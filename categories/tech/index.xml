@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tech on Bluepie&#39;s update blog</title>
+    <link>//gopinath001.github.io/blog/categories/tech/</link>
+    <description>Recent content in Tech on Bluepie&#39;s update blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 30 Mar 2019 14:02:48 +0000</lastBuildDate>
+    
+	<atom:link href="//gopinath001.github.io/blog/categories/tech/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title> A peek into my yunger self.		</title>
+      <link>//gopinath001.github.io/blog/2019/03/a-peek-into-my-yunger-self/</link>
+      <pubDate>Sat, 30 Mar 2019 14:02:48 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2019/03/a-peek-into-my-yunger-self/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Hey guys how y&amp;rsquo;all been,&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;i&amp;rsquo;ve been good, in fact i am happy after a long time, So im gona love talking about this, so here is the thing before like 7-8 months (before i got my job) i was fully involved in reverse engineering, modding mostly windows, but also old linux machines with security flaws to train for some capture the flags and the plain curisity of &amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> AI - with algorithms.(Rant mostly)		</title>
+      <link>//gopinath001.github.io/blog/2019/03/ai-with-algorithms-rant-mostly/</link>
+      <pubDate>Thu, 28 Mar 2019 23:27:50 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2019/03/ai-with-algorithms-rant-mostly/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Well hello guys! How yr&amp;rsquo; been.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;what-is-going-on&#34;&gt;what is going on.&lt;/h2&gt;
+
+&lt;p&gt;i have never thought of me doing this in my life, but this situation has come, so in the past month i have been trying to post and update whats been going on. But i am unable to complete what i started and it is bothering me still now, after that happened i stumbled upon an another old project of mine, which i cleaned up and finished it in a short span and btw this is&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> ssh tunnel		</title>
+      <link>//gopinath001.github.io/blog/2019/01/ssh-tunnel/</link>
+      <pubDate>Fri, 18 Jan 2019 06:00:11 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2019/01/ssh-tunnel/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;hey there!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;How are you guys doing, hope everyone is doing good, im doing great btw, So today i wana talk about something that i have been using a lot lately in work and personal use, the thing that i wana talk about is ssh tunneling, its a huge topic, i have been using it ever since i learned about ssh in college, So what is this?&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> file Manager contd..		</title>
+      <link>//gopinath001.github.io/blog/2018/10/file-manager-contd/</link>
+      <pubDate>Tue, 30 Oct 2018 20:56:15 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/10/file-manager-contd/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;a little update: Though i made a promise to post every two weeks, its been 4 weeks, why? ..is this&amp;hellip; i was going in a flow, but things started affecting.. rather i let things affect me, lately lot of things happened personally, lot of things reminded of the past, that made me avoid _________ in the present,&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;continuation&#34;&gt;Continuation.&lt;/h3&gt;
+
+&lt;p&gt;Pick up where i left off from previous post: Let me explain the way of approach i wanted to do, i wanted to access all the files of the server, like i wanted to go back to the root directory, back before that,&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> file manager development		</title>
+      <link>//gopinath001.github.io/blog/2018/10/file-manager-development/</link>
+      <pubDate>Wed, 03 Oct 2018 19:21:34 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/10/file-manager-development/</guid>
+      <description>&lt;p&gt;why this all of a sudden? I was introduced to php development for a little while now, and i had this in mind with several other things, this would also be a good point to start explaining with code, So where to start. let us define? It starts with what is the requirement? It is&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> MVC pattern		</title>
+      <link>//gopinath001.github.io/blog/2018/09/mvc-pattern/</link>
+      <pubDate>Fri, 07 Sep 2018 01:18:47 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/09/mvc-pattern/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Dear Internet I didn&amp;rsquo;t blog for 2 weeks and it feels weird. i promise to write within every two weeks from here on now&amp;hellip; i am terribly sorry!.This post is to clear up the silence that stagnated over the past 2 weeks. sry btw.&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title> Tamper Monkey		</title>
+      <link>//gopinath001.github.io/blog/2018/08/tamper-monkey/</link>
+      <pubDate>Fri, 17 Aug 2018 03:04:46 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/08/tamper-monkey/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Hi again, Today I am going to share something that is somewhat related to reverse engineering. Well I was working on a project, at one point of time I was working on wireframes, since I was only doing the initial design and it would be just used as a reference by the design team so my senior adviced me to use mockup.&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title> Software engineering and backend design		</title>
+      <link>//gopinath001.github.io/blog/2018/08/software-engineering-and-backend-design/</link>
+      <pubDate>Wed, 01 Aug 2018 21:30:47 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/08/software-engineering-and-backend-design/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Today I wanna share something that I found was very useful in the recent times, which is ofcourse software engineering and backend design When I started developing.. at first I was a noob &amp;lsquo;as people would call&amp;rsquo; I would do random sh**&amp;hellip; I can explain this in more detail.. which is I would go straight to coding, learning the concepts that I need to implement a certain feature.. sometimes I would chase a particular feature first for the first day.. and I would spend weeks completing a simple project.. which is inefficient and total waste when I think about it now. Then the more important part&amp;hellip; The db design.. I have worked with db with languages like c#, python and PHP..&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title> About android services		</title>
+      <link>//gopinath001.github.io/blog/2018/07/about-android-services/</link>
+      <pubDate>Sun, 22 Jul 2018 13:15:32 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/07/about-android-services/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Recently i was involved in android dev..So im gona share a short struggle in android services.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;why&#34;&gt;Why&lt;/h4&gt;
+
+&lt;p&gt;So i was targeting android 5.1 and the basic feature was setting up and do some action for every % minutes, so this varies.. below 6.0 everything was fine and was working flawlessly but i was testing it on a mobile with android 6.1.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> Php Contd..		</title>
+      <link>//gopinath001.github.io/blog/2018/07/php-contd/</link>
+      <pubDate>Fri, 13 Jul 2018 16:48:25 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/07/php-contd/</guid>
+      <description>&lt;p&gt;As i mentioned in the previous post.. i choose php and ignored rest of them because i wanted to do a project in php for a long time and i choose to use this as an opportunity.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;So i&amp;rsquo;m going to walk through the thought process.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So i needed to do a application basically (webapp) with user login, registration, with admin privilages, then with adding item, updating the item,  deleting the item, assigning the item, reassign the item etc.. SO with php i have to dynamically generate stuff based on the content and available resources.. with login registration ,&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> My experience with php		</title>
+      <link>//gopinath001.github.io/blog/2018/07/my-experience-with-php/</link>
+      <pubDate>Wed, 11 Jul 2018 17:19:33 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/07/my-experience-with-php/</guid>
+      <description>Heya&amp;hellip; ow are you doing? During the shot intervel between my last post and this post i did something interesting,, a guess???
+I got addicted to php
+ I was assigned to do a task for some reason and it involved doing things with php. ofcourse i could have done the same with let us see&amp;hellip;what are the options available.
+ i could have went with firebase as i already have prior experience, but nah went with node and all its glory.</description>
+    </item>
+    
+  </channel>
+</rss>

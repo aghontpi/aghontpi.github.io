@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Bluepie&#39;s update blog</title>
+    <link>//gopinath001.github.io/blog/categories/</link>
+    <description>Recent content in Categories on Bluepie&#39;s update blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 30 Mar 2019 14:02:48 +0000</lastBuildDate>
+    
+	<atom:link href="//gopinath001.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cracks and patches</title>
+      <link>//gopinath001.github.io/blog/categories/cracks-and-patches/</link>
+      <pubDate>Sat, 30 Mar 2019 14:02:48 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/categories/cracks-and-patches/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tech</title>
+      <link>//gopinath001.github.io/blog/categories/tech/</link>
+      <pubDate>Sat, 30 Mar 2019 14:02:48 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/categories/tech/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>development</title>
+      <link>//gopinath001.github.io/blog/categories/development/</link>
+      <pubDate>Sat, 30 Mar 2019 14:02:48 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/categories/development/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>reverse engineering</title>
+      <link>//gopinath001.github.io/blog/categories/reverse-engineering/</link>
+      <pubDate>Sat, 30 Mar 2019 14:02:48 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/categories/reverse-engineering/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>personal</title>
+      <link>//gopinath001.github.io/blog/categories/personal/</link>
+      <pubDate>Thu, 28 Mar 2019 23:27:50 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/categories/personal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Networking</title>
+      <link>//gopinath001.github.io/blog/categories/networking/</link>
+      <pubDate>Fri, 18 Jan 2019 06:00:11 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/categories/networking/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Non tech</title>
+      <link>//gopinath001.github.io/blog/categories/non-tech/</link>
+      <pubDate>Mon, 26 Nov 2018 06:23:52 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/categories/non-tech/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>android</title>
+      <link>//gopinath001.github.io/blog/categories/android/</link>
+      <pubDate>Sun, 22 Jul 2018 13:15:32 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/categories/android/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

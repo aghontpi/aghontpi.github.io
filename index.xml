@@ -1,0 +1,557 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title>
+    <link>//gopinath001.github.io/blog/</link>
+    <description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 30 Mar 2019 14:02:48 +0000</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title> A peek into my yunger self.		</title>
+      <link>//gopinath001.github.io/blog/2019/03/a-peek-into-my-yunger-self/</link>
+      <pubDate>Sat, 30 Mar 2019 14:02:48 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2019/03/a-peek-into-my-yunger-self/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Hey guys how y&amp;rsquo;all been,&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;i&amp;rsquo;ve been good, in fact i am happy after a long time, So im gona love talking about this, so here is the thing before like 7-8 months (before i got my job) i was fully involved in reverse engineering, modding mostly windows, but also old linux machines with security flaws to train for some capture the flags and the plain curisity of &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;lets say how to break stuff. On the windows part  i was mostly doing with debuggers, scripts and memory. So here i am explaining the tale of how i started my venture into c# and security, back in the days i used to do admire crack realeases, trainers,  etc. So at the begining when i was in 10th grade i already knew that i was going in the path of a software and choose computer science in the next year (senior year).&lt;/p&gt;
+
+&lt;p&gt;I began to learn form core about debugging. processors, assembly, etc, At the same time that i was doing that i began to have an interest in trainers and what not, but the main problem was i knew how to find memeoy addresses by debugging and scanning through different tools but i did not know how to do them programmatically. so the venture started in c#, since there was already a ton of source available in visual basic and i knew c and object oriented programming and c# is similar to java in many ways and the fact that i was mostly working  in windows made me lean over c#.&lt;/p&gt;
+
+&lt;p&gt;At the begining it was tough i didn&amp;rsquo;t know where to start, but little by little i learned at that time and was doing projects by using a custom library for my projects involving meomory stuff, so when i was in home recently and going through my old desktop i found the lib and soo i took it seperately dusted it off worked on that for cleaning it made sure it worked on the latest build, built a seperate dill, compiled and released it on github, Looking at that project after a long time, made me release why i even choose this field, at those days everything was fascinating to me and i wanted to learn everything, So for any new beginners entering into reversing, modding, creating trainers and c# I have created this repo for them. Most stuff on usage, reason and lib  are on the github repo given below.&lt;/p&gt;
+
+&lt;h3 id=&#34;source-code-link-link-to-my-repo-https-github-com-gopinath001-memorypatternscanner&#34;&gt;Source Code link &lt;a href=&#34;https://github.com/Gopinath001/MemoryPatternScanner&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to my repo.&lt;/a&gt;&lt;/h3&gt;</description>
+    </item>
+    
+    <item>
+      <title> AI - with algorithms.(Rant mostly)		</title>
+      <link>//gopinath001.github.io/blog/2019/03/ai-with-algorithms-rant-mostly/</link>
+      <pubDate>Thu, 28 Mar 2019 23:27:50 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2019/03/ai-with-algorithms-rant-mostly/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Well hello guys! How yr&amp;rsquo; been.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;what-is-going-on&#34;&gt;what is going on.&lt;/h2&gt;
+
+&lt;p&gt;i have never thought of me doing this in my life, but this situation has come, so in the past month i have been trying to post and update whats been going on. But i am unable to complete what i started and it is bothering me still now, after that happened i stumbled upon an another old project of mine, which i cleaned up and finished it in a short span and btw this is&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;the project that i am talking about that i didn&amp;rsquo;t complete.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-happened&#34;&gt;what happened.&lt;/h2&gt;
+
+&lt;p&gt;So it&amp;rsquo;s been a tough tight scheduled week. I was juggling with a lot of things, so this event came up &amp;lsquo;do something with ai&amp;rsquo;,  this is a willingness event, which means I can choose if I wanted to join (which didn&amp;rsquo;t happen by the way), So keeping in mind that I was already involved in soo much things, it was definitely overwhelming from my end,  considering that I had set my goals to finishing a book, complete a personal project,  and I was already dealing with personal problems and I had no interest in ai, this was not the call for me, So I was forced to join by my peers, so I had to do my best, at least for my satisfaction. I was entering into the territory of ai, so the problem statement is not chosen by me, I was told to implement someone else cooked up, I didn&amp;rsquo;t knew that would not work at that time, looking back now, I was blinded by simplified self. So the brain washing part comes along, where my subconscious was dragged by manipulation and imagination that I didn&amp;rsquo;t need, its a long chain of manipulation from the top,  Damn how did I fell for that, looking back I fell for most things..stupid things..things that are not decided by me.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Enough of this rant, I had to do this for the sake of my future self.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;the-disaster&#34;&gt;The Disaster&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s get technical here shall we, but before that let me get this straight, I&amp;rsquo;m new to this and basically a starter. So everything that I do from here will be available on my github page, for my little project of mine, I have to predict the next date and the date must corelate to some predefined value, on this date calculated from now I will eat vanilla icecream. This is a pretty damn challenge. So my first approach os going about this with neural networks, since it&amp;rsquo;s the new tech and predicting the date is not easy. So after a while, I finished a working model and was told that I could not do this.. it was too big and I was launched at by a data scientist guy..(getting personal here)..looking back, why did I even bother acknowledging him you know? Why?.  I never learn from my mistakes, so I decided to go with the algorithm part as their suggestions, I mean it was hard.. dragging myself over something (choosing a different path from neural networks). I&amp;rsquo;ll cover two parts one for neural networks and the other for algorithms, so for the neural networks part,  i decided to predict using images, so  i have an eye open for tensorflow, what could be fun? predicting captcha from websites seems like a great idea, plus i have already seen something similar but haven&amp;rsquo;t got the time to try it out, so i&amp;rsquo;ve searched for captcha image dataset and found several captcha datasets from kaggle, so i went and downloaded from kaggle,&lt;/p&gt;
+
+&lt;h2 id=&#34;moved-on-not-my-cup-of-tea&#34;&gt;Moved on - Not my cup of tea?&lt;/h2&gt;
+
+&lt;p&gt;This post is taking a long amount of time im going to post the source from bitbucket here, the main reason being i dont want to rant and bitch about something and gradually lost interest from working on this and i started working on an old project of mine that i undertook which i am going to post in the upcomming days, this post took a long amount of time that i did not expect, but it&amp;rsquo;s fine nevertheless, im just going up the stairs step by step that i what i say to myself.,, darn&lt;/p&gt;
+
+&lt;h3 id=&#34;repo-link-https-bitbucket-org-bluepie-guessing-captcha-with-ai-src-master-here-we-go&#34;&gt;&lt;a href=&#34;https://bitbucket.org/Bluepie/guessing-captcha-with-ai./src/master/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;repo link&lt;/a&gt; here we go!,&lt;/h3&gt;</description>
+    </item>
+    
+    <item>
+      <title> ssh tunnel		</title>
+      <link>//gopinath001.github.io/blog/2019/01/ssh-tunnel/</link>
+      <pubDate>Fri, 18 Jan 2019 06:00:11 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2019/01/ssh-tunnel/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;hey there!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;How are you guys doing, hope everyone is doing good, im doing great btw, So today i wana talk about something that i have been using a lot lately in work and personal use, the thing that i wana talk about is ssh tunneling, its a huge topic, i have been using it ever since i learned about ssh in college, So what is this?&lt;/p&gt;
+
+&lt;h2 id=&#34;info-scenario-and-usage&#34;&gt;Info, Scenario and usage&lt;/h2&gt;
+
+&lt;p&gt;You guys might have heard about vpn, nowadays its everywhere it is  basically that except that its done via ssh. SSH known as secure shell is a remote login feature, running on a specified port, what do  i mean by that is, suppose u have a computer in your home and you want to login to that computer from your office or anyother place other than your home, then you go for ssh, often &amp;ldquo;linux gurus&amp;rdquo; go for this, since this only provides terminal access.&lt;/p&gt;
+
+&lt;p&gt;Further-more in the old days this was used to play game with friends, (it could be done in a variety of different ways, first you create a server on your end) then through ssh tunnel your friend should connect to your computer via ssh credentials, (assuming you know port forwarding). after this setup process, your friend will be treated as if he is in your local network, in which case your both can play games with no issues, (this method assumes the following: you know how to host a game server-involving port settings, how your would allow a connection over your firewall to connect to your system, client-end i.e that is your friend knows about ssh tunnell, and more importantly your are will to expose theresource for the game server to another person since he is in your network).&lt;/p&gt;
+
+&lt;p&gt;This could work in a different way too..  if you/your friend/ group of friends have a server your dont have pto expose your own commuter network, port forwarding, etc, i.e in simple terms - connect to the server first with the port that is running for game server &amp;amp; the port in which the server should listen to, and thats it,  Any connection made to the server with the particular port will be rediected to your computer thrugh ssh tunnel. If you understand what i just said, this is mindblowing, many a things could be achieved by this, this speaking on the beginner level..that too for running games.&lt;/p&gt;
+
+&lt;p&gt;Imagine what this could do for the developers, this is a heaven for easier work flow, but most often this is only used as an option to bypass firewall, for devops purposes ofcourse, &lt;strong&gt;&lt;em&gt;-_-&amp;rdquo;&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;noob-usage&#34;&gt;Noob usage.&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;m gona brief over the ssh being used as vpn! you heard right, vpn! as i mentioned it earlier, so setting up vpn on your server could take multiple steps involing huge time, but ssh is enabled by default, what is only needed is some few lines of configuration,&lt;/p&gt;
+
+&lt;p&gt;For most cases the configuration that needed is of below type.&lt;br /&gt;
+Note:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;If you are on windows make sure you have enabled ssh from optinal features, this is mandtory incase if you want to use inbuilt ssh client on windows, you could also install third party softwares if you want.&lt;/li&gt;
+&lt;li&gt;If you are running a custom server box like me,  (i have a centos box running) you would have to configure by changing sshd_config inside &amp;lsquo;/etc/ssh/sshd_config&amp;rsquo;.&lt;/li&gt;
+&lt;li&gt;After making changes make sure you have restarted the sshd service.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;    for most part you would have to only the important marked ones*AllowAgentForwarding yes
+    *AllowTcpForwarding all
+    *GatewayPorts yes
+    AllowStreamLocalForwarding all
+
+    pop open a terminal then do the following.
+    ssh -D localport -f -C -q -N server_address
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh -D 7890 -f  -C -q -N jess-user@jupiter-server01-dynamip-massoc-address.com.
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;By using the above config you would have now setup a service listening on port 7890, just make sure to use the specific port to connect to the internet.(route all traffic through the port).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;What i mean by that is, go to proxy settings on your system/browser/etc, set &amp;lsquo;127.0.0.1&amp;rsquo; in hostname &amp;amp; &amp;lsquo;7890&amp;rsquo; in port. You have done ssh tunneling thats it. Just like a vpn.&lt;/p&gt;
+
+&lt;p&gt;Note: Any request made to that port will be treated like you are doing from the server box sitting somewhere else. (I&amp;rsquo;m saying ANY request for a reason*).&lt;/p&gt;
+
+&lt;p&gt;&amp;lt; 3. Im gona stop here, this is just scratching the surface but there is lot more, maybe otherthings at a different time.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> Touch Typing.		</title>
+      <link>//gopinath001.github.io/blog/2018/11/touch-typing/</link>
+      <pubDate>Mon, 26 Nov 2018 06:23:52 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/11/touch-typing/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Hi there,&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;reality-is-way-different-update-on-current-things&#34;&gt;Reality is way different - Update on current things.&lt;/h2&gt;
+
+&lt;p&gt;***I know i&amp;rsquo;ve been busy, but i can make up to it. Status update First: The last few weeks,infact the last month is very odd and had a busy schedule. I could&amp;rsquo;nt concentrate on few other projects, Office work took over my life, to be exact!.I&amp;rsquo;ve been the preacher of saying Complete office work early as possible and leave office by 8pm, later spend time for yourself(doing your own thing) like for an example updating blog. To think that i used to say those things but in reality i ended up like this!..&lt;/p&gt;
+
+&lt;p&gt;makes me wana just laugh. The first thing i realised is that i dont have not that much time for thinking.. like a zombie wandering around, life is just moving in an unknown path, Going back to my mates and spending the valuable time is priceless and makes me focus on things better, Maybe currently im not surrended by people like that in places I work and live. well that&amp;rsquo;s for update.***&lt;/p&gt;
+
+&lt;h2 id=&#34;the-thing-i-did&#34;&gt;The thing i did&lt;/h2&gt;
+
+&lt;p&gt;So what is touch typing? typing without seeing the keyboards, using the f&amp;amp;j as references because they have bumps on them, you feel them as a reference, You can recognise this by the word  &amp;ldquo;Type-Writer&amp;rdquo;,  back in the days they used ti have type writing class everywhere,  even now there are classes but are fewer and fewer nowadays.  Anywhere there are fewer and fewer people trying to type in this way because they have developed their own way of typing. I have taken this task some time before, i would think like i&amp;rsquo;d learn part of the system and remaining part in upcoming days,  but after this section, i would never go back, maybe i forget that i have to do that or i&amp;rsquo;ll get something else that I have to do and totally forget about all about it.eventually when i was involved in more and more typing I developed my own typing style which is not perfect but helped me to type faster upto 40 words per minute, which is somewhat good, but i would type with only some of my fingers, which in turn hurts and became tired after somebit. This was not enough and finally i decided I&amp;rsquo;d give it a try, i know i might go along with this for a few days but eventually will give up on this, so as far as i&amp;rsquo;m concerned i have to complete this quick, like real quick, So i decided to complete all the course on a single go(with atleast 90% accuracy). So it started, i&amp;rsquo;ve worked for 8 hours straight &amp;amp; completed everything, i knew how to type now but the problem is practicing, to make it faster and better. The other problem is my old typing habbits began to affect me, the new typing style was slow, thus while typing in my work it started to affect, thus had to go back to old style for completing my work faster, from then on its been a constant struggle between switching between different styles, Everyone should learn this, its super comfy. Besides it&amp;rsquo;s the official way to type, It&amp;rsquo;ll be massively helpful if done at a young age, Trust me on this one, Anyhooo0oo I typed this whole post with the new style of typing. One could say that is the reason why it took this long for the post, lol. See you next time!.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> file Manager contd..		</title>
+      <link>//gopinath001.github.io/blog/2018/10/file-manager-contd/</link>
+      <pubDate>Tue, 30 Oct 2018 20:56:15 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/10/file-manager-contd/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;a little update: Though i made a promise to post every two weeks, its been 4 weeks, why? ..is this&amp;hellip; i was going in a flow, but things started affecting.. rather i let things affect me, lately lot of things happened personally, lot of things reminded of the past, that made me avoid _________ in the present,&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;continuation&#34;&gt;Continuation.&lt;/h3&gt;
+
+&lt;p&gt;Pick up where i left off from previous post: Let me explain the way of approach i wanted to do, i wanted to access all the files of the server, like i wanted to go back to the root directory, back before that,&lt;/p&gt;
+
+&lt;p&gt;basically anywhere where i wanted, So DirectoryIterator seemed the best choice, We are in a directory, we have to list all the files and folders in the directory, how would you do that?. Directory iterator  in a foreach, since directory iterator displays everything, can be used, ex as shown below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;foreach (new DirectoryIterator($dir) as $files)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If im about to display the files and folders, they should have a nice ui, like an icon, so categorizing files and icons, i would call is_dir() else its a file, this would be fine for now, but for future everything will have to be categorize as images, mp3, video, etc. the icons can be converted into base 64 strings so can be packed into the same file, its quite big, but its worth it,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;$fileWithImage = ($files-&amp;gt;isDir())? $this-&amp;gt;getLinkWithText( (images::folderImage . &amp;quot; &amp;quot; .$files-&amp;gt;getFilename()), $this-&amp;gt;generateQueryString( &#39;folder&#39; ,$files-&amp;gt;getPath() .&#39;/&#39; .$files-&amp;gt;getFilename() )) : images::fileImage . &amp;quot; &amp;quot; .$files-&amp;gt;getFilename();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Letme explain this first, first checking if its a file or folder, if its a file, attach file image with file name, then thats it, but if its a folder, we show a folder icon with name and the link so that while clicking will be able to move front and back, All the fancy functions are just there to make the life simpler, their names exactly tell what they do. for instance, &lt;code&gt;getLinkWithText&lt;/code&gt; expects two parameters, first is the image with name, second is query the link (a href). for that &lt;code&gt;generateQueryString&lt;/code&gt; function expects a name, then the path to put it in href, and that is literally it, for making a dynamic traversing structure, all this is enough, may be next time ill explain with code for the other functions.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;for the time being..imona leave , -sorry.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title> file manager development		</title>
+      <link>//gopinath001.github.io/blog/2018/10/file-manager-development/</link>
+      <pubDate>Wed, 03 Oct 2018 19:21:34 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/10/file-manager-development/</guid>
+      <description>&lt;p&gt;why this all of a sudden? I was introduced to php development for a little while now, and i had this in mind with several other things, this would also be a good point to start explaining with code, So where to start. let us define? It starts with what is the requirement? It is&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;I want to view files in the server,&lt;/li&gt;
+&lt;li&gt;I can traverse through the files with forward and backward traversing,&lt;/li&gt;
+&lt;li&gt;i can see the file modification date&lt;/li&gt;
+&lt;li&gt;I can see the file ownership information,&lt;/li&gt;
+&lt;li&gt;I can see file icons and folder icons.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Lets begin with the first php code.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;&amp;lt;?php
+//this is the first bit of code that you had to write.
+?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Setting the page structure, since styling the page dynamically, we call the top section first, then  we do our logic, then we call the bottom section, this completes the full page structure.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;const topSection = &amp;quot;&amp;lt;!DOCTYPE html&amp;gt;
+				    	&amp;lt;head&amp;gt;
+				    		&amp;lt;title&amp;gt;
+								fm - FileManager.
+				    		&amp;lt;/title&amp;gt;
+				    	&amp;lt;/head&amp;gt;
+				    	&amp;lt;body&amp;gt;
+				    &amp;quot;;
+
+const bottomSection = &amp;quot;&amp;lt;/body&amp;gt;
+						&amp;lt;/html&amp;gt;
+						&amp;quot;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;how-do-i-insert-images&#34;&gt;How do I insert images?&lt;/h3&gt;
+
+&lt;p&gt;Since all this is being done on only one file, hosting the image on a server then linking the file can be done but why? if you can encode as base64 and use the image in the file. An example would be, since  i need to display the files with respective icons (folder, file etc.).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;const folderIcon = &#39;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAADMCAYAAACcL30dAAAQCUlEQVR4Xu3dfbBtdV3H8bdoIiQDoWbpjKVjIE9BkgyWQ/iQJkpD0oggYfiQTIxctIGJhsIw8GbZwOhIoijy0DAyQ5EXCYNACQwSRERQyKcu4hNiojxdBZtPs7ZzO55z99r7rLXO/v3W+/cXw1lnrd/3te/5nHX2/q3v71EsztgeeAnwMmAP4BeBnwe2W...&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Above is a base64 encoded folder image. to display the image i would just do this.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;const folderImage = &amp;quot;&amp;lt;img src=&#39;&amp;quot; . images::folderIcon .&amp;quot;&#39; width=&#39;10&#39;/&amp;gt;&amp;quot;;
+````
+
+### Next? Think about a way to represent files in a readable manner.
+
+A good way is a table layout, why because on the left side, file-name&#39;s can be shown, while on the right side, owner info, modification date can be shown. this can be implemented in the following way.
+
+```php
+	public function tableStructure($fData){
+		echo &amp;quot;&amp;lt;table&amp;gt;
+				  &amp;lt;tr&amp;gt;
+				  	&amp;lt;th width=&#39;50%&#39; align=&#39;left&#39;&amp;gt;name&amp;lt;/th&amp;gt;
+				  	&amp;lt;th width=&#39;10%&#39;&amp;gt;last modified&amp;lt;/th&amp;gt;
+				  	&amp;lt;th width=&#39;10%&#39;&amp;gt; owner&amp;lt;/th&amp;gt;
+				  &amp;lt;/tr&amp;gt;&amp;quot; .
+				  $fData .
+			  &amp;quot;&amp;lt;/table&amp;gt;&amp;quot;;
+	}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;where `$fdata&amp;rsquo; is the pre constructed each row with all the files and folders. Ill continue the rest on an another post.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> Old projects.		</title>
+      <link>//gopinath001.github.io/blog/2018/09/old-projects/</link>
+      <pubDate>Thu, 20 Sep 2018 03:35:45 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/09/old-projects/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Hello fellas,&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So in the recent trend of the modern world, with everyone developing new software and technology and aiming to make the life of mankind easy, There are bunch of people who want to just learn new stuff and constantly do things and move on to the next thing.. i consider myself being in that bunch.. this will matter later. The thing about old projects is that they have an emotional touch with them, the reason why i am stating this is because,&lt;/p&gt;
+
+&lt;p&gt;i think about the functionalities and often about how this could be implemented with the current knowledge that i have, being the way that I am, I mix real life with the code that i write, often times while i write the documentation, review the code that I wrote, or while making commit &lt;em&gt;i find hints in my code that reflected the current scenario in my life. &lt;/em&gt; Its like when i see the code again, I&amp;rsquo;m taken back to the room that i wrote the code in, the thought i had, the emotional state i was in, the people i was talking too.. etc.. FOR EXAMPLE, today I recalled a old friend of mine, (lets begin) it was 2017, i was in my final year of my B.E degree, a festival function was near and i was practising android and developing an android application, during that time i was constantly talking to my friend that i mentioned, During this period i was home alone for few days, I can not recall more than this..(my dumb brain). Fast forward to 3-4 am in the night, i remember completing a class with functionalities (doing java), I noticed while creating an instance of the class i made the class name similar to my friends nick name. &lt;em&gt;&lt;strong&gt;i could still remember that specific moment very clearly. &lt;/strong&gt;I took an image of that specific section and sent a message.. the following morning she didn&amp;rsquo;t understand what i was saying..that&amp;rsquo;s a completely different story none the less. &lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;so-one-of-the-reasons-to-not-going-to-old-projects&#34;&gt;so one of the reasons to not going to old projects:&lt;/h3&gt;
+
+&lt;p&gt;Going back to old projects they have a emotional weight in them, &lt;strong&gt;sometimes it&amp;rsquo;s the decision of not wanting to go the past, that certain people don&amp;rsquo;t go to old projects.&lt;/strong&gt; The fact that certain things turned out ugly, i could never revisit some projects, if i still do, I spiral into a hole and my thoughts get cloudy and i feel guilty for the things why certain things turned out ugly.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;So in my case, i realised, humans are emotional beings, being the way that they are, often leads to problems..&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title> MVC pattern		</title>
+      <link>//gopinath001.github.io/blog/2018/09/mvc-pattern/</link>
+      <pubDate>Fri, 07 Sep 2018 01:18:47 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/09/mvc-pattern/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Dear Internet I didn&amp;rsquo;t blog for 2 weeks and it feels weird. i promise to write within every two weeks from here on now&amp;hellip; i am terribly sorry!.This post is to clear up the silence that stagnated over the past 2 weeks. sry btw.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Today I would like to share a thing (to tell my future self) that I learned in the recent weeks. It&amp;rsquo;s MVC. I was introduced to MVC pattern for developing applications. So I&amp;rsquo;m explaining my interpretation and my understanding of the MVC pattern. So it has different parts. Model, View, controller. The first thing is the controller, then is the model and then the view, the controller gets everything and controlls everything, &amp;amp; orders what should be done by the model and view on the scope. While you develop this it should be with a flow. As from the development stand point, the controller should be capable of handling changes (i.e) if some changes came up in the future of the app/project, we can not handle thousands and thousands of files and track the files and change everything, that is why we use controller for everything. This is the basic idea from the controller stand point. I tested the MVC pattern with php. With a sample school project and it was great. At first I completely made it with my own understanding, but later with the help of my seniors I was able to complete it with full mvc design. So I said I implemented the design via PHP, so what is the use of model, view ,controller in this aspect, the role of the controller is to breakup the request and split the response based on parts of the url and construct the final page.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;.. i wanted to write/update something .. so i wrote this.. ill continue this post later on with an actual example.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> Tamper Monkey		</title>
+      <link>//gopinath001.github.io/blog/2018/08/tamper-monkey/</link>
+      <pubDate>Fri, 17 Aug 2018 03:04:46 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/08/tamper-monkey/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Hi again, Today I am going to share something that is somewhat related to reverse engineering. Well I was working on a project, at one point of time I was working on wireframes, since I was only doing the initial design and it would be just used as a reference by the design team so my senior adviced me to use mockup.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;mockup&#34;&gt;Mockup:&lt;/h3&gt;
+
+&lt;p&gt;So what is mockup you ask? Mockup is a wireframe tool, You would design stuff like how each and individual page would be, each elements design, UI, the flow with how defferent stuff interact with each other, etc.. you could also do use case diagrams, the process flow and other stuff in the case of mocup, mockup is a fremium tool (web app), there is a limit to each and every project with a constraint of 300 elements max. plus you have to pay to get features like exporting the projects in different formats, etc.&lt;/p&gt;
+
+&lt;h3 id=&#34;whats-the-problem-with-this&#34;&gt;Whats the problem with this?:&lt;/h3&gt;
+
+&lt;p&gt;When there is a limit for each and every stuff like the elements that you can you, the export options and other features like setting the project as private,..etc The main function that I use is that I want to export stuff which i design and that option is limited by a pay-wall. So I thought why can&amp;rsquo;t I test their functionality(security) a little bit.. i just messed with their website a liitle bit.. and they didn&amp;rsquo;t include any basic security.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-idea&#34;&gt;The Idea:&lt;/h3&gt;
+
+&lt;p&gt;I already knew about tamper money.. which is a plug-in for installing custom user scripts and i wanted to write on desperately for a long time, &lt;a href=&#34;https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;the link to tamper monkey is here. &lt;/a&gt; I wanted to write a custom script that did a lot of things like remove restriction to certain websites and remove add block detector from certain sites but i overwhelmed myself with lot of different projects and I didn&amp;rsquo;t do nit since now, that&amp;rsquo;s a story for a another time&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;the-basic-script&#34;&gt;The basic script:&lt;/h3&gt;
+
+&lt;p&gt;So i found a hack to make available certain features of the moqups site without paying anything but&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;i needed to do it with js? nah..&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I wanted to complete this in an 30 minutes or so.. plus  also had a deadline to complete a design (full stack. lol)So I opened the docs of tamper monkey of writing custom scripts and made a simple script with jQuery and published it to github.. here is the link to &lt;a href=&#34;https://github.com/Gopinath001/tamper-monkey_Export-moqups&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;that.&lt;/a&gt;  just go through the instructions on my page and install the tamper monkey plug-in first then install the script. it will become activated if you are exporting the project from moqups and make the export option available to you&amp;hellip; &lt;em&gt;And one final thing i missed a lot of days without writing something&amp;hellip; sorry for that.. bad on my end &amp;hellip; cuz of the situtations. im running late now,, sya next time.. bye.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> Software engineering and backend design		</title>
+      <link>//gopinath001.github.io/blog/2018/08/software-engineering-and-backend-design/</link>
+      <pubDate>Wed, 01 Aug 2018 21:30:47 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/08/software-engineering-and-backend-design/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Today I wanna share something that I found was very useful in the recent times, which is ofcourse software engineering and backend design When I started developing.. at first I was a noob &amp;lsquo;as people would call&amp;rsquo; I would do random sh**&amp;hellip; I can explain this in more detail.. which is I would go straight to coding, learning the concepts that I need to implement a certain feature.. sometimes I would chase a particular feature first for the first day.. and I would spend weeks completing a simple project.. which is inefficient and total waste when I think about it now. Then the more important part&amp;hellip; The db design.. I have worked with db with languages like c#, python and PHP..&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;the main aspect of this is that I would straight up go to table design without thinking about normalization, optimisation, memory limits, accessibility and query execution. This was back in my pre college, inbetween college starting and after 12th final exams. Then the times shifted.. still I didn&amp;rsquo;t know about normalization, etc&amp;hellip; But I was doing things differently well I would plan and do things now.. but still this was not enough, later I would realise.. I still was thinking why does it take soo long and sooo many iterations to complete a simple project..the teen that I was in my early days. Then came the university studies and learner about some stuff.. I came across a lot of different stuff that helped me. The period ranges from my mid college days and final ranges.. the third section of my current life. I was doing this lot differently than from the first days of my young developing career. But still I was not doing a lot than I was now.. which is would design db but that consisted of only normal stuff like &amp;lsquo; do I have all the things necessary for doing the project?&amp;rsquo;, &amp;lsquo;does this contain all the details?&amp;rsquo; and &amp;lsquo;is this optimised for retrieving data?&amp;rsquo; etc&amp;hellip; but still no normalization..after I knew about this. For the past somedays ihave been introduced to software engineering and the core concepts and I have been told to structurally implement this, so I this also covers db design with wireframe,data elements, different types of normalization and other tons of stuff that I have to do.. this is teadious but I&amp;rsquo;m realising that from my previous experiments that a lost of post development problems are being solved right now.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;SO THIS PART IS VERY PRECIOUS TO A DEVELOPER.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;And from here on out, I took a vow to follow the same on future projects so that I wouldnt be a mess and will solve most problems from the first to deal with and I hope I won&amp;rsquo;t forget these things in the future..&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;NOTE TO SELF : YOU USED TWO NOTES DURING THE WHOLE PROCESS WIHTOUT ANY COMPUTER/DIGITAL STUFF&amp;hellip; SO KEEP THEM SAFE AND FOLLOW IT EVERYTIME.&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;thoughts&#34;&gt;Thoughts:&lt;/h3&gt;
+
+&lt;p&gt;So i thought this would be a important lesson in my developing career so I am logging this as a post so that I would not forget about this. See ya next time bye!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> About android services		</title>
+      <link>//gopinath001.github.io/blog/2018/07/about-android-services/</link>
+      <pubDate>Sun, 22 Jul 2018 13:15:32 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/07/about-android-services/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Recently i was involved in android dev..So im gona share a short struggle in android services.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;why&#34;&gt;Why&lt;/h4&gt;
+
+&lt;p&gt;So i was targeting android 5.1 and the basic feature was setting up and do some action for every % minutes, so this varies.. below 6.0 everything was fine and was working flawlessly but i was testing it on a mobile with android 6.1.&lt;/p&gt;
+
+&lt;h3 id=&#34;doze&#34;&gt;&lt;strong&gt;Doze&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Since the new android versions comes with android doze enabled, and every manufacturer has their own implementation of doze enabled with custom implementations starting from android 6.0 setting up tasks was a teadious task if you are not familiar with android&amp;hellip; so what does doze do to your mobile.. it puts your mobile to a power save state with low cpu frequency and waking it up only at certain intervals for notifications and stuff this conserves a lot of battery and enforces strict policy on the apps and clears any upcoming tasks setup by the apps.&lt;/p&gt;
+
+&lt;h4 id=&#34;services&#34;&gt;Services&lt;/h4&gt;
+
+&lt;p&gt;So my problem statement was explained in the why seciton of this post&amp;hellip; so the solution to this was setting up a custom service but thats not feasible because of the doze implementation.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;nowadays most android devs focus only for dev of android 5.0/5.1 above. &amp;lsquo;apart from the sincere android devs who still check for backward compatability for each and every single feature..&amp;rsquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;  Coming to the point android 5.0 above introduced a new feature called job scheduler that reduces the work of the devs by setting up and impementing in several differnet ways.. so thsese can be&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;alarm manager&lt;/li&gt;
+&lt;li&gt;firebase jobdispatcher&lt;/li&gt;
+&lt;li&gt;sync adapter&lt;/li&gt;
+&lt;li&gt;other facilities etc..&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;so if incase anymethods fails it implements it other methods&amp;hellip; this all works on upuntil 6.0 but because of the doze feature the limit is set to 15 min.. so pretty much its a dead end&amp;hellip; only possible way custom service with notification to prevent doze feature, if destroyed create it again with the job close event trigger and remove previous values set by job scheduler. Apart from this there are several dependenscies, with differnt types of implementation..literally there are tons of implemenations to the same one..&lt;em&gt;&lt;strong&gt;its a rabbit hole where if you focus on one thing it goes on and on, deeper and deeper&amp;hellip;&lt;/strong&gt;&lt;/em&gt; do a lot of freakin research&amp;hellip;but it takes time which i dont have..&lt;em&gt;what should I do?..&lt;/em&gt; in the middle lot of third party libraray if you  just want to learn something from scratch its just soo hard&amp;hellip; maybe its just a rant or maybe not&amp;hellip; anyway do try your best..and give a try.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;android dev = mess of libraries and confusion on what to choose for dev..&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;forgot to mention if you want to implement a new feature..literally there are 100s of methods to do them.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> Php Contd..		</title>
+      <link>//gopinath001.github.io/blog/2018/07/php-contd/</link>
+      <pubDate>Fri, 13 Jul 2018 16:48:25 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/07/php-contd/</guid>
+      <description>&lt;p&gt;As i mentioned in the previous post.. i choose php and ignored rest of them because i wanted to do a project in php for a long time and i choose to use this as an opportunity.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;So i&amp;rsquo;m going to walk through the thought process.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So i needed to do a application basically (webapp) with user login, registration, with admin privilages, then with adding item, updating the item,  deleting the item, assigning the item, reassign the item etc.. SO with php i have to dynamically generate stuff based on the content and available resources.. with login registration ,&lt;/p&gt;
+
+&lt;p&gt;displaying, ui etc.. with javascript and frameworks like react.. i would know how but this is php so i have no idea about this, &lt;strong&gt;except the fact that i have seen sites using page id for page redirection, &lt;/strong&gt;so from this i know that some content are static and some are dynamic and i have to generate them and append to the page(my javascript strategy taking over the whole idea..). so there is static part and dynamic part.. i have to figure out a way for loading the stuff. The next thing is redirection.. if clicked on a link you swap some contents on the page with some other content and so on&amp;hellip;the problem here is with php you can not detect page clicks..atleat as far as i know. this is pretty basic&amp;hellip; so you have to go with page id and stuff and get the values from the GET METHOD.. using the url&amp;hellip;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;You might have noticed this in some of the pages someplaeholder.com/something.php?somevariable=somavelue&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So i worked on that quite a while and figured it out and built a custom page and implemented a small version that works well,, Next thing; back to the drawing board for the design of the indivisual pages and planning where the stuff would goll like the actual physical objects where the contents will go. and so forth.. i got some inspiration from git hub search page.. Next is the db connection with php: There are two options that could go here one is with mysqli and other one is PDO, I choose pdo beacuse it was object oriented and it supports a huge range of applications and the fact that its being actually developed.. so its final then.. I&amp;rsquo;M USING PDO for db connection&amp;hellip; checked the docs and found a an example and played with it. design , db connection, dynamic content, everything is setup and done..&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Ofcourse im leaving stuff like generating hash for passwords, session management, and a whole ton lot.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Then have to link everything else with javascript..with ajax request and animation to deal with everything else&amp;hellip; so im ending this here. See you next time.. bye So the link to the github page here..check the source &lt;a href=&#34;https://github.com/Gopinath001/php-Infra-Management-System&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;github&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> My experience with php		</title>
+      <link>//gopinath001.github.io/blog/2018/07/my-experience-with-php/</link>
+      <pubDate>Wed, 11 Jul 2018 17:19:33 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/07/my-experience-with-php/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Heya&amp;hellip; ow are you doing?   During the shot intervel between my last post and this post i did something interesting,, a guess???&lt;/p&gt;
+
+&lt;p&gt;I got addicted to php&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I was assigned to do a task for some reason and it involved doing things with php. ofcourse i could have done the same with let us see&amp;hellip;what are the options available.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;i could have went with firebase as i already have prior experience, but nah&lt;/li&gt;
+&lt;li&gt;went with node and all its glory..&lt;/li&gt;
+&lt;li&gt;(beauty javascript)&lt;/li&gt;
+&lt;li&gt;before I got this assignment, i was learning react framework with es6, cuz why not..&lt;/li&gt;
+&lt;li&gt;I could have chosen for the workflow and design.&lt;/li&gt;
+&lt;li&gt;Or atleast used some of the css frameworks that where available.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;But i didnt di any ot the mentioned above,&lt;/strong&gt;&lt;/em&gt; I choose php with javascript and css from scratch..   well ill share the remainder in coming post. seeya..&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title> Fixing bricked Mobile device		</title>
+      <link>//gopinath001.github.io/blog/2018/06/fixing-bricked-mobile-device/</link>
+      <pubDate>Sat, 30 Jun 2018 01:07:44 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/06/fixing-bricked-mobile-device/</guid>
+      <description>&lt;p&gt;My friend asked me if i could fix his _&lt;strong&gt;(picture attached is the actual device) &lt;/strong&gt;_old android mobile and i said yeah.. ill try.. then this journey started.&lt;/p&gt;
+
+&lt;p&gt;i didnt take notes of the form link..cuz im writing this 2 days after everything happed.&lt;/p&gt;
+
+&lt;h4 id=&#34;identifying-problem&#34;&gt;Identifying problem:&lt;/h4&gt;
+
+&lt;p&gt;The problem was that..the phone would not boot up or anything.. wont even go to the recovery mode.. but there is a catch when it is plugged into a charger outlet only the led link will blink..&lt;/p&gt;
+
+&lt;h4 id=&#34;searching-for-a-fix&#34;&gt;Searching for a fix:&lt;/h4&gt;
+
+&lt;p&gt;Since i felt this was a hardware issue.. there was nothing i can do.. but still i tried to look for a  solution.. tried several forums and xda was the king in that&amp;hellip; there were a ton people having the same issue..and only few of em managed to solve the issue. tried the following&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt; searching through individual people fix in forums and trying to applying it&amp;hellip;(which ofcourse didnt work)
+
+&lt;ul&gt;
+&lt;li&gt;the suggestions range from stuff with battery.. overcharging it.. undercharging it..&lt;/li&gt;
+&lt;li&gt;installing specific driver so it detects (usb port doesnt work, then how would that work&amp;ndash;dint try)&lt;/li&gt;
+&lt;li&gt;most people talk about jtag.. which i dont have.. not an option&lt;/li&gt;
+&lt;li&gt;so most of the things where useless..&lt;/li&gt;
+&lt;li&gt;prettymuch stuck at that point..&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;there was a repo dedicated to this particular issue.. which i found that was hilarious..
+
+&lt;ul&gt;
+&lt;li&gt;tried methods in that repo that didnt work either.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;device-vendor&#34;&gt;Device Vendor&lt;/h4&gt;
+
+&lt;p&gt;Its a bug on the design of the phone itself.. if all the people who got this situation tried to sue the company they would definately win :3&lt;/p&gt;
+
+&lt;h4 id=&#34;hope&#34;&gt;Hope&lt;/h4&gt;
+
+&lt;p&gt;Finally found a method that looked promising.. but involved me to open the phone.. but im not a hardware guy.. im a software guy.. but still i tried.. nearly 30% people where saying that they fixed their device by this..so its okey to try..&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;whats the result you ask? Opening up the phone also didnt do anything.. phone is dead and thats it.&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title> corrupt card..contd		</title>
+      <link>//gopinath001.github.io/blog/2018/06/corrupt-card-contd/</link>
+      <pubDate>Sat, 23 Jun 2018 04:15:44 +0000</pubDate>
+      
+      <guid>//gopinath001.github.io/blog/2018/06/corrupt-card-contd/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Well how you&amp;rsquo;ll doin.. im gona continue the post that i left some days earlier.. Mind you i might have forgotten.. ill post the updates in the comments as updates..&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;So i was talking about looking into docs of packages, &lt;em&gt;you need to know that the format of the card was &amp;lsquo;exfat&amp;rsquo; &lt;/em&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/ExFAT&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;check about exfat&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;i was looking into exfat related packages. Experimented with some of the packages and i was going nowhere regarding the card-solving&amp;hellip; then suddenly i landed in github issue tracker..&lt;/p&gt;
+
+&lt;p&gt;looks like people where historical and complaining&amp;hellip; &lt;strong&gt;i need to remind this again, others peoples card failed on them but mine was a differnent scenario.. check my previous post.. i&amp;rsquo;ve explained it cleaner there.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;i didn&amp;rsquo;t make notes while for writing later in this blog of mine.. forgive me for that.. i&amp;rsquo;ll try doing that from next time..&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;so i was going throught this tons of posts and feedbacks on the repo&amp;rsquo;s issue tracker.. so i learned from the comments that the maintainer of the repo has a branch that would soleve this issue.. so i checked out the branch and configured it, compiled it and make sure it works.. then the testing stuff comes.&lt;/p&gt;
+
+&lt;p&gt;I encountered some problems with this..&lt;em&gt;i&amp;rsquo;ll spare you the details basically bought some new card readers and one of them fixed the problem&lt;/em&gt;,, so thats the end of that.. so coming to the card issue.. some issure were fixible by the branch but i landed on the same problem in the last, which is the io error..&lt;/p&gt;
+
+&lt;p&gt;At this point in my search to rescure my sd card.. i know on thing for sure and that is my bootloader/boot partition of the sd card was dead..&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;so the next phase after trying several packages comes.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;After i figured out that boot was the problem i tried to go in that way.. which is writing to some first byte to the sd card basically nulling the bytes&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;You should never do this  unless you know what this does to your card..&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;so it was working without io errors but the card still wont let me to format the card..gave io error in that portion  of the process..&lt;/p&gt;
+
+&lt;p&gt; am keeping this short..i was going no where just trying the samething over with slight modifications and slight changes.. so thats that..&lt;/p&gt;
+
+&lt;p&gt;this briefly cover the linux side of things atleast what i felt was important and that came to y mind while i was typing this..&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;In windows i tried only several applications that where readily available.. belive me there were ton and tried them tall.. i also tried the command line stuff that where available in windows.&lt;/p&gt;
+
+&lt;p&gt;I tried from sevreal recovery software that gave options to fix caards,, several dumb blogs, legacy software..etc&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;At this point you must know that i was desperate and working for like god knows how many hours i have spent trying to give life to the card..&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;the last thing that i done was trying custom builds of applications..&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;So i decided to let the sd card go.. i put the sd card in a safe place and never looked it again.. there might be some way but that was enough for me at that point&amp;hellip; i didnt sleep.. i didn&amp;rsquo;t eat.. i was tunnel visioning that thing.. so thats the end of that.&lt;/strong&gt; &lt;strong&gt;&lt;em&gt;I intende to finish this section by this post so left out most of the stuff out.. i can fix it if if try harder spen dsome more days/weeks.. but i choose not to.. have decided to move on.. =).&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;the-next-post-i-think-will-be-something-related-to-phone-fixing-stay-tuned-for-that&#34;&gt;The next post i think will be something related to phone fixing.. stay tuned for that..&lt;/h3&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
