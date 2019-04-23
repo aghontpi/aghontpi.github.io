@@ -2,21 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tech on Bluepie&#39;s update blog</title>
-    <link>//gopinath001.github.io/blog/categories/tech/</link>
+    <link>//bluepie.live/blog/categories/tech/</link>
     <description>Recent content in Tech on Bluepie&#39;s update blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Mar 2019 14:02:48 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Apr 2019 03:02:16 +0530</lastBuildDate>
     
-	<atom:link href="//gopinath001.github.io/blog/categories/tech/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//bluepie.live/blog/categories/tech/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Blog Migration</title>
+      <link>//bluepie.live/blog/2019/04/blog-migration/</link>
+      <pubDate>Wed, 24 Apr 2019 03:02:16 +0530</pubDate>
+      
+      <guid>//bluepie.live/blog/2019/04/blog-migration/</guid>
+      <description>heya!, this wont be a rant..trust me!, don&amp;rsquo;t worry, I lost my cool in the last few posts, well thats aside, let me begin.
+ migration so i have been planning to migrate my blog from aws to replace it with jekyll, hexo,..etc, The main reason being, i run my blog in php and thus intend to replace it with the mentioned above, The another this that I keep pondering over and over is that, if i abandon my aws blog, I have to convert my previous post from the blog to the new version, reformat, reupload the images as well.</description>
+    </item>
+    
+    <item>
       <title> A peek into my yunger self.		</title>
-      <link>//gopinath001.github.io/blog/2019/03/a-peek-into-my-yunger-self/</link>
+      <link>//bluepie.live/blog/2019/03/a-peek-into-my-yunger-self/</link>
       <pubDate>Sat, 30 Mar 2019 14:02:48 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2019/03/a-peek-into-my-yunger-self/</guid>
+      <guid>//bluepie.live/blog/2019/03/a-peek-into-my-yunger-self/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Hey guys how y&amp;rsquo;all been,&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -26,10 +36,10 @@
     
     <item>
       <title> AI - with algorithms.(Rant mostly)		</title>
-      <link>//gopinath001.github.io/blog/2019/03/ai-with-algorithms-rant-mostly/</link>
+      <link>//bluepie.live/blog/2019/03/ai-with-algorithms-rant-mostly/</link>
       <pubDate>Thu, 28 Mar 2019 23:27:50 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2019/03/ai-with-algorithms-rant-mostly/</guid>
+      <guid>//bluepie.live/blog/2019/03/ai-with-algorithms-rant-mostly/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Well hello guys! How yr&amp;rsquo; been.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -41,10 +51,10 @@
     
     <item>
       <title> ssh tunnel		</title>
-      <link>//gopinath001.github.io/blog/2019/01/ssh-tunnel/</link>
+      <link>//bluepie.live/blog/2019/01/ssh-tunnel/</link>
       <pubDate>Fri, 18 Jan 2019 06:00:11 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2019/01/ssh-tunnel/</guid>
+      <guid>//bluepie.live/blog/2019/01/ssh-tunnel/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;hey there!&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -54,10 +64,10 @@
     
     <item>
       <title> file Manager contd..		</title>
-      <link>//gopinath001.github.io/blog/2018/10/file-manager-contd/</link>
+      <link>//bluepie.live/blog/2018/10/file-manager-contd/</link>
       <pubDate>Tue, 30 Oct 2018 20:56:15 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/10/file-manager-contd/</guid>
+      <guid>//bluepie.live/blog/2018/10/file-manager-contd/</guid>
       <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;a little update: Though i made a promise to post every two weeks, its been 4 weeks, why? ..is this&amp;hellip; i was going in a flow, but things started affecting.. rather i let things affect me, lately lot of things happened personally, lot of things reminded of the past, that made me avoid _________ in the present,&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
@@ -69,19 +79,19 @@
     
     <item>
       <title> file manager development		</title>
-      <link>//gopinath001.github.io/blog/2018/10/file-manager-development/</link>
+      <link>//bluepie.live/blog/2018/10/file-manager-development/</link>
       <pubDate>Wed, 03 Oct 2018 19:21:34 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/10/file-manager-development/</guid>
+      <guid>//bluepie.live/blog/2018/10/file-manager-development/</guid>
       <description>&lt;p&gt;why this all of a sudden? I was introduced to php development for a little while now, and i had this in mind with several other things, this would also be a good point to start explaining with code, So where to start. let us define? It starts with what is the requirement? It is&lt;/p&gt;</description>
     </item>
     
     <item>
       <title> MVC pattern		</title>
-      <link>//gopinath001.github.io/blog/2018/09/mvc-pattern/</link>
+      <link>//bluepie.live/blog/2018/09/mvc-pattern/</link>
       <pubDate>Fri, 07 Sep 2018 01:18:47 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/09/mvc-pattern/</guid>
+      <guid>//bluepie.live/blog/2018/09/mvc-pattern/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Dear Internet I didn&amp;rsquo;t blog for 2 weeks and it feels weird. i promise to write within every two weeks from here on now&amp;hellip; i am terribly sorry!.This post is to clear up the silence that stagnated over the past 2 weeks. sry btw.&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -89,10 +99,10 @@
     
     <item>
       <title> Tamper Monkey		</title>
-      <link>//gopinath001.github.io/blog/2018/08/tamper-monkey/</link>
+      <link>//bluepie.live/blog/2018/08/tamper-monkey/</link>
       <pubDate>Fri, 17 Aug 2018 03:04:46 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/08/tamper-monkey/</guid>
+      <guid>//bluepie.live/blog/2018/08/tamper-monkey/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Hi again, Today I am going to share something that is somewhat related to reverse engineering. Well I was working on a project, at one point of time I was working on wireframes, since I was only doing the initial design and it would be just used as a reference by the design team so my senior adviced me to use mockup.&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -100,10 +110,10 @@
     
     <item>
       <title> Software engineering and backend design		</title>
-      <link>//gopinath001.github.io/blog/2018/08/software-engineering-and-backend-design/</link>
+      <link>//bluepie.live/blog/2018/08/software-engineering-and-backend-design/</link>
       <pubDate>Wed, 01 Aug 2018 21:30:47 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/08/software-engineering-and-backend-design/</guid>
+      <guid>//bluepie.live/blog/2018/08/software-engineering-and-backend-design/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Today I wanna share something that I found was very useful in the recent times, which is ofcourse software engineering and backend design When I started developing.. at first I was a noob &amp;lsquo;as people would call&amp;rsquo; I would do random sh**&amp;hellip; I can explain this in more detail.. which is I would go straight to coding, learning the concepts that I need to implement a certain feature.. sometimes I would chase a particular feature first for the first day.. and I would spend weeks completing a simple project.. which is inefficient and total waste when I think about it now. Then the more important part&amp;hellip; The db design.. I have worked with db with languages like c#, python and PHP..&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -111,10 +121,10 @@
     
     <item>
       <title> About android services		</title>
-      <link>//gopinath001.github.io/blog/2018/07/about-android-services/</link>
+      <link>//bluepie.live/blog/2018/07/about-android-services/</link>
       <pubDate>Sun, 22 Jul 2018 13:15:32 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/07/about-android-services/</guid>
+      <guid>//bluepie.live/blog/2018/07/about-android-services/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Recently i was involved in android dev..So im gona share a short struggle in android services.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -126,10 +136,10 @@
     
     <item>
       <title> Php Contd..		</title>
-      <link>//gopinath001.github.io/blog/2018/07/php-contd/</link>
+      <link>//bluepie.live/blog/2018/07/php-contd/</link>
       <pubDate>Fri, 13 Jul 2018 16:48:25 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/07/php-contd/</guid>
+      <guid>//bluepie.live/blog/2018/07/php-contd/</guid>
       <description>&lt;p&gt;As i mentioned in the previous post.. i choose php and ignored rest of them because i wanted to do a project in php for a long time and i choose to use this as an opportunity.&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -141,10 +151,10 @@
     
     <item>
       <title> My experience with php		</title>
-      <link>//gopinath001.github.io/blog/2018/07/my-experience-with-php/</link>
+      <link>//bluepie.live/blog/2018/07/my-experience-with-php/</link>
       <pubDate>Wed, 11 Jul 2018 17:19:33 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/07/my-experience-with-php/</guid>
+      <guid>//bluepie.live/blog/2018/07/my-experience-with-php/</guid>
       <description>Heya&amp;hellip; ow are you doing? During the shot intervel between my last post and this post i did something interesting,, a guess???
 I got addicted to php
  I was assigned to do a task for some reason and it involved doing things with php. ofcourse i could have done the same with let us see&amp;hellip;what are the options available.

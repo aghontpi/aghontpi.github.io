@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>reverse engineering on Bluepie&#39;s update blog</title>
-    <link>//gopinath001.github.io/blog/categories/reverse-engineering/</link>
+    <link>//bluepie.live/blog/categories/reverse-engineering/</link>
     <description>Recent content in reverse engineering on Bluepie&#39;s update blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 30 Mar 2019 14:02:48 +0000</lastBuildDate>
     
-	<atom:link href="//gopinath001.github.io/blog/categories/reverse-engineering/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//bluepie.live/blog/categories/reverse-engineering/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title> A peek into my yunger self.		</title>
-      <link>//gopinath001.github.io/blog/2019/03/a-peek-into-my-yunger-self/</link>
+      <link>//bluepie.live/blog/2019/03/a-peek-into-my-yunger-self/</link>
       <pubDate>Sat, 30 Mar 2019 14:02:48 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2019/03/a-peek-into-my-yunger-self/</guid>
+      <guid>//bluepie.live/blog/2019/03/a-peek-into-my-yunger-self/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Hey guys how y&amp;rsquo;all been,&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -26,10 +26,10 @@
     
     <item>
       <title> Tamper Monkey		</title>
-      <link>//gopinath001.github.io/blog/2018/08/tamper-monkey/</link>
+      <link>//bluepie.live/blog/2018/08/tamper-monkey/</link>
       <pubDate>Fri, 17 Aug 2018 03:04:46 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/08/tamper-monkey/</guid>
+      <guid>//bluepie.live/blog/2018/08/tamper-monkey/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Hi again, Today I am going to share something that is somewhat related to reverse engineering. Well I was working on a project, at one point of time I was working on wireframes, since I was only doing the initial design and it would be just used as a reference by the design team so my senior adviced me to use mockup.&lt;/p&gt;
 &lt;/blockquote&gt;</description>

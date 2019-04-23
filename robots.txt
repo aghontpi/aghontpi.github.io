@@ -63,4 +63,4 @@ Disallow: /
 User-agent: ZoominfoBot
 Disallow: /
 
-Sitemap: //gopinath001.github.io/blog/sitemap.xml
+Sitemap: //bluepie.live/blog/sitemap.xml

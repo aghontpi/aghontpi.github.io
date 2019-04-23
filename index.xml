@@ -1,19 +1,55 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title>
-    <link>//gopinath001.github.io/blog/</link>
+    <link>//bluepie.live/blog/</link>
     <description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Mar 2019 14:02:48 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Apr 2019 03:02:16 +0530</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Blog Migration</title>
+      <link>//bluepie.live/blog/2019/04/blog-migration/</link>
+      <pubDate>Wed, 24 Apr 2019 03:02:16 +0530</pubDate>
+      
+      <guid>//bluepie.live/blog/2019/04/blog-migration/</guid>
+      <description>
+
+&lt;blockquote&gt;
+&lt;p&gt;heya!,  this wont be a rant..trust me!,  don&amp;rsquo;t worry, I lost my cool in the last few posts, well thats aside, let me begin.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;migration&#34;&gt;migration&lt;/h2&gt;
+
+&lt;p&gt;so i have been planning to migrate my blog from aws to replace it with jekyll, hexo,..etc,  The main reason being, i run my blog in php and thus intend to replace it with the mentioned above, The another this that I keep pondering over and over is that,  if i abandon my aws blog, I have to convert my previous post from the blog to the new version,  reformat, reupload the images as well. Not to mention i have to configure dns(though it will take only a small amount of time), configure what comment system that i will to install in, and the list goes on and on.&lt;/p&gt;
+
+&lt;h2 id=&#34;why&#34;&gt;why&lt;/h2&gt;
+
+&lt;p&gt;Since hosting it in php, for each request page will be generated dynamically, it doesn&amp;rsquo;t matter here but this causes cpu load, considering php if there are any bugs in the code it will lead to data breaches (lol, since i dont have anything that important its not important too.). If it were hosting with only html, css, js, images and etc, the site load time will be very quick,  plus you don&amp;rsquo;t have to pay extra for the high resources that is needed for handling php pages, infact if hosting on github pages it is completely free.&lt;/p&gt;
+
+&lt;h2 id=&#34;choices&#34;&gt;choices&lt;/h2&gt;
+
+&lt;p&gt;So there are a ton of choices if you want to do the same , the first thing would be jekyll, since most of the people choose that because of the huge variety of themes that comes with jekyll, its developed in ruby so installing the dependencies might be hard tho if you are new, then there is hexo,  which is fully developed in js, you just have to install npm, then install dependencies  with npm,  that is it, interms of ease of use, you can choose this instead of jekyll. There are many alternatives,  it finally comes down to what you choose to use.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-next&#34;&gt;what next?&lt;/h2&gt;
+
+&lt;p&gt;After generating the site using the defined framework, you now have a working site which is entirely static and works completely without any hosting restrictions and load-time, this then can be deployed anywhere. For example you could deploy it to AWS, GCP or any-other hosting provider, What i did was i deployed it to GitHub hosting and it is great. You can have a demo of the same here. &lt;a href=&#34;http://gopinath001.github.io/blog&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to my deployed site.&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;additional-things&#34;&gt;Additional things?&lt;/h2&gt;
+
+&lt;p&gt;Well depending upon the hosting provider that you choose you can do many things, park your domain (in-case of free hosting/paid hosting), installing ssl certificate, In case of github having own custom domain and sub-domain..etc, well it certainly depends, the possibilities are endless.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title> A peek into my yunger self.		</title>
-      <link>//gopinath001.github.io/blog/2019/03/a-peek-into-my-yunger-self/</link>
+      <link>//bluepie.live/blog/2019/03/a-peek-into-my-yunger-self/</link>
       <pubDate>Sat, 30 Mar 2019 14:02:48 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2019/03/a-peek-into-my-yunger-self/</guid>
+      <guid>//bluepie.live/blog/2019/03/a-peek-into-my-yunger-self/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Hey guys how y&amp;rsquo;all been,&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -31,10 +67,10 @@
     
     <item>
       <title> AI - with algorithms.(Rant mostly)		</title>
-      <link>//gopinath001.github.io/blog/2019/03/ai-with-algorithms-rant-mostly/</link>
+      <link>//bluepie.live/blog/2019/03/ai-with-algorithms-rant-mostly/</link>
       <pubDate>Thu, 28 Mar 2019 23:27:50 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2019/03/ai-with-algorithms-rant-mostly/</guid>
+      <guid>//bluepie.live/blog/2019/03/ai-with-algorithms-rant-mostly/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Well hello guys! How yr&amp;rsquo; been.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -66,10 +102,10 @@
     
     <item>
       <title> ssh tunnel		</title>
-      <link>//gopinath001.github.io/blog/2019/01/ssh-tunnel/</link>
+      <link>//bluepie.live/blog/2019/01/ssh-tunnel/</link>
       <pubDate>Fri, 18 Jan 2019 06:00:11 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2019/01/ssh-tunnel/</guid>
+      <guid>//bluepie.live/blog/2019/01/ssh-tunnel/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;hey there!&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -129,10 +165,10 @@ Note:&lt;/p&gt;
     
     <item>
       <title> Touch Typing.		</title>
-      <link>//gopinath001.github.io/blog/2018/11/touch-typing/</link>
+      <link>//bluepie.live/blog/2018/11/touch-typing/</link>
       <pubDate>Mon, 26 Nov 2018 06:23:52 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/11/touch-typing/</guid>
+      <guid>//bluepie.live/blog/2018/11/touch-typing/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Hi there,&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -150,10 +186,10 @@ Note:&lt;/p&gt;
     
     <item>
       <title> file Manager contd..		</title>
-      <link>//gopinath001.github.io/blog/2018/10/file-manager-contd/</link>
+      <link>//bluepie.live/blog/2018/10/file-manager-contd/</link>
       <pubDate>Tue, 30 Oct 2018 20:56:15 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/10/file-manager-contd/</guid>
+      <guid>//bluepie.live/blog/2018/10/file-manager-contd/</guid>
       <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;a little update: Though i made a promise to post every two weeks, its been 4 weeks, why? ..is this&amp;hellip; i was going in a flow, but things started affecting.. rather i let things affect me, lately lot of things happened personally, lot of things reminded of the past, that made me avoid _________ in the present,&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
@@ -181,10 +217,10 @@ Note:&lt;/p&gt;
     
     <item>
       <title> file manager development		</title>
-      <link>//gopinath001.github.io/blog/2018/10/file-manager-development/</link>
+      <link>//bluepie.live/blog/2018/10/file-manager-development/</link>
       <pubDate>Wed, 03 Oct 2018 19:21:34 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/10/file-manager-development/</guid>
+      <guid>//bluepie.live/blog/2018/10/file-manager-development/</guid>
       <description>&lt;p&gt;why this all of a sudden? I was introduced to php development for a little while now, and i had this in mind with several other things, this would also be a good point to start explaining with code, So where to start. let us define? It starts with what is the requirement? It is&lt;/p&gt;
 
 &lt;ul&gt;
@@ -252,10 +288,10 @@ A good way is a table layout, why because on the left side, file-name&#39;s can 
     
     <item>
       <title> Old projects.		</title>
-      <link>//gopinath001.github.io/blog/2018/09/old-projects/</link>
+      <link>//bluepie.live/blog/2018/09/old-projects/</link>
       <pubDate>Thu, 20 Sep 2018 03:35:45 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/09/old-projects/</guid>
+      <guid>//bluepie.live/blog/2018/09/old-projects/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Hello fellas,&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -275,10 +311,10 @@ A good way is a table layout, why because on the left side, file-name&#39;s can 
     
     <item>
       <title> MVC pattern		</title>
-      <link>//gopinath001.github.io/blog/2018/09/mvc-pattern/</link>
+      <link>//bluepie.live/blog/2018/09/mvc-pattern/</link>
       <pubDate>Fri, 07 Sep 2018 01:18:47 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/09/mvc-pattern/</guid>
+      <guid>//bluepie.live/blog/2018/09/mvc-pattern/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Dear Internet I didn&amp;rsquo;t blog for 2 weeks and it feels weird. i promise to write within every two weeks from here on now&amp;hellip; i am terribly sorry!.This post is to clear up the silence that stagnated over the past 2 weeks. sry btw.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -290,10 +326,10 @@ A good way is a table layout, why because on the left side, file-name&#39;s can 
     
     <item>
       <title> Tamper Monkey		</title>
-      <link>//gopinath001.github.io/blog/2018/08/tamper-monkey/</link>
+      <link>//bluepie.live/blog/2018/08/tamper-monkey/</link>
       <pubDate>Fri, 17 Aug 2018 03:04:46 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/08/tamper-monkey/</guid>
+      <guid>//bluepie.live/blog/2018/08/tamper-monkey/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Hi again, Today I am going to share something that is somewhat related to reverse engineering. Well I was working on a project, at one point of time I was working on wireframes, since I was only doing the initial design and it would be just used as a reference by the design team so my senior adviced me to use mockup.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -323,10 +359,10 @@ A good way is a table layout, why because on the left side, file-name&#39;s can 
     
     <item>
       <title> Software engineering and backend design		</title>
-      <link>//gopinath001.github.io/blog/2018/08/software-engineering-and-backend-design/</link>
+      <link>//bluepie.live/blog/2018/08/software-engineering-and-backend-design/</link>
       <pubDate>Wed, 01 Aug 2018 21:30:47 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/08/software-engineering-and-backend-design/</guid>
+      <guid>//bluepie.live/blog/2018/08/software-engineering-and-backend-design/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Today I wanna share something that I found was very useful in the recent times, which is ofcourse software engineering and backend design When I started developing.. at first I was a noob &amp;lsquo;as people would call&amp;rsquo; I would do random sh**&amp;hellip; I can explain this in more detail.. which is I would go straight to coding, learning the concepts that I need to implement a certain feature.. sometimes I would chase a particular feature first for the first day.. and I would spend weeks completing a simple project.. which is inefficient and total waste when I think about it now. Then the more important part&amp;hellip; The db design.. I have worked with db with languages like c#, python and PHP..&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -348,10 +384,10 @@ A good way is a table layout, why because on the left side, file-name&#39;s can 
     
     <item>
       <title> About android services		</title>
-      <link>//gopinath001.github.io/blog/2018/07/about-android-services/</link>
+      <link>//bluepie.live/blog/2018/07/about-android-services/</link>
       <pubDate>Sun, 22 Jul 2018 13:15:32 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/07/about-android-services/</guid>
+      <guid>//bluepie.live/blog/2018/07/about-android-services/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Recently i was involved in android dev..So im gona share a short struggle in android services.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -392,10 +428,10 @@ A good way is a table layout, why because on the left side, file-name&#39;s can 
     
     <item>
       <title> Php Contd..		</title>
-      <link>//gopinath001.github.io/blog/2018/07/php-contd/</link>
+      <link>//bluepie.live/blog/2018/07/php-contd/</link>
       <pubDate>Fri, 13 Jul 2018 16:48:25 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/07/php-contd/</guid>
+      <guid>//bluepie.live/blog/2018/07/php-contd/</guid>
       <description>&lt;p&gt;As i mentioned in the previous post.. i choose php and ignored rest of them because i wanted to do a project in php for a long time and i choose to use this as an opportunity.&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -421,10 +457,10 @@ A good way is a table layout, why because on the left side, file-name&#39;s can 
     
     <item>
       <title> My experience with php		</title>
-      <link>//gopinath001.github.io/blog/2018/07/my-experience-with-php/</link>
+      <link>//bluepie.live/blog/2018/07/my-experience-with-php/</link>
       <pubDate>Wed, 11 Jul 2018 17:19:33 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/07/my-experience-with-php/</guid>
+      <guid>//bluepie.live/blog/2018/07/my-experience-with-php/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Heya&amp;hellip; ow are you doing?   During the shot intervel between my last post and this post i did something interesting,, a guess???&lt;/p&gt;
 
@@ -448,10 +484,10 @@ A good way is a table layout, why because on the left side, file-name&#39;s can 
     
     <item>
       <title> Fixing bricked Mobile device		</title>
-      <link>//gopinath001.github.io/blog/2018/06/fixing-bricked-mobile-device/</link>
+      <link>//bluepie.live/blog/2018/06/fixing-bricked-mobile-device/</link>
       <pubDate>Sat, 30 Jun 2018 01:07:44 +0000</pubDate>
       
-      <guid>//gopinath001.github.io/blog/2018/06/fixing-bricked-mobile-device/</guid>
+      <guid>//bluepie.live/blog/2018/06/fixing-bricked-mobile-device/</guid>
       <description>&lt;p&gt;My friend asked me if i could fix his _&lt;strong&gt;(picture attached is the actual device) &lt;/strong&gt;_old android mobile and i said yeah.. ill try.. then this journey started.&lt;/p&gt;
 
 &lt;p&gt;i didnt take notes of the form link..cuz im writing this 2 days after everything happed.&lt;/p&gt;
@@ -492,65 +528,6 @@ A good way is a table layout, why because on the left side, file-name&#39;s can 
 &lt;blockquote&gt;
 &lt;p&gt;whats the result you ask? Opening up the phone also didnt do anything.. phone is dead and thats it.&lt;/p&gt;
 &lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title> corrupt card..contd		</title>
-      <link>//gopinath001.github.io/blog/2018/06/corrupt-card-contd/</link>
-      <pubDate>Sat, 23 Jun 2018 04:15:44 +0000</pubDate>
-      
-      <guid>//gopinath001.github.io/blog/2018/06/corrupt-card-contd/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;Well how you&amp;rsquo;ll doin.. im gona continue the post that i left some days earlier.. Mind you i might have forgotten.. ill post the updates in the comments as updates..&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;So i was talking about looking into docs of packages, &lt;em&gt;you need to know that the format of the card was &amp;lsquo;exfat&amp;rsquo; &lt;/em&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/ExFAT&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;check about exfat&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;i was looking into exfat related packages. Experimented with some of the packages and i was going nowhere regarding the card-solving&amp;hellip; then suddenly i landed in github issue tracker..&lt;/p&gt;
-
-&lt;p&gt;looks like people where historical and complaining&amp;hellip; &lt;strong&gt;i need to remind this again, others peoples card failed on them but mine was a differnent scenario.. check my previous post.. i&amp;rsquo;ve explained it cleaner there.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;i didn&amp;rsquo;t make notes while for writing later in this blog of mine.. forgive me for that.. i&amp;rsquo;ll try doing that from next time..&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;so i was going throught this tons of posts and feedbacks on the repo&amp;rsquo;s issue tracker.. so i learned from the comments that the maintainer of the repo has a branch that would soleve this issue.. so i checked out the branch and configured it, compiled it and make sure it works.. then the testing stuff comes.&lt;/p&gt;
-
-&lt;p&gt;I encountered some problems with this..&lt;em&gt;i&amp;rsquo;ll spare you the details basically bought some new card readers and one of them fixed the problem&lt;/em&gt;,, so thats the end of that.. so coming to the card issue.. some issure were fixible by the branch but i landed on the same problem in the last, which is the io error..&lt;/p&gt;
-
-&lt;p&gt;At this point in my search to rescure my sd card.. i know on thing for sure and that is my bootloader/boot partition of the sd card was dead..&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;so the next phase after trying several packages comes.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;After i figured out that boot was the problem i tried to go in that way.. which is writing to some first byte to the sd card basically nulling the bytes&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;You should never do this  unless you know what this does to your card..&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;so it was working without io errors but the card still wont let me to format the card..gave io error in that portion  of the process..&lt;/p&gt;
-
-&lt;p&gt; am keeping this short..i was going no where just trying the samething over with slight modifications and slight changes.. so thats that..&lt;/p&gt;
-
-&lt;p&gt;this briefly cover the linux side of things atleast what i felt was important and that came to y mind while i was typing this..&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;In windows i tried only several applications that where readily available.. belive me there were ton and tried them tall.. i also tried the command line stuff that where available in windows.&lt;/p&gt;
-
-&lt;p&gt;I tried from sevreal recovery software that gave options to fix caards,, several dumb blogs, legacy software..etc&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;At this point you must know that i was desperate and working for like god knows how many hours i have spent trying to give life to the card..&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;the last thing that i done was trying custom builds of applications..&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;So i decided to let the sd card go.. i put the sd card in a safe place and never looked it again.. there might be some way but that was enough for me at that point&amp;hellip; i didnt sleep.. i didn&amp;rsquo;t eat.. i was tunnel visioning that thing.. so thats the end of that.&lt;/strong&gt; &lt;strong&gt;&lt;em&gt;I intende to finish this section by this post so left out most of the stuff out.. i can fix it if if try harder spen dsome more days/weeks.. but i choose not to.. have decided to move on.. =).&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;the-next-post-i-think-will-be-something-related-to-phone-fixing-stay-tuned-for-that&#34;&gt;The next post i think will be something related to phone fixing.. stay tuned for that..&lt;/h3&gt;</description>
     </item>
     
   </channel>
