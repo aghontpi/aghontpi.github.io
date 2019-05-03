@@ -30,7 +30,7 @@
 &lt;h3 id=&#34;why-backstory&#34;&gt;why? backstory..&lt;/h3&gt;
 
 &lt;p&gt;B&amp;rsquo;coz when I was at the begining stages of my android life, I had some use case that i had to interact with service, I know java somebit but I was no java expert (haven&amp;rsquo;t done any big projects in java &lt;strong&gt;&lt;em&gt;YET &amp;gt;.&amp;gt; (you wouldn&amp;rsquo;t know)&lt;/em&gt;&lt;/strong&gt;). So without any research I went staright in, I thought i could do with interface with my own implementation that came to an dead end with problems. Later i found out binders.. stupid me.
-&lt;img src=&#34;images/posts/android_service_binder_Interface.png&#34; alt=&#34;Interface&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;//bluepie.live/blog/images/posts/android_service_binder_Interface.png&#34; alt=&#34;Interface&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;how&#34;&gt;How?&lt;/h3&gt;
 
