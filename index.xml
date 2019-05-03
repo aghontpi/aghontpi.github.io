@@ -5,8 +5,140 @@
     <description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 24 Apr 2019 03:02:16 +0530</lastBuildDate>
+    <lastBuildDate>Sun, 28 Apr 2019 18:24:31 +0530</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Android Service Binders</title>
+      <link>//bluepie.live/blog/2019/04/android-service-binders/</link>
+      <pubDate>Sun, 28 Apr 2019 18:24:31 +0530</pubDate>
+      
+      <guid>//bluepie.live/blog/2019/04/android-service-binders/</guid>
+      <description>
+
+&lt;blockquote&gt;
+&lt;p&gt;hola amigos&amp;rsquo;, how are you guys doing? im fine thank you!.
+&lt;strong&gt;&lt;em&gt;Status Update: About last week, I have covered some ground interms of development in old passion projects, the start of the week was great, but at the end of the week it got worse, nevertheless im happy that i survived this week &amp;gt;_&amp;lt;. Saw avengers end game the other day which was cool, during part-I I was studying, but for part-II -an adult going to office (feels wierd even to think, So much change in just one year), Personally nothing great happened, because of the mind that i have, I had the same bs.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;i-m-gona-explain-about-how-to-communicate-with-android-services&#34;&gt;&amp;gt; I&amp;rsquo;m gona explain about how to communicate with android services.&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;why-backstory&#34;&gt;why? backstory..&lt;/h3&gt;
+
+&lt;p&gt;B&amp;rsquo;coz when I was at the begining stages of my android life, I had some use case that i had to interact with service, I know java somebit but I was no java expert (haven&amp;rsquo;t done any big projects in java &lt;strong&gt;&lt;em&gt;YET &amp;gt;.&amp;gt; (you wouldn&amp;rsquo;t know)&lt;/em&gt;&lt;/strong&gt;). So without any research I went staright in, I thought i could do with interface with my own implementation that came to an dead end with problems. Later i found out binders.. stupid me.
+&lt;img src=&#34;images/posts/android_service_binder_Interface.png&#34; alt=&#34;Interface&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;how&#34;&gt;How?&lt;/h3&gt;
+
+&lt;p&gt;Well let me show you. First of all you must know about IBinder interface (available since android&amp;rsquo;s starting stages), then you should know about Binder class which implements the IBinder interface, keep in mind there are a lot of other ways around (as i have already mentioned in the previous posts).&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h3 id=&#34;it-will-be-better-if-i-explain-this-in-code-as-it-will-be-much-easier-to-understand&#34;&gt;It will be better if i explain this in code, as it will be much easier to understand.&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&#34;create-a-class-extending-the-class-binder&#34;&gt;create a class extending the class binder.&lt;/h5&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class CustomBinderName extends Binder {
+
+     private sericeName serviceNameInterface;
+
+     /**
+     * gets Serivce context for each service,
+     */
+    public CustomBinderName(Context serviceContext){
+        serviceNameInterface = (serviceName) serviceContext;
+    }
+
+     /**
+     * getService,
+     * return serviceNameInterface(this instance), which is what we need.
+     * calling contract - which we use in Activity.
+     */
+    public serviceName getService(){
+        return serviceNameInterface;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&#34;then-implementing-serviceconnection&#34;&gt;then implementing serviceConnection.&lt;/h5&gt;
+
+&lt;p&gt;The android os calls the contract methods inside this class (interface after implementation), these methods are called from the main thread of the application, like many other callbacks from the system.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    /**
+     * ServiceConnection  interface,
+     * calling bindService - contract - our custom implementation,
+     * calls onserviceConnection with componenetName and binder,
+     *
+     * we bind it with customClass implementation of customBinderNameBinder
+     * through the link, we get and save service on local serviceBoundLink.
+     *
+     */
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            CustomBinderName customBinderName = (CustomBinderName) iBinder;
+            serviceBoundLink = customBinderName.getService(); 
+            isServiceBound = true; 
+
+         }
+
+         @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            isServiceBound = false;
+        }
+    };
+ }
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&#34;implementing-necessary-classes-on-the-service&#34;&gt;Implementing necessary classes on the service.&lt;/h5&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    /**
+     * needs to return Interface Ibinder,
+     * onBind initiated on bindService (creation of service),
+     */
+
+     @Override
+    public IBinder onBind(Intent intent) {
+        return customBinderName;
+    }
+
+     /**
+     * Need to be of type IBinder.
+     * CustomBinderName is constructed such a was,
+     *  instance of customBinderName has to be passed in 
+     *     via constructor, since this is how we implemented it.
+     */
+    private final IBinder customBinderName = new CustomBinderName(this);
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&#34;binding-the-service-with-some-activity&#34;&gt;Binding the service, with some activity.&lt;/h5&gt;
+
+&lt;p&gt;During service creation call bindService, passing in our implementation of serviceConnection,
+then the global BIND_AUTO_CREATE (usually bind_auto_create, since most of the time, service is not created before at this point), the system will take care of the rest.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;        /*
+        * intent for the service, with class,
+        * After start, bind the service(link) with local intance so its
+        *   (service) methods can be called.
+        */
+        bindService(intent,serviceConnection,Context.BIND_AUTO_CREATE);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&#34;be-sure-to-remove-unbind-the-service-connection-else-you-ll-end-up-with-memory-leaking&#34;&gt;Be sure to remove unbind the service, connection.. else you&amp;rsquo;ll end up with memory leaking.&lt;/h5&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;bye see ya next time,  by the time im making this post public, eveything changed to the polar opposite.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
     
     <item>
       <title>Blog Migration</title>
@@ -480,54 +612,6 @@ A good way is a table layout, why because on the left side, file-name&#39;s can 
 
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;But i didnt di any ot the mentioned above,&lt;/strong&gt;&lt;/em&gt; I choose php with javascript and css from scratch..   well ill share the remainder in coming post. seeya..&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title> Fixing bricked Mobile device		</title>
-      <link>//bluepie.live/blog/2018/06/fixing-bricked-mobile-device/</link>
-      <pubDate>Sat, 30 Jun 2018 01:07:44 +0000</pubDate>
-      
-      <guid>//bluepie.live/blog/2018/06/fixing-bricked-mobile-device/</guid>
-      <description>&lt;p&gt;My friend asked me if i could fix his _&lt;strong&gt;(picture attached is the actual device) &lt;/strong&gt;_old android mobile and i said yeah.. ill try.. then this journey started.&lt;/p&gt;
-
-&lt;p&gt;i didnt take notes of the form link..cuz im writing this 2 days after everything happed.&lt;/p&gt;
-
-&lt;h4 id=&#34;identifying-problem&#34;&gt;Identifying problem:&lt;/h4&gt;
-
-&lt;p&gt;The problem was that..the phone would not boot up or anything.. wont even go to the recovery mode.. but there is a catch when it is plugged into a charger outlet only the led link will blink..&lt;/p&gt;
-
-&lt;h4 id=&#34;searching-for-a-fix&#34;&gt;Searching for a fix:&lt;/h4&gt;
-
-&lt;p&gt;Since i felt this was a hardware issue.. there was nothing i can do.. but still i tried to look for a  solution.. tried several forums and xda was the king in that&amp;hellip; there were a ton people having the same issue..and only few of em managed to solve the issue. tried the following&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt; searching through individual people fix in forums and trying to applying it&amp;hellip;(which ofcourse didnt work)
-
-&lt;ul&gt;
-&lt;li&gt;the suggestions range from stuff with battery.. overcharging it.. undercharging it..&lt;/li&gt;
-&lt;li&gt;installing specific driver so it detects (usb port doesnt work, then how would that work&amp;ndash;dint try)&lt;/li&gt;
-&lt;li&gt;most people talk about jtag.. which i dont have.. not an option&lt;/li&gt;
-&lt;li&gt;so most of the things where useless..&lt;/li&gt;
-&lt;li&gt;prettymuch stuck at that point..&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;there was a repo dedicated to this particular issue.. which i found that was hilarious..
-
-&lt;ul&gt;
-&lt;li&gt;tried methods in that repo that didnt work either.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;device-vendor&#34;&gt;Device Vendor&lt;/h4&gt;
-
-&lt;p&gt;Its a bug on the design of the phone itself.. if all the people who got this situation tried to sue the company they would definately win :3&lt;/p&gt;
-
-&lt;h4 id=&#34;hope&#34;&gt;Hope&lt;/h4&gt;
-
-&lt;p&gt;Finally found a method that looked promising.. but involved me to open the phone.. but im not a hardware guy.. im a software guy.. but still i tried.. nearly 30% people where saying that they fixed their device by this..so its okey to try..&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;whats the result you ask? Opening up the phone also didnt do anything.. phone is dead and thats it.&lt;/p&gt;
-&lt;/blockquote&gt;</description>
     </item>
     
   </channel>

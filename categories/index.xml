@@ -6,7 +6,7 @@
     <description>Recent content in Categories on Bluepie&#39;s update blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 24 Apr 2019 03:02:16 +0530</lastBuildDate>
+    <lastBuildDate>Sun, 28 Apr 2019 18:24:31 +0530</lastBuildDate>
     
 	<atom:link href="//bluepie.live/blog/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,27 @@
     <item>
       <title>Tech</title>
       <link>//bluepie.live/blog/categories/tech/</link>
-      <pubDate>Wed, 24 Apr 2019 03:02:16 +0530</pubDate>
+      <pubDate>Sun, 28 Apr 2019 18:24:31 +0530</pubDate>
       
       <guid>//bluepie.live/blog/categories/tech/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>android</title>
+      <link>//bluepie.live/blog/categories/android/</link>
+      <pubDate>Sun, 28 Apr 2019 18:24:31 +0530</pubDate>
+      
+      <guid>//bluepie.live/blog/categories/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>development</title>
+      <link>//bluepie.live/blog/categories/development/</link>
+      <pubDate>Sun, 28 Apr 2019 18:24:31 +0530</pubDate>
+      
+      <guid>//bluepie.live/blog/categories/development/</guid>
       <description></description>
     </item>
     
@@ -35,15 +53,6 @@
       <pubDate>Sat, 30 Mar 2019 14:02:48 +0000</pubDate>
       
       <guid>//bluepie.live/blog/categories/cracks-and-patches/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>development</title>
-      <link>//bluepie.live/blog/categories/development/</link>
-      <pubDate>Sat, 30 Mar 2019 14:02:48 +0000</pubDate>
-      
-      <guid>//bluepie.live/blog/categories/development/</guid>
       <description></description>
     </item>
     
@@ -80,15 +89,6 @@
       <pubDate>Mon, 26 Nov 2018 06:23:52 +0000</pubDate>
       
       <guid>//bluepie.live/blog/categories/non-tech/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>android</title>
-      <link>//bluepie.live/blog/categories/android/</link>
-      <pubDate>Sun, 22 Jul 2018 13:15:32 +0000</pubDate>
-      
-      <guid>//bluepie.live/blog/categories/android/</guid>
       <description></description>
     </item>
     

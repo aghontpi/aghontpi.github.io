@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Bluepie&#39;s update blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 24 Apr 2019 03:02:16 +0530</lastBuildDate>
+    <lastBuildDate>Sun, 28 Apr 2019 18:24:31 +0530</lastBuildDate>
     
 	<atom:link href="//bluepie.live/blog/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Android Service Binders</title>
+      <link>//bluepie.live/blog/2019/04/android-service-binders/</link>
+      <pubDate>Sun, 28 Apr 2019 18:24:31 +0530</pubDate>
+      
+      <guid>//bluepie.live/blog/2019/04/android-service-binders/</guid>
+      <description>hola amigos&amp;rsquo;, how are you guys doing? im fine thank you!. Status Update: About last week, I have covered some ground interms of development in old passion projects, the start of the week was great, but at the end of the week it got worse, nevertheless im happy that i survived this week &amp;gt;_&amp;lt;. Saw avengers end game the other day which was cool, during part-I I was studying, but for part-II -an adult going to office (feels wierd even to think, So much change in just one year), Personally nothing great happened, because of the mind that i have, I had the same bs.</description>
+    </item>
     
     <item>
       <title>Blog Migration</title>
