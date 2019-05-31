@@ -6,10 +6,19 @@
     <description>Recent content in Tech on Bluepie&#39;s update blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Apr 2019 18:24:31 +0530</lastBuildDate>
+    <lastBuildDate>Fri, 24 May 2019 23:32:43 +0530</lastBuildDate>
     
 	<atom:link href="//bluepie.live/blog/categories/tech/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ModSecurity</title>
+      <link>//bluepie.live/blog/2019/05/modsecurity/</link>
+      <pubDate>Fri, 24 May 2019 23:32:43 +0530</pubDate>
+      
+      <guid>//bluepie.live/blog/2019/05/modsecurity/</guid>
+      <description>so hello.. how are you doing..? how is life? im good, thank you!. ***Status Update: I&amp;rsquo;ve seen better days tbh, i&amp;rsquo;ve faced a lot of challenges this month, im having burnout? wtf! what is that? you ask&amp;rsquo;? just google it.. In the entirety of my life, i never hated computers and programming/ developing in general, but recently i grown a haterd to computers and coding disgusts me.. like WTH?</description>
+    </item>
     
     <item>
       <title>Android Service Binders</title>

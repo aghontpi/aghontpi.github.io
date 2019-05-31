@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Bluepie">
+  
+  
+  
+  <link rel="prev" href="//bluepie.live/blog/2019/04/android-service-binders/" />
+  
+  <link rel="canonical" href="//bluepie.live/blog/2019/05/modsecurity/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="//bluepie.live/blog/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="//bluepie.live/blog/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="//bluepie.live/blog/favicon-16x16.png">
+  <link rel="manifest" href="//bluepie.live/blog/site.webmanifest">
+  <link rel="mask-icon" href="//bluepie.live/blog/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           ModSecurity | Bluepie&#39;s update blog
+       
+  </title>
+  <meta name="title" content="ModSecurity | Bluepie&#39;s update blog">
+    
+  
+  <link rel="stylesheet" href="//bluepie.live/blog/font/iconfont.css">
+  <link rel="stylesheet" href="//bluepie.live/blog/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "\/\/bluepie.live\/blog\/"
+    },
+    "articleSection" : "posts",
+    "name" : "ModSecurity",
+    "headline" : "ModSecurity",
+    "description" : "so hello.. how are you doing..? how is life? im good, thank you!. ***Status Update: I\x26rsquo;ve seen better days tbh, i\x26rsquo;ve faced a lot of challenges this month, im having burnout? wtf! what is that? you ask\x26rsquo;? just google it.. In the entirety of my life, i never hated computers and programming\/ developing in general, but recently i grown a haterd to computers and coding disgusts me.. like WTH?",
+    "inLanguage" : "en-us",
+    "author" : "Bluepie",
+    "creator" : "Bluepie",
+    "publisher": "Bluepie",
+    "accountablePerson" : "Bluepie",
+    "copyrightHolder" : "Bluepie",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-05-24 23:32:43 \x2b0530 IST",
+    "dateModified" : "2019-05-24 23:32:43 \x2b0530 IST",
+    "url" : "\/\/bluepie.live\/blog\/2019\/05\/modsecurity\/",
+    "wordCount" : "855",
+    "keywords" : [  "Bluepie\x27s update blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-student-alt"></i></a>&nbsp;<a href="//bluepie.live/blog/">Bluepie&#39;s update blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="//bluepie.live/blog/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="//bluepie.live/blog/categories/" title="">Categories</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="//bluepie.live/blog/">Bluepie&#39;s update blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="//bluepie.live/blog/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="//bluepie.live/blog/categories/" title="">Categories</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">ModSecurity</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="//bluepie.live/blog/" rel="author">Bluepie</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-05-24 itemprop="datePublished">May 24, 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="//bluepie.live/blog/categories/tech/"> Tech </a>
+                        <a href="//bluepie.live/blog/categories/networking/"> Networking </a>
+                        <a href="//bluepie.live/blog/categories/security/"> Security </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        <img src="//bluepie.live/blog/images/posts/modsecurity_audit.png" class="featured_image">
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<blockquote>
+<p>so hello.. how are you doing..? how is life? im good, thank you!.
+***Status Update: I&rsquo;ve seen better days tbh, i&rsquo;ve faced a lot of challenges this month, im having burnout? wtf! what is that? you ask&rsquo;? just google it.. In the entirety of my life, i never hated computers and programming/ developing in general, but recently i grown a haterd to computers and coding disgusts me.. like WTH? im like the polar opposite of myself, i never thought i would reach this moment in life, funny is&rsquo;nt it? plus i&rsquo;ve been going to my old happits - i blame being human for that.. i can never forget something and get over it can&rsquo;t I. ***</p>
+</blockquote>
+
+<p><strong><em>Thankfully for burnout I got people on my back, with their help and advice, i&rsquo;ve been taking breaks but the breaks are not enough, goto go to work?!! i miss old days.</em></strong></p>
+
+<hr />
+
+<h2 id="i-ve-had-a-chance-to-work-on-modsecurity-and-im-greatfull-for-that-i-gained-a-new-skill-kudos">&gt; I&rsquo;ve had a chance to work on modSecurity and im greatfull for that! I gained a new skill! kudos!!.</h2>
+
+<hr />
+
+<h3 id="why">Why?</h3>
+
+<p>what is modSec? modSecurity is a waf, waf is like anti virus for servers, controls how the servers responds to requests and what responses are sent out. modSecurity is openSource so  using is completely free and it is a must in pci compliance, modSec works based on rules that fine tuned, identified as malicious and are wrote down, the rules are the building blocks of modsecurity. a better rule set equals better protection, this is  why you see many vendors who branched out from modSecurity and provide their own set of rules as their enterprise solutions like for example: atomicorp, mlware expert, Trustwave, trend micro, etc.</p>
+
+<p>if you want to know about modsecurity you should know a little bit of history of mod security, the rule set history, the latest in the rules of modSecurity is the core rule set 3.0+, before this release, the modSecrity rules create many false positives, but after update some big changes are the new blocking mode, curated rule-set and better detection.</p>
+
+<h3 id="so-what-is-the-new-blocking-mode">So what is the new blocking mode?</h3>
+
+<p>By default the anomaly scoring mode(new blocking mode) is activated, with
+&ldquo;SecRuleEngine DetectionOnly&rdquo;,  you have to turn this to &ldquo;SecRuleEngine On&rdquo;
+to block the malicious requests. <strong><em>(first of all you install modSecurity, leave the detection phase on, collect some logs - analyse them - tweak the rules - then turn on the secRuleEngine..)</em></strong></p>
+
+<p>if SecDefaultAction is set to “phase:2,deny,log&rdquo;  then modSecurity is working by anomaly scoring mode. next thing you must know about is &ldquo;Anomaly scoring severity levels&rdquo; and &ldquo; Anomaly scoring threshold levels&rdquo; (for blocking mostly)</p>
+
+<h4 id="what-it-does">what it does?</h4>
+
+<p>It does not block the request immediately but allows the request to pass through after assigning a score to the request, if the request any other rules another score is added to it, so there are 5 different levels where the rules are applied to the request, the scores are evaluated at the phase 3 for Inbound rules and 4 for outbound requests, yea you are right modsec scans the output content too and slaps score on it, if it sees something malicious.
+the rules are present in the rule-set too as</p>
+
+<pre><code class="language-bash">SecAction “phase:1,id:’981208’,t:none,nolog,pass,\
+setvar:tx.inbound_anomaly_score_level=5”
+SecAction “phase:1,id:’981209’,t:none,nolog,pass,\
+setvar:tx.outbound_anomaly_score_level=4”
+</code></pre>
+
+<p>the inbound rules files are present in the file named along the line of &ldquo;inbound_blocking.conf&rdquo; and same as for the outbound request &ldquo;outbound_blocking.conf&rdquo;.</p>
+
+<p>Based on severity anomaly scoring mode has different levels with scores by default</p>
+
+<pre><code class="language-json">CRITICAL with a score of 5
+Error with 4,
+warning with 3,
+notice with 2,
+</code></pre>
+
+<hr />
+
+<blockquote>
+<p>#Note: modSecurity must be tweaked to individual applications, not just install the default configuration, infact the authors of modsecurity strongly advice this too.</p>
+</blockquote>
+
+<h3 id="about-audit-logs-someother-aspects">About audit logs - SomeOther aspects.</h3>
+
+<p>Audit logs provide the entire traffic data <strong><em>if &ldquo;logging is enabled that is&rdquo;.</em></strong></p>
+
+<h6 id="if-response-code-is-500-we-are-logging-that">if response code is 500 we are logging that.</h6>
+
+<pre><code class="language-bash">SecAuditLogRelevantStatus “^(?:5|4(?!04))”
+</code></pre>
+
+<h6 id="the-following-parts-contain-the-necessary-information-for-each-request">the following parts contain the necessary information for each request.</h6>
+
+<pre><code class="language-bash">SecAuditLogParts ABCEFHZ
+• A: Audit log header
+• B: Request headers
+• C: Request body
+• E: Intended response body
+• F: Response headers
+• H: Audit log trailer
+• Z: Audit log footer
+</code></pre>
+
+<h3 id="while-logging-sensitive-data-in-logs">While logging - Sensitive Data in Logs</h3>
+
+<p>Be careful while logging the data, sensitive data are captured in logs too like passwords, creditcard numbers, you dont want that do you?</p>
+
+<p>the below log you see credit card number captured in part c.</p>
+
+<pre><code class="language-json">--8472b290-C--
+paymentType=default&amp;_D%3ApaymentType=+&amp;
+creditCardNumber=***************&amp;_D%3AcreditCardNumber=+&amp;cid=6802
+&amp;_D%3Acid=+&amp;selCreditCardType=Visa&amp;_D%3AselCreditCardType
+=+&amp;_D%3AexpirationMonth=+&amp;expirationMon
+</code></pre>
+
+<p>you can mitigate this with a rule like</p>
+
+<pre><code class="language-json">SecRule &amp;ARGS:password “@eq 1” “phase:5,t:none,id:’901’,nolog,pass,\
+sanitiseInput:pwd
+</code></pre>
+
+<p>now in audit log c section,</p>
+
+<pre><code class="language-json">--c983684a-C--
+log=admin&amp;password=********&amp;submit=Login+%C2%BB&quot;
+</code></pre>
+
+<p>with the rule applied the password is now obscured.</p>
+
+<h3 id="vitual-patching">vitual Patching</h3>
+
+<p>So ModSecurity has a ton of features you should not miss out is virtual patching,  where would you use this you ask? well.. you found a vulnerability in your application and while you wait for the developers to fix that you could do virutual patching with the wide variety of rules available in modSecurity.</p>
+
+<hr />
+
+<blockquote>
+<p><strong><em>The post is getting huge and I find writing blogs tiresome (bad at typing i guess). but i still do it cuz its for the future me.</em></strong></p>
+</blockquote>
+
+<p>***I didn&rsquo;nt cover everything and i assumed u knew little about modSecurity during halfway, ***</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Bluepie </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=//bluepie.live/blog/2019/05/modsecurity/>//bluepie.live/blog/2019/05/modsecurity/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="//bluepie.live/blog/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="//bluepie.live/blog/2019/04/android-service-binders/" class="prev" rel="prev" title="Android Service Binders"><i class="iconfont icon-left"></i>&nbsp;Android Service Binders</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+        <span class="with-love">
+    	 |
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="//bluepie.live/blog/">Bluepie</a></span> 
+         
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="//bluepie.live/blog/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>
