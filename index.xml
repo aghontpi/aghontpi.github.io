@@ -66,9 +66,7 @@ notice with 2,
 
 &lt;hr /&gt;
 
-&lt;blockquote&gt;
-&lt;p&gt;#Note: modSecurity must be tweaked to individual applications, not just install the default configuration, infact the authors of modsecurity strongly advice this too.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;h3 id=&#34;note-modsecurity-must-be-tweaked-to-individual-applications-not-just-install-the-default-configuration-infact-the-authors-of-modsecurity-strongly-advice-this-too&#34;&gt;&amp;gt;Note: modSecurity must be tweaked to individual applications, not just install the default configuration, infact the authors of modsecurity strongly advice this too.&lt;/h3&gt;
 
 &lt;h3 id=&#34;about-audit-logs-someother-aspects&#34;&gt;About audit logs - SomeOther aspects.&lt;/h3&gt;
 
@@ -128,7 +126,7 @@ log=admin&amp;amp;password=********&amp;amp;submit=Login+%C2%BB&amp;quot;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;The post is getting huge and I find writing blogs tiresome (bad at typing i guess). but i still do it cuz its for the future me.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;***I didn&amp;rsquo;nt cover everything and i assumed u knew little about modSecurity during halfway, ***&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;I didn&amp;rsquo;nt cover everything and i assumed u knew little about modSecurity during halfway, I just couln&amp;rsquo;t type the whole entirety, just contact me if you want to know more&amp;hellip;bye!&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 </description>
     </item>
     
