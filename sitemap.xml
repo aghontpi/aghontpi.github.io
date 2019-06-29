@@ -4,7 +4,19 @@
     <url>
       <loc>//bluepie.live/blog/</loc>
       
-      <lastmod>2019-05-24T23:32:43+05:30</lastmod>
+      <lastmod>2019-06-29T18:35:30+05:30</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>//bluepie.live/blog/categories/ctf/</loc>
+      
+      <lastmod>2019-06-29T18:35:30+05:30</lastmod>
       
       
       
@@ -16,7 +28,65 @@
     <url>
       <loc>//bluepie.live/blog/categories/</loc>
       
-      <lastmod>2019-05-24T23:32:43+05:30</lastmod>
+      <lastmod>2019-06-29T18:35:30+05:30</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>//bluepie.live/blog/2019/06/google-ctf-2019/</loc>
+      
+      <lastmod>2019-06-29T18:35:30+05:30</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>//bluepie.live/blog/categories/networking/</loc>
+      
+      <lastmod>2019-06-29T18:35:30+05:30</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>//bluepie.live/blog/posts/</loc>
+      
+      <lastmod>2019-06-29T18:35:30+05:30</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>//bluepie.live/blog/categories/security/</loc>
+      
+      <lastmod>2019-06-29T18:35:30+05:30</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>//bluepie.live/blog/categories/tech/</loc>
+      
+      <lastmod>2019-06-29T18:35:30+05:30</lastmod>
       
       
       
@@ -31,54 +101,6 @@
       <lastmod>2019-05-24T23:32:43+05:30</lastmod>
       
       
-      
-      
-    </url>
-  
-    <url>
-      <loc>//bluepie.live/blog/categories/networking/</loc>
-      
-      <lastmod>2019-05-24T23:32:43+05:30</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>//bluepie.live/blog/posts/</loc>
-      
-      <lastmod>2019-05-24T23:32:43+05:30</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>//bluepie.live/blog/categories/security/</loc>
-      
-      <lastmod>2019-05-24T23:32:43+05:30</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>//bluepie.live/blog/categories/tech/</loc>
-      
-      <lastmod>2019-05-24T23:32:43+05:30</lastmod>
-      
-      
-      
-      <priority>0</priority>
       
       
     </url>

@@ -6,10 +6,19 @@
     <description>Recent content in Security on Bluepie&#39;s update blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 May 2019 23:32:43 +0530</lastBuildDate>
+    <lastBuildDate>Sat, 29 Jun 2019 18:35:30 +0530</lastBuildDate>
     
 	<atom:link href="//bluepie.live/blog/categories/security/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Google Ctf 2019</title>
+      <link>//bluepie.live/blog/2019/06/google-ctf-2019/</link>
+      <pubDate>Sat, 29 Jun 2019 18:35:30 +0530</pubDate>
+      
+      <guid>//bluepie.live/blog/2019/06/google-ctf-2019/</guid>
+      <description>hey!. future me,(addressing myself) Status Update:So its been almost a year since i joined a company and having my career growing, but my personal goals are just at the same position when i left my student life. Gosh wish things where different, So another long time since i made my last post. time really flies by, so the most part im ok i guess with inner conflicts, mental forgetfullness, slow motion, slow thinking.</description>
+    </item>
     
     <item>
       <title>ModSecurity</title>
@@ -17,7 +26,7 @@
       <pubDate>Fri, 24 May 2019 23:32:43 +0530</pubDate>
       
       <guid>//bluepie.live/blog/2019/05/modsecurity/</guid>
-      <description>so hello.. how are you doing..? how is life? im good, thank you!. ***Status Update: I&amp;rsquo;ve seen better days tbh, i&amp;rsquo;ve faced a lot of challenges this month, im having burnout? wtf! what is that? you ask&amp;rsquo;? just google it.. In the entirety of my life, i never hated computers and programming/ developing in general, but recently i grown a haterd to computers and coding disgusts me.. like WTH?</description>
+      <description>so hello.. how are you doing..? how is life? im good, thank you!. Status Update: I&amp;rsquo;ve seen better days tbh, i&amp;rsquo;ve faced a lot of challenges this month, im having burnout? wtf! what is that? you ask&amp;rsquo;? just google it.. In the entirety of my life, i never hated computers and programming/ developing in general, but recently i grown a haterd to computers and coding disgusts me.. like WTH?</description>
     </item>
     
   </channel>

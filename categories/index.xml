@@ -6,15 +6,24 @@
     <description>Recent content in Categories on Bluepie&#39;s update blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 May 2019 23:32:43 +0530</lastBuildDate>
+    <lastBuildDate>Sat, 29 Jun 2019 18:35:30 +0530</lastBuildDate>
     
 	<atom:link href="//bluepie.live/blog/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>CTF</title>
+      <link>//bluepie.live/blog/categories/ctf/</link>
+      <pubDate>Sat, 29 Jun 2019 18:35:30 +0530</pubDate>
+      
+      <guid>//bluepie.live/blog/categories/ctf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Networking</title>
       <link>//bluepie.live/blog/categories/networking/</link>
-      <pubDate>Fri, 24 May 2019 23:32:43 +0530</pubDate>
+      <pubDate>Sat, 29 Jun 2019 18:35:30 +0530</pubDate>
       
       <guid>//bluepie.live/blog/categories/networking/</guid>
       <description></description>
@@ -23,7 +32,7 @@
     <item>
       <title>Security</title>
       <link>//bluepie.live/blog/categories/security/</link>
-      <pubDate>Fri, 24 May 2019 23:32:43 +0530</pubDate>
+      <pubDate>Sat, 29 Jun 2019 18:35:30 +0530</pubDate>
       
       <guid>//bluepie.live/blog/categories/security/</guid>
       <description></description>
@@ -32,7 +41,7 @@
     <item>
       <title>Tech</title>
       <link>//bluepie.live/blog/categories/tech/</link>
-      <pubDate>Fri, 24 May 2019 23:32:43 +0530</pubDate>
+      <pubDate>Sat, 29 Jun 2019 18:35:30 +0530</pubDate>
       
       <guid>//bluepie.live/blog/categories/tech/</guid>
       <description></description>
