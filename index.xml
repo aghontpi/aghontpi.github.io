@@ -1,275 +1,166 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title>
-    <link>//bluepie.live/blog/</link>
-    <description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 29 Jun 2019 18:35:30 +0530</lastBuildDate>
-    <atom:link href="/" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Google Ctf 2019</title>
-      <link>//bluepie.live/blog/2019/06/google-ctf-2019/</link>
-      <pubDate>Sat, 29 Jun 2019 18:35:30 +0530</pubDate>
-      
-      <guid>//bluepie.live/blog/2019/06/google-ctf-2019/</guid>
-      <description>
-
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.live/blog/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 29 Jun 2019 18:35:30 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Google Ctf 2019</title><link>//bluepie.live/blog/2019/06/google-ctf-2019/</link><pubDate>Sat, 29 Jun 2019 18:35:30 +0530</pubDate><guid>//bluepie.live/blog/2019/06/google-ctf-2019/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;hey!. future me,(addressing myself)
 &lt;strong&gt;&lt;em&gt;Status Update:So its been almost a year since i joined a company and having my career growing, but my personal goals are just at the same position when i left my student life. Gosh wish things where different, So another long time since i made my last post. time really flies by, so the most part im ok i guess with inner conflicts, mental forgetfullness, slow motion, slow thinking. For the past some weeks everything around me feels like it has been sped up, but i am still moving slowly.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;hr /&gt;
-
 &lt;h2 id=&#34;thing-that-got-me-interested-google-capture-the-flag&#34;&gt;Thing that got me interested - Google Capture the flag.&lt;/h2&gt;
-
-&lt;p&gt;As i said, i haven&amp;rsquo;t given up all my hobbies, recently i was eager to participate in the capture the flag conducted by google, because i was free during that time cuz that was on a saturday and sunday,  (not office hours,). So this post will cover that, i wont be writing everything, since this is ultimately for the sake of me that i am doing this.&lt;/p&gt;
-
+&lt;p&gt;As i said, i haven&amp;rsquo;t given up all my hobbies, recently i was eager to participate in the capture the flag conducted by google, because i was free during that time cuz that was on a saturday and sunday, (not office hours,). So this post will cover that, i wont be writing everything, since this is ultimately for the sake of me that i am doing this.&lt;/p&gt;
 &lt;h3 id=&#34;challenges&#34;&gt;challenges&lt;/h3&gt;
-
 &lt;p&gt;Im going to be vague about most of the things, except the ones i felt where challenging and interesitng to me.
 so the first challenge was a binary challenge, that was pretty easy a 30 second view and string analysis of the file gave me the flag, &amp;ldquo;CTF{welcome_to_googlectf}&amp;rdquo; it was the beginning after all.&lt;/p&gt;
-
-&lt;p&gt;the next part was also a binay involved, but that binary was connecting to the internet to communicat, wireshark can be used for instance but using wireshark for this beginner task is an overkill, what i did was found out the server ip from the binary,  connected to the server directly, got the flag,  bypassing the protection from the binary,&lt;/p&gt;
-
-&lt;p&gt;the next part is a two parter, first you have to find the ip address of the server, then after connecting to the server, you have limited access, you do not have any permission what so ever, the flag is there in a file with no permission set to it,  but you can access &amp;ldquo;bin/&amp;rdquo; directory with exec permissions to some of the executables, but no exec permissions to busybox binary, with some tweaking and wandering around this round is also simple.&lt;/p&gt;
-
+&lt;p&gt;the next part was also a binay involved, but that binary was connecting to the internet to communicat, wireshark can be used for instance but using wireshark for this beginner task is an overkill, what i did was found out the server ip from the binary, connected to the server directly, got the flag, bypassing the protection from the binary,&lt;/p&gt;
+&lt;p&gt;the next part is a two parter, first you have to find the ip address of the server, then after connecting to the server, you have limited access, you do not have any permission what so ever, the flag is there in a file with no permission set to it, but you can access &amp;ldquo;bin/&amp;rdquo; directory with exec permissions to some of the executables, but no exec permissions to busybox binary, with some tweaking and wandering around this round is also simple.&lt;/p&gt;
 &lt;p&gt;the next round you are presented boot sector ntfs file. the file contains the details to the flag apparently, so we mount the ntfs file, find all the files that are likely to be the flag, apparently all the files are empty with 0 bytes,by filtering the files which are above 1kb, the results shows up as only one, we get a hint that the flag is stored in pic directory on the file&amp;rsquo;s extra attribute section.&lt;/p&gt;
-
 &lt;p&gt;the next level was an xss injection, that is pretty easy i guess, basically you have to get the admin&amp;rsquo;s cookies and session id to get the flag.&lt;/p&gt;
-
 &lt;p&gt;some of the challenges are very easy so I am not going to cover them, if you know basic reverse engineering and cyber security, you could solve them easily.&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;a challenge that was fresh and I have not seen anything like that challenge before, I am going to write about how I managed to solve that.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
 &lt;hr /&gt;
-
 &lt;h3 id=&#34;a-challenge-that-was-interesting-to-me&#34;&gt;A challenge that was interesting to me.&lt;/h3&gt;
-
 &lt;p&gt;so here comes the big thing that took me a lot of time to figure this out, It was a reversing challenge, it consisted of a python program with a file as argument to it, the argument file consist of emojis, python program emulates stack based vm with the smiles as instructions, Im gona walk through how i was able to solve this problem.&lt;/p&gt;
-
 &lt;p&gt;The source of the program was given, it was just a python program, but it was quite hard to understand what they where doing at first, the link to the files are below, check them out, you have to run them on python3.&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;//bluepie.live/blog/attachments/vmbackup.py&#34; title=&#34;python Source code&#34;&gt;vmbackup.py&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;//bluepie.live/blog/attachments/program&#34; title=&#34;python Source code&#34;&gt;program&lt;/a&gt;&lt;/p&gt;
-
 &lt;h4 id=&#34;the-problem-with-this&#34;&gt;the problem with this?.&lt;/h4&gt;
-
-&lt;p&gt;So pretty much it prints a url, letter by letter, but gradually it slows down and at some point it stops, so the algorithm they are using might be the issue here, so when opening the program file you will find smiles inside of it, and the python program uses those smiles one by one as instrcutions and runs them. just like a modern cpu running the binary file. i was twisting my head around replacing smilies to understand the program, i could idenify pattersn but  nothing more.&lt;/p&gt;
-
-&lt;p&gt;A little later I tried a different approach, which is print statements, the python progrm  is still python right, so  made some print statements in different places, then ran the program.&lt;/p&gt;
-
+&lt;p&gt;So pretty much it prints a url, letter by letter, but gradually it slows down and at some point it stops, so the algorithm they are using might be the issue here, so when opening the program file you will find smiles inside of it, and the python program uses those smiles one by one as instrcutions and runs them. just like a modern cpu running the binary file. i was twisting my head around replacing smilies to understand the program, i could idenify pattersn but nothing more.&lt;/p&gt;
+&lt;p&gt;A little later I tried a different approach, which is print statements, the python progrm is still python right, so made some print statements in different places, then ran the program.&lt;/p&gt;
 &lt;h5 id=&#34;where-i-made-the-comments&#34;&gt;where I made the comments.&lt;/h5&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
-  def xor(self):
-    a = self.stack.pop()
-    b = self.stack.pop()
-    print(&amp;quot; xor:: a:&amp;quot; + str(a) +&amp;quot; b:&amp;quot;+ str(b) +&amp;quot;\n&amp;quot;)
-    self.stack.append(b ^ a)
-
-  def print_top(self):
-    print(self.stack);
-    sys.stdout.write(chr(self.stack.pop()))
-    sys.stdout.flush()
-
-  def push(self):
-    if self.rom[self.instruction_pointer] == &#39;🥇&#39;:
-      self.stack.append(self.accumulator1)
-      print(&amp;quot;accumulator1 :&amp;quot; + str(self.accumulator1) )
-    elif self.rom[self.instruction_pointer] == &#39;🥈&#39;:
-      self.stack.append(self.accumulator2)
-      print(&amp;quot;accumulator2 :&amp;quot; + str(self.accumulator1) )
-    else:
-      raise RuntimeError(&#39;Unknown instruction {} at position {}&#39;.format(
-          self.rom[self.instruction_pointer], str(self.instruction_pointer)))
-    self.instruction_pointer += 1
-
-    def load(self):
-    num = 0
-
-    if self.rom[self.instruction_pointer] == &#39;🥇&#39;:
-      acc = 1
-    elif self.rom[self.instruction_pointer] == &#39;🥈&#39;:
-      acc = 2
-    else:
-      raise RuntimeError(&#39;Unknown instruction {} at position {}&#39;.format(
-          self.rom[self.instruction_pointer], str(self.instruction_pointer)))
-    self.instruction_pointer += 1
-
-    while self.rom[self.instruction_pointer] != &#39;✋&#39;:
-      num = num * 10 + (ord(self.rom[self.instruction_pointer][0]) - ord(&#39;0&#39;))
-      print(&amp;quot;rom: &amp;quot;+str(ord(self.rom[self.instruction_pointer][0])) +&amp;quot; ord:&amp;quot;+ str((ord(self.rom[self.instruction_pointer][0]) - ord(&#39;0&#39;)) ))
-      self.instruction_pointer += 1
-
-    if acc == 1:
-      self.accumulator1 = num
-    else:
-      self.accumulator2 = num
-
-    self.instruction_pointer += 1
-
+def xor(self):
+a = self.stack.pop()
+b = self.stack.pop()
+print(&amp;quot; xor:: a:&amp;quot; + str(a) +&amp;quot; b:&amp;quot;+ str(b) +&amp;quot;\n&amp;quot;)
+self.stack.append(b ^ a)
+def print_top(self):
+print(self.stack);
+sys.stdout.write(chr(self.stack.pop()))
+sys.stdout.flush()
+def push(self):
+if self.rom[self.instruction_pointer] == &#39;🥇&#39;:
+self.stack.append(self.accumulator1)
+print(&amp;quot;accumulator1 :&amp;quot; + str(self.accumulator1) )
+elif self.rom[self.instruction_pointer] == &#39;🥈&#39;:
+self.stack.append(self.accumulator2)
+print(&amp;quot;accumulator2 :&amp;quot; + str(self.accumulator1) )
+else:
+raise RuntimeError(&#39;Unknown instruction {} at position {}&#39;.format(
+self.rom[self.instruction_pointer], str(self.instruction_pointer)))
+self.instruction_pointer += 1
+def load(self):
+num = 0
+if self.rom[self.instruction_pointer] == &#39;🥇&#39;:
+acc = 1
+elif self.rom[self.instruction_pointer] == &#39;🥈&#39;:
+acc = 2
+else:
+raise RuntimeError(&#39;Unknown instruction {} at position {}&#39;.format(
+self.rom[self.instruction_pointer], str(self.instruction_pointer)))
+self.instruction_pointer += 1
+while self.rom[self.instruction_pointer] != &#39;✋&#39;:
+num = num * 10 + (ord(self.rom[self.instruction_pointer][0]) - ord(&#39;0&#39;))
+print(&amp;quot;rom: &amp;quot;+str(ord(self.rom[self.instruction_pointer][0])) +&amp;quot; ord:&amp;quot;+ str((ord(self.rom[self.instruction_pointer][0]) - ord(&#39;0&#39;)) ))
+self.instruction_pointer += 1
+if acc == 1:
+self.accumulator1 = num
+else:
+self.accumulator2 = num
+self.instruction_pointer += 1
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;After making the comments things were much clearer to me, all the comments that I made in the above program I didn&amp;rsquo;t do it in one instance and run the program, I made some comments in the program run at and check the weather it make sense and added some more comments and then run it again and again&amp;hellip; I have also attached the log files which was generated from the different runs.&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;//bluepie.live/blog/attachments/output.txt&#34; title=&#34;run#1&#34;&gt;output.txt&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;//bluepie.live/blog/attachments/outputWithXor.txt&#34; title=&#34;run#2&#34;&gt;outputWithXor.txt&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;//bluepie.live/blog/attachments/outputWithXorWithAccumulator.txt&#34; title=&#34;run#3&#34;&gt;outputWithXorWithAccumulator.txt&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;//bluepie.live/blog/attachments/outputWithXorWithRom.txt&#34; title=&#34;run#4&#34;&gt;outputWithXorWithRom.txt&lt;/a&gt;&lt;/p&gt;
-
 &lt;hr /&gt;
-
 &lt;h4 id=&#34;solving-thought-process&#34;&gt;solving thought process&lt;/h4&gt;
-
 &lt;p&gt;Download and check the different log files from above, analysing each of those health individually will give you an idea, well it give me an idea, all the different mechanics in the program were making sense to me now, the accumulator 1, accumulator 2, push instructions, pop instructions, load instructions&amp;hellip;&lt;/p&gt;
-
 &lt;p&gt;You see when the program first runs, it just load the bunch of numbers into the memory after that it performs mathematical operations to find prime numbers, on the moment it finds a prime number it performs an &lt;strong&gt;&lt;em&gt;XOR operation on a number that was initially loaded(a number that is in the top of the stack)&lt;/em&gt;&lt;/strong&gt; this produces an integer value, this integer value corresponds to an ASCII character.. yeah! integer values are converted to ASCII character and then print out. This is the basis of the URL generator.&lt;/p&gt;
-
 &lt;p&gt;So we have the encoded URL as numbers in memory, you can easily find this out in the log files that I have attach, so we can easily extract those numbers, find the prime numbers ourselves and then perform xor operation and get the URL, easy right? .&lt;/p&gt;
-
-&lt;p&gt;So I  cooked a a Python program that finds a series of prime numbers and then performs XOR operation. Running that I couldn&amp;rsquo;t find the URL it was printing random rubbish things.  After inspecting closely I found out that the prime numbers or not in a series,  are they were using some logic or or some other thing and only using certain prime numbers.  This was the part where I was stuck and couldn&amp;rsquo;t get my brain around this. I was literally stuck for 45 minutes and clearly missed out the clue that was in front of me, maybe my office activities made my brain dull.&lt;/p&gt;
-
+&lt;p&gt;So I cooked a a Python program that finds a series of prime numbers and then performs XOR operation. Running that I couldn&amp;rsquo;t find the URL it was printing random rubbish things. After inspecting closely I found out that the prime numbers or not in a series, are they were using some logic or or some other thing and only using certain prime numbers. This was the part where I was stuck and couldn&amp;rsquo;t get my brain around this. I was literally stuck for 45 minutes and clearly missed out the clue that was in front of me, maybe my office activities made my brain dull.&lt;/p&gt;
 &lt;p&gt;I found out that the &lt;strong&gt;&lt;em&gt;prime numbers are in-fact in series, but the series contained only prime numbers that where palindromic&lt;/em&gt;&lt;/strong&gt;. So I did some tweaks to my program and then executed it. Vola! I got the URL in an instant, with that URL I solved that challenge.&lt;/p&gt;
-
 &lt;h4 id=&#34;solution&#34;&gt;solution.&lt;/h4&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
 # Make sure to run the program in Python 3, I cooked up this program quickly so forgive my bad code,
-
 import operator
 toDecode = [17488, 16758, 16599, 16285, 16094, 15505, 15417, 14832, 14450, 13893, 13926, 13437, 12833, 12741, 12533, 11504, 11342, 10503, 10550, 10319, 975, 1007, 892, 893, 660, 743, 267, 344, 264, 339, 208, 216, 242, 172, 74, 49, 119, 113, 119,106]
-
 def checkprime(num):
-	flag=True
-	for x in range(3,(int(num/2))+1):
-		if(num%x==0):
-			flag=False
-	return flag
-
-
+flag=True
+for x in range(3,(int(num/2))+1):
+if(num%x==0):
+flag=False
+return flag
 def primeNumberGenerator():
-	primeNumberArr = [2,3,5,7]
-	for x in range(10,17488):
-		if(checkprime(x)):
-			primeNumberArr.append(x)
-	return primeNumberArr
-
+primeNumberArr = [2,3,5,7]
+for x in range(10,17488):
+if(checkprime(x)):
+primeNumberArr.append(x)
+return primeNumberArr
 def filterPalindromeFromPrime(primeNumberArr):
-	primePalindrome = []
-	for x in primeNumberArr:
-		if (str(x) == str(x)[::-1]):
-			primePalindrome.append(x)
-	return primePalindrome
-
+primePalindrome = []
+for x in primeNumberArr:
+if (str(x) == str(x)[::-1]):
+primePalindrome.append(x)
+return primePalindrome
 def decode(PrimePalindromeArr):
-	toDecode.reverse()
-	url = []
-	print(&amp;quot;toDecode Count:&amp;quot; +str(len(toDecode)))
-	print(&amp;quot;PrimePalindromeArr Count:&amp;quot; +str(len(PrimePalindromeArr)))
-	for index, value in enumerate(toDecode):
-		character = operator.xor(PrimePalindromeArr[index],value)
-		print(&amp;quot;palindromeValue:&amp;quot;+str(PrimePalindromeArr[index]))
-		print(&amp;quot;value:&amp;quot;+str(value))
-		print(&amp;quot;character:&amp;quot;+chr(character))
-		url.append(chr(character))
-
-	print(&amp;quot;url:&amp;quot;+&amp;quot;&amp;quot;.join(url))
-
-
-
+toDecode.reverse()
+url = []
+print(&amp;quot;toDecode Count:&amp;quot; +str(len(toDecode)))
+print(&amp;quot;PrimePalindromeArr Count:&amp;quot; +str(len(PrimePalindromeArr)))
+for index, value in enumerate(toDecode):
+character = operator.xor(PrimePalindromeArr[index],value)
+print(&amp;quot;palindromeValue:&amp;quot;+str(PrimePalindromeArr[index]))
+print(&amp;quot;value:&amp;quot;+str(value))
+print(&amp;quot;character:&amp;quot;+chr(character))
+url.append(chr(character))
+print(&amp;quot;url:&amp;quot;+&amp;quot;&amp;quot;.join(url))
 if __name__ == &#39;__main__&#39;:
-	primeArr = primeNumberGenerator()
-	PrimePalindromeArr = filterPalindromeFromPrime(primeArr)
-	decode(PrimePalindromeArr)
-
+primeArr = primeNumberGenerator()
+PrimePalindromeArr = filterPalindromeFromPrime(primeArr)
+decode(PrimePalindromeArr)
 # Also forgot to mention there where three batches of toDecode, join them entirely to get the complete URL
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;I did manage to solve the challenges,  but for the sake of this post I am gonna keep this short,  already the post is very huge and it took me so long to write this. I know I am a bad typer(could not type very fast). I promise you that I will post all the challenges that were challenging to me. Bye See ya soon.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ModSecurity</title>
-      <link>//bluepie.live/blog/2019/05/modsecurity/</link>
-      <pubDate>Fri, 24 May 2019 23:32:43 +0530</pubDate>
-      
-      <guid>//bluepie.live/blog/2019/05/modsecurity/</guid>
-      <description>
-
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;I did manage to solve the challenges, but for the sake of this post I am gonna keep this short, already the post is very huge and it took me so long to write this. I know I am a bad typer(could not type very fast). I promise you that I will post all the challenges that were challenging to me. Bye See ya soon.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>ModSecurity</title><link>//bluepie.live/blog/2019/05/modsecurity/</link><pubDate>Fri, 24 May 2019 23:32:43 +0530</pubDate><guid>//bluepie.live/blog/2019/05/modsecurity/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;so hello.. how are you doing..? how is life? im good, thank you!.
 &lt;strong&gt;&lt;em&gt;Status Update: I&amp;rsquo;ve seen better days tbh, i&amp;rsquo;ve faced a lot of challenges this month, im having burnout? wtf! what is that? you ask&amp;rsquo;? just google it.. In the entirety of my life, i never hated computers and programming/ developing in general, but recently i grown a haterd to computers and coding disgusts me.. like WTH? im like the polar opposite of myself, i never thought i would reach this moment in life, funny is&amp;rsquo;nt it? plus i&amp;rsquo;ve been going to my old happits - i blame being human for that.. i can never forget something and get over it can&amp;rsquo;t I.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Thankfully for burnout I got people on my back, with their help and advice, i&amp;rsquo;ve been taking breaks but the breaks are not enough, goto go to work?!! i miss old days.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
 &lt;hr /&gt;
-
 &lt;h2 id=&#34;i-ve-had-a-chance-to-work-on-modsecurity-and-im-greatfull-for-that-i-gained-a-new-skill-kudos&#34;&gt;&amp;gt; I&amp;rsquo;ve had a chance to work on modSecurity and im greatfull for that! I gained a new skill! kudos!!.&lt;/h2&gt;
-
 &lt;hr /&gt;
-
 &lt;h3 id=&#34;why&#34;&gt;Why?&lt;/h3&gt;
-
-&lt;p&gt;what is modSec? modSecurity is a waf, waf is like anti virus for servers, controls how the servers responds to requests and what responses are sent out. modSecurity is openSource so  using is completely free and it is a must in pci compliance, modSec works based on rules that fine tuned, identified as malicious and are wrote down, the rules are the building blocks of modsecurity. a better rule set equals better protection, this is  why you see many vendors who branched out from modSecurity and provide their own set of rules as their enterprise solutions like for example: atomicorp, mlware expert, Trustwave, trend micro, etc.&lt;/p&gt;
-
+&lt;p&gt;what is modSec? modSecurity is a waf, waf is like anti virus for servers, controls how the servers responds to requests and what responses are sent out. modSecurity is openSource so using is completely free and it is a must in pci compliance, modSec works based on rules that fine tuned, identified as malicious and are wrote down, the rules are the building blocks of modsecurity. a better rule set equals better protection, this is why you see many vendors who branched out from modSecurity and provide their own set of rules as their enterprise solutions like for example: atomicorp, mlware expert, Trustwave, trend micro, etc.&lt;/p&gt;
 &lt;p&gt;if you want to know about modsecurity you should know a little bit of history of mod security, the rule set history, the latest in the rules of modSecurity is the core rule set 3.0+, before this release, the modSecrity rules create many false positives, but after update some big changes are the new blocking mode, curated rule-set and better detection.&lt;/p&gt;
-
 &lt;h3 id=&#34;so-what-is-the-new-blocking-mode&#34;&gt;So what is the new blocking mode?&lt;/h3&gt;
-
 &lt;p&gt;By default the anomaly scoring mode(new blocking mode) is activated, with
-&amp;ldquo;SecRuleEngine DetectionOnly&amp;rdquo;,  you have to turn this to &amp;ldquo;SecRuleEngine On&amp;rdquo;
+&amp;ldquo;SecRuleEngine DetectionOnly&amp;rdquo;, you have to turn this to &amp;ldquo;SecRuleEngine On&amp;rdquo;
 to block the malicious requests. &lt;strong&gt;&lt;em&gt;(first of all you install modSecurity, leave the detection phase on, collect some logs - analyse them - tweak the rules - then turn on the secRuleEngine..)&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;if SecDefaultAction is set to “phase:2,deny,log&amp;rdquo;  then modSecurity is working by anomaly scoring mode. next thing you must know about is &amp;ldquo;Anomaly scoring severity levels&amp;rdquo; and &amp;ldquo; Anomaly scoring threshold levels&amp;rdquo; (for blocking mostly)&lt;/p&gt;
-
+&lt;p&gt;if SecDefaultAction is set to “phase:2,deny,log&amp;rdquo; then modSecurity is working by anomaly scoring mode. next thing you must know about is &amp;ldquo;Anomaly scoring severity levels&amp;rdquo; and &amp;ldquo; Anomaly scoring threshold levels&amp;rdquo; (for blocking mostly)&lt;/p&gt;
 &lt;h4 id=&#34;what-it-does&#34;&gt;what it does?&lt;/h4&gt;
-
 &lt;p&gt;It does not block the request immediately but allows the request to pass through after assigning a score to the request, if the request any other rules another score is added to it, so there are 5 different levels where the rules are applied to the request, the scores are evaluated at the phase 3 for Inbound rules and 4 for outbound requests, yea you are right modsec scans the output content too and slaps score on it, if it sees something malicious.
 the rules are present in the rule-set too as&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SecAction “phase:1,id:’981208’,t:none,nolog,pass,\
 setvar:tx.inbound_anomaly_score_level=5”
 SecAction “phase:1,id:’981209’,t:none,nolog,pass,\
 setvar:tx.outbound_anomaly_score_level=4”
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;the inbound rules files are present in the file named along the line of &amp;ldquo;inbound_blocking.conf&amp;rdquo; and same as for the outbound request &amp;ldquo;outbound_blocking.conf&amp;rdquo;.&lt;/p&gt;
-
 &lt;p&gt;Based on severity anomaly scoring mode has different levels with scores by default&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;CRITICAL with a score of 5
 Error with 4,
 warning with 3,
 notice with 2,
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;hr /&gt;
-
 &lt;h3 id=&#34;note-modsecurity-must-be-tweaked-to-individual-applications-not-just-install-the-default-configuration-infact-the-authors-of-modsecurity-strongly-advice-this-too&#34;&gt;&amp;gt;Note: modSecurity must be tweaked to individual applications, not just install the default configuration, infact the authors of modsecurity strongly advice this too.&lt;/h3&gt;
-
 &lt;h3 id=&#34;about-audit-logs-someother-aspects&#34;&gt;About audit logs - SomeOther aspects.&lt;/h3&gt;
-
 &lt;p&gt;Audit logs provide the entire traffic data &lt;strong&gt;&lt;em&gt;if &amp;ldquo;logging is enabled that is&amp;rdquo;.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
 &lt;h5 id=&#34;if-response-code-is-500-we-are-logging-that&#34;&gt;if response code is 500 we are logging that.&lt;/h5&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SecAuditLogRelevantStatus “^(?:5|4(?!04))”
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h5 id=&#34;the-following-parts-contain-the-necessary-information-for-each-request&#34;&gt;the following parts contain the necessary information for each request.&lt;/h5&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SecAuditLogParts ABCEFHZ
 • A: Audit log header
 • B: Request headers
@@ -279,395 +170,214 @@ notice with 2,
 • H: Audit log trailer
 • Z: Audit log footer
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h3 id=&#34;while-logging-sensitive-data-in-logs&#34;&gt;While logging - Sensitive Data in Logs&lt;/h3&gt;
-
 &lt;p&gt;Be careful while logging the data, sensitive data are captured in logs too like passwords, creditcard numbers, you dont want that do you?&lt;/p&gt;
-
 &lt;p&gt;the below log you see credit card number captured in part c.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;--8472b290-C--
 paymentType=default&amp;amp;_D%3ApaymentType=+&amp;amp;
 creditCardNumber=***************&amp;amp;_D%3AcreditCardNumber=+&amp;amp;cid=6802
 &amp;amp;_D%3Acid=+&amp;amp;selCreditCardType=Visa&amp;amp;_D%3AselCreditCardType
 =+&amp;amp;_D%3AexpirationMonth=+&amp;amp;expirationMon
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;you can mitigate this with a rule like&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;SecRule &amp;amp;ARGS:password “@eq 1” “phase:5,t:none,id:’901’,nolog,pass,\
 sanitiseInput:pwd
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;now in audit log c section,&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;--c983684a-C--
 log=admin&amp;amp;password=********&amp;amp;submit=Login+%C2%BB&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;with the rule applied the password is now obscured.&lt;/p&gt;
-
 &lt;h3 id=&#34;vitual-patching&#34;&gt;vitual Patching&lt;/h3&gt;
-
-&lt;p&gt;So ModSecurity has a ton of features you should not miss out is virtual patching,  where would you use this you ask? well.. you found a vulnerability in your application and while you wait for the developers to fix that you could do virutual patching with the wide variety of rules available in modSecurity.&lt;/p&gt;
-
+&lt;p&gt;So ModSecurity has a ton of features you should not miss out is virtual patching, where would you use this you ask? well.. you found a vulnerability in your application and while you wait for the developers to fix that you could do virutual patching with the wide variety of rules available in modSecurity.&lt;/p&gt;
 &lt;hr /&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;The post is getting huge and I find writing blogs tiresome (bad at typing i guess). but i still do it cuz its for the future me.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;I didn&amp;rsquo;nt cover everything and i assumed u knew little about modSecurity during halfway, I just couln&amp;rsquo;t type the whole entirety, just contact me if you want to know more&amp;hellip;bye!&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Android Service Binders</title>
-      <link>//bluepie.live/blog/2019/04/android-service-binders/</link>
-      <pubDate>Sun, 28 Apr 2019 18:24:31 +0530</pubDate>
-      
-      <guid>//bluepie.live/blog/2019/04/android-service-binders/</guid>
-      <description>
-
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;I didn&amp;rsquo;nt cover everything and i assumed u knew little about modSecurity during halfway, I just couln&amp;rsquo;t type the whole entirety, just contact me if you want to know more&amp;hellip;bye!&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>Android Service Binders</title><link>//bluepie.live/blog/2019/04/android-service-binders/</link><pubDate>Sun, 28 Apr 2019 18:24:31 +0530</pubDate><guid>//bluepie.live/blog/2019/04/android-service-binders/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;hola amigos&amp;rsquo;, how are you guys doing? im fine thank you!.
 &lt;strong&gt;&lt;em&gt;Status Update: About last week, I have covered some ground interms of development in old passion projects, the start of the week was great, but at the end of the week it got worse, nevertheless im happy that i survived this week &amp;gt;_&amp;lt;. Saw avengers end game the other day which was cool, during part-I I was studying, but for part-II -an adult going to office (feels wierd even to think, So much change in just one year), Personally nothing great happened, because of the mind that i have, I had the same bs.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;hr /&gt;
-
 &lt;h2 id=&#34;i-m-gona-explain-about-how-to-communicate-with-android-services&#34;&gt;&amp;gt; I&amp;rsquo;m gona explain about how to communicate with android services.&lt;/h2&gt;
-
 &lt;hr /&gt;
-
 &lt;h3 id=&#34;why-backstory&#34;&gt;why? backstory..&lt;/h3&gt;
-
 &lt;p&gt;B&amp;rsquo;coz when I was at the begining stages of my android life, I had some use case that i had to interact with service, I know java somebit but I was no java expert (haven&amp;rsquo;t done any big projects in java &lt;strong&gt;&lt;em&gt;YET &amp;gt;.&amp;gt; (you wouldn&amp;rsquo;t know)&lt;/em&gt;&lt;/strong&gt;). So without any research I went staright in, I thought i could do with interface with my own implementation that came to an dead end with problems. Later i found out binders.. stupid me.
 &lt;img src=&#34;//bluepie.live/blog/images/posts/android_service_binder_Interface.png&#34; alt=&#34;Interface&#34; /&gt;&lt;/p&gt;
-
 &lt;h3 id=&#34;how&#34;&gt;How?&lt;/h3&gt;
-
 &lt;p&gt;Well let me show you. First of all you must know about IBinder interface (available since android&amp;rsquo;s starting stages), then you should know about Binder class which implements the IBinder interface, keep in mind there are a lot of other ways around (as i have already mentioned in the previous posts).&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;h3 id=&#34;it-will-be-better-if-i-explain-this-in-code-as-it-will-be-much-easier-to-understand&#34;&gt;It will be better if i explain this in code, as it will be much easier to understand.&lt;/h3&gt;
 &lt;/blockquote&gt;
-
 &lt;h5 id=&#34;create-a-class-extending-the-class-binder&#34;&gt;create a class extending the class binder.&lt;/h5&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class CustomBinderName extends Binder {
-
-     private sericeName serviceNameInterface;
-
-     /**
-     * gets Serivce context for each service,
-     */
-    public CustomBinderName(Context serviceContext){
-        serviceNameInterface = (serviceName) serviceContext;
-    }
-
-     /**
-     * getService,
-     * return serviceNameInterface(this instance), which is what we need.
-     * calling contract - which we use in Activity.
-     */
-    public serviceName getService(){
-        return serviceNameInterface;
-    }
+private sericeName serviceNameInterface;
+/**
+* gets Serivce context for each service,
+*/
+public CustomBinderName(Context serviceContext){
+serviceNameInterface = (serviceName) serviceContext;
+}
+/**
+* getService,
+* return serviceNameInterface(this instance), which is what we need.
+* calling contract - which we use in Activity.
+*/
+public serviceName getService(){
+return serviceNameInterface;
+}
 }
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h5 id=&#34;then-implementing-serviceconnection&#34;&gt;then implementing serviceConnection.&lt;/h5&gt;
-
 &lt;p&gt;The android os calls the contract methods inside this class (interface after implementation), these methods are called from the main thread of the application, like many other callbacks from the system.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    /**
-     * ServiceConnection  interface,
-     * calling bindService - contract - our custom implementation,
-     * calls onserviceConnection with componenetName and binder,
-     *
-     * we bind it with customClass implementation of customBinderNameBinder
-     * through the link, we get and save service on local serviceBoundLink.
-     *
-     */
-    private ServiceConnection serviceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            CustomBinderName customBinderName = (CustomBinderName) iBinder;
-            serviceBoundLink = customBinderName.getService(); 
-            isServiceBound = true; 
-
-         }
-
-         @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-            isServiceBound = false;
-        }
-    };
- }
-
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; /**
+* ServiceConnection interface,
+* calling bindService - contract - our custom implementation,
+* calls onserviceConnection with componenetName and binder,
+*
+* we bind it with customClass implementation of customBinderNameBinder
+* through the link, we get and save service on local serviceBoundLink.
+*
+*/
+private ServiceConnection serviceConnection = new ServiceConnection() {
+@Override
+public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+CustomBinderName customBinderName = (CustomBinderName) iBinder;
+serviceBoundLink = customBinderName.getService();
+isServiceBound = true;
+}
+@Override
+public void onServiceDisconnected(ComponentName componentName) {
+isServiceBound = false;
+}
+};
+}
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h5 id=&#34;implementing-necessary-classes-on-the-service&#34;&gt;Implementing necessary classes on the service.&lt;/h5&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    /**
-     * needs to return Interface Ibinder,
-     * onBind initiated on bindService (creation of service),
-     */
-
-     @Override
-    public IBinder onBind(Intent intent) {
-        return customBinderName;
-    }
-
-     /**
-     * Need to be of type IBinder.
-     * CustomBinderName is constructed such a was,
-     *  instance of customBinderName has to be passed in 
-     *     via constructor, since this is how we implemented it.
-     */
-    private final IBinder customBinderName = new CustomBinderName(this);
-
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; /**
+* needs to return Interface Ibinder,
+* onBind initiated on bindService (creation of service),
+*/
+@Override
+public IBinder onBind(Intent intent) {
+return customBinderName;
+}
+/**
+* Need to be of type IBinder.
+* CustomBinderName is constructed such a was,
+* instance of customBinderName has to be passed in
+* via constructor, since this is how we implemented it.
+*/
+private final IBinder customBinderName = new CustomBinderName(this);
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h5 id=&#34;binding-the-service-with-some-activity&#34;&gt;Binding the service, with some activity.&lt;/h5&gt;
-
 &lt;p&gt;During service creation call bindService, passing in our implementation of serviceConnection,
 then the global BIND_AUTO_CREATE (usually bind_auto_create, since most of the time, service is not created before at this point), the system will take care of the rest.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;        /*
-        * intent for the service, with class,
-        * After start, bind the service(link) with local intance so its
-        *   (service) methods can be called.
-        */
-        bindService(intent,serviceConnection,Context.BIND_AUTO_CREATE);
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; /*
+* intent for the service, with class,
+* After start, bind the service(link) with local intance so its
+* (service) methods can be called.
+*/
+bindService(intent,serviceConnection,Context.BIND_AUTO_CREATE);
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h5 id=&#34;be-sure-to-remove-unbind-the-service-connection-else-you-ll-end-up-with-memory-leaking&#34;&gt;Be sure to remove unbind the service, connection.. else you&amp;rsquo;ll end up with memory leaking.&lt;/h5&gt;
-
 &lt;hr /&gt;
-
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;bye see ya next time,  by the time im making this post public, eveything changed to the polar opposite.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Blog Migration</title>
-      <link>//bluepie.live/blog/2019/04/blog-migration/</link>
-      <pubDate>Wed, 24 Apr 2019 03:02:16 +0530</pubDate>
-      
-      <guid>//bluepie.live/blog/2019/04/blog-migration/</guid>
-      <description>
-
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;bye see ya next time, by the time im making this post public, eveything changed to the polar opposite.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Blog Migration</title><link>//bluepie.live/blog/2019/04/blog-migration/</link><pubDate>Wed, 24 Apr 2019 03:02:16 +0530</pubDate><guid>//bluepie.live/blog/2019/04/blog-migration/</guid><description>
 &lt;blockquote&gt;
-&lt;p&gt;heya!,  this wont be a rant..trust me!,  don&amp;rsquo;t worry, I lost my cool in the last few posts, well thats aside, let me begin.&lt;/p&gt;
+&lt;p&gt;heya!, this wont be a rant..trust me!, don&amp;rsquo;t worry, I lost my cool in the last few posts, well thats aside, let me begin.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;hr /&gt;
-
 &lt;h2 id=&#34;migration&#34;&gt;migration&lt;/h2&gt;
-
-&lt;p&gt;so i have been planning to migrate my blog from aws to replace it with jekyll, hexo,..etc,  The main reason being, i run my blog in php and thus intend to replace it with the mentioned above, The another this that I keep pondering over and over is that,  if i abandon my aws blog, I have to convert my previous post from the blog to the new version,  reformat, reupload the images as well. Not to mention i have to configure dns(though it will take only a small amount of time), configure what comment system that i will to install in, and the list goes on and on.&lt;/p&gt;
-
+&lt;p&gt;so i have been planning to migrate my blog from aws to replace it with jekyll, hexo,..etc, The main reason being, i run my blog in php and thus intend to replace it with the mentioned above, The another this that I keep pondering over and over is that, if i abandon my aws blog, I have to convert my previous post from the blog to the new version, reformat, reupload the images as well. Not to mention i have to configure dns(though it will take only a small amount of time), configure what comment system that i will to install in, and the list goes on and on.&lt;/p&gt;
 &lt;h2 id=&#34;why&#34;&gt;why&lt;/h2&gt;
-
-&lt;p&gt;Since hosting it in php, for each request page will be generated dynamically, it doesn&amp;rsquo;t matter here but this causes cpu load, considering php if there are any bugs in the code it will lead to data breaches (lol, since i dont have anything that important its not important too.). If it were hosting with only html, css, js, images and etc, the site load time will be very quick,  plus you don&amp;rsquo;t have to pay extra for the high resources that is needed for handling php pages, infact if hosting on github pages it is completely free.&lt;/p&gt;
-
+&lt;p&gt;Since hosting it in php, for each request page will be generated dynamically, it doesn&amp;rsquo;t matter here but this causes cpu load, considering php if there are any bugs in the code it will lead to data breaches (lol, since i dont have anything that important its not important too.). If it were hosting with only html, css, js, images and etc, the site load time will be very quick, plus you don&amp;rsquo;t have to pay extra for the high resources that is needed for handling php pages, infact if hosting on github pages it is completely free.&lt;/p&gt;
 &lt;h2 id=&#34;choices&#34;&gt;choices&lt;/h2&gt;
-
-&lt;p&gt;So there are a ton of choices if you want to do the same , the first thing would be jekyll, since most of the people choose that because of the huge variety of themes that comes with jekyll, its developed in ruby so installing the dependencies might be hard tho if you are new, then there is hexo,  which is fully developed in js, you just have to install npm, then install dependencies  with npm,  that is it, interms of ease of use, you can choose this instead of jekyll. There are many alternatives,  it finally comes down to what you choose to use.&lt;/p&gt;
-
+&lt;p&gt;So there are a ton of choices if you want to do the same , the first thing would be jekyll, since most of the people choose that because of the huge variety of themes that comes with jekyll, its developed in ruby so installing the dependencies might be hard tho if you are new, then there is hexo, which is fully developed in js, you just have to install npm, then install dependencies with npm, that is it, interms of ease of use, you can choose this instead of jekyll. There are many alternatives, it finally comes down to what you choose to use.&lt;/p&gt;
 &lt;h2 id=&#34;what-next&#34;&gt;what next?&lt;/h2&gt;
-
 &lt;p&gt;After generating the site using the defined framework, you now have a working site which is entirely static and works completely without any hosting restrictions and load-time, this then can be deployed anywhere. For example you could deploy it to AWS, GCP or any-other hosting provider, What i did was i deployed it to GitHub hosting and it is great. You can have a demo of the same here. &lt;a href=&#34;http://gopinath001.github.io/blog&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to my deployed site.&lt;/a&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;additional-things&#34;&gt;Additional things?&lt;/h2&gt;
-
-&lt;p&gt;Well depending upon the hosting provider that you choose you can do many things, park your domain (in-case of free hosting/paid hosting), installing ssl certificate, In case of github having own custom domain and sub-domain..etc, well it certainly depends, the possibilities are endless.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title> A peek into my yunger self.		</title>
-      <link>//bluepie.live/blog/2019/03/a-peek-into-my-yunger-self/</link>
-      <pubDate>Sat, 30 Mar 2019 14:02:48 +0000</pubDate>
-      
-      <guid>//bluepie.live/blog/2019/03/a-peek-into-my-yunger-self/</guid>
-      <description>&lt;blockquote&gt;
+&lt;p&gt;Well depending upon the hosting provider that you choose you can do many things, park your domain (in-case of free hosting/paid hosting), installing ssl certificate, In case of github having own custom domain and sub-domain..etc, well it certainly depends, the possibilities are endless.&lt;/p&gt;</description></item><item><title> A peek into my yunger self.</title><link>//bluepie.live/blog/2019/03/a-peek-into-my-yunger-self/</link><pubDate>Sat, 30 Mar 2019 00:00:00 +0000</pubDate><guid>//bluepie.live/blog/2019/03/a-peek-into-my-yunger-self/</guid><description>
+&lt;blockquote&gt;
 &lt;p&gt;Hey guys how y&amp;rsquo;all been,&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;i&amp;rsquo;ve been good, in fact i am happy after a long time, So im gona love talking about this, so here is the thing before like 7-8 months (before i got my job) i was fully involved in reverse engineering, modding mostly windows, but also old linux machines with security flaws to train for some capture the flags and the plain curisity of &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;lets say how to break stuff. On the windows part  i was mostly doing with debuggers, scripts and memory. So here i am explaining the tale of how i started my venture into c# and security, back in the days i used to do admire crack realeases, trainers,  etc. So at the begining when i was in 10th grade i already knew that i was going in the path of a software and choose computer science in the next year (senior year).&lt;/p&gt;
-
+&lt;p&gt;i&amp;rsquo;ve been good, in fact i am happy after a long time, So im gona love talking about this, so here is the thing before like 7-8 months (before i got my job) i was fully involved in reverse engineering, modding mostly windows, but also old linux machines with security flaws to train for some capture the flags and the plain curisity of&amp;hellip; lets say how to break stuff. On the windows part  i was mostly doing with debuggers, scripts and memory. So here i am explaining the tale of how i started my venture into c# and security, back in the days i used to do admire crack realeases, trainers,  etc. So at the begining when i was in 10th grade i already knew that i was going in the path of a software and choose computer science in the next year (senior year).&lt;/p&gt;
 &lt;p&gt;I began to learn form core about debugging. processors, assembly, etc, At the same time that i was doing that i began to have an interest in trainers and what not, but the main problem was i knew how to find memeoy addresses by debugging and scanning through different tools but i did not know how to do them programmatically. so the venture started in c#, since there was already a ton of source available in visual basic and i knew c and object oriented programming and c# is similar to java in many ways and the fact that i was mostly working  in windows made me lean over c#.&lt;/p&gt;
-
 &lt;p&gt;At the begining it was tough i didn&amp;rsquo;t know where to start, but little by little i learned at that time and was doing projects by using a custom library for my projects involving meomory stuff, so when i was in home recently and going through my old desktop i found the lib and soo i took it seperately dusted it off worked on that for cleaning it made sure it worked on the latest build, built a seperate dill, compiled and released it on github, Looking at that project after a long time, made me release why i even choose this field, at those days everything was fascinating to me and i wanted to learn everything, So for any new beginners entering into reversing, modding, creating trainers and c# I have created this repo for them. Most stuff on usage, reason and lib  are on the github repo given below.&lt;/p&gt;
-
-&lt;h3 id=&#34;source-code-link-link-to-my-repo-https-github-com-gopinath001-memorypatternscanner&#34;&gt;Source Code link &lt;a href=&#34;https://github.com/Gopinath001/MemoryPatternScanner&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to my repo.&lt;/a&gt;&lt;/h3&gt;</description>
-    </item>
-    
-    <item>
-      <title> AI - with algorithms.(Rant mostly)		</title>
-      <link>//bluepie.live/blog/2019/03/ai-with-algorithms-rant-mostly/</link>
-      <pubDate>Thu, 28 Mar 2019 23:27:50 +0000</pubDate>
-      
-      <guid>//bluepie.live/blog/2019/03/ai-with-algorithms-rant-mostly/</guid>
-      <description>&lt;blockquote&gt;
+&lt;h3 id=&#34;source-code-link-link-to-my-repo-https-github-com-gopinath001-memorypatternscanner&#34;&gt;Source Code link &lt;a href=&#34;https://github.com/Gopinath001/MemoryPatternScanner&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to my repo.&lt;/a&gt;&lt;/h3&gt;</description></item><item><title> AI - with algorithms.(Rant mostly)</title><link>//bluepie.live/blog/2019/03/ai-with-algorithms-rant-mostly/</link><pubDate>Thu, 28 Mar 2019 23:27:50 +0000</pubDate><guid>//bluepie.live/blog/2019/03/ai-with-algorithms-rant-mostly/</guid><description>
+&lt;blockquote&gt;
 &lt;p&gt;Well hello guys! How yr&amp;rsquo; been.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;h2 id=&#34;what-is-going-on&#34;&gt;what is going on.&lt;/h2&gt;
-
-&lt;p&gt;i have never thought of me doing this in my life, but this situation has come, so in the past month i have been trying to post and update whats been going on. But i am unable to complete what i started and it is bothering me still now, after that happened i stumbled upon an another old project of mine, which i cleaned up and finished it in a short span and btw this is&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;the project that i am talking about that i didn&amp;rsquo;t complete.&lt;/p&gt;
-
+&lt;p&gt;i have never thought of me doing this in my life, but this situation has come, so in the past month i have been trying to post and update whats been going on. But i am unable to complete what i started and it is bothering me still now, after that happened i stumbled upon an another old project of mine, which i cleaned up and finished it in a short span and btw this is the project that i am talking about that i didn&amp;rsquo;t complete.&lt;/p&gt;
 &lt;h2 id=&#34;what-happened&#34;&gt;what happened.&lt;/h2&gt;
-
 &lt;p&gt;So it&amp;rsquo;s been a tough tight scheduled week. I was juggling with a lot of things, so this event came up &amp;lsquo;do something with ai&amp;rsquo;,  this is a willingness event, which means I can choose if I wanted to join (which didn&amp;rsquo;t happen by the way), So keeping in mind that I was already involved in soo much things, it was definitely overwhelming from my end,  considering that I had set my goals to finishing a book, complete a personal project,  and I was already dealing with personal problems and I had no interest in ai, this was not the call for me, So I was forced to join by my peers, so I had to do my best, at least for my satisfaction. I was entering into the territory of ai, so the problem statement is not chosen by me, I was told to implement someone else cooked up, I didn&amp;rsquo;t knew that would not work at that time, looking back now, I was blinded by simplified self. So the brain washing part comes along, where my subconscious was dragged by manipulation and imagination that I didn&amp;rsquo;t need, its a long chain of manipulation from the top,  Damn how did I fell for that, looking back I fell for most things..stupid things..things that are not decided by me.&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;Enough of this rant, I had to do this for the sake of my future self.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;h2 id=&#34;the-disaster&#34;&gt;The Disaster&lt;/h2&gt;
-
 &lt;p&gt;Let&amp;rsquo;s get technical here shall we, but before that let me get this straight, I&amp;rsquo;m new to this and basically a starter. So everything that I do from here will be available on my github page, for my little project of mine, I have to predict the next date and the date must corelate to some predefined value, on this date calculated from now I will eat vanilla icecream. This is a pretty damn challenge. So my first approach os going about this with neural networks, since it&amp;rsquo;s the new tech and predicting the date is not easy. So after a while, I finished a working model and was told that I could not do this.. it was too big and I was launched at by a data scientist guy..(getting personal here)..looking back, why did I even bother acknowledging him you know? Why?.  I never learn from my mistakes, so I decided to go with the algorithm part as their suggestions, I mean it was hard.. dragging myself over something (choosing a different path from neural networks). I&amp;rsquo;ll cover two parts one for neural networks and the other for algorithms, so for the neural networks part,  i decided to predict using images, so  i have an eye open for tensorflow, what could be fun? predicting captcha from websites seems like a great idea, plus i have already seen something similar but haven&amp;rsquo;t got the time to try it out, so i&amp;rsquo;ve searched for captcha image dataset and found several captcha datasets from kaggle, so i went and downloaded from kaggle,&lt;/p&gt;
-
 &lt;h2 id=&#34;moved-on-not-my-cup-of-tea&#34;&gt;Moved on - Not my cup of tea?&lt;/h2&gt;
-
 &lt;p&gt;This post is taking a long amount of time im going to post the source from bitbucket here, the main reason being i dont want to rant and bitch about something and gradually lost interest from working on this and i started working on an old project of mine that i undertook which i am going to post in the upcomming days, this post took a long amount of time that i did not expect, but it&amp;rsquo;s fine nevertheless, im just going up the stairs step by step that i what i say to myself.,, darn&lt;/p&gt;
-
-&lt;h3 id=&#34;repo-link-https-bitbucket-org-bluepie-guessing-captcha-with-ai-src-master-here-we-go&#34;&gt;&lt;a href=&#34;https://bitbucket.org/Bluepie/guessing-captcha-with-ai./src/master/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;repo link&lt;/a&gt; here we go!,&lt;/h3&gt;</description>
-    </item>
-    
-    <item>
-      <title> ssh tunnel		</title>
-      <link>//bluepie.live/blog/2019/01/ssh-tunnel/</link>
-      <pubDate>Fri, 18 Jan 2019 06:00:11 +0000</pubDate>
-      
-      <guid>//bluepie.live/blog/2019/01/ssh-tunnel/</guid>
-      <description>&lt;blockquote&gt;
+&lt;h3 id=&#34;repo-link-https-bitbucket-org-bluepie-guessing-captcha-with-ai-src-master-here-we-go&#34;&gt;&lt;a href=&#34;https://bitbucket.org/Bluepie/guessing-captcha-with-ai./src/master/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;repo link&lt;/a&gt; here we go!,&lt;/h3&gt;</description></item><item><title> ssh tunnel</title><link>//bluepie.live/blog/2019/01/ssh-tunnel/</link><pubDate>Fri, 18 Jan 2019 06:00:11 +0000</pubDate><guid>//bluepie.live/blog/2019/01/ssh-tunnel/</guid><description>
+&lt;blockquote&gt;
 &lt;p&gt;hey there!&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;How are you guys doing, hope everyone is doing good, im doing great btw, So today i wana talk about something that i have been using a lot lately in work and personal use, the thing that i wana talk about is ssh tunneling, its a huge topic, i have been using it ever since i learned about ssh in college, So what is this?&lt;/p&gt;
-
 &lt;h2 id=&#34;info-scenario-and-usage&#34;&gt;Info, Scenario and usage&lt;/h2&gt;
-
 &lt;p&gt;You guys might have heard about vpn, nowadays its everywhere it is  basically that except that its done via ssh. SSH known as secure shell is a remote login feature, running on a specified port, what do  i mean by that is, suppose u have a computer in your home and you want to login to that computer from your office or anyother place other than your home, then you go for ssh, often &amp;ldquo;linux gurus&amp;rdquo; go for this, since this only provides terminal access.&lt;/p&gt;
-
 &lt;p&gt;Further-more in the old days this was used to play game with friends, (it could be done in a variety of different ways, first you create a server on your end) then through ssh tunnel your friend should connect to your computer via ssh credentials, (assuming you know port forwarding). after this setup process, your friend will be treated as if he is in your local network, in which case your both can play games with no issues, (this method assumes the following: you know how to host a game server-involving port settings, how your would allow a connection over your firewall to connect to your system, client-end i.e that is your friend knows about ssh tunnell, and more importantly your are will to expose theresource for the game server to another person since he is in your network).&lt;/p&gt;
-
 &lt;p&gt;This could work in a different way too..  if you/your friend/ group of friends have a server your dont have pto expose your own commuter network, port forwarding, etc, i.e in simple terms - connect to the server first with the port that is running for game server &amp;amp; the port in which the server should listen to, and thats it,  Any connection made to the server with the particular port will be rediected to your computer thrugh ssh tunnel. If you understand what i just said, this is mindblowing, many a things could be achieved by this, this speaking on the beginner level..that too for running games.&lt;/p&gt;
-
 &lt;p&gt;Imagine what this could do for the developers, this is a heaven for easier work flow, but most often this is only used as an option to bypass firewall, for devops purposes ofcourse, &lt;strong&gt;&lt;em&gt;-_-&amp;rdquo;&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
-
 &lt;h2 id=&#34;noob-usage&#34;&gt;Noob usage.&lt;/h2&gt;
-
 &lt;p&gt;I&amp;rsquo;m gona brief over the ssh being used as vpn! you heard right, vpn! as i mentioned it earlier, so setting up vpn on your server could take multiple steps involing huge time, but ssh is enabled by default, what is only needed is some few lines of configuration,&lt;/p&gt;
-
 &lt;p&gt;For most cases the configuration that needed is of below type.&lt;br /&gt;
 Note:&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;If you are on windows make sure you have enabled ssh from optinal features, this is mandtory incase if you want to use inbuilt ssh client on windows, you could also install third party softwares if you want.&lt;/li&gt;
 &lt;li&gt;If you are running a custom server box like me,  (i have a centos box running) you would have to configure by changing sshd_config inside &amp;lsquo;/etc/ssh/sshd_config&amp;rsquo;.&lt;/li&gt;
 &lt;li&gt;After making changes make sure you have restarted the sshd service.&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;hr /&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;    for most part you would have to only the important marked ones*AllowAgentForwarding yes
-    *AllowTcpForwarding all
-    *GatewayPorts yes
-    AllowStreamLocalForwarding all
-
-    pop open a terminal then do the following.
-    ssh -D localport -f -C -q -N server_address
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt; for most part you would have to only the important marked ones*AllowAgentForwarding yes
+*AllowTcpForwarding all
+*GatewayPorts yes
+AllowStreamLocalForwarding all
+pop open a terminal then do the following.
+ssh -D localport -f -C -q -N server_address
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;For example:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh -D 7890 -f  -C -q -N jess-user@jupiter-server01-dynamip-massoc-address.com.
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;By using the above config you would have now setup a service listening on port 7890, just make sure to use the specific port to connect to the internet.(route all traffic through the port).&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;What i mean by that is, go to proxy settings on your system/browser/etc, set &amp;lsquo;127.0.0.1&amp;rsquo; in hostname &amp;amp; &amp;lsquo;7890&amp;rsquo; in port. You have done ssh tunneling thats it. Just like a vpn.&lt;/p&gt;
-
 &lt;p&gt;Note: Any request made to that port will be treated like you are doing from the server box sitting somewhere else. (I&amp;rsquo;m saying ANY request for a reason*).&lt;/p&gt;
-
-&lt;p&gt;&amp;lt; 3. Im gona stop here, this is just scratching the surface but there is lot more, maybe otherthings at a different time.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title> Touch Typing.		</title>
-      <link>//bluepie.live/blog/2018/11/touch-typing/</link>
-      <pubDate>Mon, 26 Nov 2018 06:23:52 +0000</pubDate>
-      
-      <guid>//bluepie.live/blog/2018/11/touch-typing/</guid>
-      <description>&lt;blockquote&gt;
+&lt;p&gt;&amp;lt; 3. Im gona stop here, this is just scratching the surface but there is lot more, maybe otherthings at a different time.&lt;/p&gt;</description></item><item><title> Touch Typing.</title><link>//bluepie.live/blog/2018/11/touch-typing/</link><pubDate>Mon, 26 Nov 2018 06:23:52 +0000</pubDate><guid>//bluepie.live/blog/2018/11/touch-typing/</guid><description>
+&lt;blockquote&gt;
 &lt;p&gt;Hi there,&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;h2 id=&#34;reality-is-way-different-update-on-current-things&#34;&gt;Reality is way different - Update on current things.&lt;/h2&gt;
-
-&lt;p&gt;***I know i&amp;rsquo;ve been busy, but i can make up to it. Status update First: The last few weeks,infact the last month is very odd and had a busy schedule. I could&amp;rsquo;nt concentrate on few other projects, Office work took over my life, to be exact!.I&amp;rsquo;ve been the preacher of saying Complete office work early as possible and leave office by 8pm, later spend time for yourself(doing your own thing) like for an example updating blog. To think that i used to say those things but in reality i ended up like this!..&lt;/p&gt;
-
-&lt;p&gt;makes me wana just laugh. The first thing i realised is that i dont have not that much time for thinking.. like a zombie wandering around, life is just moving in an unknown path, Going back to my mates and spending the valuable time is priceless and makes me focus on things better, Maybe currently im not surrended by people like that in places I work and live. well that&amp;rsquo;s for update.***&lt;/p&gt;
-
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;I know i&amp;rsquo;ve been busy, but i can make up to it. Status update First: The last few weeks,infact the last month is very odd and had a busy schedule. I could&amp;rsquo;nt concentrate on few other projects, Office work took over my life, to be exact!.I&amp;rsquo;ve been the preacher of saying Complete office work early as possible and leave office by 8pm, later spend time for yourself(doing your own thing) like for an example updating blog. To think that i used to say those things but in reality i ended up like this!.. makes me wana just laugh. The first thing i realised is that i dont have not that much time for thinking.. like a zombie wandering around, life is just moving in an unknown path, Going back to my mates and spending the valuable time is priceless and makes me focus on things better, Maybe currently im not surrended by people like that in places I work and live. well that&amp;rsquo;s for update.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;the-thing-i-did&#34;&gt;The thing i did&lt;/h2&gt;
-
-&lt;p&gt;So what is touch typing? typing without seeing the keyboards, using the f&amp;amp;j as references because they have bumps on them, you feel them as a reference, You can recognise this by the word  &amp;ldquo;Type-Writer&amp;rdquo;,  back in the days they used ti have type writing class everywhere,  even now there are classes but are fewer and fewer nowadays.  Anywhere there are fewer and fewer people trying to type in this way because they have developed their own way of typing. I have taken this task some time before, i would think like i&amp;rsquo;d learn part of the system and remaining part in upcoming days,  but after this section, i would never go back, maybe i forget that i have to do that or i&amp;rsquo;ll get something else that I have to do and totally forget about all about it.eventually when i was involved in more and more typing I developed my own typing style which is not perfect but helped me to type faster upto 40 words per minute, which is somewhat good, but i would type with only some of my fingers, which in turn hurts and became tired after somebit. This was not enough and finally i decided I&amp;rsquo;d give it a try, i know i might go along with this for a few days but eventually will give up on this, so as far as i&amp;rsquo;m concerned i have to complete this quick, like real quick, So i decided to complete all the course on a single go(with atleast 90% accuracy). So it started, i&amp;rsquo;ve worked for 8 hours straight &amp;amp; completed everything, i knew how to type now but the problem is practicing, to make it faster and better. The other problem is my old typing habbits began to affect me, the new typing style was slow, thus while typing in my work it started to affect, thus had to go back to old style for completing my work faster, from then on its been a constant struggle between switching between different styles, Everyone should learn this, its super comfy. Besides it&amp;rsquo;s the official way to type, It&amp;rsquo;ll be massively helpful if done at a young age, Trust me on this one, Anyhooo0oo I typed this whole post with the new style of typing. One could say that is the reason why it took this long for the post, lol. See you next time!.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title> file Manager contd..		</title>
-      <link>//bluepie.live/blog/2018/10/file-manager-contd/</link>
-      <pubDate>Tue, 30 Oct 2018 20:56:15 +0000</pubDate>
-      
-      <guid>//bluepie.live/blog/2018/10/file-manager-contd/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;a little update: Though i made a promise to post every two weeks, its been 4 weeks, why? ..is this&amp;hellip; i was going in a flow, but things started affecting.. rather i let things affect me, lately lot of things happened personally, lot of things reminded of the past, that made me avoid _________ in the present,&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
+&lt;p&gt;So what is touch typing? typing without seeing the keyboards, using the f&amp;amp;j as references because they have bumps on them, you feel them as a reference, You can recognise this by the word  &amp;ldquo;Type-Writer&amp;rdquo;,  back in the days they used ti have type writing class everywhere,  even now there are classes but are fewer and fewer nowadays.  Anywhere there are fewer and fewer people trying to type in this way because they have developed their own way of typing. I have taken this task some time before, i would think like i&amp;rsquo;d learn part of the system and remaining part in upcoming days,  but after this section, i would never go back, maybe i forget that i have to do that or i&amp;rsquo;ll get something else that I have to do and totally forget about all about it.eventually when i was involved in more and more typing I developed my own typing style which is not perfect but helped me to type faster upto 40 words per minute, which is somewhat good, but i would type with only some of my fingers, which in turn hurts and became tired after somebit. This was not enough and finally i decided I&amp;rsquo;d give it a try, i know i might go along with this for a few days but eventually will give up on this, so as far as i&amp;rsquo;m concerned i have to complete this quick, like real quick, So i decided to complete all the course on a single go(with atleast 90% accuracy). So it started, i&amp;rsquo;ve worked for 8 hours straight &amp;amp; completed everything, i knew how to type now but the problem is practicing, to make it faster and better. The other problem is my old typing habbits began to affect me, the new typing style was slow, thus while typing in my work it started to affect, thus had to go back to old style for completing my work faster, from then on its been a constant struggle between switching between different styles, Everyone should learn this, its super comfy. Besides it&amp;rsquo;s the official way to type, It&amp;rsquo;ll be massively helpful if done at a young age, Trust me on this one, Anyhooo0oo I typed this whole post with the new style of typing. One could say that is the reason why it took this long for the post, lol. See you next time!.&lt;/p&gt;</description></item><item><title> file Manager contd..</title><link>//bluepie.live/blog/2018/10/file-manager-contd/</link><pubDate>Tue, 30 Oct 2018 20:56:15 +0000</pubDate><guid>//bluepie.live/blog/2018/10/file-manager-contd/</guid><description>
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;a little update: Though i made a promise to post every two weeks, its been 4 weeks, why? ..is this&amp;hellip; i was going in a flow, but things started affecting.. rather i let things affect me, lately lot of things happened personally, lot of things reminded of the past, that made me avoid _________ in the present,&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;hr /&gt;
-
 &lt;h3 id=&#34;continuation&#34;&gt;Continuation.&lt;/h3&gt;
-
-&lt;p&gt;Pick up where i left off from previous post: Let me explain the way of approach i wanted to do, i wanted to access all the files of the server, like i wanted to go back to the root directory, back before that,&lt;/p&gt;
-
-&lt;p&gt;basically anywhere where i wanted, So DirectoryIterator seemed the best choice, We are in a directory, we have to list all the files and folders in the directory, how would you do that?. Directory iterator  in a foreach, since directory iterator displays everything, can be used, ex as shown below.&lt;/p&gt;
-
+&lt;p&gt;Pick up where i left off from previous post: Let me explain the way of approach i wanted to do, i wanted to access all the files of the server, like i wanted to go back to the root directory, back before that, basically anywhere where i wanted, So DirectoryIterator seemed the best choice, We are in a directory, we have to list all the files and folders in the directory, how would you do that?. Directory iterator  in a foreach, since directory iterator displays everything, can be used, ex as shown below.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;foreach (new DirectoryIterator($dir) as $files)
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;If im about to display the files and folders, they should have a nice ui, like an icon, so categorizing files and icons, i would call is_dir() else its a file, this would be fine for now, but for future everything will have to be categorize as images, mp3, video, etc. the icons can be converted into base 64 strings so can be packed into the same file, its quite big, but its worth it,&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;$fileWithImage = ($files-&amp;gt;isDir())? $this-&amp;gt;getLinkWithText( (images::folderImage . &amp;quot; &amp;quot; .$files-&amp;gt;getFilename()), $this-&amp;gt;generateQueryString( &#39;folder&#39; ,$files-&amp;gt;getPath() .&#39;/&#39; .$files-&amp;gt;getFilename() )) : images::fileImage . &amp;quot; &amp;quot; .$files-&amp;gt;getFilename();
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;Letme explain this first, first checking if its a file or folder, if its a file, attach file image with file name, then thats it, but if its a folder, we show a folder icon with name and the link so that while clicking will be able to move front and back, All the fancy functions are just there to make the life simpler, their names exactly tell what they do. for instance, &lt;code&gt;getLinkWithText&lt;/code&gt; expects two parameters, first is the image with name, second is query the link (a href). for that &lt;code&gt;generateQueryString&lt;/code&gt; function expects a name, then the path to put it in href, and that is literally it, for making a dynamic traversing structure, all this is enough, may be next time ill explain with code for the other functions.&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;for the time being..imona leave , -sorry.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title> file manager development		</title>
-      <link>//bluepie.live/blog/2018/10/file-manager-development/</link>
-      <pubDate>Wed, 03 Oct 2018 19:21:34 +0000</pubDate>
-      
-      <guid>//bluepie.live/blog/2018/10/file-manager-development/</guid>
-      <description>&lt;p&gt;why this all of a sudden? I was introduced to php development for a little while now, and i had this in mind with several other things, this would also be a good point to start explaining with code, So where to start. let us define? It starts with what is the requirement? It is&lt;/p&gt;
-
+&lt;/blockquote&gt;</description></item><item><title> file manager development</title><link>//bluepie.live/blog/2018/10/file-manager-development/</link><pubDate>Wed, 03 Oct 2018 19:21:34 +0000</pubDate><guid>//bluepie.live/blog/2018/10/file-manager-development/</guid><description>
+&lt;p&gt;why this all of a sudden? I was introduced to php development for a little while now, and i had this in mind with several other things, this would also be a good point to start explaining with code, So where to start. let us define? It starts with what is the requirement? It is&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;I want to view files in the server,&lt;/li&gt;
 &lt;li&gt;I can traverse through the files with forward and backward traversing,&lt;/li&gt;
@@ -675,201 +385,106 @@ Note:&lt;/p&gt;
 &lt;li&gt;I can see the file ownership information,&lt;/li&gt;
 &lt;li&gt;I can see file icons and folder icons.&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Lets begin with the first php code.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;&amp;lt;?php
 //this is the first bit of code that you had to write.
 ?&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;Setting the page structure, since styling the page dynamically, we call the top section first, then  we do our logic, then we call the bottom section, this completes the full page structure.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;const topSection = &amp;quot;&amp;lt;!DOCTYPE html&amp;gt;
-				    	&amp;lt;head&amp;gt;
-				    		&amp;lt;title&amp;gt;
-								fm - FileManager.
-				    		&amp;lt;/title&amp;gt;
-				    	&amp;lt;/head&amp;gt;
-				    	&amp;lt;body&amp;gt;
-				    &amp;quot;;
-
+&amp;lt;head&amp;gt;
+&amp;lt;title&amp;gt;
+fm - FileManager.
+&amp;lt;/title&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+&amp;quot;;
 const bottomSection = &amp;quot;&amp;lt;/body&amp;gt;
-						&amp;lt;/html&amp;gt;
-						&amp;quot;;
+&amp;lt;/html&amp;gt;
+&amp;quot;;
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h3 id=&#34;how-do-i-insert-images&#34;&gt;How do I insert images?&lt;/h3&gt;
-
 &lt;p&gt;Since all this is being done on only one file, hosting the image on a server then linking the file can be done but why? if you can encode as base64 and use the image in the file. An example would be, since  i need to display the files with respective icons (folder, file etc.).&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;const folderIcon = &#39;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAADMCAYAAACcL30dAAAQCUlEQVR4Xu3dfbBtdV3H8bdoIiQDoWbpjKVjIE9BkgyWQ/iQJkpD0oggYfiQTIxctIGJhsIw8GbZwOhIoijy0DAyQ5EXCYNACQwSRERQyKcu4hNiojxdBZtPs7ZzO55z99r7rLXO/v3W+/cXw1lnrd/3te/5nHX2/q3v71EsztgeeAnwMmAP4BeBnwe2W...&#39;;
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;Above is a base64 encoded folder image. to display the image i would just do this.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;const folderImage = &amp;quot;&amp;lt;img src=&#39;&amp;quot; . images::folderIcon .&amp;quot;&#39; width=&#39;10&#39;/&amp;gt;&amp;quot;;
 ````
-
 ### Next? Think about a way to represent files in a readable manner.
-
 A good way is a table layout, why because on the left side, file-name&#39;s can be shown, while on the right side, owner info, modification date can be shown. this can be implemented in the following way.
-
 ```php
-	public function tableStructure($fData){
-		echo &amp;quot;&amp;lt;table&amp;gt;
-				  &amp;lt;tr&amp;gt;
-				  	&amp;lt;th width=&#39;50%&#39; align=&#39;left&#39;&amp;gt;name&amp;lt;/th&amp;gt;
-				  	&amp;lt;th width=&#39;10%&#39;&amp;gt;last modified&amp;lt;/th&amp;gt;
-				  	&amp;lt;th width=&#39;10%&#39;&amp;gt; owner&amp;lt;/th&amp;gt;
-				  &amp;lt;/tr&amp;gt;&amp;quot; .
-				  $fData .
-			  &amp;quot;&amp;lt;/table&amp;gt;&amp;quot;;
-	}
+public function tableStructure($fData){
+echo &amp;quot;&amp;lt;table&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;th width=&#39;50%&#39; align=&#39;left&#39;&amp;gt;name&amp;lt;/th&amp;gt;
+&amp;lt;th width=&#39;10%&#39;&amp;gt;last modified&amp;lt;/th&amp;gt;
+&amp;lt;th width=&#39;10%&#39;&amp;gt; owner&amp;lt;/th&amp;gt;
+&amp;lt;/tr&amp;gt;&amp;quot; .
+$fData .
+&amp;quot;&amp;lt;/table&amp;gt;&amp;quot;;
+}
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;where `$fdata&amp;rsquo; is the pre constructed each row with all the files and folders. Ill continue the rest on an another post.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title> Old projects.		</title>
-      <link>//bluepie.live/blog/2018/09/old-projects/</link>
-      <pubDate>Thu, 20 Sep 2018 03:35:45 +0000</pubDate>
-      
-      <guid>//bluepie.live/blog/2018/09/old-projects/</guid>
-      <description>&lt;blockquote&gt;
+&lt;p&gt;where `$fdata&amp;rsquo; is the pre constructed each row with all the files and folders. Ill continue the rest on an another post.&lt;/p&gt;</description></item><item><title> Old projects.</title><link>//bluepie.live/blog/2018/09/old-projects/</link><pubDate>Thu, 20 Sep 2018 03:35:45 +0000</pubDate><guid>//bluepie.live/blog/2018/09/old-projects/</guid><description>
+&lt;blockquote&gt;
 &lt;p&gt;Hello fellas,&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;So in the recent trend of the modern world, with everyone developing new software and technology and aiming to make the life of mankind easy, There are bunch of people who want to just learn new stuff and constantly do things and move on to the next thing.. i consider myself being in that bunch.. this will matter later. The thing about old projects is that they have an emotional touch with them, the reason why i am stating this is because,&lt;/p&gt;
-
-&lt;p&gt;i think about the functionalities and often about how this could be implemented with the current knowledge that i have, being the way that I am, I mix real life with the code that i write, often times while i write the documentation, review the code that I wrote, or while making commit &lt;em&gt;i find hints in my code that reflected the current scenario in my life. &lt;/em&gt; Its like when i see the code again, I&amp;rsquo;m taken back to the room that i wrote the code in, the thought i had, the emotional state i was in, the people i was talking too.. etc.. FOR EXAMPLE, today I recalled a old friend of mine, (lets begin) it was 2017, i was in my final year of my B.E degree, a festival function was near and i was practising android and developing an android application, during that time i was constantly talking to my friend that i mentioned, During this period i was home alone for few days, I can not recall more than this..(my dumb brain). Fast forward to 3-4 am in the night, i remember completing a class with functionalities (doing java), I noticed while creating an instance of the class i made the class name similar to my friends nick name. &lt;em&gt;&lt;strong&gt;i could still remember that specific moment very clearly. &lt;/strong&gt;I took an image of that specific section and sent a message.. the following morning she didn&amp;rsquo;t understand what i was saying..that&amp;rsquo;s a completely different story none the less. &lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;so-one-of-the-reasons-to-not-going-to-old-projects&#34;&gt;so one of the reasons to not going to old projects:&lt;/h3&gt;
-
+&lt;p&gt;So in the recent trend of the modern world, with everyone developing new software and technology and aiming to make the life of mankind easy, There are bunch of people who want to just learn new stuff and constantly do things and move on to the next thing.. i consider myself being in that bunch.. this will matter later. The thing about old projects is that they have an emotional touch with them, the reason why i am stating this is because, i think about the functionalities and often about how this could be implemented with the current knowledge that i have, being the way that I am, I mix real life with the code that i write, often times while i write the documentation, review the code that I wrote, or while making commit &lt;em&gt;i find hints in my code that reflected the current scenario in my life.&lt;/em&gt; Its like when i see the code again, I&amp;rsquo;m taken back to the room that i wrote the code in, the thought i had, the emotional state i was in, the people i was talking too.. etc.. FOR EXAMPLE, today I recalled a old friend of mine, (lets begin) it was 2017, i was in my final year of my B.E degree, a festival function was near and i was practising android and developing an android application, during that time i was constantly talking to my friend that i mentioned, During this period i was home alone for few days, I can not recall more than this..(my dumb brain). Fast forward to 3-4 am in the night, i remember completing a class with functionalities (doing java), I noticed while creating an instance of the class i made the class name similar to my friends nick name. &lt;em&gt;&lt;strong&gt;i could still remember that specific moment very clearly. &lt;/strong&gt;I took an image of that specific section and sent a message.. the following morning she didn&amp;rsquo;t understand what i was saying..that&amp;rsquo;s a completely different story none the less.&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;so-one-of-the-reasons-to-not-going-to-old-projects&#34;&gt;so one of the reasons to not going to old projects&lt;/h3&gt;
 &lt;p&gt;Going back to old projects they have a emotional weight in them, &lt;strong&gt;sometimes it&amp;rsquo;s the decision of not wanting to go the past, that certain people don&amp;rsquo;t go to old projects.&lt;/strong&gt; The fact that certain things turned out ugly, i could never revisit some projects, if i still do, I spiral into a hole and my thoughts get cloudy and i feel guilty for the things why certain things turned out ugly.&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;So in my case, i realised, humans are emotional beings, being the way that they are, often leads to problems..&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title> MVC pattern		</title>
-      <link>//bluepie.live/blog/2018/09/mvc-pattern/</link>
-      <pubDate>Fri, 07 Sep 2018 01:18:47 +0000</pubDate>
-      
-      <guid>//bluepie.live/blog/2018/09/mvc-pattern/</guid>
-      <description>&lt;blockquote&gt;
+&lt;/blockquote&gt;</description></item><item><title> MVC pattern</title><link>//bluepie.live/blog/2018/09/mvc-pattern/</link><pubDate>Fri, 07 Sep 2018 01:18:47 +0000</pubDate><guid>//bluepie.live/blog/2018/09/mvc-pattern/</guid><description>&lt;blockquote&gt;
 &lt;p&gt;Dear Internet I didn&amp;rsquo;t blog for 2 weeks and it feels weird. i promise to write within every two weeks from here on now&amp;hellip; i am terribly sorry!.This post is to clear up the silence that stagnated over the past 2 weeks. sry btw.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;Today I would like to share a thing (to tell my future self) that I learned in the recent weeks. It&amp;rsquo;s MVC. I was introduced to MVC pattern for developing applications. So I&amp;rsquo;m explaining my interpretation and my understanding of the MVC pattern. So it has different parts. Model, View, controller. The first thing is the controller, then is the model and then the view, the controller gets everything and controlls everything, &amp;amp; orders what should be done by the model and view on the scope. While you develop this it should be with a flow. As from the development stand point, the controller should be capable of handling changes (i.e) if some changes came up in the future of the app/project, we can not handle thousands and thousands of files and track the files and change everything, that is why we use controller for everything. This is the basic idea from the controller stand point. I tested the MVC pattern with php. With a sample school project and it was great. At first I completely made it with my own understanding, but later with the help of my seniors I was able to complete it with full mvc design. So I said I implemented the design via PHP, so what is the use of model, view ,controller in this aspect, the role of the controller is to breakup the request and split the response based on parts of the url and construct the final page.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;.. i wanted to write/update something .. so i wrote this.. ill continue this post later on with an actual example.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title> Tamper Monkey		</title>
-      <link>//bluepie.live/blog/2018/08/tamper-monkey/</link>
-      <pubDate>Fri, 17 Aug 2018 03:04:46 +0000</pubDate>
-      
-      <guid>//bluepie.live/blog/2018/08/tamper-monkey/</guid>
-      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;.. i wanted to write/update something .. so i wrote this.. ill continue this post later on with an actual example.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</description></item><item><title> Tamper Monkey</title><link>//bluepie.live/blog/2018/08/tamper-monkey/</link><pubDate>Fri, 17 Aug 2018 03:04:46 +0000</pubDate><guid>//bluepie.live/blog/2018/08/tamper-monkey/</guid><description>
+&lt;blockquote&gt;
 &lt;p&gt;Hi again, Today I am going to share something that is somewhat related to reverse engineering. Well I was working on a project, at one point of time I was working on wireframes, since I was only doing the initial design and it would be just used as a reference by the design team so my senior adviced me to use mockup.&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;h3 id=&#34;mockup&#34;&gt;Mockup:&lt;/h3&gt;
-
+&lt;h3 id=&#34;mockup&#34;&gt;Mockup&lt;/h3&gt;
 &lt;p&gt;So what is mockup you ask? Mockup is a wireframe tool, You would design stuff like how each and individual page would be, each elements design, UI, the flow with how defferent stuff interact with each other, etc.. you could also do use case diagrams, the process flow and other stuff in the case of mocup, mockup is a fremium tool (web app), there is a limit to each and every project with a constraint of 300 elements max. plus you have to pay to get features like exporting the projects in different formats, etc.&lt;/p&gt;
-
 &lt;h3 id=&#34;whats-the-problem-with-this&#34;&gt;Whats the problem with this?:&lt;/h3&gt;
-
 &lt;p&gt;When there is a limit for each and every stuff like the elements that you can you, the export options and other features like setting the project as private,..etc The main function that I use is that I want to export stuff which i design and that option is limited by a pay-wall. So I thought why can&amp;rsquo;t I test their functionality(security) a little bit.. i just messed with their website a liitle bit.. and they didn&amp;rsquo;t include any basic security.&lt;/p&gt;
-
-&lt;h3 id=&#34;the-idea&#34;&gt;The Idea:&lt;/h3&gt;
-
+&lt;h3 id=&#34;the-idea&#34;&gt;The Idea&lt;/h3&gt;
 &lt;p&gt;I already knew about tamper money.. which is a plug-in for installing custom user scripts and i wanted to write on desperately for a long time, &lt;a href=&#34;https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;the link to tamper monkey is here. &lt;/a&gt; I wanted to write a custom script that did a lot of things like remove restriction to certain websites and remove add block detector from certain sites but i overwhelmed myself with lot of different projects and I didn&amp;rsquo;t do nit since now, that&amp;rsquo;s a story for a another time&amp;hellip;&lt;/p&gt;
-
-&lt;h3 id=&#34;the-basic-script&#34;&gt;The basic script:&lt;/h3&gt;
-
+&lt;h3 id=&#34;the-basic-script&#34;&gt;The basic script&lt;/h3&gt;
 &lt;p&gt;So i found a hack to make available certain features of the moqups site without paying anything but&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;i needed to do it with js? nah..&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;I wanted to complete this in an 30 minutes or so.. plus  also had a deadline to complete a design (full stack. lol)So I opened the docs of tamper monkey of writing custom scripts and made a simple script with jQuery and published it to github.. here is the link to &lt;a href=&#34;https://github.com/Gopinath001/tamper-monkey_Export-moqups&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;that.&lt;/a&gt;  just go through the instructions on my page and install the tamper monkey plug-in first then install the script. it will become activated if you are exporting the project from moqups and make the export option available to you&amp;hellip; &lt;em&gt;And one final thing i missed a lot of days without writing something&amp;hellip; sorry for that.. bad on my end &amp;hellip; cuz of the situtations. im running late now,, sya next time.. bye.&lt;/em&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title> Software engineering and backend design		</title>
-      <link>//bluepie.live/blog/2018/08/software-engineering-and-backend-design/</link>
-      <pubDate>Wed, 01 Aug 2018 21:30:47 +0000</pubDate>
-      
-      <guid>//bluepie.live/blog/2018/08/software-engineering-and-backend-design/</guid>
-      <description>&lt;blockquote&gt;
+&lt;p&gt;I wanted to complete this in an 30 minutes or so.. plus  also had a deadline to complete a design (full stack. lol)So I opened the docs of tamper monkey of writing custom scripts and made a simple script with jQuery and published it to github.. here is the link to &lt;a href=&#34;https://github.com/Gopinath001/tamper-monkey_Export-moqups&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;that.&lt;/a&gt;  just go through the instructions on my page and install the tamper monkey plug-in first then install the script. it will become activated if you are exporting the project from moqups and make the export option available to you&amp;hellip; &lt;em&gt;And one final thing i missed a lot of days without writing something&amp;hellip; sorry for that.. bad on my end &amp;hellip; cuz of the situtations. im running late now,, sya next time.. bye.&lt;/em&gt;&lt;/p&gt;</description></item><item><title> Software engineering and backend design</title><link>//bluepie.live/blog/2018/08/software-engineering-and-backend-design/</link><pubDate>Wed, 01 Aug 2018 21:30:47 +0000</pubDate><guid>//bluepie.live/blog/2018/08/software-engineering-and-backend-design/</guid><description>
+&lt;blockquote&gt;
 &lt;p&gt;Today I wanna share something that I found was very useful in the recent times, which is ofcourse software engineering and backend design When I started developing.. at first I was a noob &amp;lsquo;as people would call&amp;rsquo; I would do random sh**&amp;hellip; I can explain this in more detail.. which is I would go straight to coding, learning the concepts that I need to implement a certain feature.. sometimes I would chase a particular feature first for the first day.. and I would spend weeks completing a simple project.. which is inefficient and total waste when I think about it now. Then the more important part&amp;hellip; The db design.. I have worked with db with languages like c#, python and PHP..&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;the main aspect of this is that I would straight up go to table design without thinking about normalization, optimisation, memory limits, accessibility and query execution. This was back in my pre college, inbetween college starting and after 12th final exams. Then the times shifted.. still I didn&amp;rsquo;t know about normalization, etc&amp;hellip; But I was doing things differently well I would plan and do things now.. but still this was not enough, later I would realise.. I still was thinking why does it take soo long and sooo many iterations to complete a simple project..the teen that I was in my early days. Then came the university studies and learner about some stuff.. I came across a lot of different stuff that helped me. The period ranges from my mid college days and final ranges.. the third section of my current life. I was doing this lot differently than from the first days of my young developing career. But still I was not doing a lot than I was now.. which is would design db but that consisted of only normal stuff like &amp;lsquo; do I have all the things necessary for doing the project?&amp;rsquo;, &amp;lsquo;does this contain all the details?&amp;rsquo; and &amp;lsquo;is this optimised for retrieving data?&amp;rsquo; etc&amp;hellip; but still no normalization..after I knew about this. For the past somedays ihave been introduced to software engineering and the core concepts and I have been told to structurally implement this, so I this also covers db design with wireframe,data elements, different types of normalization and other tons of stuff that I have to do.. this is teadious but I&amp;rsquo;m realising that from my previous experiments that a lost of post development problems are being solved right now.&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;SO THIS PART IS VERY PRECIOUS TO A DEVELOPER.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;And from here on out, I took a vow to follow the same on future projects so that I wouldnt be a mess and will solve most problems from the first to deal with and I hope I won&amp;rsquo;t forget these things in the future..&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;NOTE TO SELF : YOU USED TWO NOTES DURING THE WHOLE PROCESS WIHTOUT ANY COMPUTER/DIGITAL STUFF&amp;hellip; SO KEEP THEM SAFE AND FOLLOW IT EVERYTIME.&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
 &lt;h3 id=&#34;thoughts&#34;&gt;Thoughts:&lt;/h3&gt;
-
-&lt;p&gt;So i thought this would be a important lesson in my developing career so I am logging this as a post so that I would not forget about this. See ya next time bye!&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title> About android services		</title>
-      <link>//bluepie.live/blog/2018/07/about-android-services/</link>
-      <pubDate>Sun, 22 Jul 2018 13:15:32 +0000</pubDate>
-      
-      <guid>//bluepie.live/blog/2018/07/about-android-services/</guid>
-      <description>&lt;blockquote&gt;
+&lt;p&gt;So i thought this would be a important lesson in my developing career so I am logging this as a post so that I would not forget about this. See ya next time bye!&lt;/p&gt;</description></item><item><title>About android services</title><link>//bluepie.live/blog/2018/07/about-android-services/</link><pubDate>Sun, 22 Jul 2018 13:15:32 +0000</pubDate><guid>//bluepie.live/blog/2018/07/about-android-services/</guid><description>
+&lt;blockquote&gt;
 &lt;p&gt;Recently i was involved in android dev..So im gona share a short struggle in android services.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;h4 id=&#34;why&#34;&gt;Why&lt;/h4&gt;
-
 &lt;p&gt;So i was targeting android 5.1 and the basic feature was setting up and do some action for every % minutes, so this varies.. below 6.0 everything was fine and was working flawlessly but i was testing it on a mobile with android 6.1.&lt;/p&gt;
-
 &lt;h3 id=&#34;doze&#34;&gt;&lt;strong&gt;Doze&lt;/strong&gt;&lt;/h3&gt;
-
 &lt;p&gt;Since the new android versions comes with android doze enabled, and every manufacturer has their own implementation of doze enabled with custom implementations starting from android 6.0 setting up tasks was a teadious task if you are not familiar with android&amp;hellip; so what does doze do to your mobile.. it puts your mobile to a power save state with low cpu frequency and waking it up only at certain intervals for notifications and stuff this conserves a lot of battery and enforces strict policy on the apps and clears any upcoming tasks setup by the apps.&lt;/p&gt;
-
 &lt;h4 id=&#34;services&#34;&gt;Services&lt;/h4&gt;
-
 &lt;p&gt;So my problem statement was explained in the why seciton of this post&amp;hellip; so the solution to this was setting up a custom service but thats not feasible because of the doze implementation.&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;nowadays most android devs focus only for dev of android 5.0/5.1 above. &amp;lsquo;apart from the sincere android devs who still check for backward compatability for each and every single feature..&amp;rsquo;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;  Coming to the point android 5.0 above introduced a new feature called job scheduler that reduces the work of the devs by setting up and impementing in several differnet ways.. so thsese can be&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;alarm manager&lt;/li&gt;
 &lt;li&gt;firebase jobdispatcher&lt;/li&gt;
 &lt;li&gt;sync adapter&lt;/li&gt;
 &lt;li&gt;other facilities etc..&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;so if incase anymethods fails it implements it other methods&amp;hellip; this all works on upuntil 6.0 but because of the doze feature the limit is set to 15 min.. so pretty much its a dead end&amp;hellip; only possible way custom service with notification to prevent doze feature, if destroyed create it again with the job close event trigger and remove previous values set by job scheduler. Apart from this there are several dependenscies, with differnt types of implementation..literally there are tons of implemenations to the same one..&lt;em&gt;&lt;strong&gt;its a rabbit hole where if you focus on one thing it goes on and on, deeper and deeper&amp;hellip;&lt;/strong&gt;&lt;/em&gt; do a lot of freakin research&amp;hellip;but it takes time which i dont have..&lt;em&gt;what should I do?..&lt;/em&gt; in the middle lot of third party libraray if you  just want to learn something from scratch its just soo hard&amp;hellip; maybe its just a rant or maybe not&amp;hellip; anyway do try your best..and give a try.&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;android dev = mess of libraries and confusion on what to choose for dev..&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;em&gt;forgot to mention if you want to implement a new feature..literally there are 100s of methods to do them.&lt;/em&gt;&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+&lt;p&gt;&lt;em&gt;forgot to mention if you want to implement a new feature..literally there are 100s of methods to do them.&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>
