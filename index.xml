@@ -1,4 +1,98 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.live/blog/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 29 Jun 2019 18:35:30 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Google Ctf 2019</title><link>//bluepie.live/blog/2019/06/google-ctf-2019/</link><pubDate>Sat, 29 Jun 2019 18:35:30 +0530</pubDate><guid>//bluepie.live/blog/2019/06/google-ctf-2019/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.live/blog/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 30 Jul 2019 22:40:21 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Android Revesing</title><link>//bluepie.live/blog/2019/07/android-revesing/</link><pubDate>Tue, 30 Jul 2019 22:40:21 +0530</pubDate><guid>//bluepie.live/blog/2019/07/android-revesing/</guid><description>
+&lt;blockquote&gt;
+&lt;p&gt;Hello! me and others reading this from the future. &lt;strong&gt;&lt;em&gt;Status Update:So, this month I have lost a companion that was with me for the past 4 years, he is not entirely dead but let&amp;rsquo;s say is not the same person he once was&amp;hellip;.wait wait wait! I am talking about my laptop. I was doing an all-nighter &amp;amp; I think it was about 4 a.m. or so I was planning to go to sleep, so so while I was cleaning up &amp;amp; I dropped the laptop from my waist height, I was one of the tallest persons in my class so that explains a lot. I should have cleaned everything in the morning. Anyway after that I couldn&amp;rsquo;t work on my projects for sometime, but I fixed it to a point where it is somewhat workable, bit its not the same, I have to buy a new one. Next time when I make a post it will be on a new laptop.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;goal&#34;&gt;Goal&lt;/h2&gt;
+&lt;p&gt;I have been away from reversing, ctf and modding, basically my hobbies from my University days. but occasionally I do some reversing and CTF&amp;rsquo;s, &lt;em&gt;because of course I don&amp;rsquo;t want to forget everything.&lt;/em&gt; I was busy with my office work but in the back of my mind there was always thoughts about reversing apps again usually to find bugs and exploit in myself for fun. That is the GOAL!.&lt;/p&gt;
+&lt;h2 id=&#34;motivaation&#34;&gt;Motivaation&lt;/h2&gt;
+&lt;p&gt;The next thing that Lead me to writing this post is that I use torrents sometimes and i mostly do it in my phone. Out of all the Torrent clients I used, ttorrent is the best(phone). I use it but not to the point of im going to buy it(the premium app without adds).&lt;/p&gt;
+&lt;p&gt;Lately ads are just awefull, full-blown full screen ads with full audio and you cannot even skip the video. So in one weekend I decided to reverse it, because at this point you cannot use it.&lt;/p&gt;
+&lt;h3 id=&#34;question&#34;&gt;Question&lt;/h3&gt;
+&lt;p&gt;Why not use mods/cracks from the internet,&lt;/p&gt;
+&lt;p&gt;answer: easy, since I&amp;rsquo;m also in the security community I know for a fact that almost every other mod has some Trojan linked with it and the other reason is I am paranoid.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;warning-or-notice-whatever-you-want-to-call-it&#34;&gt;WARNING OR NOTICE WHATEVER YOU WANT TO CALL IT&lt;/h2&gt;
+&lt;p&gt;What I am going to share below is purely for myself to remind me(future me) that at some point in life I did this and is purely for learning purposes for anyone else that might stumbled upon this.&lt;/p&gt;
+&lt;h2 id=&#34;decompiling&#34;&gt;Decompiling&lt;/h2&gt;
+&lt;h3 id=&#34;fun-part&#34;&gt;Fun part&lt;/h3&gt;
+&lt;p&gt;Note: I have already done this before and I have a personal preference of tools that I use.&lt;/p&gt;
+&lt;p&gt;First thing that you need is the decompiler, at the time of writing this post I have seen around 15 or so decompilers online and offline for android ofcourse personally i have been fan of APK tool its just perfect.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://bitbucket.org/iBotPeaches/apktool/downloads&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;apktool download link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Some of the Honorable mentions&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;cfr decompiler&lt;/li&gt;
+&lt;li&gt;jd-gui&lt;/li&gt;
+&lt;li&gt;jadx&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;apktool-usage&#34;&gt;Apktool usage&lt;/h4&gt;
+&lt;h5 id=&#34;its-simple-apktool-d-for-decompile-o-outputdirectory&#34;&gt;its simple. apktool d(for decompile) -o(outputdirectory)&lt;/h5&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;
+java -jar apktook_2.4.0.jar d -o output_dir/ apkfile.apk
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;after you decompile the APK. Explore the decompiled folder for some time.
+If you want to to change the app flow or know its secrets, you have to to change those files so you need a text editor with find in files feature. My personal preference for this is Sublime course you can use anything you like.&lt;/p&gt;
+&lt;p&gt;So Android apps are basically written in Java and kotlin from native app standpoint. So the files that you saw in those folders are just the compiled versions of the source. For seeing the source code of apps, you cannot see the exact source code from Java everything will be obfuscated and a lot of it will not make any sense to you if you don&amp;rsquo;t have any experience at first so don&amp;rsquo;t be afraid of it. Be very vigilant here I am talking about two things one is the Java source files and the other is the compiled .smali files.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;.smali modifications are the most imporatant one, that matters in this post. since that will be used to change the app flow.&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;modding&#34;&gt;Modding&lt;/h2&gt;
+&lt;h3 id=&#34;smali-modifications&#34;&gt;smali modifications&lt;/h3&gt;
+&lt;p&gt;This is the tough spot. I have previous experience with assembly(x86 and dex) but for other people you have to learn to understand it.&lt;/p&gt;
+&lt;h4 id=&#34;viewing-logic-and-instructions&#34;&gt;viewing logic and instructions&lt;/h4&gt;
+&lt;p&gt;personally, i use jadx for viewing the java code(obfuscated and confusing) and viewing the smali code at the same time and make changes with text editors on .smali files.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/skylot/jadx&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;jadx link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;for smali modifications to understand the instructions.i&amp;rsquo;ve found this to be useful than the google one.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://pallergabor.uw.hu/androidblog/dalvik_opcodes.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;dalvik_opcodes&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;understanding-structure-and-finding-things-to-be-changed-to-suit-our-needs&#34;&gt;Understanding structure and finding things to be changed to suit our needs&lt;/h3&gt;
+&lt;p&gt;So with the command form the apktool part, you would have decompiled the apk, with the help of tools provided above you can also now just view the source and hopefully understand the logic. I am going to tell what i changed after analysing it.&lt;/p&gt;
+&lt;p&gt;hint: ttorrent lite can be converted to premium if you have a code, that might be exploitable.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt; .locals 0
+.line 1
+iput-object p1, p0, Lhu/tagsoft/ttorrent/serial/a;-&amp;gt;c:Lhu/tagsoft/ttorrent/serial/SerialActivity;
+iput-boolean p2, p0, Lhu/tagsoft/ttorrent/serial/a;-&amp;gt;a:Z
+&amp;gt;.local 0, means no extra variables will be included,
+to make conditions true, set variable true,
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;basically-what-u-have-to-do-in-terms-of-java-code-is-below-this-is-one-of-the-common-modding-pattern&#34;&gt;&lt;em&gt;basically what u have to do in terms of java code is below&lt;/em&gt; this is one of the common modding pattern&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
+public Boolean isLicenseVerified{
+this.licenseCheck = getLicenseCheck();
+return this.licecseCheck //true if bought the license.
+}
+public Boolean isLicenseVerified{
+this.licenseCheck = true;
+return this.licecseCheck //always true.
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;in-smali-code-that-would-translate-to-actual-change-made-in-code&#34;&gt;in smali code that would translate to, actual change made in code.&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt; ex:
+.local 1 //now one extra variable can be created.
+const/4 v0, 0x1
+iput-boolean v0, p0, Lhu/tagsoft/ttorrent/serial/a;-&amp;gt;a:Z //the variable was set to true.
+!imp calling to check if serial registered, always return true. successful patch!.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;NOTE: this is not an easy to do at the begining, I was at that point myself so just dont give up.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;recompiling&#34;&gt;Recompiling&lt;/h2&gt;
+&lt;p&gt;After that you have to recompile the app, There are several ways to do this, I am gonna go with removing the original signature of the app creating a new key and then signing the app with your key.&lt;/p&gt;
+&lt;h3 id=&#34;removemeta-inf-folder-to-remove-original-signatures&#34;&gt;removemeta inf folder to remove original signatures&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;
+java -jar apktool b -o outputdir/filename.apk decompiledDirectory/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;resigning&#34;&gt;Resigning&lt;/h2&gt;
+&lt;h4 id=&#34;creating-key-and-signing-with-it&#34;&gt;creating key and signing with it&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;
+keytool -genkey -v -keystore ck-release-key.keystore -alias ck -keyalg RSA -keysize 2048 -validity 10000
+//resign the apk
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ck-release-key.keystore my_application.apk ck
+//be sure to verify it there might be some errors.
+jarsigner -verify -verbose recompiledApk.apk
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;there-is-also-another-way-of-disabling-ads-simpler-very-much-simpler-by-disabling-the-activity-from-manifest-but-what-is-the-fun-in-that&#34;&gt;there is also another way of disabling ads simpler(very much simpler) by disabling the activity from manifest but what is the fun in that&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Now got rid of the pesky fullScreen ads, I am not gona share the apk here, cuz reasons duh&amp;hellip;&lt;/em&gt;&lt;/strong&gt; &lt;em&gt;but I taught u the necessary stuff to do so, you should do fine on your own&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Google Ctf 2019</title><link>//bluepie.live/blog/2019/06/google-ctf-2019/</link><pubDate>Sat, 29 Jun 2019 18:35:30 +0530</pubDate><guid>//bluepie.live/blog/2019/06/google-ctf-2019/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;hey!. future me,(addressing myself)
 &lt;strong&gt;&lt;em&gt;Status Update:So its been almost a year since i joined a company and having my career growing, but my personal goals are just at the same position when i left my student life. Gosh wish things where different, So another long time since i made my last post. time really flies by, so the most part im ok i guess with inner conflicts, mental forgetfullness, slow motion, slow thinking. For the past some weeks everything around me feels like it has been sped up, but i am still moving slowly.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -463,28 +557,4 @@ $fData .
 &lt;p&gt;And from here on out, I took a vow to follow the same on future projects so that I wouldnt be a mess and will solve most problems from the first to deal with and I hope I won&amp;rsquo;t forget these things in the future..&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;NOTE TO SELF : YOU USED TWO NOTES DURING THE WHOLE PROCESS WIHTOUT ANY COMPUTER/DIGITAL STUFF&amp;hellip; SO KEEP THEM SAFE AND FOLLOW IT EVERYTIME.&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;thoughts&#34;&gt;Thoughts:&lt;/h3&gt;
-&lt;p&gt;So i thought this would be a important lesson in my developing career so I am logging this as a post so that I would not forget about this. See ya next time bye!&lt;/p&gt;</description></item><item><title>About android services</title><link>//bluepie.live/blog/2018/07/about-android-services/</link><pubDate>Sun, 22 Jul 2018 13:15:32 +0000</pubDate><guid>//bluepie.live/blog/2018/07/about-android-services/</guid><description>
-&lt;blockquote&gt;
-&lt;p&gt;Recently i was involved in android dev..So im gona share a short struggle in android services.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id=&#34;why&#34;&gt;Why&lt;/h4&gt;
-&lt;p&gt;So i was targeting android 5.1 and the basic feature was setting up and do some action for every % minutes, so this varies.. below 6.0 everything was fine and was working flawlessly but i was testing it on a mobile with android 6.1.&lt;/p&gt;
-&lt;h3 id=&#34;doze&#34;&gt;&lt;strong&gt;Doze&lt;/strong&gt;&lt;/h3&gt;
-&lt;p&gt;Since the new android versions comes with android doze enabled, and every manufacturer has their own implementation of doze enabled with custom implementations starting from android 6.0 setting up tasks was a teadious task if you are not familiar with android&amp;hellip; so what does doze do to your mobile.. it puts your mobile to a power save state with low cpu frequency and waking it up only at certain intervals for notifications and stuff this conserves a lot of battery and enforces strict policy on the apps and clears any upcoming tasks setup by the apps.&lt;/p&gt;
-&lt;h4 id=&#34;services&#34;&gt;Services&lt;/h4&gt;
-&lt;p&gt;So my problem statement was explained in the why seciton of this post&amp;hellip; so the solution to this was setting up a custom service but thats not feasible because of the doze implementation.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;nowadays most android devs focus only for dev of android 5.0/5.1 above. &amp;lsquo;apart from the sincere android devs who still check for backward compatability for each and every single feature..&amp;rsquo;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;  Coming to the point android 5.0 above introduced a new feature called job scheduler that reduces the work of the devs by setting up and impementing in several differnet ways.. so thsese can be&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;alarm manager&lt;/li&gt;
-&lt;li&gt;firebase jobdispatcher&lt;/li&gt;
-&lt;li&gt;sync adapter&lt;/li&gt;
-&lt;li&gt;other facilities etc..&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;so if incase anymethods fails it implements it other methods&amp;hellip; this all works on upuntil 6.0 but because of the doze feature the limit is set to 15 min.. so pretty much its a dead end&amp;hellip; only possible way custom service with notification to prevent doze feature, if destroyed create it again with the job close event trigger and remove previous values set by job scheduler. Apart from this there are several dependenscies, with differnt types of implementation..literally there are tons of implemenations to the same one..&lt;em&gt;&lt;strong&gt;its a rabbit hole where if you focus on one thing it goes on and on, deeper and deeper&amp;hellip;&lt;/strong&gt;&lt;/em&gt; do a lot of freakin research&amp;hellip;but it takes time which i dont have..&lt;em&gt;what should I do?..&lt;/em&gt; in the middle lot of third party libraray if you  just want to learn something from scratch its just soo hard&amp;hellip; maybe its just a rant or maybe not&amp;hellip; anyway do try your best..and give a try.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;android dev = mess of libraries and confusion on what to choose for dev..&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;em&gt;forgot to mention if you want to implement a new feature..literally there are 100s of methods to do them.&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;So i thought this would be a important lesson in my developing career so I am logging this as a post so that I would not forget about this. See ya next time bye!&lt;/p&gt;</description></item></channel></rss>
