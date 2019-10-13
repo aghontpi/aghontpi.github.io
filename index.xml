@@ -1,4 +1,159 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.in/blog/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 11 Sep 2019 09:17:29 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Docker to Make Life Easier</title><link>//bluepie.in/blog/2019/09/docker-to-make-life-easier/</link><pubDate>Wed, 11 Sep 2019 09:17:29 +0530</pubDate><guid>//bluepie.in/blog/2019/09/docker-to-make-life-easier/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.in/blog/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><language>en-us</language><lastBuildDate>Sun, 13 Oct 2019 19:30:27 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Android Reversing Part 2</title><link>//bluepie.in/blog/2019/10/android-reversing-part-2/</link><pubDate>Sun, 13 Oct 2019 19:30:27 +0530</pubDate><guid>//bluepie.in/blog/2019/10/android-reversing-part-2/</guid><description>
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;hey, how ya been. so this is a another reversing post (reverse engineering android mod). So before some months,
+I gave some basic info to reversing android apps with a practical example(ttorrent). This post is gona build on
+top of that post. basically pretty advanced version of that post.&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;h2 id=&#34;im-just-sharing-information-not-distrubuting-mod-files-here-this-is-strictly-for-learning-purposes-only&#34;&gt;Im just sharing information &amp;amp; not distrubuting mod files here! this is strictly for learning purposes only.&lt;/h2&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;starting-off&#34;&gt;Starting off&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s just continue where we left off shall we. Today the practical example that we are gona use is Spotify lite,
+this at the time of writing, is newly repleased, with version &amp;lsquo;0.13.13.6&amp;rsquo;.&lt;/p&gt;
+&lt;p&gt;why spotify? Cause i love the app, but too broke to pay for subscription and the ads are just painful, i just want
+to remove the ads. You could ask the question &amp;ldquo;bu..but there are always mods available in the outside market?&amp;rdquo; Yea
+those are available, but my simple answer is trust, especially nowadays it very easy to
+attach a backdoor in any app, and also the fact that I love doing this.&lt;/p&gt;
+&lt;p&gt;So we train by making the ads stop and add premium features to it, keep in-mind we converting only the client to
+be premium, server assisted premium features won&amp;rsquo;t work here.&lt;/p&gt;
+&lt;p&gt;so here we go&lt;/p&gt;
+&lt;h3 id=&#34;continue-d&#34;&gt;continue..d&lt;/h3&gt;
+&lt;p&gt;As said this section is just a continuation of the prevous post titled &amp;lsquo;android reversing&amp;rsquo;, starting things up with
+decompiling and recompiling are in that post,&lt;/p&gt;
+&lt;h4 id=&#34;errors&#34;&gt;errors&lt;/h4&gt;
+&lt;p&gt;Most of the errors encountered are during the decompilaton shows up only during the recompiling phase and launching
+app phase, hopefully there are extra options during decompilation which can fix most errors encountered.&lt;/p&gt;
+&lt;p&gt;the following options are available in decompilation&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
+when to use -r option,
+if launch causes crashes in relation to resources
+you can find this out in logcat and try this option
+when to use --no-assets option,
+the same reason as -r option
+when to use -d flag,
+debug flag, adds debug to manifest enabling debug output
+utilize logcat
+when to use customFranework/update framework,
+would not build or recompile, so install new framework with
+apktool.jar -if framework-file.apk
+framework files from android device:
+usually inside /system/framework.
+adb pull to get the apk then do if framework
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;more-about-frameworks&#34;&gt;more about frameworks&lt;/h5&gt;
+&lt;p&gt;In some cases there may be recompiling and rebuilding errors from apktool,
+this can be either fixed by -r param while decompiling(keep resources intact) or by installing latest framework
+with the command, multiple frameworks can be used too, or even pull a framework file from your Android device,
+more about it here, so if you are using miui like me, use the command below.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;
+ex:(current device miui)
+adb pull /system/framework/framework-res.apk
+adb pull /system/framework/framework-ext-res/framework-ext-res.apk
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Lastet framework files can be taken from Android build tools. At the time of writing this Android api 29 is out.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;the above will fix about 90% of the problems.&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&#34;working-with-practical-example&#34;&gt;working with practical example&lt;/h4&gt;
+&lt;p&gt;Install the latest version of spotify lite from playstore and extract the apk from the device and decompile it
+using the guide from part 1, solve the problems you face by the above methods. after decompile take some time to
+go through the app structure and keep note of key parts of the application.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;also launch jadx_gui side by side to get a better idea. (you can find this in part 1)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Launch the app on your device and check the app structure (always keep notes on interesting places) for example
+(hint) the settings has a section called account type. This practical example wont be simple as changing the
+return value of a function like previous post, we has an attack vector specific to that app, but here its a
+different story, &lt;em&gt;analysing the app structure and finding potential spots is the key step.&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;hints&#34;&gt;hints&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;smali modifications&lt;/em&gt;&lt;/strong&gt;
+I use this site a lot &lt;a href=&#34;http://pallergabor.uw.hu/androidblog/dalvik_opcodes.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;dalvik_opcodes&lt;/a&gt; , as mentioned in
+the part 1. Here we want to replace section&amp;rsquo;s of byte code, thus make use of this, here to I wont say the exact-way
+to mod since that would be illegal, you can find this out on your own, ill just share the gist of the byte code
+necessary to do the trick and show code sample&amp;rsquo;s for it.&lt;/p&gt;
+&lt;p&gt;While you browse through the decompiled files you might stumble upon a enumerator that is referenced everywhere,
+yeah, of course this can be exploited indeed.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Im gona explain with Java code instead of the dalvik opcodes, since that is much more easier to unserstand&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
+enum Account{
+PREMIUM,
+FREE
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h4 id=&#34;the-trick&#34;&gt;The trick&lt;/h4&gt;
+&lt;p&gt;When the app launches (MainActivity), app makes an api call to get the type of user and save&amp;rsquo;s it as a local reference,&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
+# sudocode
+AnnonymousCall_to_apiToRetreiveUserType(...){
+//make the call
+//parse the call
+return Account (response);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;check the sudocode, if you are able to change the response of the annoymous call to always send use PREMIUM,then we
+can call it a day!.&lt;/p&gt;
+&lt;p&gt;In Java you use enumerator.valueOf(&amp;ldquo;fname_here&amp;rdquo;) to get the value of the enum. so we change the above code to something like&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
+# sudocode
+AnnonymousCall_to_apiToRetreiveUserType(...){
+//make the call EVEN THIS ARE NOT NECESSARY HERE
+//parse the call EVEN THIS ARE NOT NECESSARY HERE
+return Account.valueOf(&amp;quot;PREMIUM&amp;quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;here is the dalvik opcode equivalent for the above&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
+//storage
+const-string p2, &amp;quot;PREMIUM&amp;quot;
+//valueOf from storage
+invoke-static {p2}, Lcom/spotify/lite/productstate/Product;-&amp;gt;valueOf(Ljava/lang/String;)Lcom/spotify/lite/productstate/Product;
+//move the result object into p2
+move-result-object p2
+//move the same into class object
+iput-object p2, p0, Ldlc;-&amp;gt;b:Lcom/spotify/lite/productstate/Product;
+//return the object
+return-object Ldlc;-&amp;gt;b:Lcom/spotify/lite/productstate/Product;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;the same but for lambda functins&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;original: api_call -&amp;gt; retrun cast(response)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
+.method public final apply(Ljava/lang/Object;)Ljava/lang/Object;
+.locals 0
+check-cast p1, Lcjl;
+invoke-virtual {p1}, Lcjl;-&amp;gt;b()Lcom/spotify/lite/productstate/Product;
+move-result-object p1
+return-object p1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;patched:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
+.registers 2
+.line 47
+const-string p1, &amp;quot;PREMIUM&amp;quot;
+invoke-static {p1}, Lcom/spotify/lite/productstate/Product;-&amp;gt;valueOf(Ljava/lang/String;)Lcom/spotify/lite/productstate/Product;
+move-result-object p1
+return-object p1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;some additional interesting patch sections, go through this too, latest verisons of the app need this.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
+player util
+player restriction
+resolve player
+skipToFutureTrack
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;p&gt;with the given patch work, it is all that you will need to enable premium features, just recompile, sign and install the app.
+follow part 1 for recompiling, sign and installing.&lt;/p&gt;
+&lt;h3 id=&#34;end&#34;&gt;End&lt;/h3&gt;
+&lt;p&gt;I hope this helps some one else other than me, I&amp;rsquo;m not gona share the recompiled apk for obvious reasons(legal), But I feel you should
+be able to do so, with the information you have now. peace! seeya next time.&lt;/p&gt;</description></item><item><title>Docker to Make Life Easier</title><link>//bluepie.in/blog/2019/09/docker-to-make-life-easier/</link><pubDate>Wed, 11 Sep 2019 09:17:29 +0530</pubDate><guid>//bluepie.in/blog/2019/09/docker-to-make-life-easier/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;Hello, it&amp;rsquo;s been two months since last update. Anyway the August month I was pretty busy, to be honest, I was involved in a old project of mine that I had to revist, in order to get more productive and flexibility in developing the application I chose to use docker. So this post is going to be about docker.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -673,19 +828,4 @@ $fData .
 &lt;p&gt;Dear Internet I didn&amp;rsquo;t blog for 2 weeks and it feels weird. i promise to write within every two weeks from here on now&amp;hellip; i am terribly sorry!.This post is to clear up the silence that stagnated over the past 2 weeks. sry btw.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Today I would like to share a thing (to tell my future self) that I learned in the recent weeks. It&amp;rsquo;s MVC. I was introduced to MVC pattern for developing applications. So I&amp;rsquo;m explaining my interpretation and my understanding of the MVC pattern. So it has different parts. Model, View, controller. The first thing is the controller, then is the model and then the view, the controller gets everything and controlls everything, &amp;amp; orders what should be done by the model and view on the scope. While you develop this it should be with a flow. As from the development stand point, the controller should be capable of handling changes (i.e) if some changes came up in the future of the app/project, we can not handle thousands and thousands of files and track the files and change everything, that is why we use controller for everything. This is the basic idea from the controller stand point. I tested the MVC pattern with php. With a sample school project and it was great. At first I completely made it with my own understanding, but later with the help of my seniors I was able to complete it with full mvc design. So I said I implemented the design via PHP, so what is the use of model, view ,controller in this aspect, the role of the controller is to breakup the request and split the response based on parts of the url and construct the final page.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;.. i wanted to write/update something .. so i wrote this.. ill continue this post later on with an actual example.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</description></item><item><title> Tamper Monkey</title><link>//bluepie.in/blog/2018/08/tamper-monkey/</link><pubDate>Fri, 17 Aug 2018 03:04:46 +0000</pubDate><guid>//bluepie.in/blog/2018/08/tamper-monkey/</guid><description>
-&lt;blockquote&gt;
-&lt;p&gt;Hi again, Today I am going to share something that is somewhat related to reverse engineering. Well I was working on a project, at one point of time I was working on wireframes, since I was only doing the initial design and it would be just used as a reference by the design team so my senior adviced me to use mockup.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;mockup&#34;&gt;Mockup&lt;/h3&gt;
-&lt;p&gt;So what is mockup you ask? Mockup is a wireframe tool, You would design stuff like how each and individual page would be, each elements design, UI, the flow with how defferent stuff interact with each other, etc.. you could also do use case diagrams, the process flow and other stuff in the case of mocup, mockup is a fremium tool (web app), there is a limit to each and every project with a constraint of 300 elements max. plus you have to pay to get features like exporting the projects in different formats, etc.&lt;/p&gt;
-&lt;h3 id=&#34;whats-the-problem-with-this&#34;&gt;Whats the problem with this?:&lt;/h3&gt;
-&lt;p&gt;When there is a limit for each and every stuff like the elements that you can you, the export options and other features like setting the project as private,..etc The main function that I use is that I want to export stuff which i design and that option is limited by a pay-wall. So I thought why can&amp;rsquo;t I test their functionality(security) a little bit.. i just messed with their website a liitle bit.. and they didn&amp;rsquo;t include any basic security.&lt;/p&gt;
-&lt;h3 id=&#34;the-idea&#34;&gt;The Idea&lt;/h3&gt;
-&lt;p&gt;I already knew about tamper money.. which is a plug-in for installing custom user scripts and i wanted to write on desperately for a long time, &lt;a href=&#34;https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;the link to tamper monkey is here. &lt;/a&gt; I wanted to write a custom script that did a lot of things like remove restriction to certain websites and remove add block detector from certain sites but i overwhelmed myself with lot of different projects and I didn&amp;rsquo;t do nit since now, that&amp;rsquo;s a story for a another time&amp;hellip;&lt;/p&gt;
-&lt;h3 id=&#34;the-basic-script&#34;&gt;The basic script&lt;/h3&gt;
-&lt;p&gt;So i found a hack to make available certain features of the moqups site without paying anything but&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;i needed to do it with js? nah..&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;I wanted to complete this in an 30 minutes or so.. plus  also had a deadline to complete a design (full stack. lol)So I opened the docs of tamper monkey of writing custom scripts and made a simple script with jQuery and published it to github.. here is the link to &lt;a href=&#34;https://github.com/Gopinath001/tamper-monkey_Export-moqups&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;that.&lt;/a&gt;  just go through the instructions on my page and install the tamper monkey plug-in first then install the script. it will become activated if you are exporting the project from moqups and make the export option available to you&amp;hellip; &lt;em&gt;And one final thing i missed a lot of days without writing something&amp;hellip; sorry for that.. bad on my end &amp;hellip; cuz of the situtations. im running late now,, sya next time.. bye.&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;.. i wanted to write/update something .. so i wrote this.. ill continue this post later on with an actual example.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>
