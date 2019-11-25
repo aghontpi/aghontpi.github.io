@@ -1,17 +1,283 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><link rel=prev href=//bluepie.in/2018/10/file-manager-development/><link rel=next href=//bluepie.in/2018/11/touch-typing/><link rel=canonical href=//bluepie.in/2018/10/file-manager-contd/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>file Manager contd.. | Bluepie&#39;s update blog</title><meta name=title content="file Manager contd..		 | Bluepie's update blog"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":" file Manager contd..\t\t","headline":" file Manager contd..\t\t","description":"a little update: Though i made a promise to post every two weeks, its been 4 weeks, why? ..is this\x26hellip; i was going in a flow, but things started affecting.. rather i let things affect me, lately lot of things happened personally, lot of things reminded of the past, that made me avoid _________ in the present,\nContinuation. Pick up where i left off from previous post: Let me explain the way of approach i wanted to do, i wanted to access all the files of the server, like i wanted to go back to the root directory, back before that, basically anywhere where i wanted, So DirectoryIterator seemed the best choice, We are in a directory, we have to list all the files and folders in the directory, how would you do that?","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2018","datePublished":"2018-10-30 20:56:15 \x2b0000 UTC","dateModified":"2018-10-30 20:56:15 \x2b0000 UTC","url":"\/\/bluepie.in\/2018\/10\/file-manager-contd\/","wordCount":"391","keywords":["Bluepie\x27s update blog"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-student-alt"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s update blog</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>Blog</a>
-<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s update blog</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>Blog</a>
-<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-135013873-2','auto');ga('send','pageview');}</script><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">file Manager contd..</h1><div class=post-meta>Written by <a itemprop=name href=//bluepie.in/ rel=author>Bluepie</a> with ♥
-<span class=post-time>on <time datetime=2018-10-30 itemprop=datePublished>October 30, 2018</time></span>
-in
-<i class="iconfont icon-folder"></i><span class=post-category><a href=//bluepie.in/categories/development/>development</a>
-<a href=//bluepie.in/categories/tech/>Tech</a></span></div></header><div class=post-content><img src=//bluepie.in/images/posts/post.png class=featured_image><p><strong><em>a little update: Though i made a promise to post every two weeks, its been 4 weeks, why? ..is this&hellip; i was going in a flow, but things started affecting.. rather i let things affect me, lately lot of things happened personally, lot of things reminded of the past, that made me avoid _________ in the present,</em></strong></p><hr><h3 id=continuation>Continuation.</h3><p>Pick up where i left off from previous post: Let me explain the way of approach i wanted to do, i wanted to access all the files of the server, like i wanted to go back to the root directory, back before that, basically anywhere where i wanted, So DirectoryIterator seemed the best choice, We are in a directory, we have to list all the files and folders in the directory, how would you do that?. Directory iterator  in a foreach, since directory iterator displays everything, can be used, ex as shown below.</p><pre><code class=language-php>foreach (new DirectoryIterator($dir) as $files)
-</code></pre><p>If im about to display the files and folders, they should have a nice ui, like an icon, so categorizing files and icons, i would call is_dir() else its a file, this would be fine for now, but for future everything will have to be categorize as images, mp3, video, etc. the icons can be converted into base 64 strings so can be packed into the same file, its quite big, but its worth it,</p><pre><code class=language-php>$fileWithImage = ($files-&gt;isDir())? $this-&gt;getLinkWithText( (images::folderImage . &quot; &quot; .$files-&gt;getFilename()), $this-&gt;generateQueryString( 'folder' ,$files-&gt;getPath() .'/' .$files-&gt;getFilename() )) : images::fileImage . &quot; &quot; .$files-&gt;getFilename();
-</code></pre><p>Letme explain this first, first checking if its a file or folder, if its a file, attach file image with file name, then thats it, but if its a folder, we show a folder icon with name and the link so that while clicking will be able to move front and back, All the fancy functions are just there to make the life simpler, their names exactly tell what they do. for instance, <code>getLinkWithText</code> expects two parameters, first is the image with name, second is query the link (a href). for that <code>generateQueryString</code> function expects a name, then the path to put it in href, and that is literally it, for making a dynamic traversing structure, all this is enough, may be next time ill explain with code for the other functions.</p><blockquote><p><strong><em>for the time being..imona leave , -sorry.</em></strong></p></blockquote></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
-<span>Bluepie</span></p><p class=copyright-item><span>Link:</span>
-<a href=//bluepie.in/2018/10/file-manager-contd/>//bluepie.in/2018/10/file-manager-contd/</span></p></div><div class=post-tags><section><a href=javascript:window.history.back();>back</a></span> ·
-<span><a href=//bluepie.in/>home</a></span></section></div><div class=post-nav><a href=//bluepie.in/2018/10/file-manager-development/ class=prev rel=prev title="file manager development"><i class="iconfont icon-left"></i>&nbsp; file manager development</a>
-<a href=//bluepie.in/2018/11/touch-typing/ class=next rel=next title="Touch Typing.">Touch Typing. &nbsp;<i class="iconfont icon-right"></i></a></div><div class=post-comment><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
-var d=document,s=d.createElement('script');s.async=true;s.src='//'+"gopinath001-github-io-blog"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></div></main><footer class=footer><div class=copyright>&copy;
-<span itemprop=copyrightYear>2017 - 2019</span>
-<span class=with-love>|</span>
-<span class=author itemprop=copyrightHolder><a href=//bluepie.in/>Bluepie</a></span></div></footer><script src=//bluepie.in/js/vendor_no_gallery.min.js async></script></div></body></html>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Bluepie">
+  
+  
+  
+  <link rel="prev" href="//bluepie.in/2018/10/file-manager-development/" />
+  <link rel="next" href="//bluepie.in/2018/11/touch-typing/" />
+  <link rel="canonical" href="//bluepie.in/2018/10/file-manager-contd/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="//bluepie.in/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="//bluepie.in/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="//bluepie.in/favicon-16x16.png">
+  <link rel="manifest" href="//bluepie.in/site.webmanifest">
+  <link rel="mask-icon" href="//bluepie.in/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+            file Manager contd..		 | Bluepie&#39;s update blog
+       
+  </title>
+  <meta name="title" content=" file Manager contd..		 | Bluepie&#39;s update blog">
+    
+  
+  <link rel="stylesheet" href="//bluepie.in/font/iconfont.css">
+  <link rel="stylesheet" href="//bluepie.in/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+{
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "\/\/bluepie.in\/"
+    },
+    "articleSection" : "posts",
+    "name" : " file Manager contd..\t\t",
+    "headline" : " file Manager contd..\t\t",
+    "description" : "a little update: Though i made a promise to post every two weeks, its been 4 weeks, why? ..is this\x26hellip; i was going in a flow, but things started affecting.. rather i let things affect me, lately lot of things happened personally, lot of things reminded of the past, that made me avoid _________ in the present,\nContinuation. Pick up where i left off from previous post: Let me explain the way of approach i wanted to do, i wanted to access all the files of the server, like i wanted to go back to the root directory, back before that, basically anywhere where i wanted, So DirectoryIterator seemed the best choice, We are in a directory, we have to list all the files and folders in the directory, how would you do that?",
+    "inLanguage" : "en-us",
+    "author" : "Bluepie",
+    "creator" : "Bluepie",
+    "publisher": "Bluepie",
+    "accountablePerson" : "Bluepie",
+    "copyrightHolder" : "Bluepie",
+    "copyrightYear" : "2018",
+    "datePublished": "2018-10-30 20:56:15 \x2b0000 UTC",
+    "dateModified" : "2018-10-30 20:56:15 \x2b0000 UTC",
+    "url" : "\/\/bluepie.in\/2018\/10\/file-manager-contd\/",
+    "wordCount" : "391",
+    "keywords" : [  "Bluepie\x27s update blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-student-alt"></i></a>&nbsp;<a href="//bluepie.in/">Bluepie&#39;s update blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="//bluepie.in/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="//bluepie.in/categories/" title="">Categories</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="//bluepie.in/">Bluepie&#39;s update blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="//bluepie.in/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="//bluepie.in/categories/" title="">Categories</a>
+                
+        </div>
+    </div>
+</nav>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-135013873-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline"> file Manager contd..		</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="//bluepie.in/" rel="author">Bluepie</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2018-10-30 itemprop="datePublished">October 30, 2018</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="//bluepie.in/categories/development/"> development </a>
+                        <a href="//bluepie.in/categories/tech/"> Tech </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        <img src="//bluepie.in/images/posts/post.png" class="featured_image">
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p><strong><em>a little update: Though i made a promise to post every two weeks, its been 4 weeks, why? ..is this&hellip; i was going in a flow, but things started affecting.. rather i let things affect me, lately lot of things happened personally, lot of things reminded of the past, that made me avoid _________ in the present,</em></strong></p>
+
+<hr />
+
+<h3 id="continuation">Continuation.</h3>
+
+<p>Pick up where i left off from previous post: Let me explain the way of approach i wanted to do, i wanted to access all the files of the server, like i wanted to go back to the root directory, back before that, basically anywhere where i wanted, So DirectoryIterator seemed the best choice, We are in a directory, we have to list all the files and folders in the directory, how would you do that?. Directory iterator  in a foreach, since directory iterator displays everything, can be used, ex as shown below.</p>
+
+<pre><code class="language-php">foreach (new DirectoryIterator($dir) as $files)
+</code></pre>
+
+<p>If im about to display the files and folders, they should have a nice ui, like an icon, so categorizing files and icons, i would call is_dir() else its a file, this would be fine for now, but for future everything will have to be categorize as images, mp3, video, etc. the icons can be converted into base 64 strings so can be packed into the same file, its quite big, but its worth it,</p>
+
+<pre><code class="language-php">$fileWithImage = ($files-&gt;isDir())? $this-&gt;getLinkWithText( (images::folderImage . &quot; &quot; .$files-&gt;getFilename()), $this-&gt;generateQueryString( 'folder' ,$files-&gt;getPath() .'/' .$files-&gt;getFilename() )) : images::fileImage . &quot; &quot; .$files-&gt;getFilename();
+</code></pre>
+
+<p>Letme explain this first, first checking if its a file or folder, if its a file, attach file image with file name, then thats it, but if its a folder, we show a folder icon with name and the link so that while clicking will be able to move front and back, All the fancy functions are just there to make the life simpler, their names exactly tell what they do. for instance, <code>getLinkWithText</code> expects two parameters, first is the image with name, second is query the link (a href). for that <code>generateQueryString</code> function expects a name, then the path to put it in href, and that is literally it, for making a dynamic traversing structure, all this is enough, may be next time ill explain with code for the other functions.</p>
+
+<blockquote>
+<p><strong><em>for the time being..imona leave , -sorry.</em></strong></p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Bluepie </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=//bluepie.in/2018/10/file-manager-contd/>//bluepie.in/2018/10/file-manager-contd/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="//bluepie.in/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="//bluepie.in/2018/10/file-manager-development/" class="prev" rel="prev" title=" file manager development		"><i class="iconfont icon-left"></i>&nbsp; file manager development		</a>
+         
+        
+        <a href="//bluepie.in/2018/11/touch-typing/" class="next" rel="next" title=" Touch Typing.		"> Touch Typing.		&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+                     <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "gopinath001-github-io-blog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+        <span class="with-love">
+    	 |
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="//bluepie.in/">Bluepie</a></span> 
+         
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="//bluepie.in/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+     </div>
+  </body>
+</html>

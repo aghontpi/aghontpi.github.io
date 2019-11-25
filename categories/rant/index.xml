@@ -1,2 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>rant on Bluepie&#39;s update blog</title><link>//bluepie.in/categories/rant/</link><description>Recent content in rant on Bluepie&#39;s update blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 28 Mar 2019 23:27:50 +0000</lastBuildDate><atom:link href="//bluepie.in/categories/rant/index.xml" rel="self" type="application/rss+xml"/><item><title> AI - with algorithms.(Rant mostly)</title><link>//bluepie.in/2019/03/ai-with-algorithms-rant-mostly/</link><pubDate>Thu, 28 Mar 2019 23:27:50 +0000</pubDate><guid>//bluepie.in/2019/03/ai-with-algorithms-rant-mostly/</guid><description>Well hello guys! How yr&amp;rsquo; been.
-what is going on. i have never thought of me doing this in my life, but this situation has come, so in the past month i have been trying to post and update whats been going on. But i am unable to complete what i started and it is bothering me still now, after that happened i stumbled upon an another old project of mine, which i cleaned up and finished it in a short span and btw this is the project that i am talking about that i didn&amp;rsquo;t complete.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rant on Bluepie&#39;s update blog</title>
+    <link>//bluepie.in/categories/rant/</link>
+    <description>Recent content in rant on Bluepie&#39;s update blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 28 Mar 2019 23:27:50 +0000</lastBuildDate>
+    
+	<atom:link href="//bluepie.in/categories/rant/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title> AI - with algorithms.(Rant mostly)		</title>
+      <link>//bluepie.in/2019/03/ai-with-algorithms-rant-mostly/</link>
+      <pubDate>Thu, 28 Mar 2019 23:27:50 +0000</pubDate>
+      
+      <guid>//bluepie.in/2019/03/ai-with-algorithms-rant-mostly/</guid>
+      <description>Well hello guys! How yr&amp;rsquo; been.
+ what is going on. i have never thought of me doing this in my life, but this situation has come, so in the past month i have been trying to post and update whats been going on. But i am unable to complete what i started and it is bothering me still now, after that happened i stumbled upon an another old project of mine, which i cleaned up and finished it in a short span and btw this is the project that i am talking about that i didn&amp;rsquo;t complete.</description>
+    </item>
+    
+  </channel>
+</rss>
