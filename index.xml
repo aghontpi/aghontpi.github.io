@@ -1,5 +1,144 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><language>en-us</language><lastBuildDate>Sat, 21 Dec 2019 17:28:03 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Liunx LD_PRELOAD</title><link>//bluepie.in/2019/12/linux-ld_preload/</link><pubDate>Sat, 21 Dec 2019 17:28:03 +0530</pubDate><guid>//bluepie.in/2019/12/linux-ld_preload/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;_Hello me, this is going to be a short post that is very interesting to me and I don&amp;rsquo;t know how I have missed this all this time, I&amp;rsquo;ve known to break binary files directly by directly debugging them, mostly the windows files are binary extensions, I have worked even on dll files, which is somewhat similar to .so files on linux, both perform the same functions except that linux part is open source, and i&amp;rsquo;ve seen many articles using this partuclar approrach in many different ways(ofcourse after knowing about this only, I searched for those articles), A bit of personal update - so its been a tough month actually, progress interms of self development is zero, progress in terms of social level is a wip, but still a development. So you understand this right!. anyway the memorable thing that i did this month is going on a office trip to kerala, personally i would prefer to go alone, (only a few people accompanying me!) but gosh dang it!, anyway lets not talk about it. :(. In terms of development work (tech related) that is big zero on the professional side as well as personal side, except a few python scripts &amp;amp; spjs(that is a different topic to discuss entirely)&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><language>en-us</language><lastBuildDate>Wed, 25 Dec 2019 14:15:33 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Custom Dns Server With Adblock</title><link>//bluepie.in/2019/12/custom-dns-server-with-adblock/</link><pubDate>Wed, 25 Dec 2019 14:15:33 +0530</pubDate><guid>//bluepie.in/2019/12/custom-dns-server-with-adblock/</guid><description>
+&lt;blockquote&gt;
+&lt;p&gt;hello guys, as of writing this post this is christmas of 2019 (25 dec 2019), gosh time really goes fast!. How was the holidays? personal update: I have sevre cold &amp;amp; fever as of writing this, hope i&amp;rsquo;ll get better soon.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;today-im-going-to-share-my-method-of-adblocking-with-custom-dns-servers&#34;&gt;Today im going to share my method of adblocking with custom dns servers&lt;/h2&gt;
+&lt;h3 id=&#34;my-requiremets&#34;&gt;my requiremets&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;I want adblocking solution without any addons &amp;amp; applications for laptops/desktops/mobile.&lt;/li&gt;
+&lt;li&gt;I want it universal (meaning it has to work outside of my home network)&lt;/li&gt;
+&lt;li&gt;I should not waste time setting it up (should be quick and simple to setup)&lt;/li&gt;
+&lt;li&gt;should be configurable (easy to configure)&lt;/li&gt;
+&lt;li&gt;should work perfectly &amp;amp; should not cost me anything&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;explanation&#34;&gt;explanation&lt;/h3&gt;
+&lt;p&gt;Sound pretty simple ain&amp;rsquo;t it? we&amp;rsquo;ll it ain&amp;rsquo;t easy to do.&lt;/p&gt;
+&lt;h4 id=&#34;crossplatform-laptop-mobile-anydevice-that-has-access-to-internet&#34;&gt;crossplatform (laptop/mobile/..anydevice that has access to internet)&lt;/h4&gt;
+&lt;p&gt;This requirement rules out addons, applications on all devices.&lt;/p&gt;
+&lt;h4 id=&#34;work-outside-of-my-home-network&#34;&gt;work outside of my home network)&lt;/h4&gt;
+&lt;p&gt;This requirement rules out private adblocking solutions, so a server is need for this, luckly, I have server on aws,
+&lt;em&gt;but that server is already being used for a different purpose, so it has to be minimal impact on the cpu and memory&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;obvious anwser would be to use pi-hole &lt;a href=&#34;work outside of my home network&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;pie-hole&lt;/a&gt;), my experience with pie-hole is not good, let me explain what i mean by that, I had problems trying to install it(the automated script did not work for me), it took me so much time to debug the error, second is it had a extra bit of cpu load compared to my other options.&lt;/p&gt;
+&lt;h4 id=&#34;should-be-quick-and-simple-to-setup&#34;&gt;should be quick and simple to setup)&lt;/h4&gt;
+&lt;p&gt;I should not waste time learning a new tool,(don&amp;rsquo;t a industrial level dns server, I just need a simple solution), plus if any error, it should be easy for me to debug.&lt;/p&gt;
+&lt;h4 id=&#34;configurable-easy-to-configure&#34;&gt;configurable (easy to configure)&lt;/h4&gt;
+&lt;p&gt;some things i looked for, should be
+* able to mention, forward dns vendor (google/opendns)
+* easy to install
+* easy to add adblocking lists (just add files from differnet adblock sources)
+* easy to add whitelists
+* i should have a log, to inspect if anything is not working&lt;/p&gt;
+&lt;h4 id=&#34;should-not-cost-me-anything&#34;&gt;should not cost me anything&lt;/h4&gt;
+&lt;p&gt;This makes the solution to be open source, I already have a server that i am paying for so i&amp;rsquo;ll just add this to it, So there is no additional cost.&lt;/p&gt;
+&lt;h3 id=&#34;hidden-gem-the-solution&#34;&gt;Hidden gem - The solution&lt;/h3&gt;
+&lt;p&gt;So after trying several solutions(trust me i wasted a lot of time, installing &amp;amp; uninstalling) I arrived at &lt;a href=&#34;https://github.com/looterz/grimd&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;grimd&lt;/a&gt;, an opensource project written in go. It had all the capabilities that I mentioned above(checkout the grimd&amp;rsquo;s page), It even comes in prebuilt binaries, So i do not even have to compile anything.&lt;/p&gt;
+&lt;h3 id=&#34;installing-it-to-myserver&#34;&gt;Installing it to myserver&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;download the binary from the release page&lt;/li&gt;
+&lt;li&gt;run it on the server&lt;/li&gt;
+&lt;li&gt;open port 51 (udp &amp;amp; tcp) on firewall inside cloud instance &amp;amp; vendor firewall&lt;/li&gt;
+&lt;li&gt;add my custom adblock list to the config file (grimd.toml)&lt;/li&gt;
+&lt;li&gt;change default nameserver to google dns in config file&lt;/li&gt;
+&lt;li&gt;change the dns server on my laptops &amp;amp; mobiles, that is it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;that is it, that is all i have to do, here is the log where it is in action&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+20:29:01.341 DEBU handler.go:252 ▶ 103c insert d.joinhoney.com IN A into cache with ttl 140
+20:29:11.361 INFO handler.go:102 ▶ 103d 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
+20:29:11.361 DEBU cache.go:208 ▶ 103e KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
+20:29:11.361 DEBU cache.go:123 ▶ 103f Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
+20:29:11.361 DEBU cache.go:133 ▶ 1040 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
+20:29:11.361 DEBU handler.go:124 ▶ 1041 vortex.data.microsoft.com IN AAAA didn&#39;t hit cache
+20:29:11.361 NOTI handler.go:180 ▶ 1042 vortex.data.microsoft.com found in blocklist
+20:29:11.362 INFO handler.go:102 ▶ 1043 219.91.177.2 lookup　vortex.data.microsoft.com IN A
+20:29:11.362 DEBU cache.go:208 ▶ 1044 KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
+20:29:11.362 DEBU cache.go:123 ▶ 1045 Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
+20:29:11.362 DEBU cache.go:133 ▶ 1046 Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
+20:29:11.362 DEBU handler.go:124 ▶ 1047 vortex.data.microsoft.com IN A didn&#39;t hit cache
+20:29:11.362 NOTI handler.go:180 ▶ 1048 vortex.data.microsoft.com found in blocklist
+20:29:30.496 INFO handler.go:102 ▶ 1049 219.91.177.2 lookup　vortex.data.microsoft.com IN A
+20:29:30.496 DEBU cache.go:208 ▶ 104a KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
+20:29:30.496 DEBU cache.go:123 ▶ 104b Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
+20:29:30.496 DEBU cache.go:133 ▶ 104c Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
+20:29:30.496 DEBU handler.go:124 ▶ 104d vortex.data.microsoft.com IN A didn&#39;t hit cache
+20:29:30.497 NOTI handler.go:180 ▶ 104e vortex.data.microsoft.com found in blocklist
+20:29:30.497 INFO handler.go:102 ▶ 104f 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
+20:29:30.497 DEBU cache.go:208 ▶ 1050 KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
+20:29:30.497 DEBU cache.go:123 ▶ 1051 Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
+20:29:30.497 DEBU cache.go:133 ▶ 1052 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
+20:29:30.497 DEBU handler.go:124 ▶ 1053 vortex.data.microsoft.com IN AAAA didn&#39;t hit cache
+20:29:30.497 NOTI handler.go:180 ▶ 1054 vortex.data.microsoft.com found in blocklist
+20:29:45.932 INFO handler.go:102 ▶ 1055 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
+20:29:45.932 DEBU cache.go:208 ▶ 1056 KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
+20:29:45.932 DEBU cache.go:123 ▶ 1057 Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
+20:29:45.932 DEBU cache.go:133 ▶ 1058 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
+20:29:45.932 DEBU handler.go:124 ▶ 1059 vortex.data.microsoft.com IN AAAA didn&#39;t hit cache
+20:29:45.932 NOTI handler.go:180 ▶ 105a vortex.data.microsoft.com found in blocklist
+20:29:45.932 INFO handler.go:102 ▶ 105b 219.91.177.2 lookup　vortex.data.microsoft.com IN A
+20:29:45.932 DEBU cache.go:208 ▶ 105c KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
+20:29:45.932 DEBU cache.go:123 ▶ 105d Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
+20:29:45.932 DEBU cache.go:133 ▶ 105e Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
+20:29:45.932 DEBU handler.go:124 ▶ 105f vortex.data.microsoft.com IN A didn&#39;t hit cache
+20:29:45.933 NOTI handler.go:180 ▶ 1060 vortex.data.microsoft.com found in blocklist
+20:30:00.976 INFO handler.go:102 ▶ 1061 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
+20:30:00.976 DEBU cache.go:208 ▶ 1062 KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
+20:30:00.977 DEBU cache.go:123 ▶ 1063 Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
+20:30:00.977 DEBU cache.go:133 ▶ 1064 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
+20:30:00.977 DEBU handler.go:124 ▶ 1065 vortex.data.microsoft.com IN AAAA didn&#39;t hit cache
+20:30:00.977 NOTI handler.go:180 ▶ 1066 vortex.data.microsoft.com found in blocklist
+20:30:00.977 INFO handler.go:102 ▶ 1067 219.91.177.2 lookup　vortex.data.microsoft.com IN A
+20:30:00.977 DEBU cache.go:208 ▶ 1068 KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
+20:30:00.977 DEBU cache.go:123 ▶ 1069 Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
+20:30:00.977 DEBU cache.go:133 ▶ 106a Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
+20:30:00.977 DEBU handler.go:124 ▶ 106b vortex.data.microsoft.com IN A didn&#39;t hit cache
+20:30:00.977 NOTI handler.go:180 ▶ 106c vortex.data.microsoft.com found in blocklist
+20:30:16.972 INFO handler.go:102 ▶ 106d 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
+20:30:16.973 DEBU cache.go:208 ▶ 106e KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
+20:30:16.973 DEBU cache.go:123 ▶ 106f Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
+20:30:16.973 DEBU cache.go:133 ▶ 1070 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
+20:30:16.973 DEBU handler.go:124 ▶ 1071 vortex.data.microsoft.com IN AAAA didn&#39;t hit cache
+20:30:16.973 NOTI handler.go:180 ▶ 1072 vortex.data.microsoft.com found in blocklist
+20:30:16.973 INFO handler.go:102 ▶ 1073 219.91.177.2 lookup　vortex.data.microsoft.com IN A
+20:30:16.973 DEBU cache.go:208 ▶ 1074 KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
+20:30:16.973 DEBU cache.go:123 ▶ 1075 Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
+20:30:16.973 DEBU cache.go:133 ▶ 1076 Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
+20:30:16.973 DEBU handler.go:124 ▶ 1077 vortex.data.microsoft.com IN A didn&#39;t hit cache
+20:30:16.973 NOTI handler.go:180 ▶ 1078 vortex.data.microsoft.com found in blocklist
+20:30:33.009 INFO handler.go:102 ▶ 1079 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
+20:30:33.010 DEBU cache.go:208 ▶ 107a KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
+20:30:33.010 DEBU cache.go:123 ▶ 107b Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
+20:30:33.010 DEBU cache.go:133 ▶ 107c Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
+20:30:33.010 DEBU handler.go:124 ▶ 107d vortex.data.microsoft.com IN AAAA didn&#39;t hit cache
+20:30:33.010 NOTI handler.go:180 ▶ 107e vortex.data.microsoft.com found in blocklist
+20:30:33.010 INFO handler.go:102 ▶ 107f 219.91.177.2 lookup　vortex.data.microsoft.com IN A
+20:30:33.010 DEBU cache.go:208 ▶ 1080 KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
+20:30:33.010 DEBU cache.go:123 ▶ 1081 Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
+20:30:33.010 DEBU cache.go:133 ▶ 1082 Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
+20:30:33.010 DEBU handler.go:124 ▶ 1083 vortex.data.microsoft.com IN A didn&#39;t hit cache
+20:30:33.010 NOTI handler.go:180 ▶ 1084 vortex.data.microsoft.com found in blocklist
+20:30:48.234 INFO handler.go:102 ▶ 1085 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
+20:30:48.235 DEBU cache.go:208 ▶ 1086 KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
+20:30:48.235 DEBU cache.go:123 ▶ 1087 Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
+20:30:48.235 DEBU cache.go:133 ▶ 1088 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
+20:30:48.235 DEBU handler.go:124 ▶ 1089 vortex.data.microsoft.com IN AAAA didn&#39;t hit cache
+20:30:48.235 NOTI handler.go:180 ▶ 108a vortex.data.microsoft.com found in blocklist
+20:30:48.235 INFO handler.go:102 ▶ 108b 219.91.177.2 lookup　vortex.data.microsoft.com IN A
+20:30:48.235 DEBU cache.go:208 ▶ 108c KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
+20:30:48.235 DEBU cache.go:123 ▶ 108d Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
+20:30:48.235 DEBU cache.go:133 ▶ 108e Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
+20:30:48.235 DEBU handler.go:124 ▶ 108f vortex.data.microsoft.com IN A didn&#39;t hit cache
+20:30:48.235 NOTI handler.go:180 ▶ 1090 vortex.data.microsoft.com found in blocklist
+20:31:00.797 INFO handler.go:102 ▶ 1091 219.91.177.2 lookup　dev.bluepie.in IN AAAA
+20:31:00.798 DEBU cache.go:208 ▶ 1092 KeyGen: dev.bluepie.in IN AAAA e424b1464ef59d6aff7514f252c6b088
+20:31:00.798 DEBU cache.go:133 ▶ 1093 Cache: Cannot find key e424b1464ef59d6aff7514f252c6b088
+20:31:00.798 DEBU cache.go:133 ▶ 1094 Cache: Cannot find key e424b1464ef59d6aff7514f252c6b088
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;you-might-argue-that-this-is-not-a-dns-server-it-is-a-proxy-server-for-dns-well-it-depends-up-how-you-see-it&#34;&gt;&amp;gt; You might argue that, this is not a dns server, it is a proxy server for dns. Well it depends up how you see it&lt;/h3&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;conclusion&lt;/h2&gt;
+&lt;p&gt;From my experience, its simple, awsome &amp;amp; works great, No ads system wide! on all networks! on all devices!,
+My very own private dns server..XD.If you have any doubts, just dm me!&lt;/p&gt;</description></item><item><title>Liunx LD_PRELOAD</title><link>//bluepie.in/2019/12/linux-ld_preload/</link><pubDate>Sat, 21 Dec 2019 17:28:03 +0530</pubDate><guid>//bluepie.in/2019/12/linux-ld_preload/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Hello me, this is going to be a short post that is very interesting to me and I don&amp;rsquo;t know how I have missed this all this time, I&amp;rsquo;ve known to break binary files directly by directly debugging them, mostly the windows files are binary extensions, I have worked even on dll files, which is somewhat similar to .so files on linux, both perform the same functions except that linux part is open source, and i&amp;rsquo;ve seen many articles using this partuclar approrach in many different ways(ofcourse after knowing about this only, I searched for those articles), A bit of personal update - so its been a tough month actually, progress interms of self development is zero, progress in terms of social level is a wip, but still a development. So you understand this right!. anyway the memorable thing that i did this month is going on a office trip to kerala, personally i would prefer to go alone, (only a few people accompanying me!) but gosh dang it!, anyway lets not talk about it. :(. In terms of development work (tech related) that is big zero on the professional side as well as personal side, except a few python scripts &amp;amp; spjs(that is a different topic to discuss entirely)&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;ld_preload is actually pretty basic if you think about it, ld_preload is a linux feature of linux, which is for? so u take a library for example &amp;ldquo;lib that resolves ip address for hostname&amp;rdquo; - lib_curl , get the source, modfify the source for evil purposes, compile it and then load that library for the application you want to run.&lt;/p&gt;
 &lt;p&gt;actually this could go south even if a small mistake is made, the development process looks like this, okey take an example of some app or a program, ex: ping, ping google.com -&amp;gt; gives you the ip address, time delay etc. You do strace ping somewebsite then you get all the system calls that the ping binary makes, you could theoritcally make a list of method calls that the app makes to system, write a custom implementation of the system calls probally malicious and take over the app.&lt;/p&gt;
@@ -1180,53 +1319,4 @@ ssh -D localport -f -C -q -N server_address
 &lt;p&gt;Letme explain this first, first checking if its a file or folder, if its a file, attach file image with file name, then thats it, but if its a folder, we show a folder icon with name and the link so that while clicking will be able to move front and back, All the fancy functions are just there to make the life simpler, their names exactly tell what they do. for instance, &lt;code&gt;getLinkWithText&lt;/code&gt; expects two parameters, first is the image with name, second is query the link (a href). for that &lt;code&gt;generateQueryString&lt;/code&gt; function expects a name, then the path to put it in href, and that is literally it, for making a dynamic traversing structure, all this is enough, may be next time ill explain with code for the other functions.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;for the time being..imona leave , -sorry.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title> file manager development</title><link>//bluepie.in/2018/10/file-manager-development/</link><pubDate>Wed, 03 Oct 2018 19:21:34 +0000</pubDate><guid>//bluepie.in/2018/10/file-manager-development/</guid><description>
-&lt;p&gt;why this all of a sudden? I was introduced to php development for a little while now, and i had this in mind with several other things, this would also be a good point to start explaining with code, So where to start. let us define? It starts with what is the requirement? It is&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;I want to view files in the server,&lt;/li&gt;
-&lt;li&gt;I can traverse through the files with forward and backward traversing,&lt;/li&gt;
-&lt;li&gt;i can see the file modification date&lt;/li&gt;
-&lt;li&gt;I can see the file ownership information,&lt;/li&gt;
-&lt;li&gt;I can see file icons and folder icons.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Lets begin with the first php code.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;&amp;lt;?php
-//this is the first bit of code that you had to write.
-?&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Setting the page structure, since styling the page dynamically, we call the top section first, then  we do our logic, then we call the bottom section, this completes the full page structure.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;const topSection = &amp;quot;&amp;lt;!DOCTYPE html&amp;gt;
-&amp;lt;head&amp;gt;
-&amp;lt;title&amp;gt;
-fm - FileManager.
-&amp;lt;/title&amp;gt;
-&amp;lt;/head&amp;gt;
-&amp;lt;body&amp;gt;
-&amp;quot;;
-const bottomSection = &amp;quot;&amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&amp;quot;;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;how-do-i-insert-images&#34;&gt;How do I insert images?&lt;/h3&gt;
-&lt;p&gt;Since all this is being done on only one file, hosting the image on a server then linking the file can be done but why? if you can encode as base64 and use the image in the file. An example would be, since  i need to display the files with respective icons (folder, file etc.).&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;const folderIcon = &#39;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAADMCAYAAACcL30dAAAQCUlEQVR4Xu3dfbBtdV3H8bdoIiQDoWbpjKVjIE9BkgyWQ/iQJkpD0oggYfiQTIxctIGJhsIw8GbZwOhIoijy0DAyQ5EXCYNACQwSRERQyKcu4hNiojxdBZtPs7ZzO55z99r7rLXO/v3W+/cXw1lnrd/3te/5nHX2/q3v71EsztgeeAnwMmAP4BeBnwe2W...&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Above is a base64 encoded folder image. to display the image i would just do this.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;const folderImage = &amp;quot;&amp;lt;img src=&#39;&amp;quot; . images::folderIcon .&amp;quot;&#39; width=&#39;10&#39;/&amp;gt;&amp;quot;;
-````
-### Next? Think about a way to represent files in a readable manner.
-A good way is a table layout, why because on the left side, file-name&#39;s can be shown, while on the right side, owner info, modification date can be shown. this can be implemented in the following way.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;php
-public function tableStructure($fData){
-echo &amp;ldquo;&lt;table&gt;
-&lt;tr&gt;
-&lt;th width=&#39;50%&#39; align=&#39;left&#39;&gt;name&lt;/th&gt;
-&lt;th width=&#39;10%&#39;&gt;last modified&lt;/th&gt;
-&lt;th width=&#39;10%&#39;&gt; owner&lt;/th&gt;
-&lt;/tr&gt;&amp;rdquo; .
-$fData .
-&amp;ldquo;&lt;/table&gt;&amp;rdquo;;
-}
-```&lt;/p&gt;
-&lt;p&gt;where `$fdata&amp;rsquo; is the pre constructed each row with all the files and folders. Ill continue the rest on an another post.&lt;/p&gt;</description></item></channel></rss>
+&lt;/blockquote&gt;</description></item></channel></rss>
