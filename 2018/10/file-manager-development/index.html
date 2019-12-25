@@ -1,182 +1,13 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noodp"/>
-  <meta name="author" content="Bluepie">
-  
-  
-  
-  <link rel="prev" href="//bluepie.in/2018/09/old-projects/" />
-  <link rel="next" href="//bluepie.in/2018/10/file-manager-contd/" />
-  <link rel="canonical" href="//bluepie.in/2018/10/file-manager-development/" />
-  <link rel="apple-touch-icon" sizes="180x180" href="//bluepie.in/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="//bluepie.in/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="//bluepie.in/favicon-16x16.png">
-  <link rel="manifest" href="//bluepie.in/site.webmanifest">
-  <link rel="mask-icon" href="//bluepie.in/safari-pinned-tab.svg" color="#5bbad5">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
-  <title>
-       
-       
-            file manager development		 | Bluepie&#39;s update blog
-       
-  </title>
-  <meta name="title" content=" file manager development		 | Bluepie&#39;s update blog">
-    
-  
-  <link rel="stylesheet" href="//bluepie.in/font/iconfont.css">
-  <link rel="stylesheet" href="//bluepie.in/css/main.min.css">
-
-
-  
-  
- 
-
-<script type="application/ld+json">
-{
- "@context" : "http://schema.org",
-    "@type" : "BlogPosting",
-    "mainEntityOfPage": {
-         "@type": "WebPage",
-         "@id": "\/\/bluepie.in\/"
-    },
-    "articleSection" : "posts",
-    "name" : " file manager development\t\t",
-    "headline" : " file manager development\t\t",
-    "description" : "why this all of a sudden? I was introduced to php development for a little while now, and i had this in mind with several other things, this would also be a good point to start explaining with code, So where to start. let us define? It starts with what is the requirement? It is\n I want to view files in the server, I can traverse through the files with forward and backward traversing, i can see the file modification date I can see the file ownership information, I can see file icons and folder icons.",
-    "inLanguage" : "en-us",
-    "author" : "Bluepie",
-    "creator" : "Bluepie",
-    "publisher": "Bluepie",
-    "accountablePerson" : "Bluepie",
-    "copyrightHolder" : "Bluepie",
-    "copyrightYear" : "2018",
-    "datePublished": "2018-10-03 19:21:34 \x2b0000 UTC",
-    "dateModified" : "2018-10-03 19:21:34 \x2b0000 UTC",
-    "url" : "\/\/bluepie.in\/2018\/10\/file-manager-development\/",
-    "wordCount" : "348",
-    "keywords" : [  "Bluepie\x27s update blog"]
-}
-</script>
-
-</head>
-
-  
-
-
-  <body class="">
-    <div class="wrapper">
-        <nav class="navbar">
-    <div class="container">
-        <div class="navbar-header header-logo">
-        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-student-alt"></i></a>&nbsp;<a href="//bluepie.in/">Bluepie&#39;s update blog</a>
-        </div>
-        <div class="menu navbar-right">
-                
-                
-                <a class="menu-item" href="//bluepie.in/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="//bluepie.in/categories/" title="">Categories</a>
-                
-        </div>
-    </div>
-</nav>
-<nav class="navbar-mobile" id="nav-mobile" style="display: none">
-     <div class="container">
-        <div class="navbar-header">
-            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="//bluepie.in/">Bluepie&#39;s update blog</a></div>
-            <div class="menu-toggle">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-     
-          <div class="menu" id="mobile-menu">
-                
-                
-                <a class="menu-item" href="//bluepie.in/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="//bluepie.in/categories/" title="">Categories</a>
-                
-        </div>
-    </div>
-</nav>
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-135013873-2', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-
-    	 <main class="main">
-          <div class="container">
-      		
-<article class="post-warp" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-        <h1 class="post-title" itemprop="name headline"> file manager development		</h1>
-        <div class="post-meta">
-                Written by <a itemprop="name" href="//bluepie.in/" rel="author">Bluepie</a> with ♥ 
-                <span class="post-time">
-                on <time datetime=2018-10-03 itemprop="datePublished">October 3, 2018</time>
-                </span>
-                in
-                <i class="iconfont icon-folder"></i>
-                <span class="post-category">
-                        <a href="//bluepie.in/categories/development/"> development </a>
-                        <a href="//bluepie.in/categories/tech/"> Tech </a>
-                        
-                </span>
-        </div>
-    </header>
-    <div class="post-content">
-        
-
-        
-
-        <img src="//bluepie.in/images/posts/post.png" class="featured_image">
-        
-        
-     
-          
-          
-          
-
-          
-          
-          
-
-          
-
-<p>why this all of a sudden? I was introduced to php development for a little while now, and i had this in mind with several other things, this would also be a good point to start explaining with code, So where to start. let us define? It starts with what is the requirement? It is</p>
-
-<ul>
-<li>I want to view files in the server,</li>
-<li>I can traverse through the files with forward and backward traversing,</li>
-<li>i can see the file modification date</li>
-<li>I can see the file ownership information,</li>
-<li>I can see file icons and folder icons.</li>
-</ul>
-
-<p>Lets begin with the first php code.</p>
-
-<pre><code class="language-php">&lt;?php
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><link rel=prev href=//bluepie.in/2018/09/old-projects/><link rel=next href=//bluepie.in/2018/10/file-manager-contd/><link rel=canonical href=//bluepie.in/2018/10/file-manager-development/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>file manager development | Bluepie&#39;s update blog</title><meta name=title content="file manager development		 | Bluepie's update blog"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":" file manager development\t\t","headline":" file manager development\t\t","description":"why this all of a sudden? I was introduced to php development for a little while now, and i had this in mind with several other things, this would also be a good point to start explaining with code, So where to start. let us define? It starts with what is the requirement? It is\n I want to view files in the server, I can traverse through the files with forward and backward traversing, i can see the file modification date I can see the file ownership information, I can see file icons and folder icons.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2018","datePublished":"2018-10-03 19:21:34 \x2b0000 UTC","dateModified":"2018-10-03 19:21:34 \x2b0000 UTC","url":"\/\/bluepie.in\/2018\/10\/file-manager-development\/","wordCount":"348","keywords":["Bluepie\x27s update blog"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-student-alt"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s update blog</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>Blog</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s update blog</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>Blog</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-135013873-2','auto');ga('send','pageview');}</script><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">file manager development</h1><div class=post-meta>Written by <a itemprop=name href=//bluepie.in/ rel=author>Bluepie</a> with ♥
+<span class=post-time>on <time datetime=2018-10-03 itemprop=datePublished>October 3, 2018</time></span>
+in
+<i class="iconfont icon-folder"></i><span class=post-category><a href=//bluepie.in/categories/development/>development</a>
+<a href=//bluepie.in/categories/tech/>Tech</a></span></div></header><div class=post-content><img src=//bluepie.in/images/posts/post.png class=featured_image><p>why this all of a sudden? I was introduced to php development for a little while now, and i had this in mind with several other things, this would also be a good point to start explaining with code, So where to start. let us define? It starts with what is the requirement? It is</p><ul><li>I want to view files in the server,</li><li>I can traverse through the files with forward and backward traversing,</li><li>i can see the file modification date</li><li>I can see the file ownership information,</li><li>I can see file icons and folder icons.</li></ul><p>Lets begin with the first php code.</p><pre><code class=language-php>&lt;?php
 //this is the first bit of code that you had to write.
 ?&gt;
-</code></pre>
-
-<p>Setting the page structure, since styling the page dynamically, we call the top section first, then  we do our logic, then we call the bottom section, this completes the full page structure.</p>
-
-<pre><code class="language-php">const topSection = &quot;&lt;!DOCTYPE html&gt;
+</code></pre><p>Setting the page structure, since styling the page dynamically, we call the top section first, then  we do our logic, then we call the bottom section, this completes the full page structure.</p><pre><code class=language-php>const topSection = &quot;&lt;!DOCTYPE html&gt;
 				    	&lt;head&gt;
 				    		&lt;title&gt;
 								fm - FileManager.
@@ -188,140 +19,26 @@ if (!doNotTrack) {
 const bottomSection = &quot;&lt;/body&gt;
 						&lt;/html&gt;
 						&quot;;
-</code></pre>
-
-<h3 id="how-do-i-insert-images">How do I insert images?</h3>
-
-<p>Since all this is being done on only one file, hosting the image on a server then linking the file can be done but why? if you can encode as base64 and use the image in the file. An example would be, since  i need to display the files with respective icons (folder, file etc.).</p>
-
-<pre><code class="language-php">const folderIcon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAADMCAYAAACcL30dAAAQCUlEQVR4Xu3dfbBtdV3H8bdoIiQDoWbpjKVjIE9BkgyWQ/iQJkpD0oggYfiQTIxctIGJhsIw8GbZwOhIoijy0DAyQ5EXCYNACQwSRERQyKcu4hNiojxdBZtPs7ZzO55z99r7rLXO/v3W+/cXw1lnrd/3te/5nHX2/q3v71EsztgeeAnwMmAP4BeBnwe2W...';
-</code></pre>
-
-<p>Above is a base64 encoded folder image. to display the image i would just do this.</p>
-
-<pre><code class="language-php">const folderImage = &quot;&lt;img src='&quot; . images::folderIcon .&quot;' width='10'/&gt;&quot;;
+</code></pre><h3 id=how-do-i-insert-images>How do I insert images?</h3><p>Since all this is being done on only one file, hosting the image on a server then linking the file can be done but why? if you can encode as base64 and use the image in the file. An example would be, since  i need to display the files with respective icons (folder, file etc.).</p><pre><code class=language-php>const folderIcon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAADMCAYAAACcL30dAAAQCUlEQVR4Xu3dfbBtdV3H8bdoIiQDoWbpjKVjIE9BkgyWQ/iQJkpD0oggYfiQTIxctIGJhsIw8GbZwOhIoijy0DAyQ5EXCYNACQwSRERQyKcu4hNiojxdBZtPs7ZzO55z99r7rLXO/v3W+/cXw1lnrd/3te/5nHX2/q3v71EsztgeeAnwMmAP4BeBnwe2W...';
+</code></pre><p>Above is a base64 encoded folder image. to display the image i would just do this.</p><pre><code class=language-php>const folderImage = &quot;&lt;img src='&quot; . images::folderIcon .&quot;' width='10'/&gt;&quot;;
 ````
 
 ### Next? Think about a way to represent files in a readable manner.
 
 A good way is a table layout, why because on the left side, file-name's can be shown, while on the right side, owner info, modification date can be shown. this can be implemented in the following way.
 
-</code></pre>
-
-<p>php
-    public function tableStructure($fData){
-        echo &ldquo;<table>
-                  <tr>
-                    <th width='50%' align='left'>name</th>
-                    <th width='10%'>last modified</th>
-                    <th width='10%'> owner</th>
-                  </tr>&rdquo; .
-                  $fData .
-              &ldquo;</table>&rdquo;;
-    }
-```</p>
-
-<p>where `$fdata&rsquo; is the pre constructed each row with all the files and folders. Ill continue the rest on an another post.</p>
-
-    </div>
-
-    <div class="post-copyright">
-             
-            <p class="copyright-item">
-                <span>Author:</span>
-                <span>Bluepie </span>
-                </p>
-            
-           
-             
-            <p class="copyright-item">
-                    <span>Link:</span>
-                    <a href=//bluepie.in/2018/10/file-manager-development/>//bluepie.in/2018/10/file-manager-development/</span>
-            </p>
-            
-            
-    </div>
-
-  
-    <div class="post-tags">
-        
-        <section>
-                <a href="javascript:window.history.back();">back</a></span> · 
-                <span><a href="//bluepie.in/">home</a></span>
-        </section>
-    </div>
-
-    <div class="post-nav">
-        
-        <a href="//bluepie.in/2018/09/old-projects/" class="prev" rel="prev" title=" Old projects."><i class="iconfont icon-left"></i>&nbsp; Old projects.</a>
-         
-        
-        <a href="//bluepie.in/2018/10/file-manager-contd/" class="next" rel="next" title=" file Manager contd..		"> file Manager contd..		&nbsp;<i class="iconfont icon-right"></i></a>
-        
-    </div>
-
-    <div class="post-comment">
-          
-                 
-                     <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "gopinath001-github-io-blog" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-                 
-          
-    </div>
-</article>
-          </div>
-		   </main>
-      <footer class="footer">
-    <div class="copyright">
-        &copy;
-        
-        <span itemprop="copyrightYear">2017 - 2019</span>
-        
-        <span class="with-love">
-    	 |
-         </span>
-         
-            <span class="author" itemprop="copyrightHolder"><a href="//bluepie.in/">Bluepie</a></span> 
-         
-    </div>
-</footer>
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-    <script src="//bluepie.in/js/vendor_no_gallery.min.js" async=""></script>
-    
-  
-
-
-     </div>
-  </body>
-</html>
+</code></pre><p>php
+public function tableStructure($fData){
+echo &ldquo;<table><tr><th width=50% align=left>name</th><th width=10%>last modified</th><th width=10%>owner</th></tr>&rdquo; .
+$fData .
+&ldquo;</table>&rdquo;;
+}
+```</p><p>where `$fdata&rsquo; is the pre constructed each row with all the files and folders. Ill continue the rest on an another post.</p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span>Bluepie</span></p><p class=copyright-item><span>Link:</span>
+<a href=//bluepie.in/2018/10/file-manager-development/>//bluepie.in/2018/10/file-manager-development/</span></p></div><div class=post-tags><section><a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=//bluepie.in/>home</a></span></section></div><div class=post-nav><a href=//bluepie.in/2018/09/old-projects/ class=prev rel=prev title="Old projects."><i class="iconfont icon-left"></i>&nbsp; Old projects.</a>
+<a href=//bluepie.in/2018/10/file-manager-contd/ class=next rel=next title="file Manager contd..">file Manager contd.. &nbsp;<i class="iconfont icon-right"></i></a></div><div class=post-comment><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
+var d=document,s=d.createElement('script');s.async=true;s.src='//'+"gopinath001-github-io-blog"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></div></main><footer class=footer><div class=copyright>&copy;
+<span itemprop=copyrightYear>2017 - 2019</span>
+<span class=with-love>|</span>
+<span class=author itemprop=copyrightHolder><a href=//bluepie.in/>Bluepie</a></span></div></footer><script src=//bluepie.in/js/vendor_no_gallery.min.js async></script></div></body></html>

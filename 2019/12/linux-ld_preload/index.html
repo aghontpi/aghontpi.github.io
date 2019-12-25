@@ -1,0 +1,127 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><link rel=prev href=//bluepie.in/2019/11/game-dev/><link rel=canonical href=//bluepie.in/2019/12/linux-ld_preload/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>Liunx LD_PRELOAD | Bluepie&#39;s update blog</title><meta name=title content="Liunx LD_PRELOAD | Bluepie's update blog"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"Liunx LD_PRELOAD","headline":"Liunx LD_PRELOAD","description":"_Hello me, this is going to be a short post that is very interesting to me and I don\x26rsquo;t know how I have missed this all this time, I\x26rsquo;ve known to break binary files directly by directly debugging them, mostly the windows files are binary extensions, I have worked even on dll files, which is somewhat similar to .so files on linux, both perform the same functions except that linux part is open source, and i\x26rsquo;ve seen many articles using this partuclar approrach in many different ways(ofcourse after knowing about this only, I searched for those articles), A bit of personal update - so its been a tough month actually, progress interms of self development is zero, progress in terms of social level is a wip, but still a development.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2019","datePublished":"2019-12-21 17:28:03 \x2b0530 IST","dateModified":"2019-12-21 17:28:03 \x2b0530 IST","url":"\/\/bluepie.in\/2019\/12\/linux-ld_preload\/","wordCount":"1255","keywords":["Bluepie\x27s update blog"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-student-alt"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s update blog</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>Blog</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s update blog</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>Blog</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-135013873-2','auto');ga('send','pageview');}</script><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">Liunx LD_PRELOAD</h1><div class=post-meta>Written by <a itemprop=name href=//bluepie.in/ rel=author>Bluepie</a> with ♥
+<span class=post-time>on <time datetime=2019-12-21 itemprop=datePublished>December 21, 2019</time></span>
+in
+<i class="iconfont icon-folder"></i><span class=post-category><a href=//bluepie.in/categories/tech/>Tech</a>
+<a href=//bluepie.in/categories/reversing/>reversing</a>
+<a href=//bluepie.in/categories/linux/>Linux</a></span></div></header><div class=post-content><img src=//bluepie.in/images/posts/ld_preload.png class=featured_image><blockquote><p>_Hello me, this is going to be a short post that is very interesting to me and I don&rsquo;t know how I have missed this all this time, I&rsquo;ve known to break binary files directly by directly debugging them, mostly the windows files are binary extensions, I have worked even on dll files, which is somewhat similar to .so files on linux, both perform the same functions except that linux part is open source, and i&rsquo;ve seen many articles using this partuclar approrach in many different ways(ofcourse after knowing about this only, I searched for those articles), A bit of personal update - so its been a tough month actually, progress interms of self development is zero, progress in terms of social level is a wip, but still a development. So you understand this right!. anyway the memorable thing that i did this month is going on a office trip to kerala, personally i would prefer to go alone, (only a few people accompanying me!) but gosh dang it!, anyway lets not talk about it. :(. In terms of development work (tech related) that is big zero on the professional side as well as personal side, except a few python scripts &amp; spjs(that is a different topic to discuss entirely)</p></blockquote><p>ld_preload is actually pretty basic if you think about it, ld_preload is a linux feature of linux, which is for? so u take a library for example &ldquo;lib that resolves ip address for hostname&rdquo; - lib_curl , get the source, modfify the source for evil purposes, compile it and then load that library for the application you want to run.</p><p>actually this could go south even if a small mistake is made, the development process looks like this, okey take an example of some app or a program, ex: ping, ping google.com -&gt; gives you the ip address, time delay etc. You do strace ping somewebsite then you get all the system calls that the ping binary makes, you could theoritcally make a list of method calls that the app makes to system, write a custom implementation of the system calls probally malicious and take over the app.</p><p><em>system calls that ping made during ping google.com</em></p><pre><code class=language-bash>
+execve(&quot;/bin/ping&quot;, [&quot;ping&quot;, &quot;google.com&quot;], 0x7fffe83a4978 /* 62 vars */) = 0
+access(&quot;/etc/suid-debug&quot;, F_OK)         = -1 ENOENT (No such file or directory)
+brk(NULL)                               = 0x559075d1a000
+fcntl(0, F_GETFD)                       = 0
+fcntl(1, F_GETFD)                       = 0
+fcntl(2, F_GETFD)                       = 0
+access(&quot;/etc/suid-debug&quot;, F_OK)         = -1 ENOENT (No such file or directory)
+access(&quot;/etc/ld.so.nohwcap&quot;, F_OK)      = -1 ENOENT (No such file or directory)
+access(&quot;/etc/ld.so.preload&quot;, R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/etc/ld.so.cache&quot;, O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=113810, ...}) = 0
+mmap(NULL, 113810, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f76c189a000
+close(3)                                = 0
+access(&quot;/etc/ld.so.nohwcap&quot;, F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/lib/x86_64-linux-gnu/libcap.so.2&quot;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &quot;\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\20\30\0\0\0\0\0\0&quot;..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=22768, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f76c1898000
+mmap(NULL, 2117976, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f76c1489000
+mprotect(0x7f76c148d000, 2097152, PROT_NONE) = 0
+mmap(0x7f76c168d000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x4000) = 0x7f76c168d000
+close(3)                                = 0
+access(&quot;/etc/ld.so.nohwcap&quot;, F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/lib/x86_64-linux-gnu/libidn.so.11&quot;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &quot;\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\0+\0\0\0\0\0\0&quot;..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=206872, ...}) = 0
+mmap(NULL, 2302000, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f76c1256000
+mprotect(0x7f76c1288000, 2093056, PROT_NONE) = 0
+mmap(0x7f76c1487000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x31000) = 0x7f76c1487000
+close(3)                                = 0
+access(&quot;/etc/ld.so.nohwcap&quot;, F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/usr/lib/x86_64-linux-gnu/libnettle.so.6&quot;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &quot;\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\340\200\0\0\0\0\0\0&quot;..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=219304, ...}) = 0
+mmap(NULL, 2314384, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f76c1020000
+mprotect(0x7f76c1054000, 2093056, PROT_NONE) = 0
+mmap(0x7f76c1253000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x33000) = 0x7f76c1253000
+close(3)                                = 0
+access(&quot;/etc/ld.so.nohwcap&quot;, F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/lib/x86_64-linux-gnu/libresolv.so.2&quot;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &quot;\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\00008\0\0\0\0\0\0&quot;..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=101168, ...}) = 0
+mmap(NULL, 2206336, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f76c0e05000
+mprotect(0x7f76c0e1c000, 2097152, PROT_NONE) = 0
+mmap(0x7f76c101c000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x17000) = 0x7f76c101c000
+mmap(0x7f76c101e000, 6784, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f76c101e000
+close(3)                                = 0
+access(&quot;/etc/ld.so.nohwcap&quot;, F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/lib/x86_64-linux-gnu/libc.so.6&quot;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &quot;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\260\34\2\0\0\0\0\0&quot;..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=2030544, ...}) = 0
+mmap(NULL, 4131552, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f76c0a14000
+mprotect(0x7f76c0bfb000, 2097152, PROT_NONE) = 0
+mmap(0x7f76c0dfb000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f76c0dfb000
+mmap(0x7f76c0e01000, 15072, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f76c0e01000
+close(3)                                = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f76c1896000
+arch_prctl(ARCH_SET_FS, 0x7f76c1896f00) = 0
+mprotect(0x7f76c0dfb000, 16384, PROT_READ) = 0
+mprotect(0x7f76c101c000, 4096, PROT_READ) = 0
+mprotect(0x7f76c1253000, 8192, PROT_READ) = 0
+mprotect(0x7f76c1487000, 4096, PROT_READ) = 0
+mprotect(0x7f76c168d000, 4096, PROT_READ) = 0
+mprotect(0x559075bcc000, 4096, PROT_READ) = 0
+mprotect(0x7f76c18b6000, 4096, PROT_READ) = 0
+munmap(0x7f76c189a000, 113810)          = 0
+brk(NULL)                               = 0x559075d1a000
+brk(0x559075d3b000)                     = 0x559075d3b000
+capget({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, NULL) = 0
+capget({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, {effective=0, permitted=0, inheritable=0}) = 0
+capget({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, NULL) = 0
+capset({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, {effective=0, permitted=0, inheritable=0}) = 0
+prctl(PR_SET_KEEPCAPS, 1)               = 0
+getuid()                                = 1000
+setuid(1000)                            = 0
+prctl(PR_SET_KEEPCAPS, 0)               = 0
+getuid()                                = 1000
+geteuid()                               = 1000
+openat(AT_FDCWD, &quot;/usr/lib/locale/locale-archive&quot;, O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=10756928, ...}) = 0
+mmap(NULL, 10756928, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f76bffd1000
+close(3)                                = 0
+capget({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, NULL) = 0
+capget({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, {effective=0, permitted=0, inheritable=0}) = 0
+socket(AF_INET, SOCK_DGRAM, IPPROTO_ICMP) = -1 EACCES (Permission denied)
+socket(AF_INET, SOCK_RAW, IPPROTO_ICMP) = -1 EPERM (Operation not permitted)
+socket(AF_INET6, SOCK_DGRAM, IPPROTO_ICMPV6) = -1 EACCES (Permission denied)
+socket(AF_INET6, SOCK_RAW, IPPROTO_ICMPV6) = -1 EPERM (Operation not permitted)
+openat(AT_FDCWD, &quot;/usr/share/locale/locale.alias&quot;, O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=2995, ...}) = 0
+read(3, &quot;# Locale name alias data base.\n#&quot;..., 4096) = 2995
+read(3, &quot;&quot;, 4096)                       = 0
+close(3)                                = 0
+openat(AT_FDCWD, &quot;/usr/share/locale/en_IN.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/usr/share/locale/en_IN.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/usr/share/locale/en_IN/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/usr/share/locale/en/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_IN.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_IN.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_IN/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+write(2, &quot;ping: socket: Operation not perm&quot;..., 38ping: socket: Operation not permitted
+) = 38
+exit_group(2)                           = ?
++++ exited with 2 +++
+
+</code></pre><p>I saw a similar implementation recently that looks really awsome, that made me write about this, i have known this for some time now, but i can not just let it go, the repository link is this <a href=https://github.com/abba23/spotify-adblock-linux rel="nofollow noreferrer" target=_blank>ld_preload</a>.
+I&rsquo;m not supporting this particular implementation (adblock) to be used everywhere, im just curious!.</p><p>Look at the source its very facinating how things are done in the linux world, how come i never knew about this untill a few months ago, obviously you can argue that you can make a custom network filter in the linux machine to achieve this (only allow certain apps to make api calls), there are several apps that do this, I&rsquo;m not disaggreing with you on that matter, but you can not deny this also.</p><p>I want to make something similar with this usecase, &ldquo;lp_preload to make life better!&ldquo;, If you have any ideas just throw them in the comment section, or dm me personlly!. I&rsquo;d love to do it. Anyway see ya next time <strong><em>And Merry Christmas, And a happy new year</em></strong>.</p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span>Bluepie</span></p><p class=copyright-item><span>Link:</span>
+<a href=//bluepie.in/2019/12/linux-ld_preload/>//bluepie.in/2019/12/linux-ld_preload/</span></p></div><div class=post-tags><section><a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=//bluepie.in/>home</a></span></section></div><div class=post-nav><a href=//bluepie.in/2019/11/game-dev/ class=prev rel=prev title="Game Dev"><i class="iconfont icon-left"></i>&nbsp;Game Dev</a></div><div class=post-comment><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
+var d=document,s=d.createElement('script');s.async=true;s.src='//'+"gopinath001-github-io-blog"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></div></main><footer class=footer><div class=copyright>&copy;
+<span itemprop=copyrightYear>2017 - 2019</span>
+<span class=with-love>|</span>
+<span class=author itemprop=copyrightHolder><a href=//bluepie.in/>Bluepie</a></span></div></footer><script src=//bluepie.in/js/vendor_no_gallery.min.js async></script></div></body></html>

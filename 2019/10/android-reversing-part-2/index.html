@@ -1,203 +1,20 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noodp"/>
-  <meta name="author" content="Bluepie">
-  
-  
-  
-  <link rel="prev" href="//bluepie.in/2019/09/docker-to-make-life-easier/" />
-  <link rel="next" href="//bluepie.in/2019/11/game-dev/" />
-  <link rel="canonical" href="//bluepie.in/2019/10/android-reversing-part-2/" />
-  <link rel="apple-touch-icon" sizes="180x180" href="//bluepie.in/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="//bluepie.in/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="//bluepie.in/favicon-16x16.png">
-  <link rel="manifest" href="//bluepie.in/site.webmanifest">
-  <link rel="mask-icon" href="//bluepie.in/safari-pinned-tab.svg" color="#5bbad5">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
-  <title>
-       
-       
-           Android Reversing Part 2 | Bluepie&#39;s update blog
-       
-  </title>
-  <meta name="title" content="Android Reversing Part 2 | Bluepie&#39;s update blog">
-    
-  
-  <link rel="stylesheet" href="//bluepie.in/font/iconfont.css">
-  <link rel="stylesheet" href="//bluepie.in/css/main.min.css">
-
-
-  
-  
- 
-
-<script type="application/ld+json">
-{
- "@context" : "http://schema.org",
-    "@type" : "BlogPosting",
-    "mainEntityOfPage": {
-         "@type": "WebPage",
-         "@id": "\/\/bluepie.in\/"
-    },
-    "articleSection" : "posts",
-    "name" : "Android Reversing Part 2",
-    "headline" : "Android Reversing Part 2",
-    "description" : "hey, how ya been. so this is a another reversing post (reverse engineering android mod). So before some months, I gave some basic info to reversing android apps with a practical example(ttorrent). This post is gona build on top of that post. basically pretty advanced version of that post.\n  Im just sharing information \x26amp; not distrubuting mod files here! this is strictly for learning purposes only.  Starting off Let\x26rsquo;s just continue where we left off shall we.",
-    "inLanguage" : "en-us",
-    "author" : "Bluepie",
-    "creator" : "Bluepie",
-    "publisher": "Bluepie",
-    "accountablePerson" : "Bluepie",
-    "copyrightHolder" : "Bluepie",
-    "copyrightYear" : "2019",
-    "datePublished": "2019-10-13 19:30:27 \x2b0530 IST",
-    "dateModified" : "2019-10-13 19:30:27 \x2b0530 IST",
-    "url" : "\/\/bluepie.in\/2019\/10\/android-reversing-part-2\/",
-    "wordCount" : "1028",
-    "keywords" : [  "Bluepie\x27s update blog"]
-}
-</script>
-
-</head>
-
-  
-
-
-  <body class="">
-    <div class="wrapper">
-        <nav class="navbar">
-    <div class="container">
-        <div class="navbar-header header-logo">
-        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-student-alt"></i></a>&nbsp;<a href="//bluepie.in/">Bluepie&#39;s update blog</a>
-        </div>
-        <div class="menu navbar-right">
-                
-                
-                <a class="menu-item" href="//bluepie.in/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="//bluepie.in/categories/" title="">Categories</a>
-                
-        </div>
-    </div>
-</nav>
-<nav class="navbar-mobile" id="nav-mobile" style="display: none">
-     <div class="container">
-        <div class="navbar-header">
-            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="//bluepie.in/">Bluepie&#39;s update blog</a></div>
-            <div class="menu-toggle">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-     
-          <div class="menu" id="mobile-menu">
-                
-                
-                <a class="menu-item" href="//bluepie.in/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="//bluepie.in/categories/" title="">Categories</a>
-                
-        </div>
-    </div>
-</nav>
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-135013873-2', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-
-    	 <main class="main">
-          <div class="container">
-      		
-<article class="post-warp" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Android Reversing Part 2</h1>
-        <div class="post-meta">
-                Written by <a itemprop="name" href="//bluepie.in/" rel="author">Bluepie</a> with ♥ 
-                <span class="post-time">
-                on <time datetime=2019-10-13 itemprop="datePublished">October 13, 2019</time>
-                </span>
-                in
-                <i class="iconfont icon-folder"></i>
-                <span class="post-category">
-                        <a href="//bluepie.in/categories/tech/"> Tech </a>
-                        <a href="//bluepie.in/categories/reversing/"> Reversing </a>
-                        <a href="//bluepie.in/categories/android/"> android </a>
-                        
-                </span>
-        </div>
-    </header>
-    <div class="post-content">
-        
-
-        
-
-        <img src="//bluepie.in/images/posts/androidReverse-2.png" class="featured_image">
-        
-        
-     
-          
-          
-          
-
-          
-          
-          
-
-          
-
-<blockquote>
-<p><strong><em><em>hey, how ya been. so this is a another reversing post (reverse engineering android mod). So before some months,
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><link rel=prev href=//bluepie.in/2019/09/docker-to-make-life-easier/><link rel=next href=//bluepie.in/2019/11/game-dev/><link rel=canonical href=//bluepie.in/2019/10/android-reversing-part-2/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>Android Reversing Part 2 | Bluepie&#39;s update blog</title><meta name=title content="Android Reversing Part 2 | Bluepie's update blog"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"Android Reversing Part 2","headline":"Android Reversing Part 2","description":"hey, how ya been. so this is a another reversing post (reverse engineering android mod). So before some months, I gave some basic info to reversing android apps with a practical example(ttorrent). This post is gona build on top of that post. basically pretty advanced version of that post.\n  Im just sharing information \x26amp; not distrubuting mod files here! this is strictly for learning purposes only.  Starting off Let\x26rsquo;s just continue where we left off shall we.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2019","datePublished":"2019-10-13 19:30:27 \x2b0530 IST","dateModified":"2019-10-13 19:30:27 \x2b0530 IST","url":"\/\/bluepie.in\/2019\/10\/android-reversing-part-2\/","wordCount":"1028","keywords":["Bluepie\x27s update blog"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-student-alt"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s update blog</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>Blog</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s update blog</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>Blog</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-135013873-2','auto');ga('send','pageview');}</script><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">Android Reversing Part 2</h1><div class=post-meta>Written by <a itemprop=name href=//bluepie.in/ rel=author>Bluepie</a> with ♥
+<span class=post-time>on <time datetime=2019-10-13 itemprop=datePublished>October 13, 2019</time></span>
+in
+<i class="iconfont icon-folder"></i><span class=post-category><a href=//bluepie.in/categories/tech/>Tech</a>
+<a href=//bluepie.in/categories/reversing/>Reversing</a>
+<a href=//bluepie.in/categories/android/>android</a></span></div></header><div class=post-content><img src=//bluepie.in/images/posts/androidReverse-2.png class=featured_image><blockquote><p><strong><em><em>hey, how ya been. so this is a another reversing post (reverse engineering android mod). So before some months,
 I gave some basic info to reversing android apps with a practical example(ttorrent). This post is gona build on
-top of that post. basically pretty advanced version of that post.</em></em></strong></p>
-</blockquote>
-
-<hr />
-
-<blockquote>
-<h2 id="im-just-sharing-information-not-distrubuting-mod-files-here-this-is-strictly-for-learning-purposes-only">Im just sharing information &amp; not distrubuting mod files here! this is strictly for learning purposes only.</h2>
-</blockquote>
-
-<h2 id="starting-off">Starting off</h2>
-
-<p>Let&rsquo;s just continue where we left off shall we. Today the practical example that we are gona use is Spotify lite,
-this at the time of writing, is newly repleased, with version &lsquo;0.13.13.6&rsquo;.</p>
-
-<p>why spotify? Cause i love the app, but too broke to pay for subscription and the ads are just painful, i just want
+top of that post. basically pretty advanced version of that post.</em></em></strong></p></blockquote><hr><blockquote><h2 id=im-just-sharing-information-not-distrubuting-mod-files-here-this-is-strictly-for-learning-purposes-only>Im just sharing information &amp; not distrubuting mod files here! this is strictly for learning purposes only.</h2></blockquote><h2 id=starting-off>Starting off</h2><p>Let&rsquo;s just continue where we left off shall we. Today the practical example that we are gona use is Spotify lite,
+this at the time of writing, is newly repleased, with version &lsquo;0.13.13.6&rsquo;.</p><p>why spotify? Cause i love the app, but too broke to pay for subscription and the ads are just painful, i just want
 to remove the ads. You could ask the question &ldquo;bu..but there are always mods available in the outside market?&rdquo; Yea
 those are available, but my simple answer is trust, especially nowadays it very easy to
-attach a backdoor in any app, and also the fact that I love doing this.</p>
-
-<p>So we train by making the ads stop and add premium features to it, keep in-mind we converting only the client to
-be premium, server assisted premium features won&rsquo;t work here.</p>
-
-<p>so here we go</p>
-
-<h3 id="continue-d">continue..d</h3>
-
-<p>As said this section is just a continuation of the prevous post titled &lsquo;android reversing&rsquo;, starting things up with
-decompiling and recompiling are in that post,</p>
-
-<h4 id="errors">errors</h4>
-
-<p>Most of the errors encountered are during the decompilaton shows up only during the recompiling phase and launching
-app phase, hopefully there are extra options during decompilation which can fix most errors encountered.</p>
-
-<p>the following options are available in decompilation</p>
-
-<pre><code class="language-text">
+attach a backdoor in any app, and also the fact that I love doing this.</p><p>So we train by making the ads stop and add premium features to it, keep in-mind we converting only the client to
+be premium, server assisted premium features won&rsquo;t work here.</p><p>so here we go</p><h3 id=continue-d>continue..d</h3><p>As said this section is just a continuation of the prevous post titled &lsquo;android reversing&rsquo;, starting things up with
+decompiling and recompiling are in that post,</p><h4 id=errors>errors</h4><p>Most of the errors encountered are during the decompilaton shows up only during the recompiling phase and launching
+app phase, hopefully there are extra options during decompilation which can fix most errors encountered.</p><p>the following options are available in decompilation</p><pre><code class=language-text>
 when to use -r option,
   if launch causes crashes in relation to resources
     you can find this out in logcat and try this option
@@ -217,71 +34,31 @@ framework files from android device:
    usually inside /system/framework.
     adb pull to get the apk then do if framework
 
-</code></pre>
-
-<h5 id="more-about-frameworks">more about frameworks</h5>
-
-<p>In some cases there may be recompiling and rebuilding errors from apktool,
+</code></pre><h5 id=more-about-frameworks>more about frameworks</h5><p>In some cases there may be recompiling and rebuilding errors from apktool,
 this can be either fixed by -r param while decompiling(keep resources intact) or by installing latest framework
 with the command, multiple frameworks can be used too, or even pull a framework file from your Android device,
-more about it here, so if you are using miui like me, use the command below.</p>
-
-<pre><code class="language-shell">
+more about it here, so if you are using miui like me, use the command below.</p><pre><code class=language-shell>
 ex:(current device miui)
     adb pull /system/framework/framework-res.apk
     adb pull /system/framework/framework-ext-res/framework-ext-res.apk
 
-</code></pre>
-
-<p>Lastet framework files can be taken from Android build tools. At the time of writing this Android api 29 is out.</p>
-
-<p><em>the above will fix about 90% of the problems.</em></p>
-
-<h4 id="working-with-practical-example">working with practical example</h4>
-
-<p>Install the latest version of spotify lite from playstore and extract the apk from the device and decompile it
+</code></pre><p>Lastet framework files can be taken from Android build tools. At the time of writing this Android api 29 is out.</p><p><em>the above will fix about 90% of the problems.</em></p><h4 id=working-with-practical-example>working with practical example</h4><p>Install the latest version of spotify lite from playstore and extract the apk from the device and decompile it
 using the guide from part 1, solve the problems you face by the above methods. after decompile take some time to
-go through the app structure and keep note of key parts of the application.</p>
-
-<blockquote>
-<p>also launch jadx_gui side by side to get a better idea. (you can find this in part 1)</p>
-</blockquote>
-
-<p>Launch the app on your device and check the app structure (always keep notes on interesting places) for example
+go through the app structure and keep note of key parts of the application.</p><blockquote><p>also launch jadx_gui side by side to get a better idea. (you can find this in part 1)</p></blockquote><p>Launch the app on your device and check the app structure (always keep notes on interesting places) for example
 (hint) the settings has a section called account type. This practical example wont be simple as changing the
 return value of a function like previous post, we has an attack vector specific to that app, but here its a
-different story, <em>analysing the app structure and finding potential spots is the key step.</em></p>
-
-<h3 id="hints">hints</h3>
-
-<p><strong><em>smali modifications</em></strong>
-I use this site a lot <a href="http://pallergabor.uw.hu/androidblog/dalvik_opcodes.html" rel="nofollow noreferrer" target="_blank">dalvik_opcodes</a> , as mentioned in
+different story, <em>analysing the app structure and finding potential spots is the key step.</em></p><h3 id=hints>hints</h3><p><strong><em>smali modifications</em></strong>
+I use this site a lot <a href=http://pallergabor.uw.hu/androidblog/dalvik_opcodes.html rel="nofollow noreferrer" target=_blank>dalvik_opcodes</a> , as mentioned in
 the part 1. Here we want to replace section&rsquo;s of byte code, thus make use of this, here to I wont say the exact-way
 to mod since that would be illegal, you can find this out on your own, ill just share the gist of the byte code
-necessary to do the trick and show code sample&rsquo;s for it.</p>
-
-<p>While you browse through the decompiled files you might stumble upon a enumerator that is referenced everywhere,
-yeah, of course this can be exploited indeed.</p>
-
-<blockquote>
-<p><strong><em>Im gona explain with Java code instead of the dalvik opcodes, since that is much more easier to unserstand</em></strong></p>
-</blockquote>
-
-<pre><code class="language-java">
+necessary to do the trick and show code sample&rsquo;s for it.</p><p>While you browse through the decompiled files you might stumble upon a enumerator that is referenced everywhere,
+yeah, of course this can be exploited indeed.</p><blockquote><p><strong><em>Im gona explain with Java code instead of the dalvik opcodes, since that is much more easier to unserstand</em></strong></p></blockquote><pre><code class=language-java>
 enum Account{
   PREMIUM,
   FREE
 }
 
-</code></pre>
-
-<hr />
-
-<h4 id="the-trick">The trick</h4>
-
-<p>When the app launches (MainActivity), app makes an api call to get the type of user and save&rsquo;s it as a local reference,</p>
-
-<pre><code class="language-java">
+</code></pre><hr><h4 id=the-trick>The trick</h4><p>When the app launches (MainActivity), app makes an api call to get the type of user and save&rsquo;s it as a local reference,</p><pre><code class=language-java>
 # sudocode
 
 AnnonymousCall_to_apiToRetreiveUserType(...){
@@ -290,14 +67,8 @@ AnnonymousCall_to_apiToRetreiveUserType(...){
   return Account (response);
 }
 
-</code></pre>
-
-<p>check the sudocode, if you are able to change the response of the annoymous call to always send use PREMIUM,then we
-can call it a day!.</p>
-
-<p>In Java you use enumerator.valueOf(&ldquo;fname_here&rdquo;) to get the value of the enum. so we change the above code to something like</p>
-
-<pre><code class="language-java">
+</code></pre><p>check the sudocode, if you are able to change the response of the annoymous call to always send use PREMIUM,then we
+can call it a day!.</p><p>In Java you use enumerator.valueOf(&ldquo;fname_here&rdquo;) to get the value of the enum. so we change the above code to something like</p><pre><code class=language-java>
 # sudocode
 
 AnnonymousCall_to_apiToRetreiveUserType(...){
@@ -306,11 +77,7 @@ AnnonymousCall_to_apiToRetreiveUserType(...){
   return Account.valueOf(&quot;PREMIUM&quot;);
 }
 
-</code></pre>
-
-<p>here is the dalvik opcode equivalent for the above</p>
-
-<pre><code class="language-text">
+</code></pre><p>here is the dalvik opcode equivalent for the above</p><pre><code class=language-text>
 //storage
 const-string p2, &quot;PREMIUM&quot;
 
@@ -326,15 +93,7 @@ iput-object p2, p0, Ldlc;-&gt;b:Lcom/spotify/lite/productstate/Product;
 //return the object
 return-object Ldlc;-&gt;b:Lcom/spotify/lite/productstate/Product;
 
-</code></pre>
-
-<p><strong><em>the same but for lambda functins</em></strong></p>
-
-<blockquote>
-<p>original: api_call -&gt; retrun cast(response)</p>
-</blockquote>
-
-<pre><code class="language-text">
+</code></pre><p><strong><em>the same but for lambda functins</em></strong></p><blockquote><p>original: api_call -&gt; retrun cast(response)</p></blockquote><pre><code class=language-text>
 .method public final apply(Ljava/lang/Object;)Ljava/lang/Object;
 .locals 0
 
@@ -346,13 +105,7 @@ move-result-object p1
 
 return-object p1
 
-</code></pre>
-
-<blockquote>
-<p>patched:</p>
-</blockquote>
-
-<pre><code class="language-text">
+</code></pre><blockquote><p>patched:</p></blockquote><pre><code class=language-text>
 .registers 2
 
 .line 47
@@ -364,13 +117,7 @@ move-result-object p1
 
 return-object p1
 
-</code></pre>
-
-<blockquote>
-<p>some additional interesting patch sections, go through this too, latest verisons of the app need this.</p>
-</blockquote>
-
-<pre><code class="language-text">
+</code></pre><blockquote><p>some additional interesting patch sections, go through this too, latest verisons of the app need this.</p></blockquote><pre><code class=language-text>
 player util
 
 player restriction 
@@ -379,117 +126,14 @@ resolve player
 
 skipToFutureTrack              
 
-</code></pre>
-
-<hr />
-
-<p>with the given patch work, it is all that you will need to enable premium features, just recompile, sign and install the app.
-follow part 1 for recompiling, sign and installing.</p>
-
-<h3 id="end">End</h3>
-
-<p>I hope this helps some one else other than me, I&rsquo;m not gona share the recompiled apk for obvious reasons(legal), But I feel you should
-be able to do so, with the information you have now. peace! seeya next time.</p>
-
-    </div>
-
-    <div class="post-copyright">
-             
-            <p class="copyright-item">
-                <span>Author:</span>
-                <span>Bluepie </span>
-                </p>
-            
-           
-             
-            <p class="copyright-item">
-                    <span>Link:</span>
-                    <a href=//bluepie.in/2019/10/android-reversing-part-2/>//bluepie.in/2019/10/android-reversing-part-2/</span>
-            </p>
-            
-            
-    </div>
-
-  
-    <div class="post-tags">
-        
-        <section>
-                <a href="javascript:window.history.back();">back</a></span> · 
-                <span><a href="//bluepie.in/">home</a></span>
-        </section>
-    </div>
-
-    <div class="post-nav">
-        
-        <a href="//bluepie.in/2019/09/docker-to-make-life-easier/" class="prev" rel="prev" title="Docker to Make Life Easier"><i class="iconfont icon-left"></i>&nbsp;Docker to Make Life Easier</a>
-         
-        
-        <a href="//bluepie.in/2019/11/game-dev/" class="next" rel="next" title="Game Dev">Game Dev&nbsp;<i class="iconfont icon-right"></i></a>
-        
-    </div>
-
-    <div class="post-comment">
-          
-                 
-                     <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "gopinath001-github-io-blog" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-                 
-          
-    </div>
-</article>
-          </div>
-		   </main>
-      <footer class="footer">
-    <div class="copyright">
-        &copy;
-        
-        <span itemprop="copyrightYear">2017 - 2019</span>
-        
-        <span class="with-love">
-    	 |
-         </span>
-         
-            <span class="author" itemprop="copyrightHolder"><a href="//bluepie.in/">Bluepie</a></span> 
-         
-    </div>
-</footer>
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-    <script src="//bluepie.in/js/vendor_no_gallery.min.js" async=""></script>
-    
-  
-
-
-     </div>
-  </body>
-</html>
+</code></pre><hr><p>with the given patch work, it is all that you will need to enable premium features, just recompile, sign and install the app.
+follow part 1 for recompiling, sign and installing.</p><h3 id=end>End</h3><p>I hope this helps some one else other than me, I&rsquo;m not gona share the recompiled apk for obvious reasons(legal), But I feel you should
+be able to do so, with the information you have now. peace! seeya next time.</p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span>Bluepie</span></p><p class=copyright-item><span>Link:</span>
+<a href=//bluepie.in/2019/10/android-reversing-part-2/>//bluepie.in/2019/10/android-reversing-part-2/</span></p></div><div class=post-tags><section><a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=//bluepie.in/>home</a></span></section></div><div class=post-nav><a href=//bluepie.in/2019/09/docker-to-make-life-easier/ class=prev rel=prev title="Docker to Make Life Easier"><i class="iconfont icon-left"></i>&nbsp;Docker to Make Life Easier</a>
+<a href=//bluepie.in/2019/11/game-dev/ class=next rel=next title="Game Dev">Game Dev&nbsp;<i class="iconfont icon-right"></i></a></div><div class=post-comment><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
+var d=document,s=d.createElement('script');s.async=true;s.src='//'+"gopinath001-github-io-blog"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></div></main><footer class=footer><div class=copyright>&copy;
+<span itemprop=copyrightYear>2017 - 2019</span>
+<span class=with-love>|</span>
+<span class=author itemprop=copyrightHolder><a href=//bluepie.in/>Bluepie</a></span></div></footer><script src=//bluepie.in/js/vendor_no_gallery.min.js async></script></div></body></html>

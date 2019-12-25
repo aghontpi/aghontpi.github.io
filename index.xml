@@ -1,729 +1,631 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title>
-    <link>//bluepie.in/</link>
-    <description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description>
-    
-    <language>en-us</language>
-    <lastBuildDate>Fri, 15 Nov 2019 11:46:05 +0530</lastBuildDate>
-    <atom:link href="/" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Game Dev</title>
-      <link>//bluepie.in/2019/11/game-dev/</link>
-      <pubDate>Fri, 15 Nov 2019 11:46:05 +0530</pubDate>
-      
-      <guid>//bluepie.in/2019/11/game-dev/</guid>
-      <description>
-
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><language>en-us</language><lastBuildDate>Sat, 21 Dec 2019 17:28:03 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Liunx LD_PRELOAD</title><link>//bluepie.in/2019/12/linux-ld_preload/</link><pubDate>Sat, 21 Dec 2019 17:28:03 +0530</pubDate><guid>//bluepie.in/2019/12/linux-ld_preload/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;_Hello me, this is going to be a short post that is very interesting to me and I don&amp;rsquo;t know how I have missed this all this time, I&amp;rsquo;ve known to break binary files directly by directly debugging them, mostly the windows files are binary extensions, I have worked even on dll files, which is somewhat similar to .so files on linux, both perform the same functions except that linux part is open source, and i&amp;rsquo;ve seen many articles using this partuclar approrach in many different ways(ofcourse after knowing about this only, I searched for those articles), A bit of personal update - so its been a tough month actually, progress interms of self development is zero, progress in terms of social level is a wip, but still a development. So you understand this right!. anyway the memorable thing that i did this month is going on a office trip to kerala, personally i would prefer to go alone, (only a few people accompanying me!) but gosh dang it!, anyway lets not talk about it. :(. In terms of development work (tech related) that is big zero on the professional side as well as personal side, except a few python scripts &amp;amp; spjs(that is a different topic to discuss entirely)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ld_preload is actually pretty basic if you think about it, ld_preload is a linux feature of linux, which is for? so u take a library for example &amp;ldquo;lib that resolves ip address for hostname&amp;rdquo; - lib_curl , get the source, modfify the source for evil purposes, compile it and then load that library for the application you want to run.&lt;/p&gt;
+&lt;p&gt;actually this could go south even if a small mistake is made, the development process looks like this, okey take an example of some app or a program, ex: ping, ping google.com -&amp;gt; gives you the ip address, time delay etc. You do strace ping somewebsite then you get all the system calls that the ping binary makes, you could theoritcally make a list of method calls that the app makes to system, write a custom implementation of the system calls probally malicious and take over the app.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;system calls that ping made during ping google.com&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+execve(&amp;quot;/bin/ping&amp;quot;, [&amp;quot;ping&amp;quot;, &amp;quot;google.com&amp;quot;], 0x7fffe83a4978 /* 62 vars */) = 0
+access(&amp;quot;/etc/suid-debug&amp;quot;, F_OK) = -1 ENOENT (No such file or directory)
+brk(NULL) = 0x559075d1a000
+fcntl(0, F_GETFD) = 0
+fcntl(1, F_GETFD) = 0
+fcntl(2, F_GETFD) = 0
+access(&amp;quot;/etc/suid-debug&amp;quot;, F_OK) = -1 ENOENT (No such file or directory)
+access(&amp;quot;/etc/ld.so.nohwcap&amp;quot;, F_OK) = -1 ENOENT (No such file or directory)
+access(&amp;quot;/etc/ld.so.preload&amp;quot;, R_OK) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/etc/ld.so.cache&amp;quot;, O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=113810, ...}) = 0
+mmap(NULL, 113810, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f76c189a000
+close(3) = 0
+access(&amp;quot;/etc/ld.so.nohwcap&amp;quot;, F_OK) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/lib/x86_64-linux-gnu/libcap.so.2&amp;quot;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &amp;quot;\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&amp;gt;\0\1\0\0\0\20\30\0\0\0\0\0\0&amp;quot;..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=22768, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f76c1898000
+mmap(NULL, 2117976, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f76c1489000
+mprotect(0x7f76c148d000, 2097152, PROT_NONE) = 0
+mmap(0x7f76c168d000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x4000) = 0x7f76c168d000
+close(3) = 0
+access(&amp;quot;/etc/ld.so.nohwcap&amp;quot;, F_OK) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/lib/x86_64-linux-gnu/libidn.so.11&amp;quot;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &amp;quot;\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&amp;gt;\0\1\0\0\0\0+\0\0\0\0\0\0&amp;quot;..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=206872, ...}) = 0
+mmap(NULL, 2302000, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f76c1256000
+mprotect(0x7f76c1288000, 2093056, PROT_NONE) = 0
+mmap(0x7f76c1487000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x31000) = 0x7f76c1487000
+close(3) = 0
+access(&amp;quot;/etc/ld.so.nohwcap&amp;quot;, F_OK) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/usr/lib/x86_64-linux-gnu/libnettle.so.6&amp;quot;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &amp;quot;\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&amp;gt;\0\1\0\0\0\340\200\0\0\0\0\0\0&amp;quot;..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=219304, ...}) = 0
+mmap(NULL, 2314384, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f76c1020000
+mprotect(0x7f76c1054000, 2093056, PROT_NONE) = 0
+mmap(0x7f76c1253000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x33000) = 0x7f76c1253000
+close(3) = 0
+access(&amp;quot;/etc/ld.so.nohwcap&amp;quot;, F_OK) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/lib/x86_64-linux-gnu/libresolv.so.2&amp;quot;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &amp;quot;\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&amp;gt;\0\1\0\0\00008\0\0\0\0\0\0&amp;quot;..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=101168, ...}) = 0
+mmap(NULL, 2206336, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f76c0e05000
+mprotect(0x7f76c0e1c000, 2097152, PROT_NONE) = 0
+mmap(0x7f76c101c000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x17000) = 0x7f76c101c000
+mmap(0x7f76c101e000, 6784, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f76c101e000
+close(3) = 0
+access(&amp;quot;/etc/ld.so.nohwcap&amp;quot;, F_OK) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/lib/x86_64-linux-gnu/libc.so.6&amp;quot;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &amp;quot;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&amp;gt;\0\1\0\0\0\260\34\2\0\0\0\0\0&amp;quot;..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=2030544, ...}) = 0
+mmap(NULL, 4131552, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f76c0a14000
+mprotect(0x7f76c0bfb000, 2097152, PROT_NONE) = 0
+mmap(0x7f76c0dfb000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f76c0dfb000
+mmap(0x7f76c0e01000, 15072, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f76c0e01000
+close(3) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f76c1896000
+arch_prctl(ARCH_SET_FS, 0x7f76c1896f00) = 0
+mprotect(0x7f76c0dfb000, 16384, PROT_READ) = 0
+mprotect(0x7f76c101c000, 4096, PROT_READ) = 0
+mprotect(0x7f76c1253000, 8192, PROT_READ) = 0
+mprotect(0x7f76c1487000, 4096, PROT_READ) = 0
+mprotect(0x7f76c168d000, 4096, PROT_READ) = 0
+mprotect(0x559075bcc000, 4096, PROT_READ) = 0
+mprotect(0x7f76c18b6000, 4096, PROT_READ) = 0
+munmap(0x7f76c189a000, 113810) = 0
+brk(NULL) = 0x559075d1a000
+brk(0x559075d3b000) = 0x559075d3b000
+capget({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, NULL) = 0
+capget({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, {effective=0, permitted=0, inheritable=0}) = 0
+capget({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, NULL) = 0
+capset({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, {effective=0, permitted=0, inheritable=0}) = 0
+prctl(PR_SET_KEEPCAPS, 1) = 0
+getuid() = 1000
+setuid(1000) = 0
+prctl(PR_SET_KEEPCAPS, 0) = 0
+getuid() = 1000
+geteuid() = 1000
+openat(AT_FDCWD, &amp;quot;/usr/lib/locale/locale-archive&amp;quot;, O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=10756928, ...}) = 0
+mmap(NULL, 10756928, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f76bffd1000
+close(3) = 0
+capget({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, NULL) = 0
+capget({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, {effective=0, permitted=0, inheritable=0}) = 0
+socket(AF_INET, SOCK_DGRAM, IPPROTO_ICMP) = -1 EACCES (Permission denied)
+socket(AF_INET, SOCK_RAW, IPPROTO_ICMP) = -1 EPERM (Operation not permitted)
+socket(AF_INET6, SOCK_DGRAM, IPPROTO_ICMPV6) = -1 EACCES (Permission denied)
+socket(AF_INET6, SOCK_RAW, IPPROTO_ICMPV6) = -1 EPERM (Operation not permitted)
+openat(AT_FDCWD, &amp;quot;/usr/share/locale/locale.alias&amp;quot;, O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=2995, ...}) = 0
+read(3, &amp;quot;# Locale name alias data base.\n#&amp;quot;..., 4096) = 2995
+read(3, &amp;quot;&amp;quot;, 4096) = 0
+close(3) = 0
+openat(AT_FDCWD, &amp;quot;/usr/share/locale/en_IN.UTF-8/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/usr/share/locale/en_IN.utf8/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/usr/share/locale/en_IN/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/usr/share/locale/en/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/usr/share/locale-langpack/en_IN.UTF-8/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/usr/share/locale-langpack/en_IN.utf8/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/usr/share/locale-langpack/en_IN/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &amp;quot;/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+write(2, &amp;quot;ping: socket: Operation not perm&amp;quot;..., 38ping: socket: Operation not permitted
+) = 38
+exit_group(2) = ?
++++ exited with 2 +++
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I saw a similar implementation recently that looks really awsome, that made me write about this, i have known this for some time now, but i can not just let it go, the repository link is this &lt;a href=&#34;https://github.com/abba23/spotify-adblock-linux&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;ld_preload&lt;/a&gt;.
+I&amp;rsquo;m not supporting this particular implementation (adblock) to be used everywhere, im just curious!.&lt;/p&gt;
+&lt;p&gt;Look at the source its very facinating how things are done in the linux world, how come i never knew about this untill a few months ago, obviously you can argue that you can make a custom network filter in the linux machine to achieve this (only allow certain apps to make api calls), there are several apps that do this, I&amp;rsquo;m not disaggreing with you on that matter, but you can not deny this also.&lt;/p&gt;
+&lt;p&gt;I want to make something similar with this usecase, &amp;ldquo;lp_preload to make life better!&amp;ldquo;, If you have any ideas just throw them in the comment section, or dm me personlly!. I&amp;rsquo;d love to do it. Anyway see ya next time &lt;strong&gt;&lt;em&gt;And Merry Christmas, And a happy new year&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Game Dev</title><link>//bluepie.in/2019/11/game-dev/</link><pubDate>Fri, 15 Nov 2019 11:46:05 +0530</pubDate><guid>//bluepie.in/2019/11/game-dev/</guid><description>
 &lt;p&gt;&lt;em&gt;Hey!, hope you are doing well!, im good, This post should have gone up in the month of august and this post should
 have been a follow-up, anyway never too late. Update: Im following a tight schedule for the past few weeks, tight-schedule
 in the sense &amp;ldquo;wake-up -&amp;gt; commute-to-office -&amp;gt; professional code-&amp;gt; aftier-office -&amp;gt; passion code -&amp;gt; sleep&amp;rdquo; throw in breaks, travel,
 and Personal hygene time in there, at-first it was awful, but after some while got the hang of it,Infact it became like addiction
 to me at this point &amp;amp; im craving for more.&lt;/em&gt;&lt;/p&gt;
-
 &lt;hr /&gt;
-
 &lt;h1 id=&#34;why-what&#34;&gt;why &amp;amp; what&lt;/h1&gt;
-
 &lt;p&gt;So in the month of september a friend of mine asked me whether I can Join him in making game, till that point in time,
-I haven&amp;rsquo;t done game development. So the gamejam was js13games thought it ran for a month we went into working only in the
+I haven&amp;rsquo;t done game development. So the gamejam was js13kgames, though it ran for a month we went into working only in the
 last seven days.&lt;/p&gt;
-
 &lt;h3 id=&#34;development-stack&#34;&gt;development stack&lt;/h3&gt;
-
 &lt;p&gt;javascript,
 gulp for automated tasks,&lt;/p&gt;
-
 &lt;p&gt;apart from the time constraint of a month to finish, this also included a constraint which is, the total size of the
 game must be less than 13 kilobytes and a topic to develop unde, which is not quite a lot. Everything developed for the competition was from scratch except the sound library.&lt;/p&gt;
-
 &lt;h3 id=&#34;challenges&#34;&gt;challenges&lt;/h3&gt;
-
 &lt;p&gt;Though the gamejam was for a month, the actual dev period was for 7 days, to be honest it was more like 2-3 days of dev.
-other guy was sick during the last few days &amp;amp; had to complete it myself. though not complete, I made the decision to submit
-it.&lt;/p&gt;
-
+(Project mate) &lt;a href=&#34;https://github.com/FR0ST1N/Pew-Pew/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;FR0ST1N&lt;/a&gt; was sick during the last few days so the game was not complete, I made the decision to submit
+it anyway.&lt;/p&gt;
 &lt;p&gt;This post is gona be the disection of different parts of the game.&lt;/p&gt;
-
 &lt;h4 id=&#34;ui&#34;&gt;UI&lt;/h4&gt;
-
 &lt;p&gt;Pixel art for game images, since we were limited on the size aspect of the game, we could not have high res image assets.Spritesheets were used for the development.&lt;/p&gt;
-
 &lt;p&gt;There is a seperate class for parsing the spriteSheet &amp;amp; maintining it states based on the sprite attributes.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
-    /*
-     * Porperties the sprite has to manipulate it
-     */
-
-    const image = new Image();
-    image.src = &#39;images/&#39; + imagename;
-    this.image = image;
-    this.rows = rows;
-    this.columns = columns;
-    this.individualSpriteSize = individualSpriteSize;
-    this.totalSpriteSize = totalSpriteSize;
-    this.position = position;
-    this.scaleFactorX = scaleFactorX;
-    this.scaleFactorY = scaleFactorY;
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;animation&#34;&gt;animation&lt;/h4&gt;
-
-&lt;p&gt;Bare api calls, small framework that can be used in future projects.&lt;/p&gt;
-
-&lt;p&gt;Explanation on how that works.&lt;/p&gt;
-
-&lt;p&gt;Core is based on values defined by you, fps is set accordingly &amp;amp; callbacks are called,
-these callbacks are responsilbe for object-animation &amp;amp; object movement, all logic should be done with those callbacks.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;following this principle, animation was done to the most part, code for the same is below&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Main callbacks from the animation class&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
 /*
- * Animation properties that all object in canvas should have,
- * ex |------------------------| represent total time
- *    |-----x------x------x-----| represent time to next frame.
- */
-
-  /**
-   * reset the animation timer,
-   * @return {void}
-   */
-  _resetAnimationTimer() {
-    this.animationTimer = 0;
-  }
-
-
-  /**
-   * reset the animation timer,
-   * @return {void}
-   */
-  _resetMotionTimer() {
-    this.motionTimer = 0;
-  }
-
-  /**
-   * @return {void}
-   */
-  stepTimer() {
-    if (this.timeToChangeAnimation != 0) {
-      this.animationTimer += 1;
-    } if (this.timeToChangeMotion != 0) {
-      this.motionTimer += 1;
-    }
-  }
-
-  /**
-   * @return {boolean}
-   */
-  isTimeToAnimate() {
-    if (this.timeToChangeAnimation == 0) {
-      return true;
-    } if (this.animationTimer == this.timeToChangeAnimation) {
-      this._resetAnimationTimer();
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * @return {boolean}
-   */
-  isTimeToMove() {
-    if (this.timeToChangeMotion == 0) {
-      return true;
-    } if (this.motionTimer == this.timeToChangeMotion) {
-      this._resetMotionTimer();
-      return true;
-    } else {
-      return false;
-    }
-  }
-
+* Porperties the sprite has to manipulate it
+*/
+const image = new Image();
+image.src = &#39;images/&#39; + imagename;
+this.image = image;
+this.rows = rows;
+this.columns = columns;
+this.individualSpriteSize = individualSpriteSize;
+this.totalSpriteSize = totalSpriteSize;
+this.position = position;
+this.scaleFactorX = scaleFactorX;
+this.scaleFactorY = scaleFactorY;
 &lt;/code&gt;&lt;/pre&gt;
-
+&lt;h4 id=&#34;animation&#34;&gt;animation&lt;/h4&gt;
+&lt;p&gt;Bare api calls, small framework that can be used in future projects.&lt;/p&gt;
+&lt;p&gt;Explanation on how that works.&lt;/p&gt;
+&lt;p&gt;Core is based on values defined by you, fps is set accordingly &amp;amp; callbacks are called,
+these callbacks are responsilbe for object-animation &amp;amp; object movement, all logic should be done with those callbacks.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;following this principle, animation was done to the most part, code for the same is below&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Main callbacks from the animation class&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
+/*
+* Animation properties that all object in canvas should have,
+* ex |------------------------| represent total time
+* |-----x------x------x-----| represent time to next frame.
+*/
+/**
+* reset the animation timer,
+* @return {void}
+*/
+_resetAnimationTimer() {
+this.animationTimer = 0;
+}
+/**
+* reset the animation timer,
+* @return {void}
+*/
+_resetMotionTimer() {
+this.motionTimer = 0;
+}
+/**
+* @return {void}
+*/
+stepTimer() {
+if (this.timeToChangeAnimation != 0) {
+this.animationTimer += 1;
+} if (this.timeToChangeMotion != 0) {
+this.motionTimer += 1;
+}
+}
+/**
+* @return {boolean}
+*/
+isTimeToAnimate() {
+if (this.timeToChangeAnimation == 0) {
+return true;
+} if (this.animationTimer == this.timeToChangeAnimation) {
+this._resetAnimationTimer();
+return true;
+}
+return false;
+}
+/**
+* @return {boolean}
+*/
+isTimeToMove() {
+if (this.timeToChangeMotion == 0) {
+return true;
+} if (this.motionTimer == this.timeToChangeMotion) {
+this._resetMotionTimer();
+return true;
+} else {
+return false;
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Main callbacks from timer&lt;low-level&gt;&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
-  /**
-   * wrapper Draw.
-   */
-  wDraw() {
-    this.context.drawImage(
-        this.sprite.image,
-        this.sprite.position.x,
-        this.sprite.position.y,
-        this.sprite.individualSpriteSize,
-        this.sprite.individualSpriteSize,
-        this.position.x, this.position.y,
-        this.sprite.individualSpriteSize * this.sprite.scaleFactorX,
-        this.sprite.individualSpriteSize * this.sprite.scaleFactorY
-    );
-  }
-
-  /**
-   * override this method in child classe, for animation logic.
-   * when it is time for next frame, this method will be called.
-   */
-  objectUpdate() {
-  }
-
-   /**
-   * makes decisions whether to redraw,
-   * based on the fps defined.
-   */
-  postObjectUpdate() {
-    this.stepTimer();
-    if (this.isTimeToMove()) {
-      this._Movement();
-    } if (this.isTimeToAnimate()) {
-      this.objectUpdate();
-    } this.objectAnimation();
-  }
-
-  /**
-   * object movement loop
-   */
-  objectAnimation() {
-    this.animationTimerId = setTimeout(() =&amp;gt; {
-      this.postObjectUpdate();
-    }, 1);
-  }
-
-
+/**
+* wrapper Draw.
+*/
+wDraw() {
+this.context.drawImage(
+this.sprite.image,
+this.sprite.position.x,
+this.sprite.position.y,
+this.sprite.individualSpriteSize,
+this.sprite.individualSpriteSize,
+this.position.x, this.position.y,
+this.sprite.individualSpriteSize * this.sprite.scaleFactorX,
+this.sprite.individualSpriteSize * this.sprite.scaleFactorY
+);
+}
+/**
+* override this method in child classe, for animation logic.
+* when it is time for next frame, this method will be called.
+*/
+objectUpdate() {
+}
+/**
+* makes decisions whether to redraw,
+* based on the fps defined.
+*/
+postObjectUpdate() {
+this.stepTimer();
+if (this.isTimeToMove()) {
+this._Movement();
+} if (this.isTimeToAnimate()) {
+this.objectUpdate();
+} this.objectAnimation();
+}
+/**
+* object movement loop
+*/
+objectAnimation() {
+this.animationTimerId = setTimeout(() =&amp;gt; {
+this.postObjectUpdate();
+}, 1);
+}
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h5 id=&#34;where-i-struggled&#34;&gt;Where I struggled&lt;/h5&gt;
-
 &lt;p&gt;The level designing was the part that i struggled the most, since from what we had to work with, I was finding it hard to come up with a good gameplay anyhow based on the time constraint (two hours before deadline for the game), I came up with a level design involving two fire-animations (straight pattern &amp;amp; follow pattern)&lt;/p&gt;
-
 &lt;p&gt;following is the level logic that I cameup &amp;amp; implemented in 15min.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
-  //@level logic from class level
-
-  /**
-   * design
-   * level one:
-   *  one enemy, straight bullet, health = 1, rateOfFire = (1000-100/level=1)
-   * level two:
-   *  two enemy:
-   *    1st enemy: straight bullet, health = 2, rateOfFire = (1000-100/level=2)
-   *    last enemy: follow bullet, health,rateOfFire=same as 1st enemy
-   * ... progressive, all the last enemy has the follow bullet
-   */
-  levelTrigger() {
-    for (let enemyCounter = 1; enemyCounter &amp;lt;= this.level;
-      enemyCounter++ ) {
-      const enemy = this.enenmyOneFactory(
-          new Position(800, enemyCounter * 50 + 100),
-          this.level,
-          (1000 - 100) / this.level);
-      enemy.startAnimation(this.context);
-      enemy.autoshoot = true;
-      if (this.level != 1 &amp;amp;&amp;amp; enemyCounter == this.level) {
-        enemy.setBulletPattern(BulletPattern.FOLLOW);
-      }
-      enemy.shoot();
-      this.currentLevelEnemies.push(enemy);
-      this.drawableObjects.push(enemy);
-    }
-  }
-
+//@level logic from class level
+/**
+* design
+* level one:
+* one enemy, straight bullet, health = 1, rateOfFire = (1000-100/level=1)
+* level two:
+* two enemy:
+* 1st enemy: straight bullet, health = 2, rateOfFire = (1000-100/level=2)
+* last enemy: follow bullet, health,rateOfFire=same as 1st enemy
+* ... progressive, all the last enemy has the follow bullet
+*/
+levelTrigger() {
+for (let enemyCounter = 1; enemyCounter &amp;lt;= this.level;
+enemyCounter++ ) {
+const enemy = this.enenmyOneFactory(
+new Position(800, enemyCounter * 50 + 100),
+this.level,
+(1000 - 100) / this.level);
+enemy.startAnimation(this.context);
+enemy.autoshoot = true;
+if (this.level != 1 &amp;amp;&amp;amp; enemyCounter == this.level) {
+enemy.setBulletPattern(BulletPattern.FOLLOW);
+}
+enemy.shoot();
+this.currentLevelEnemies.push(enemy);
+this.drawableObjects.push(enemy);
+}
+}
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h3 id=&#34;collision-detection&#34;&gt;collision Detection&lt;/h3&gt;
-
 &lt;p&gt;Collision detection was straight forward too, you just compare the two rectangles.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
-  /**
-   * collideDetect of enemyObject with given bullet
-   * @param {Bullet} bullet
-   * @return {boolean}
-   */
-  collideDetect(bullet) {
-    if (this.position == null || bullet.position == null ) {
-      return false;
-    }
-    const bulletObject = {&#39;x&#39;: bullet.position.x,
-      &#39;y&#39;: bullet.position.y,
-      &#39;width&#39;: bullet.sprite.individualSpriteSize * bullet.sprite.scaleFactorX,
-      &#39;height&#39;: bullet.sprite.individualSpriteSize * bullet.sprite.scaleFactorY,
-    };
-    const EnemyObject = {
-      &#39;x&#39;: this.position.x,
-      &#39;y&#39;: this.position.y,
-      &#39;width&#39;: this.sprite.individualSpriteSize * this.sprite.scaleFactorX,
-      &#39;height&#39;: this.sprite.individualSpriteSize * this.sprite.scaleFactorY,
-    };
-    return CollisionDetection.detect(bulletObject, EnemyObject);
-  }
-
+/**
+* collideDetect of enemyObject with given bullet
+* @param {Bullet} bullet
+* @return {boolean}
+*/
+collideDetect(bullet) {
+if (this.position == null || bullet.position == null ) {
+return false;
+}
+const bulletObject = {&#39;x&#39;: bullet.position.x,
+&#39;y&#39;: bullet.position.y,
+&#39;width&#39;: bullet.sprite.individualSpriteSize * bullet.sprite.scaleFactorX,
+&#39;height&#39;: bullet.sprite.individualSpriteSize * bullet.sprite.scaleFactorY,
+};
+const EnemyObject = {
+&#39;x&#39;: this.position.x,
+&#39;y&#39;: this.position.y,
+&#39;width&#39;: this.sprite.individualSpriteSize * this.sprite.scaleFactorX,
+&#39;height&#39;: this.sprite.individualSpriteSize * this.sprite.scaleFactorY,
+};
+return CollisionDetection.detect(bulletObject, EnemyObject);
+}
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h3 id=&#34;sound&#34;&gt;Sound&lt;/h3&gt;
-
 &lt;p&gt;Small library extending from previous year&amp;rsquo;s.&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;https://github.com/FR0ST1N/Pew-Pew/blob/develop/src/js/audio/audioEffects.js&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;AudioEffects.js&lt;/a&gt;&lt;/p&gt;
-
 &lt;h4 id=&#34;fonts&#34;&gt;Fonts&lt;/h4&gt;
-
 &lt;pre&gt;&lt;code&gt;Even using texts take a huge hit on the size of the game, we found a custom font implementation &amp;amp; modified it to fit our usecase, since the font class mainly contains hardcoded values for drawing fonts to the canvas, I have linked just the source below.
-
 [font.js](https://github.com/FR0ST1N/Pew-Pew/blob/develop/src/js/font/font.js)
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;the fonts can be used by the following way&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
 this.ctx.fillStyle = &#39;#00bff3&#39;;
 const CORRECTION = (value.length - 1) * 20;
 Font.draw(value, size, this.ctx, 775 - CORRECTION, 10);
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h4 id=&#34;build&#34;&gt;Build&lt;/h4&gt;
-
 &lt;p&gt;For automating the build process gulp was used, the commands from gulp are pretty straight forward, can be understood just from telling the commands.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
 gulp.task(&#39;cssLint&#39;, function() {
-  return gulp.src(&#39;src/css/*.css&#39;)
-      .pipe(cssLint({
-        reporters: [{formatter: &#39;string&#39;, console: true}],
-      }));
+return gulp.src(&#39;src/css/*.css&#39;)
+.pipe(cssLint({
+reporters: [{formatter: &#39;string&#39;, console: true}],
+}));
 });
-
 gulp.task(&#39;jsLint&#39;, function() {
-  return gulp.src(&#39;src/js/**/*.js&#39;)
-      .pipe(concat(&#39;main.js&#39;))
-      .pipe(jsLint())
-      .pipe(jsLint.format())
-      .pipe(jsLint.failAfterError());
+return gulp.src(&#39;src/js/**/*.js&#39;)
+.pipe(concat(&#39;main.js&#39;))
+.pipe(jsLint())
+.pipe(jsLint.format())
+.pipe(jsLint.failAfterError());
 });
-
 gulp.task(&#39;htmlBuild&#39;, function() {
-  return gulp.src(&#39;src/index.html&#39;)
-      .pipe(htmlMin({
-        collapseWhitespace: true,
-        removeComments: true,
-        html5: true,
-      }))
-      .pipe(gulp.dest(&#39;build&#39;));
+return gulp.src(&#39;src/index.html&#39;)
+.pipe(htmlMin({
+collapseWhitespace: true,
+removeComments: true,
+html5: true,
+}))
+.pipe(gulp.dest(&#39;build&#39;));
 });
-
 gulp.task(&#39;cssBuild&#39;, function() {
-  return gulp.src(&#39;src/css/*.css&#39;)
-      .pipe(concat(&#39;style.min.css&#39;))
-      .pipe(cssMin())
-      .pipe(gulp.dest(&#39;build/css&#39;));
+return gulp.src(&#39;src/css/*.css&#39;)
+.pipe(concat(&#39;style.min.css&#39;))
+.pipe(cssMin())
+.pipe(gulp.dest(&#39;build/css&#39;));
 });
-
 gulp.task(&#39;jsBuild&#39;, function() {
-  return gulp.src(jsConcat, {allowEmpty: true})
-      .pipe(concat(&#39;main.js&#39;))
-      .pipe(jsMin({
-        noSource: true,
-        ext: {
-          min: &#39;.min.js&#39;,
-        },
-      }))
-      .pipe(gulp.dest(&#39;build/js&#39;));
+return gulp.src(jsConcat, {allowEmpty: true})
+.pipe(concat(&#39;main.js&#39;))
+.pipe(jsMin({
+noSource: true,
+ext: {
+min: &#39;.min.js&#39;,
+},
+}))
+.pipe(gulp.dest(&#39;build/js&#39;));
 });
-
 gulp.task(&#39;imageMin&#39;, function() {
-  return gulp.src(&#39;src/images/*&#39;)
-      .pipe(imageMin({optimizationLevel: 5}))
-      .pipe(gulp.dest(&#39;build/images&#39;));
+return gulp.src(&#39;src/images/*&#39;)
+.pipe(imageMin({optimizationLevel: 5}))
+.pipe(gulp.dest(&#39;build/images&#39;));
 });
-
 gulp.task(&#39;zip&#39;, function() {
-  const maxSize = 1024 * 13;
-
-  return gulp.src(&#39;build/**&#39;)
-      .pipe(zip(&#39;Pew-Pew.zip&#39;))
-      .pipe(gulp.dest(&#39;zip&#39;))
-      .pipe(checkSize({fileSizeLimit: maxSize}));
+const maxSize = 1024 * 13;
+return gulp.src(&#39;build/**&#39;)
+.pipe(zip(&#39;Pew-Pew.zip&#39;))
+.pipe(gulp.dest(&#39;zip&#39;))
+.pipe(checkSize({fileSizeLimit: maxSize}));
 });
-
 gulp.task(&#39;lint&#39;, gulp.parallel(
-    &#39;htmlLint&#39;,
-    &#39;cssLint&#39;,
-    &#39;jsLint&#39;
+&#39;htmlLint&#39;,
+&#39;cssLint&#39;,
+&#39;jsLint&#39;
 ));
-
 gulp.task(&#39;build&#39;, gulp.series(
-    &#39;lint&#39;,
-    &#39;clean&#39;,
-    &#39;htmlBuild&#39;,
-    &#39;cssBuild&#39;,
-    &#39;jsBuild&#39;,
-    &#39;jsfxr&#39;,
-    &#39;imageMin&#39;,
-    &#39;zip&#39;,
-    &#39;genDocs&#39;
+&#39;lint&#39;,
+&#39;clean&#39;,
+&#39;htmlBuild&#39;,
+&#39;cssBuild&#39;,
+&#39;jsBuild&#39;,
+&#39;jsfxr&#39;,
+&#39;imageMin&#39;,
+&#39;zip&#39;,
+&#39;genDocs&#39;
 ));
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h3 id=&#34;submission-conclusion&#34;&gt;submission - conclusion&lt;/h3&gt;
-
 &lt;p&gt;During the last day, 80% of the game was completed, everything was to be put together, except that my team mate was very ill &amp;amp; could not work on the project.&lt;/p&gt;
-
 &lt;p&gt;We almost did not submit because the game cuz &amp;lsquo;incomplete, except we did submit the game that was too because I insisted on submitting,&lt;/p&gt;
-
 &lt;p&gt;My friend &amp;amp; partner in the project.
 &lt;a href=&#34;https://github.com/FR0ST1N/Pew-Pew/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;FR0ST1N&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;At the end, It was fun..&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Android Reversing Part 2</title>
-      <link>//bluepie.in/2019/10/android-reversing-part-2/</link>
-      <pubDate>Sun, 13 Oct 2019 19:30:27 +0530</pubDate>
-      
-      <guid>//bluepie.in/2019/10/android-reversing-part-2/</guid>
-      <description>
-
+&lt;p&gt;At the end, It was fun..&lt;/p&gt;</description></item><item><title>Android Reversing Part 2</title><link>//bluepie.in/2019/10/android-reversing-part-2/</link><pubDate>Sun, 13 Oct 2019 19:30:27 +0530</pubDate><guid>//bluepie.in/2019/10/android-reversing-part-2/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;hey, how ya been. so this is a another reversing post (reverse engineering android mod). So before some months,
 I gave some basic info to reversing android apps with a practical example(ttorrent). This post is gona build on
 top of that post. basically pretty advanced version of that post.&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;hr /&gt;
-
 &lt;blockquote&gt;
 &lt;h2 id=&#34;im-just-sharing-information-not-distrubuting-mod-files-here-this-is-strictly-for-learning-purposes-only&#34;&gt;Im just sharing information &amp;amp; not distrubuting mod files here! this is strictly for learning purposes only.&lt;/h2&gt;
 &lt;/blockquote&gt;
-
 &lt;h2 id=&#34;starting-off&#34;&gt;Starting off&lt;/h2&gt;
-
 &lt;p&gt;Let&amp;rsquo;s just continue where we left off shall we. Today the practical example that we are gona use is Spotify lite,
 this at the time of writing, is newly repleased, with version &amp;lsquo;0.13.13.6&amp;rsquo;.&lt;/p&gt;
-
 &lt;p&gt;why spotify? Cause i love the app, but too broke to pay for subscription and the ads are just painful, i just want
 to remove the ads. You could ask the question &amp;ldquo;bu..but there are always mods available in the outside market?&amp;rdquo; Yea
 those are available, but my simple answer is trust, especially nowadays it very easy to
 attach a backdoor in any app, and also the fact that I love doing this.&lt;/p&gt;
-
 &lt;p&gt;So we train by making the ads stop and add premium features to it, keep in-mind we converting only the client to
 be premium, server assisted premium features won&amp;rsquo;t work here.&lt;/p&gt;
-
 &lt;p&gt;so here we go&lt;/p&gt;
-
 &lt;h3 id=&#34;continue-d&#34;&gt;continue..d&lt;/h3&gt;
-
 &lt;p&gt;As said this section is just a continuation of the prevous post titled &amp;lsquo;android reversing&amp;rsquo;, starting things up with
 decompiling and recompiling are in that post,&lt;/p&gt;
-
 &lt;h4 id=&#34;errors&#34;&gt;errors&lt;/h4&gt;
-
 &lt;p&gt;Most of the errors encountered are during the decompilaton shows up only during the recompiling phase and launching
 app phase, hopefully there are extra options during decompilation which can fix most errors encountered.&lt;/p&gt;
-
 &lt;p&gt;the following options are available in decompilation&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
 when to use -r option,
-  if launch causes crashes in relation to resources
-    you can find this out in logcat and try this option
-
+if launch causes crashes in relation to resources
+you can find this out in logcat and try this option
 when to use --no-assets option,
-  the same reason as -r option
-
+the same reason as -r option
 when to use -d flag,
-  debug flag, adds debug to manifest enabling debug output
-    utilize logcat
-
+debug flag, adds debug to manifest enabling debug output
+utilize logcat
 when to use customFranework/update framework,
-  would not build or recompile, so install new framework with
-    apktool.jar -if framework-file.apk
-
+would not build or recompile, so install new framework with
+apktool.jar -if framework-file.apk
 framework files from android device:
-   usually inside /system/framework.
-    adb pull to get the apk then do if framework
-
+usually inside /system/framework.
+adb pull to get the apk then do if framework
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h5 id=&#34;more-about-frameworks&#34;&gt;more about frameworks&lt;/h5&gt;
-
 &lt;p&gt;In some cases there may be recompiling and rebuilding errors from apktool,
 this can be either fixed by -r param while decompiling(keep resources intact) or by installing latest framework
 with the command, multiple frameworks can be used too, or even pull a framework file from your Android device,
 more about it here, so if you are using miui like me, use the command below.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;
 ex:(current device miui)
-    adb pull /system/framework/framework-res.apk
-    adb pull /system/framework/framework-ext-res/framework-ext-res.apk
-
+adb pull /system/framework/framework-res.apk
+adb pull /system/framework/framework-ext-res/framework-ext-res.apk
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;Lastet framework files can be taken from Android build tools. At the time of writing this Android api 29 is out.&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;the above will fix about 90% of the problems.&lt;/em&gt;&lt;/p&gt;
-
 &lt;h4 id=&#34;working-with-practical-example&#34;&gt;working with practical example&lt;/h4&gt;
-
 &lt;p&gt;Install the latest version of spotify lite from playstore and extract the apk from the device and decompile it
 using the guide from part 1, solve the problems you face by the above methods. after decompile take some time to
 go through the app structure and keep note of key parts of the application.&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;also launch jadx_gui side by side to get a better idea. (you can find this in part 1)&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;Launch the app on your device and check the app structure (always keep notes on interesting places) for example
 (hint) the settings has a section called account type. This practical example wont be simple as changing the
 return value of a function like previous post, we has an attack vector specific to that app, but here its a
 different story, &lt;em&gt;analysing the app structure and finding potential spots is the key step.&lt;/em&gt;&lt;/p&gt;
-
 &lt;h3 id=&#34;hints&#34;&gt;hints&lt;/h3&gt;
-
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;smali modifications&lt;/em&gt;&lt;/strong&gt;
 I use this site a lot &lt;a href=&#34;http://pallergabor.uw.hu/androidblog/dalvik_opcodes.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;dalvik_opcodes&lt;/a&gt; , as mentioned in
 the part 1. Here we want to replace section&amp;rsquo;s of byte code, thus make use of this, here to I wont say the exact-way
 to mod since that would be illegal, you can find this out on your own, ill just share the gist of the byte code
 necessary to do the trick and show code sample&amp;rsquo;s for it.&lt;/p&gt;
-
 &lt;p&gt;While you browse through the decompiled files you might stumble upon a enumerator that is referenced everywhere,
 yeah, of course this can be exploited indeed.&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Im gona explain with Java code instead of the dalvik opcodes, since that is much more easier to unserstand&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
 enum Account{
-  PREMIUM,
-  FREE
+PREMIUM,
+FREE
 }
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;hr /&gt;
-
 &lt;h4 id=&#34;the-trick&#34;&gt;The trick&lt;/h4&gt;
-
 &lt;p&gt;When the app launches (MainActivity), app makes an api call to get the type of user and save&amp;rsquo;s it as a local reference,&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
 # sudocode
-
 AnnonymousCall_to_apiToRetreiveUserType(...){
-  //make the call
-  //parse the call
-  return Account (response);
+//make the call
+//parse the call
+return Account (response);
 }
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;check the sudocode, if you are able to change the response of the annoymous call to always send use PREMIUM,then we
 can call it a day!.&lt;/p&gt;
-
 &lt;p&gt;In Java you use enumerator.valueOf(&amp;ldquo;fname_here&amp;rdquo;) to get the value of the enum. so we change the above code to something like&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
 # sudocode
-
 AnnonymousCall_to_apiToRetreiveUserType(...){
-  //make the call EVEN THIS ARE NOT NECESSARY HERE
-  //parse the call EVEN THIS ARE NOT NECESSARY HERE
-  return Account.valueOf(&amp;quot;PREMIUM&amp;quot;);
+//make the call EVEN THIS ARE NOT NECESSARY HERE
+//parse the call EVEN THIS ARE NOT NECESSARY HERE
+return Account.valueOf(&amp;quot;PREMIUM&amp;quot;);
 }
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;here is the dalvik opcode equivalent for the above&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
 //storage
 const-string p2, &amp;quot;PREMIUM&amp;quot;
-
 //valueOf from storage
 invoke-static {p2}, Lcom/spotify/lite/productstate/Product;-&amp;gt;valueOf(Ljava/lang/String;)Lcom/spotify/lite/productstate/Product;
-
 //move the result object into p2
 move-result-object p2
-
 //move the same into class object
 iput-object p2, p0, Ldlc;-&amp;gt;b:Lcom/spotify/lite/productstate/Product;
-
 //return the object
 return-object Ldlc;-&amp;gt;b:Lcom/spotify/lite/productstate/Product;
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;the same but for lambda functins&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;original: api_call -&amp;gt; retrun cast(response)&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
 .method public final apply(Ljava/lang/Object;)Ljava/lang/Object;
 .locals 0
-
 check-cast p1, Lcjl;
-
 invoke-virtual {p1}, Lcjl;-&amp;gt;b()Lcom/spotify/lite/productstate/Product;
-
 move-result-object p1
-
 return-object p1
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;patched:&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
 .registers 2
-
 .line 47
 const-string p1, &amp;quot;PREMIUM&amp;quot;
-
 invoke-static {p1}, Lcom/spotify/lite/productstate/Product;-&amp;gt;valueOf(Ljava/lang/String;)Lcom/spotify/lite/productstate/Product;
-
 move-result-object p1
-
 return-object p1
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;some additional interesting patch sections, go through this too, latest verisons of the app need this.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
 player util
-
-player restriction 
-
-resolve player 
-
-skipToFutureTrack              
-
+player restriction
+resolve player
+skipToFutureTrack
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;hr /&gt;
-
 &lt;p&gt;with the given patch work, it is all that you will need to enable premium features, just recompile, sign and install the app.
 follow part 1 for recompiling, sign and installing.&lt;/p&gt;
-
 &lt;h3 id=&#34;end&#34;&gt;End&lt;/h3&gt;
-
 &lt;p&gt;I hope this helps some one else other than me, I&amp;rsquo;m not gona share the recompiled apk for obvious reasons(legal), But I feel you should
-be able to do so, with the information you have now. peace! seeya next time.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Docker to Make Life Easier</title>
-      <link>//bluepie.in/2019/09/docker-to-make-life-easier/</link>
-      <pubDate>Wed, 11 Sep 2019 09:17:29 +0530</pubDate>
-      
-      <guid>//bluepie.in/2019/09/docker-to-make-life-easier/</guid>
-      <description>
-
+be able to do so, with the information you have now. peace! seeya next time.&lt;/p&gt;</description></item><item><title>Docker to Make Life Easier</title><link>//bluepie.in/2019/09/docker-to-make-life-easier/</link><pubDate>Wed, 11 Sep 2019 09:17:29 +0530</pubDate><guid>//bluepie.in/2019/09/docker-to-make-life-easier/</guid><description>
 &lt;blockquote&gt;
-&lt;p&gt;Hello, it&amp;rsquo;s been two months since last update. Anyway the August month I was pretty busy, to be honest, I was involved in a old project of mine that I had to revist, in order to get more  productive and flexibility in developing the application I chose to use docker. So this post is going to be about docker.&lt;/p&gt;
+&lt;p&gt;Hello, it&amp;rsquo;s been two months since last update. Anyway the August month I was pretty busy, to be honest, I was involved in a old project of mine that I had to revist, in order to get more productive and flexibility in developing the application I chose to use docker. So this post is going to be about docker.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Status Update:The month of August also had something interesting in it, which is my birthday. There was a plan to go a special temple so I took some leave from office, during that time another holiday was also just around the corner, so on the whole I had about 5 days of stay in my house, which is a lot considering I only have a two or three days leave if I had leave my office. This was the first time after a year that I have been staying in home for a long time. During that time I spent some minimal time developing and I found out that I had so much productivity in home then in my chennai room or my office and I was learning new things, so that is that.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
 &lt;hr /&gt;
-
 &lt;h1 id=&#34;will-reference-everything-with-the-assumption-you-are-on-the-linux-platform-too-it-ll-be-only-slightly-different-on-windows&#34;&gt;&lt;em&gt;Will reference everything with the assumption you are on the linux platform too, it&amp;rsquo;ll be only slightly different on windows.&lt;/em&gt;&lt;/h1&gt;
-
 &lt;hr /&gt;
-
 &lt;h2 id=&#34;intro-to-docker&#34;&gt;Intro to docker&lt;/h2&gt;
-
 &lt;h3 id=&#34;installation&#34;&gt;installation&lt;/h3&gt;
-
 &lt;p&gt;I recommend installation with the prebuilt packages from the docker link instead of your flavour&amp;rsquo;s package (debian[ubunut..], arch..).&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
 # use the following path while navigating through to get the download links.
-
 pool/dist/package
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;(or)&lt;/p&gt;
-
 &lt;p&gt;if you insist on installing with apt.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
 # installation with apt / apt-get
 sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    software-properties-common
+apt-transport-https \
+ca-certificates \
+curl \
+gnupg-agent \
+software-properties-common
 gpg key:
- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 check fingerprint:
 sudo apt-key fingerprint 0EBFCD88
-
-pub   rsa4096 2017-02-22 [SCEA]
-      9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
-uid           [ unknown] Docker Release (CE deb) &amp;lt;docker@docker.com&amp;gt;
-sub   rsa4096 2017-02-22 [S]
-
+pub rsa4096 2017-02-22 [SCEA]
+9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88
+uid [ unknown] Docker Release (CE deb) &amp;lt;docker@docker.com&amp;gt;
+sub rsa4096 2017-02-22 [S]
 #choosing stable release for docker:
 sudo add-apt-repository \
-   &amp;quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable&amp;quot;
-
+&amp;quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) \
+stable&amp;quot;
 #installing latest docker from ubuntu.
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
-
-#deb is even simpler in my openion (example for debian): 
-sudo dpkg -i /path/to/package.deb 
-
+#deb is even simpler in my openion (example for debian):
+sudo dpkg -i /path/to/package.deb
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h3 id=&#34;basics&#34;&gt;basics&lt;/h3&gt;
-
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;the following are true for linux based distros&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;To put it simple terms&lt;/em&gt;
 Docker is like a virtualMachine except it&amp;rsquo;s not resource hungry.&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;To not put in simple terms&lt;/em&gt;
 Docker shares the same kernel as the host, while VirtualMachine rewrites low-level instructions &amp;amp; executes them on the fly.&lt;/p&gt;
-
 &lt;hr /&gt;
-
 &lt;h4 id=&#34;image&#34;&gt;image&lt;/h4&gt;
-
 &lt;p&gt;images are like iso images burnt to a cd/usb ready to be installed,
 things you can do with it,
-  * use prebuilt images from market, (both official and user created)
-  * build an image with customisations on top of an official image form market
-  * publish the images you are using/ publish images that you built&lt;/p&gt;
-
+* use prebuilt images from market, (both official and user created)
+* build an image with customisations on top of an official image form market
+* publish the images you are using/ publish images that you built&lt;/p&gt;
 &lt;hr /&gt;
-
 &lt;h4 id=&#34;container&#34;&gt;container&lt;/h4&gt;
-
 &lt;p&gt;Image u have a fresh HardDisk, you installed a OS(operating system) of your liking in it,
 what do you have left in it?
 Free space after the o-files, which u can use to store anything,
@@ -732,29 +634,19 @@ basically any software,
 so next time if you take that particular hardDisk will you get, basically above right?
 This is what a container is, replace HardDisk with container and os with prebuilt/customImage.
 you can attach external HardDrive to it, which in our case is volume, &amp;hellip;etc&lt;/p&gt;
-
 &lt;hr /&gt;
-
 &lt;h4 id=&#34;basic-commands&#34;&gt;basic commands&lt;/h4&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
 #list local images/containers
 docker image ls
-
 #only running containers
-docker container ls 
-
+docker container ls
 #list all (even turned off containers)
 docker contaienr ls -a
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;hr /&gt;
-
 &lt;h4 id=&#34;custom-image-creation-section&#34;&gt;custom image creation section&lt;/h4&gt;
-
 &lt;p&gt;some commands to help you(addressig myslef), for custom images.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
 # dockerfile
 FROM &amp;lt;imagename&amp;gt;:&amp;lt;tagfortheimage&amp;gt;
@@ -762,527 +654,317 @@ COPY &amp;lt;src&amp;gt; &amp;lt;dest&amp;gt;
 WORKDIR further interaction will start from this directory.
 EXPOSE port to be exposed.
 # installed additioal/required programs from below commands
-RUN commands to run 
-CMD commands to run 
-
+RUN commands to run
+CMD commands to run
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;build the image, filename for the file should be &amp;lsquo;Dockerfile&amp;rsquo;&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
 docker-build -f PathToFile -t nameOfTheBuildImage
 #ex:
 docker build -t phpserver:0.0.2 phpServer/
-
 docker image ls phpserver
-
-REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
-phpserver           0.0.2               5f7b4c7374b5        About a minute ago   416MB
-
+REPOSITORY TAG IMAGE ID CREATED SIZE
+phpserver 0.0.2 5f7b4c7374b5 About a minute ago 416MB
 #another way of representing, httpd/somefeature:tagHere, httpd/somefeature (tag assumed as latest here), user/httpd-imageName:taghere
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;running a image which you built locally or from the official image,&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
 docker-run -d run-container-in-background -v specify-volume / --mount --mount=&#39;-type=bind,src=path_here,dst=path_here&#39; (path must be absolute --name=&#39;&#39; -p [] (port) -p [] (port)
-
 ex:
-docker run -d -p 80:80  --mount=&#39;src=//bluepie.in/home/path/to/folder/,dst=/var/www/html/,type=bind&#39; --name phpserver  phpserver:0.0.2
-
-docker ps 
-
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES
-5f7b4c7374b5        phpserver:0.0.2     &amp;quot;docker-php-entrypoi…&amp;quot;   10 seconds ago      Up 9 seconds        0.0.0.0:80-&amp;gt;80/tcp   phpserver
-
+docker run -d -p 80:80 --mount=&#39;src=//bluepie.in/home/path/to/folder/,dst=/var/www/html/,type=bind&#39; --name phpserver phpserver:0.0.2
+docker ps
+CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
+5f7b4c7374b5 phpserver:0.0.2 &amp;quot;docker-php-entrypoi…&amp;quot; 10 seconds ago Up 9 seconds 0.0.0.0:80-&amp;gt;80/tcp phpserver
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;after starting the container, some commands to help you,&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-
 docker-container start name
 docker-container stop name
 docker-container restart name
-docker-container stat 
+docker-container stat
 docker-container inspect name
-docker-container ls -a 
+docker-container ls -a
 docker-container la
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;to interact with running containers&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
 #run single instance command
 docker-exec -i image command-here params-if-command-has-it
 #ex: install php inside a conainer and use it like binary like this
 docker run \
-    --rm \
-    -i \
-    --network=host \
-    -v &amp;quot;$HOME&amp;quot;:&amp;quot;$HOME&amp;quot;:ro \
-    -u $(id -u) \
-    -w &amp;quot;$PWD&amp;quot; \
-    php:7.3-alpine \
-    php &amp;quot;$@&amp;quot;
-
+--rm \
+-i \
+--network=host \
+-v &amp;quot;$HOME&amp;quot;:&amp;quot;$HOME&amp;quot;:ro \
+-u $(id -u) \
+-w &amp;quot;$PWD&amp;quot; \
+php:7.3-alpine \
+php &amp;quot;$@&amp;quot;
 #run interactive shell command
-docker-exec -it image 
-
+docker-exec -it image
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;hr /&gt;
-
 &lt;h5 id=&#34;docker-compose&#34;&gt;docker compose&lt;/h5&gt;
-
 &lt;p&gt;wana start a bunch of container&amp;rsquo;s each serving its own purpose,
 for eg: one container for running server, another for databse, another for running waf, another for running microService ?&lt;/p&gt;
-
 &lt;p&gt;install docker-compose, downlaod the docker-compose binary and include it in your environment variable, and build a docker-compose.yml for it.&lt;/p&gt;
-
-&lt;h3 id=&#34;bye-see-ya-soon-sorry-for-missing-out-last-month&#34;&gt;&lt;em&gt;bye, see ya soon, sorry for missing out last month&lt;/em&gt;&lt;/h3&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Android Reversing</title>
-      <link>//bluepie.in/2019/07/android-reversing/</link>
-      <pubDate>Tue, 30 Jul 2019 22:40:21 +0530</pubDate>
-      
-      <guid>//bluepie.in/2019/07/android-reversing/</guid>
-      <description>
-
+&lt;h3 id=&#34;bye-see-ya-soon-sorry-for-missing-out-last-month&#34;&gt;&lt;em&gt;bye, see ya soon, sorry for missing out last month&lt;/em&gt;&lt;/h3&gt;</description></item><item><title>Android Reversing</title><link>//bluepie.in/2019/07/android-reversing/</link><pubDate>Tue, 30 Jul 2019 22:40:21 +0530</pubDate><guid>//bluepie.in/2019/07/android-reversing/</guid><description>
 &lt;blockquote&gt;
-&lt;p&gt;Hello! me and others reading this from the future. &lt;strong&gt;&lt;em&gt;Status Update:So, this month I have lost a companion that was with me for the past 4 years, he is not entirely dead but let&amp;rsquo;s say is not the same person he once was&amp;hellip;.wait wait wait! I am talking about my laptop. I was doing an all-nighter &amp;amp; I think it was about 4 a.m. or so  I was planning to go to sleep, so so while I was cleaning up &amp;amp; I dropped the laptop from my waist height, I was one of the tallest persons in my class so that explains a lot. I should have cleaned everything in the morning. Anyway after that I couldn&amp;rsquo;t work on my projects for sometime, but I fixed it to a point where it is somewhat workable, bit its not the same, I have to buy a new one. Next time when I make a post it will be on a new laptop.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Hello! me and others reading this from the future. &lt;strong&gt;&lt;em&gt;Status Update:So, this month I have lost a companion that was with me for the past 4 years, he is not entirely dead but let&amp;rsquo;s say is not the same person he once was&amp;hellip;.wait wait wait! I am talking about my laptop. I was doing an all-nighter &amp;amp; I think it was about 4 a.m. or so I was planning to go to sleep, so so while I was cleaning up &amp;amp; I dropped the laptop from my waist height, I was one of the tallest persons in my class so that explains a lot. I should have cleaned everything in the morning. Anyway after that I couldn&amp;rsquo;t work on my projects for sometime, but I fixed it to a point where it is somewhat workable, bit its not the same, I have to buy a new one. Next time when I make a post it will be on a new laptop.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;hr /&gt;
-
 &lt;h2 id=&#34;goal&#34;&gt;Goal&lt;/h2&gt;
-
 &lt;p&gt;I have been away from reversing, ctf and modding, basically my hobbies from my University days. but occasionally I do some reversing and CTF&amp;rsquo;s, &lt;em&gt;because of course I don&amp;rsquo;t want to forget everything.&lt;/em&gt; I was busy with my office work but in the back of my mind there was always thoughts about reversing apps again usually to find bugs and exploit in myself for fun. That is the GOAL!.&lt;/p&gt;
-
 &lt;h2 id=&#34;motivaation&#34;&gt;Motivaation&lt;/h2&gt;
-
 &lt;p&gt;The next thing that Lead me to writing this post is that I use torrents sometimes and i mostly do it in my phone. Out of all the Torrent clients I used, ttorrent is the best(phone). I use it but not to the point of im going to buy it(the premium app without adds).&lt;/p&gt;
-
 &lt;p&gt;Lately ads are just awefull, full-blown full screen ads with full audio and you cannot even skip the video. So in one weekend I decided to reverse it, because at this point you cannot use it.&lt;/p&gt;
-
 &lt;h3 id=&#34;question&#34;&gt;Question&lt;/h3&gt;
-
-&lt;p&gt;Why not use mods/cracks  from the internet,&lt;/p&gt;
-
+&lt;p&gt;Why not use mods/cracks from the internet,&lt;/p&gt;
 &lt;p&gt;answer: easy, since I&amp;rsquo;m also in the security community I know for a fact that almost every other mod has some Trojan linked with it and the other reason is I am paranoid.&lt;/p&gt;
-
 &lt;hr /&gt;
-
 &lt;h2 id=&#34;warning-or-notice-whatever-you-want-to-call-it&#34;&gt;WARNING OR NOTICE WHATEVER YOU WANT TO CALL IT&lt;/h2&gt;
-
 &lt;p&gt;What I am going to share below is purely for myself to remind me(future me) that at some point in life I did this and is purely for learning purposes for anyone else that might stumbled upon this.&lt;/p&gt;
-
 &lt;h2 id=&#34;decompiling&#34;&gt;Decompiling&lt;/h2&gt;
-
 &lt;h3 id=&#34;fun-part&#34;&gt;Fun part&lt;/h3&gt;
-
 &lt;p&gt;Note: I have already done this before and I have a personal preference of tools that I use.&lt;/p&gt;
-
 &lt;p&gt;First thing that you need is the decompiler, at the time of writing this post I have seen around 15 or so decompilers online and offline for android ofcourse personally i have been fan of APK tool its just perfect.&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;https://bitbucket.org/iBotPeaches/apktool/downloads&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;apktool download link&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;Some of the Honorable mentions&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;cfr decompiler&lt;/li&gt;
 &lt;li&gt;jd-gui&lt;/li&gt;
 &lt;li&gt;jadx&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;h4 id=&#34;apktool-usage&#34;&gt;Apktool usage&lt;/h4&gt;
-
 &lt;h5 id=&#34;its-simple-apktool-d-for-decompile-o-outputdirectory&#34;&gt;its simple. apktool d(for decompile) -o(outputdirectory)&lt;/h5&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;
 java -jar apktook_2.4.0.jar d -o output_dir/ apkfile.apk
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;after you decompile the APK. Explore the decompiled folder for some time.
 If you want to to change the app flow or know its secrets, you have to to change those files so you need a text editor with find in files feature. My personal preference for this is Sublime course you can use anything you like.&lt;/p&gt;
-
-&lt;p&gt;So Android apps are basically written in Java and kotlin from native app standpoint. So the files that you saw in those folders are just the compiled versions of the source. For seeing the source code of apps, you cannot see the exact source code from Java everything will be obfuscated  and a lot of it will not make any sense to you if you don&amp;rsquo;t have any experience at first so don&amp;rsquo;t be afraid of it.  Be very  vigilant here I am talking about two things one is the Java source files and the other is the compiled .smali files.&lt;/p&gt;
-
+&lt;p&gt;So Android apps are basically written in Java and kotlin from native app standpoint. So the files that you saw in those folders are just the compiled versions of the source. For seeing the source code of apps, you cannot see the exact source code from Java everything will be obfuscated and a lot of it will not make any sense to you if you don&amp;rsquo;t have any experience at first so don&amp;rsquo;t be afraid of it. Be very vigilant here I am talking about two things one is the Java source files and the other is the compiled .smali files.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;.smali modifications are the most imporatant one, that matters in this post. since that will be used to change the app flow.&lt;/em&gt;&lt;/p&gt;
-
 &lt;hr /&gt;
-
 &lt;h2 id=&#34;modding&#34;&gt;Modding&lt;/h2&gt;
-
 &lt;h3 id=&#34;smali-modifications&#34;&gt;smali modifications&lt;/h3&gt;
-
 &lt;p&gt;This is the tough spot. I have previous experience with assembly(x86 and dex) but for other people you have to learn to understand it.&lt;/p&gt;
-
 &lt;h4 id=&#34;viewing-logic-and-instructions&#34;&gt;viewing logic and instructions&lt;/h4&gt;
-
 &lt;p&gt;personally, i use jadx for viewing the java code(obfuscated and confusing) and viewing the smali code at the same time and make changes with text editors on .smali files.&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;https://github.com/skylot/jadx&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;jadx link&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;for smali modifications to understand the instructions.i&amp;rsquo;ve found this to be useful than the google one.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;http://pallergabor.uw.hu/androidblog/dalvik_opcodes.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;dalvik_opcodes&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;understanding-structure-and-finding-things-to-be-changed-to-suit-our-needs&#34;&gt;Understanding structure  and finding things to be changed to suit our needs&lt;/h3&gt;
-
+&lt;h3 id=&#34;understanding-structure-and-finding-things-to-be-changed-to-suit-our-needs&#34;&gt;Understanding structure and finding things to be changed to suit our needs&lt;/h3&gt;
 &lt;p&gt;So with the command form the apktool part, you would have decompiled the apk, with the help of tools provided above you can also now just view the source and hopefully understand the logic. I am going to tell what i changed after analysing it.&lt;/p&gt;
-
 &lt;p&gt;hint: ttorrent lite can be converted to premium if you have a code, that might be exploitable.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;    .locals 0
-
-    .line 1
-    iput-object p1, p0, Lhu/tagsoft/ttorrent/serial/a;-&amp;gt;c:Lhu/tagsoft/ttorrent/serial/SerialActivity;
-
-    iput-boolean p2, p0, Lhu/tagsoft/ttorrent/serial/a;-&amp;gt;a:Z
-
-    &amp;gt;.local 0, means no extra variables will be included,
-
-    to make conditions true, set variable true,
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt; .locals 0
+.line 1
+iput-object p1, p0, Lhu/tagsoft/ttorrent/serial/a;-&amp;gt;c:Lhu/tagsoft/ttorrent/serial/SerialActivity;
+iput-boolean p2, p0, Lhu/tagsoft/ttorrent/serial/a;-&amp;gt;a:Z
+&amp;gt;.local 0, means no extra variables will be included,
+to make conditions true, set variable true,
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h4 id=&#34;basically-what-u-have-to-do-in-terms-of-java-code-is-below-this-is-one-of-the-common-modding-pattern&#34;&gt;&lt;em&gt;basically what u have to do in terms of java code is below&lt;/em&gt; this is one of the common modding pattern&lt;/h4&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
-    public Boolean isLicenseVerified{
-        this.licenseCheck = getLicenseCheck();
-        return this.licecseCheck //true if bought the license.
-    }
-
-    public Boolean isLicenseVerified{
-        this.licenseCheck = true;
-        return this.licecseCheck //always true.
-    }
-
+public Boolean isLicenseVerified{
+this.licenseCheck = getLicenseCheck();
+return this.licecseCheck //true if bought the license.
+}
+public Boolean isLicenseVerified{
+this.licenseCheck = true;
+return this.licecseCheck //always true.
+}
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h4 id=&#34;in-smali-code-that-would-translate-to-actual-change-made-in-code&#34;&gt;in smali code that would translate to, actual change made in code.&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;    ex:
-    .local 1 //now one extra variable can be created.
-
-     const/4 v0, 0x1
-
-     iput-boolean v0, p0, Lhu/tagsoft/ttorrent/serial/a;-&amp;gt;a:Z //the variable was set to true.
-
-    !imp calling to check if serial registered, always return true. successful patch!.
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt; ex:
+.local 1 //now one extra variable can be created.
+const/4 v0, 0x1
+iput-boolean v0, p0, Lhu/tagsoft/ttorrent/serial/a;-&amp;gt;a:Z //the variable was set to true.
+!imp calling to check if serial registered, always return true. successful patch!.
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;NOTE: this is not an easy to do at the begining, I was at that point myself so just dont give up.&lt;/p&gt;
-
 &lt;hr /&gt;
-
 &lt;h2 id=&#34;recompiling&#34;&gt;Recompiling&lt;/h2&gt;
-
 &lt;p&gt;After that you have to recompile the app, There are several ways to do this, I am gonna go with removing the original signature of the app creating a new key and then signing the app with your key.&lt;/p&gt;
-
-&lt;h3 id=&#34;removemeta-inf-folder-to-remove-original-signatures&#34;&gt;removemeta inf folder to remove  original signatures&lt;/h3&gt;
-
+&lt;h3 id=&#34;removemeta-inf-folder-to-remove-original-signatures&#34;&gt;removemeta inf folder to remove original signatures&lt;/h3&gt;
 &lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;
-java -jar apktool b -o  outputdir/filename.apk decompiledDirectory/
-
+java -jar apktool b -o outputdir/filename.apk decompiledDirectory/
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;hr /&gt;
-
 &lt;h2 id=&#34;resigning&#34;&gt;Resigning&lt;/h2&gt;
-
 &lt;h4 id=&#34;creating-key-and-signing-with-it&#34;&gt;creating key and signing with it&lt;/h4&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;
 keytool -genkey -v -keystore ck-release-key.keystore -alias ck -keyalg RSA -keysize 2048 -validity 10000
-
 //resign the apk
-
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ck-release-key.keystore my_application.apk ck
-
 //be sure to verify it there might be some errors.
-
 jarsigner -verify -verbose recompiledApk.apk
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h4 id=&#34;there-is-also-another-way-of-disabling-ads-simpler-very-much-simpler-by-disabling-the-activity-from-manifest-but-what-is-the-fun-in-that&#34;&gt;there is also another way of disabling ads simpler(very much simpler) by disabling the activity from manifest but what is the fun in that&lt;/h4&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Now got rid of the pesky fullScreen ads, I am not gona share the apk here, cuz reasons duh&amp;hellip;&lt;/em&gt;&lt;/strong&gt; &lt;em&gt;but I taught u the necessary stuff to do so, you should do fine on your own&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Google Ctf 2019</title>
-      <link>//bluepie.in/2019/06/google-ctf-2019/</link>
-      <pubDate>Sat, 29 Jun 2019 18:35:30 +0530</pubDate>
-      
-      <guid>//bluepie.in/2019/06/google-ctf-2019/</guid>
-      <description>
-
+&lt;/blockquote&gt;</description></item><item><title>Google Ctf 2019</title><link>//bluepie.in/2019/06/google-ctf-2019/</link><pubDate>Sat, 29 Jun 2019 18:35:30 +0530</pubDate><guid>//bluepie.in/2019/06/google-ctf-2019/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;hey!. future me,(addressing myself)
 &lt;strong&gt;&lt;em&gt;Status Update:So its been almost a year since i joined a company and having my career growing, but my personal goals are just at the same position when i left my student life. Gosh wish things where different, So another long time since i made my last post. time really flies by, so the most part im ok i guess with inner conflicts, mental forgetfullness, slow motion, slow thinking. For the past some weeks everything around me feels like it has been sped up, but i am still moving slowly.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;hr /&gt;
-
 &lt;h2 id=&#34;thing-that-got-me-interested-google-capture-the-flag&#34;&gt;Thing that got me interested - Google Capture the flag.&lt;/h2&gt;
-
-&lt;p&gt;As i said, i haven&amp;rsquo;t given up all my hobbies, recently i was eager to participate in the capture the flag conducted by google, because i was free during that time cuz that was on a saturday and sunday,  (not office hours,). So this post will cover that, i wont be writing everything, since this is ultimately for the sake of me that i am doing this.&lt;/p&gt;
-
+&lt;p&gt;As i said, i haven&amp;rsquo;t given up all my hobbies, recently i was eager to participate in the capture the flag conducted by google, because i was free during that time cuz that was on a saturday and sunday, (not office hours,). So this post will cover that, i wont be writing everything, since this is ultimately for the sake of me that i am doing this.&lt;/p&gt;
 &lt;h3 id=&#34;challenges&#34;&gt;challenges&lt;/h3&gt;
-
 &lt;p&gt;Im going to be vague about most of the things, except the ones i felt where challenging and interesitng to me.
 so the first challenge was a binary challenge, that was pretty easy a 30 second view and string analysis of the file gave me the flag, &amp;ldquo;CTF{welcome_to_googlectf}&amp;rdquo; it was the beginning after all.&lt;/p&gt;
-
-&lt;p&gt;the next part was also a binay involved, but that binary was connecting to the internet to communicat, wireshark can be used for instance but using wireshark for this beginner task is an overkill, what i did was found out the server ip from the binary,  connected to the server directly, got the flag,  bypassing the protection from the binary,&lt;/p&gt;
-
-&lt;p&gt;the next part is a two parter, first you have to find the ip address of the server, then after connecting to the server, you have limited access, you do not have any permission what so ever, the flag is there in a file with no permission set to it,  but you can access &amp;ldquo;bin/&amp;rdquo; directory with exec permissions to some of the executables, but no exec permissions to busybox binary, with some tweaking and wandering around this round is also simple.&lt;/p&gt;
-
+&lt;p&gt;the next part was also a binay involved, but that binary was connecting to the internet to communicat, wireshark can be used for instance but using wireshark for this beginner task is an overkill, what i did was found out the server ip from the binary, connected to the server directly, got the flag, bypassing the protection from the binary,&lt;/p&gt;
+&lt;p&gt;the next part is a two parter, first you have to find the ip address of the server, then after connecting to the server, you have limited access, you do not have any permission what so ever, the flag is there in a file with no permission set to it, but you can access &amp;ldquo;bin/&amp;rdquo; directory with exec permissions to some of the executables, but no exec permissions to busybox binary, with some tweaking and wandering around this round is also simple.&lt;/p&gt;
 &lt;p&gt;the next round you are presented boot sector ntfs file. the file contains the details to the flag apparently, so we mount the ntfs file, find all the files that are likely to be the flag, apparently all the files are empty with 0 bytes,by filtering the files which are above 1kb, the results shows up as only one, we get a hint that the flag is stored in pic directory on the file&amp;rsquo;s extra attribute section.&lt;/p&gt;
-
 &lt;p&gt;the next level was an xss injection, that is pretty easy i guess, basically you have to get the admin&amp;rsquo;s cookies and session id to get the flag.&lt;/p&gt;
-
 &lt;p&gt;some of the challenges are very easy so I am not going to cover them, if you know basic reverse engineering and cyber security, you could solve them easily.&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;a challenge that was fresh and I have not seen anything like that challenge before, I am going to write about how I managed to solve that.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
 &lt;hr /&gt;
-
 &lt;h3 id=&#34;a-challenge-that-was-interesting-to-me&#34;&gt;A challenge that was interesting to me.&lt;/h3&gt;
-
 &lt;p&gt;so here comes the big thing that took me a lot of time to figure this out, It was a reversing challenge, it consisted of a python program with a file as argument to it, the argument file consist of emojis, python program emulates stack based vm with the smiles as instructions, Im gona walk through how i was able to solve this problem.&lt;/p&gt;
-
 &lt;p&gt;The source of the program was given, it was just a python program, but it was quite hard to understand what they where doing at first, the link to the files are below, check them out, you have to run them on python3.&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;//bluepie.in/attachments/vmbackup.py&#34; title=&#34;python Source code&#34;&gt;vmbackup.py&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;//bluepie.in/attachments/program&#34; title=&#34;python Source code&#34;&gt;program&lt;/a&gt;&lt;/p&gt;
-
 &lt;h4 id=&#34;the-problem-with-this&#34;&gt;the problem with this?.&lt;/h4&gt;
-
-&lt;p&gt;So pretty much it prints a url, letter by letter, but gradually it slows down and at some point it stops, so the algorithm they are using might be the issue here, so when opening the program file you will find smiles inside of it, and the python program uses those smiles one by one as instrcutions and runs them. just like a modern cpu running the binary file. i was twisting my head around replacing smilies to understand the program, i could idenify pattersn but  nothing more.&lt;/p&gt;
-
-&lt;p&gt;A little later I tried a different approach, which is print statements, the python progrm  is still python right, so  made some print statements in different places, then ran the program.&lt;/p&gt;
-
+&lt;p&gt;So pretty much it prints a url, letter by letter, but gradually it slows down and at some point it stops, so the algorithm they are using might be the issue here, so when opening the program file you will find smiles inside of it, and the python program uses those smiles one by one as instrcutions and runs them. just like a modern cpu running the binary file. i was twisting my head around replacing smilies to understand the program, i could idenify pattersn but nothing more.&lt;/p&gt;
+&lt;p&gt;A little later I tried a different approach, which is print statements, the python progrm is still python right, so made some print statements in different places, then ran the program.&lt;/p&gt;
 &lt;h5 id=&#34;where-i-made-the-comments&#34;&gt;where I made the comments.&lt;/h5&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
-  def xor(self):
-    a = self.stack.pop()
-    b = self.stack.pop()
-    print(&amp;quot; xor:: a:&amp;quot; + str(a) +&amp;quot; b:&amp;quot;+ str(b) +&amp;quot;\n&amp;quot;)
-    self.stack.append(b ^ a)
-
-  def print_top(self):
-    print(self.stack);
-    sys.stdout.write(chr(self.stack.pop()))
-    sys.stdout.flush()
-
-  def push(self):
-    if self.rom[self.instruction_pointer] == &#39;🥇&#39;:
-      self.stack.append(self.accumulator1)
-      print(&amp;quot;accumulator1 :&amp;quot; + str(self.accumulator1) )
-    elif self.rom[self.instruction_pointer] == &#39;🥈&#39;:
-      self.stack.append(self.accumulator2)
-      print(&amp;quot;accumulator2 :&amp;quot; + str(self.accumulator1) )
-    else:
-      raise RuntimeError(&#39;Unknown instruction {} at position {}&#39;.format(
-          self.rom[self.instruction_pointer], str(self.instruction_pointer)))
-    self.instruction_pointer += 1
-
-    def load(self):
-    num = 0
-
-    if self.rom[self.instruction_pointer] == &#39;🥇&#39;:
-      acc = 1
-    elif self.rom[self.instruction_pointer] == &#39;🥈&#39;:
-      acc = 2
-    else:
-      raise RuntimeError(&#39;Unknown instruction {} at position {}&#39;.format(
-          self.rom[self.instruction_pointer], str(self.instruction_pointer)))
-    self.instruction_pointer += 1
-
-    while self.rom[self.instruction_pointer] != &#39;✋&#39;:
-      num = num * 10 + (ord(self.rom[self.instruction_pointer][0]) - ord(&#39;0&#39;))
-      print(&amp;quot;rom: &amp;quot;+str(ord(self.rom[self.instruction_pointer][0])) +&amp;quot; ord:&amp;quot;+ str((ord(self.rom[self.instruction_pointer][0]) - ord(&#39;0&#39;)) ))
-      self.instruction_pointer += 1
-
-    if acc == 1:
-      self.accumulator1 = num
-    else:
-      self.accumulator2 = num
-
-    self.instruction_pointer += 1
-
+def xor(self):
+a = self.stack.pop()
+b = self.stack.pop()
+print(&amp;quot; xor:: a:&amp;quot; + str(a) +&amp;quot; b:&amp;quot;+ str(b) +&amp;quot;\n&amp;quot;)
+self.stack.append(b ^ a)
+def print_top(self):
+print(self.stack);
+sys.stdout.write(chr(self.stack.pop()))
+sys.stdout.flush()
+def push(self):
+if self.rom[self.instruction_pointer] == &#39;🥇&#39;:
+self.stack.append(self.accumulator1)
+print(&amp;quot;accumulator1 :&amp;quot; + str(self.accumulator1) )
+elif self.rom[self.instruction_pointer] == &#39;🥈&#39;:
+self.stack.append(self.accumulator2)
+print(&amp;quot;accumulator2 :&amp;quot; + str(self.accumulator1) )
+else:
+raise RuntimeError(&#39;Unknown instruction {} at position {}&#39;.format(
+self.rom[self.instruction_pointer], str(self.instruction_pointer)))
+self.instruction_pointer += 1
+def load(self):
+num = 0
+if self.rom[self.instruction_pointer] == &#39;🥇&#39;:
+acc = 1
+elif self.rom[self.instruction_pointer] == &#39;🥈&#39;:
+acc = 2
+else:
+raise RuntimeError(&#39;Unknown instruction {} at position {}&#39;.format(
+self.rom[self.instruction_pointer], str(self.instruction_pointer)))
+self.instruction_pointer += 1
+while self.rom[self.instruction_pointer] != &#39;✋&#39;:
+num = num * 10 + (ord(self.rom[self.instruction_pointer][0]) - ord(&#39;0&#39;))
+print(&amp;quot;rom: &amp;quot;+str(ord(self.rom[self.instruction_pointer][0])) +&amp;quot; ord:&amp;quot;+ str((ord(self.rom[self.instruction_pointer][0]) - ord(&#39;0&#39;)) ))
+self.instruction_pointer += 1
+if acc == 1:
+self.accumulator1 = num
+else:
+self.accumulator2 = num
+self.instruction_pointer += 1
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;After making the comments things were much clearer to me, all the comments that I made in the above program I didn&amp;rsquo;t do it in one instance and run the program, I made some comments in the program run at and check the weather it make sense and added some more comments and then run it again and again&amp;hellip; I have also attached the log files which was generated from the different runs.&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;//bluepie.in/attachments/output.txt&#34; title=&#34;run#1&#34;&gt;output.txt&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;//bluepie.in/attachments/outputWithXor.txt&#34; title=&#34;run#2&#34;&gt;outputWithXor.txt&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;//bluepie.in/attachments/outputWithXorWithAccumulator.txt&#34; title=&#34;run#3&#34;&gt;outputWithXorWithAccumulator.txt&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;//bluepie.in/attachments/outputWithXorWithRom.txt&#34; title=&#34;run#4&#34;&gt;outputWithXorWithRom.txt&lt;/a&gt;&lt;/p&gt;
-
 &lt;hr /&gt;
-
 &lt;h4 id=&#34;solving-thought-process&#34;&gt;solving thought process&lt;/h4&gt;
-
 &lt;p&gt;Download and check the different log files from above, analysing each of those health individually will give you an idea, well it give me an idea, all the different mechanics in the program were making sense to me now, the accumulator 1, accumulator 2, push instructions, pop instructions, load instructions&amp;hellip;&lt;/p&gt;
-
 &lt;p&gt;You see when the program first runs, it just load the bunch of numbers into the memory after that it performs mathematical operations to find prime numbers, on the moment it finds a prime number it performs an &lt;strong&gt;&lt;em&gt;XOR operation on a number that was initially loaded(a number that is in the top of the stack)&lt;/em&gt;&lt;/strong&gt; this produces an integer value, this integer value corresponds to an ASCII character.. yeah! integer values are converted to ASCII character and then print out. This is the basis of the URL generator.&lt;/p&gt;
-
 &lt;p&gt;So we have the encoded URL as numbers in memory, you can easily find this out in the log files that I have attach, so we can easily extract those numbers, find the prime numbers ourselves and then perform xor operation and get the URL, easy right? .&lt;/p&gt;
-
-&lt;p&gt;So I  cooked a a Python program that finds a series of prime numbers and then performs XOR operation. Running that I couldn&amp;rsquo;t find the URL it was printing random rubbish things.  After inspecting closely I found out that the prime numbers or not in a series,  are they were using some logic or or some other thing and only using certain prime numbers.  This was the part where I was stuck and couldn&amp;rsquo;t get my brain around this. I was literally stuck for 45 minutes and clearly missed out the clue that was in front of me, maybe my office activities made my brain dull.&lt;/p&gt;
-
+&lt;p&gt;So I cooked a a Python program that finds a series of prime numbers and then performs XOR operation. Running that I couldn&amp;rsquo;t find the URL it was printing random rubbish things. After inspecting closely I found out that the prime numbers or not in a series, are they were using some logic or or some other thing and only using certain prime numbers. This was the part where I was stuck and couldn&amp;rsquo;t get my brain around this. I was literally stuck for 45 minutes and clearly missed out the clue that was in front of me, maybe my office activities made my brain dull.&lt;/p&gt;
 &lt;p&gt;I found out that the &lt;strong&gt;&lt;em&gt;prime numbers are in-fact in series, but the series contained only prime numbers that where palindromic&lt;/em&gt;&lt;/strong&gt;. So I did some tweaks to my program and then executed it. Vola! I got the URL in an instant, with that URL I solved that challenge.&lt;/p&gt;
-
 &lt;h4 id=&#34;solution&#34;&gt;solution.&lt;/h4&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
 # Make sure to run the program in Python 3, I cooked up this program quickly so forgive my bad code,
-
 import operator
 toDecode = [17488, 16758, 16599, 16285, 16094, 15505, 15417, 14832, 14450, 13893, 13926, 13437, 12833, 12741, 12533, 11504, 11342, 10503, 10550, 10319, 975, 1007, 892, 893, 660, 743, 267, 344, 264, 339, 208, 216, 242, 172, 74, 49, 119, 113, 119,106]
-
 def checkprime(num):
-	flag=True
-	for x in range(3,(int(num/2))+1):
-		if(num%x==0):
-			flag=False
-	return flag
-
-
+flag=True
+for x in range(3,(int(num/2))+1):
+if(num%x==0):
+flag=False
+return flag
 def primeNumberGenerator():
-	primeNumberArr = [2,3,5,7]
-	for x in range(10,17488):
-		if(checkprime(x)):
-			primeNumberArr.append(x)
-	return primeNumberArr
-
+primeNumberArr = [2,3,5,7]
+for x in range(10,17488):
+if(checkprime(x)):
+primeNumberArr.append(x)
+return primeNumberArr
 def filterPalindromeFromPrime(primeNumberArr):
-	primePalindrome = []
-	for x in primeNumberArr:
-		if (str(x) == str(x)[::-1]):
-			primePalindrome.append(x)
-	return primePalindrome
-
+primePalindrome = []
+for x in primeNumberArr:
+if (str(x) == str(x)[::-1]):
+primePalindrome.append(x)
+return primePalindrome
 def decode(PrimePalindromeArr):
-	toDecode.reverse()
-	url = []
-	print(&amp;quot;toDecode Count:&amp;quot; +str(len(toDecode)))
-	print(&amp;quot;PrimePalindromeArr Count:&amp;quot; +str(len(PrimePalindromeArr)))
-	for index, value in enumerate(toDecode):
-		character = operator.xor(PrimePalindromeArr[index],value)
-		print(&amp;quot;palindromeValue:&amp;quot;+str(PrimePalindromeArr[index]))
-		print(&amp;quot;value:&amp;quot;+str(value))
-		print(&amp;quot;character:&amp;quot;+chr(character))
-		url.append(chr(character))
-
-	print(&amp;quot;url:&amp;quot;+&amp;quot;&amp;quot;.join(url))
-
-
-
+toDecode.reverse()
+url = []
+print(&amp;quot;toDecode Count:&amp;quot; +str(len(toDecode)))
+print(&amp;quot;PrimePalindromeArr Count:&amp;quot; +str(len(PrimePalindromeArr)))
+for index, value in enumerate(toDecode):
+character = operator.xor(PrimePalindromeArr[index],value)
+print(&amp;quot;palindromeValue:&amp;quot;+str(PrimePalindromeArr[index]))
+print(&amp;quot;value:&amp;quot;+str(value))
+print(&amp;quot;character:&amp;quot;+chr(character))
+url.append(chr(character))
+print(&amp;quot;url:&amp;quot;+&amp;quot;&amp;quot;.join(url))
 if __name__ == &#39;__main__&#39;:
-	primeArr = primeNumberGenerator()
-	PrimePalindromeArr = filterPalindromeFromPrime(primeArr)
-	decode(PrimePalindromeArr)
-
+primeArr = primeNumberGenerator()
+PrimePalindromeArr = filterPalindromeFromPrime(primeArr)
+decode(PrimePalindromeArr)
 # Also forgot to mention there where three batches of toDecode, join them entirely to get the complete URL
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;I did manage to solve the challenges,  but for the sake of this post I am gonna keep this short,  already the post is very huge and it took me so long to write this. I know I am a bad typer(could not type very fast). I promise you that I will post all the challenges that were challenging to me. Bye See ya soon.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ModSecurity</title>
-      <link>//bluepie.in/2019/05/modsecurity/</link>
-      <pubDate>Fri, 24 May 2019 23:32:43 +0530</pubDate>
-      
-      <guid>//bluepie.in/2019/05/modsecurity/</guid>
-      <description>
-
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;I did manage to solve the challenges, but for the sake of this post I am gonna keep this short, already the post is very huge and it took me so long to write this. I know I am a bad typer(could not type very fast). I promise you that I will post all the challenges that were challenging to me. Bye See ya soon.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>ModSecurity</title><link>//bluepie.in/2019/05/modsecurity/</link><pubDate>Fri, 24 May 2019 23:32:43 +0530</pubDate><guid>//bluepie.in/2019/05/modsecurity/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;so hello.. how are you doing..? how is life? im good, thank you!.
 &lt;strong&gt;&lt;em&gt;Status Update: I&amp;rsquo;ve seen better days tbh, i&amp;rsquo;ve faced a lot of challenges this month, im having burnout? wtf! what is that? you ask&amp;rsquo;? just google it.. In the entirety of my life, i never hated computers and programming/ developing in general, but recently i grown a haterd to computers and coding disgusts me.. like WTH? im like the polar opposite of myself, i never thought i would reach this moment in life, funny is&amp;rsquo;nt it? plus i&amp;rsquo;ve been going to my old happits - i blame being human for that.. i can never forget something and get over it can&amp;rsquo;t I.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Thankfully for burnout I got people on my back, with their help and advice, i&amp;rsquo;ve been taking breaks but the breaks are not enough, goto go to work?!! i miss old days.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
 &lt;hr /&gt;
-
 &lt;h2 id=&#34;i-ve-had-a-chance-to-work-on-modsecurity-and-im-greatfull-for-that-i-gained-a-new-skill-kudos&#34;&gt;&amp;gt; I&amp;rsquo;ve had a chance to work on modSecurity and im greatfull for that! I gained a new skill! kudos!!.&lt;/h2&gt;
-
 &lt;hr /&gt;
-
 &lt;h3 id=&#34;why&#34;&gt;Why?&lt;/h3&gt;
-
-&lt;p&gt;what is modSec? modSecurity is a waf, waf is like anti virus for servers, controls how the servers responds to requests and what responses are sent out. modSecurity is openSource so  using is completely free and it is a must in pci compliance, modSec works based on rules that fine tuned, identified as malicious and are wrote down, the rules are the building blocks of modsecurity. a better rule set equals better protection, this is  why you see many vendors who branched out from modSecurity and provide their own set of rules as their enterprise solutions like for example: atomicorp, mlware expert, Trustwave, trend micro, etc.&lt;/p&gt;
-
+&lt;p&gt;what is modSec? modSecurity is a waf, waf is like anti virus for servers, controls how the servers responds to requests and what responses are sent out. modSecurity is openSource so using is completely free and it is a must in pci compliance, modSec works based on rules that fine tuned, identified as malicious and are wrote down, the rules are the building blocks of modsecurity. a better rule set equals better protection, this is why you see many vendors who branched out from modSecurity and provide their own set of rules as their enterprise solutions like for example: atomicorp, mlware expert, Trustwave, trend micro, etc.&lt;/p&gt;
 &lt;p&gt;if you want to know about modsecurity you should know a little bit of history of mod security, the rule set history, the latest in the rules of modSecurity is the core rule set 3.0+, before this release, the modSecrity rules create many false positives, but after update some big changes are the new blocking mode, curated rule-set and better detection.&lt;/p&gt;
-
 &lt;h3 id=&#34;so-what-is-the-new-blocking-mode&#34;&gt;So what is the new blocking mode?&lt;/h3&gt;
-
 &lt;p&gt;By default the anomaly scoring mode(new blocking mode) is activated, with
-&amp;ldquo;SecRuleEngine DetectionOnly&amp;rdquo;,  you have to turn this to &amp;ldquo;SecRuleEngine On&amp;rdquo;
+&amp;ldquo;SecRuleEngine DetectionOnly&amp;rdquo;, you have to turn this to &amp;ldquo;SecRuleEngine On&amp;rdquo;
 to block the malicious requests. &lt;strong&gt;&lt;em&gt;(first of all you install modSecurity, leave the detection phase on, collect some logs - analyse them - tweak the rules - then turn on the secRuleEngine..)&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;if SecDefaultAction is set to “phase:2,deny,log&amp;rdquo;  then modSecurity is working by anomaly scoring mode. next thing you must know about is &amp;ldquo;Anomaly scoring severity levels&amp;rdquo; and &amp;ldquo; Anomaly scoring threshold levels&amp;rdquo; (for blocking mostly)&lt;/p&gt;
-
+&lt;p&gt;if SecDefaultAction is set to “phase:2,deny,log&amp;rdquo; then modSecurity is working by anomaly scoring mode. next thing you must know about is &amp;ldquo;Anomaly scoring severity levels&amp;rdquo; and &amp;ldquo; Anomaly scoring threshold levels&amp;rdquo; (for blocking mostly)&lt;/p&gt;
 &lt;h4 id=&#34;what-it-does&#34;&gt;what it does?&lt;/h4&gt;
-
 &lt;p&gt;It does not block the request immediately but allows the request to pass through after assigning a score to the request, if the request any other rules another score is added to it, so there are 5 different levels where the rules are applied to the request, the scores are evaluated at the phase 3 for Inbound rules and 4 for outbound requests, yea you are right modsec scans the output content too and slaps score on it, if it sees something malicious.
 the rules are present in the rule-set too as&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SecAction “phase:1,id:’981208’,t:none,nolog,pass,\
 setvar:tx.inbound_anomaly_score_level=5”
 SecAction “phase:1,id:’981209’,t:none,nolog,pass,\
 setvar:tx.outbound_anomaly_score_level=4”
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;the inbound rules files are present in the file named along the line of &amp;ldquo;inbound_blocking.conf&amp;rdquo; and same as for the outbound request &amp;ldquo;outbound_blocking.conf&amp;rdquo;.&lt;/p&gt;
-
 &lt;p&gt;Based on severity anomaly scoring mode has different levels with scores by default&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;CRITICAL with a score of 5
 Error with 4,
 warning with 3,
 notice with 2,
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;hr /&gt;
-
 &lt;h3 id=&#34;note-modsecurity-must-be-tweaked-to-individual-applications-not-just-install-the-default-configuration-infact-the-authors-of-modsecurity-strongly-advice-this-too&#34;&gt;&amp;gt;Note: modSecurity must be tweaked to individual applications, not just install the default configuration, infact the authors of modsecurity strongly advice this too.&lt;/h3&gt;
-
 &lt;h3 id=&#34;about-audit-logs-someother-aspects&#34;&gt;About audit logs - SomeOther aspects.&lt;/h3&gt;
-
 &lt;p&gt;Audit logs provide the entire traffic data &lt;strong&gt;&lt;em&gt;if &amp;ldquo;logging is enabled that is&amp;rdquo;.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
 &lt;h5 id=&#34;if-response-code-is-500-we-are-logging-that&#34;&gt;if response code is 500 we are logging that.&lt;/h5&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SecAuditLogRelevantStatus “^(?:5|4(?!04))”
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h5 id=&#34;the-following-parts-contain-the-necessary-information-for-each-request&#34;&gt;the following parts contain the necessary information for each request.&lt;/h5&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SecAuditLogParts ABCEFHZ
 • A: Audit log header
 • B: Request headers
@@ -1292,404 +974,214 @@ notice with 2,
 • H: Audit log trailer
 • Z: Audit log footer
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h3 id=&#34;while-logging-sensitive-data-in-logs&#34;&gt;While logging - Sensitive Data in Logs&lt;/h3&gt;
-
 &lt;p&gt;Be careful while logging the data, sensitive data are captured in logs too like passwords, creditcard numbers, you dont want that do you?&lt;/p&gt;
-
 &lt;p&gt;the below log you see credit card number captured in part c.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;--8472b290-C--
 paymentType=default&amp;amp;_D%3ApaymentType=+&amp;amp;
 creditCardNumber=***************&amp;amp;_D%3AcreditCardNumber=+&amp;amp;cid=6802
 &amp;amp;_D%3Acid=+&amp;amp;selCreditCardType=Visa&amp;amp;_D%3AselCreditCardType
 =+&amp;amp;_D%3AexpirationMonth=+&amp;amp;expirationMon
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;you can mitigate this with a rule like&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;SecRule &amp;amp;ARGS:password “@eq 1” “phase:5,t:none,id:’901’,nolog,pass,\
 sanitiseInput:pwd
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;now in audit log c section,&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;--c983684a-C--
 log=admin&amp;amp;password=********&amp;amp;submit=Login+%C2%BB&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;with the rule applied the password is now obscured.&lt;/p&gt;
-
 &lt;h3 id=&#34;vitual-patching&#34;&gt;vitual Patching&lt;/h3&gt;
-
-&lt;p&gt;So ModSecurity has a ton of features you should not miss out is virtual patching,  where would you use this you ask? well.. you found a vulnerability in your application and while you wait for the developers to fix that you could do virutual patching with the wide variety of rules available in modSecurity.&lt;/p&gt;
-
+&lt;p&gt;So ModSecurity has a ton of features you should not miss out is virtual patching, where would you use this you ask? well.. you found a vulnerability in your application and while you wait for the developers to fix that you could do virutual patching with the wide variety of rules available in modSecurity.&lt;/p&gt;
 &lt;hr /&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;The post is getting huge and I find writing blogs tiresome (bad at typing i guess). but i still do it cuz its for the future me.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;I didn&amp;rsquo;nt cover everything and i assumed u knew little about modSecurity during halfway, I just couln&amp;rsquo;t type the whole entirety, just contact me if you want to know more&amp;hellip;bye!&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Android Service Binders</title>
-      <link>//bluepie.in/2019/04/android-service-binders/</link>
-      <pubDate>Sun, 28 Apr 2019 18:24:31 +0530</pubDate>
-      
-      <guid>//bluepie.in/2019/04/android-service-binders/</guid>
-      <description>
-
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;I didn&amp;rsquo;nt cover everything and i assumed u knew little about modSecurity during halfway, I just couln&amp;rsquo;t type the whole entirety, just contact me if you want to know more&amp;hellip;bye!&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>Android Service Binders</title><link>//bluepie.in/2019/04/android-service-binders/</link><pubDate>Sun, 28 Apr 2019 18:24:31 +0530</pubDate><guid>//bluepie.in/2019/04/android-service-binders/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;hola amigos&amp;rsquo;, how are you guys doing? im fine thank you!.
 &lt;strong&gt;&lt;em&gt;Status Update: About last week, I have covered some ground interms of development in old passion projects, the start of the week was great, but at the end of the week it got worse, nevertheless im happy that i survived this week &amp;gt;_&amp;lt;. Saw avengers end game the other day which was cool, during part-I I was studying, but for part-II -an adult going to office (feels wierd even to think, So much change in just one year), Personally nothing great happened, because of the mind that i have, I had the same bs.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;hr /&gt;
-
 &lt;h2 id=&#34;i-m-gona-explain-about-how-to-communicate-with-android-services&#34;&gt;&amp;gt; I&amp;rsquo;m gona explain about how to communicate with android services.&lt;/h2&gt;
-
 &lt;hr /&gt;
-
 &lt;h3 id=&#34;why-backstory&#34;&gt;why? backstory..&lt;/h3&gt;
-
 &lt;p&gt;B&amp;rsquo;coz when I was at the begining stages of my android life, I had some use case that i had to interact with service, I know java somebit but I was no java expert (haven&amp;rsquo;t done any big projects in java &lt;strong&gt;&lt;em&gt;YET &amp;gt;.&amp;gt; (you wouldn&amp;rsquo;t know)&lt;/em&gt;&lt;/strong&gt;). So without any research I went staright in, I thought i could do with interface with my own implementation that came to an dead end with problems. Later i found out binders.. stupid me.
 &lt;img src=&#34;//bluepie.in/images/posts/android_service_binder_Interface.png&#34; alt=&#34;Interface&#34; /&gt;&lt;/p&gt;
-
 &lt;h3 id=&#34;how&#34;&gt;How?&lt;/h3&gt;
-
 &lt;p&gt;Well let me show you. First of all you must know about IBinder interface (available since android&amp;rsquo;s starting stages), then you should know about Binder class which implements the IBinder interface, keep in mind there are a lot of other ways around (as i have already mentioned in the previous posts).&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;h3 id=&#34;it-will-be-better-if-i-explain-this-in-code-as-it-will-be-much-easier-to-understand&#34;&gt;It will be better if i explain this in code, as it will be much easier to understand.&lt;/h3&gt;
 &lt;/blockquote&gt;
-
 &lt;h5 id=&#34;create-a-class-extending-the-class-binder&#34;&gt;create a class extending the class binder.&lt;/h5&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class CustomBinderName extends Binder {
-
-     private sericeName serviceNameInterface;
-
-     /**
-     * gets Serivce context for each service,
-     */
-    public CustomBinderName(Context serviceContext){
-        serviceNameInterface = (serviceName) serviceContext;
-    }
-
-     /**
-     * getService,
-     * return serviceNameInterface(this instance), which is what we need.
-     * calling contract - which we use in Activity.
-     */
-    public serviceName getService(){
-        return serviceNameInterface;
-    }
+private sericeName serviceNameInterface;
+/**
+* gets Serivce context for each service,
+*/
+public CustomBinderName(Context serviceContext){
+serviceNameInterface = (serviceName) serviceContext;
+}
+/**
+* getService,
+* return serviceNameInterface(this instance), which is what we need.
+* calling contract - which we use in Activity.
+*/
+public serviceName getService(){
+return serviceNameInterface;
+}
 }
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h5 id=&#34;then-implementing-serviceconnection&#34;&gt;then implementing serviceConnection.&lt;/h5&gt;
-
 &lt;p&gt;The android os calls the contract methods inside this class (interface after implementation), these methods are called from the main thread of the application, like many other callbacks from the system.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    /**
-     * ServiceConnection  interface,
-     * calling bindService - contract - our custom implementation,
-     * calls onserviceConnection with componenetName and binder,
-     *
-     * we bind it with customClass implementation of customBinderNameBinder
-     * through the link, we get and save service on local serviceBoundLink.
-     *
-     */
-    private ServiceConnection serviceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            CustomBinderName customBinderName = (CustomBinderName) iBinder;
-            serviceBoundLink = customBinderName.getService(); 
-            isServiceBound = true; 
-
-         }
-
-         @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-            isServiceBound = false;
-        }
-    };
- }
-
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; /**
+* ServiceConnection interface,
+* calling bindService - contract - our custom implementation,
+* calls onserviceConnection with componenetName and binder,
+*
+* we bind it with customClass implementation of customBinderNameBinder
+* through the link, we get and save service on local serviceBoundLink.
+*
+*/
+private ServiceConnection serviceConnection = new ServiceConnection() {
+@Override
+public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+CustomBinderName customBinderName = (CustomBinderName) iBinder;
+serviceBoundLink = customBinderName.getService();
+isServiceBound = true;
+}
+@Override
+public void onServiceDisconnected(ComponentName componentName) {
+isServiceBound = false;
+}
+};
+}
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h5 id=&#34;implementing-necessary-classes-on-the-service&#34;&gt;Implementing necessary classes on the service.&lt;/h5&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    /**
-     * needs to return Interface Ibinder,
-     * onBind initiated on bindService (creation of service),
-     */
-
-     @Override
-    public IBinder onBind(Intent intent) {
-        return customBinderName;
-    }
-
-     /**
-     * Need to be of type IBinder.
-     * CustomBinderName is constructed such a was,
-     *  instance of customBinderName has to be passed in 
-     *     via constructor, since this is how we implemented it.
-     */
-    private final IBinder customBinderName = new CustomBinderName(this);
-
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; /**
+* needs to return Interface Ibinder,
+* onBind initiated on bindService (creation of service),
+*/
+@Override
+public IBinder onBind(Intent intent) {
+return customBinderName;
+}
+/**
+* Need to be of type IBinder.
+* CustomBinderName is constructed such a was,
+* instance of customBinderName has to be passed in
+* via constructor, since this is how we implemented it.
+*/
+private final IBinder customBinderName = new CustomBinderName(this);
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h5 id=&#34;binding-the-service-with-some-activity&#34;&gt;Binding the service, with some activity.&lt;/h5&gt;
-
 &lt;p&gt;During service creation call bindService, passing in our implementation of serviceConnection,
 then the global BIND_AUTO_CREATE (usually bind_auto_create, since most of the time, service is not created before at this point), the system will take care of the rest.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;        /*
-        * intent for the service, with class,
-        * After start, bind the service(link) with local intance so its
-        *   (service) methods can be called.
-        */
-        bindService(intent,serviceConnection,Context.BIND_AUTO_CREATE);
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; /*
+* intent for the service, with class,
+* After start, bind the service(link) with local intance so its
+* (service) methods can be called.
+*/
+bindService(intent,serviceConnection,Context.BIND_AUTO_CREATE);
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h5 id=&#34;be-sure-to-remove-unbind-the-service-connection-else-you-ll-end-up-with-memory-leaking&#34;&gt;Be sure to remove unbind the service, connection.. else you&amp;rsquo;ll end up with memory leaking.&lt;/h5&gt;
-
 &lt;hr /&gt;
-
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;bye see ya next time,  by the time im making this post public, eveything changed to the polar opposite.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Blog Migration</title>
-      <link>//bluepie.in/2019/04/blog-migration/</link>
-      <pubDate>Wed, 24 Apr 2019 03:02:16 +0530</pubDate>
-      
-      <guid>//bluepie.in/2019/04/blog-migration/</guid>
-      <description>
-
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;bye see ya next time, by the time im making this post public, eveything changed to the polar opposite.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Blog Migration</title><link>//bluepie.in/2019/04/blog-migration/</link><pubDate>Wed, 24 Apr 2019 03:02:16 +0530</pubDate><guid>//bluepie.in/2019/04/blog-migration/</guid><description>
 &lt;blockquote&gt;
-&lt;p&gt;heya!,  this wont be a rant..trust me!,  don&amp;rsquo;t worry, I lost my cool in the last few posts, well thats aside, let me begin.&lt;/p&gt;
+&lt;p&gt;heya!, this wont be a rant..trust me!, don&amp;rsquo;t worry, I lost my cool in the last few posts, well thats aside, let me begin.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;hr /&gt;
-
 &lt;h2 id=&#34;migration&#34;&gt;migration&lt;/h2&gt;
-
-&lt;p&gt;so i have been planning to migrate my blog from aws to replace it with jekyll, hexo,..etc,  The main reason being, i run my blog in php and thus intend to replace it with the mentioned above, The another this that I keep pondering over and over is that,  if i abandon my aws blog, I have to convert my previous post from the blog to the new version,  reformat, reupload the images as well. Not to mention i have to configure dns(though it will take only a small amount of time), configure what comment system that i will to install in, and the list goes on and on.&lt;/p&gt;
-
+&lt;p&gt;so i have been planning to migrate my blog from aws to replace it with jekyll, hexo,..etc, The main reason being, i run my blog in php and thus intend to replace it with the mentioned above, The another this that I keep pondering over and over is that, if i abandon my aws blog, I have to convert my previous post from the blog to the new version, reformat, reupload the images as well. Not to mention i have to configure dns(though it will take only a small amount of time), configure what comment system that i will to install in, and the list goes on and on.&lt;/p&gt;
 &lt;h2 id=&#34;why&#34;&gt;why&lt;/h2&gt;
-
-&lt;p&gt;Since hosting it in php, for each request page will be generated dynamically, it doesn&amp;rsquo;t matter here but this causes cpu load, considering php if there are any bugs in the code it will lead to data breaches (lol, since i dont have anything that important its not important too.). If it were hosting with only html, css, js, images and etc, the site load time will be very quick,  plus you don&amp;rsquo;t have to pay extra for the high resources that is needed for handling php pages, infact if hosting on github pages it is completely free.&lt;/p&gt;
-
+&lt;p&gt;Since hosting it in php, for each request page will be generated dynamically, it doesn&amp;rsquo;t matter here but this causes cpu load, considering php if there are any bugs in the code it will lead to data breaches (lol, since i dont have anything that important its not important too.). If it were hosting with only html, css, js, images and etc, the site load time will be very quick, plus you don&amp;rsquo;t have to pay extra for the high resources that is needed for handling php pages, infact if hosting on github pages it is completely free.&lt;/p&gt;
 &lt;h2 id=&#34;choices&#34;&gt;choices&lt;/h2&gt;
-
-&lt;p&gt;So there are a ton of choices if you want to do the same , the first thing would be jekyll, since most of the people choose that because of the huge variety of themes that comes with jekyll, its developed in ruby so installing the dependencies might be hard tho if you are new, then there is hexo,  which is fully developed in js, you just have to install npm, then install dependencies  with npm,  that is it, interms of ease of use, you can choose this instead of jekyll. There are many alternatives,  it finally comes down to what you choose to use.&lt;/p&gt;
-
+&lt;p&gt;So there are a ton of choices if you want to do the same , the first thing would be jekyll, since most of the people choose that because of the huge variety of themes that comes with jekyll, its developed in ruby so installing the dependencies might be hard tho if you are new, then there is hexo, which is fully developed in js, you just have to install npm, then install dependencies with npm, that is it, interms of ease of use, you can choose this instead of jekyll. There are many alternatives, it finally comes down to what you choose to use.&lt;/p&gt;
 &lt;h2 id=&#34;what-next&#34;&gt;what next?&lt;/h2&gt;
-
 &lt;p&gt;After generating the site using the defined framework, you now have a working site which is entirely static and works completely without any hosting restrictions and load-time, this then can be deployed anywhere. For example you could deploy it to AWS, GCP or any-other hosting provider, What i did was i deployed it to GitHub hosting and it is great. You can have a demo of the same here. &lt;a href=&#34;http://gopinath001.github.io/blog&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to my deployed site.&lt;/a&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;additional-things&#34;&gt;Additional things?&lt;/h2&gt;
-
-&lt;p&gt;Well depending upon the hosting provider that you choose you can do many things, park your domain (in-case of free hosting/paid hosting), installing ssl certificate, In case of github having own custom domain and sub-domain..etc, well it certainly depends, the possibilities are endless.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title> A peek into my yunger self.		</title>
-      <link>//bluepie.in/2019/03/a-peek-into-my-yunger-self/</link>
-      <pubDate>Sat, 30 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>//bluepie.in/2019/03/a-peek-into-my-yunger-self/</guid>
-      <description>
-
+&lt;p&gt;Well depending upon the hosting provider that you choose you can do many things, park your domain (in-case of free hosting/paid hosting), installing ssl certificate, In case of github having own custom domain and sub-domain..etc, well it certainly depends, the possibilities are endless.&lt;/p&gt;</description></item><item><title> A peek into my yunger self.</title><link>//bluepie.in/2019/03/a-peek-into-my-yunger-self/</link><pubDate>Sat, 30 Mar 2019 00:00:00 +0000</pubDate><guid>//bluepie.in/2019/03/a-peek-into-my-yunger-self/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;Hey guys how y&amp;rsquo;all been,&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;i&amp;rsquo;ve been good, in fact i am happy after a long time, So im gona love talking about this, so here is the thing before like 7-8 months (before i got my job) i was fully involved in reverse engineering, modding mostly windows, but also old linux machines with security flaws to train for some capture the flags and the plain curisity of&amp;hellip; lets say how to break stuff. On the windows part  i was mostly doing with debuggers, scripts and memory. So here i am explaining the tale of how i started my venture into c# and security, back in the days i used to do admire crack realeases, trainers,  etc. So at the begining when i was in 10th grade i already knew that i was going in the path of a software and choose computer science in the next year (senior year).&lt;/p&gt;
-
 &lt;p&gt;I began to learn form core about debugging. processors, assembly, etc, At the same time that i was doing that i began to have an interest in trainers and what not, but the main problem was i knew how to find memeoy addresses by debugging and scanning through different tools but i did not know how to do them programmatically. so the venture started in c#, since there was already a ton of source available in visual basic and i knew c and object oriented programming and c# is similar to java in many ways and the fact that i was mostly working  in windows made me lean over c#.&lt;/p&gt;
-
 &lt;p&gt;At the begining it was tough i didn&amp;rsquo;t know where to start, but little by little i learned at that time and was doing projects by using a custom library for my projects involving meomory stuff, so when i was in home recently and going through my old desktop i found the lib and soo i took it seperately dusted it off worked on that for cleaning it made sure it worked on the latest build, built a seperate dill, compiled and released it on github, Looking at that project after a long time, made me release why i even choose this field, at those days everything was fascinating to me and i wanted to learn everything, So for any new beginners entering into reversing, modding, creating trainers and c# I have created this repo for them. Most stuff on usage, reason and lib  are on the github repo given below.&lt;/p&gt;
-
-&lt;h3 id=&#34;source-code-link-link-to-my-repo-https-github-com-gopinath001-memorypatternscanner&#34;&gt;Source Code link &lt;a href=&#34;https://github.com/Gopinath001/MemoryPatternScanner&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to my repo.&lt;/a&gt;&lt;/h3&gt;
-</description>
-    </item>
-    
-    <item>
-      <title> AI - with algorithms.(Rant mostly)		</title>
-      <link>//bluepie.in/2019/03/ai-with-algorithms-rant-mostly/</link>
-      <pubDate>Thu, 28 Mar 2019 23:27:50 +0000</pubDate>
-      
-      <guid>//bluepie.in/2019/03/ai-with-algorithms-rant-mostly/</guid>
-      <description>
-
+&lt;h3 id=&#34;source-code-link-link-to-my-repo-https-github-com-gopinath001-memorypatternscanner&#34;&gt;Source Code link &lt;a href=&#34;https://github.com/Gopinath001/MemoryPatternScanner&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to my repo.&lt;/a&gt;&lt;/h3&gt;</description></item><item><title> AI - with algorithms.(Rant mostly)</title><link>//bluepie.in/2019/03/ai-with-algorithms-rant-mostly/</link><pubDate>Thu, 28 Mar 2019 23:27:50 +0000</pubDate><guid>//bluepie.in/2019/03/ai-with-algorithms-rant-mostly/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;Well hello guys! How yr&amp;rsquo; been.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;h2 id=&#34;what-is-going-on&#34;&gt;what is going on.&lt;/h2&gt;
-
 &lt;p&gt;i have never thought of me doing this in my life, but this situation has come, so in the past month i have been trying to post and update whats been going on. But i am unable to complete what i started and it is bothering me still now, after that happened i stumbled upon an another old project of mine, which i cleaned up and finished it in a short span and btw this is the project that i am talking about that i didn&amp;rsquo;t complete.&lt;/p&gt;
-
 &lt;h2 id=&#34;what-happened&#34;&gt;what happened.&lt;/h2&gt;
-
 &lt;p&gt;So it&amp;rsquo;s been a tough tight scheduled week. I was juggling with a lot of things, so this event came up &amp;lsquo;do something with ai&amp;rsquo;,  this is a willingness event, which means I can choose if I wanted to join (which didn&amp;rsquo;t happen by the way), So keeping in mind that I was already involved in soo much things, it was definitely overwhelming from my end,  considering that I had set my goals to finishing a book, complete a personal project,  and I was already dealing with personal problems and I had no interest in ai, this was not the call for me, So I was forced to join by my peers, so I had to do my best, at least for my satisfaction. I was entering into the territory of ai, so the problem statement is not chosen by me, I was told to implement someone else cooked up, I didn&amp;rsquo;t knew that would not work at that time, looking back now, I was blinded by simplified self. So the brain washing part comes along, where my subconscious was dragged by manipulation and imagination that I didn&amp;rsquo;t need, its a long chain of manipulation from the top,  Damn how did I fell for that, looking back I fell for most things..stupid things..things that are not decided by me.&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;Enough of this rant, I had to do this for the sake of my future self.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;h2 id=&#34;the-disaster&#34;&gt;The Disaster&lt;/h2&gt;
-
 &lt;p&gt;Let&amp;rsquo;s get technical here shall we, but before that let me get this straight, I&amp;rsquo;m new to this and basically a starter. So everything that I do from here will be available on my github page, for my little project of mine, I have to predict the next date and the date must corelate to some predefined value, on this date calculated from now I will eat vanilla icecream. This is a pretty damn challenge. So my first approach os going about this with neural networks, since it&amp;rsquo;s the new tech and predicting the date is not easy. So after a while, I finished a working model and was told that I could not do this.. it was too big and I was launched at by a data scientist guy..(getting personal here)..looking back, why did I even bother acknowledging him you know? Why?.  I never learn from my mistakes, so I decided to go with the algorithm part as their suggestions, I mean it was hard.. dragging myself over something (choosing a different path from neural networks). I&amp;rsquo;ll cover two parts one for neural networks and the other for algorithms, so for the neural networks part,  i decided to predict using images, so  i have an eye open for tensorflow, what could be fun? predicting captcha from websites seems like a great idea, plus i have already seen something similar but haven&amp;rsquo;t got the time to try it out, so i&amp;rsquo;ve searched for captcha image dataset and found several captcha datasets from kaggle, so i went and downloaded from kaggle,&lt;/p&gt;
-
 &lt;h2 id=&#34;moved-on-not-my-cup-of-tea&#34;&gt;Moved on - Not my cup of tea?&lt;/h2&gt;
-
 &lt;p&gt;This post is taking a long amount of time im going to post the source from bitbucket here, the main reason being i dont want to rant and bitch about something and gradually lost interest from working on this and i started working on an old project of mine that i undertook which i am going to post in the upcomming days, this post took a long amount of time that i did not expect, but it&amp;rsquo;s fine nevertheless, im just going up the stairs step by step that i what i say to myself.,, darn&lt;/p&gt;
-
-&lt;h3 id=&#34;repo-link-https-bitbucket-org-bluepie-guessing-captcha-with-ai-src-master-here-we-go&#34;&gt;&lt;a href=&#34;https://bitbucket.org/Bluepie/guessing-captcha-with-ai./src/master/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;repo link&lt;/a&gt; here we go!,&lt;/h3&gt;
-</description>
-    </item>
-    
-    <item>
-      <title> ssh tunnel		</title>
-      <link>//bluepie.in/2019/01/ssh-tunnel/</link>
-      <pubDate>Fri, 18 Jan 2019 06:00:11 +0000</pubDate>
-      
-      <guid>//bluepie.in/2019/01/ssh-tunnel/</guid>
-      <description>
-
+&lt;h3 id=&#34;repo-link-https-bitbucket-org-bluepie-guessing-captcha-with-ai-src-master-here-we-go&#34;&gt;&lt;a href=&#34;https://bitbucket.org/Bluepie/guessing-captcha-with-ai./src/master/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;repo link&lt;/a&gt; here we go!,&lt;/h3&gt;</description></item><item><title> ssh tunnel</title><link>//bluepie.in/2019/01/ssh-tunnel/</link><pubDate>Fri, 18 Jan 2019 06:00:11 +0000</pubDate><guid>//bluepie.in/2019/01/ssh-tunnel/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;hey there!&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;How are you guys doing, hope everyone is doing good, im doing great btw, So today i wana talk about something that i have been using a lot lately in work and personal use, the thing that i wana talk about is ssh tunneling, its a huge topic, i have been using it ever since i learned about ssh in college, So what is this?&lt;/p&gt;
-
 &lt;h2 id=&#34;info-scenario-and-usage&#34;&gt;Info, Scenario and usage&lt;/h2&gt;
-
 &lt;p&gt;You guys might have heard about vpn, nowadays its everywhere it is  basically that except that its done via ssh. SSH known as secure shell is a remote login feature, running on a specified port, what do  i mean by that is, suppose u have a computer in your home and you want to login to that computer from your office or anyother place other than your home, then you go for ssh, often &amp;ldquo;linux gurus&amp;rdquo; go for this, since this only provides terminal access.&lt;/p&gt;
-
 &lt;p&gt;Further-more in the old days this was used to play game with friends, (it could be done in a variety of different ways, first you create a server on your end) then through ssh tunnel your friend should connect to your computer via ssh credentials, (assuming you know port forwarding). after this setup process, your friend will be treated as if he is in your local network, in which case your both can play games with no issues, (this method assumes the following: you know how to host a game server-involving port settings, how your would allow a connection over your firewall to connect to your system, client-end i.e that is your friend knows about ssh tunnell, and more importantly your are will to expose theresource for the game server to another person since he is in your network).&lt;/p&gt;
-
 &lt;p&gt;This could work in a different way too..  if you/your friend/ group of friends have a server your dont have pto expose your own commuter network, port forwarding, etc, i.e in simple terms - connect to the server first with the port that is running for game server &amp;amp; the port in which the server should listen to, and thats it,  Any connection made to the server with the particular port will be rediected to your computer thrugh ssh tunnel. If you understand what i just said, this is mindblowing, many a things could be achieved by this, this speaking on the beginner level..that too for running games.&lt;/p&gt;
-
 &lt;p&gt;Imagine what this could do for the developers, this is a heaven for easier work flow, but most often this is only used as an option to bypass firewall, for devops purposes ofcourse, &lt;strong&gt;&lt;em&gt;-_-&amp;rdquo;&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
-
 &lt;h2 id=&#34;noob-usage&#34;&gt;Noob usage.&lt;/h2&gt;
-
 &lt;p&gt;I&amp;rsquo;m gona brief over the ssh being used as vpn! you heard right, vpn! as i mentioned it earlier, so setting up vpn on your server could take multiple steps involing huge time, but ssh is enabled by default, what is only needed is some few lines of configuration,&lt;/p&gt;
-
 &lt;p&gt;For most cases the configuration that needed is of below type.&lt;br /&gt;
 Note:&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;If you are on windows make sure you have enabled ssh from optinal features, this is mandtory incase if you want to use inbuilt ssh client on windows, you could also install third party softwares if you want.&lt;/li&gt;
 &lt;li&gt;If you are running a custom server box like me,  (i have a centos box running) you would have to configure by changing sshd_config inside &amp;lsquo;/etc/ssh/sshd_config&amp;rsquo;.&lt;/li&gt;
 &lt;li&gt;After making changes make sure you have restarted the sshd service.&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;hr /&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;    for most part you would have to only the important marked ones*AllowAgentForwarding yes
-    *AllowTcpForwarding all
-    *GatewayPorts yes
-    AllowStreamLocalForwarding all
-
-    pop open a terminal then do the following.
-    ssh -D localport -f -C -q -N server_address
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt; for most part you would have to only the important marked ones*AllowAgentForwarding yes
+*AllowTcpForwarding all
+*GatewayPorts yes
+AllowStreamLocalForwarding all
+pop open a terminal then do the following.
+ssh -D localport -f -C -q -N server_address
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;For example:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh -D 7890 -f  -C -q -N jess-user@jupiter-server01-dynamip-massoc-address.com.
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;By using the above config you would have now setup a service listening on port 7890, just make sure to use the specific port to connect to the internet.(route all traffic through the port).&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;What i mean by that is, go to proxy settings on your system/browser/etc, set &amp;lsquo;127.0.0.1&amp;rsquo; in hostname &amp;amp; &amp;lsquo;7890&amp;rsquo; in port. You have done ssh tunneling thats it. Just like a vpn.&lt;/p&gt;
-
 &lt;p&gt;Note: Any request made to that port will be treated like you are doing from the server box sitting somewhere else. (I&amp;rsquo;m saying ANY request for a reason*).&lt;/p&gt;
-
-&lt;p&gt;&amp;lt; 3. Im gona stop here, this is just scratching the surface but there is lot more, maybe otherthings at a different time.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title> Touch Typing.		</title>
-      <link>//bluepie.in/2018/11/touch-typing/</link>
-      <pubDate>Mon, 26 Nov 2018 06:23:52 +0000</pubDate>
-      
-      <guid>//bluepie.in/2018/11/touch-typing/</guid>
-      <description>
-
+&lt;p&gt;&amp;lt; 3. Im gona stop here, this is just scratching the surface but there is lot more, maybe otherthings at a different time.&lt;/p&gt;</description></item><item><title> Touch Typing.</title><link>//bluepie.in/2018/11/touch-typing/</link><pubDate>Mon, 26 Nov 2018 06:23:52 +0000</pubDate><guid>//bluepie.in/2018/11/touch-typing/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;Hi there,&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;h2 id=&#34;reality-is-way-different-update-on-current-things&#34;&gt;Reality is way different - Update on current things.&lt;/h2&gt;
-
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;I know i&amp;rsquo;ve been busy, but i can make up to it. Status update First: The last few weeks,infact the last month is very odd and had a busy schedule. I could&amp;rsquo;nt concentrate on few other projects, Office work took over my life, to be exact!.I&amp;rsquo;ve been the preacher of saying Complete office work early as possible and leave office by 8pm, later spend time for yourself(doing your own thing) like for an example updating blog. To think that i used to say those things but in reality i ended up like this!.. makes me wana just laugh. The first thing i realised is that i dont have not that much time for thinking.. like a zombie wandering around, life is just moving in an unknown path, Going back to my mates and spending the valuable time is priceless and makes me focus on things better, Maybe currently im not surrended by people like that in places I work and live. well that&amp;rsquo;s for update.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;the-thing-i-did&#34;&gt;The thing i did&lt;/h2&gt;
-
-&lt;p&gt;So what is touch typing? typing without seeing the keyboards, using the f&amp;amp;j as references because they have bumps on them, you feel them as a reference, You can recognise this by the word  &amp;ldquo;Type-Writer&amp;rdquo;,  back in the days they used ti have type writing class everywhere,  even now there are classes but are fewer and fewer nowadays.  Anywhere there are fewer and fewer people trying to type in this way because they have developed their own way of typing. I have taken this task some time before, i would think like i&amp;rsquo;d learn part of the system and remaining part in upcoming days,  but after this section, i would never go back, maybe i forget that i have to do that or i&amp;rsquo;ll get something else that I have to do and totally forget about all about it.eventually when i was involved in more and more typing I developed my own typing style which is not perfect but helped me to type faster upto 40 words per minute, which is somewhat good, but i would type with only some of my fingers, which in turn hurts and became tired after somebit. This was not enough and finally i decided I&amp;rsquo;d give it a try, i know i might go along with this for a few days but eventually will give up on this, so as far as i&amp;rsquo;m concerned i have to complete this quick, like real quick, So i decided to complete all the course on a single go(with atleast 90% accuracy). So it started, i&amp;rsquo;ve worked for 8 hours straight &amp;amp; completed everything, i knew how to type now but the problem is practicing, to make it faster and better. The other problem is my old typing habbits began to affect me, the new typing style was slow, thus while typing in my work it started to affect, thus had to go back to old style for completing my work faster, from then on its been a constant struggle between switching between different styles, Everyone should learn this, its super comfy. Besides it&amp;rsquo;s the official way to type, It&amp;rsquo;ll be massively helpful if done at a young age, Trust me on this one, Anyhooo0oo I typed this whole post with the new style of typing. One could say that is the reason why it took this long for the post, lol. See you next time!.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title> file Manager contd..		</title>
-      <link>//bluepie.in/2018/10/file-manager-contd/</link>
-      <pubDate>Tue, 30 Oct 2018 20:56:15 +0000</pubDate>
-      
-      <guid>//bluepie.in/2018/10/file-manager-contd/</guid>
-      <description>
-
+&lt;p&gt;So what is touch typing? typing without seeing the keyboards, using the f&amp;amp;j as references because they have bumps on them, you feel them as a reference, You can recognise this by the word  &amp;ldquo;Type-Writer&amp;rdquo;,  back in the days they used ti have type writing class everywhere,  even now there are classes but are fewer and fewer nowadays.  Anywhere there are fewer and fewer people trying to type in this way because they have developed their own way of typing. I have taken this task some time before, i would think like i&amp;rsquo;d learn part of the system and remaining part in upcoming days,  but after this section, i would never go back, maybe i forget that i have to do that or i&amp;rsquo;ll get something else that I have to do and totally forget about all about it.eventually when i was involved in more and more typing I developed my own typing style which is not perfect but helped me to type faster upto 40 words per minute, which is somewhat good, but i would type with only some of my fingers, which in turn hurts and became tired after somebit. This was not enough and finally i decided I&amp;rsquo;d give it a try, i know i might go along with this for a few days but eventually will give up on this, so as far as i&amp;rsquo;m concerned i have to complete this quick, like real quick, So i decided to complete all the course on a single go(with atleast 90% accuracy). So it started, i&amp;rsquo;ve worked for 8 hours straight &amp;amp; completed everything, i knew how to type now but the problem is practicing, to make it faster and better. The other problem is my old typing habbits began to affect me, the new typing style was slow, thus while typing in my work it started to affect, thus had to go back to old style for completing my work faster, from then on its been a constant struggle between switching between different styles, Everyone should learn this, its super comfy. Besides it&amp;rsquo;s the official way to type, It&amp;rsquo;ll be massively helpful if done at a young age, Trust me on this one, Anyhooo0oo I typed this whole post with the new style of typing. One could say that is the reason why it took this long for the post, lol. See you next time!.&lt;/p&gt;</description></item><item><title> file Manager contd..</title><link>//bluepie.in/2018/10/file-manager-contd/</link><pubDate>Tue, 30 Oct 2018 20:56:15 +0000</pubDate><guid>//bluepie.in/2018/10/file-manager-contd/</guid><description>
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;a little update: Though i made a promise to post every two weeks, its been 4 weeks, why? ..is this&amp;hellip; i was going in a flow, but things started affecting.. rather i let things affect me, lately lot of things happened personally, lot of things reminded of the past, that made me avoid _________ in the present,&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
 &lt;hr /&gt;
-
 &lt;h3 id=&#34;continuation&#34;&gt;Continuation.&lt;/h3&gt;
-
 &lt;p&gt;Pick up where i left off from previous post: Let me explain the way of approach i wanted to do, i wanted to access all the files of the server, like i wanted to go back to the root directory, back before that, basically anywhere where i wanted, So DirectoryIterator seemed the best choice, We are in a directory, we have to list all the files and folders in the directory, how would you do that?. Directory iterator  in a foreach, since directory iterator displays everything, can be used, ex as shown below.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;foreach (new DirectoryIterator($dir) as $files)
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;If im about to display the files and folders, they should have a nice ui, like an icon, so categorizing files and icons, i would call is_dir() else its a file, this would be fine for now, but for future everything will have to be categorize as images, mp3, video, etc. the icons can be converted into base 64 strings so can be packed into the same file, its quite big, but its worth it,&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;$fileWithImage = ($files-&amp;gt;isDir())? $this-&amp;gt;getLinkWithText( (images::folderImage . &amp;quot; &amp;quot; .$files-&amp;gt;getFilename()), $this-&amp;gt;generateQueryString( &#39;folder&#39; ,$files-&amp;gt;getPath() .&#39;/&#39; .$files-&amp;gt;getFilename() )) : images::fileImage . &amp;quot; &amp;quot; .$files-&amp;gt;getFilename();
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;Letme explain this first, first checking if its a file or folder, if its a file, attach file image with file name, then thats it, but if its a folder, we show a folder icon with name and the link so that while clicking will be able to move front and back, All the fancy functions are just there to make the life simpler, their names exactly tell what they do. for instance, &lt;code&gt;getLinkWithText&lt;/code&gt; expects two parameters, first is the image with name, second is query the link (a href). for that &lt;code&gt;generateQueryString&lt;/code&gt; function expects a name, then the path to put it in href, and that is literally it, for making a dynamic traversing structure, all this is enough, may be next time ill explain with code for the other functions.&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;for the time being..imona leave , -sorry.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-    </item>
-    
-    <item>
-      <title> file manager development		</title>
-      <link>//bluepie.in/2018/10/file-manager-development/</link>
-      <pubDate>Wed, 03 Oct 2018 19:21:34 +0000</pubDate>
-      
-      <guid>//bluepie.in/2018/10/file-manager-development/</guid>
-      <description>
-
+&lt;/blockquote&gt;</description></item><item><title> file manager development</title><link>//bluepie.in/2018/10/file-manager-development/</link><pubDate>Wed, 03 Oct 2018 19:21:34 +0000</pubDate><guid>//bluepie.in/2018/10/file-manager-development/</guid><description>
 &lt;p&gt;why this all of a sudden? I was introduced to php development for a little while now, and i had this in mind with several other things, this would also be a good point to start explaining with code, So where to start. let us define? It starts with what is the requirement? It is&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;I want to view files in the server,&lt;/li&gt;
 &lt;li&gt;I can traverse through the files with forward and backward traversing,&lt;/li&gt;
@@ -1697,88 +1189,44 @@ Note:&lt;/p&gt;
 &lt;li&gt;I can see the file ownership information,&lt;/li&gt;
 &lt;li&gt;I can see file icons and folder icons.&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Lets begin with the first php code.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;&amp;lt;?php
 //this is the first bit of code that you had to write.
 ?&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;Setting the page structure, since styling the page dynamically, we call the top section first, then  we do our logic, then we call the bottom section, this completes the full page structure.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;const topSection = &amp;quot;&amp;lt;!DOCTYPE html&amp;gt;
-				    	&amp;lt;head&amp;gt;
-				    		&amp;lt;title&amp;gt;
-								fm - FileManager.
-				    		&amp;lt;/title&amp;gt;
-				    	&amp;lt;/head&amp;gt;
-				    	&amp;lt;body&amp;gt;
-				    &amp;quot;;
-
+&amp;lt;head&amp;gt;
+&amp;lt;title&amp;gt;
+fm - FileManager.
+&amp;lt;/title&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+&amp;quot;;
 const bottomSection = &amp;quot;&amp;lt;/body&amp;gt;
-						&amp;lt;/html&amp;gt;
-						&amp;quot;;
+&amp;lt;/html&amp;gt;
+&amp;quot;;
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h3 id=&#34;how-do-i-insert-images&#34;&gt;How do I insert images?&lt;/h3&gt;
-
 &lt;p&gt;Since all this is being done on only one file, hosting the image on a server then linking the file can be done but why? if you can encode as base64 and use the image in the file. An example would be, since  i need to display the files with respective icons (folder, file etc.).&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;const folderIcon = &#39;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAADMCAYAAACcL30dAAAQCUlEQVR4Xu3dfbBtdV3H8bdoIiQDoWbpjKVjIE9BkgyWQ/iQJkpD0oggYfiQTIxctIGJhsIw8GbZwOhIoijy0DAyQ5EXCYNACQwSRERQyKcu4hNiojxdBZtPs7ZzO55z99r7rLXO/v3W+/cXw1lnrd/3te/5nHX2/q3v71EsztgeeAnwMmAP4BeBnwe2W...&#39;;
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;Above is a base64 encoded folder image. to display the image i would just do this.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;const folderImage = &amp;quot;&amp;lt;img src=&#39;&amp;quot; . images::folderIcon .&amp;quot;&#39; width=&#39;10&#39;/&amp;gt;&amp;quot;;
 ````
-
 ### Next? Think about a way to represent files in a readable manner.
-
 A good way is a table layout, why because on the left side, file-name&#39;s can be shown, while on the right side, owner info, modification date can be shown. this can be implemented in the following way.
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;php
-    public function tableStructure($fData){
-        echo &amp;ldquo;&lt;table&gt;
-                  &lt;tr&gt;
-                    &lt;th width=&#39;50%&#39; align=&#39;left&#39;&gt;name&lt;/th&gt;
-                    &lt;th width=&#39;10%&#39;&gt;last modified&lt;/th&gt;
-                    &lt;th width=&#39;10%&#39;&gt; owner&lt;/th&gt;
-                  &lt;/tr&gt;&amp;rdquo; .
-                  $fData .
-              &amp;ldquo;&lt;/table&gt;&amp;rdquo;;
-    }
+public function tableStructure($fData){
+echo &amp;ldquo;&lt;table&gt;
+&lt;tr&gt;
+&lt;th width=&#39;50%&#39; align=&#39;left&#39;&gt;name&lt;/th&gt;
+&lt;th width=&#39;10%&#39;&gt;last modified&lt;/th&gt;
+&lt;th width=&#39;10%&#39;&gt; owner&lt;/th&gt;
+&lt;/tr&gt;&amp;rdquo; .
+$fData .
+&amp;ldquo;&lt;/table&gt;&amp;rdquo;;
+}
 ```&lt;/p&gt;
-
-&lt;p&gt;where `$fdata&amp;rsquo; is the pre constructed each row with all the files and folders. Ill continue the rest on an another post.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title> Old projects.</title>
-      <link>//bluepie.in/2018/09/old-projects/</link>
-      <pubDate>Thu, 20 Sep 2018 03:35:45 +0000</pubDate>
-      
-      <guid>//bluepie.in/2018/09/old-projects/</guid>
-      <description>
-
-&lt;blockquote&gt;
-&lt;p&gt;Hello fellas,&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;So in the recent trend of the modern world, with everyone developing new software and technology and aiming to make the life of mankind easy, There are bunch of people who want to just learn new stuff and constantly do things and move on to the next thing.. i consider myself being in that bunch.. this will matter later. The thing about old projects is that they have an emotional touch with them, the reason why i am stating this is because, i think about the functionalities and often about how this could be implemented with the current knowledge that i have, being the way that I am, I mix real life with the code that i write, often times while i write the documentation, review the code that I wrote, or while making commit &lt;em&gt;i find hints in my code that reflected the current scenario in my life.&lt;/em&gt; Its like when i see the code again, I&amp;rsquo;m taken back to the room that i wrote the code in, the thought i had, the emotional state i was in, the people i was talking too.. etc.. FOR EXAMPLE, today I recalled a old friend of mine, (lets begin) it was 2017, i was in my final year of my B.E degree, a festival function was near and i was practising android and developing an android application, during that time i was constantly talking to my friend that i mentioned, During this period i was home alone for few days, I can not recall more than this..(my dumb brain). Fast forward to 3-4 am in the night, i remember completing a class with functionalities (doing java), I noticed while creating an instance of the class i made the class name similar to my friends nick name. &lt;em&gt;&lt;strong&gt;i could still remember that specific moment very clearly. &lt;/strong&gt;I took an image of that specific section and sent a message.. the following morning she didn&amp;rsquo;t understand what i was saying..that&amp;rsquo;s a completely different story none the less.&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;so-one-of-the-reasons-to-not-going-to-old-projects&#34;&gt;so one of the reasons to not going to old projects&lt;/h3&gt;
-
-&lt;p&gt;Going back to old projects they have a emotional weight in them, &lt;strong&gt;sometimes it&amp;rsquo;s the decision of not wanting to go the past, that certain people don&amp;rsquo;t go to old projects.&lt;/strong&gt; The fact that certain things turned out ugly, i could never revisit some projects, if i still do, I spiral into a hole and my thoughts get cloudy and i feel guilty for the things why certain things turned out ugly.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;So in my case, i realised, humans are emotional beings, being the way that they are, often leads to problems..&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-    </item>
-    
-  </channel>
-</rss>
+&lt;p&gt;where `$fdata&amp;rsquo; is the pre constructed each row with all the files and folders. Ill continue the rest on an another post.&lt;/p&gt;</description></item></channel></rss>
