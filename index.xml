@@ -1,4 +1,75 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><language>en-us</language><lastBuildDate>Sun, 12 Apr 2020 00:43:59 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Xkcd Declutter</title><link>//bluepie.in/2020/04/xkcd-declutter/</link><pubDate>Sun, 12 Apr 2020 00:43:59 +0530</pubDate><guid>//bluepie.in/2020/04/xkcd-declutter/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><language>en-us</language><lastBuildDate>Fri, 01 May 2020 23:32:58 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Github Workflow</title><link>//bluepie.in/2020/05/github-workflow/</link><pubDate>Fri, 01 May 2020 23:32:58 +0530</pubDate><guid>//bluepie.in/2020/05/github-workflow/</guid><description>
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;Hi&amp;hellip; how ya been, its been a month already, gosh times flies by really fast. Status update: I&amp;rsquo;ve been doing good, When I am in home I complete the work that I plan&amp;hellip; far better than when I am in Chennai. The corona virus pandemic is still around the world at large, US right now is the largest affected country with over 70k dead people as of writing this. The lockdown in India has been extended
+another 2 weeks.&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This post is going to be about github actions.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;why&#34;&gt;Why&lt;/h2&gt;
+&lt;p&gt;Automate a process after commit, schedule a process to be done timely&amp;hellip;etc the possibililties are endless. A little background&amp;hellip; lastweek
+github announced unlimited private colaborations and made a ton of premium features completely free.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;I am going to use this feature entirely for a different purpose, It further backs-up my saying..literally anything can be done.&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;goal&#34;&gt;Goal&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;I have this github repository which is XKCD viewer, which utilises api &amp;lsquo;&lt;a href=&#34;https://xkcd.com/info.0.json&#39;&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://xkcd.com/info.0.json&#39;&lt;/a&gt;. The api does not provide cors.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;I want to clone the api, (the clone must be updated daily).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;should provide cors support.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;should not contain any external dependencies like server to set it up.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;github offers unlimited time constraint for github actions(public repository)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;using github actions I could setup a bot that runs timely.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;I can mainatain a local copy of the api, compare it to the offical every day,&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;if there is difference, then download the new contents and update the local state.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;commit the changes directly to the repository.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;approach&#34;&gt;Approach&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Im going with python in conjunction with workflow file, since I want to brush up my python skills.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The python logic will maintain a local state, add new contents, update itself i.e. the state.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;I am going to use json to maintain the state.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The api data will be stored under a folder with every entry having a unique folder.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Use github actions to commit the changes to the directory.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Use github secrets to maintain a token, (token used to commit diretly to repository)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;result&#34;&gt;Result.&lt;/h2&gt;
+&lt;p&gt;After coding away the mentioned logics above. I am left with this workflow file.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;
+name: fetch new content from api
+on:
+schedule:
+- cron: &#39;0 */8 * * *&#39;
+jobs:
+fetch-content:
+if: github.repository == &#39;Gopinath001/xkcd-declutter&#39;
+name: execute python logic
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v1
+- name: install requests pip3
+run: pip3 install requests
+- name: run python logic
+run: python3 ./.github/workflows/update_xkcd_official.py
+- name: status of the new folder
+run: git status xkcd-offline/ --porcelain
+- name: add new files
+run: |
+git config --local user.name &amp;quot;xkcd-content-fetcher-bot&amp;quot;
+git add xkcd-offline/
+- name: commit new content
+run: (awk &#39;{print &amp;quot;added content &amp;quot; substr($3, match($3,&amp;quot;\&amp;quot;&amp;quot;), match($3,&amp;quot;}&amp;quot;)-1) &amp;quot;.&amp;quot;}&#39; xkcd-offline/state.json) | git commit -F -
+- name: push the new content
+uses: ad-m/github-push-action@master
+with:
+github_token: ${{ secrets.TOKEN }}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;See it in action, downloads new content automatically and put it under the folder xkcd-offline.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/Gopinath001/xkcd-declutter/tree/master/xkcd-offline/api&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Folder containing api content&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;See you soon, untill then hope you do well. - Gopinath aka aghontpi aka bluepie&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Xkcd Declutter</title><link>//bluepie.in/2020/04/xkcd-declutter/</link><pubDate>Sun, 12 Apr 2020 00:43:59 +0530</pubDate><guid>//bluepie.in/2020/04/xkcd-declutter/</guid><description>
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;Hi, how are you doing&lt;/em&gt; Im doing good, the corona virus pandemic is everywhere! hope your survived the ordeal, its still going on as of writing this, Hope you survive this.. In my childhood after watching movies like &amp;lsquo;i am legend&amp;rsquo; &amp;amp; &amp;lsquo;the day that the earth stood still&amp;rsquo;, i always wanted to see the world in the situtation, oh booy, i did not expect them to happen irl, but it did anyway. Im saying this because in some wierd way dreams do come true.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;h3 id=&#34;what-is-this-about&#34;&gt;What is this about?&lt;/h3&gt;
@@ -1334,11 +1405,4 @@ bindService(intent,serviceConnection,Context.BIND_AUTO_CREATE);
 &lt;h2 id=&#34;what-next&#34;&gt;what next?&lt;/h2&gt;
 &lt;p&gt;After generating the site using the defined framework, you now have a working site which is entirely static and works completely without any hosting restrictions and load-time, this then can be deployed anywhere. For example you could deploy it to AWS, GCP or any-other hosting provider, What i did was i deployed it to GitHub hosting and it is great. You can have a demo of the same here. &lt;a href=&#34;http://gopinath001.github.io/blog&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to my deployed site.&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;additional-things&#34;&gt;Additional things?&lt;/h2&gt;
-&lt;p&gt;Well depending upon the hosting provider that you choose you can do many things, park your domain (in-case of free hosting/paid hosting), installing ssl certificate, In case of github having own custom domain and sub-domain..etc, well it certainly depends, the possibilities are endless.&lt;/p&gt;</description></item><item><title> A peek into my yunger self.</title><link>//bluepie.in/2019/03/a-peek-into-my-yunger-self/</link><pubDate>Sat, 30 Mar 2019 00:00:00 +0000</pubDate><guid>//bluepie.in/2019/03/a-peek-into-my-yunger-self/</guid><description>
-&lt;blockquote&gt;
-&lt;p&gt;Hey guys how y&amp;rsquo;all been,&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;i&amp;rsquo;ve been good, in fact i am happy after a long time, So im gona love talking about this, so here is the thing before like 7-8 months (before i got my job) i was fully involved in reverse engineering, modding mostly windows, but also old linux machines with security flaws to train for some capture the flags and the plain curisity of&amp;hellip; lets say how to break stuff. On the windows part  i was mostly doing with debuggers, scripts and memory. So here i am explaining the tale of how i started my venture into c# and security, back in the days i used to do admire crack realeases, trainers,  etc. So at the begining when i was in 10th grade i already knew that i was going in the path of a software and choose computer science in the next year (senior year).&lt;/p&gt;
-&lt;p&gt;I began to learn form core about debugging. processors, assembly, etc, At the same time that i was doing that i began to have an interest in trainers and what not, but the main problem was i knew how to find memeoy addresses by debugging and scanning through different tools but i did not know how to do them programmatically. so the venture started in c#, since there was already a ton of source available in visual basic and i knew c and object oriented programming and c# is similar to java in many ways and the fact that i was mostly working  in windows made me lean over c#.&lt;/p&gt;
-&lt;p&gt;At the begining it was tough i didn&amp;rsquo;t know where to start, but little by little i learned at that time and was doing projects by using a custom library for my projects involving meomory stuff, so when i was in home recently and going through my old desktop i found the lib and soo i took it seperately dusted it off worked on that for cleaning it made sure it worked on the latest build, built a seperate dill, compiled and released it on github, Looking at that project after a long time, made me release why i even choose this field, at those days everything was fascinating to me and i wanted to learn everything, So for any new beginners entering into reversing, modding, creating trainers and c# I have created this repo for them. Most stuff on usage, reason and lib  are on the github repo given below.&lt;/p&gt;
-&lt;h3 id=&#34;source-code-link-link-to-my-repo-https-github-com-gopinath001-memorypatternscanner&#34;&gt;Source Code link &lt;a href=&#34;https://github.com/Gopinath001/MemoryPatternScanner&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to my repo.&lt;/a&gt;&lt;/h3&gt;</description></item></channel></rss>
+&lt;p&gt;Well depending upon the hosting provider that you choose you can do many things, park your domain (in-case of free hosting/paid hosting), installing ssl certificate, In case of github having own custom domain and sub-domain..etc, well it certainly depends, the possibilities are endless.&lt;/p&gt;</description></item></channel></rss>
