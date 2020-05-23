@@ -1,4 +1,12 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><language>en-us</language><lastBuildDate>Fri, 01 May 2020 23:32:58 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Github Workflow</title><link>//bluepie.in/2020/05/github-workflow/</link><pubDate>Fri, 01 May 2020 23:32:58 +0530</pubDate><guid>//bluepie.in/2020/05/github-workflow/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><language>en-us</language><lastBuildDate>Sat, 23 May 2020 20:47:55 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Its Been Two Years..</title><link>//bluepie.in/2020/05/its-been-two-years/</link><pubDate>Sat, 23 May 2020 20:47:55 +0530</pubDate><guid>//bluepie.in/2020/05/its-been-two-years/</guid><description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Hi.. how are you, I am doing well, still doing work from home.. don&amp;rsquo;t know how long the work from home thing is going to continue. All my friends and family are good(no corona).&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This post is going to be a reminder for me in the future&amp;hellip; and also a milestone.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Well two years ago, exactly this week, I got an offer from a company in Chennai, at that time, I already had an offer from another company in Coimbatore that was close to my home with a nice package. I choose Chennai over Coimbatore because I wanted to leave my home.&lt;/p&gt;
+&lt;p&gt;So here I am after two years, I&amp;rsquo;m happy with my employer. I have my fair-share of cons, I&amp;rsquo;m sure everybody will have them, but the pros over-weigh the cons.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m grateful for my employer, taking such good care of me, they give me motivation to work on both office and personal projects.&lt;/p&gt;
+&lt;p&gt;These things aside, &lt;em&gt;TO MY FUTURE SELF&lt;/em&gt; two years went really fast didn&amp;rsquo;t it?, of all the things that happened over the last two years, from the bottom of my heart, I just wish I learned a lot more than I did..&lt;/p&gt;
+&lt;p&gt;Some of the things I did in the past haunt me daily, those&amp;hellip;missed opportunities, those..fights, those&amp;hellip;bad decisions, those..misunderstandings. I guess its been a long time and I have to move on..&lt;/p&gt;</description></item><item><title>Github Workflow</title><link>//bluepie.in/2020/05/github-workflow/</link><pubDate>Fri, 01 May 2020 23:32:58 +0530</pubDate><guid>//bluepie.in/2020/05/github-workflow/</guid><description>
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;Hi&amp;hellip; how ya been, its been a month already, gosh times flies by really fast. Status update: I&amp;rsquo;ve been doing good, When I am in home I complete the work that I plan&amp;hellip; far better than when I am in Chennai. The corona virus pandemic is still around the world at large, US right now is the largest affected country with over 70k dead people as of writing this. The lockdown in India has been extended
 another 2 weeks.&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;hr /&gt;
@@ -143,9 +151,7 @@ current scenario by not taking your own decision.(confusing i know, but there it
 &lt;blockquote&gt;
 &lt;h3 id=&#34;friendships&#34;&gt;friendships&lt;/h3&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;when i was young(upuntill 12th) I had a lot of friends, it was a social status, I dont care about it anymore(was not selfaware at that time, more about this maybe in a different post), there is only two openions that I have right now,
-1. From my pov - who are friends -&amp;gt; I have a mindless time when I am with them, so I take all the steps/necessities while I am being with them, money, buying things, me driving to their place,&amp;hellip;etc
-2. They dont share the first openion as i do, but they need me for some purpose or they just use me when they are bored. its sad that i have these thoughts (self-aware) but its the truth.&lt;/p&gt;
+&lt;p&gt;when i was young(upuntill 12th) I had a lot of friends, it was a social status, I dont care about it anymore(was not selfaware at that time, more about this maybe in a different post),&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;h3 id=&#34;core-belief-s&#34;&gt;core-belief&amp;rsquo;s&lt;/h3&gt;
 &lt;/blockquote&gt;
@@ -224,78 +230,7 @@ fail for you(if you belong to the minority category of different people).&lt;/p&
 20:29:30.496 DEBU cache.go:208 ▶ 104a KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
 20:29:30.496 DEBU cache.go:123 ▶ 104b Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
 20:29:30.496 DEBU cache.go:133 ▶ 104c Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
-20:29:30.496 DEBU handler.go:124 ▶ 104d vortex.data.microsoft.com IN A didn&#39;t hit cache
-20:29:30.497 NOTI handler.go:180 ▶ 104e vortex.data.microsoft.com found in blocklist
-20:29:30.497 INFO handler.go:102 ▶ 104f 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
-20:29:30.497 DEBU cache.go:208 ▶ 1050 KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
-20:29:30.497 DEBU cache.go:123 ▶ 1051 Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
-20:29:30.497 DEBU cache.go:133 ▶ 1052 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
-20:29:30.497 DEBU handler.go:124 ▶ 1053 vortex.data.microsoft.com IN AAAA didn&#39;t hit cache
-20:29:30.497 NOTI handler.go:180 ▶ 1054 vortex.data.microsoft.com found in blocklist
-20:29:45.932 INFO handler.go:102 ▶ 1055 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
-20:29:45.932 DEBU cache.go:208 ▶ 1056 KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
-20:29:45.932 DEBU cache.go:123 ▶ 1057 Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
-20:29:45.932 DEBU cache.go:133 ▶ 1058 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
-20:29:45.932 DEBU handler.go:124 ▶ 1059 vortex.data.microsoft.com IN AAAA didn&#39;t hit cache
-20:29:45.932 NOTI handler.go:180 ▶ 105a vortex.data.microsoft.com found in blocklist
-20:29:45.932 INFO handler.go:102 ▶ 105b 219.91.177.2 lookup　vortex.data.microsoft.com IN A
-20:29:45.932 DEBU cache.go:208 ▶ 105c KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
-20:29:45.932 DEBU cache.go:123 ▶ 105d Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
-20:29:45.932 DEBU cache.go:133 ▶ 105e Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
-20:29:45.932 DEBU handler.go:124 ▶ 105f vortex.data.microsoft.com IN A didn&#39;t hit cache
-20:29:45.933 NOTI handler.go:180 ▶ 1060 vortex.data.microsoft.com found in blocklist
-20:30:00.976 INFO handler.go:102 ▶ 1061 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
-20:30:00.976 DEBU cache.go:208 ▶ 1062 KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:00.977 DEBU cache.go:123 ▶ 1063 Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:00.977 DEBU cache.go:133 ▶ 1064 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:00.977 DEBU handler.go:124 ▶ 1065 vortex.data.microsoft.com IN AAAA didn&#39;t hit cache
-20:30:00.977 NOTI handler.go:180 ▶ 1066 vortex.data.microsoft.com found in blocklist
-20:30:00.977 INFO handler.go:102 ▶ 1067 219.91.177.2 lookup　vortex.data.microsoft.com IN A
-20:30:00.977 DEBU cache.go:208 ▶ 1068 KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
-20:30:00.977 DEBU cache.go:123 ▶ 1069 Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
-20:30:00.977 DEBU cache.go:133 ▶ 106a Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
-20:30:00.977 DEBU handler.go:124 ▶ 106b vortex.data.microsoft.com IN A didn&#39;t hit cache
-20:30:00.977 NOTI handler.go:180 ▶ 106c vortex.data.microsoft.com found in blocklist
-20:30:16.972 INFO handler.go:102 ▶ 106d 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
-20:30:16.973 DEBU cache.go:208 ▶ 106e KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:16.973 DEBU cache.go:123 ▶ 106f Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:16.973 DEBU cache.go:133 ▶ 1070 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:16.973 DEBU handler.go:124 ▶ 1071 vortex.data.microsoft.com IN AAAA didn&#39;t hit cache
-20:30:16.973 NOTI handler.go:180 ▶ 1072 vortex.data.microsoft.com found in blocklist
-20:30:16.973 INFO handler.go:102 ▶ 1073 219.91.177.2 lookup　vortex.data.microsoft.com IN A
-20:30:16.973 DEBU cache.go:208 ▶ 1074 KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
-20:30:16.973 DEBU cache.go:123 ▶ 1075 Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
-20:30:16.973 DEBU cache.go:133 ▶ 1076 Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
-20:30:16.973 DEBU handler.go:124 ▶ 1077 vortex.data.microsoft.com IN A didn&#39;t hit cache
-20:30:16.973 NOTI handler.go:180 ▶ 1078 vortex.data.microsoft.com found in blocklist
-20:30:33.009 INFO handler.go:102 ▶ 1079 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
-20:30:33.010 DEBU cache.go:208 ▶ 107a KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:33.010 DEBU cache.go:123 ▶ 107b Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:33.010 DEBU cache.go:133 ▶ 107c Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:33.010 DEBU handler.go:124 ▶ 107d vortex.data.microsoft.com IN AAAA didn&#39;t hit cache
-20:30:33.010 NOTI handler.go:180 ▶ 107e vortex.data.microsoft.com found in blocklist
-20:30:33.010 INFO handler.go:102 ▶ 107f 219.91.177.2 lookup　vortex.data.microsoft.com IN A
-20:30:33.010 DEBU cache.go:208 ▶ 1080 KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
-20:30:33.010 DEBU cache.go:123 ▶ 1081 Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
-20:30:33.010 DEBU cache.go:133 ▶ 1082 Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
-20:30:33.010 DEBU handler.go:124 ▶ 1083 vortex.data.microsoft.com IN A didn&#39;t hit cache
-20:30:33.010 NOTI handler.go:180 ▶ 1084 vortex.data.microsoft.com found in blocklist
-20:30:48.234 INFO handler.go:102 ▶ 1085 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
-20:30:48.235 DEBU cache.go:208 ▶ 1086 KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:48.235 DEBU cache.go:123 ▶ 1087 Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:48.235 DEBU cache.go:133 ▶ 1088 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:48.235 DEBU handler.go:124 ▶ 1089 vortex.data.microsoft.com IN AAAA didn&#39;t hit cache
-20:30:48.235 NOTI handler.go:180 ▶ 108a vortex.data.microsoft.com found in blocklist
-20:30:48.235 INFO handler.go:102 ▶ 108b 219.91.177.2 lookup　vortex.data.microsoft.com IN A
-20:30:48.235 DEBU cache.go:208 ▶ 108c KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
-20:30:48.235 DEBU cache.go:123 ▶ 108d Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
-20:30:48.235 DEBU cache.go:133 ▶ 108e Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
-20:30:48.235 DEBU handler.go:124 ▶ 108f vortex.data.microsoft.com IN A didn&#39;t hit cache
-20:30:48.235 NOTI handler.go:180 ▶ 1090 vortex.data.microsoft.com found in blocklist
-20:31:00.797 INFO handler.go:102 ▶ 1091 219.91.177.2 lookup　dev.bluepie.in IN AAAA
-20:31:00.798 DEBU cache.go:208 ▶ 1092 KeyGen: dev.bluepie.in IN AAAA e424b1464ef59d6aff7514f252c6b088
-20:31:00.798 DEBU cache.go:133 ▶ 1093 Cache: Cannot find key e424b1464ef59d6aff7514f252c6b088
-20:31:00.798 DEBU cache.go:133 ▶ 1094 Cache: Cannot find key e424b1464ef59d6aff7514f252c6b088
+...
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&#34;you-might-argue-that-this-is-not-a-dns-server-it-is-a-proxy-server-for-dns-well-it-depends-up-how-you-see-it&#34;&gt;&amp;gt; You might argue that, this is not a dns server, it is a proxy server for dns. Well it depends up how you see it&lt;/h3&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;conclusion&lt;/h2&gt;
@@ -1391,18 +1326,4 @@ bindService(intent,serviceConnection,Context.BIND_AUTO_CREATE);
 &lt;hr /&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;bye see ya next time, by the time im making this post public, eveything changed to the polar opposite.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>Blog Migration</title><link>//bluepie.in/2019/04/blog-migration/</link><pubDate>Wed, 24 Apr 2019 03:02:16 +0530</pubDate><guid>//bluepie.in/2019/04/blog-migration/</guid><description>
-&lt;blockquote&gt;
-&lt;p&gt;heya!, this wont be a rant..trust me!, don&amp;rsquo;t worry, I lost my cool in the last few posts, well thats aside, let me begin.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;migration&#34;&gt;migration&lt;/h2&gt;
-&lt;p&gt;so i have been planning to migrate my blog from aws to replace it with jekyll, hexo,..etc, The main reason being, i run my blog in php and thus intend to replace it with the mentioned above, The another this that I keep pondering over and over is that, if i abandon my aws blog, I have to convert my previous post from the blog to the new version, reformat, reupload the images as well. Not to mention i have to configure dns(though it will take only a small amount of time), configure what comment system that i will to install in, and the list goes on and on.&lt;/p&gt;
-&lt;h2 id=&#34;why&#34;&gt;why&lt;/h2&gt;
-&lt;p&gt;Since hosting it in php, for each request page will be generated dynamically, it doesn&amp;rsquo;t matter here but this causes cpu load, considering php if there are any bugs in the code it will lead to data breaches (lol, since i dont have anything that important its not important too.). If it were hosting with only html, css, js, images and etc, the site load time will be very quick, plus you don&amp;rsquo;t have to pay extra for the high resources that is needed for handling php pages, infact if hosting on github pages it is completely free.&lt;/p&gt;
-&lt;h2 id=&#34;choices&#34;&gt;choices&lt;/h2&gt;
-&lt;p&gt;So there are a ton of choices if you want to do the same , the first thing would be jekyll, since most of the people choose that because of the huge variety of themes that comes with jekyll, its developed in ruby so installing the dependencies might be hard tho if you are new, then there is hexo, which is fully developed in js, you just have to install npm, then install dependencies with npm, that is it, interms of ease of use, you can choose this instead of jekyll. There are many alternatives, it finally comes down to what you choose to use.&lt;/p&gt;
-&lt;h2 id=&#34;what-next&#34;&gt;what next?&lt;/h2&gt;
-&lt;p&gt;After generating the site using the defined framework, you now have a working site which is entirely static and works completely without any hosting restrictions and load-time, this then can be deployed anywhere. For example you could deploy it to AWS, GCP or any-other hosting provider, What i did was i deployed it to GitHub hosting and it is great. You can have a demo of the same here. &lt;a href=&#34;http://gopinath001.github.io/blog&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to my deployed site.&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;additional-things&#34;&gt;Additional things?&lt;/h2&gt;
-&lt;p&gt;Well depending upon the hosting provider that you choose you can do many things, park your domain (in-case of free hosting/paid hosting), installing ssl certificate, In case of github having own custom domain and sub-domain..etc, well it certainly depends, the possibilities are endless.&lt;/p&gt;</description></item></channel></rss>
+&lt;/blockquote&gt;</description></item></channel></rss>

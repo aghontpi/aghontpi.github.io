@@ -1,4 +1,4 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><link rel=prev href=//bluepie.in/2019/12/linux-ld_preload/><link rel=next href=//bluepie.in/2020/01/noises-or-im-wrong/><link rel=canonical href=//bluepie.in/2019/12/custom-dns-server-with-adblock/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>Custom Dns Server With Adblock | Bluepie&#39;s update blog</title><meta name=title content="Custom Dns Server With Adblock | Bluepie's update blog"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"Custom Dns Server With Adblock","headline":"Custom Dns Server With Adblock","description":"hello guys, as of writing this post this is christmas of 2019 (25 dec 2019), gosh time really goes fast!. How was the holidays? personal update: I have sevre cold \x26amp; fever as of writing this, hope i\x26rsquo;ll get better soon.\n Today im going to share my method of adblocking with custom dns servers my requiremets  I want adblocking solution without any addons \x26amp; applications for laptops\/desktops\/mobile.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2019","datePublished":"2019-12-25 14:15:33 \x2b0530 IST","dateModified":"2019-12-25 14:15:33 \x2b0530 IST","url":"\/\/bluepie.in\/2019\/12\/custom-dns-server-with-adblock\/","wordCount":"1455","keywords":["Bluepie\x27s update blog"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-student-alt"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s update blog</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>Blog</a>
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><link rel=prev href=//bluepie.in/2019/12/linux-ld_preload/><link rel=next href=//bluepie.in/2020/01/noises-or-im-wrong/><link rel=canonical href=//bluepie.in/2019/12/custom-dns-server-with-adblock/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>Custom Dns Server With Adblock | Bluepie&#39;s update blog</title><meta name=title content="Custom Dns Server With Adblock | Bluepie's update blog"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"Custom Dns Server With Adblock","headline":"Custom Dns Server With Adblock","description":"hello guys, as of writing this post this is christmas of 2019 (25 dec 2019), gosh time really goes fast!. How was the holidays? personal update: I have sevre cold \x26amp; fever as of writing this, hope i\x26rsquo;ll get better soon.\n Today im going to share my method of adblocking with custom dns servers my requiremets  I want adblocking solution without any addons \x26amp; applications for laptops\/desktops\/mobile.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2019","datePublished":"2019-12-25 14:15:33 \x2b0530 IST","dateModified":"2019-12-25 14:15:33 \x2b0530 IST","url":"\/\/bluepie.in\/2019\/12\/custom-dns-server-with-adblock\/","wordCount":"747","keywords":["Bluepie\x27s update blog"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-student-alt"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s update blog</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>Blog</a>
 <a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s update blog</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>Blog</a>
 <a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-135013873-2','auto');ga('send','pageview');}</script><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">Custom Dns Server With Adblock</h1><div class=post-meta>Written by <a itemprop=name href=//bluepie.in/ rel=author>Bluepie</a> with ♥
 <span class=post-time>on <time datetime=2019-12-25 itemprop=datePublished>December 25, 2019</time></span>
@@ -30,78 +30,7 @@ in
 20:29:30.496 DEBU cache.go:208 ▶ 104a KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
 20:29:30.496 DEBU cache.go:123 ▶ 104b Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
 20:29:30.496 DEBU cache.go:133 ▶ 104c Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
-20:29:30.496 DEBU handler.go:124 ▶ 104d vortex.data.microsoft.com IN A didn't hit cache
-20:29:30.497 NOTI handler.go:180 ▶ 104e vortex.data.microsoft.com found in blocklist
-20:29:30.497 INFO handler.go:102 ▶ 104f 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
-20:29:30.497 DEBU cache.go:208 ▶ 1050 KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
-20:29:30.497 DEBU cache.go:123 ▶ 1051 Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
-20:29:30.497 DEBU cache.go:133 ▶ 1052 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
-20:29:30.497 DEBU handler.go:124 ▶ 1053 vortex.data.microsoft.com IN AAAA didn't hit cache
-20:29:30.497 NOTI handler.go:180 ▶ 1054 vortex.data.microsoft.com found in blocklist
-20:29:45.932 INFO handler.go:102 ▶ 1055 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
-20:29:45.932 DEBU cache.go:208 ▶ 1056 KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
-20:29:45.932 DEBU cache.go:123 ▶ 1057 Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
-20:29:45.932 DEBU cache.go:133 ▶ 1058 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
-20:29:45.932 DEBU handler.go:124 ▶ 1059 vortex.data.microsoft.com IN AAAA didn't hit cache
-20:29:45.932 NOTI handler.go:180 ▶ 105a vortex.data.microsoft.com found in blocklist
-20:29:45.932 INFO handler.go:102 ▶ 105b 219.91.177.2 lookup　vortex.data.microsoft.com IN A
-20:29:45.932 DEBU cache.go:208 ▶ 105c KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
-20:29:45.932 DEBU cache.go:123 ▶ 105d Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
-20:29:45.932 DEBU cache.go:133 ▶ 105e Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
-20:29:45.932 DEBU handler.go:124 ▶ 105f vortex.data.microsoft.com IN A didn't hit cache
-20:29:45.933 NOTI handler.go:180 ▶ 1060 vortex.data.microsoft.com found in blocklist
-20:30:00.976 INFO handler.go:102 ▶ 1061 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
-20:30:00.976 DEBU cache.go:208 ▶ 1062 KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:00.977 DEBU cache.go:123 ▶ 1063 Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:00.977 DEBU cache.go:133 ▶ 1064 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:00.977 DEBU handler.go:124 ▶ 1065 vortex.data.microsoft.com IN AAAA didn't hit cache
-20:30:00.977 NOTI handler.go:180 ▶ 1066 vortex.data.microsoft.com found in blocklist
-20:30:00.977 INFO handler.go:102 ▶ 1067 219.91.177.2 lookup　vortex.data.microsoft.com IN A
-20:30:00.977 DEBU cache.go:208 ▶ 1068 KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
-20:30:00.977 DEBU cache.go:123 ▶ 1069 Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
-20:30:00.977 DEBU cache.go:133 ▶ 106a Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
-20:30:00.977 DEBU handler.go:124 ▶ 106b vortex.data.microsoft.com IN A didn't hit cache
-20:30:00.977 NOTI handler.go:180 ▶ 106c vortex.data.microsoft.com found in blocklist
-20:30:16.972 INFO handler.go:102 ▶ 106d 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
-20:30:16.973 DEBU cache.go:208 ▶ 106e KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:16.973 DEBU cache.go:123 ▶ 106f Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:16.973 DEBU cache.go:133 ▶ 1070 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:16.973 DEBU handler.go:124 ▶ 1071 vortex.data.microsoft.com IN AAAA didn't hit cache
-20:30:16.973 NOTI handler.go:180 ▶ 1072 vortex.data.microsoft.com found in blocklist
-20:30:16.973 INFO handler.go:102 ▶ 1073 219.91.177.2 lookup　vortex.data.microsoft.com IN A
-20:30:16.973 DEBU cache.go:208 ▶ 1074 KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
-20:30:16.973 DEBU cache.go:123 ▶ 1075 Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
-20:30:16.973 DEBU cache.go:133 ▶ 1076 Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
-20:30:16.973 DEBU handler.go:124 ▶ 1077 vortex.data.microsoft.com IN A didn't hit cache
-20:30:16.973 NOTI handler.go:180 ▶ 1078 vortex.data.microsoft.com found in blocklist
-20:30:33.009 INFO handler.go:102 ▶ 1079 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
-20:30:33.010 DEBU cache.go:208 ▶ 107a KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:33.010 DEBU cache.go:123 ▶ 107b Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:33.010 DEBU cache.go:133 ▶ 107c Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:33.010 DEBU handler.go:124 ▶ 107d vortex.data.microsoft.com IN AAAA didn't hit cache
-20:30:33.010 NOTI handler.go:180 ▶ 107e vortex.data.microsoft.com found in blocklist
-20:30:33.010 INFO handler.go:102 ▶ 107f 219.91.177.2 lookup　vortex.data.microsoft.com IN A
-20:30:33.010 DEBU cache.go:208 ▶ 1080 KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
-20:30:33.010 DEBU cache.go:123 ▶ 1081 Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
-20:30:33.010 DEBU cache.go:133 ▶ 1082 Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
-20:30:33.010 DEBU handler.go:124 ▶ 1083 vortex.data.microsoft.com IN A didn't hit cache
-20:30:33.010 NOTI handler.go:180 ▶ 1084 vortex.data.microsoft.com found in blocklist
-20:30:48.234 INFO handler.go:102 ▶ 1085 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
-20:30:48.235 DEBU cache.go:208 ▶ 1086 KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:48.235 DEBU cache.go:123 ▶ 1087 Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:48.235 DEBU cache.go:133 ▶ 1088 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
-20:30:48.235 DEBU handler.go:124 ▶ 1089 vortex.data.microsoft.com IN AAAA didn't hit cache
-20:30:48.235 NOTI handler.go:180 ▶ 108a vortex.data.microsoft.com found in blocklist
-20:30:48.235 INFO handler.go:102 ▶ 108b 219.91.177.2 lookup　vortex.data.microsoft.com IN A
-20:30:48.235 DEBU cache.go:208 ▶ 108c KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
-20:30:48.235 DEBU cache.go:123 ▶ 108d Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
-20:30:48.235 DEBU cache.go:133 ▶ 108e Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
-20:30:48.235 DEBU handler.go:124 ▶ 108f vortex.data.microsoft.com IN A didn't hit cache
-20:30:48.235 NOTI handler.go:180 ▶ 1090 vortex.data.microsoft.com found in blocklist
-20:31:00.797 INFO handler.go:102 ▶ 1091 219.91.177.2 lookup　dev.bluepie.in IN AAAA
-20:31:00.798 DEBU cache.go:208 ▶ 1092 KeyGen: dev.bluepie.in IN AAAA e424b1464ef59d6aff7514f252c6b088
-20:31:00.798 DEBU cache.go:133 ▶ 1093 Cache: Cannot find key e424b1464ef59d6aff7514f252c6b088
-20:31:00.798 DEBU cache.go:133 ▶ 1094 Cache: Cannot find key e424b1464ef59d6aff7514f252c6b088
+...
 
 </code></pre><h3 id=you-might-argue-that-this-is-not-a-dns-server-it-is-a-proxy-server-for-dns-well-it-depends-up-how-you-see-it>&gt; You might argue that, this is not a dns server, it is a proxy server for dns. Well it depends up how you see it</h3><h2 id=conclusion>conclusion</h2><p>From my experience, its simple, awsome &amp; works great, No ads system wide! on all networks! on all devices!,
 My very own private dns server..XD.If you have any doubts, just dm me!</p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
