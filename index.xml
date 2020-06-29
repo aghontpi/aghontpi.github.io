@@ -1,39 +1,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><language>en-us</language><lastBuildDate>Tue, 30 Jun 2020 00:21:31 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Android Reversing Part 4</title><link>//bluepie.in/2020/06/android-reversing-part-4/</link><pubDate>Tue, 30 Jun 2020 00:21:31 +0530</pubDate><guid>//bluepie.in/2020/06/android-reversing-part-4/</guid><description>
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;&lt;em&gt;Hi me!, how are you doing, how is the future holding up?&lt;/em&gt;&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Personal Update: It&amp;rsquo;s been a rough couple weeks since the last post, Covid-19 has shown no rate of slowing down. Nothing been around my mind lately just junk&amp;hellip; a lot of junk I don&amp;rsquo;t want to think about. To many frequent decisions, Once a friend told me Self control over your thoughts are very important. No matter what I do, It seems I can not achieve it.. at least up-until now.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Personal Update: It&amp;rsquo;s been a rough couple weeks since the last post, Covid-19 has shown no rate of slowing down. Nothing been around my mind lately just junk&amp;hellip; a lot of junk I don&amp;rsquo;t want to think about. To many frequent decisions, Once a friend told me Self control over your thoughts is very important. No matter what I do, It seems I can not achieve it.. at least up-until now.&lt;/em&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;blockquote&gt;
 &lt;h2 id=&#34;disclaimer-im-just-sharing-information-not-distrubuting-mod-files-here-this-is-strictly-for-learning-purposes-only&#34;&gt;Disclaimer : Im just sharing information &amp;amp; not distrubuting mod files here! this is strictly for learning purposes only.&lt;/h2&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&#34;intro&#34;&gt;Intro:&lt;/h2&gt;
+&lt;h2 id=&#34;intro-why&#34;&gt;Intro &amp;amp; why:&lt;/h2&gt;
 &lt;p&gt;This post will be an another reverse engineering/modding post. I recommend checking out last three posts. &lt;a href=&#34;https://bluepie.in/2019/07/android-reversing/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Android Reversing&amp;rdquo;&lt;/a&gt;, &lt;a href=&#34;https://bluepie.in/2019/10/android-reversing-part-2/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Android Reversing Part 2&amp;rdquo;&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://bluepie.in/2020/05/android-reversing-part-3/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Android Reversing part 3&amp;rdquo;&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;what-why&#34;&gt;What &amp;amp; why:&lt;/h2&gt;
 &lt;p&gt;Today we will be looking at two apps to study on, to put it simply I did it for my friends, After I told them about the Terria experiment that I did in the last post, they asked me whether Advanced Download Manager &amp;amp; Printer Sharer app can be modded too, I haven&amp;rsquo;t felt this existed to work on something since a long time. I immediately started working on it. spoiler: I completed it quickly&amp;hellip;but it was fun.&lt;/p&gt;
-&lt;h3 id=&#34;app-one&#34;&gt;App one:&lt;/h3&gt;
+&lt;h3 id=&#34;apps-one-two&#34;&gt;Apps one &amp;amp; two:&lt;/h3&gt;
 &lt;p&gt;The first app is ADM (advanced download manager). this app has a premium activation, we will check whether we can exploit this feature.&lt;/p&gt;
-&lt;h3 id=&#34;app-two&#34;&gt;App two:&lt;/h3&gt;
 &lt;p&gt;The second app is Print share anywhere, this app has premium features that works by installing another app that has to be bought from google play store, for the app to work both applications should have to installed.&lt;/p&gt;
 &lt;h2 id=&#34;new&#34;&gt;New:&lt;/h2&gt;
-&lt;p&gt;Taking apart &amp;ldquo;app one&amp;rdquo; and &amp;ldquo;app two&amp;rdquo; does not contain anything new, refer previous post for this section.&lt;/p&gt;
-&lt;p&gt;What could be changed:&lt;/p&gt;
-&lt;h2 id=&#34;trivia&#34;&gt;Trivia:&lt;/h2&gt;
-&lt;p&gt;Before discussing the possible ways, there is something we must understand, usually when an app has premium features, during first launch the default state of the purchase flag in code will be &amp;lsquo;not purchased&amp;rsquo;(in code), what I mean by &amp;ldquo;first launch&amp;rdquo; is installing the app fresh from app store and launching it for the first time or it communicates with some license server for it information for the first time.&lt;/p&gt;
+&lt;p&gt;Taking apart of &amp;ldquo;app one&amp;rdquo; and &amp;ldquo;app two&amp;rdquo; does not contain anything new, refer previous post for this section.&lt;/p&gt;
+&lt;p&gt;Before discussing the possible ways to achieve our goals, there is something we would like to know, usually when an app has premium features, during first launch the default state of the purchase flag in code will be &amp;lsquo;not purchased&amp;rsquo;(in code), what I mean by &amp;ldquo;first launch&amp;rdquo; is installing the app fresh from app store and launching it for the first time or it communicates with some license server for it information for the first time.&lt;/p&gt;
 &lt;p&gt;Second thing we should know about: we are getting into advanced territory here, I&amp;rsquo;ve been sharing basic modding until now, lets go advanced for a change.&lt;/p&gt;
 &lt;h2 id=&#34;accessing-data&#34;&gt;Accessing data:&lt;/h2&gt;
 &lt;p&gt;As mentioned the debug flag &amp;lsquo;android:debuggable=&amp;ldquo;true&amp;rdquo;&amp;rsquo; must be added to manifest.xml.&lt;/p&gt;
-&lt;p&gt;as of writing this post, the last stable release is android 9. the following methond works on my devices running android 8 &amp;amp; 9.&lt;/p&gt;
+&lt;p&gt;as of writing this post, Google&amp;rsquo;s last stable release is android 9 and the following methond works on my devices running android 8 &amp;amp; 9.&lt;/p&gt;
 &lt;p&gt;make sure the device is connected and has debugging enabled.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;
 &amp;gt; adb shell
 shell $ run-as package_name
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;interesting-part&#34;&gt;Interesting part:&lt;/h2&gt;
-&lt;p&gt;So for an application to work, consider it being android, apple, windows, space-craft software&amp;hellip;any piece of software that has to run and has to retain memory between launches, It has to store the state someplace.&lt;/p&gt;
+&lt;p&gt;For an application to work, consider it being android, apple, windows, space-craft software&amp;hellip;(i.e)any piece of software that has to run and has to retain memory between launches, It has to store the state someplace.&lt;/p&gt;
 &lt;p&gt;Yes exactly the android applications work on the same principle. how do we access it?
 We can add the debug flag during compilation of the app and install it to the device and run it, by this we overcome the restriction imposed by the android system, (i.e) applications private data can not be accessed by us.&lt;/p&gt;
 &lt;p&gt;We can then investigate the configs, private files of the app, One common way an app retains information for example: Entering your name in the app, it remembers it by store the information inside these files(there could be other-ways but lets not over-complicate things).&lt;/p&gt;
 &lt;p&gt;Theoretically, after we find out where the config to app&amp;rsquo;s purchase state is found, we can insert new code into the app to change the &amp;lsquo;buy state&amp;rsquo; of the application.&lt;/p&gt;
-&lt;p&gt;I later found out that these two apps was way too simple to mod, So did not use this method, but anyway Keep this idea in the mind may be we will use it in another scenario.&lt;/p&gt;
+&lt;p&gt;I later found out that these two apps were way-too-simple to mod, so did not bother use this, but anyway Keep this idea in the mind, we might use it in the future.&lt;/p&gt;
 &lt;h2 id=&#34;patching&#34;&gt;patching:&lt;/h2&gt;
 &lt;p&gt;Ways to overcome app one:&lt;/p&gt;
 &lt;p&gt;So after I decompiled the app, It was way too easy, they maintain a flag and use the flag everywhere for premium option, So basically I can just change it? Yea that is what I did and recompiled whola!. You have to be carefull here since during the first launch, It will just check with server whether you have bought the app from google app store or not. if we bought the app, then it stores the status in memory, what we could do here is change the smali-code to default go to insert the premium status in memory, doing &lt;em&gt;this way we could not worry about the different lifecycle problems that you might face. pause, destroy, resume states of the app.&lt;/em&gt;&lt;/p&gt;
@@ -65,7 +61,7 @@ sput-object v0, Lcom/dynamixsoftware/printershare/Billing;-&amp;gt;is_prm:[Ljava
 &lt;blockquote&gt;
 &lt;p&gt;Apart from the first app utilising pro-guard, these two apps required very little work, but I enjoyed it neverthless.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Im not gone share this post for obvious reasons, that is it for this post, see you next time.&lt;/p&gt;</description></item><item><title>Android Reversing Part 3</title><link>//bluepie.in/2020/05/android-reversing-part-3/</link><pubDate>Thu, 28 May 2020 04:55:51 +0530</pubDate><guid>//bluepie.in/2020/05/android-reversing-part-3/</guid><description>
+&lt;p&gt;Im not gone share the apk for obvious reasons, this concludes this post, have a good day &amp;amp; see you next time.&lt;/p&gt;</description></item><item><title>Android Reversing Part 3</title><link>//bluepie.in/2020/05/android-reversing-part-3/</link><pubDate>Thu, 28 May 2020 04:55:51 +0530</pubDate><guid>//bluepie.in/2020/05/android-reversing-part-3/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;Hi!, Its nice to post weekely for a change, I never posted weekely before, anyway this might be a one time thing(posting weekely).&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
