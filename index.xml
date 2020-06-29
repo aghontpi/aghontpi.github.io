@@ -1,4 +1,71 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><language>en-us</language><lastBuildDate>Thu, 28 May 2020 04:55:51 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Android Reversing Part 3</title><link>//bluepie.in/2020/05/android-reversing-part-3/</link><pubDate>Thu, 28 May 2020 04:55:51 +0530</pubDate><guid>//bluepie.in/2020/05/android-reversing-part-3/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><language>en-us</language><lastBuildDate>Tue, 30 Jun 2020 00:21:31 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Android Reversing Part 4</title><link>//bluepie.in/2020/06/android-reversing-part-4/</link><pubDate>Tue, 30 Jun 2020 00:21:31 +0530</pubDate><guid>//bluepie.in/2020/06/android-reversing-part-4/</guid><description>
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;&lt;em&gt;Hi me!, how are you doing, how is the future holding up?&lt;/em&gt;&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Personal Update: It&amp;rsquo;s been a rough couple weeks since the last post, Covid-19 has shown no rate of slowing down. Nothing been around my mind lately just junk&amp;hellip; a lot of junk I don&amp;rsquo;t want to think about. To many frequent decisions, Once a friend told me Self control over your thoughts are very important. No matter what I do, It seems I can not achieve it.. at least up-until now.&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;h2 id=&#34;disclaimer-im-just-sharing-information-not-distrubuting-mod-files-here-this-is-strictly-for-learning-purposes-only&#34;&gt;Disclaimer : Im just sharing information &amp;amp; not distrubuting mod files here! this is strictly for learning purposes only.&lt;/h2&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;intro&#34;&gt;Intro:&lt;/h2&gt;
+&lt;p&gt;This post will be an another reverse engineering/modding post. I recommend checking out last three posts. &lt;a href=&#34;https://bluepie.in/2019/07/android-reversing/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Android Reversing&amp;rdquo;&lt;/a&gt;, &lt;a href=&#34;https://bluepie.in/2019/10/android-reversing-part-2/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Android Reversing Part 2&amp;rdquo;&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://bluepie.in/2020/05/android-reversing-part-3/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Android Reversing part 3&amp;rdquo;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;what-why&#34;&gt;What &amp;amp; why:&lt;/h2&gt;
+&lt;p&gt;Today we will be looking at two apps to study on, to put it simply I did it for my friends, After I told them about the Terria experiment that I did in the last post, they asked me whether Advanced Download Manager &amp;amp; Printer Sharer app can be modded too, I haven&amp;rsquo;t felt this existed to work on something since a long time. I immediately started working on it. spoiler: I completed it quickly&amp;hellip;but it was fun.&lt;/p&gt;
+&lt;h3 id=&#34;app-one&#34;&gt;App one:&lt;/h3&gt;
+&lt;p&gt;The first app is ADM (advanced download manager). this app has a premium activation, we will check whether we can exploit this feature.&lt;/p&gt;
+&lt;h3 id=&#34;app-two&#34;&gt;App two:&lt;/h3&gt;
+&lt;p&gt;The second app is Print share anywhere, this app has premium features that works by installing another app that has to be bought from google play store, for the app to work both applications should have to installed.&lt;/p&gt;
+&lt;h2 id=&#34;new&#34;&gt;New:&lt;/h2&gt;
+&lt;p&gt;Taking apart &amp;ldquo;app one&amp;rdquo; and &amp;ldquo;app two&amp;rdquo; does not contain anything new, refer previous post for this section.&lt;/p&gt;
+&lt;p&gt;What could be changed:&lt;/p&gt;
+&lt;h2 id=&#34;trivia&#34;&gt;Trivia:&lt;/h2&gt;
+&lt;p&gt;Before discussing the possible ways, there is something we must understand, usually when an app has premium features, during first launch the default state of the purchase flag in code will be &amp;lsquo;not purchased&amp;rsquo;(in code), what I mean by &amp;ldquo;first launch&amp;rdquo; is installing the app fresh from app store and launching it for the first time or it communicates with some license server for it information for the first time.&lt;/p&gt;
+&lt;p&gt;Second thing we should know about: we are getting into advanced territory here, I&amp;rsquo;ve been sharing basic modding until now, lets go advanced for a change.&lt;/p&gt;
+&lt;h2 id=&#34;accessing-data&#34;&gt;Accessing data:&lt;/h2&gt;
+&lt;p&gt;As mentioned the debug flag &amp;lsquo;android:debuggable=&amp;ldquo;true&amp;rdquo;&amp;rsquo; must be added to manifest.xml.&lt;/p&gt;
+&lt;p&gt;as of writing this post, the last stable release is android 9. the following methond works on my devices running android 8 &amp;amp; 9.&lt;/p&gt;
+&lt;p&gt;make sure the device is connected and has debugging enabled.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;
+&amp;gt; adb shell
+shell $ run-as package_name
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;interesting-part&#34;&gt;Interesting part:&lt;/h2&gt;
+&lt;p&gt;So for an application to work, consider it being android, apple, windows, space-craft software&amp;hellip;any piece of software that has to run and has to retain memory between launches, It has to store the state someplace.&lt;/p&gt;
+&lt;p&gt;Yes exactly the android applications work on the same principle. how do we access it?
+We can add the debug flag during compilation of the app and install it to the device and run it, by this we overcome the restriction imposed by the android system, (i.e) applications private data can not be accessed by us.&lt;/p&gt;
+&lt;p&gt;We can then investigate the configs, private files of the app, One common way an app retains information for example: Entering your name in the app, it remembers it by store the information inside these files(there could be other-ways but lets not over-complicate things).&lt;/p&gt;
+&lt;p&gt;Theoretically, after we find out where the config to app&amp;rsquo;s purchase state is found, we can insert new code into the app to change the &amp;lsquo;buy state&amp;rsquo; of the application.&lt;/p&gt;
+&lt;p&gt;I later found out that these two apps was way too simple to mod, So did not use this method, but anyway Keep this idea in the mind may be we will use it in another scenario.&lt;/p&gt;
+&lt;h2 id=&#34;patching&#34;&gt;patching:&lt;/h2&gt;
+&lt;p&gt;Ways to overcome app one:&lt;/p&gt;
+&lt;p&gt;So after I decompiled the app, It was way too easy, they maintain a flag and use the flag everywhere for premium option, So basically I can just change it? Yea that is what I did and recompiled whola!. You have to be carefull here since during the first launch, It will just check with server whether you have bought the app from google app store or not. if we bought the app, then it stores the status in memory, what we could do here is change the smali-code to default go to insert the premium status in memory, doing &lt;em&gt;this way we could not worry about the different lifecycle problems that you might face. pause, destroy, resume states of the app.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Ways to overcome for app two:&lt;/p&gt;
+&lt;p&gt;The second app had the same logic, I made a similar patch in smali, the actual logic and smali code are as follows:&lt;/p&gt;
+&lt;p&gt;before:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; // by default the license variable contains false values,
+public static final Boolean[] is_prm = new Boolean[2];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;after:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
+public static final Boolean[] is_prm = {true, true};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In smali, it translates to:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-smali&#34;&gt;
+const/4 v4, 0x1
+const/4 v0, 0x2
+new-array v0, v0, [Ljava/lang/Boolean;
+const/4 v2, 0x0
+invoke-static {v4}, Ljava/lang/Boolean;-&amp;gt;valueOf(Z)Ljava/lang/Boolean;
+move-result-object v3
+aput-object v3, v0, v2
+invoke-static {v4}, Ljava/lang/Boolean;-&amp;gt;valueOf(Z)Ljava/lang/Boolean;
+move-result-object v2
+aput-object v2, v0, v4
+.line 398
+sput-object v0, Lcom/dynamixsoftware/printershare/Billing;-&amp;gt;is_prm:[Ljava/lang/Boolean;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Apart from the first app utilising pro-guard, these two apps required very little work, but I enjoyed it neverthless.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Im not gone share this post for obvious reasons, that is it for this post, see you next time.&lt;/p&gt;</description></item><item><title>Android Reversing Part 3</title><link>//bluepie.in/2020/05/android-reversing-part-3/</link><pubDate>Thu, 28 May 2020 04:55:51 +0530</pubDate><guid>//bluepie.in/2020/05/android-reversing-part-3/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;Hi!, Its nice to post weekely for a change, I never posted weekely before, anyway this might be a one time thing(posting weekely).&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1269,77 +1336,4 @@ decode(PrimePalindromeArr)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;I did manage to solve the challenges, but for the sake of this post I am gonna keep this short, already the post is very huge and it took me so long to write this. I know I am a bad typer(could not type very fast). I promise you that I will post all the challenges that were challenging to me. Bye See ya soon.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>ModSecurity</title><link>//bluepie.in/2019/05/modsecurity/</link><pubDate>Fri, 24 May 2019 23:32:43 +0530</pubDate><guid>//bluepie.in/2019/05/modsecurity/</guid><description>
-&lt;blockquote&gt;
-&lt;p&gt;so hello.. how are you doing..? how is life? im good, thank you!.
-&lt;strong&gt;&lt;em&gt;Status Update: I&amp;rsquo;ve seen better days tbh, i&amp;rsquo;ve faced a lot of challenges this month, im having burnout? wtf! what is that? you ask&amp;rsquo;? just google it.. In the entirety of my life, i never hated computers and programming/ developing in general, but recently i grown a haterd to computers and coding disgusts me.. like WTH? im like the polar opposite of myself, i never thought i would reach this moment in life, funny is&amp;rsquo;nt it? plus i&amp;rsquo;ve been going to my old happits - i blame being human for that.. i can never forget something and get over it can&amp;rsquo;t I.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Thankfully for burnout I got people on my back, with their help and advice, i&amp;rsquo;ve been taking breaks but the breaks are not enough, goto go to work?!! i miss old days.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;i-ve-had-a-chance-to-work-on-modsecurity-and-im-greatfull-for-that-i-gained-a-new-skill-kudos&#34;&gt;&amp;gt; I&amp;rsquo;ve had a chance to work on modSecurity and im greatfull for that! I gained a new skill! kudos!!.&lt;/h2&gt;
-&lt;hr /&gt;
-&lt;h3 id=&#34;why&#34;&gt;Why?&lt;/h3&gt;
-&lt;p&gt;what is modSec? modSecurity is a waf, waf is like anti virus for servers, controls how the servers responds to requests and what responses are sent out. modSecurity is openSource so using is completely free and it is a must in pci compliance, modSec works based on rules that fine tuned, identified as malicious and are wrote down, the rules are the building blocks of modsecurity. a better rule set equals better protection, this is why you see many vendors who branched out from modSecurity and provide their own set of rules as their enterprise solutions like for example: atomicorp, mlware expert, Trustwave, trend micro, etc.&lt;/p&gt;
-&lt;p&gt;if you want to know about modsecurity you should know a little bit of history of mod security, the rule set history, the latest in the rules of modSecurity is the core rule set 3.0+, before this release, the modSecrity rules create many false positives, but after update some big changes are the new blocking mode, curated rule-set and better detection.&lt;/p&gt;
-&lt;h3 id=&#34;so-what-is-the-new-blocking-mode&#34;&gt;So what is the new blocking mode?&lt;/h3&gt;
-&lt;p&gt;By default the anomaly scoring mode(new blocking mode) is activated, with
-&amp;ldquo;SecRuleEngine DetectionOnly&amp;rdquo;, you have to turn this to &amp;ldquo;SecRuleEngine On&amp;rdquo;
-to block the malicious requests. &lt;strong&gt;&lt;em&gt;(first of all you install modSecurity, leave the detection phase on, collect some logs - analyse them - tweak the rules - then turn on the secRuleEngine..)&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;if SecDefaultAction is set to “phase:2,deny,log&amp;rdquo; then modSecurity is working by anomaly scoring mode. next thing you must know about is &amp;ldquo;Anomaly scoring severity levels&amp;rdquo; and &amp;ldquo; Anomaly scoring threshold levels&amp;rdquo; (for blocking mostly)&lt;/p&gt;
-&lt;h4 id=&#34;what-it-does&#34;&gt;what it does?&lt;/h4&gt;
-&lt;p&gt;It does not block the request immediately but allows the request to pass through after assigning a score to the request, if the request any other rules another score is added to it, so there are 5 different levels where the rules are applied to the request, the scores are evaluated at the phase 3 for Inbound rules and 4 for outbound requests, yea you are right modsec scans the output content too and slaps score on it, if it sees something malicious.
-the rules are present in the rule-set too as&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SecAction “phase:1,id:’981208’,t:none,nolog,pass,\
-setvar:tx.inbound_anomaly_score_level=5”
-SecAction “phase:1,id:’981209’,t:none,nolog,pass,\
-setvar:tx.outbound_anomaly_score_level=4”
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;the inbound rules files are present in the file named along the line of &amp;ldquo;inbound_blocking.conf&amp;rdquo; and same as for the outbound request &amp;ldquo;outbound_blocking.conf&amp;rdquo;.&lt;/p&gt;
-&lt;p&gt;Based on severity anomaly scoring mode has different levels with scores by default&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;CRITICAL with a score of 5
-Error with 4,
-warning with 3,
-notice with 2,
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;h3 id=&#34;note-modsecurity-must-be-tweaked-to-individual-applications-not-just-install-the-default-configuration-infact-the-authors-of-modsecurity-strongly-advice-this-too&#34;&gt;&amp;gt;Note: modSecurity must be tweaked to individual applications, not just install the default configuration, infact the authors of modsecurity strongly advice this too.&lt;/h3&gt;
-&lt;h3 id=&#34;about-audit-logs-someother-aspects&#34;&gt;About audit logs - SomeOther aspects.&lt;/h3&gt;
-&lt;p&gt;Audit logs provide the entire traffic data &lt;strong&gt;&lt;em&gt;if &amp;ldquo;logging is enabled that is&amp;rdquo;.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;h5 id=&#34;if-response-code-is-500-we-are-logging-that&#34;&gt;if response code is 500 we are logging that.&lt;/h5&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SecAuditLogRelevantStatus “^(?:5|4(?!04))”
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h5 id=&#34;the-following-parts-contain-the-necessary-information-for-each-request&#34;&gt;the following parts contain the necessary information for each request.&lt;/h5&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SecAuditLogParts ABCEFHZ
-• A: Audit log header
-• B: Request headers
-• C: Request body
-• E: Intended response body
-• F: Response headers
-• H: Audit log trailer
-• Z: Audit log footer
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;while-logging-sensitive-data-in-logs&#34;&gt;While logging - Sensitive Data in Logs&lt;/h3&gt;
-&lt;p&gt;Be careful while logging the data, sensitive data are captured in logs too like passwords, creditcard numbers, you dont want that do you?&lt;/p&gt;
-&lt;p&gt;the below log you see credit card number captured in part c.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;--8472b290-C--
-paymentType=default&amp;amp;_D%3ApaymentType=+&amp;amp;
-creditCardNumber=***************&amp;amp;_D%3AcreditCardNumber=+&amp;amp;cid=6802
-&amp;amp;_D%3Acid=+&amp;amp;selCreditCardType=Visa&amp;amp;_D%3AselCreditCardType
-=+&amp;amp;_D%3AexpirationMonth=+&amp;amp;expirationMon
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;you can mitigate this with a rule like&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;SecRule &amp;amp;ARGS:password “@eq 1” “phase:5,t:none,id:’901’,nolog,pass,\
-sanitiseInput:pwd
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;now in audit log c section,&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;--c983684a-C--
-log=admin&amp;amp;password=********&amp;amp;submit=Login+%C2%BB&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;with the rule applied the password is now obscured.&lt;/p&gt;
-&lt;h3 id=&#34;vitual-patching&#34;&gt;vitual Patching&lt;/h3&gt;
-&lt;p&gt;So ModSecurity has a ton of features you should not miss out is virtual patching, where would you use this you ask? well.. you found a vulnerability in your application and while you wait for the developers to fix that you could do virutual patching with the wide variety of rules available in modSecurity.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;The post is getting huge and I find writing blogs tiresome (bad at typing i guess). but i still do it cuz its for the future me.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;I didn&amp;rsquo;nt cover everything and i assumed u knew little about modSecurity during halfway, I just couln&amp;rsquo;t type the whole entirety, just contact me if you want to know more&amp;hellip;bye!&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>
+&lt;/blockquote&gt;</description></item></channel></rss>
