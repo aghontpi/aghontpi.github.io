@@ -1,84 +1,81 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><link rel=prev href=//bluepie.in/2019/07/android-reversing/><link rel=next href=//bluepie.in/2019/10/android-reversing-part-2/><link rel=canonical href=//bluepie.in/2019/09/docker-to-make-life-easier/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>Docker to Make Life Easier | Bluepie&#39;s update blog</title><meta name=title content="Docker to Make Life Easier | Bluepie's update blog"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"Docker to Make Life Easier","headline":"Docker to Make Life Easier","description":"Hello, it\x26rsquo;s been two months since last update. Anyway the August month I was pretty busy, to be honest, I was involved in a old project of mine that I had to revist, in order to get more productive and flexibility in developing the application I chose to use docker. So this post is going to be about docker.\n Status Update:The month of August also had something interesting in it, which is my birthday.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2019","datePublished":"2019-09-11 09:17:29 \x2b0530 IST","dateModified":"2019-09-11 09:17:29 \x2b0530 IST","url":"\/\/bluepie.in\/2019\/09\/docker-to-make-life-easier\/","wordCount":"888","keywords":["Bluepie\x27s update blog"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s update blog</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>Blog</a>
-<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s update blog</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>Blog</a>
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="Bluepie"><link rel=prev href=//bluepie.in/2019/07/android-reversing/><link rel=next href=//bluepie.in/2019/10/android-reversing-part-2/><link rel=canonical href=//bluepie.in/2019/09/docker-to-make-life-easier/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>Docker to Make Life Easier | Bluepie's update blog</title><meta name=title content="Docker to Make Life Easier | Bluepie's update blog"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"Docker to Make Life Easier","headline":"Docker to Make Life Easier","description":"Hello, it\x26rsquo;s been two months since last update. Anyway the August month I was pretty busy, to be honest, I was involved in a old project of mine that I had to revist, in order to get more productive and flexibility in developing the application I chose to use docker. So this post is going to be about docker.\n Status Update:The month of August also had something interesting in it, which is my birthday.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2019","datePublished":"2019-09-11 09:17:29 \x2b0530 IST","dateModified":"2019-09-11 09:17:29 \x2b0530 IST","url":"\/\/bluepie.in\/2019\/09\/docker-to-make-life-easier\/","wordCount":"884","keywords":["Bluepie\x27s update blog"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie's update blog</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>Blog</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie's update blog</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>Blog</a>
 <a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-135013873-2','auto');ga('send','pageview');}</script><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">Docker to Make Life Easier</h1><div class=post-meta>Written by <a itemprop=name href=//bluepie.in/ rel=author>Bluepie</a> with ♥
 <span class=post-time>on <time datetime=2019-09-11 itemprop=datePublished>September 11, 2019</time></span>
 in
 <i class="iconfont icon-folder"></i><span class=post-category><a href=//bluepie.in/categories/tech/>Tech</a>
 <a href=//bluepie.in/categories/automation/>Automation</a>
 <a href=//bluepie.in/categories/developer/>Developer</a>
-<a href=//bluepie.in/categories/workflow/>workflow</a></span></div></header><div class=post-content><img src=//bluepie.in/images/posts/docker.png class=featured_image><blockquote><p>Hello, it&rsquo;s been two months since last update. Anyway the August month I was pretty busy, to be honest, I was involved in a old project of mine that I had to revist, in order to get more productive and flexibility in developing the application I chose to use docker. So this post is going to be about docker.</p></blockquote><p><strong><em>Status Update:The month of August also had something interesting in it, which is my birthday. There was a plan to go a special temple so I took some leave from office, during that time another holiday was also just around the corner, so on the whole I had about 5 days of stay in my house, which is a lot considering I only have a two or three days leave if I had leave my office. This was the first time after a year that I have been staying in home for a long time. During that time I spent some minimal time developing and I found out that I had so much productivity in home then in my chennai room or my office and I was learning new things, so that is that.</em></strong></p><hr><h1 id=will-reference-everything-with-the-assumption-you-are-on-the-linux-platform-too-it-ll-be-only-slightly-different-on-windows><em>Will reference everything with the assumption you are on the linux platform too, it&rsquo;ll be only slightly different on windows.</em></h1><hr><h2 id=intro-to-docker>Intro to docker</h2><h3 id=installation>installation</h3><p>I recommend installation with the prebuilt packages from the docker link instead of your flavour&rsquo;s package (debian[ubunut..], arch..).</p><pre><code class=language-text>
+<a href=//bluepie.in/categories/workflow/>workflow</a></span></div></header><div class=post-content><img src=//bluepie.in/images/posts/docker.png class=featured_image><blockquote><p>Hello, it&rsquo;s been two months since last update. Anyway the August month I was pretty busy, to be honest, I was involved in a old project of mine that I had to revist, in order to get more productive and flexibility in developing the application I chose to use docker. So this post is going to be about docker.</p></blockquote><p><em><strong>Status Update:The month of August also had something interesting in it, which is my birthday. There was a plan to go a special temple so I took some leave from office, during that time another holiday was also just around the corner, so on the whole I had about 5 days of stay in my house, which is a lot considering I only have a two or three days leave if I had leave my office. This was the first time after a year that I have been staying in home for a long time. During that time I spent some minimal time developing and I found out that I had so much productivity in home then in my chennai room or my office and I was learning new things, so that is that.</strong></em></p><hr><h1 id=_will-reference-everything-with-the-assumption-you-are-on-the-linux-platform-too-itll-be-only-slightly-different-on-windows_><em>Will reference everything with the assumption you are on the linux platform too, it&rsquo;ll be only slightly different on windows.</em></h1><hr><h2 id=intro-to-docker>Intro to docker</h2><h3 id=installation>installation</h3><p>I recommend installation with the prebuilt packages from the docker link instead of your flavour&rsquo;s package (debian[ubunut..], arch..).</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>
 # use the following path while navigating through to get the download links.
 
 pool/dist/package
 
-</code></pre><p>(or)</p><p>if you insist on installing with apt.</p><pre><code class=language-bash>
-# installation with apt / apt-get
-sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    software-properties-common
+</code></pre></div><p>(or)</p><p>if you insist on installing with apt.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>
+<span style=color:#75715e># installation with apt / apt-get</span>
+sudo apt-get install <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>    apt-transport-https <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>    ca-certificates <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>    curl <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>    gnupg-agent <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>    software-properties-common
 gpg key:
  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 check fingerprint:
 sudo apt-key fingerprint 0EBFCD88
 
-pub   rsa4096 2017-02-22 [SCEA]
-      9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
-uid           [ unknown] Docker Release (CE deb) &lt;docker@docker.com&gt;
-sub   rsa4096 2017-02-22 [S]
+pub   rsa4096 2017-02-22 <span style=color:#f92672>[</span>SCEA<span style=color:#f92672>]</span>
+      9DC8 <span style=color:#ae81ff>5822</span> 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
+uid           <span style=color:#f92672>[</span> unknown<span style=color:#f92672>]</span> Docker Release <span style=color:#f92672>(</span>CE deb<span style=color:#f92672>)</span> &lt;docker@docker.com&gt;
+sub   rsa4096 2017-02-22 <span style=color:#f92672>[</span>S<span style=color:#f92672>]</span>
 
-#choosing stable release for docker:
-sudo add-apt-repository \
-   &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable&quot;
+<span style=color:#75715e>#choosing stable release for docker:</span>
+sudo add-apt-repository <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>   <span style=color:#e6db74>&#34;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+</span><span style=color:#e6db74>   </span><span style=color:#66d9ef>$(</span>lsb_release -cs<span style=color:#66d9ef>)</span><span style=color:#e6db74> \
+</span><span style=color:#e6db74>   stable&#34;</span>
 
-#installing latest docker from ubuntu.
+<span style=color:#75715e>#installing latest docker from ubuntu.</span>
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 
-#deb is even simpler in my openion (example for debian): 
+<span style=color:#75715e>#deb is even simpler in my openion (example for debian):</span> 
 sudo dpkg -i /path/to/package.deb 
 
-</code></pre><h3 id=basics>basics</h3><p><strong><em>the following are true for linux based distros</em></strong></p><p><em>To put it simple terms</em>
+</code></pre></div><h3 id=basics>basics</h3><p><em><strong>the following are true for linux based distros</strong></em></p><p><em>To put it simple terms</em>
 Docker is like a virtualMachine except it&rsquo;s not resource hungry.</p><p><em>To not put in simple terms</em>
-Docker shares the same kernel as the host, while VirtualMachine rewrites low-level instructions &amp; executes them on the fly.</p><hr><h4 id=image>image</h4><p>images are like iso images burnt to a cd/usb ready to be installed,
-things you can do with it,
-* use prebuilt images from market, (both official and user created)
-* build an image with customisations on top of an official image form market
-* publish the images you are using/ publish images that you built</p><hr><h4 id=container>container</h4><p>Image u have a fresh HardDisk, you installed a OS(operating system) of your liking in it,
+Docker shares the same kernel as the host, while VirtualMachine rewrites low-level instructions & executes them on the fly.</p><hr><h4 id=image>image</h4><p>images are like iso images burnt to a cd/usb ready to be installed,
+things you can do with it,</p><ul><li>use prebuilt images from market, (both official and user created)</li><li>build an image with customisations on top of an official image form market</li><li>publish the images you are using/ publish images that you built</li></ul><hr><h4 id=container>container</h4><p>Image u have a fresh HardDisk, you installed a OS(operating system) of your liking in it,
 what do you have left in it?
 Free space after the o-files, which u can use to store anything,
 what can you install on the os?
 basically any software,
 so next time if you take that particular hardDisk will you get, basically above right?
 This is what a container is, replace HardDisk with container and os with prebuilt/customImage.
-you can attach external HardDrive to it, which in our case is volume, &hellip;etc</p><hr><h4 id=basic-commands>basic commands</h4><pre><code class=language-bash>
-#list local images/containers
+you can attach external HardDrive to it, which in our case is volume, &mldr;etc</p><hr><h4 id=basic-commands>basic commands</h4><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>
+<span style=color:#75715e>#list local images/containers</span>
 docker image ls
 
-#only running containers
+<span style=color:#75715e>#only running containers</span>
 docker container ls 
 
-#list all (even turned off containers)
+<span style=color:#75715e>#list all (even turned off containers)</span>
 docker contaienr ls -a
 
-</code></pre><hr><h4 id=custom-image-creation-section>custom image creation section</h4><p>some commands to help you(addressig myslef), for custom images.</p><pre><code class=language-bash>
-# dockerfile
+</code></pre></div><hr><h4 id=custom-image-creation-section>custom image creation section</h4><p>some commands to help you(addressig myslef), for custom images.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>
+<span style=color:#75715e># dockerfile</span>
 FROM &lt;imagename&gt;:&lt;tagfortheimage&gt;
 COPY &lt;src&gt; &lt;dest&gt;
 WORKDIR further interaction will start from this directory.
 EXPOSE port to be exposed.
-# installed additioal/required programs from below commands
+<span style=color:#75715e># installed additioal/required programs from below commands</span>
 RUN commands to run 
 CMD commands to run 
 
-</code></pre><p>build the image, filename for the file should be &lsquo;Dockerfile&rsquo;</p><pre><code class=language-bash>
+</code></pre></div><p>build the image, filename for the file should be &lsquo;Dockerfile&rsquo;</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>
 docker-build -f PathToFile -t nameOfTheBuildImage
-#ex:
+<span style=color:#75715e>#ex:</span>
 docker build -t phpserver:0.0.2 phpServer/
 
 docker image ls phpserver
@@ -86,20 +83,20 @@ docker image ls phpserver
 REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
 phpserver           0.0.2               5f7b4c7374b5        About a minute ago   416MB
 
-#another way of representing, httpd/somefeature:tagHere, httpd/somefeature (tag assumed as latest here), user/httpd-imageName:taghere
+<span style=color:#75715e>#another way of representing, httpd/somefeature:tagHere, httpd/somefeature (tag assumed as latest here), user/httpd-imageName:taghere</span>
 
-</code></pre><p>running a image which you built locally or from the official image,</p><pre><code class=language-bash>
-docker-run -d run-container-in-background -v specify-volume / --mount --mount='-type=bind,src=path_here,dst=path_here' (path must be absolute --name='' -p [] (port) -p [] (port)
+</code></pre></div><p>running a image which you built locally or from the official image,</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>
+docker-run -d run-container-in-background -v specify-volume / --mount --mount<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;-type=bind,src=path_here,dst=path_here&#39;</span> <span style=color:#f92672>(</span>path must be absolute --name<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;&#39;</span> -p <span style=color:#f92672>[]</span> <span style=color:#f92672>(</span>port<span style=color:#f92672>)</span> -p <span style=color:#f92672>[]</span> <span style=color:#f92672>(</span>port<span style=color:#f92672>)</span>
 
 ex:
-docker run -d -p 80:80  --mount='src=//bluepie.in/home/path/to/folder/,dst=/var/www/html/,type=bind' --name phpserver  phpserver:0.0.2
+docker run -d -p 80:80  --mount<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;src=//bluepie.in/home/path/to/folder/,dst=/var/www/html/,type=bind&#39;</span> --name phpserver  phpserver:0.0.2
 
 docker ps 
 
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES
-5f7b4c7374b5        phpserver:0.0.2     &quot;docker-php-entrypoi…&quot;   10 seconds ago      Up 9 seconds        0.0.0.0:80-&gt;80/tcp   phpserver
+5f7b4c7374b5        phpserver:0.0.2     <span style=color:#e6db74>&#34;docker-php-entrypoi…&#34;</span>   <span style=color:#ae81ff>10</span> seconds ago      Up <span style=color:#ae81ff>9</span> seconds        0.0.0.0:80-&gt;80/tcp   phpserver
 
-</code></pre><p>after starting the container, some commands to help you,</p><pre><code class=language-bash>
+</code></pre></div><p>after starting the container, some commands to help you,</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>
 
 docker-container start name
 docker-container stop name
@@ -109,25 +106,25 @@ docker-container inspect name
 docker-container ls -a 
 docker-container la
 
-</code></pre><p>to interact with running containers</p><pre><code class=language-bash>
-#run single instance command
+</code></pre></div><p>to interact with running containers</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>
+<span style=color:#75715e>#run single instance command</span>
 docker-exec -i image command-here params-if-command-has-it
-#ex: install php inside a conainer and use it like binary like this
-docker run \
-    --rm \
-    -i \
-    --network=host \
-    -v &quot;$HOME&quot;:&quot;$HOME&quot;:ro \
-    -u $(id -u) \
-    -w &quot;$PWD&quot; \
-    php:7.3-alpine \
-    php &quot;$@&quot;
+<span style=color:#75715e>#ex: install php inside a conainer and use it like binary like this</span>
+docker run <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>    --rm <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>    -i <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>    --network<span style=color:#f92672>=</span>host <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>    -v <span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>&#34;</span>:<span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>&#34;</span>:ro <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>    -u <span style=color:#66d9ef>$(</span>id -u<span style=color:#66d9ef>)</span> <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>    -w <span style=color:#e6db74>&#34;</span>$PWD<span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>    php:7.3-alpine <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>    php <span style=color:#e6db74>&#34;</span>$@<span style=color:#e6db74>&#34;</span>
 
-#run interactive shell command
+<span style=color:#75715e>#run interactive shell command</span>
 docker-exec -it image 
 
-</code></pre><hr><h5 id=docker-compose>docker compose</h5><p>wana start a bunch of container&rsquo;s each serving its own purpose,
-for eg: one container for running server, another for databse, another for running waf, another for running microService ?</p><p>install docker-compose, downlaod the docker-compose binary and include it in your environment variable, and build a docker-compose.yml for it.</p><h3 id=bye-see-ya-soon-sorry-for-missing-out-last-month><em>bye, see ya soon, sorry for missing out last month</em></h3></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+</code></pre></div><hr><h5 id=docker-compose>docker compose</h5><p>wana start a bunch of container&rsquo;s each serving its own purpose,
+for eg: one container for running server, another for databse, another for running waf, another for running microService ?</p><p>install docker-compose, downlaod the docker-compose binary and include it in your environment variable, and build a docker-compose.yml for it.</p><h3 id=_bye-see-ya-soon-sorry-for-missing-out-last-month_><em>bye, see ya soon, sorry for missing out last month</em></h3></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
 <span>Bluepie</span></p><p class=copyright-item><span>Link:</span>
 <a href=//bluepie.in/2019/09/docker-to-make-life-easier/>//bluepie.in/2019/09/docker-to-make-life-easier/</span></p></div><div class=post-tags><section><a href=javascript:window.history.back();>back</a></span> ·
 <span><a href=//bluepie.in/>home</a></span></section></div><div class=post-nav><a href=//bluepie.in/2019/07/android-reversing/ class=prev rel=prev title="Android Reversing"><i class="iconfont icon-left"></i>&nbsp;Android Reversing</a>
