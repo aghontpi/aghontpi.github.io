@@ -1,83 +1,82 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="Bluepie"><link rel=prev href=//bluepie.in/2019/04/blog-migration/><link rel=next href=//bluepie.in/2019/05/modsecurity/><link rel=canonical href=//bluepie.in/2019/04/android-service-binders/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>Android Service Binders | Bluepie's update blog</title><meta name=title content="Android Service Binders | Bluepie's update blog"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"Android Service Binders","headline":"Android Service Binders","description":"hola amigos\x26rsquo;, how are you guys doing? im fine thank you!. Status Update: About last week, I have covered some ground interms of development in old passion projects, the start of the week was great, but at the end of the week it got worse, nevertheless im happy that i survived this week \x26gt;_\x26lt;. Saw avengers end game the other day which was cool, during part-I I was studying, but for part-II -an adult going to office (feels wierd even to think, So much change in just one year), Personally nothing great happened, because of the mind that i have, I had the same bs.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2019","datePublished":"2019-04-28 18:24:31 \x2b0530 IST","dateModified":"2019-04-28 18:24:31 \x2b0530 IST","url":"\/\/bluepie.in\/2019\/04\/android-service-binders\/","wordCount":"625","keywords":["Bluepie\x27s update blog"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie's update blog</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>Blog</a>
-<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie's update blog</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>Blog</a>
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><link rel=prev href=//bluepie.in/2019/04/blog-migration/><link rel=next href=//bluepie.in/2019/05/modsecurity/><link rel=canonical href=//bluepie.in/2019/04/android-service-binders/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>Android Service Binders | Bluepie&#39;s update blog</title><meta name=title content="Android Service Binders | Bluepie's update blog"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"Android Service Binders","headline":"Android Service Binders","description":"hola amigos\x26rsquo;, how are you guys doing? im fine thank you!. Status Update: About last week, I have covered some ground interms of development in old passion projects, the start of the week was great, but at the end of the week it got worse, nevertheless im happy that i survived this week \x26gt;_\x26lt;. Saw avengers end game the other day which was cool, during part-I I was studying, but for part-II -an adult going to office (feels wierd even to think, So much change in just one year), Personally nothing great happened, because of the mind that i have, I had the same bs.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2019","datePublished":"2019-04-28 18:24:31 \x2b0530 IST","dateModified":"2019-04-28 18:24:31 \x2b0530 IST","url":"\/\/bluepie.in\/2019\/04\/android-service-binders\/","wordCount":"625","keywords":["Bluepie\x27s update blog"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s update blog</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>Blog</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s update blog</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>Blog</a>
 <a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-135013873-2','auto');ga('send','pageview');}</script><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">Android Service Binders</h1><div class=post-meta>Written by <a itemprop=name href=//bluepie.in/ rel=author>Bluepie</a> with ♥
 <span class=post-time>on <time datetime=2019-04-28 itemprop=datePublished>April 28, 2019</time></span>
 in
 <i class="iconfont icon-folder"></i><span class=post-category><a href=//bluepie.in/categories/tech/>Tech</a>
 <a href=//bluepie.in/categories/android/>android</a>
 <a href=//bluepie.in/categories/development/>development</a></span></div></header><div class=post-content><img src=//bluepie.in/images/posts/service-binders.png class=featured_image><blockquote><p>hola amigos&rsquo;, how are you guys doing? im fine thank you!.
-<em><strong>Status Update: About last week, I have covered some ground interms of development in old passion projects, the start of the week was great, but at the end of the week it got worse, nevertheless im happy that i survived this week >_&lt;. Saw avengers end game the other day which was cool, during part-I I was studying, but for part-II -an adult going to office (feels wierd even to think, So much change in just one year), Personally nothing great happened, because of the mind that i have, I had the same bs.</strong></em></p></blockquote><hr><h2 id=-im-gona-explain-about-how-to-communicate-with-android-services>> I&rsquo;m gona explain about how to communicate with android services.</h2><hr><h3 id=why-backstory>why? backstory..</h3><p>B&rsquo;coz when I was at the begining stages of my android life, I had some use case that i had to interact with service, I know java somebit but I was no java expert (haven&rsquo;t done any big projects in java <em><strong>YET >.> (you wouldn&rsquo;t know)</strong></em>). So without any research I went staright in, I thought i could do with interface with my own implementation that came to an dead end with problems. Later i found out binders.. stupid me.
-<img src=//bluepie.in/images/posts/android_service_binder_Interface.png alt=Interface></p><h3 id=how>How?</h3><p>Well let me show you. First of all you must know about IBinder interface (available since android&rsquo;s starting stages), then you should know about Binder class which implements the IBinder interface, keep in mind there are a lot of other ways around (as i have already mentioned in the previous posts).</p><blockquote><h3 id=it-will-be-better-if-i-explain-this-in-code-as-it-will-be-much-easier-to-understand>It will be better if i explain this in code, as it will be much easier to understand.</h3></blockquote><h5 id=create-a-class-extending-the-class-binder>create a class extending the class binder.</h5><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CustomBinderName</span> <span style=color:#66d9ef>extends</span> Binder <span style=color:#f92672>{</span>
+<strong><em>Status Update: About last week, I have covered some ground interms of development in old passion projects, the start of the week was great, but at the end of the week it got worse, nevertheless im happy that i survived this week &gt;_&lt;. Saw avengers end game the other day which was cool, during part-I I was studying, but for part-II -an adult going to office (feels wierd even to think, So much change in just one year), Personally nothing great happened, because of the mind that i have, I had the same bs.</em></strong></p></blockquote><hr><h2 id=i-m-gona-explain-about-how-to-communicate-with-android-services>&gt; I&rsquo;m gona explain about how to communicate with android services.</h2><hr><h3 id=why-backstory>why? backstory..</h3><p>B&rsquo;coz when I was at the begining stages of my android life, I had some use case that i had to interact with service, I know java somebit but I was no java expert (haven&rsquo;t done any big projects in java <strong><em>YET &gt;.&gt; (you wouldn&rsquo;t know)</em></strong>). So without any research I went staright in, I thought i could do with interface with my own implementation that came to an dead end with problems. Later i found out binders.. stupid me.<figure><img src=//bluepie.in/images/ring.svg data-sizes=auto data-src=//bluepie.in/images/posts/android_service_binder_Interface.png alt=Interface class=lazyload><figcaption class=image-caption>Interface</figcaption></figure></p><h3 id=how>How?</h3><p>Well let me show you. First of all you must know about IBinder interface (available since android&rsquo;s starting stages), then you should know about Binder class which implements the IBinder interface, keep in mind there are a lot of other ways around (as i have already mentioned in the previous posts).</p><blockquote><h3 id=it-will-be-better-if-i-explain-this-in-code-as-it-will-be-much-easier-to-understand>It will be better if i explain this in code, as it will be much easier to understand.</h3></blockquote><h5 id=create-a-class-extending-the-class-binder>create a class extending the class binder.</h5><pre><code class=language-java>public class CustomBinderName extends Binder {
 
-     <span style=color:#66d9ef>private</span> sericeName serviceNameInterface<span style=color:#f92672>;</span>
+     private sericeName serviceNameInterface;
 
-     <span style=color:#75715e>/**
-</span><span style=color:#75715e>     * gets Serivce context for each service,
-</span><span style=color:#75715e>     */</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>CustomBinderName</span><span style=color:#f92672>(</span>Context serviceContext<span style=color:#f92672>){</span>
-        serviceNameInterface <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>serviceName<span style=color:#f92672>)</span> serviceContext<span style=color:#f92672>;</span>
-    <span style=color:#f92672>}</span>
+     /**
+     * gets Serivce context for each service,
+     */
+    public CustomBinderName(Context serviceContext){
+        serviceNameInterface = (serviceName) serviceContext;
+    }
 
-     <span style=color:#75715e>/**
-</span><span style=color:#75715e>     * getService,
-</span><span style=color:#75715e>     * return serviceNameInterface(this instance), which is what we need.
-</span><span style=color:#75715e>     * calling contract - which we use in Activity.
-</span><span style=color:#75715e>     */</span>
-    <span style=color:#66d9ef>public</span> serviceName <span style=color:#a6e22e>getService</span><span style=color:#f92672>(){</span>
-        <span style=color:#66d9ef>return</span> serviceNameInterface<span style=color:#f92672>;</span>
-    <span style=color:#f92672>}</span>
-<span style=color:#f92672>}</span>
-</code></pre></div><h5 id=then-implementing-serviceconnection>then implementing serviceConnection.</h5><p>The android os calls the contract methods inside this class (interface after implementation), these methods are called from the main thread of the application, like many other callbacks from the system.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>    <span style=color:#75715e>/**
-</span><span style=color:#75715e>     * ServiceConnection  interface,
-</span><span style=color:#75715e>     * calling bindService - contract - our custom implementation,
-</span><span style=color:#75715e>     * calls onserviceConnection with componenetName and binder,
-</span><span style=color:#75715e>     *
-</span><span style=color:#75715e>     * we bind it with customClass implementation of customBinderNameBinder
-</span><span style=color:#75715e>     * through the link, we get and save service on local serviceBoundLink.
-</span><span style=color:#75715e>     *
-</span><span style=color:#75715e>     */</span>
-    <span style=color:#66d9ef>private</span> ServiceConnection serviceConnection <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ServiceConnection<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-        <span style=color:#a6e22e>@Override</span>
-        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>onServiceConnected</span><span style=color:#f92672>(</span>ComponentName componentName<span style=color:#f92672>,</span> IBinder iBinder<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-            CustomBinderName customBinderName <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>CustomBinderName<span style=color:#f92672>)</span> iBinder<span style=color:#f92672>;</span>
-            serviceBoundLink <span style=color:#f92672>=</span> customBinderName<span style=color:#f92672>.</span><span style=color:#a6e22e>getService</span><span style=color:#f92672>();</span> 
-            isServiceBound <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>;</span> 
+     /**
+     * getService,
+     * return serviceNameInterface(this instance), which is what we need.
+     * calling contract - which we use in Activity.
+     */
+    public serviceName getService(){
+        return serviceNameInterface;
+    }
+}
+</code></pre><h5 id=then-implementing-serviceconnection>then implementing serviceConnection.</h5><p>The android os calls the contract methods inside this class (interface after implementation), these methods are called from the main thread of the application, like many other callbacks from the system.</p><pre><code class=language-java>    /**
+     * ServiceConnection  interface,
+     * calling bindService - contract - our custom implementation,
+     * calls onserviceConnection with componenetName and binder,
+     *
+     * we bind it with customClass implementation of customBinderNameBinder
+     * through the link, we get and save service on local serviceBoundLink.
+     *
+     */
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            CustomBinderName customBinderName = (CustomBinderName) iBinder;
+            serviceBoundLink = customBinderName.getService(); 
+            isServiceBound = true; 
 
-         <span style=color:#f92672>}</span>
+         }
 
-         <span style=color:#a6e22e>@Override</span>
-        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>onServiceDisconnected</span><span style=color:#f92672>(</span>ComponentName componentName<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-            isServiceBound <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
-        <span style=color:#f92672>}</span>
-    <span style=color:#f92672>};</span>
- <span style=color:#f92672>}</span>
+         @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            isServiceBound = false;
+        }
+    };
+ }
 
-</code></pre></div><h5 id=implementing-necessary-classes-on-the-service>Implementing necessary classes on the service.</h5><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>    <span style=color:#75715e>/**
-</span><span style=color:#75715e>     * needs to return Interface Ibinder,
-</span><span style=color:#75715e>     * onBind initiated on bindService (creation of service),
-</span><span style=color:#75715e>     */</span>
+</code></pre><h5 id=implementing-necessary-classes-on-the-service>Implementing necessary classes on the service.</h5><pre><code class=language-java>    /**
+     * needs to return Interface Ibinder,
+     * onBind initiated on bindService (creation of service),
+     */
 
-     <span style=color:#a6e22e>@Override</span>
-    <span style=color:#66d9ef>public</span> IBinder <span style=color:#a6e22e>onBind</span><span style=color:#f92672>(</span>Intent intent<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-        <span style=color:#66d9ef>return</span> customBinderName<span style=color:#f92672>;</span>
-    <span style=color:#f92672>}</span>
+     @Override
+    public IBinder onBind(Intent intent) {
+        return customBinderName;
+    }
 
-     <span style=color:#75715e>/**
-</span><span style=color:#75715e>     * Need to be of type IBinder.
-</span><span style=color:#75715e>     * CustomBinderName is constructed such a was,
-</span><span style=color:#75715e>     *  instance of customBinderName has to be passed in 
-</span><span style=color:#75715e>     *     via constructor, since this is how we implemented it.
-</span><span style=color:#75715e>     */</span>
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> IBinder customBinderName <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> CustomBinderName<span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>);</span>
+     /**
+     * Need to be of type IBinder.
+     * CustomBinderName is constructed such a was,
+     *  instance of customBinderName has to be passed in 
+     *     via constructor, since this is how we implemented it.
+     */
+    private final IBinder customBinderName = new CustomBinderName(this);
 
-</code></pre></div><h5 id=binding-the-service-with-some-activity>Binding the service, with some activity.</h5><p>During service creation call bindService, passing in our implementation of serviceConnection,
-then the global BIND_AUTO_CREATE (usually bind_auto_create, since most of the time, service is not created before at this point), the system will take care of the rest.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>        <span style=color:#75715e>/*
-</span><span style=color:#75715e>        * intent for the service, with class,
-</span><span style=color:#75715e>        * After start, bind the service(link) with local intance so its
-</span><span style=color:#75715e>        *   (service) methods can be called.
-</span><span style=color:#75715e>        */</span>
-        bindService<span style=color:#f92672>(</span>intent<span style=color:#f92672>,</span>serviceConnection<span style=color:#f92672>,</span>Context<span style=color:#f92672>.</span><span style=color:#a6e22e>BIND_AUTO_CREATE</span><span style=color:#f92672>);</span>
-</code></pre></div><h5 id=be-sure-to-remove-unbind-the-service-connection-else-youll-end-up-with-memory-leaking>Be sure to remove unbind the service, connection.. else you&rsquo;ll end up with memory leaking.</h5><hr><blockquote><p><em><strong>bye see ya next time, by the time im making this post public, eveything changed to the polar opposite.</strong></em></p></blockquote></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+</code></pre><h5 id=binding-the-service-with-some-activity>Binding the service, with some activity.</h5><p>During service creation call bindService, passing in our implementation of serviceConnection,
+then the global BIND_AUTO_CREATE (usually bind_auto_create, since most of the time, service is not created before at this point), the system will take care of the rest.</p><pre><code class=language-java>        /*
+        * intent for the service, with class,
+        * After start, bind the service(link) with local intance so its
+        *   (service) methods can be called.
+        */
+        bindService(intent,serviceConnection,Context.BIND_AUTO_CREATE);
+</code></pre><h5 id=be-sure-to-remove-unbind-the-service-connection-else-you-ll-end-up-with-memory-leaking>Be sure to remove unbind the service, connection.. else you&rsquo;ll end up with memory leaking.</h5><hr><blockquote><p><strong><em>bye see ya next time, by the time im making this post public, eveything changed to the polar opposite.</em></strong></p></blockquote></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
 <span>Bluepie</span></p><p class=copyright-item><span>Link:</span>
 <a href=//bluepie.in/2019/04/android-service-binders/>//bluepie.in/2019/04/android-service-binders/</span></p></div><div class=post-tags><section><a href=javascript:window.history.back();>back</a></span> ·
 <span><a href=//bluepie.in/>home</a></span></section></div><div class=post-nav><a href=//bluepie.in/2019/04/blog-migration/ class=prev rel=prev title="Blog Migration"><i class="iconfont icon-left"></i>&nbsp;Blog Migration</a>
