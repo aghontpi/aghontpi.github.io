@@ -1,4 +1,38 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><language>en-us</language><lastBuildDate>Fri, 28 Aug 2020 19:41:47 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>august and future</title><link>//bluepie.in/2020/08/future/</link><pubDate>Fri, 28 Aug 2020 19:41:47 +0530</pubDate><guid>//bluepie.in/2020/08/future/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><language>en-us</language><lastBuildDate>Wed, 30 Sep 2020 22:26:17 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Gatsby Experiment</title><link>//bluepie.in/2020/09/gatsby-experiment/</link><pubDate>Wed, 30 Sep 2020 22:26:17 +0530</pubDate><guid>//bluepie.in/2020/09/gatsby-experiment/</guid><description>
+&lt;p&gt;&lt;em&gt;Hi, how did the day go?, what about the week? what about the month?, Good I hope!. Personal update: I almost bought a guitar, But then I realised something and stopped, the decision correct or wrong? the future holds the truth, hope you got the answer with you! future me reading this.&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Pew!&amp;hellip; I almost did not post this month, although I completed the project/experiment in the middle of the month. I&amp;rsquo;ve been learning a new tech stack offtime and working on a project, more on this on a future post.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;goal&#34;&gt;Goal&lt;/h2&gt;
+&lt;p&gt;To learn&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Gatsby&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;its workflow&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Its seo capabilities, since seo is non existent with client side rendering.(react)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;GraphQL&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I had my eye on Gatsby for a while now, ever since one of my friends mentioned it, I wanted to see what it had to offer.&lt;/p&gt;
+&lt;h2 id=&#34;so-what-to-build-with-gatsby&#34;&gt;so what to build with gatsby ?&lt;/h2&gt;
+&lt;p&gt;One of my friends needed a landing page, which I thought might be a good experiment to do with Gatsby, but did the landing page really had to have Gatsby? Absolutely no, It could have been easily be built by html, css and javascript.&lt;/p&gt;
+&lt;p&gt;Key advantages of gatsby.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Static sites /w React&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;SEO&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;GraphQL&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;workflow&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;plugin support&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I have not used SSR particulary with Gatsby, So my thoughts on it is 0.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SSR&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;would-i-recomment-it-to-anyone&#34;&gt;Would I recomment it to anyone?&lt;/h2&gt;
+&lt;p&gt;Of course, If they already know react. but for a beginners I would not recommend it, especially if they had time constraint to finish the project.&lt;/p&gt;
+&lt;p&gt;well check it out &lt;a href=&#34;https://poojabags.netlify.app&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;bye, seeya, untill next-time - Gopinath.&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>august and future</title><link>//bluepie.in/2020/08/future/</link><pubDate>Fri, 28 Aug 2020 19:41:47 +0530</pubDate><guid>//bluepie.in/2020/08/future/</guid><description>
 &lt;p&gt;&lt;em&gt;Hello, how are you doing, I&amp;rsquo;m fine thank you, hope you and your loved ones are doing fine.&lt;/em&gt; It&amp;rsquo;s the end of august and covid is still plowing through every city in India, Most of the people are just sitting sulking. What about Me? Im just&amp;hellip;ah, I have a dilema, its just that I don&amp;rsquo;t have a freaking clue what the future holds, Today I turn 24, and this is this months review.&lt;/p&gt;
 &lt;p&gt;This month is all over the place from begining to end, but think I&amp;rsquo;ve learned some things here and there.&lt;/p&gt;
 &lt;h1 id=&#34;this-month-i-got-the-chance-to-work-on-some-nice-tools-like-burp-nessus-and-zap-along-with-the-oppurtunity-to-learn-to-configuring-headers-in-the-server&#34;&gt;This month I got the chance to work on some nice tools like burp, nessus and zap. Along with the oppurtunity to learn to configuring headers in the server.&lt;/h1&gt;
@@ -1090,145 +1124,4 @@ skipToFutureTrack
 follow part 1 for recompiling, sign and installing.&lt;/p&gt;
 &lt;h3 id=&#34;end&#34;&gt;End&lt;/h3&gt;
 &lt;p&gt;I hope this helps some one else other than me, I&amp;rsquo;m not gona share the recompiled apk for obvious reasons(legal), But I feel you should
-be able to do so, with the information you have now. peace! seeya next time.&lt;/p&gt;</description></item><item><title>Docker to Make Life Easier</title><link>//bluepie.in/2019/09/docker-to-make-life-easier/</link><pubDate>Wed, 11 Sep 2019 09:17:29 +0530</pubDate><guid>//bluepie.in/2019/09/docker-to-make-life-easier/</guid><description>
-&lt;blockquote&gt;
-&lt;p&gt;Hello, it&amp;rsquo;s been two months since last update. Anyway the August month I was pretty busy, to be honest, I was involved in a old project of mine that I had to revist, in order to get more productive and flexibility in developing the application I chose to use docker. So this post is going to be about docker.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Status Update:The month of August also had something interesting in it, which is my birthday. There was a plan to go a special temple so I took some leave from office, during that time another holiday was also just around the corner, so on the whole I had about 5 days of stay in my house, which is a lot considering I only have a two or three days leave if I had leave my office. This was the first time after a year that I have been staying in home for a long time. During that time I spent some minimal time developing and I found out that I had so much productivity in home then in my chennai room or my office and I was learning new things, so that is that.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h1 id=&#34;will-reference-everything-with-the-assumption-you-are-on-the-linux-platform-too-it-ll-be-only-slightly-different-on-windows&#34;&gt;&lt;em&gt;Will reference everything with the assumption you are on the linux platform too, it&amp;rsquo;ll be only slightly different on windows.&lt;/em&gt;&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;intro-to-docker&#34;&gt;Intro to docker&lt;/h2&gt;
-&lt;h3 id=&#34;installation&#34;&gt;installation&lt;/h3&gt;
-&lt;p&gt;I recommend installation with the prebuilt packages from the docker link instead of your flavour&amp;rsquo;s package (debian[ubunut..], arch..).&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
-# use the following path while navigating through to get the download links.
-pool/dist/package
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;(or)&lt;/p&gt;
-&lt;p&gt;if you insist on installing with apt.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-# installation with apt / apt-get
-sudo apt-get install \
-apt-transport-https \
-ca-certificates \
-curl \
-gnupg-agent \
-software-properties-common
-gpg key:
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-check fingerprint:
-sudo apt-key fingerprint 0EBFCD88
-pub rsa4096 2017-02-22 [SCEA]
-9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88
-uid [ unknown] Docker Release (CE deb) &amp;lt;docker@docker.com&amp;gt;
-sub rsa4096 2017-02-22 [S]
-#choosing stable release for docker:
-sudo add-apt-repository \
-&amp;quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-$(lsb_release -cs) \
-stable&amp;quot;
-#installing latest docker from ubuntu.
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
-#deb is even simpler in my openion (example for debian):
-sudo dpkg -i /path/to/package.deb
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;basics&#34;&gt;basics&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;the following are true for linux based distros&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;To put it simple terms&lt;/em&gt;
-Docker is like a virtualMachine except it&amp;rsquo;s not resource hungry.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;To not put in simple terms&lt;/em&gt;
-Docker shares the same kernel as the host, while VirtualMachine rewrites low-level instructions &amp;amp; executes them on the fly.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h4 id=&#34;image&#34;&gt;image&lt;/h4&gt;
-&lt;p&gt;images are like iso images burnt to a cd/usb ready to be installed,
-things you can do with it,
-* use prebuilt images from market, (both official and user created)
-* build an image with customisations on top of an official image form market
-* publish the images you are using/ publish images that you built&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h4 id=&#34;container&#34;&gt;container&lt;/h4&gt;
-&lt;p&gt;Image u have a fresh HardDisk, you installed a OS(operating system) of your liking in it,
-what do you have left in it?
-Free space after the o-files, which u can use to store anything,
-what can you install on the os?
-basically any software,
-so next time if you take that particular hardDisk will you get, basically above right?
-This is what a container is, replace HardDisk with container and os with prebuilt/customImage.
-you can attach external HardDrive to it, which in our case is volume, &amp;hellip;etc&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h4 id=&#34;basic-commands&#34;&gt;basic commands&lt;/h4&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-#list local images/containers
-docker image ls
-#only running containers
-docker container ls
-#list all (even turned off containers)
-docker contaienr ls -a
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;h4 id=&#34;custom-image-creation-section&#34;&gt;custom image creation section&lt;/h4&gt;
-&lt;p&gt;some commands to help you(addressig myslef), for custom images.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-# dockerfile
-FROM &amp;lt;imagename&amp;gt;:&amp;lt;tagfortheimage&amp;gt;
-COPY &amp;lt;src&amp;gt; &amp;lt;dest&amp;gt;
-WORKDIR further interaction will start from this directory.
-EXPOSE port to be exposed.
-# installed additioal/required programs from below commands
-RUN commands to run
-CMD commands to run
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;build the image, filename for the file should be &amp;lsquo;Dockerfile&amp;rsquo;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-docker-build -f PathToFile -t nameOfTheBuildImage
-#ex:
-docker build -t phpserver:0.0.2 phpServer/
-docker image ls phpserver
-REPOSITORY TAG IMAGE ID CREATED SIZE
-phpserver 0.0.2 5f7b4c7374b5 About a minute ago 416MB
-#another way of representing, httpd/somefeature:tagHere, httpd/somefeature (tag assumed as latest here), user/httpd-imageName:taghere
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;running a image which you built locally or from the official image,&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-docker-run -d run-container-in-background -v specify-volume / --mount --mount=&#39;-type=bind,src=path_here,dst=path_here&#39; (path must be absolute --name=&#39;&#39; -p [] (port) -p [] (port)
-ex:
-docker run -d -p 80:80 --mount=&#39;src=//bluepie.in/home/path/to/folder/,dst=/var/www/html/,type=bind&#39; --name phpserver phpserver:0.0.2
-docker ps
-CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
-5f7b4c7374b5 phpserver:0.0.2 &amp;quot;docker-php-entrypoi…&amp;quot; 10 seconds ago Up 9 seconds 0.0.0.0:80-&amp;gt;80/tcp phpserver
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;after starting the container, some commands to help you,&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-docker-container start name
-docker-container stop name
-docker-container restart name
-docker-container stat
-docker-container inspect name
-docker-container ls -a
-docker-container la
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;to interact with running containers&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-#run single instance command
-docker-exec -i image command-here params-if-command-has-it
-#ex: install php inside a conainer and use it like binary like this
-docker run \
---rm \
--i \
---network=host \
--v &amp;quot;$HOME&amp;quot;:&amp;quot;$HOME&amp;quot;:ro \
--u $(id -u) \
--w &amp;quot;$PWD&amp;quot; \
-php:7.3-alpine \
-php &amp;quot;$@&amp;quot;
-#run interactive shell command
-docker-exec -it image
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;h5 id=&#34;docker-compose&#34;&gt;docker compose&lt;/h5&gt;
-&lt;p&gt;wana start a bunch of container&amp;rsquo;s each serving its own purpose,
-for eg: one container for running server, another for databse, another for running waf, another for running microService ?&lt;/p&gt;
-&lt;p&gt;install docker-compose, downlaod the docker-compose binary and include it in your environment variable, and build a docker-compose.yml for it.&lt;/p&gt;
-&lt;h3 id=&#34;bye-see-ya-soon-sorry-for-missing-out-last-month&#34;&gt;&lt;em&gt;bye, see ya soon, sorry for missing out last month&lt;/em&gt;&lt;/h3&gt;</description></item></channel></rss>
+be able to do so, with the information you have now. peace! seeya next time.&lt;/p&gt;</description></item></channel></rss>
