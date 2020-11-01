@@ -1,4 +1,52 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><language>en-us</language><lastBuildDate>Wed, 30 Sep 2020 22:26:17 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Gatsby Experiment</title><link>//bluepie.in/2020/09/gatsby-experiment/</link><pubDate>Wed, 30 Sep 2020 22:26:17 +0530</pubDate><guid>//bluepie.in/2020/09/gatsby-experiment/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s update blog on Bluepie&#39;s update blog</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s update blog on Bluepie&#39;s update blog</description><language>en-us</language><lastBuildDate>Thu, 29 Oct 2020 21:34:18 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Why I Choose Typescript</title><link>//bluepie.in/2020/10/why-i-choose-typescript/</link><pubDate>Thu, 29 Oct 2020 21:34:18 +0530</pubDate><guid>//bluepie.in/2020/10/why-i-choose-typescript/</guid><description>
+&lt;p&gt;Hello, we meet again!, how was the week? hope you are well and gud!, This post will be about typescript, I&amp;rsquo;m not explaining what it is, but rather why i choose to use it.&lt;/p&gt;
+&lt;h2 id=&#34;typescript-was-everywhere-background&#34;&gt;TypeScript was everywhere - background&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;First of all, I want to clear some air by opening up, &lt;em&gt;In in past, I hated typescript with a passion&lt;/em&gt;, Since then I&amp;rsquo;ve grown a lot as a person, lol.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Typescript was the new kid in the block, soo much hype was around it, stackoverflow surveys did not help with this either since it was top in their survey.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve been a fan of &lt;a href=&#34;https://www.freecodecamp.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;codecamp&amp;rsquo;s&lt;/a&gt; work, they do useful stuff for the community,&lt;/p&gt;
+&lt;p&gt;To my suprise they announced &lt;a href=&#34;https://twitter.com/ossia/status/1183845054449930241?s=20&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;this on twitter&lt;/a&gt;, I&amp;rsquo;ve been following their project - &lt;a href=&#34;https://github.com/freeCodeCamp/chapter&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;chapter&lt;/a&gt;, from then. After a month into development they migrated to typescript from javascript, there is an entire debate on their discord and github, but more importantly I was pissed because of this decision.&lt;/p&gt;
+&lt;p&gt;Ever since they changed the project to use typescript, gradually I started to reason and see-past my hate-wall (because of the respect I have for them). But I was not ready to try it out though, So a month later, I worked on a angular project, I learned basic typescipt(1% - 8%) to complete the project, was still writing javascript code everywhere, I was the &amp;ldquo;any&amp;rdquo; guy, if you know what I mean.&lt;/p&gt;
+&lt;h2 id=&#34;javascript-my-experience&#34;&gt;Javascript - my experience&lt;/h2&gt;
+&lt;p&gt;After the angular project, I did a few projects in React &lt;a href=&#34;https://bluepie.in/2020/07/rinku/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;rinku&lt;/a&gt;, &lt;a href=&#34;https://bluepie.in/2020/09/gatsby-experiment/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;with gatsby&lt;/a&gt; to name a few, I did the entire thing in javascript. From my experience, when the codebase grew along with the files, some issues I faced were,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Trying to remember object properties, function properties, etc, avoidable bcoz of autocompletion.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;every so-often you are searching through the entire project, either by using find in files/grep.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Facing errors that could be avoidable by typesafety and static analysis, spending a ton of time debugging and fixing it.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Lack of easy peek into method signatures of third party libraries.`&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Maintaining seperate documentation&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It should be noted that I&amp;rsquo;m adding this on top of es-lint and prettier.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;solution-typescript&#34;&gt;Solution Typescript&lt;/h2&gt;
+&lt;p&gt;So naturally when I was starting a new project, I choose typescript as the result of my previous experience,&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;What I get with typescript?&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;autocomplete&#34;&gt;Autocomplete&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/autocomplete-1.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/autocomplete-2.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;library-definition&#34;&gt;Library definition&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/library-1.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/library-2.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;type-checking-for-parameters&#34;&gt;Type checking for parameters&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/typing-passed-params-2.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/typechecking-passed-params.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;customtypes-etc-for-comfort&#34;&gt;Customtypes, etc.. for comfort&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/comfort-1.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/comfort-2.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/comfort-3.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/comfort-4.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/comfort-5.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;static-analysis&#34;&gt;Static analysis&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/static-1.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/static-2.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;typing-api-responses-implemented-with-awesome-library-quicktype-https-github-com-quicktype-quicktype&#34;&gt;Typing api responses - implemented with awesome library &lt;a href=&#34;https://github.com/quicktype/quicktype&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;quicktype&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/type-api-response.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m just starting to adapt typescript in my javascript workflow, this is the begining phase, obviously there is much more to learn. Bye, See ya soon - Gopinath.&lt;/p&gt;</description></item><item><title>Gatsby Experiment</title><link>//bluepie.in/2020/09/gatsby-experiment/</link><pubDate>Wed, 30 Sep 2020 22:26:17 +0530</pubDate><guid>//bluepie.in/2020/09/gatsby-experiment/</guid><description>
 &lt;p&gt;&lt;em&gt;Hi, how did the day go?, what about the week? what about the month?, Good I hope!. Personal update: I almost bought a guitar, But then I realised something and stopped, the decision correct or wrong? the future holds the truth, hope you got the answer with you! future me reading this.&lt;/em&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Pew!&amp;hellip; I almost did not post this month, although I completed the project/experiment in the middle of the month. I&amp;rsquo;ve been learning a new tech stack offtime and working on a project, more on this on a future post.&lt;/p&gt;
@@ -32,11 +80,15 @@
 &lt;p&gt;well check it out &lt;a href=&#34;https://poojabags.netlify.app&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;bye, seeya, untill next-time - Gopinath.&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>august and future</title><link>//bluepie.in/2020/08/future/</link><pubDate>Fri, 28 Aug 2020 19:41:47 +0530</pubDate><guid>//bluepie.in/2020/08/future/</guid><description>
-&lt;p&gt;&lt;em&gt;Hello, how are you doing, I&amp;rsquo;m fine thank you, hope you and your loved ones are doing fine.&lt;/em&gt; It&amp;rsquo;s the end of august and covid is still plowing through every city in India, Most of the people are just sitting sulking. What about Me? Im just&amp;hellip;ah, I have a dilema, its just that I don&amp;rsquo;t have a freaking clue what the future holds, Today I turn 24, and this is this months review.&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Birthday month! - reflection and future</title><link>//bluepie.in/2020/08/future/</link><pubDate>Fri, 28 Aug 2020 19:41:47 +0530</pubDate><guid>//bluepie.in/2020/08/future/</guid><description>
+&lt;p&gt;&lt;em&gt;Hello, how are you doing, I&amp;rsquo;m fine thank you, hope you and your loved ones are doing fine.&lt;/em&gt; It&amp;rsquo;s the end of august and covid is still plowing through every city in India, Most of the people are just sitting sulking. What about Me? Im just&amp;hellip;ah, I have a dilema, its just that I don&amp;rsquo;t have a freaking clue what the future holds, Today I go &amp;lsquo;age += 1&amp;rsquo;/ or level up and here is this months review.&lt;/p&gt;
 &lt;p&gt;This month is all over the place from begining to end, but think I&amp;rsquo;ve learned some things here and there.&lt;/p&gt;
-&lt;h1 id=&#34;this-month-i-got-the-chance-to-work-on-some-nice-tools-like-burp-nessus-and-zap-along-with-the-oppurtunity-to-learn-to-configuring-headers-in-the-server&#34;&gt;This month I got the chance to work on some nice tools like burp, nessus and zap. Along with the oppurtunity to learn to configuring headers in the server.&lt;/h1&gt;
-&lt;h3 id=&#34;the-comparison-is-stricly-based-on-web-applications-burp-pro-vs-nessus-trial-vs-zap&#34;&gt;THE COMPARISON IS STRICLY BASED ON WEB APPLICATIONS, BURP PRO VS nessus trial VS ZAP.&lt;/h3&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;tech-stuff&#34;&gt;Tech stuff&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This month I got the chance to work on some nice tools like burp, nessus and zap. Along with the oppurtunity to learn to configuring headers in the server.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&#34;the-comparison-is-stricly-based-on-web-applications-burp-pro-vs-nessus-trial-vs-zap&#34;&gt;&lt;em&gt;THE COMPARISON IS STRICLY BASED ON WEB APPLICATIONS, BURP PRO VS nessus trial VS ZAP.&lt;/em&gt;&lt;/h5&gt;
 &lt;p&gt;Burp is pretty awesome, if you have pro, then you&amp;rsquo;ve chosen the right one.&lt;/p&gt;
 &lt;p&gt;Advantages of using burp:&lt;/p&gt;
 &lt;ol&gt;
@@ -81,22 +133,40 @@ results, nessus is the thing to go.&lt;/p&gt;
 &lt;li&gt;their &amp;lsquo;WAS&amp;rsquo; package costs 3 lakhs, I mean why&amp;hellip; (all the vulnerabilities/reports this thing finds can be found in open source alternatives.)&lt;/li&gt;
 &lt;li&gt;Initial Installation time is way too long, compilation too slow, Im impatient.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h1 id=&#34;headers&#34;&gt;HEADERS:&lt;/h1&gt;
-&lt;p&gt;Securing cookie - If the website is taken over by some javascript vulnerability then the first line of defence to protect the users, is to secure the cookie, by not allowing access of cookies to other sites, cookie not accessible to javascript, and transporting cookies only through https&lt;/p&gt;
-&lt;p&gt;secure flag, samesite flag must be set.&lt;/p&gt;
-&lt;p&gt;sample cookie for facebook.com&lt;/p&gt;
+&lt;h5 id=&#34;headers&#34;&gt;HEADERS:&lt;/h5&gt;
+&lt;p&gt;If the website is taken over by some javascript vulnerability then the first line of defence is just headers&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;by not allowing access of cookies to other sites,&lt;/li&gt;
+&lt;li&gt;by making cookie not accessible to javascript,&lt;/li&gt;
+&lt;li&gt;by transporting cookies only through https,&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;with response flags&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;secure flag&lt;/li&gt;
+&lt;li&gt;samesite flag&lt;/li&gt;
+&lt;li&gt;http flag&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;sample cookie from facebook.com&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
-set-cookie: sb=T8pJXwjf4x51HdF-qqumtNHT; expires=Mon, 29-Aug-2022 03:23:59 GMT; Max-Age=63072000; path=/; domain=.facebook.com; secure; httponly; SameSite=None
+set-cookie:
+sb=T8pJXwjf4x51HdF-qqumtNHT; expires=Mon, 29-Aug-2022 03:23:59 GMT; Max-Age=63072000; path=/; domain=.facebook.com;
+secure;
+httponly;
+SameSite=None
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;CSP - Tells how javascript and css are included in the browser and executed, (xss). A good way is to check with&lt;/p&gt;
-&lt;p&gt;sample csp for facebook.com&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Second line of defence would by Content Security Policy&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;CSP - Tells how javascript and css are included in the browser and executed, (xss). A good way is to check with &lt;a href=&#34;https://csp-evaluator.withgoogle.com&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;csp evaluator&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;a sample from &lt;a href=&#34;https://facebook.com&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;facebook&lt;/a&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
-content-security-policy: default-src * data: blob: &#39;self&#39;;script-src *.facebook.com *.fbcdn.net *.facebook.net *.google-analytics.com *.virtualearth.net *.google.com 127.0.0.1:* *.spotilocal.com:* &#39;unsafe-inline&#39; &#39;unsafe-eval&#39; blob: data: &#39;self&#39;;style-src data: blob: &#39;unsafe-inline&#39; *;connect-src *.facebook.com facebook.com *.fbcdn.net *.facebook.net *.spotilocal.com:* wss://*.facebook.com:* https://fb.scanandcleanlocal.com:* attachment.fbsbx.com ws://localhost:* blob: *.cdninstagram.com &#39;self&#39;;block-all-mixed-content;upgrade-insecure-requests;
+content-security-policy:
+default-src * data: blob: &#39;self&#39;;
+script-src *.facebook.com *.fbcdn.net *.facebook.net *.google-analytics.com *.virtualearth.net *.google.com 127.0.0.1:* *.spotilocal.com:* &#39;unsafe-inline&#39; &#39;unsafe-eval&#39; blob: data: &#39;self&#39;;
+style-src data: blob: &#39;unsafe-inline&#39; *;connect-src *.facebook.com facebook.com *.fbcdn.net *.facebook.net *.spotilocal.com:* wss://*.facebook.com:* https://fb.scanandcleanlocal.com:* attachment.fbsbx.com ws://localhost:* blob: *.cdninstagram.com &#39;self&#39;;block-all-mixed-content;upgrade-insecure-requests;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h1 id=&#34;game-i-choose-gaming-as-a-way-to-calm-me-down-and-take-my-mind-of-things&#34;&gt;Game: I Choose gaming as a way to calm me down, and take my mind of things.&lt;/h1&gt;
-&lt;p&gt;I gave DIVISION 2 a shot. Online player base is dead in my openion, nevertheless, my 18 hours of play time did not disappoint.&lt;/p&gt;
-&lt;p&gt;As today is my birthday&amp;hellip;i&amp;rsquo;m getting older, I feel like I don&amp;rsquo;t know a lot of things around my surroundings yet, I have to asses my future goals. My goal was to contribute to opensource as much as I can, May be I am wrong?, i don&amp;rsquo;t know yet. As for my career, I made up my mind to excell in a new domain.&lt;/p&gt;
-&lt;p&gt;At this point Im just rambling, anyway, see ya next time. bye.&lt;/p&gt;</description></item><item><title>Rinku</title><link>//bluepie.in/2020/07/rinku/</link><pubDate>Wed, 22 Jul 2020 19:22:49 +0530</pubDate><guid>//bluepie.in/2020/07/rinku/</guid><description>
+&lt;hr /&gt;
+&lt;h3 id=&#34;reflection&#34;&gt;Reflection&lt;/h3&gt;
+&lt;p&gt;Today is my birthday&amp;hellip;i&amp;rsquo;m getting older, I feel like I don&amp;rsquo;t know a lot of things around my surroundings yet, I have to asses my future goals. My goal was to contribute to opensource as much as I can, May be I am wrong?, i don&amp;rsquo;t know yet. As for my career, I made up my mind to excell in a new domain. I will update what is happening in upcoming months and asses my career goals in next august.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;peace bye!&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Rinku</title><link>//bluepie.in/2020/07/rinku/</link><pubDate>Wed, 22 Jul 2020 19:22:49 +0530</pubDate><guid>//bluepie.in/2020/07/rinku/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;Hi! hope you are doing well future me!,&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -969,159 +1039,4 @@ gulp.task(&#39;build&#39;, gulp.series(
 &lt;p&gt;We almost did not submit because the game cuz &amp;lsquo;incomplete, except we did submit the game that was too because I insisted on submitting,&lt;/p&gt;
 &lt;p&gt;My friend &amp;amp; partner in the project.
 &lt;a href=&#34;https://github.com/FR0ST1N/Pew-Pew/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;FR0ST1N&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;At the end, It was fun..&lt;/p&gt;</description></item><item><title>Android Reversing Part 2</title><link>//bluepie.in/2019/10/android-reversing-part-2/</link><pubDate>Sun, 13 Oct 2019 19:30:27 +0530</pubDate><guid>//bluepie.in/2019/10/android-reversing-part-2/</guid><description>
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;hey, how ya been. so this is a another reversing post (reverse engineering android mod). So before some months,
-I gave some basic info to reversing android apps with a practical example(ttorrent). This post is gona build on
-top of that post. basically pretty advanced version of that post.&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr /&gt;
-&lt;blockquote&gt;
-&lt;h2 id=&#34;im-just-sharing-information-not-distrubuting-mod-files-here-this-is-strictly-for-learning-purposes-only&#34;&gt;Im just sharing information &amp;amp; not distrubuting mod files here! this is strictly for learning purposes only.&lt;/h2&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;starting-off&#34;&gt;Starting off&lt;/h2&gt;
-&lt;p&gt;Let&amp;rsquo;s just continue where we left off shall we. Today the practical example that we are gona use is Spotify lite,
-this at the time of writing, is newly repleased, with version &amp;lsquo;0.13.13.6&amp;rsquo;.&lt;/p&gt;
-&lt;p&gt;why spotify? Cause i love the app, but too broke to pay for subscription and the ads are just painful, i just want
-to remove the ads. You could ask the question &amp;ldquo;bu..but there are always mods available in the outside market?&amp;rdquo; Yea
-those are available, but my simple answer is trust, especially nowadays it very easy to
-attach a backdoor in any app, and also the fact that I love doing this.&lt;/p&gt;
-&lt;p&gt;So we train by making the ads stop and add premium features to it, keep in-mind we converting only the client to
-be premium, server assisted premium features won&amp;rsquo;t work here.&lt;/p&gt;
-&lt;p&gt;so here we go&lt;/p&gt;
-&lt;h3 id=&#34;continue-d&#34;&gt;continue..d&lt;/h3&gt;
-&lt;p&gt;As said this section is just a continuation of the prevous post titled &amp;lsquo;android reversing&amp;rsquo;, starting things up with
-decompiling and recompiling are in that post,&lt;/p&gt;
-&lt;h4 id=&#34;errors&#34;&gt;errors&lt;/h4&gt;
-&lt;p&gt;Most of the errors encountered are during the decompilaton shows up only during the recompiling phase and launching
-app phase, hopefully there are extra options during decompilation which can fix most errors encountered.&lt;/p&gt;
-&lt;p&gt;the following options are available in decompilation&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
-when to use -r option,
-if launch causes crashes in relation to resources
-you can find this out in logcat and try this option
-when to use --no-assets option,
-the same reason as -r option
-when to use -d flag,
-debug flag, adds debug to manifest enabling debug output
-utilize logcat
-when to use customFranework/update framework,
-would not build or recompile, so install new framework with
-apktool.jar -if framework-file.apk
-framework files from android device:
-usually inside /system/framework.
-adb pull to get the apk then do if framework
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h5 id=&#34;more-about-frameworks&#34;&gt;more about frameworks&lt;/h5&gt;
-&lt;p&gt;In some cases there may be recompiling and rebuilding errors from apktool,
-this can be either fixed by -r param while decompiling(keep resources intact) or by installing latest framework
-with the command, multiple frameworks can be used too, or even pull a framework file from your Android device,
-more about it here, so if you are using miui like me, use the command below.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;
-ex:(current device miui)
-adb pull /system/framework/framework-res.apk
-adb pull /system/framework/framework-ext-res/framework-ext-res.apk
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Lastet framework files can be taken from Android build tools. At the time of writing this Android api 29 is out.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;the above will fix about 90% of the problems.&lt;/em&gt;&lt;/p&gt;
-&lt;h4 id=&#34;working-with-practical-example&#34;&gt;working with practical example&lt;/h4&gt;
-&lt;p&gt;Install the latest version of spotify lite from playstore and extract the apk from the device and decompile it
-using the guide from part 1, solve the problems you face by the above methods. after decompile take some time to
-go through the app structure and keep note of key parts of the application.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;also launch jadx_gui side by side to get a better idea. (you can find this in part 1)&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Launch the app on your device and check the app structure (always keep notes on interesting places) for example
-(hint) the settings has a section called account type. This practical example wont be simple as changing the
-return value of a function like previous post, we has an attack vector specific to that app, but here its a
-different story, &lt;em&gt;analysing the app structure and finding potential spots is the key step.&lt;/em&gt;&lt;/p&gt;
-&lt;h3 id=&#34;hints&#34;&gt;hints&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;smali modifications&lt;/em&gt;&lt;/strong&gt;
-I use this site a lot &lt;a href=&#34;http://pallergabor.uw.hu/androidblog/dalvik_opcodes.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;dalvik_opcodes&lt;/a&gt; , as mentioned in
-the part 1. Here we want to replace section&amp;rsquo;s of byte code, thus make use of this, here to I wont say the exact-way
-to mod since that would be illegal, you can find this out on your own, ill just share the gist of the byte code
-necessary to do the trick and show code sample&amp;rsquo;s for it.&lt;/p&gt;
-&lt;p&gt;While you browse through the decompiled files you might stumble upon a enumerator that is referenced everywhere,
-yeah, of course this can be exploited indeed.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Im gona explain with Java code instead of the dalvik opcodes, since that is much more easier to unserstand&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
-enum Account{
-PREMIUM,
-FREE
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;h4 id=&#34;the-trick&#34;&gt;The trick&lt;/h4&gt;
-&lt;p&gt;When the app launches (MainActivity), app makes an api call to get the type of user and save&amp;rsquo;s it as a local reference,&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
-# sudocode
-AnnonymousCall_to_apiToRetreiveUserType(...){
-//make the call
-//parse the call
-return Account (response);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;check the sudocode, if you are able to change the response of the annoymous call to always send use PREMIUM,then we
-can call it a day!.&lt;/p&gt;
-&lt;p&gt;In Java you use enumerator.valueOf(&amp;ldquo;fname_here&amp;rdquo;) to get the value of the enum. so we change the above code to something like&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
-# sudocode
-AnnonymousCall_to_apiToRetreiveUserType(...){
-//make the call EVEN THIS ARE NOT NECESSARY HERE
-//parse the call EVEN THIS ARE NOT NECESSARY HERE
-return Account.valueOf(&amp;quot;PREMIUM&amp;quot;);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;here is the dalvik opcode equivalent for the above&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
-//storage
-const-string p2, &amp;quot;PREMIUM&amp;quot;
-//valueOf from storage
-invoke-static {p2}, Lcom/spotify/lite/productstate/Product;-&amp;gt;valueOf(Ljava/lang/String;)Lcom/spotify/lite/productstate/Product;
-//move the result object into p2
-move-result-object p2
-//move the same into class object
-iput-object p2, p0, Ldlc;-&amp;gt;b:Lcom/spotify/lite/productstate/Product;
-//return the object
-return-object Ldlc;-&amp;gt;b:Lcom/spotify/lite/productstate/Product;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;the same but for lambda functins&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;original: api_call -&amp;gt; retrun cast(response)&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
-.method public final apply(Ljava/lang/Object;)Ljava/lang/Object;
-.locals 0
-check-cast p1, Lcjl;
-invoke-virtual {p1}, Lcjl;-&amp;gt;b()Lcom/spotify/lite/productstate/Product;
-move-result-object p1
-return-object p1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;blockquote&gt;
-&lt;p&gt;patched:&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
-.registers 2
-.line 47
-const-string p1, &amp;quot;PREMIUM&amp;quot;
-invoke-static {p1}, Lcom/spotify/lite/productstate/Product;-&amp;gt;valueOf(Ljava/lang/String;)Lcom/spotify/lite/productstate/Product;
-move-result-object p1
-return-object p1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;blockquote&gt;
-&lt;p&gt;some additional interesting patch sections, go through this too, latest verisons of the app need this.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
-player util
-player restriction
-resolve player
-skipToFutureTrack
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;p&gt;with the given patch work, it is all that you will need to enable premium features, just recompile, sign and install the app.
-follow part 1 for recompiling, sign and installing.&lt;/p&gt;
-&lt;h3 id=&#34;end&#34;&gt;End&lt;/h3&gt;
-&lt;p&gt;I hope this helps some one else other than me, I&amp;rsquo;m not gona share the recompiled apk for obvious reasons(legal), But I feel you should
-be able to do so, with the information you have now. peace! seeya next time.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;At the end, It was fun..&lt;/p&gt;</description></item></channel></rss>
