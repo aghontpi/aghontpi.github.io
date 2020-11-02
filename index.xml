@@ -4,7 +4,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;First of all, I want to clear some air by opening up, &lt;em&gt;In in past, I hated typescript with a passion&lt;/em&gt;, Since then I&amp;rsquo;ve grown a lot as a person, lol.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Typescript was the new kid in the block, soo much hype was around it, stackoverflow surveys did not help with this either since it was top in their survey.&lt;/p&gt;
+&lt;p&gt;Typescript was the new kid in the block, soo much hype was around it, stackoverflow surveys did not help either since it had typescript ranked top in their survey.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;ve been a fan of &lt;a href=&#34;https://www.freecodecamp.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;codecamp&amp;rsquo;s&lt;/a&gt; work, they do useful stuff for the community,&lt;/p&gt;
 &lt;p&gt;To my suprise they announced &lt;a href=&#34;https://twitter.com/ossia/status/1183845054449930241?s=20&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;this on twitter&lt;/a&gt;, I&amp;rsquo;ve been following their project - &lt;a href=&#34;https://github.com/freeCodeCamp/chapter&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;chapter&lt;/a&gt;, from then. After a month into development they migrated to typescript from javascript, there is an entire debate on their discord and github, but more importantly I was pissed because of this decision.&lt;/p&gt;
 &lt;p&gt;Ever since they changed the project to use typescript, gradually I started to reason and see-past my hate-wall (because of the respect I have for them). But I was not ready to try it out though, So a month later, I worked on a angular project, I learned basic typescipt(1% - 8%) to complete the project, was still writing javascript code everywhere, I was the &amp;ldquo;any&amp;rdquo; guy, if you know what I mean.&lt;/p&gt;
@@ -22,8 +22,16 @@
 &lt;blockquote&gt;
 &lt;p&gt;It should be noted that I&amp;rsquo;m adding this on top of es-lint and prettier.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&#34;solution-typescript&#34;&gt;Solution Typescript&lt;/h2&gt;
-&lt;p&gt;So naturally when I was starting a new project, I choose typescript as the result of my previous experience,&lt;/p&gt;
+&lt;h2 id=&#34;solution-reasons-for-using-typescript&#34;&gt;Solution - reasons for using Typescript&lt;/h2&gt;
+&lt;p&gt;So naturally when I was starting a new project, I choose typescript as the result of my previous experience, I striclty enable &lt;a href=&#34;https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;no-explicit-any&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Before proceeding below, it should be noted you wont get any of the benefits if they aren&amp;rsquo;t initialized with types.&lt;/p&gt;
+&lt;p&gt;ex:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;
+interface ApiItemProps {
+...
+}
+const [api, setApi] = useState&amp;lt;ApiItemProps[] | null&amp;gt;(null);
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;What I get with typescript?&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;autocomplete&#34;&gt;Autocomplete&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/autocomplete-1.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
@@ -44,7 +52,26 @@
 &lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/static-1.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/static-2.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;h3 id=&#34;typing-api-responses-implemented-with-awesome-library-quicktype-https-github-com-quicktype-quicktype&#34;&gt;Typing api responses - implemented with awesome library &lt;a href=&#34;https://github.com/quicktype/quicktype&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;quicktype&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/type-api-response.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/typing-api.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;advanced-features-of-typescript&#34;&gt;Advanced features of typescript,&lt;/h2&gt;
+&lt;p&gt;To achieve the best experience, typescript offers &lt;a href=&#34;https://www.typescriptlang.org/docs/handbook/advanced-types.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;advanced&lt;/a&gt;, &lt;a href=&#34;https://www.typescriptlang.org/docs/handbook/utility-types.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;unity&lt;/a&gt; and &lt;a href=&#34;https://www.typescriptlang.org/docs/handbook/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;much more&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;an example for unity and how I use it.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;interface ListItemProps {
+onPress: () =&amp;gt; void;
+id: string;
+name: string;
+color: keyof theme[&#39;colors&#39;];
+}
+type MenuItemProps = Omit&amp;lt;ListItemProps, &#39;onPress&#39;&amp;gt;;
+interface FlatListRenderProps {
+item: MenuItemProps;
+index: number;
+}
+const [list, setFlatList] = useState&amp;lt;FlatListRenderProps[] | null&amp;gt;(null);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For more &lt;a href=&#34;https://www.typescriptlang.org/docs/handbook/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;official handbook&lt;/a&gt;, explains a lot better than me.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;I&amp;rsquo;m just starting to adapt typescript in my javascript workflow, this is the begining phase, obviously there is much more to learn. Bye, See ya soon - Gopinath.&lt;/p&gt;</description></item><item><title>Gatsby Experiment</title><link>//bluepie.in/2020/09/gatsby-experiment/</link><pubDate>Wed, 30 Sep 2020 22:26:17 +0530</pubDate><guid>//bluepie.in/2020/09/gatsby-experiment/</guid><description>
 &lt;p&gt;&lt;em&gt;Hi, how did the day go?, what about the week? what about the month?, Good I hope!. Personal update: I almost bought a guitar, But then I realised something and stopped, the decision correct or wrong? the future holds the truth, hope you got the answer with you! future me reading this.&lt;/em&gt;&lt;/p&gt;
@@ -62,7 +89,7 @@
 &lt;/ul&gt;
 &lt;p&gt;I had my eye on Gatsby for a while now, ever since one of my friends mentioned it, I wanted to see what it had to offer.&lt;/p&gt;
 &lt;h2 id=&#34;so-what-to-build-with-gatsby&#34;&gt;so what to build with gatsby ?&lt;/h2&gt;
-&lt;p&gt;One of my friends needed a landing page, which I thought might be a good experiment to do with Gatsby, but did the landing page really had to have Gatsby? Absolutely no, It could have been easily be built by html, css and javascript.&lt;/p&gt;
+&lt;p&gt;I thought designing a landing page might be a good experiment to do with Gatsby, but did the landing page really had to have Gatsby? Absolutely no, It could have been easily be built by html, css and javascript.&lt;/p&gt;
 &lt;p&gt;Key advantages of gatsby.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Static sites /w React&lt;/p&gt;&lt;/li&gt;
@@ -77,7 +104,7 @@
 &lt;/ul&gt;
 &lt;h2 id=&#34;would-i-recomment-it-to-anyone&#34;&gt;Would I recomment it to anyone?&lt;/h2&gt;
 &lt;p&gt;Of course, If they already know react. but for a beginners I would not recommend it, especially if they had time constraint to finish the project.&lt;/p&gt;
-&lt;p&gt;well check it out &lt;a href=&#34;https://poojabags.netlify.app&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;well.. check it out &lt;a href=&#34;https://poojabags.netlify.app&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;bye, seeya, untill next-time - Gopinath.&lt;/p&gt;
 &lt;/blockquote&gt;</description></item><item><title>Birthday month! - reflection and future</title><link>//bluepie.in/2020/08/future/</link><pubDate>Fri, 28 Aug 2020 19:41:47 +0530</pubDate><guid>//bluepie.in/2020/08/future/</guid><description>
