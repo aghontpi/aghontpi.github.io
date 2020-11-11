@@ -224,13 +224,13 @@ there were certain edge cases where I had to disable a link temporarily, disable
 &lt;h2 id=&#34;technology-stack&#34;&gt;Technology stack&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;note: fontend and backend are on different repos&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;frontend&#34;&gt;FrontEnd&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/Gopinath001/Rinku-Frontend&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to frontend repo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/Rinku-Frontend&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to frontend repo&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;react&#34;&gt;React&lt;/h4&gt;
 &lt;p&gt;This was absolutely clear from the start, I madeup my mind to use React. The reason being
 I had already done a project in angular, eversince that wanted to a project in
 React.&lt;/p&gt;
 &lt;h3 id=&#34;backend&#34;&gt;Backend&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/Gopinath001/Rinku-Backend/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to backend repo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/Rinku-Backend/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to backend repo&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;php-with-framework-written-from-scratch&#34;&gt;PHP with Framework Written from Scratch.&lt;/h4&gt;
 &lt;p&gt;I wanted a simple backend, that could be deployable anywhere, currently the most popular free hosting
 service provided language (atleast at the time of writing this post) is php. It&amp;rsquo;s used everywhere.&lt;/p&gt;
@@ -460,14 +460,13 @@ github announced unlimited private colaborations and made a ton of premium featu
 &lt;/ul&gt;
 &lt;h2 id=&#34;result&#34;&gt;Result.&lt;/h2&gt;
 &lt;p&gt;After coding away the mentioned logics above. I am left with this workflow file.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;
-name: fetch new content from api
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;name: fetch new content from api
 on:
 schedule:
 - cron: &#39;0 */8 * * *&#39;
 jobs:
 fetch-content:
-if: github.repository == &#39;Gopinath001/xkcd-declutter&#39;
+if: github.repository == &#39;aghontpi/xkcd-declutter&#39;
 name: execute python logic
 runs-on: ubuntu-latest
 steps:
@@ -490,7 +489,7 @@ with:
 github_token: ${{ secrets.TOKEN }}
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;See it in action, downloads new content automatically and put it under the folder xkcd-offline.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/Gopinath001/xkcd-declutter/tree/master/xkcd-offline/api&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Folder containing api content&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/xkcd-declutter/tree/master/xkcd-offline/api&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Folder containing api content&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;See you soon, untill then hope you do well. - Gopinath aka aghontpi aka bluepie&lt;/p&gt;
@@ -514,7 +513,7 @@ It should have a download option. both batch and single!.&lt;/p&gt;
 &lt;h3 id=&#34;what-i-did-conclusion&#34;&gt;what I did &amp;amp; Conclusion:&lt;/h3&gt;
 &lt;p&gt;I built a xkcd viewer app with the above requirements in angular, I tried to use much of the core functionality of angular
 while building the requriements, I&amp;rsquo;ve also learnt about some interesting libraries, rxjs, imageViewer. Go checkout the repo for more info and demo.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/Gopinath001/xkcd-declutter&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Link - xkcdViewer&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/xkcd-declutter&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Link - xkcdViewer&lt;/a&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;blockquote&gt;
 &lt;p&gt;I have kept this post short!. See you soon!. &amp;amp; About the name change!.. I&amp;rsquo;ve chosen agontpi, hope i make up my mind soon. untill then -gopianth&lt;/p&gt;
