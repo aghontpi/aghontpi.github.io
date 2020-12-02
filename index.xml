@@ -1,4 +1,142 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Thu, 29 Oct 2020 21:34:18 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Why I Choose Typescript</title><link>//bluepie.in/2020/10/why-i-choose-typescript/</link><pubDate>Thu, 29 Oct 2020 21:34:18 +0530</pubDate><guid>//bluepie.in/2020/10/why-i-choose-typescript/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Mon, 30 Nov 2020 11:47:43 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Publishing Npm Package</title><link>//bluepie.in/2020/11/publishing-npm-package/</link><pubDate>Mon, 30 Nov 2020 11:47:43 +0530</pubDate><guid>//bluepie.in/2020/11/publishing-npm-package/</guid><description>
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Personal Update: I finally managed to change my github username with all its dependencies to aghontpi, it was less work than I expected. Gosh, Its been 6 months already..since I decided to change my username. Incase my future self is wondering, its still work from home, probablly will go chennai after new years&amp;rsquo; i.e 2021.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;This month was boring as hell in terms of office work, since I had to work on Extjs, I introduced some flare into it, but making it similar to react, because of this, it much easier to work on.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The more important stuff - Learnt to publish a package in npm.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;backstory&#34;&gt;Backstory&lt;/h2&gt;
+&lt;p&gt;So I wanted to do this for almost a year, I never got around it, main reason being, the other person who&amp;rsquo;s collaborating leaving. One of my colleagues &amp;amp; a good friend of mine asked if we could do any open-source projects, this was after he just demonstrated a angular componenet that he was building. It looked cool, So I told him Why not publish this?.
+So that is what we did, but decided to do it for react and publish it to npm.&lt;/p&gt;
+&lt;h2 id=&#34;reason-goal&#34;&gt;Reason/Goal&lt;/h2&gt;
+&lt;p&gt;I wanted to learn, what are the steps necessary to&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;publish to npm,&lt;/li&gt;
+&lt;li&gt;convert a component so that it can be published,&lt;/li&gt;
+&lt;li&gt;generate build
+&lt;ul&gt;
+&lt;li&gt;compiling typescript with types file&lt;/li&gt;
+&lt;li&gt;bundle the whole library as package&lt;/li&gt;
+&lt;li&gt;comparing webpack, lerna, rollup, etc.
+and lastly&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;just for the fun of it&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;the-idea&#34;&gt;The idea&lt;/h2&gt;
+&lt;p&gt;The idea is Table, the logic and functionality was all handled by my friend, I took care of remaining things. left the use cases for him to handle.&lt;/p&gt;
+&lt;h2 id=&#34;so-what-i-learnt&#34;&gt;So what I learnt?&lt;/h2&gt;
+&lt;h3 id=&#34;bundling&#34;&gt;Bundling&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;&lt;em&gt;Removing react-scripts to custom scripts&lt;/em&gt;&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;After some re-search found react-scripts was good, but not suitable for a libaray. so went ahead with just using babel,&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;rimraf lib/ &amp;amp;&amp;amp; babel src -d lib/
+rimraf lib/ &amp;amp;&amp;amp; babel src --watch -d lib/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;.babelrc.js&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;module.exports = {
+presets: [
+[
+&amp;quot;@babel/preset-react&amp;quot;,
+{
+development: process.env.BABEL_ENV === &amp;quot;development&amp;quot;,
+},
+&amp;quot;@babel/preset-env&amp;quot;,
+],
+],
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;but babel can not bundle/compile css files, which was used in out project, so researched further on bundlers.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;moving to webpack&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The final decision came down to choosing between rollup and webpack. rollup was new to me, webpack, I already had experience with.. &amp;amp; my requirements was pretty simple, bundle files to /lib/index.js.
+So went ahead with just using webpack.&lt;/p&gt;
+&lt;p&gt;processing in webpack&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;rimraf lib/ &amp;amp;&amp;amp; webpack
+rimraf lib/ &amp;amp;&amp;amp; webpack --env mode=dev --watch
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;webpack.config.js&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const path = require(&amp;quot;path&amp;quot;)
+const includeFolder = path.resolve(__dirname, &amp;quot;src&amp;quot;)
+const outputFolder = path.resolve(__dirname, &amp;quot;lib&amp;quot;)
+module.exports = (env, argv) =&amp;gt; {
+const mode = env ? (env.mode == &amp;quot;dev&amp;quot; ? &amp;quot;development&amp;quot; : &amp;quot;production&amp;quot;) : &amp;quot;production&amp;quot;
+console.log(`running in ${mode} mode`)
+return {
+entry: &amp;quot;./src/Index.tsx&amp;quot;,
+mode,
+output: {
+filename: &amp;quot;index.js&amp;quot;,
+path: outputFolder,
+library: &amp;quot;dynamic-table-react&amp;quot;,
+libraryTarget: &amp;quot;umd&amp;quot;,
+},
+module: {
+rules: [
+{ //process css files
+test: /\.css$/i,
+include: includeFolder,
+use: [&amp;quot;style-loader&amp;quot;, &amp;quot;css-loader&amp;quot;],
+},
+{
+// process js and ts files
+test: /\.(js|mjs|jsx|ts|tsx)$/,
+include: includeFolder,
+use: {
+loader: &amp;quot;babel-loader&amp;quot;,
+},
+},
+],
+},
+externals: {
+react: &amp;quot;react&amp;quot;,
+&amp;quot;react-dom&amp;quot;: &amp;quot;react-dom&amp;quot;,
+},
+resolve: {
+extensions: [&amp;quot;.js&amp;quot;, &amp;quot;.jsx&amp;quot;, &amp;quot;.ts&amp;quot;, &amp;quot;.tsx&amp;quot;],
+},
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;renamed .babelrc.js to .babelrc&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;// using preset to process react and typescript files
+{
+&amp;quot;presets&amp;quot;: [&amp;quot;@babel/preset-env&amp;quot;, &amp;quot;@babel/preset-react&amp;quot;, &amp;quot;@babel/preset-typescript&amp;quot;]
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;genrating-types-file&#34;&gt;Genrating Types file&lt;/h3&gt;
+&lt;p&gt;generating types file .d.ts was soo much pain, bacause webpack could not do it, (at least at the time of writing this).&lt;/p&gt;
+&lt;p&gt;tsc could do it, but it needs tsconfig.json and also I would have to include it as seperate script in package.json, This is where I thought I should have went with rollup or tsdx.&lt;/p&gt;
+&lt;p&gt;I have not yet added this to the package, still experimenting on stuff, Will update this once I complete that part.&lt;/p&gt;
+&lt;h3 id=&#34;structuring-package-json&#34;&gt;structuring package.json&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;Stuff to configure in package.json, importantly main, scripts, types file, peer dependencies.&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+...,
+&amp;quot;main&amp;quot;: &amp;quot;lib/index.js&amp;quot;,Removing react-scripts to custom scripts
+&amp;quot;peerDependencies&amp;quot;: {
+&amp;quot;react&amp;quot;: &amp;quot;^x.x.x&amp;quot;,
+&amp;quot;react-dom&amp;quot;: &amp;quot;^x.x.x&amp;quot;
+},
+&amp;quot;scripts&amp;quot;: {
+&amp;quot;build&amp;quot;: &amp;quot;rimraf lib &amp;amp;&amp;amp; webpack&amp;quot;,
+&amp;quot;start&amp;quot;: &amp;quot;rimraf lib/ &amp;amp;&amp;amp; webpack --env mode=dev --watch&amp;quot;
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;since we added react to be a &lt;a href=&#34;https://nodejs.org/en/blog/npm/peer-dependencies/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;peer-dependency&lt;/a&gt;, we oughta add following to webpack config.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;
+externals: {
+&amp;quot;react&amp;quot;: &amp;quot;react&amp;quot;,
+&amp;quot;react-dom&amp;quot;: &amp;quot;react-dom&amp;quot;,
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;other-minor-stuff&#34;&gt;Other minor stuff&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;building and publishing commands with npm/yarn&lt;/li&gt;
+&lt;li&gt;using yarn link/ npm link while developing&lt;/li&gt;
+&lt;li&gt;maintain packages in npmjs (admin setting for package)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;conclusion.&lt;/h2&gt;
+&lt;p&gt;It was fun learning, creating and publishing the package. The link to the &lt;a href=&#34;https://www.npmjs.com/package/dynamic-table-react&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;package&lt;/a&gt;. untill next time -aghontpi.&lt;/p&gt;</description></item><item><title>Why I Choose Typescript</title><link>//bluepie.in/2020/10/why-i-choose-typescript/</link><pubDate>Thu, 29 Oct 2020 21:34:18 +0530</pubDate><guid>//bluepie.in/2020/10/why-i-choose-typescript/</guid><description>
 &lt;p&gt;Hello, we meet again!, how was the week? hope you are well and gud!, This post will be about typescript, I&amp;rsquo;m not explaining what it is, but rather why i choose to use it.&lt;/p&gt;
 &lt;h2 id=&#34;typescript-was-everywhere-background&#34;&gt;TypeScript was everywhere - background&lt;/h2&gt;
 &lt;blockquote&gt;
@@ -771,298 +909,4 @@ exit_group(2) = ?
 &lt;p&gt;I saw a similar implementation recently that looks really awsome, that made me write about this, i have known this for some time now, but i can not just let it go, the repository link is this &lt;a href=&#34;https://github.com/abba23/spotify-adblock-linux&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;ld_preload&lt;/a&gt;.
 I&amp;rsquo;m not supporting this particular implementation (adblock) to be used everywhere, im just curious!.&lt;/p&gt;
 &lt;p&gt;Look at the source its very facinating how things are done in the linux world, how come i never knew about this untill a few months ago, obviously you can argue that you can make a custom network filter in the linux machine to achieve this (only allow certain apps to make api calls), there are several apps that do this, I&amp;rsquo;m not disaggreing with you on that matter, but you can not deny this also.&lt;/p&gt;
-&lt;p&gt;I want to make something similar with this usecase, &amp;ldquo;lp_preload to make life better!&amp;ldquo;, If you have any ideas just throw them in the comment section, or dm me personlly!. I&amp;rsquo;d love to do it. Anyway see ya next time &lt;strong&gt;&lt;em&gt;And Merry Christmas, And a happy new year&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Game Dev</title><link>//bluepie.in/2019/11/game-dev/</link><pubDate>Fri, 15 Nov 2019 11:46:05 +0530</pubDate><guid>//bluepie.in/2019/11/game-dev/</guid><description>
-&lt;p&gt;&lt;em&gt;Hey!, hope you are doing well!, im good, This post should have gone up in the month of august and this post should
-have been a follow-up, anyway never too late. Update: Im following a tight schedule for the past few weeks, tight-schedule
-in the sense &amp;ldquo;wake-up -&amp;gt; commute-to-office -&amp;gt; professional code-&amp;gt; aftier-office -&amp;gt; passion code -&amp;gt; sleep&amp;rdquo; throw in breaks, travel,
-and Personal hygene time in there, at-first it was awful, but after some while got the hang of it,Infact it became like addiction
-to me at this point &amp;amp; im craving for more.&lt;/em&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h1 id=&#34;why-what&#34;&gt;why &amp;amp; what&lt;/h1&gt;
-&lt;p&gt;So in the month of september a friend of mine asked me whether I can Join him in making game, till that point in time,
-I haven&amp;rsquo;t done game development. So the gamejam was js13kgames, though it ran for a month we went into working only in the
-last seven days.&lt;/p&gt;
-&lt;h3 id=&#34;development-stack&#34;&gt;development stack&lt;/h3&gt;
-&lt;p&gt;javascript,
-gulp for automated tasks,&lt;/p&gt;
-&lt;p&gt;apart from the time constraint of a month to finish, this also included a constraint which is, the total size of the
-game must be less than 13 kilobytes and a topic to develop unde, which is not quite a lot. Everything developed for the competition was from scratch except the sound library.&lt;/p&gt;
-&lt;h3 id=&#34;challenges&#34;&gt;challenges&lt;/h3&gt;
-&lt;p&gt;Though the gamejam was for a month, the actual dev period was for 7 days, to be honest it was more like 2-3 days of dev.
-(Project mate) &lt;a href=&#34;https://github.com/FR0ST1N/Pew-Pew/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;FR0ST1N&lt;/a&gt; was sick during the last few days so the game was not complete, I made the decision to submit
-it anyway.&lt;/p&gt;
-&lt;p&gt;This post is gona be the disection of different parts of the game.&lt;/p&gt;
-&lt;h4 id=&#34;ui&#34;&gt;UI&lt;/h4&gt;
-&lt;p&gt;Pixel art for game images, since we were limited on the size aspect of the game, we could not have high res image assets.Spritesheets were used for the development.&lt;/p&gt;
-&lt;p&gt;There is a seperate class for parsing the spriteSheet &amp;amp; maintining it states based on the sprite attributes.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
-/*
-* Porperties the sprite has to manipulate it
-*/
-const image = new Image();
-image.src = &#39;images/&#39; + imagename;
-this.image = image;
-this.rows = rows;
-this.columns = columns;
-this.individualSpriteSize = individualSpriteSize;
-this.totalSpriteSize = totalSpriteSize;
-this.position = position;
-this.scaleFactorX = scaleFactorX;
-this.scaleFactorY = scaleFactorY;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;animation&#34;&gt;animation&lt;/h4&gt;
-&lt;p&gt;Bare api calls, small framework that can be used in future projects.&lt;/p&gt;
-&lt;p&gt;Explanation on how that works.&lt;/p&gt;
-&lt;p&gt;Core is based on values defined by you, fps is set accordingly &amp;amp; callbacks are called,
-these callbacks are responsilbe for object-animation &amp;amp; object movement, all logic should be done with those callbacks.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;following this principle, animation was done to the most part, code for the same is below&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Main callbacks from the animation class&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
-/*
-* Animation properties that all object in canvas should have,
-* ex |------------------------| represent total time
-* |-----x------x------x-----| represent time to next frame.
-*/
-/**
-* reset the animation timer,
-* @return {void}
-*/
-_resetAnimationTimer() {
-this.animationTimer = 0;
-}
-/**
-* reset the animation timer,
-* @return {void}
-*/
-_resetMotionTimer() {
-this.motionTimer = 0;
-}
-/**
-* @return {void}
-*/
-stepTimer() {
-if (this.timeToChangeAnimation != 0) {
-this.animationTimer += 1;
-} if (this.timeToChangeMotion != 0) {
-this.motionTimer += 1;
-}
-}
-/**
-* @return {boolean}
-*/
-isTimeToAnimate() {
-if (this.timeToChangeAnimation == 0) {
-return true;
-} if (this.animationTimer == this.timeToChangeAnimation) {
-this._resetAnimationTimer();
-return true;
-}
-return false;
-}
-/**
-* @return {boolean}
-*/
-isTimeToMove() {
-if (this.timeToChangeMotion == 0) {
-return true;
-} if (this.motionTimer == this.timeToChangeMotion) {
-this._resetMotionTimer();
-return true;
-} else {
-return false;
-}
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Main callbacks from timer&lt;low-level&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
-/**
-* wrapper Draw.
-*/
-wDraw() {
-this.context.drawImage(
-this.sprite.image,
-this.sprite.position.x,
-this.sprite.position.y,
-this.sprite.individualSpriteSize,
-this.sprite.individualSpriteSize,
-this.position.x, this.position.y,
-this.sprite.individualSpriteSize * this.sprite.scaleFactorX,
-this.sprite.individualSpriteSize * this.sprite.scaleFactorY
-);
-}
-/**
-* override this method in child classe, for animation logic.
-* when it is time for next frame, this method will be called.
-*/
-objectUpdate() {
-}
-/**
-* makes decisions whether to redraw,
-* based on the fps defined.
-*/
-postObjectUpdate() {
-this.stepTimer();
-if (this.isTimeToMove()) {
-this._Movement();
-} if (this.isTimeToAnimate()) {
-this.objectUpdate();
-} this.objectAnimation();
-}
-/**
-* object movement loop
-*/
-objectAnimation() {
-this.animationTimerId = setTimeout(() =&amp;gt; {
-this.postObjectUpdate();
-}, 1);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h5 id=&#34;where-i-struggled&#34;&gt;Where I struggled&lt;/h5&gt;
-&lt;p&gt;The level designing was the part that i struggled the most, since from what we had to work with, I was finding it hard to come up with a good gameplay anyhow based on the time constraint (two hours before deadline for the game), I came up with a level design involving two fire-animations (straight pattern &amp;amp; follow pattern)&lt;/p&gt;
-&lt;p&gt;following is the level logic that I cameup &amp;amp; implemented in 15min.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
-//@level logic from class level
-/**
-* design
-* level one:
-* one enemy, straight bullet, health = 1, rateOfFire = (1000-100/level=1)
-* level two:
-* two enemy:
-* 1st enemy: straight bullet, health = 2, rateOfFire = (1000-100/level=2)
-* last enemy: follow bullet, health,rateOfFire=same as 1st enemy
-* ... progressive, all the last enemy has the follow bullet
-*/
-levelTrigger() {
-for (let enemyCounter = 1; enemyCounter &amp;lt;= this.level;
-enemyCounter++ ) {
-const enemy = this.enenmyOneFactory(
-new Position(800, enemyCounter * 50 + 100),
-this.level,
-(1000 - 100) / this.level);
-enemy.startAnimation(this.context);
-enemy.autoshoot = true;
-if (this.level != 1 &amp;amp;&amp;amp; enemyCounter == this.level) {
-enemy.setBulletPattern(BulletPattern.FOLLOW);
-}
-enemy.shoot();
-this.currentLevelEnemies.push(enemy);
-this.drawableObjects.push(enemy);
-}
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;collision-detection&#34;&gt;collision Detection&lt;/h3&gt;
-&lt;p&gt;Collision detection was straight forward too, you just compare the two rectangles.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
-/**
-* collideDetect of enemyObject with given bullet
-* @param {Bullet} bullet
-* @return {boolean}
-*/
-collideDetect(bullet) {
-if (this.position == null || bullet.position == null ) {
-return false;
-}
-const bulletObject = {&#39;x&#39;: bullet.position.x,
-&#39;y&#39;: bullet.position.y,
-&#39;width&#39;: bullet.sprite.individualSpriteSize * bullet.sprite.scaleFactorX,
-&#39;height&#39;: bullet.sprite.individualSpriteSize * bullet.sprite.scaleFactorY,
-};
-const EnemyObject = {
-&#39;x&#39;: this.position.x,
-&#39;y&#39;: this.position.y,
-&#39;width&#39;: this.sprite.individualSpriteSize * this.sprite.scaleFactorX,
-&#39;height&#39;: this.sprite.individualSpriteSize * this.sprite.scaleFactorY,
-};
-return CollisionDetection.detect(bulletObject, EnemyObject);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;sound&#34;&gt;Sound&lt;/h3&gt;
-&lt;p&gt;Small library extending from previous year&amp;rsquo;s.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/FR0ST1N/Pew-Pew/blob/develop/src/js/audio/audioEffects.js&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;AudioEffects.js&lt;/a&gt;&lt;/p&gt;
-&lt;h4 id=&#34;fonts&#34;&gt;Fonts&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;Even using texts take a huge hit on the size of the game, we found a custom font implementation &amp;amp; modified it to fit our usecase, since the font class mainly contains hardcoded values for drawing fonts to the canvas, I have linked just the source below.
-[font.js](https://github.com/FR0ST1N/Pew-Pew/blob/develop/src/js/font/font.js)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;the fonts can be used by the following way&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
-this.ctx.fillStyle = &#39;#00bff3&#39;;
-const CORRECTION = (value.length - 1) * 20;
-Font.draw(value, size, this.ctx, 775 - CORRECTION, 10);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;build&#34;&gt;Build&lt;/h4&gt;
-&lt;p&gt;For automating the build process gulp was used, the commands from gulp are pretty straight forward, can be understood just from telling the commands.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
-gulp.task(&#39;cssLint&#39;, function() {
-return gulp.src(&#39;src/css/*.css&#39;)
-.pipe(cssLint({
-reporters: [{formatter: &#39;string&#39;, console: true}],
-}));
-});
-gulp.task(&#39;jsLint&#39;, function() {
-return gulp.src(&#39;src/js/**/*.js&#39;)
-.pipe(concat(&#39;main.js&#39;))
-.pipe(jsLint())
-.pipe(jsLint.format())
-.pipe(jsLint.failAfterError());
-});
-gulp.task(&#39;htmlBuild&#39;, function() {
-return gulp.src(&#39;src/index.html&#39;)
-.pipe(htmlMin({
-collapseWhitespace: true,
-removeComments: true,
-html5: true,
-}))
-.pipe(gulp.dest(&#39;build&#39;));
-});
-gulp.task(&#39;cssBuild&#39;, function() {
-return gulp.src(&#39;src/css/*.css&#39;)
-.pipe(concat(&#39;style.min.css&#39;))
-.pipe(cssMin())
-.pipe(gulp.dest(&#39;build/css&#39;));
-});
-gulp.task(&#39;jsBuild&#39;, function() {
-return gulp.src(jsConcat, {allowEmpty: true})
-.pipe(concat(&#39;main.js&#39;))
-.pipe(jsMin({
-noSource: true,
-ext: {
-min: &#39;.min.js&#39;,
-},
-}))
-.pipe(gulp.dest(&#39;build/js&#39;));
-});
-gulp.task(&#39;imageMin&#39;, function() {
-return gulp.src(&#39;src/images/*&#39;)
-.pipe(imageMin({optimizationLevel: 5}))
-.pipe(gulp.dest(&#39;build/images&#39;));
-});
-gulp.task(&#39;zip&#39;, function() {
-const maxSize = 1024 * 13;
-return gulp.src(&#39;build/**&#39;)
-.pipe(zip(&#39;Pew-Pew.zip&#39;))
-.pipe(gulp.dest(&#39;zip&#39;))
-.pipe(checkSize({fileSizeLimit: maxSize}));
-});
-gulp.task(&#39;lint&#39;, gulp.parallel(
-&#39;htmlLint&#39;,
-&#39;cssLint&#39;,
-&#39;jsLint&#39;
-));
-gulp.task(&#39;build&#39;, gulp.series(
-&#39;lint&#39;,
-&#39;clean&#39;,
-&#39;htmlBuild&#39;,
-&#39;cssBuild&#39;,
-&#39;jsBuild&#39;,
-&#39;jsfxr&#39;,
-&#39;imageMin&#39;,
-&#39;zip&#39;,
-&#39;genDocs&#39;
-));
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;submission-conclusion&#34;&gt;submission - conclusion&lt;/h3&gt;
-&lt;p&gt;During the last day, 80% of the game was completed, everything was to be put together, except that my team mate was very ill &amp;amp; could not work on the project.&lt;/p&gt;
-&lt;p&gt;We almost did not submit because the game cuz &amp;lsquo;incomplete, except we did submit the game that was too because I insisted on submitting,&lt;/p&gt;
-&lt;p&gt;My friend &amp;amp; partner in the project.
-&lt;a href=&#34;https://github.com/FR0ST1N/Pew-Pew/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;FR0ST1N&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;At the end, It was fun..&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;I want to make something similar with this usecase, &amp;ldquo;lp_preload to make life better!&amp;ldquo;, If you have any ideas just throw them in the comment section, or dm me personlly!. I&amp;rsquo;d love to do it. Anyway see ya next time &lt;strong&gt;&lt;em&gt;And Merry Christmas, And a happy new year&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;</description></item></channel></rss>

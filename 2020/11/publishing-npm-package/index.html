@@ -1,0 +1,102 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><meta name=description content="Public Journal of aghontpi"><meta name=keywords content="aghontpi bluepie Journal"><link rel=prev href=//bluepie.in/2020/10/why-i-choose-typescript/><link rel=canonical href=//bluepie.in/2020/11/publishing-npm-package/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>Publishing Npm Package | Bluepie&#39;s Journal</title><meta name=title content="Publishing Npm Package | Bluepie's Journal"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"Publishing Npm Package","headline":"Publishing Npm Package","description":"Personal Update: I finally managed to change my github username with all its dependencies to aghontpi, it was less work than I expected. Gosh, Its been 6 months already..since I decided to change my username. Incase my future self is wondering, its still work from home, probablly will go chennai after new years\x26rsquo; i.e 2021.\nThis month was boring as hell in terms of office work, since I had to work on Extjs, I introduced some flare into it, but making it similar to react, because of this, it much easier to work on.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2020","datePublished":"2020-11-30 11:47:43 \x2b0530 IST","dateModified":"2020-11-30 11:47:43 \x2b0530 IST","url":"\/\/bluepie.in\/2020\/11\/publishing-npm-package\/","wordCount":"724","keywords":["Bluepie\x27s Journal"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>My Journal</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>My Journal</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-135013873-2','auto');ga('send','pageview');}</script><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">Publishing Npm Package</h1><div class=post-meta>Written by <a itemprop=name href=//bluepie.in/ rel=author>Bluepie</a> with ♥
+<span class=post-time>on <time datetime=2020-11-30 itemprop=datePublished>November 30, 2020</time></span>
+in
+<i class="iconfont icon-folder"></i><span class=post-category><a href=//bluepie.in/categories/tech/>Tech</a>
+<a href=//bluepie.in/categories/npm/>npm</a>
+<a href=//bluepie.in/categories/react/>React</a>
+<a href=//bluepie.in/categories/webpack/>webpack</a></span></div></header><div class=post-content><img src=//bluepie.in/images/posts/npm-package.png class=featured_image><p><strong><em>Personal Update: I finally managed to change my github username with all its dependencies to aghontpi, it was less work than I expected. Gosh, Its been 6 months already..since I decided to change my username. Incase my future self is wondering, its still work from home, probablly will go chennai after new years&rsquo; i.e 2021.</em></strong></p><hr><p>This month was boring as hell in terms of office work, since I had to work on Extjs, I introduced some flare into it, but making it similar to react, because of this, it much easier to work on.</p><blockquote><p>The more important stuff - Learnt to publish a package in npm.</p></blockquote><h2 id=backstory>Backstory</h2><p>So I wanted to do this for almost a year, I never got around it, main reason being, the other person who&rsquo;s collaborating leaving. One of my colleagues &amp; a good friend of mine asked if we could do any open-source projects, this was after he just demonstrated a angular componenet that he was building. It looked cool, So I told him Why not publish this?.
+So that is what we did, but decided to do it for react and publish it to npm.</p><h2 id=reason-goal>Reason/Goal</h2><p>I wanted to learn, what are the steps necessary to</p><ul><li>publish to npm,</li><li>convert a component so that it can be published,</li><li>generate build<ul><li>compiling typescript with types file</li><li>bundle the whole library as package</li><li>comparing webpack, lerna, rollup, etc.
+and lastly</li></ul></li><li>just for the fun of it</li></ul><h2 id=the-idea>The idea</h2><p>The idea is Table, the logic and functionality was all handled by my friend, I took care of remaining things. left the use cases for him to handle.</p><h2 id=so-what-i-learnt>So what I learnt?</h2><h3 id=bundling>Bundling</h3><p><em><strong><em>Removing react-scripts to custom scripts</em></strong></em></p><p>After some re-search found react-scripts was good, but not suitable for a libaray. so went ahead with just using babel,</p><pre><code class=language-bash>rimraf lib/ &amp;&amp; babel src -d lib/
+
+rimraf lib/ &amp;&amp; babel src --watch -d lib/
+</code></pre><p><strong><em>.babelrc.js</em></strong></p><pre><code class=language-javascript>module.exports = {
+  presets: [
+    [
+      &quot;@babel/preset-react&quot;,
+      {
+        development: process.env.BABEL_ENV === &quot;development&quot;,
+      },
+      &quot;@babel/preset-env&quot;,
+    ],
+  ],
+}
+</code></pre><blockquote><p>but babel can not bundle/compile css files, which was used in out project, so researched further on bundlers.</p></blockquote><p><strong><em>moving to webpack</em></strong></p><p>The final decision came down to choosing between rollup and webpack. rollup was new to me, webpack, I already had experience with.. &amp; my requirements was pretty simple, bundle files to /lib/index.js.
+So went ahead with just using webpack.</p><p>processing in webpack</p><pre><code class=language-bash>rimraf lib/ &amp;&amp; webpack
+
+rimraf lib/ &amp;&amp; webpack --env mode=dev --watch
+</code></pre><p><strong><em>webpack.config.js</em></strong></p><pre><code class=language-javascript>const path = require(&quot;path&quot;)
+const includeFolder = path.resolve(__dirname, &quot;src&quot;)
+const outputFolder = path.resolve(__dirname, &quot;lib&quot;)
+
+module.exports = (env, argv) =&gt; {
+  const mode = env ? (env.mode == &quot;dev&quot; ? &quot;development&quot; : &quot;production&quot;) : &quot;production&quot;
+  console.log(`running in ${mode} mode`)
+
+  return {
+    entry: &quot;./src/Index.tsx&quot;,
+    mode,
+    output: {
+      filename: &quot;index.js&quot;,
+      path: outputFolder,
+      library: &quot;dynamic-table-react&quot;,
+      libraryTarget: &quot;umd&quot;,
+    },
+    module: {
+      rules: [
+        {   //process css files
+          test: /\.css$/i,
+          include: includeFolder,
+          use: [&quot;style-loader&quot;, &quot;css-loader&quot;],
+        },
+        {
+          // process js and ts files
+          test: /\.(js|mjs|jsx|ts|tsx)$/,
+          include: includeFolder,
+          use: {
+            loader: &quot;babel-loader&quot;,
+          },
+        },
+      ],
+    },
+    externals: {
+      react: &quot;react&quot;,
+      &quot;react-dom&quot;: &quot;react-dom&quot;,
+    },
+    resolve: {
+      extensions: [&quot;.js&quot;, &quot;.jsx&quot;, &quot;.ts&quot;, &quot;.tsx&quot;],
+    },
+  }
+}
+</code></pre><p><strong><em>renamed .babelrc.js to .babelrc</em></strong></p><pre><code class=language-json>// using preset to process react and typescript files
+{                       
+    &quot;presets&quot;: [&quot;@babel/preset-env&quot;, &quot;@babel/preset-react&quot;, &quot;@babel/preset-typescript&quot;]
+}
+</code></pre><h3 id=genrating-types-file>Genrating Types file</h3><p>generating types file .d.ts was soo much pain, bacause webpack could not do it, (at least at the time of writing this).</p><p>tsc could do it, but it needs tsconfig.json and also I would have to include it as seperate script in package.json, This is where I thought I should have went with rollup or tsdx.</p><p>I have not yet added this to the package, still experimenting on stuff, Will update this once I complete that part.</p><h3 id=structuring-package-json>structuring package.json</h3><p><strong><em><em>Stuff to configure in package.json, importantly main, scripts, types file, peer dependencies.</em></em></strong></p><pre><code class=language-json>{
+    ...,
+    &quot;main&quot;: &quot;lib/index.js&quot;,Removing react-scripts to custom scripts
+    &quot;peerDependencies&quot;: {
+        &quot;react&quot;: &quot;^x.x.x&quot;,
+        &quot;react-dom&quot;: &quot;^x.x.x&quot;
+    },
+    &quot;scripts&quot;: {
+        &quot;build&quot;: &quot;rimraf lib &amp;&amp; webpack&quot;,
+        &quot;start&quot;: &quot;rimraf lib/ &amp;&amp; webpack --env mode=dev --watch&quot;
+    }
+}
+
+</code></pre><p>since we added react to be a <a href=https://nodejs.org/en/blog/npm/peer-dependencies/ rel="nofollow noreferrer" target=_blank>peer-dependency</a>, we oughta add following to webpack config.</p><pre><code class=language-json>
+externals: {
+    &quot;react&quot;: &quot;react&quot;,
+    &quot;react-dom&quot;: &quot;react-dom&quot;,
+  }
+
+</code></pre><h3 id=other-minor-stuff>Other minor stuff</h3><ul><li>building and publishing commands with npm/yarn</li><li>using yarn link/ npm link while developing</li><li>maintain packages in npmjs (admin setting for package)</li></ul><h2 id=conclusion>conclusion.</h2><p>It was fun learning, creating and publishing the package. The link to the <a href=https://www.npmjs.com/package/dynamic-table-react rel="nofollow noreferrer" target=_blank>package</a>. untill next time -aghontpi.</p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span>Bluepie</span></p><p class=copyright-item><span>Link:</span>
+<a href=//bluepie.in/2020/11/publishing-npm-package/>//bluepie.in/2020/11/publishing-npm-package/</span></p></div><div class=post-tags><section><a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=//bluepie.in/>home</a></span></section></div><div class=post-nav><a href=//bluepie.in/2020/10/why-i-choose-typescript/ class=prev rel=prev title="Why I Choose Typescript"><i class="iconfont icon-left"></i>&nbsp;Why I Choose Typescript</a></div><div class=post-comment><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
+var d=document,s=d.createElement('script');s.async=true;s.src='//'+"gopinath001-github-io-blog"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></div></main><footer class=footer><div class=copyright>&copy;
+<span itemprop=copyrightYear>2017 - 2020</span>
+<span class=with-love>|</span>
+<span class=author itemprop=copyrightHolder><a href=//bluepie.in/>Bluepie</a></span></div></footer><script src=//bluepie.in/js/vendor_no_gallery.min.js async></script></div></body></html>
