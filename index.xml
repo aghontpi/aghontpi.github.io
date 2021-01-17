@@ -1,4 +1,13 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Mon, 30 Nov 2020 11:47:43 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Publishing Npm Package</title><link>//bluepie.in/2020/11/publishing-npm-package/</link><pubDate>Mon, 30 Nov 2020 11:47:43 +0530</pubDate><guid>//bluepie.in/2020/11/publishing-npm-package/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Tue, 29 Dec 2020 23:02:55 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>AdventOfCode-2020</title><link>//bluepie.in/2020/12/adventofcode-2020/</link><pubDate>Tue, 29 Dec 2020 23:02:55 +0530</pubDate><guid>//bluepie.in/2020/12/adventofcode-2020/</guid><description>
+&lt;blockquote&gt;
+&lt;p&gt;This month was quite interesting, I stopped all developemt (except office work, which is still sad, imo I should have taken a break from that too) and focused my attention towards coding challenges, by newyear have to go chennai for resuming my work life, the timing for it was the worst.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;what-is-advent-of-code&#34;&gt;what is advent of code?&lt;/h2&gt;
+&lt;p&gt;AOC is a series of programming challenges, two problems unlock each day, till christmas, i.e untill dec 25th.&lt;/p&gt;
+&lt;h2 id=&#34;what-i-gained&#34;&gt;what I gained?&lt;/h2&gt;
+&lt;p&gt;algorithms, datastructures, problem solving concepts, programming concepts and mainly it was fun and helped me take my mind off things.&lt;/p&gt;
+&lt;h2 id=&#34;questions-and-solutions&#34;&gt;Questions and Solutions.&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/AdventOfCode2020&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Check the repo for questions and solutions.&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Publishing Npm Package</title><link>//bluepie.in/2020/11/publishing-npm-package/</link><pubDate>Mon, 30 Nov 2020 11:47:43 +0530</pubDate><guid>//bluepie.in/2020/11/publishing-npm-package/</guid><description>
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Personal Update: I finally managed to change my github username with all its dependencies to aghontpi, it was less work than I expected. Gosh, Its been 6 months already..since I decided to change my username. Incase my future self is wondering, its still work from home, probablly will go chennai after new years&amp;rsquo; i.e 2021.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;This month was boring as hell in terms of office work, since I had to work on Extjs, I introduced some flare into it, but making it similar to react, because of this, it much easier to work on.&lt;/p&gt;
@@ -789,124 +798,4 @@ fail for you(if you belong to the minority category of different people).&lt;/p&
 &lt;h3 id=&#34;you-might-argue-that-this-is-not-a-dns-server-it-is-a-proxy-server-for-dns-well-it-depends-up-how-you-see-it&#34;&gt;&amp;gt; You might argue that, this is not a dns server, it is a proxy server for dns. Well it depends up how you see it&lt;/h3&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;conclusion&lt;/h2&gt;
 &lt;p&gt;From my experience, its simple, awsome &amp;amp; works great, No ads system wide! on all networks! on all devices!,
-My very own private dns server..XD.If you have any doubts, just dm me!&lt;/p&gt;</description></item><item><title>Liunx LD_PRELOAD</title><link>//bluepie.in/2019/12/linux-ld_preload/</link><pubDate>Sat, 21 Dec 2019 17:28:03 +0530</pubDate><guid>//bluepie.in/2019/12/linux-ld_preload/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Hello me, this is going to be a short post that is very interesting to me and I don&amp;rsquo;t know how I have missed this all this time, I&amp;rsquo;ve known to break binary files directly by directly debugging them, mostly the windows files are binary extensions, I have worked even on dll files, which is somewhat similar to .so files on linux, both perform the same functions except that linux part is open source, and i&amp;rsquo;ve seen many articles using this partuclar approrach in many different ways(ofcourse after knowing about this only, I searched for those articles), A bit of personal update - so its been a tough month actually, progress interms of self development is zero, progress in terms of social level is a wip, but still a development. So you understand this right!. anyway the memorable thing that i did this month is going on a office trip to kerala, personally i would prefer to go alone, (only a few people accompanying me!) but gosh dang it!, anyway lets not talk about it. :(. In terms of development work (tech related) that is big zero on the professional side as well as personal side, except a few python scripts &amp;amp; spjs(that is a different topic to discuss entirely)&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;ld_preload is actually pretty basic if you think about it, ld_preload is a linux feature of linux, which is for? so u take a library for example &amp;ldquo;lib that resolves ip address for hostname&amp;rdquo; - lib_curl , get the source, modfify the source for evil purposes, compile it and then load that library for the application you want to run.&lt;/p&gt;
-&lt;p&gt;actually this could go south even if a small mistake is made, the development process looks like this, okey take an example of some app or a program, ex: ping, ping google.com -&amp;gt; gives you the ip address, time delay etc. You do strace ping somewebsite then you get all the system calls that the ping binary makes, you could theoritcally make a list of method calls that the app makes to system, write a custom implementation of the system calls probally malicious and take over the app.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;system calls that ping made during ping google.com&lt;/em&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-execve(&amp;quot;/bin/ping&amp;quot;, [&amp;quot;ping&amp;quot;, &amp;quot;google.com&amp;quot;], 0x7fffe83a4978 /* 62 vars */) = 0
-access(&amp;quot;/etc/suid-debug&amp;quot;, F_OK) = -1 ENOENT (No such file or directory)
-brk(NULL) = 0x559075d1a000
-fcntl(0, F_GETFD) = 0
-fcntl(1, F_GETFD) = 0
-fcntl(2, F_GETFD) = 0
-access(&amp;quot;/etc/suid-debug&amp;quot;, F_OK) = -1 ENOENT (No such file or directory)
-access(&amp;quot;/etc/ld.so.nohwcap&amp;quot;, F_OK) = -1 ENOENT (No such file or directory)
-access(&amp;quot;/etc/ld.so.preload&amp;quot;, R_OK) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/etc/ld.so.cache&amp;quot;, O_RDONLY|O_CLOEXEC) = 3
-fstat(3, {st_mode=S_IFREG|0644, st_size=113810, ...}) = 0
-mmap(NULL, 113810, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f76c189a000
-close(3) = 0
-access(&amp;quot;/etc/ld.so.nohwcap&amp;quot;, F_OK) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/lib/x86_64-linux-gnu/libcap.so.2&amp;quot;, O_RDONLY|O_CLOEXEC) = 3
-read(3, &amp;quot;\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&amp;gt;\0\1\0\0\0\20\30\0\0\0\0\0\0&amp;quot;..., 832) = 832
-fstat(3, {st_mode=S_IFREG|0644, st_size=22768, ...}) = 0
-mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f76c1898000
-mmap(NULL, 2117976, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f76c1489000
-mprotect(0x7f76c148d000, 2097152, PROT_NONE) = 0
-mmap(0x7f76c168d000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x4000) = 0x7f76c168d000
-close(3) = 0
-access(&amp;quot;/etc/ld.so.nohwcap&amp;quot;, F_OK) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/lib/x86_64-linux-gnu/libidn.so.11&amp;quot;, O_RDONLY|O_CLOEXEC) = 3
-read(3, &amp;quot;\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&amp;gt;\0\1\0\0\0\0+\0\0\0\0\0\0&amp;quot;..., 832) = 832
-fstat(3, {st_mode=S_IFREG|0644, st_size=206872, ...}) = 0
-mmap(NULL, 2302000, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f76c1256000
-mprotect(0x7f76c1288000, 2093056, PROT_NONE) = 0
-mmap(0x7f76c1487000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x31000) = 0x7f76c1487000
-close(3) = 0
-access(&amp;quot;/etc/ld.so.nohwcap&amp;quot;, F_OK) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/usr/lib/x86_64-linux-gnu/libnettle.so.6&amp;quot;, O_RDONLY|O_CLOEXEC) = 3
-read(3, &amp;quot;\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&amp;gt;\0\1\0\0\0\340\200\0\0\0\0\0\0&amp;quot;..., 832) = 832
-fstat(3, {st_mode=S_IFREG|0644, st_size=219304, ...}) = 0
-mmap(NULL, 2314384, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f76c1020000
-mprotect(0x7f76c1054000, 2093056, PROT_NONE) = 0
-mmap(0x7f76c1253000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x33000) = 0x7f76c1253000
-close(3) = 0
-access(&amp;quot;/etc/ld.so.nohwcap&amp;quot;, F_OK) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/lib/x86_64-linux-gnu/libresolv.so.2&amp;quot;, O_RDONLY|O_CLOEXEC) = 3
-read(3, &amp;quot;\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&amp;gt;\0\1\0\0\00008\0\0\0\0\0\0&amp;quot;..., 832) = 832
-fstat(3, {st_mode=S_IFREG|0644, st_size=101168, ...}) = 0
-mmap(NULL, 2206336, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f76c0e05000
-mprotect(0x7f76c0e1c000, 2097152, PROT_NONE) = 0
-mmap(0x7f76c101c000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x17000) = 0x7f76c101c000
-mmap(0x7f76c101e000, 6784, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f76c101e000
-close(3) = 0
-access(&amp;quot;/etc/ld.so.nohwcap&amp;quot;, F_OK) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/lib/x86_64-linux-gnu/libc.so.6&amp;quot;, O_RDONLY|O_CLOEXEC) = 3
-read(3, &amp;quot;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&amp;gt;\0\1\0\0\0\260\34\2\0\0\0\0\0&amp;quot;..., 832) = 832
-fstat(3, {st_mode=S_IFREG|0755, st_size=2030544, ...}) = 0
-mmap(NULL, 4131552, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f76c0a14000
-mprotect(0x7f76c0bfb000, 2097152, PROT_NONE) = 0
-mmap(0x7f76c0dfb000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f76c0dfb000
-mmap(0x7f76c0e01000, 15072, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f76c0e01000
-close(3) = 0
-mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f76c1896000
-arch_prctl(ARCH_SET_FS, 0x7f76c1896f00) = 0
-mprotect(0x7f76c0dfb000, 16384, PROT_READ) = 0
-mprotect(0x7f76c101c000, 4096, PROT_READ) = 0
-mprotect(0x7f76c1253000, 8192, PROT_READ) = 0
-mprotect(0x7f76c1487000, 4096, PROT_READ) = 0
-mprotect(0x7f76c168d000, 4096, PROT_READ) = 0
-mprotect(0x559075bcc000, 4096, PROT_READ) = 0
-mprotect(0x7f76c18b6000, 4096, PROT_READ) = 0
-munmap(0x7f76c189a000, 113810) = 0
-brk(NULL) = 0x559075d1a000
-brk(0x559075d3b000) = 0x559075d3b000
-capget({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, NULL) = 0
-capget({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, {effective=0, permitted=0, inheritable=0}) = 0
-capget({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, NULL) = 0
-capset({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, {effective=0, permitted=0, inheritable=0}) = 0
-prctl(PR_SET_KEEPCAPS, 1) = 0
-getuid() = 1000
-setuid(1000) = 0
-prctl(PR_SET_KEEPCAPS, 0) = 0
-getuid() = 1000
-geteuid() = 1000
-openat(AT_FDCWD, &amp;quot;/usr/lib/locale/locale-archive&amp;quot;, O_RDONLY|O_CLOEXEC) = 3
-fstat(3, {st_mode=S_IFREG|0644, st_size=10756928, ...}) = 0
-mmap(NULL, 10756928, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f76bffd1000
-close(3) = 0
-capget({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, NULL) = 0
-capget({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, {effective=0, permitted=0, inheritable=0}) = 0
-socket(AF_INET, SOCK_DGRAM, IPPROTO_ICMP) = -1 EACCES (Permission denied)
-socket(AF_INET, SOCK_RAW, IPPROTO_ICMP) = -1 EPERM (Operation not permitted)
-socket(AF_INET6, SOCK_DGRAM, IPPROTO_ICMPV6) = -1 EACCES (Permission denied)
-socket(AF_INET6, SOCK_RAW, IPPROTO_ICMPV6) = -1 EPERM (Operation not permitted)
-openat(AT_FDCWD, &amp;quot;/usr/share/locale/locale.alias&amp;quot;, O_RDONLY|O_CLOEXEC) = 3
-fstat(3, {st_mode=S_IFREG|0644, st_size=2995, ...}) = 0
-read(3, &amp;quot;# Locale name alias data base.\n#&amp;quot;..., 4096) = 2995
-read(3, &amp;quot;&amp;quot;, 4096) = 0
-close(3) = 0
-openat(AT_FDCWD, &amp;quot;/usr/share/locale/en_IN.UTF-8/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/usr/share/locale/en_IN.utf8/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/usr/share/locale/en_IN/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/usr/share/locale/en/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/usr/share/locale-langpack/en_IN.UTF-8/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/usr/share/locale-langpack/en_IN.utf8/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/usr/share/locale-langpack/en_IN/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, &amp;quot;/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
-write(2, &amp;quot;ping: socket: Operation not perm&amp;quot;..., 38ping: socket: Operation not permitted
-) = 38
-exit_group(2) = ?
-+++ exited with 2 +++
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I saw a similar implementation recently that looks really awsome, that made me write about this, i have known this for some time now, but i can not just let it go, the repository link is this &lt;a href=&#34;https://github.com/abba23/spotify-adblock-linux&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;ld_preload&lt;/a&gt;.
-I&amp;rsquo;m not supporting this particular implementation (adblock) to be used everywhere, im just curious!.&lt;/p&gt;
-&lt;p&gt;Look at the source its very facinating how things are done in the linux world, how come i never knew about this untill a few months ago, obviously you can argue that you can make a custom network filter in the linux machine to achieve this (only allow certain apps to make api calls), there are several apps that do this, I&amp;rsquo;m not disaggreing with you on that matter, but you can not deny this also.&lt;/p&gt;
-&lt;p&gt;I want to make something similar with this usecase, &amp;ldquo;lp_preload to make life better!&amp;ldquo;, If you have any ideas just throw them in the comment section, or dm me personlly!. I&amp;rsquo;d love to do it. Anyway see ya next time &lt;strong&gt;&lt;em&gt;And Merry Christmas, And a happy new year&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;</description></item></channel></rss>
+My very own private dns server..XD.If you have any doubts, just dm me!&lt;/p&gt;</description></item></channel></rss>
