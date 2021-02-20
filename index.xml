@@ -1,4 +1,174 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Tue, 29 Dec 2020 23:02:55 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>AdventOfCode-2020</title><link>//bluepie.in/2020/12/adventofcode-2020/</link><pubDate>Tue, 29 Dec 2020 23:02:55 +0530</pubDate><guid>//bluepie.in/2020/12/adventofcode-2020/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Fri, 29 Jan 2021 08:23:06 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Preconfigured Binary and Installer script through Docker</title><link>//bluepie.in/2021/01/preconfigured-binary-using-docker/</link><pubDate>Fri, 29 Jan 2021 08:23:06 +0530</pubDate><guid>//bluepie.in/2021/01/preconfigured-binary-using-docker/</guid><description>
+&lt;p&gt;How&amp;rsquo;s it going, good I hope!, Hope this year is a blast for you.&lt;/p&gt;
+&lt;h2 id=&#34;what-is-this&#34;&gt;What is this?&lt;/h2&gt;
+&lt;p&gt;Creating a preconfigured container for a precompiled binary utilizing docker.&lt;/p&gt;
+&lt;h2 id=&#34;reason-motivation&#34;&gt;Reason / Motivation:&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;ve been using hugo, even since my blog migration post, the one problem that I am facing with hugo is that,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;whenever I run update os host system,hugo version also updates, the problem with that is some features are deprecated in the new release, my site design depends upon those features. so what I was doing is constantly degrading the hugo version back to old version, before I write a post everytime.&lt;/li&gt;
+&lt;li&gt;I work in new environments all the time, so downloading the appropriate version and installing takes time.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;goal&#34;&gt;goal&lt;/h2&gt;
+&lt;p&gt;At the end of this venture, I should be able to&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;create a image from scratch&lt;/li&gt;
+&lt;li&gt;install a required binary with its dependencies, either using source or binary distribution&lt;/li&gt;
+&lt;li&gt;create a container from the image and export it&lt;/li&gt;
+&lt;li&gt;upload the container image to a docker hub or something similar&lt;/li&gt;
+&lt;li&gt;setup an environment using the container&lt;/li&gt;
+&lt;li&gt;link the local binary executable to the binary inside the container
+&lt;ul&gt;
+&lt;li&gt;whenever I run the binary locally, the binary inside the container should be executed on the files
+from the host system&amp;rsquo;s current path.&lt;/li&gt;
+&lt;li&gt;I should be able to run the binary, with or without its parameters and environment options&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;is-this-even-possible&#34;&gt;Is this even possible?&lt;/h2&gt;
+&lt;p&gt;what I am trying to achieve is completely possible using docker, its a feature completely baked into the docker core,
+using &amp;lsquo;&amp;ndash;rm&amp;rsquo; with &amp;lsquo;docker -run&amp;rsquo;&lt;/p&gt;
+&lt;h2 id=&#34;lets-start&#34;&gt;Lets start&lt;/h2&gt;
+&lt;h3 id=&#34;choosing-the-best-base-image-i-recommend-alpine-https-hub-docker-com-alpine&#34;&gt;Choosing the best base image, I recommend &lt;a href=&#34;https://hub.docker.com/_/alpine/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;alpine&lt;/a&gt;.&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;why?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Alpine Linux is a Linux distribution built around musl libc and BusyBox. The &lt;strong&gt;&lt;em&gt;&lt;em&gt;image is only 5 MB&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt; in size and &lt;strong&gt;&lt;em&gt;&lt;em&gt;has access to a package repository&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;set-up-a-container-from-alpine&#34;&gt;Set up a container from alpine&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+aghontpi@elitebook:~$ docker run --name testalpine -d -it alpine:latest /bin/sh
+1be3fb1ba1c46786dc5034745dcdab31c6588627c086c08f3c0ff8493d270544
+aghontpi@elitebook:~$ docker ps
+CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
+1be3fb1ba1c4 alpine:latest &amp;quot;/bin/sh&amp;quot; 4 seconds ago Up 3 seconds testalpine
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;login-to-the-shell-to-install-your-binary&#34;&gt;Login to the shell to install your binary&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;aghontpi@elitebook:~$ docker exec -it testalpine /bin/sh
+/ # whoami
+root
+/ # apk update
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
+v3.13.2-8-g7bb1c88019 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
+v3.13.2-9-gd3529c068e [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
+OK: 13884 distinct packages available
+/ # apk list vim
+vim-8.2.2320-r0 x86_64 {vim} (Vim)
+/ # apk add --no-cache vim
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
+(1/5) Installing xxd (8.2.2320-r0)
+(2/5) Installing lua5.3-libs (5.3.6-r0)
+(3/5) Installing ncurses-terminfo-base (6.2_p20210109-r0)
+(4/5) Installing ncurses-libs (6.2_p20210109-r0)
+(5/5) Installing vim (8.2.2320-r0)
+Executing busybox-1.32.1-r0.trigger
+OK: 25 MiB in 19 packages
+/ # vim test
+/ # cd home
+/home # wget https://github.com/gohugoio/hugo/releases/download/v0.56.3/hugo_0.56.3_Linux-64bit.tar.gz
+Connecting to github.com (13.234.210.38:443)
+Connecting to github-releases.githubusercontent.com (185.199.108.154:443)
+saving to &#39;hugo_0.56.3_Linux-64bit.tar.gz&#39;
+hugo_0.56.3_Linux-64 100% |*********************************************************************************************************************************************************************************************************************************| 11.4M 0:00:00 ETA
+&#39;hugo_0.56.3_Linux-64bit.tar.gz&#39; saved
+/home # ls
+hugo_0.56.3_Linux-64bit.tar.gz
+/home # tar -xf hugo_0.56.3_Linux-64bit.tar.gz
+/home # ls
+LICENSE README.md hugo hugo_0.56.3_Linux-64bit.tar.gz
+/home # cp hugo /usr/bin/
+/home # mkdir test
+/home # cd test/hugo
+/home # ls
+LICENSE README.md hugo hugo_0.56.3_Linux-64bit.tar.gz test
+/home # cd test/
+/home/test # hugo
+Building sites … WARN 2021/02/19 16:52:24 found no layout file for &amp;quot;HTML&amp;quot; for &amp;quot;taxonomyTerm&amp;quot;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
+WARN 2021/02/19 16:52:24 found no layout file for &amp;quot;HTML&amp;quot; for &amp;quot;home&amp;quot;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
+WARN 2021/02/19 16:52:24 found no layout file for &amp;quot;HTML&amp;quot; for &amp;quot;taxonomyTerm&amp;quot;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
+| EN
++------------------+----+
+Pages | 3
+Paginator pages | 0
+Non-page files | 0
+Static files | 0
+Processed images | 0
+Aliases | 0
+Sitemaps | 1
+Cleaned | 0
+Total in 4 ms
+/home/test # ls
+public resources
+/home/test # cd ..
+/home # ls
+LICENSE README.md hugo hugo_0.56.3_Linux-64bit.tar.gz test
+/home # rm -rf ./*
+/home # exit
+aghontpi@elitebook:~$
+aghontpi@elitebook:~$ docker container stop testalpine
+testalpine
+aghontpi@elitebook:~$ docker commit testalpine testalpinewithhugo/0.1
+sha256:c305edf7f82a912801ae44dfe6ffe9e834e0541728295c2968ef69ad2ba9e90f
+aghontpi@elitebook:~$ docker image ls testalpinewithhugo/0.1
+REPOSITORY TAG IMAGE ID CREATED SIZE
+testalpinewithhugo/0.1 latest c305edf7f82a 14 seconds ago 60.1MB
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then use services like &lt;a href=&#34;https://hub.docker.com&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;docker-hub&lt;/a&gt; to your private repo, it will look like below.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/preconfigured-binary-using-docker/docker-container-export-and-upload-to-docker-hub.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;shell-script-to-orchestrate-the-whole-thing&#34;&gt;Shell script to orchestrate the whole thing.&lt;/h3&gt;
+&lt;p&gt;Didn&amp;rsquo;t want to brushup my sheel script so wrote a python script and used it as executable instead.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://gist.github.com/aghontpi/8271dc0f28c2c844ae2a0d1e03c70bf5&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to the following code&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#! /usr/bin/python3
+import os
+calling_directory = os.getcwd()
+cmd = f&amp;quot;docker run --rm -it \
+--user $(id -u):$(id -g) \
+-v &#39;/etc/group:/etc/group:ro&#39; \
+-v &#39;/etc/passwd:/etc/passwd:ro&#39; \
+-v &#39;/etc/shadow:/etc/shadow:ro&#39;
+-v {calling_directory}/:/tmp/ \
+-e HUGO_ENV \
+-p 80:1313 \
+bluepie/hugo:0.1 \
+/bin/sh -c &#39;cd /tmp/ &amp;amp;&amp;amp; hugo &amp;quot; + &#39; &#39;.join(sys.argv[1:]) +&amp;quot; &#39;&amp;quot;
+print(cmd)
+os.system(cmd)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;finally-installation-script&#34;&gt;Finally Installation script&lt;/h3&gt;
+&lt;p&gt;The code is verbose, so check it out through the link.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://gist.github.com/aghontpi/a9f160d80923823757a9894caf37aba7&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to installation script&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;what the script does..&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;check if hugo and docker is already installed&lt;/li&gt;
+&lt;li&gt;create .bin directory inside $HOME&lt;/li&gt;
+&lt;li&gt;downloads the &lt;a href=&#34;https://gist.github.com/aghontpi/8271dc0f28c2c844ae2a0d1e03c70bf5&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;code&lt;/a&gt; and places it as executable inside $HOME/.bin/hugo&lt;/li&gt;
+&lt;li&gt;adds the path $HOME/.bin to .bashrc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;script-in-action&#34;&gt;Script in action&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+aghontpi@elitebook:/tmp$ ./install-script.py
+&amp;gt; docker-hugo custom binary script v0.0.1
+&amp;gt; docker is installed proceeding..
+&amp;gt; hugo does not exists, initiating docker pull and installation
+&amp;gt; authenticating /w docker, enter credential when asked
+Authenticating with existing credentials...
+WARNING! Your password will be stored unencrypted in /home/aghontpi/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+Login Succeeded
+&amp;gt; pulling from docker repo
+0.1: Pulling from bluepie/hugo
+Digest: sha256:db54d94cfb7ad12726b1ee9f5fa7b2a2ad9d7e567021886fe2dd74e4262a43ea
+Status: Image is up to date for bluepie/hugo:0.1
+docker.io/bluepie/hugo:0.1
+&amp;gt; getting the custom script
+&amp;gt; writing to disc
+&amp;gt; setting permission
+&amp;gt; backup cmd -&amp;gt; cp /home/aghontpi/.bashrc /home/aghontpi/.bashrc_bkp_19022021-21:20:15
+&amp;gt; modifying bashrc of user
+&amp;gt; installation complete
+---&amp;gt; use a new terminal to test &amp;lt;---
+aghontpi@elitebook:/tmp$
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
+&lt;p&gt;I learned a lot through this little experiment, It saves a ton of my time.&lt;/p&gt;</description></item><item><title>AdventOfCode-2020</title><link>//bluepie.in/2020/12/adventofcode-2020/</link><pubDate>Tue, 29 Dec 2020 23:02:55 +0530</pubDate><guid>//bluepie.in/2020/12/adventofcode-2020/</guid><description>
 &lt;blockquote&gt;
 &lt;p&gt;This month was quite interesting, I stopped all developemt (except office work, which is still sad, imo I should have taken a break from that too) and focused my attention towards coding challenges, by newyear have to go chennai for resuming my work life, the timing for it was the worst.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -730,72 +900,4 @@ fail for you(if you belong to the minority category of different people).&lt;/p&
 &lt;/blockquote&gt;
 &lt;p&gt;So from my childhood i have seen my surroundings &amp;amp; i dreamt I would go in a different path, Which is &amp;ldquo;People become thick friends, go out, , fall in love, get married to people in the circle only they interact with/ their neighbours.&amp;rdquo; &amp;amp; I wanted this to be opposite of that, but right untill now i&amp;rsquo;ve had chances to claim my dream but I did not do so, (mmo&amp;rsquo;s, guild&amp;rsquo;s, discord, tele, communi..onli..).&lt;/p&gt;
 &lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;anyway these are my present thoughts, see ya soon!. hope u do well untill then -gopinath.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>Custom Dns Server With Adblock</title><link>//bluepie.in/2019/12/custom-dns-server-with-adblock/</link><pubDate>Wed, 25 Dec 2019 14:15:33 +0530</pubDate><guid>//bluepie.in/2019/12/custom-dns-server-with-adblock/</guid><description>
-&lt;blockquote&gt;
-&lt;p&gt;hello guys, as of writing this post this is christmas of 2019 (25 dec 2019), gosh time really goes fast!. How was the holidays? personal update: I have sevre cold &amp;amp; fever as of writing this, hope i&amp;rsquo;ll get better soon.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;today-im-going-to-share-my-method-of-adblocking-with-custom-dns-servers&#34;&gt;Today im going to share my method of adblocking with custom dns servers&lt;/h2&gt;
-&lt;h3 id=&#34;my-requiremets&#34;&gt;my requiremets&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;I want adblocking solution without any addons &amp;amp; applications for laptops/desktops/mobile.&lt;/li&gt;
-&lt;li&gt;I want it universal (meaning it has to work outside of my home network)&lt;/li&gt;
-&lt;li&gt;I should not waste time setting it up (should be quick and simple to setup)&lt;/li&gt;
-&lt;li&gt;should be configurable (easy to configure)&lt;/li&gt;
-&lt;li&gt;should work perfectly &amp;amp; should not cost me anything&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;explanation&#34;&gt;explanation&lt;/h3&gt;
-&lt;p&gt;Sound pretty simple ain&amp;rsquo;t it? we&amp;rsquo;ll it ain&amp;rsquo;t easy to do.&lt;/p&gt;
-&lt;h4 id=&#34;crossplatform-laptop-mobile-anydevice-that-has-access-to-internet&#34;&gt;crossplatform (laptop/mobile/..anydevice that has access to internet)&lt;/h4&gt;
-&lt;p&gt;This requirement rules out addons, applications on all devices.&lt;/p&gt;
-&lt;h4 id=&#34;work-outside-of-my-home-network&#34;&gt;work outside of my home network)&lt;/h4&gt;
-&lt;p&gt;This requirement rules out private adblocking solutions, so a server is need for this, luckly, I have server on aws,
-&lt;em&gt;but that server is already being used for a different purpose, so it has to be minimal impact on the cpu and memory&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;obvious anwser would be to use pi-hole &lt;a href=&#34;work outside of my home network&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;pie-hole&lt;/a&gt;), my experience with pie-hole is not good, let me explain what i mean by that, I had problems trying to install it(the automated script did not work for me), it took me so much time to debug the error, second is it had a extra bit of cpu load compared to my other options.&lt;/p&gt;
-&lt;h4 id=&#34;should-be-quick-and-simple-to-setup&#34;&gt;should be quick and simple to setup)&lt;/h4&gt;
-&lt;p&gt;I should not waste time learning a new tool,(don&amp;rsquo;t a industrial level dns server, I just need a simple solution), plus if any error, it should be easy for me to debug.&lt;/p&gt;
-&lt;h4 id=&#34;configurable-easy-to-configure&#34;&gt;configurable (easy to configure)&lt;/h4&gt;
-&lt;p&gt;some things i looked for, should be
-* able to mention, forward dns vendor (google/opendns)
-* easy to install
-* easy to add adblocking lists (just add files from differnet adblock sources)
-* easy to add whitelists
-* i should have a log, to inspect if anything is not working&lt;/p&gt;
-&lt;h4 id=&#34;should-not-cost-me-anything&#34;&gt;should not cost me anything&lt;/h4&gt;
-&lt;p&gt;This makes the solution to be open source, I already have a server that i am paying for so i&amp;rsquo;ll just add this to it, So there is no additional cost.&lt;/p&gt;
-&lt;h3 id=&#34;hidden-gem-the-solution&#34;&gt;Hidden gem - The solution&lt;/h3&gt;
-&lt;p&gt;So after trying several solutions(trust me i wasted a lot of time, installing &amp;amp; uninstalling) I arrived at &lt;a href=&#34;https://github.com/looterz/grimd&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;grimd&lt;/a&gt;, an opensource project written in go. It had all the capabilities that I mentioned above(checkout the grimd&amp;rsquo;s page), It even comes in prebuilt binaries, So i do not even have to compile anything.&lt;/p&gt;
-&lt;h3 id=&#34;installing-it-to-myserver&#34;&gt;Installing it to myserver&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;download the binary from the release page&lt;/li&gt;
-&lt;li&gt;run it on the server&lt;/li&gt;
-&lt;li&gt;open port 51 (udp &amp;amp; tcp) on firewall inside cloud instance &amp;amp; vendor firewall&lt;/li&gt;
-&lt;li&gt;add my custom adblock list to the config file (grimd.toml)&lt;/li&gt;
-&lt;li&gt;change default nameserver to google dns in config file&lt;/li&gt;
-&lt;li&gt;change the dns server on my laptops &amp;amp; mobiles, that is it.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;that is it, that is all i have to do, here is the log where it is in action&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-20:29:01.341 DEBU handler.go:252 ▶ 103c insert d.joinhoney.com IN A into cache with ttl 140
-20:29:11.361 INFO handler.go:102 ▶ 103d 219.91.177.2 lookup　vortex.data.microsoft.com IN AAAA
-20:29:11.361 DEBU cache.go:208 ▶ 103e KeyGen: vortex.data.microsoft.com IN AAAA 6210738ab9fea7763f2ba8ec16beb2c3
-20:29:11.361 DEBU cache.go:123 ▶ 103f Cache: Key expired 6210738ab9fea7763f2ba8ec16beb2c3
-20:29:11.361 DEBU cache.go:133 ▶ 1040 Cache: Cannot find key 6210738ab9fea7763f2ba8ec16beb2c3
-20:29:11.361 DEBU handler.go:124 ▶ 1041 vortex.data.microsoft.com IN AAAA didn&#39;t hit cache
-20:29:11.361 NOTI handler.go:180 ▶ 1042 vortex.data.microsoft.com found in blocklist
-20:29:11.362 INFO handler.go:102 ▶ 1043 219.91.177.2 lookup　vortex.data.microsoft.com IN A
-20:29:11.362 DEBU cache.go:208 ▶ 1044 KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
-20:29:11.362 DEBU cache.go:123 ▶ 1045 Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
-20:29:11.362 DEBU cache.go:133 ▶ 1046 Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
-20:29:11.362 DEBU handler.go:124 ▶ 1047 vortex.data.microsoft.com IN A didn&#39;t hit cache
-20:29:11.362 NOTI handler.go:180 ▶ 1048 vortex.data.microsoft.com found in blocklist
-20:29:30.496 INFO handler.go:102 ▶ 1049 219.91.177.2 lookup　vortex.data.microsoft.com IN A
-20:29:30.496 DEBU cache.go:208 ▶ 104a KeyGen: vortex.data.microsoft.com IN A 87ca3e2c1cf9d028f97ce6794f963327
-20:29:30.496 DEBU cache.go:123 ▶ 104b Cache: Key expired 87ca3e2c1cf9d028f97ce6794f963327
-20:29:30.496 DEBU cache.go:133 ▶ 104c Cache: Cannot find key 87ca3e2c1cf9d028f97ce6794f963327
-...
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;you-might-argue-that-this-is-not-a-dns-server-it-is-a-proxy-server-for-dns-well-it-depends-up-how-you-see-it&#34;&gt;&amp;gt; You might argue that, this is not a dns server, it is a proxy server for dns. Well it depends up how you see it&lt;/h3&gt;
-&lt;h2 id=&#34;conclusion&#34;&gt;conclusion&lt;/h2&gt;
-&lt;p&gt;From my experience, its simple, awsome &amp;amp; works great, No ads system wide! on all networks! on all devices!,
-My very own private dns server..XD.If you have any doubts, just dm me!&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;anyway these are my present thoughts, see ya soon!. hope u do well untill then -gopinath.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>
