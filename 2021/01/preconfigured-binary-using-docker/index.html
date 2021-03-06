@@ -1,4 +1,4 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><meta name=description content="Public Journal of aghontpi"><meta name=keywords content="aghontpi bluepie Journal"><link rel=prev href=//bluepie.in/2020/12/adventofcode-2020/><link rel=canonical href=//bluepie.in/2021/01/preconfigured-binary-using-docker/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>Preconfigured Binary and Installer script through Docker | Bluepie&#39;s Journal</title><meta name=title content="Preconfigured Binary and Installer script through Docker | Bluepie's Journal"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"Preconfigured Binary and Installer script through Docker","headline":"Preconfigured Binary and Installer script through Docker","description":"How\x26rsquo;s it going, good I hope!, Hope this year is a blast for you.\nWhat is this? Creating a preconfigured container for a precompiled binary utilizing docker.\nReason \/ Motivation: I\x26rsquo;ve been using hugo, even since my blog migration post, the one problem that I am facing with hugo is that,\n whenever I run update os host system,hugo version also updates, the problem with that is some features are deprecated in the new release, my site design depends upon those features.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2021","datePublished":"2021-01-29 08:23:06 \x2b0530 \x2b0530","dateModified":"2021-01-29 08:23:06 \x2b0530 \x2b0530","url":"\/\/bluepie.in\/2021\/01\/preconfigured-binary-using-docker\/","wordCount":"936","keywords":["Bluepie\x27s Journal"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>My Journal</a>
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><meta name=description content="Public Journal of aghontpi"><meta name=keywords content="aghontpi bluepie Journal"><link rel=prev href=//bluepie.in/2020/12/adventofcode-2020/><link rel=next href=//bluepie.in/2021/02/express-api-server/><link rel=canonical href=//bluepie.in/2021/01/preconfigured-binary-using-docker/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>Preconfigured Binary and Installer script through Docker | Bluepie&#39;s Journal</title><meta name=title content="Preconfigured Binary and Installer script through Docker | Bluepie's Journal"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"Preconfigured Binary and Installer script through Docker","headline":"Preconfigured Binary and Installer script through Docker","description":"How\x26rsquo;s it going, good I hope!, Hope this year is a blast for you.\nWhat is this? Creating a preconfigured container for a precompiled binary utilizing docker.\nReason \/ Motivation: I\x26rsquo;ve been using hugo, even since my blog migration post, the one problem that I am facing with hugo is that,\n whenever I run update os host system,hugo version also updates, the problem with that is some features are deprecated in the new release, my site design depends upon those features.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2021","datePublished":"2021-01-29 08:23:06 \x2b0530 \x2b0530","dateModified":"2021-01-29 08:23:06 \x2b0530 \x2b0530","url":"\/\/bluepie.in\/2021\/01\/preconfigured-binary-using-docker\/","wordCount":"946","keywords":["Bluepie\x27s Journal"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>My Journal</a>
 <a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>My Journal</a>
 <a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-135013873-2','auto');ga('send','pageview');}</script><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">Preconfigured Binary and Installer script through Docker</h1><div class=post-meta>Written by <a itemprop=name href=//bluepie.in/ rel=author>Bluepie</a> with ♥
 <span class=post-time>on <time datetime=2021-01-29 itemprop=datePublished>January 29, 2021</time></span>
@@ -54,7 +54,7 @@ hugo_0.56.3_Linux-64 100% |*****************************************************
 /home # ls
 hugo_0.56.3_Linux-64bit.tar.gz
 
-/home # tar -xf hugo_0.56.3_Linux-64bit.tar.gz 
+/home # tar -xf hugo_0.56.3_Linux-64bit.tar.gz
 
 /home # ls
 LICENSE                         README.md                       hugo                            hugo_0.56.3_Linux-64bit.tar.gz
@@ -76,16 +76,16 @@ Building sites … WARN 2021/02/19 16:52:24 found no layout file for &quot;HTML&
 WARN 2021/02/19 16:52:24 found no layout file for &quot;HTML&quot; for &quot;home&quot;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
 WARN 2021/02/19 16:52:24 found no layout file for &quot;HTML&quot; for &quot;taxonomyTerm&quot;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
 
-                   | EN  
+                   | EN
 +------------------+----+
-  Pages            |  3  
-  Paginator pages  |  0  
-  Non-page files   |  0  
-  Static files     |  0  
-  Processed images |  0  
-  Aliases          |  0  
-  Sitemaps         |  1  
-  Cleaned          |  0  
+  Pages            |  3
+  Paginator pages  |  0
+  Non-page files   |  0
+  Static files     |  0
+  Processed images |  0
+  Aliases          |  0
+  Sitemaps         |  1
+  Cleaned          |  0
 
 Total in 4 ms
 
@@ -101,7 +101,7 @@ LICENSE                         README.md                       hugo            
 
 /home # exit
 
-aghontpi@elitebook:~$ 
+aghontpi@elitebook:~$
 
 aghontpi@elitebook:~$ docker container stop testalpine
 testalpine
@@ -113,17 +113,17 @@ aghontpi@elitebook:~$ docker image ls testalpinewithhugo/0.1
 REPOSITORY               TAG       IMAGE ID       CREATED          SIZE
 testalpinewithhugo/0.1   latest    c305edf7f82a   14 seconds ago   60.1MB
 
-</code></pre><p>Then use services like <a href=https://hub.docker.com rel="nofollow noreferrer" target=_blank>docker-hub</a> to your private repo, it will look like below.</p><p><figure><img src=//bluepie.in/images/ring.svg data-sizes=auto data-src=//bluepie.in/images/posts/preconfigured-binary-using-docker/docker-container-export-and-upload-to-docker-hub.png alt class=lazyload><figcaption class=image-caption></figcaption></figure></p><h3 id=shell-script-to-orchestrate-the-whole-thing>Shell script to orchestrate the whole thing.</h3><p>Didn&rsquo;t want to brushup my sheel script so wrote a python script and used it as executable instead.</p><p><a href=https://gist.github.com/aghontpi/8271dc0f28c2c844ae2a0d1e03c70bf5 rel="nofollow noreferrer" target=_blank>link to the following code</a></p><pre><code class=language-python>#! /usr/bin/python3
+</code></pre><h3 id=host-the-image-remotely-in-a-service-of-your-choice>Host the image remotely in a service of your choice.</h3><p>Then use services like <a href=https://hub.docker.com rel="nofollow noreferrer" target=_blank>docker-hub</a> to your private repo, it will look like below.</p><p><figure><img src=//bluepie.in/images/ring.svg data-sizes=auto data-src=//bluepie.in/images/posts/preconfigured-binary-using-docker/docker-container-export-and-upload-to-docker-hub.png alt class=lazyload><figcaption class=image-caption></figcaption></figure></p><h3 id=shell-script-to-orchestrate-the-whole-thing>Shell script to orchestrate the whole thing.</h3><p>Didn&rsquo;t want to brushup my sheel script so wrote a python script and used it as executable instead.</p><p><a href=https://gist.github.com/aghontpi/8271dc0f28c2c844ae2a0d1e03c70bf5 rel="nofollow noreferrer" target=_blank>link to the following code</a></p><pre><code class=language-python>#! /usr/bin/python3
 
 import os
 
 calling_directory = os.getcwd()
 
 cmd =  f&quot;docker run --rm -it \
-    --user $(id -u):$(id -g) \ 
+    --user $(id -u):$(id -g) \
     -v '/etc/group:/etc/group:ro' \
     -v '/etc/passwd:/etc/passwd:ro' \
-    -v '/etc/shadow:/etc/shadow:ro' 
+    -v '/etc/shadow:/etc/shadow:ro'
     -v {calling_directory}/:/tmp/ \
     -e HUGO_ENV \
     -p 80:1313 \
@@ -133,7 +133,7 @@ cmd =  f&quot;docker run --rm -it \
 print(cmd)
 os.system(cmd)
 </code></pre><h3 id=finally-installation-script>Finally Installation script</h3><p>The code is verbose, so check it out through the link.</p><p><a href=https://gist.github.com/aghontpi/a9f160d80923823757a9894caf37aba7 rel="nofollow noreferrer" target=_blank>link to installation script</a></p><p>what the script does..</p><ul><li>check if hugo and docker is already installed</li><li>create .bin directory inside $HOME</li><li>downloads the <a href=https://gist.github.com/aghontpi/8271dc0f28c2c844ae2a0d1e03c70bf5 rel="nofollow noreferrer" target=_blank>code</a> and places it as executable inside $HOME/.bin/hugo</li><li>adds the path $HOME/.bin to .bashrc</li></ul><h3 id=script-in-action>Script in action</h3><pre><code class=language-sh>
-aghontpi@elitebook:/tmp$ ./install-script.py 
+aghontpi@elitebook:/tmp$ ./install-script.py
 
 &gt; docker-hugo custom binary script  v0.0.1
 
@@ -171,12 +171,13 @@ docker.io/bluepie/hugo:0.1
 
 ---&gt; use a new terminal to test &lt;---
 
-aghontpi@elitebook:/tmp$ 
+aghontpi@elitebook:/tmp$
 
 </code></pre><h2 id=end>End</h2><p>I learned a lot through this little experiment, It saves a ton of my time.</p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
 <span>Bluepie</span></p><p class=copyright-item><span>Link:</span>
 <a href=//bluepie.in/2021/01/preconfigured-binary-using-docker/>//bluepie.in/2021/01/preconfigured-binary-using-docker/</span></p></div><div class=post-tags><section><a href=javascript:window.history.back();>back</a></span> ·
-<span><a href=//bluepie.in/>home</a></span></section></div><div class=post-nav><a href=//bluepie.in/2020/12/adventofcode-2020/ class=prev rel=prev title=AdventOfCode-2020><i class="iconfont icon-left"></i>&nbsp;AdventOfCode-2020</a></div><div class=post-comment><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
+<span><a href=//bluepie.in/>home</a></span></section></div><div class=post-nav><a href=//bluepie.in/2020/12/adventofcode-2020/ class=prev rel=prev title=AdventOfCode-2020><i class="iconfont icon-left"></i>&nbsp;AdventOfCode-2020</a>
+<a href=//bluepie.in/2021/02/express-api-server/ class=next rel=next title="Express Api Server">Express Api Server&nbsp;<i class="iconfont icon-right"></i></a></div><div class=post-comment><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
 var d=document,s=d.createElement('script');s.async=true;s.src='//'+"gopinath001-github-io-blog"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></div></main><footer class=footer><div class=copyright>&copy;
 <span itemprop=copyrightYear>2017 - 2021</span>
 <span class=with-love>|</span>

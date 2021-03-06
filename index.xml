@@ -1,4 +1,122 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Fri, 29 Jan 2021 08:23:06 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Preconfigured Binary and Installer script through Docker</title><link>//bluepie.in/2021/01/preconfigured-binary-using-docker/</link><pubDate>Fri, 29 Jan 2021 08:23:06 +0530</pubDate><guid>//bluepie.in/2021/01/preconfigured-binary-using-docker/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 21 Feb 2021 10:54:20 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Express Api Server</title><link>//bluepie.in/2021/02/express-api-server/</link><pubDate>Sun, 21 Feb 2021 10:54:20 +0000</pubDate><guid>//bluepie.in/2021/02/express-api-server/</guid><description>
+&lt;p&gt;After a hectic past two months, hope I get some free time in the upcomming months.&lt;/p&gt;
+&lt;h2 id=&#34;what-is-this&#34;&gt;What is this?&lt;/h2&gt;
+&lt;p&gt;This is a backend, written for one of my projects. &lt;em&gt;This was originally developed to be a private repository, I made it public this month.&lt;/em&gt; And this was my first time using typescript 100 percent for backend, my experience with it is pretty cool.&lt;/p&gt;
+&lt;h2 id=&#34;stack&#34;&gt;Stack&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;express server&lt;/li&gt;
+&lt;li&gt;mongodb&lt;/li&gt;
+&lt;li&gt;nginx&lt;/li&gt;
+&lt;li&gt;pm manager&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;framework&#34;&gt;Framework&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;model&lt;/li&gt;
+&lt;li&gt;view&lt;/li&gt;
+&lt;li&gt;controller&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;folder-structure&#34;&gt;Folder structure&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;src&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Source files of the server&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;src/public&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Static files to be used on client side&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;src/models&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Storing and retrieving datails from different schema, not using mongoose models&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;src/controllers&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Controllers define functions that respond to various http requests&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;src&lt;/strong&gt;/server.ts&lt;/td&gt;
+&lt;td&gt;Entry point for the app&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;src/util/&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;helpers - logging, cache, ratelimit, database&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;test&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Test cases to perform before taking a new build, is also used in combination with github actions before merging the code to master branch&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;views&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Template files for rendering dynamic content to client side, since this is a api server, there is not much there in this folder.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;.env.example&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;repos.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;.github&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;CI - github actions - run test cases on pull request and report if it is safe to merge.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;cache&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Cache folder for responses that do not need to connect to database all the time.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;explore-the-code-in-github&#34;&gt;Explore the code in github&lt;/h3&gt;
+&lt;p&gt;Repository Link:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/watchlist-backend&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/aghontpi/watchlist-backend&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;misc&#34;&gt;Misc&lt;/h3&gt;
+&lt;h4 id=&#34;a-cool-library-that-i-found-useful-for-testing-api&#34;&gt;A cool library that I found useful for testing api&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.npmjs.com/package/supertest&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;supertest&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;see the code examples below, &lt;a href=&#34;https://github.com/aghontpi/watchlist-backend/blob/104b3b1b53850c626f557a1936a68ce5bd0aa121/test/api.test.ts&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to source file&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-ts&#34;&gt;# testing routing redirect
+describe(&#39;GET /asdfd/askf&#39;, () =&amp;gt; {
+it(&#39;should return redirect&#39;, (done) =&amp;gt; {
+request(app).get(&#39;/random&#39;).expect(302, done);
+});
+});
+# testing api endpoint
+describe(&#39;GET /top&#39;, () =&amp;gt; {
+it(&#39;should return type json with 200 OK&#39;, (done) =&amp;gt; {
+request(app).get(&#39;/top&#39;).expect(&#39;Content-Type&#39;, /json/).expect(200, done);
+});
+});
+# testing rate limiting
+describe(&#39;GET /top&#39;, () =&amp;gt; {
+const req = request.agent(app);
+it(&#39;shoult not be ratelimited&#39;, (done) =&amp;gt; {
+req.get(&#39;/top&#39;).expect(200, done);
+});
+it(&#39;should not be ratelimited&#39;, (done) =&amp;gt; {
+req.get(&#39;/top&#39;).expect(200, done);
+});
+it(&#39;should not be ratelimited&#39;, (done) =&amp;gt; {
+req.get(&#39;/top&#39;).expect(200, done);
+});
+it(&#39;should not be ratelimited&#39;, (done) =&amp;gt; {
+req.get(&#39;/top&#39;).expect(200, done);
+});
+it(&#39;should &amp;quot;be ratelimited&amp;quot;&#39;, (done) =&amp;gt; {
+req.get(&#39;/top&#39;).expect(429, done);
+});
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;merging-pull-requests-automatically-run-tests-on-bug-fixes-and-new-features&#34;&gt;Merging pull requests, automatically run tests on bug fixes and new features.&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/express-api-server/pull-request-merge-after-build-success.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h4 id=&#34;nginx-config-used-for-deploying&#34;&gt;Nginx config used for deploying&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/express-api-server/nginx-config-for-express-server.png&#34; alt=&#34;nginx config&#34; /&gt;&lt;/p&gt;
+&lt;h4 id=&#34;pm2-managing-the-api&#34;&gt;pm2 managing the api&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/express-api-server/running-the-server-in-production.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
+&lt;p&gt;Hope this motivates my futureself in someway, keep learning and reach milestones constantly.&lt;/p&gt;</description></item><item><title>Preconfigured Binary and Installer script through Docker</title><link>//bluepie.in/2021/01/preconfigured-binary-using-docker/</link><pubDate>Fri, 29 Jan 2021 08:23:06 +0530</pubDate><guid>//bluepie.in/2021/01/preconfigured-binary-using-docker/</guid><description>
 &lt;p&gt;How&amp;rsquo;s it going, good I hope!, Hope this year is a blast for you.&lt;/p&gt;
 &lt;h2 id=&#34;what-is-this&#34;&gt;What is this?&lt;/h2&gt;
 &lt;p&gt;Creating a preconfigured container for a precompiled binary utilizing docker.&lt;/p&gt;
@@ -110,6 +228,7 @@ aghontpi@elitebook:~$ docker image ls testalpinewithhugo/0.1
 REPOSITORY TAG IMAGE ID CREATED SIZE
 testalpinewithhugo/0.1 latest c305edf7f82a 14 seconds ago 60.1MB
 &lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;host-the-image-remotely-in-a-service-of-your-choice&#34;&gt;Host the image remotely in a service of your choice.&lt;/h3&gt;
 &lt;p&gt;Then use services like &lt;a href=&#34;https://hub.docker.com&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;docker-hub&lt;/a&gt; to your private repo, it will look like below.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/preconfigured-binary-using-docker/docker-container-export-and-upload-to-docker-hub.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;h3 id=&#34;shell-script-to-orchestrate-the-whole-thing&#34;&gt;Shell script to orchestrate the whole thing.&lt;/h3&gt;
@@ -858,46 +977,4 @@ buy at all.&lt;/p&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;A week later after all this mess I still have the problem, lost a lot of money, lost dignity(work place), added a ton of chemicals to my
 body(still adding..), I have been asked to have an another appointment with them, Im already having a difficult time with managing time,
-but this made it a lot worse. (with the constant pain in the back of my head).&lt;/p&gt;</description></item><item><title>Noises or Im Wrong</title><link>//bluepie.in/2020/01/noises-or-im-wrong/</link><pubDate>Mon, 13 Jan 2020 10:32:09 +0000</pubDate><guid>//bluepie.in/2020/01/noises-or-im-wrong/</guid><description>
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;Hi, How are you, I hope you are doing good, me? i&amp;rsquo;m good as well from the top down view, but if inspected carefully, im not so good. This post is not going to be about tech.. so skip this if you wish. note: this post was completed in the month of januray but only published it on feb.&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr /&gt;
-&lt;blockquote&gt;
-&lt;h2 id=&#34;what-is-this-about&#34;&gt;what is this about&lt;/h2&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;So lately i&amp;rsquo;ve been contemplating on a lot of things!, some of &amp;lsquo;em include, life goals, relationships, fiends, money, how we interact as human beings, etc&amp;hellip;all these are interconnected to one another, I have decided to share this today as im 23 years old, it would be fun to see how things change over the years when im 28, 33, .. so forth.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;h3 id=&#34;life-goals&#34;&gt;life goals&lt;/h3&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Can I ask you something? what is your life goal, It should be either of two, &lt;em&gt;1. you have a defined life goal, 2. you do not have a life goal, you are going with a flow&lt;/em&gt;, I have experienced both of &amp;lsquo;em, so here is my take on it.&lt;/p&gt;
-&lt;p&gt;You are moving towards a point and all actions that you make must be towards that point you belong to this category if you have a life goal, in-short: Short term goals that matter in the long run(to achieve a final goal).&lt;/p&gt;
-&lt;p&gt;You take decisions based on what you currently feel/have, short term goals that doesn&amp;rsquo;t matter in the long run.&lt;/p&gt;
-&lt;p&gt;There is a third category that I did not mention, which is terrible of em all, which is you take decisions based on other people&amp;rsquo;s suggestion, it is bad beacuse u feel regrets after the decision is made and you realise that, you are responsible for your
-current scenario by not taking your own decision.(confusing i know, but there it is)&lt;/p&gt;
-&lt;p&gt;my parents are both 2nd category from my point of view, atleast my father is.. I strieve to be the first category&amp;hellip; but I am weak.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;h3 id=&#34;relationships&#34;&gt;relationships&lt;/h3&gt;
-&lt;p&gt;This was my openion when i was in my 10th grade, 11th &amp;amp; 12th, love is a beautiful thing, is a necessity, is a social status, you are a if you are not currently in a loving relationship.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;This was an anwser of mine before 3 years ago, when i was asked a question &amp;ldquo;what do you think about love?&amp;rdquo; in a group gathering of my peers, teachers &amp;amp; parents, &amp;lsquo;is just a distraction, a mixture of chemical compounds in brain is to be blamed for it.&amp;rsquo; So my openion is little changed, i&amp;rsquo;ve removed &amp;ldquo;its just a distraction part&amp;rdquo;.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;h3 id=&#34;friendships&#34;&gt;friendships&lt;/h3&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;when i was young(upuntill 12th) I had a lot of friends, it was a social status, I dont care about it anymore(was not selfaware at that time, more about this maybe in a different post),&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;h3 id=&#34;core-belief-s&#34;&gt;core-belief&amp;rsquo;s&lt;/h3&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;This thing dawned on me few months ago &amp;amp; once in a while i&amp;rsquo;ve been thinking about it ever since, what am i talking about here?,&lt;/p&gt;
-&lt;p&gt;Well it is about &amp;ldquo;everyone has their own belief such as what makes one&amp;rsquo;s action differ from right and
-wrong, what is considered humiliation, what is considered success, sadness, depression&amp;hellip;etc.&amp;rdquo; these belief&amp;rsquo;s come from either through
-parents or from movies/shows(mostly), talking with others(mostly), (rarely) from books, and very rare from own experience. since we
-do not in-herit these belief&amp;rsquo;s from own experience/thoughts, it will not be useful for you &amp;amp; if you make decisions its gona 70% of the time
-fail for you(if you belong to the minority category of different people).&lt;/p&gt;
-&lt;p&gt;So my conclusion from all this is &amp;ldquo;unless you are absolutely sure about your core belief, do not think over it of the outcomes&amp;rdquo;,&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;h3 id=&#34;my-utopian-dream&#34;&gt;my utopian dream&lt;/h3&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;So from my childhood i have seen my surroundings &amp;amp; i dreamt I would go in a different path, Which is &amp;ldquo;People become thick friends, go out, , fall in love, get married to people in the circle only they interact with/ their neighbours.&amp;rdquo; &amp;amp; I wanted this to be opposite of that, but right untill now i&amp;rsquo;ve had chances to claim my dream but I did not do so, (mmo&amp;rsquo;s, guild&amp;rsquo;s, discord, tele, communi..onli..).&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;anyway these are my present thoughts, see ya soon!. hope u do well untill then -gopinath.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>
+but this made it a lot worse. (with the constant pain in the back of my head).&lt;/p&gt;</description></item></channel></rss>
