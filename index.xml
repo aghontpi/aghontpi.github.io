@@ -1,4 +1,140 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 21 Feb 2021 10:54:20 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Express Api Server</title><link>//bluepie.in/2021/02/express-api-server/</link><pubDate>Sun, 21 Feb 2021 10:54:20 +0000</pubDate><guid>//bluepie.in/2021/02/express-api-server/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Mon, 29 Mar 2021 19:08:42 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Firebase-RealtimeDatabase &amp; Self-assesment</title><link>//bluepie.in/2021/03/firebase-realtimedatabase/</link><pubDate>Mon, 29 Mar 2021 19:08:42 +0000</pubDate><guid>//bluepie.in/2021/03/firebase-realtimedatabase/</guid><description>
+&lt;p&gt;&lt;em&gt;Hi!, its been a wild month, jumping all over the places, future me reading!, keep your composure.&lt;/em&gt; &lt;strong&gt;Coming to other things, I&amp;rsquo;ve been doing work from home for the past year, but recently (the past 3 months) I was asked to come office atleast a week or two. Although some of my friends are still doing WFM, I had to go chennai, Which I felt was bad, but this is not a major consern.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;time-management-upuntill-now&#34;&gt;Time Management upuntill now&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;ve been managing three different workflows in my life(tech side),&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;office&lt;/li&gt;
+&lt;li&gt;hobbies (this is where I maintain my public journal, &lt;strong&gt;posting here&lt;/strong&gt; )&lt;/li&gt;
+&lt;li&gt;learning new stuff&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Which often makes me wana take a break from everything(like the one I&amp;rsquo;m about to take, 20-30 days), after an assesment that I made myself, I&amp;rsquo;ve decided its not good for me to continue this way, &lt;em&gt;I am juggling too much things at once&lt;/em&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;time-management-going-forward&#34;&gt;Time management going forward&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;office&lt;/li&gt;
+&lt;li&gt;hobbies &amp;amp; learning new stuff (combining hobbies and learning new stuff as a public journal)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Due to the said change, The jorunal will now contain&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Scrum_(software_development)&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Scrum&lt;/a&gt; of hobby &amp;amp; learning projects.&lt;/li&gt;
+&lt;li&gt;where did I spent my time (on tech)each month.&lt;/li&gt;
+&lt;li&gt;Reverse engineering/Modding/Programming/Competitions.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;things-i-have-completed-in-this-month-in-my-freetime&#34;&gt;Things I have completed in this month in my freetime.&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;design &amp;amp; implement searching/adding friends in an RN app that I am building.&lt;/li&gt;
+&lt;li&gt;create an animation from scratch for RN using RN reanimated.&lt;/li&gt;
+&lt;li&gt;restructure RealtimeDatabase to manage follow requests and friends.&lt;/li&gt;
+&lt;li&gt;managing firebase rules for differnet roots/refs.&lt;/li&gt;
+&lt;li&gt;refactor firebase connection&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;design-and-implement-searching-adding-friends&#34;&gt;design and implement searching/adding friends&lt;/h4&gt;
+&lt;p&gt;I took inspiration from twitter and this is how Im panning it out.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/march-2021/design.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h4 id=&#34;creating-an-animation-similar-to-twitter-s-search-and-trending-from-scratch&#34;&gt;creating an animation similar to twitter&amp;rsquo;s search and trending from &lt;strong&gt;&lt;em&gt;scratch&lt;/em&gt;&lt;/strong&gt;.&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/watchlist/blob/70e02ba3485dd1b957033ca33c208d10a72482c6/src/Home/Friends/TabbedView.tsx&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;code link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;following the documentation, it was pretty simple to implement.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;const translateX = useSharedValue(0);
+const scrollHandler = useAnimatedScrollHandler((event) =&amp;gt; {
+translateX.value = -event.contentOffset.x;
+});
+const activeTab = useDerivedValue(() =&amp;gt; interpolate(translateX.value, [0, -wWidth / 2], [0, 1], Extrapolate.CLAMP));
+const animatedStyle = useAnimatedStyle(() =&amp;gt; {
+return {
+transform: [{ translateX: -translateX.value / 2 }],
+};
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;above code handles the animation logic, then incorporating this into our style makes it perfect.&lt;/p&gt;
+&lt;p&gt;Further tweaking was done just by using the &amp;lsquo;activeTab&amp;rsquo; variable. ex: changing color during animation, etc.&lt;/p&gt;
+&lt;h5 id=&#34;restructuring-firebase-rules&#34;&gt;restructuring firebase &amp;amp; rules.&lt;/h5&gt;
+&lt;h6 id=&#34;structuring&#34;&gt;structuring&lt;/h6&gt;
+&lt;p&gt;My initial design holds up pretty good since I already had an experience. I only had to design the new data to store in exisiting structure.&lt;/p&gt;
+&lt;p&gt;my hypothetical design looks like below(for extending existing to add feature friends)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;users/user[]
+user:{
+..details,
+friends:friend[]
+}
+frind{
+status: requeststed/accepted
+friendssince: accpeted date
+userid: from userid in the given list
+}
+users/friends/frind[]
+users-list:{
+user:
+profile:
+email:
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I avoided creating a new api, &amp;amp; preferred to use workaround in firebase, cuz it would have consumed a lot of my time in backend.&lt;/p&gt;
+&lt;p&gt;This &lt;a href=&#34;https://firebase.google.com/docs/database/web/structure-data&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;article was greatly helpful in making decisions&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;bellow exchange pretty much sums it up.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/march-2021/firebase-scenario.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h6 id=&#34;rules&#34;&gt;rules&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;any logged in user can access &amp;lsquo;new-ref&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;only owner of the uid can access the uid and its properties&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;any logged in user can access another-ref, (this is based on above article)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;ref&amp;quot;:{
+&amp;quot;$uid&amp;quot;: {
+&amp;quot;.read&amp;quot;: &amp;quot;auth.uid != null &amp;amp;&amp;amp; auth.uid == $uid&amp;quot;,
+&amp;quot;.write&amp;quot;: &amp;quot;auth.uid != null &amp;amp;&amp;amp; auth.uid == $uid&amp;quot;,
+&amp;quot;new-ref&amp;quot;: {
+&amp;quot;.read&amp;quot;: &amp;quot;auth.uid != null&amp;quot;,
+&amp;quot;.write&amp;quot;: &amp;quot;auth.uid != null&amp;quot;
+}
+}
+},
+&amp;quot;another-ref&amp;quot;: {
+&amp;quot;.read&amp;quot;: &amp;quot;auth.uid != null&amp;quot;,
+&amp;quot;.write&amp;quot;: &amp;quot;auth.uid != null&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;refactoring-firebase&#34;&gt;Refactoring Firebase&lt;/h4&gt;
+&lt;p&gt;Since the RN app was getting bigger, It was time for refactoring the firebase part.&lt;/p&gt;
+&lt;p&gt;from /root/Firebase.ts(single file) to following folder strucutre,&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;folder&lt;/th&gt;
+&lt;th&gt;description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;root&lt;/td&gt;
+&lt;td&gt;root directory contents&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;/Firebase/login.ts&lt;/td&gt;
+&lt;td&gt;curd operations post login&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;/Firebase/friends.ts&lt;/td&gt;
+&lt;td&gt;crud operatios for people realted&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;/Firebase/movie.ts&lt;/td&gt;
+&lt;td&gt;crud operations for movie related&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;/Firebase/index.ts&lt;/td&gt;
+&lt;td&gt;exports in a single file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;hellip;etc&lt;/td&gt;
+&lt;td&gt;other&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/watchlist/tree/70e02ba3485dd1b957033ca33c208d10a72482c6/src/Firebase&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Link to code/files&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
+&lt;p&gt;I planned to take a break, ill update on it next month. untill then seeya. tc &amp;lt;3.&lt;/p&gt;</description></item><item><title>Express Api Server</title><link>//bluepie.in/2021/02/express-api-server/</link><pubDate>Sun, 21 Feb 2021 10:54:20 +0000</pubDate><guid>//bluepie.in/2021/02/express-api-server/</guid><description>
 &lt;p&gt;After a hectic past two months, hope I get some free time in the upcomming months.&lt;/p&gt;
 &lt;h2 id=&#34;what-is-this&#34;&gt;What is this?&lt;/h2&gt;
 &lt;p&gt;This is a backend, written for one of my projects. &lt;em&gt;This was originally developed to be a private repository, I made it public this month.&lt;/em&gt; And this was my first time using typescript 100 percent for backend, my experience with it is pretty cool.&lt;/p&gt;
@@ -965,16 +1101,4 @@ while building the requriements, I&amp;rsquo;ve also learnt about some interesti
 &lt;hr /&gt;
 &lt;h3 id=&#34;name-changing&#34;&gt;name changing&lt;/h3&gt;
 &lt;p&gt;Another thing, I&amp;rsquo;ve been thinking about changing my name I mean my online alis. from bluepie to something else. The name is not unique and also I chose this name when I was very young, making an anagram of my name would be really cool. I already have a few names that I have in mind but those are not anagram. The logical way is to go with anagram, but I don&amp;rsquo;t really like it. I just want to have it because it is an anagram of my name and also it resembles the current name i.e bluepie. I hope by next time i have chosen the right name,&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;So that is it for this month, hope we see soon. &lt;strong&gt;&lt;em&gt;-Gopinath&lt;/em&gt;&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Healthproblem Migraine</title><link>//bluepie.in/2020/02/healthproblem-migraine/</link><pubDate>Sat, 22 Feb 2020 03:51:42 +0530</pubDate><guid>//bluepie.in/2020/02/healthproblem-migraine/</guid><description>
-&lt;p&gt;Hi, this will be q quick update this month, Recently my health is deteriating, on the account of me moving to chennai, living alone, I lost a lot of weight almost 20 kilo&amp;rsquo;s to be exact. Adding to it, this month(february 2020) has seen a lof ot twist &amp;amp; turns mentally, to be from no issues with my health and to this(wow), all of this this quick is something to consider.&lt;/p&gt;
-&lt;h2 id=&#34;what-the-problem-is&#34;&gt;what the problem is?&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;ve been having constant headache&amp;rsquo;s recently, at first it was frequent, then came the continuous hail-marry of a strom, that lasted weeks,
-at first me &amp;amp; my surrounding people thought it was just a eye problem, that is why I was just leaving it, without checking it out,
-but the docter just gave me the finger &amp;amp; told to it was not the case, then i consulted a physican, took scans and fudge then the doctor told
-me to consult a neurologist, which i did, then came the list of tests what burned my money to nothing, then the docter came to the conclusion that it was migrain, the tests showed me that i was sleep depraved, (which i dont agree), the docter in addition to prescribing
-pills told me that I have &amp;ldquo;migraine&amp;rdquo; &amp;amp; that I should maintain work life balance, meditate more, take breaks in between works,..and some usual bullcrap which I do not
-buy at all.&lt;/p&gt;
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;A week later after all this mess I still have the problem, lost a lot of money, lost dignity(work place), added a ton of chemicals to my
-body(still adding..), I have been asked to have an another appointment with them, Im already having a difficult time with managing time,
-but this made it a lot worse. (with the constant pain in the back of my head).&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&lt;em&gt;So that is it for this month, hope we see soon. &lt;strong&gt;&lt;em&gt;-Gopinath&lt;/em&gt;&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>
