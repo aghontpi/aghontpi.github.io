@@ -1102,9 +1102,10 @@ const p2, 1
 &lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
 &lt;p&gt;These things aside, &lt;em&gt;TO MY FUTURE SELF&lt;/em&gt; &amp;ldquo;two years went really fast didn&amp;rsquo;t it?&amp;hellip;always had the next thing to work on and you just looked away didn&amp;rsquo;t you?&amp;rdquo;, of all the things that happened over the last two years, from the bottom of my heart, I just wish I learned a lot more than I did..&lt;/p&gt;
 &lt;p&gt;Some of the things I did in the past haunt me daily, those&amp;hellip;missed opportunities, those..fights, those&amp;hellip;bad decisions, those..misunderstandings. I guess its been a long time and I have to move on.. this month of may is something I should forget.&lt;/p&gt;</description></item><item><title>Github Workflow</title><link>//bluepie.in/2020/05/github-workflow/</link><pubDate>Fri, 01 May 2020 23:32:58 +0530</pubDate><guid>//bluepie.in/2020/05/github-workflow/</guid><description>
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;Hi&amp;hellip; how ya been, its been a month already, gosh times flies by really fast. Status update: I&amp;rsquo;ve been doing good, When I am in home I complete the work that I plan&amp;hellip; far better than when I am in Chennai. The corona virus pandemic is still around the world at large, US right now is the largest affected country with over 70k dead people as of writing this. The lockdown in India has been extended
-another 2 weeks.&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Hi&amp;hellip; how ya been, its been a month already, gosh times flies by really fast. Status update: I&amp;rsquo;ve been doing good, When I am in home I complete the work that I plan&amp;hellip; far better than when I am in Chennai. The corona virus pandemic is still around the world at large, US right now is the largest affected country with over 70k dead people as of writing this. The lockdown in India has been extended
+another 2 weeks.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;hr /&gt;
+&lt;h2 id=&#34;note-i-have-edited-this-post-because-of-the-changes-i-made-after-publishing-this-post&#34;&gt;Note: I have edited this post, because of the changes I made, after publishing this post.&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;This post is going to be about github actions.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1167,7 +1168,59 @@ with:
 github_token: ${{ secrets.TOKEN }}
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;See it in action, downloads new content automatically and put it under the folder xkcd-offline.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/xkcd-declutter/tree/master/xkcd-offline/api&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Folder containing api content&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/mirror-xkcd-api/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Link to project github&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;updates-post-edit&#34;&gt;Updates/Post Edit&lt;/h2&gt;
+&lt;p&gt;After I published this post, Github made changes to how an environment variable is accessed, changes contains the following.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;updates to accessing environment variable.&lt;/li&gt;
+&lt;li&gt;decided to log while every run, that is persistent in the repository.&lt;/li&gt;
+&lt;li&gt;run every 12 hours instead of 8 hours.&lt;/li&gt;
+&lt;li&gt;added github actions bot as the author in commit message&lt;/li&gt;
+&lt;li&gt;update instructions to how to use this API (supporting cors)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;updates to yaml&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;name: Sync with Api
+on:
+schedule:
+- cron: &#39;0 */12 * * *&#39;
+jobs:
+fetch-content:
+if: github.repository == &#39;aghontpi/mirror-xkcd-api&#39;
+name: execute python logic
+runs-on: ubuntu-latest
+env:
+new_content: true
+steps:
+- uses: actions/checkout@v1
+- name: install requests pip3
+run: pip3 install requests
+- name: run python logic
+run: python3 ./sync.py
+- name: status of the new folder
+run: git status api/ --porcelain
+- name: add new files
+run: |
+git config --local user.name &amp;quot;sync bot&amp;quot;
+git config --local user.email &amp;quot;41898282+github-actions[bot]@users.noreply.github.com&amp;quot;
+git add *
+- name: commit new content
+id: newfiles
+run: (awk &#39;{print &amp;quot;added content &amp;quot; substr($3, match($3,&amp;quot;\&amp;quot;&amp;quot;), match($3,&amp;quot;}&amp;quot;)-1) &amp;quot;.&amp;quot;}&#39; syncState.json) | git commit -F -
+continue-on-error: true
+- name: not proceed if there is no new files
+if: steps.newfiles.outcome == &#39;failure&#39; &amp;amp;&amp;amp; env.new_content == &#39;true&#39;
+run: |
+echo &amp;quot;no new content was fetched&amp;quot;
+echo &amp;quot;new_content=false&amp;quot; &amp;gt;&amp;gt; $GITHUB_ENV
+- name: push the new content
+if: env.new_content == &#39;true&#39;
+uses: ad-m/github-push-action@master
+with:
+github_token: ${{ secrets.TOKEN }}
+branch: main
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;how to use this as an api(supporting cors)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/mirror-xkcd-api/blob/main/README.md&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Instructions/Usage&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;See you soon, untill then hope you do well. - Gopinath aka aghontpi aka bluepie&lt;/p&gt;
