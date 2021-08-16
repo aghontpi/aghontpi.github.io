@@ -1,4 +1,192 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Fri, 28 May 2021 20:21:39 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Frontend Updates &amp; Rinku Project Upgrade</title><link>//bluepie.in/2021/05/react-updates-rinku-upgrade/</link><pubDate>Fri, 28 May 2021 20:21:39 +0000</pubDate><guid>//bluepie.in/2021/05/react-updates-rinku-upgrade/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Fri, 16 Jul 2021 15:00:24 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Android Reversing Part 5</title><link>//bluepie.in/2021/07/android-reversing-part-5/</link><pubDate>Fri, 16 Jul 2021 15:00:24 +0000</pubDate><guid>//bluepie.in/2021/07/android-reversing-part-5/</guid><description>
+&lt;hr /&gt;
+&lt;h1 id=&#34;contents&#34;&gt;Contents&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#why--motivation&#34;&gt;Why &amp;amp; Motivation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#decompiling&#34;&gt;Decompiling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#finding-where-to-patch&#34;&gt;Finding where to patch&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#patching-recompiling-and-installing-it-on-device&#34;&gt;Patching, recompiling and installing it on device&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#premium-features-does-not-work-fully&#34;&gt;App&amp;rsquo;s premium features does not work fully&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#finding-integrity-checks-digging-deeper-for-final-patch&#34;&gt;Finding integrity checks, digging deeper for final patch.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#end&#34;&gt;End&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;why-motivation&#34;&gt;Why &amp;amp; Motivation&lt;/h2&gt;
+&lt;p&gt;I wanted to monitor my mobile network traffic after I found some wierd dns logs in my custom dns server, I could not figure out which app made that request thus I found out this &lt;a href=&#34;https://play.google.com/store/apps/details?id=com.protectstar.firewall&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;app&lt;/a&gt; in playstore called &amp;lsquo;No Root Firewall, Internet Data Blocker Protection&amp;rsquo;. it had good ui and satisfied 60% of my usage needs. The downside of this is they require a montly subscription for app features. This is bit much if you ask me so decided to mod it for personal use. &lt;em&gt;In my defense, I did purchase it for a month.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/android-reversing-part-5/orderhistoryforfirewall.png&#34; alt=&#34;Proof that I bought this thing&#34; /&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;My past posts cover which tools I use, how to decompile, configs, etc.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;decompiling&#34;&gt;Decompiling&lt;/h2&gt;
+&lt;p&gt;Extracing the app.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+pm path com.placeholder.app
+adb pull path_of_apk # one by one
+# we get the following files
+-rw-rw-r-- 1 nouser nouser 6273850 base.apk
+-rw-rw-r-- 1 nouser nouser 90809 split_config.arm64_v8a.apk
+-rw-rw-r-- 1 nouser nouser 126542 split_config.xxhdpi.apk
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This app uses &lt;a href=&#34;https://developer.android.com/guide/app-bundle&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;app bundle&lt;/a&gt; so we make use of &amp;ndash;use-aapt2 flag in apk-tool &lt;em&gt;I am using apktool v2.5.0&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;finding-where-to-patch&#34;&gt;Finding where to patch&lt;/h2&gt;
+&lt;p&gt;after decompiling, immediately in mainActivity we find a call to this,&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;//from
+public static boolean hasSubscription(Context context) {
+if (Settings.isLicenseActive(context)) {
+return true;
+}
+try {
+Subscription subscription = (Subscription) new TinyDB(context).getObject(Settings.SAVE_KEY_SUBSCRIPTION, Subscription.class);
+if (subscription == Subscription.Month || subscription == Subscription.Year || subscription == Subscription.Lifetime) {
+return true;
+}
+return false;
+} catch (Exception unused) {
+return false;
+}
+}
+// to
+public static boolean hasSubscription(Context context){
+return true;
+}
+//from
+public static boolean isLifeTime(Context context) {
+if (!hasSubscription(context)) {
+return false;
+}
+try {
+if (((Subscription) new TinyDB(context).getObject(Settings.SAVE_KEY_SUBSCRIPTION, Subscription.class)) == Subscription.Lifetime) {
+return true;
+}
+return false;
+} catch (Exception unused) {
+return false;
+}
+}
+//to
+public static boolean isLifeTime(Context context){
+return true;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Smali logic for return true.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-smali&#34;&gt;
+const/4 v1, 0x1
+return v1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;patching-recompiling-and-installing-it-on-device&#34;&gt;Patching, recompiling and installing it on device&lt;/h2&gt;
+&lt;p&gt;while recompiling and signing, sign all the split apks with the same key, even if you did not touch the other split apks.
+(this is because android expects all the split apks to have the same signature)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+zip -d ./split_config.arm64_v8a.apk META-INF/\*
+zip -d ./split_config.xxhdpi.apk META-INF/\*
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;then sign them as mentioned from my previous posts.&lt;/p&gt;
+&lt;p&gt;For installing, since we have 3 apks&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+├── base.apk
+├── split_config.arm64_v8a.apk
+└── split_config.xxhdpi.apk
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+adb install-multiple ./base.apk ./split_config.arm64_v8a.apk ./split_config.xxhdpi.apk
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;premium-features-does-not-work-fully&#34;&gt;Premium features does not work fully&lt;/h2&gt;
+&lt;p&gt;After installing and using it, it was apparent that some of the premium features were not working, like filter lists provided by the app, ip information and location presented visually in map.&lt;/p&gt;
+&lt;p&gt;In situations like this, there could be only one possible scenario and that is an additional check, it may be in the form of&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;app integrity, whether the app was tampered&lt;/li&gt;
+&lt;li&gt;was it not installed from google play store&lt;/li&gt;
+&lt;li&gt;verifying the purchase information via google services,&lt;/li&gt;
+&lt;li&gt;based on implementor&amp;rsquo;s thought process..etc,&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;finding-integrity-checks-digging-deeper-for-final-patch&#34;&gt;Finding integrity checks, digging deeper for final patch.&lt;/h2&gt;
+&lt;p&gt;Digging deeper we find the app along with integrity check,&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
+public static boolean detect(Context context) {
+PackageInfo packageInfo;
+Signature[] signatureArr;
+try {
+if (Build.VERSION.SDK_INT &amp;gt;= 28) {
+packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 134217728);
+} else {
+packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 64);
+}
+if (Build.VERSION.SDK_INT &amp;lt; 28) {
+signatureArr = packageInfo.signatures;
+} else if (packageInfo.signingInfo.hasMultipleSigners()) {
+signatureArr = packageInfo.signingInfo.getApkContentsSigners();
+} else {
+signatureArr = packageInfo.signingInfo.getSigningCertificateHistory();
+}
+try {
+String calculateSHA = calculateSHA(&amp;quot;SHA-1&amp;quot;, signatureArr[0].toByteArray());
+if (calculateSHA.equalsIgnoreCase(&amp;quot;44F217A05AE9E2A8FB0F627528EABF8855FBC274&amp;quot;) || calculateSHA.equalsIgnoreCase(&amp;quot;8aa072cdd29068b79d30cbff9afb2d3ab89e7ec4&amp;quot;) || calculateSHA.equalsIgnoreCase(&amp;quot;dfe607e53da092636e47789497365fca36589cba&amp;quot;)) {
+return false;
+}
+return true;
+} catch (Exception e) {
+e.printStackTrace();
+return false;
+}
+} catch (Throwable unused) {
+return false;
+}
+}
+private static String calculateSHA(String str, byte[] bArr) {
+try {
+return FileUtils.byte2HexFormatted(MessageDigest.getInstance(str).digest(bArr));
+} catch (Exception e) {
+e.printStackTrace();
+return &amp;quot;&amp;quot;;
+}
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So add it to the list of item to patch.&lt;/p&gt;
+&lt;p&gt;smali equivalent&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-smali&#34;&gt;
+const/4 v1,0x0
+return v1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Interestingly we also find lucky patcher detection, I don&amp;rsquo;t use lucky patcher, so ignorning this.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
+public static boolean hasLuckyPatcher(Context context) {
+PackageManager packageManager = context.getPackageManager();
+return isPackageInstalled(&amp;quot;ru.aaaaaaad.installer&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.sxbuIDfx.pFSOyagrF&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.HUounqZv.qGDvALdrY&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.yFarPSsi.lSWLCBgGE&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.auLSaZJK.OldqqVPqY&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.HvZVLLax.FuBLzbTId&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.FxCVdppm.yVDnvQgJU&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.oCHfhtgN.LaiQlIeIK&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.ohHbeFjR.uZvxvLPnK&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.oSFnVIfs.fUUFExgWn&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.PDOIPrWH.abjKeIKLW&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.UaLzEHLI.yXTTBtSFW&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.uBVJgfKc.udsaLjziD&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;com.chelpus.lackypatch&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;com.dimonvideo.luckypatcher&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;com.luckypatchers.luckypatcherinstaller&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;com.android.vending.billing.InAppBillingService.LACK&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;com.android.vending.billing.InAppBillingService.COIN&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;com.android.vending.billing.InAppBillingService.LOCK&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;com.android.vending.billing.InAppBillingService.CRAC&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;com.android.vending.billing.InAppBillingService.COIO&amp;quot;, packageManager);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This time, we also mod the isLicenseActive setting function, since there are a number of calls from others parts of the app, I did not notice this earlier.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// from
+public static boolean isLicenseActive(Context context) {
+TinyDB tinyDB = new TinyDB(context);
+String string = tinyDB.getString(LicenseActivation.SAVE_KEY_EXPIRE_DATE, &amp;quot;&amp;quot;);
+if (!string.isEmpty()) {
+if (string.equals(&amp;quot;0&amp;quot;)) {
+return true;
+}
+try {
+if (new Date().getTime() &amp;lt;= new SimpleDateFormat(&amp;quot;yyyyMMdd&amp;quot;, Locale.getDefault()).parse(string).getTime()) {
+return true;
+}
+tinyDB.removeKey(LicenseActivation.SAVE_KEY_EXPIRE_DATE);
+checkProfessional(context, false, null);
+return false;
+} catch (ParseException unused) {
+}
+}
+return false;
+}
+//to
+public static boolean isLicenseActive(Context context) {
+return true;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Patch the two places noted before, repeat the recompiling and installation step.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now The app works with all the premium features.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
+&lt;p&gt;I dont have to pay 3k every year for using this app.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;If this post offends you in any way, contact me to it take it down.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>Frontend Updates &amp; Rinku Project Upgrade</title><link>//bluepie.in/2021/05/react-updates-rinku-upgrade/</link><pubDate>Fri, 28 May 2021 20:21:39 +0000</pubDate><guid>//bluepie.in/2021/05/react-updates-rinku-upgrade/</guid><description>
 &lt;p&gt;&lt;em&gt;Hi!, Like I mentioned in my last update, I took a break from everything ( a month and 3 weeks), the reason behind me missing my post on past month(april). I still had to do office work though, but its&amp;rsquo; alright because it was fun. The time off that I took was the best decision in a while, It helped me rethink priorities.&lt;/em&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Like I said in &lt;a href=&#34;https://bluepie.in/2021/03/firebase-realtimedatabase/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;march post 2021&lt;/a&gt;, I&amp;rsquo;ll be posting with new Time management in mind.&lt;/p&gt;
@@ -1224,28 +1412,4 @@ branch: main
 &lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;See you soon, untill then hope you do well. - Gopinath aka aghontpi aka bluepie&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>Xkcd Declutter</title><link>//bluepie.in/2020/04/xkcd-declutter/</link><pubDate>Sun, 12 Apr 2020 00:43:59 +0530</pubDate><guid>//bluepie.in/2020/04/xkcd-declutter/</guid><description>
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;Hi, how are you doing&lt;/em&gt; Im doing good, the corona virus pandemic is everywhere! hope your survived the ordeal, its still going on as of writing this, Hope you survive this.. In my childhood after watching movies like &amp;lsquo;i am legend&amp;rsquo; &amp;amp; &amp;lsquo;the day that the earth stood still&amp;rsquo;, i always wanted to see the world in the situtation, oh booy, i did not expect them to happen irl, but it did anyway. Im saying this because in some wierd way dreams do come true.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h3 id=&#34;what-is-this-about&#34;&gt;What is this about?&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;I sometimes read xkcd, its not great but something that i occasionally checked, its a comic for programmers&amp;rsquo;,&lt;/li&gt;
-&lt;li&gt;I wanted to lean angular for sometime (i only knew the basics, haven&amp;rsquo;t really done projects in them.)&lt;/li&gt;
-&lt;li&gt;the xkcd site had a api for them!.&lt;/li&gt;
-&lt;li&gt;there was no darkmode xkcd,&lt;/li&gt;
-&lt;li&gt;there was ads in the website&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;the-plan&#34;&gt;The plan:&lt;/h3&gt;
-&lt;p&gt;So i decided to do a xkcd viewer, (declutter) It will ads and unnecessary stuff from the site and just provide the comic.
-It will have to have darkmode,
-it will have to have an image viewer builtin for zooming in and out,
-It should have a grid viewer to laod previous comics in a single page,
-It should have a download option. both batch and single!.&lt;/p&gt;
-&lt;h3 id=&#34;what-i-did-conclusion&#34;&gt;what I did &amp;amp; Conclusion:&lt;/h3&gt;
-&lt;p&gt;I built a xkcd viewer app with the above requirements in angular, I tried to use much of the core functionality of angular
-while building the requriements, I&amp;rsquo;ve also learnt about some interesting libraries, rxjs, imageViewer. Go checkout the repo for more info and demo.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/xkcd-declutter&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Link - xkcdViewer&lt;/a&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;blockquote&gt;
-&lt;p&gt;I have kept this post short!. See you soon!. &amp;amp; About the name change!.. I&amp;rsquo;ve chosen agontpi, hope i make up my mind soon. untill then -gopianth&lt;/p&gt;
 &lt;/blockquote&gt;</description></item></channel></rss>

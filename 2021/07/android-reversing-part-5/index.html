@@ -1,0 +1,167 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><meta name=description content="Public Journal of aghontpi"><meta name=keywords content="aghontpi bluepie Journal"><link rel=prev href=//bluepie.in/2021/05/react-updates-rinku-upgrade/><link rel=canonical href=//bluepie.in/2021/07/android-reversing-part-5/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>Android Reversing Part 5 | Bluepie&#39;s Journal</title><meta name=title content="Android Reversing Part 5 | Bluepie's Journal"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"Android Reversing Part 5","headline":"Android Reversing Part 5","description":"Contents  Why \x26amp; Motivation Decompiling Finding where to patch Patching, recompiling and installing it on device App\x26rsquo;s premium features does not work fully Finding integrity checks, digging deeper for final patch. End  Why \x26amp; Motivation I wanted to monitor my mobile network traffic after I found some wierd dns logs in my custom dns server, I could not figure out which app made that request thus I found out this app in playstore called \x26lsquo;No Root Firewall, Internet Data Blocker Protection\x26rsquo;.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2021","datePublished":"2021-07-16 15:00:24 \x2b0000 UTC","dateModified":"2021-07-16 15:00:24 \x2b0000 UTC","url":"\/\/bluepie.in\/2021\/07\/android-reversing-part-5\/","wordCount":"877","keywords":["Bluepie\x27s Journal"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>My Journal</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>My Journal</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-135013873-2','auto');ga('send','pageview');}</script><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">Android Reversing Part 5</h1><div class=post-meta>Written by <a itemprop=name href=//bluepie.in/ rel=author>Bluepie</a> with ♥
+<span class=post-time>on <time datetime=2021-07-16 itemprop=datePublished>July 16, 2021</time></span>
+in
+<i class="iconfont icon-folder"></i><span class=post-category><a href=//bluepie.in/categories/tech/>Tech</a>
+<a href=//bluepie.in/categories/reversing/>Reversing</a>
+<a href=//bluepie.in/categories/android/>android</a></span></div></header><div class=post-content><img src=//bluepie.in/images/posts/android-reversing-part-5/android-reversing-part5.png class=featured_image><hr><h1 id=contents>Contents</h1><ul><li><a href=#why--motivation>Why &amp; Motivation</a></li><li><a href=#decompiling>Decompiling</a></li><li><a href=#finding-where-to-patch>Finding where to patch</a></li><li><a href=#patching-recompiling-and-installing-it-on-device>Patching, recompiling and installing it on device</a></li><li><a href=#premium-features-does-not-work-fully>App&rsquo;s premium features does not work fully</a></li><li><a href=#finding-integrity-checks-digging-deeper-for-final-patch>Finding integrity checks, digging deeper for final patch.</a></li><li><a href=#end>End</a></li></ul><h2 id=why-motivation>Why &amp; Motivation</h2><p>I wanted to monitor my mobile network traffic after I found some wierd dns logs in my custom dns server, I could not figure out which app made that request thus I found out this <a href="https://play.google.com/store/apps/details?id=com.protectstar.firewall" rel="nofollow noreferrer" target=_blank>app</a> in playstore called &lsquo;No Root Firewall, Internet Data Blocker Protection&rsquo;. it had good ui and satisfied 60% of my usage needs. The downside of this is they require a montly subscription for app features. This is bit much if you ask me so decided to mod it for personal use. <em>In my defense, I did purchase it for a month.</em></p><p><figure><img src=//bluepie.in/images/ring.svg data-sizes=auto data-src=//bluepie.in/images/posts/android-reversing-part-5/orderhistoryforfirewall.png alt="Proof that I bought this thing" class=lazyload><figcaption class=image-caption>Proof that I bought this thing</figcaption></figure></p><blockquote><p>My past posts cover which tools I use, how to decompile, configs, etc.</p></blockquote><h2 id=decompiling>Decompiling</h2><p>Extracing the app.</p><pre><code class=language-bash>
+pm path com.placeholder.app
+
+adb pull path_of_apk # one by one
+
+# we get the following files
+
+-rw-rw-r--  1 nouser nouser 6273850  base.apk
+-rw-rw-r--  1 nouser nouser   90809  split_config.arm64_v8a.apk
+-rw-rw-r--  1 nouser nouser  126542  split_config.xxhdpi.apk
+
+
+</code></pre><p>This app uses <a href=https://developer.android.com/guide/app-bundle rel="nofollow noreferrer" target=_blank>app bundle</a> so we make use of &ndash;use-aapt2 flag in apk-tool <em>I am using apktool v2.5.0</em></p><h2 id=finding-where-to-patch>Finding where to patch</h2><p>after decompiling, immediately in mainActivity we find a call to this,</p><pre><code class=language-java>//from
+public static boolean hasSubscription(Context context) {
+    if (Settings.isLicenseActive(context)) {
+        return true;
+    }
+    try {
+        Subscription subscription = (Subscription) new TinyDB(context).getObject(Settings.SAVE_KEY_SUBSCRIPTION, Subscription.class);
+        if (subscription == Subscription.Month || subscription == Subscription.Year || subscription == Subscription.Lifetime) {
+            return true;
+        }
+        return false;
+    } catch (Exception unused) {
+        return false;
+    }
+}
+
+// to
+public static boolean hasSubscription(Context context){
+    return true;
+}
+
+//from
+
+public static boolean isLifeTime(Context context) {
+    if (!hasSubscription(context)) {
+        return false;
+    }
+    try {
+        if (((Subscription) new TinyDB(context).getObject(Settings.SAVE_KEY_SUBSCRIPTION, Subscription.class)) == Subscription.Lifetime) {
+            return true;
+        }
+        return false;
+    } catch (Exception unused) {
+        return false;
+    }
+}
+
+//to
+public static boolean isLifeTime(Context context){
+    return true;
+}
+
+</code></pre><p>Smali logic for return true.</p><pre><code class=language-smali>
+const/4 v1, 0x1
+
+return v1
+
+</code></pre><h2 id=patching-recompiling-and-installing-it-on-device>Patching, recompiling and installing it on device</h2><p>while recompiling and signing, sign all the split apks with the same key, even if you did not touch the other split apks.
+(this is because android expects all the split apks to have the same signature)</p><pre><code class=language-bash>
+zip -d ./split_config.arm64_v8a.apk META-INF/\*
+
+zip -d ./split_config.xxhdpi.apk META-INF/\*
+
+</code></pre><p>then sign them as mentioned from my previous posts.</p><p>For installing, since we have 3 apks</p><pre><code class=language-bash>
+├── base.apk
+├── split_config.arm64_v8a.apk
+└── split_config.xxhdpi.apk
+
+</code></pre><pre><code class=language-bash>
+adb install-multiple ./base.apk ./split_config.arm64_v8a.apk  ./split_config.xxhdpi.apk
+
+</code></pre><h2 id=premium-features-does-not-work-fully>Premium features does not work fully</h2><p>After installing and using it, it was apparent that some of the premium features were not working, like filter lists provided by the app, ip information and location presented visually in map.</p><p>In situations like this, there could be only one possible scenario and that is an additional check, it may be in the form of</p><ul><li>app integrity, whether the app was tampered</li><li>was it not installed from google play store</li><li>verifying the purchase information via google services,</li><li>based on implementor&rsquo;s thought process..etc,</li></ul><h2 id=finding-integrity-checks-digging-deeper-for-final-patch>Finding integrity checks, digging deeper for final patch.</h2><p>Digging deeper we find the app along with integrity check,</p><pre><code class=language-java>
+    public static boolean detect(Context context) {
+        PackageInfo packageInfo;
+        Signature[] signatureArr;
+        try {
+            if (Build.VERSION.SDK_INT &gt;= 28) {
+                packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 134217728);
+            } else {
+                packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 64);
+            }
+            if (Build.VERSION.SDK_INT &lt; 28) {
+                signatureArr = packageInfo.signatures;
+            } else if (packageInfo.signingInfo.hasMultipleSigners()) {
+                signatureArr = packageInfo.signingInfo.getApkContentsSigners();
+            } else {
+                signatureArr = packageInfo.signingInfo.getSigningCertificateHistory();
+            }
+            try {
+                String calculateSHA = calculateSHA(&quot;SHA-1&quot;, signatureArr[0].toByteArray());
+                if (calculateSHA.equalsIgnoreCase(&quot;44F217A05AE9E2A8FB0F627528EABF8855FBC274&quot;) || calculateSHA.equalsIgnoreCase(&quot;8aa072cdd29068b79d30cbff9afb2d3ab89e7ec4&quot;) || calculateSHA.equalsIgnoreCase(&quot;dfe607e53da092636e47789497365fca36589cba&quot;)) {
+                    return false;
+                }
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        } catch (Throwable unused) {
+            return false;
+        }
+    }
+
+    private static String calculateSHA(String str, byte[] bArr) {
+        try {
+            return FileUtils.byte2HexFormatted(MessageDigest.getInstance(str).digest(bArr));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return &quot;&quot;;
+        }
+    }
+}
+
+</code></pre><p>So add it to the list of item to patch.</p><p>smali equivalent</p><pre><code class=language-smali>
+const/4 v1,0x0
+
+return v1
+
+</code></pre><p>Interestingly we also find lucky patcher detection, I don&rsquo;t use lucky patcher, so ignorning this.</p><pre><code class=language-java>
+ public static boolean hasLuckyPatcher(Context context) {
+            PackageManager packageManager = context.getPackageManager();
+            return isPackageInstalled(&quot;ru.aaaaaaad.installer&quot;, packageManager) || isPackageInstalled(&quot;ru.sxbuIDfx.pFSOyagrF&quot;, packageManager) || isPackageInstalled(&quot;ru.HUounqZv.qGDvALdrY&quot;, packageManager) || isPackageInstalled(&quot;ru.yFarPSsi.lSWLCBgGE&quot;, packageManager) || isPackageInstalled(&quot;ru.auLSaZJK.OldqqVPqY&quot;, packageManager) || isPackageInstalled(&quot;ru.HvZVLLax.FuBLzbTId&quot;, packageManager) || isPackageInstalled(&quot;ru.FxCVdppm.yVDnvQgJU&quot;, packageManager) || isPackageInstalled(&quot;ru.oCHfhtgN.LaiQlIeIK&quot;, packageManager) || isPackageInstalled(&quot;ru.ohHbeFjR.uZvxvLPnK&quot;, packageManager) || isPackageInstalled(&quot;ru.oSFnVIfs.fUUFExgWn&quot;, packageManager) || isPackageInstalled(&quot;ru.PDOIPrWH.abjKeIKLW&quot;, packageManager) || isPackageInstalled(&quot;ru.UaLzEHLI.yXTTBtSFW&quot;, packageManager) || isPackageInstalled(&quot;ru.uBVJgfKc.udsaLjziD&quot;, packageManager) || isPackageInstalled(&quot;com.chelpus.lackypatch&quot;, packageManager) || isPackageInstalled(&quot;com.dimonvideo.luckypatcher&quot;, packageManager) || isPackageInstalled(&quot;com.luckypatchers.luckypatcherinstaller&quot;, packageManager) || isPackageInstalled(&quot;com.android.vending.billing.InAppBillingService.LACK&quot;, packageManager) || isPackageInstalled(&quot;com.android.vending.billing.InAppBillingService.COIN&quot;, packageManager) || isPackageInstalled(&quot;com.android.vending.billing.InAppBillingService.LOCK&quot;, packageManager) || isPackageInstalled(&quot;com.android.vending.billing.InAppBillingService.CRAC&quot;, packageManager) || isPackageInstalled(&quot;com.android.vending.billing.InAppBillingService.COIO&quot;, packageManager);
+        }
+
+</code></pre><p>This time, we also mod the isLicenseActive setting function, since there are a number of calls from others parts of the app, I did not notice this earlier.</p><pre><code class=language-java>// from
+public static boolean isLicenseActive(Context context) {
+    TinyDB tinyDB = new TinyDB(context);
+    String string = tinyDB.getString(LicenseActivation.SAVE_KEY_EXPIRE_DATE, &quot;&quot;);
+    if (!string.isEmpty()) {
+        if (string.equals(&quot;0&quot;)) {
+            return true;
+        }
+        try {
+            if (new Date().getTime() &lt;= new SimpleDateFormat(&quot;yyyyMMdd&quot;, Locale.getDefault()).parse(string).getTime()) {
+                return true;
+            }
+            tinyDB.removeKey(LicenseActivation.SAVE_KEY_EXPIRE_DATE);
+            checkProfessional(context, false, null);
+            return false;
+        } catch (ParseException unused) {
+        }
+    }
+    return false;
+}
+
+//to
+
+public static boolean isLicenseActive(Context context) {
+    return true;
+}
+</code></pre><p>Patch the two places noted before, repeat the recompiling and installation step.</p><blockquote><p>Now The app works with all the premium features.</p></blockquote><h2 id=end>End</h2><p>I dont have to pay 3k every year for using this app.</p><p><strong><em>If this post offends you in any way, contact me to it take it down.</em></strong></p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span>Bluepie</span></p><p class=copyright-item><span>Link:</span>
+<a href=//bluepie.in/2021/07/android-reversing-part-5/>//bluepie.in/2021/07/android-reversing-part-5/</span></p></div><div class=post-tags><section><a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=//bluepie.in/>home</a></span></section></div><div class=post-nav><a href=//bluepie.in/2021/05/react-updates-rinku-upgrade/ class=prev rel=prev title="Frontend Updates &amp; Rinku Project Upgrade"><i class="iconfont icon-left"></i>&nbsp;Frontend Updates &amp; Rinku Project Upgrade</a></div><div class=post-comment><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
+var d=document,s=d.createElement('script');s.async=true;s.src='//'+"gopinath001-github-io-blog"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></div></main><footer class=footer><div class=copyright>&copy;
+<span itemprop=copyrightYear>2017 - 2021</span>
+<span class=with-love>|</span>
+<span class=author itemprop=copyrightHolder><a href=//bluepie.in/>Bluepie</a></span></div></footer><link href=//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css rel=stylesheet><script src=//bluepie.in/js/vendor_gallery.min.js async></script></div></body></html>
