@@ -1,4 +1,101 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Fri, 16 Jul 2021 15:00:24 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Android Reversing Part 5</title><link>//bluepie.in/2021/07/android-reversing-part-5/</link><pubDate>Fri, 16 Jul 2021 15:00:24 +0000</pubDate><guid>//bluepie.in/2021/07/android-reversing-part-5/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sat, 21 Aug 2021 07:25:55 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Android Reversing Part 5 But With Frida</title><link>//bluepie.in/2021/08/android-reversing-part-5-with-frida/</link><pubDate>Sat, 21 Aug 2021 07:25:55 +0000</pubDate><guid>//bluepie.in/2021/08/android-reversing-part-5-with-frida/</guid><description>
+&lt;h2 id=&#34;why-frida&#34;&gt;Why Frida?&lt;/h2&gt;
+&lt;p&gt;Becase it can be many things, &lt;a href=&#34;https://frida.re/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;know more&lt;/a&gt;. Its is,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;easy, sure learning curve takes some time, but it pays off spectacularly.&lt;/li&gt;
+&lt;li&gt;efficient, a rough estimate for the modification took 30 min in frida vs 2 hours in traditional methods, its way more flexible.&lt;/li&gt;
+&lt;li&gt;elegant when compared to traditional ways. you get creative new ideas and implement them easily (implementating manually takes way longer).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;my-setup&#34;&gt;My setup&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://www.genymotion.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Genymotion&lt;/a&gt;, but why? (better than avd) runs way faster than avd, default root, runs via virtual box, image size is small, less cpu usage compared to avd.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;latest frida server and client from &lt;a href=&#34;https://github.com/frida/frida/releases&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;frida/releases&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;in my case, &lt;a href=&#34;https://github.com/frida/frida/releases/download/15.0.17/frida-server-15.0.17-android-x86.xz&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&amp;lsquo;frida-server-15.0.17-android-arm.xz&amp;rsquo;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;move the fridaserver to android device/emulator and start it.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;adb push /data/local/tmp/firda-server
+adb shell
+cd /data/local/tmp/frida-server
+./frida-server &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;modding-with-very-little-effort&#34;&gt;Modding with very little effort&lt;/h2&gt;
+&lt;p&gt;Frida has a great feature &lt;strong&gt;&amp;lsquo;TRACE&amp;rsquo;&lt;/strong&gt;, but without manually injection, by doing it dynamically, &lt;a href=&#34;https://frida.re/docs/frida-trace/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;more here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;what it does in oneline is &lt;strong&gt;you give it &amp;lsquo;wildcard methods&amp;rsquo; and a process, it will then log the input params and out values when the traced method is called of the target process&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# for tracing all methods which contains &#39;license&#39;
+noone@pc:frida-trace -U Firewall -j &#39;*!*license*/isu&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Trace Logs&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt; 26442 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.ActivityRules&amp;gt;&amp;quot;)
+26443 ms &amp;lt;= false
+26598 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.ActivityRules&amp;gt;&amp;quot;)
+26599 ms &amp;lt;= false
+26603 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.ActivityRules&amp;gt;&amp;quot;)
+26604 ms &amp;lt;= false
+39331 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.settings.Settings&amp;gt;&amp;quot;)
+39331 ms &amp;lt;= false
+45614 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.settings.Settings&amp;gt;&amp;quot;)
+45614 ms &amp;lt;= false
+49377 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.ActivityLogs&amp;gt;&amp;quot;)
+49378 ms &amp;lt;= false
+49567 ms &amp;lt;= false
+49581 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.ActivityLogs&amp;gt;&amp;quot;)
+49581 ms &amp;lt;= false
+52637 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.settings.SettingsInApp&amp;gt;&amp;quot;)
+52637 ms &amp;lt;= false
+52786 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.settings.SettingsInApp&amp;gt;&amp;quot;)
+52789 ms &amp;lt;= false
+52792 ms SettingsInApp.initLicense()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With just guessing the method name &amp;lsquo;license&amp;rsquo;, following license methods were found and its input and output params are logged when run via adb, without even decompiling and going through code (isn&amp;rsquo;t this great!?)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;8 directories, 31 files
+__handlers__/
+├── com.protectstar.firewall.activity.settings.Settings
+│   └── isLicenseActive.js &amp;lt;--- this file seems interesting?!
+├── com.protectstar.firewall.activity.settings.SettingsInApp
+│   ├── initLicense.js
+...
+│   └── licenseSuccess.js
+├── com.protectstar.firewall.cloud.Auth
+│   ├── getLicense1Url.js
+...
+├── com.protectstar.firewall.utility.LicenseActivation
+│   ├── access_000.js
+...
+│   ├── checkLicenseDuration.js &amp;lt;--- this file seems interesting?!
+│   └── _init.js
+├── com.protectstar.firewall.utility.LicenseActivation_Customer
+...
+│   ├── access_900.js
+│   └── _init.js
+├── com.protectstar.firewall.utility.LicenseActivation_Reason
+│   ├── valueOf.js
+│   └── values.js
+├── com.protectstar.firewall.utility.LicenseActivation_ResponseListener
+   ├── error.js
+   └── licenseSuccess.js
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now navigate though all sections of the app and find any interesting methods invoked through the trace logs.&lt;/p&gt;
+&lt;h2 id=&#34;patching-on-the-fly-without-seeing-the-original-code&#34;&gt;patching on the fly, without seeing the original code&lt;/h2&gt;
+&lt;p&gt;By observing the invoked methods and its input/output values, we can guess the method name to patch, it is &lt;em&gt;&amp;lsquo;isLicenseActive&amp;rsquo; from &amp;lsquo;com.protectstar.firewall.activity.settings.Settings&amp;rsquo;&lt;/em&gt;, in frida-trace, we see the return value is &lt;em&gt;False&lt;/em&gt;, so why not make it as true and observe the behaviour?&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// patching the method
+function main() {
+Java.perform(function () {
+// match the method signature
+Java.use(&#39;com.protectstar.firewall.activity.settings.Settings&#39;).isLicenseActive.implementation = function (
+context
+) {
+return true;
+};
+});
+}
+setImmediate(main);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After patching, navigating the app we now see the premium features are unlocked, that was way easier than conventional methods, greatly reduces the time.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/android-reversing-part-5/patch_with_frida_accessing_premium.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
+&lt;p&gt;I intend to use Frida in the future stuff I do, its simply great. Seeya next time. untill then - aghontpi :)&lt;/p&gt;</description></item><item><title>Android Reversing Part 5</title><link>//bluepie.in/2021/07/android-reversing-part-5/</link><pubDate>Fri, 16 Jul 2021 15:00:24 +0000</pubDate><guid>//bluepie.in/2021/07/android-reversing-part-5/</guid><description>
 &lt;hr /&gt;
 &lt;h1 id=&#34;contents&#34;&gt;Contents&lt;/h1&gt;
 &lt;ul&gt;
@@ -1289,127 +1386,4 @@ const p2, 1
 &lt;p&gt;I have good parents, friends, a job that I like in a place im in love with, All these excpet that one thing.. Of all these other things I have Im lost.. Im lost&amp;hellip; searching for something I can not find, distracting myself/ lying to myself, not enjoying/living in the movement.&lt;/p&gt;
 &lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
 &lt;p&gt;These things aside, &lt;em&gt;TO MY FUTURE SELF&lt;/em&gt; &amp;ldquo;two years went really fast didn&amp;rsquo;t it?&amp;hellip;always had the next thing to work on and you just looked away didn&amp;rsquo;t you?&amp;rdquo;, of all the things that happened over the last two years, from the bottom of my heart, I just wish I learned a lot more than I did..&lt;/p&gt;
-&lt;p&gt;Some of the things I did in the past haunt me daily, those&amp;hellip;missed opportunities, those..fights, those&amp;hellip;bad decisions, those..misunderstandings. I guess its been a long time and I have to move on.. this month of may is something I should forget.&lt;/p&gt;</description></item><item><title>Github Workflow</title><link>//bluepie.in/2020/05/github-workflow/</link><pubDate>Fri, 01 May 2020 23:32:58 +0530</pubDate><guid>//bluepie.in/2020/05/github-workflow/</guid><description>
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Hi&amp;hellip; how ya been, its been a month already, gosh times flies by really fast. Status update: I&amp;rsquo;ve been doing good, When I am in home I complete the work that I plan&amp;hellip; far better than when I am in Chennai. The corona virus pandemic is still around the world at large, US right now is the largest affected country with over 70k dead people as of writing this. The lockdown in India has been extended
-another 2 weeks.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;note-i-have-edited-this-post-because-of-the-changes-i-made-after-publishing-this-post&#34;&gt;Note: I have edited this post, because of the changes I made, after publishing this post.&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This post is going to be about github actions.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;why&#34;&gt;Why&lt;/h2&gt;
-&lt;p&gt;Automate a process after commit, schedule a process to be done timely&amp;hellip;etc the possibililties are endless. A little background&amp;hellip; lastweek
-github announced unlimited private colaborations and made a ton of premium features completely free.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;I am going to use this feature entirely for a different purpose, It further backs-up my saying..literally anything can be done.&lt;/em&gt;&lt;/p&gt;
-&lt;h2 id=&#34;goal&#34;&gt;Goal&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;I have this github repository which is XKCD viewer, which utilises api &amp;lsquo;&lt;a href=&#34;https://xkcd.com/info.0.json&#39;&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://xkcd.com/info.0.json&#39;&lt;/a&gt;. The api does not provide cors.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;I want to clone the api, (the clone must be updated daily).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;should provide cors support.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;should not contain any external dependencies like server to set it up.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;github offers unlimited time constraint for github actions(public repository)&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;using github actions I could setup a bot that runs timely.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;I can mainatain a local copy of the api, compare it to the offical every day,&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;if there is difference, then download the new contents and update the local state.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;commit the changes directly to the repository.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;approach&#34;&gt;Approach&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Im going with python in conjunction with workflow file, since I want to brush up my python skills.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The python logic will maintain a local state, add new contents, update itself i.e. the state.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;I am going to use json to maintain the state.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The api data will be stored under a folder with every entry having a unique folder.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Use github actions to commit the changes to the directory.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Use github secrets to maintain a token, (token used to commit diretly to repository)&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;result&#34;&gt;Result.&lt;/h2&gt;
-&lt;p&gt;After coding away the mentioned logics above. I am left with this workflow file.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;name: fetch new content from api
-on:
-schedule:
-- cron: &#39;0 */8 * * *&#39;
-jobs:
-fetch-content:
-if: github.repository == &#39;aghontpi/xkcd-declutter&#39;
-name: execute python logic
-runs-on: ubuntu-latest
-steps:
-- uses: actions/checkout@v1
-- name: install requests pip3
-run: pip3 install requests
-- name: run python logic
-run: python3 ./.github/workflows/update_xkcd_official.py
-- name: status of the new folder
-run: git status xkcd-offline/ --porcelain
-- name: add new files
-run: |
-git config --local user.name &amp;quot;xkcd-content-fetcher-bot&amp;quot;
-git add xkcd-offline/
-- name: commit new content
-run: (awk &#39;{print &amp;quot;added content &amp;quot; substr($3, match($3,&amp;quot;\&amp;quot;&amp;quot;), match($3,&amp;quot;}&amp;quot;)-1) &amp;quot;.&amp;quot;}&#39; xkcd-offline/state.json) | git commit -F -
-- name: push the new content
-uses: ad-m/github-push-action@master
-with:
-github_token: ${{ secrets.TOKEN }}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;See it in action, downloads new content automatically and put it under the folder xkcd-offline.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/mirror-xkcd-api/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Link to project github&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;updates-post-edit&#34;&gt;Updates/Post Edit&lt;/h2&gt;
-&lt;p&gt;After I published this post, Github made changes to how an environment variable is accessed, changes contains the following.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;updates to accessing environment variable.&lt;/li&gt;
-&lt;li&gt;decided to log while every run, that is persistent in the repository.&lt;/li&gt;
-&lt;li&gt;run every 12 hours instead of 8 hours.&lt;/li&gt;
-&lt;li&gt;added github actions bot as the author in commit message&lt;/li&gt;
-&lt;li&gt;update instructions to how to use this API (supporting cors)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;updates to yaml&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;name: Sync with Api
-on:
-schedule:
-- cron: &#39;0 */12 * * *&#39;
-jobs:
-fetch-content:
-if: github.repository == &#39;aghontpi/mirror-xkcd-api&#39;
-name: execute python logic
-runs-on: ubuntu-latest
-env:
-new_content: true
-steps:
-- uses: actions/checkout@v1
-- name: install requests pip3
-run: pip3 install requests
-- name: run python logic
-run: python3 ./sync.py
-- name: status of the new folder
-run: git status api/ --porcelain
-- name: add new files
-run: |
-git config --local user.name &amp;quot;sync bot&amp;quot;
-git config --local user.email &amp;quot;41898282+github-actions[bot]@users.noreply.github.com&amp;quot;
-git add *
-- name: commit new content
-id: newfiles
-run: (awk &#39;{print &amp;quot;added content &amp;quot; substr($3, match($3,&amp;quot;\&amp;quot;&amp;quot;), match($3,&amp;quot;}&amp;quot;)-1) &amp;quot;.&amp;quot;}&#39; syncState.json) | git commit -F -
-continue-on-error: true
-- name: not proceed if there is no new files
-if: steps.newfiles.outcome == &#39;failure&#39; &amp;amp;&amp;amp; env.new_content == &#39;true&#39;
-run: |
-echo &amp;quot;no new content was fetched&amp;quot;
-echo &amp;quot;new_content=false&amp;quot; &amp;gt;&amp;gt; $GITHUB_ENV
-- name: push the new content
-if: env.new_content == &#39;true&#39;
-uses: ad-m/github-push-action@master
-with:
-github_token: ${{ secrets.TOKEN }}
-branch: main
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;how to use this as an api(supporting cors)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/mirror-xkcd-api/blob/main/README.md&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Instructions/Usage&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;See you soon, untill then hope you do well. - Gopinath aka aghontpi aka bluepie&lt;/p&gt;
-&lt;/blockquote&gt;</description></item></channel></rss>
+&lt;p&gt;Some of the things I did in the past haunt me daily, those&amp;hellip;missed opportunities, those..fights, those&amp;hellip;bad decisions, those..misunderstandings. I guess its been a long time and I have to move on.. this month of may is something I should forget.&lt;/p&gt;</description></item></channel></rss>
