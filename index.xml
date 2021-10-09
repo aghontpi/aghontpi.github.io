@@ -1,4 +1,237 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sat, 21 Aug 2021 07:25:55 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Android Reversing Part 5 But With Frida</title><link>//bluepie.in/2021/08/android-reversing-part-5-with-frida/</link><pubDate>Sat, 21 Aug 2021 07:25:55 +0000</pubDate><guid>//bluepie.in/2021/08/android-reversing-part-5-with-frida/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 26 Sep 2021 10:22:12 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Html to React</title><link>//bluepie.in/2021/09/html-to-react/</link><pubDate>Sun, 26 Sep 2021 10:22:12 +0000</pubDate><guid>//bluepie.in/2021/09/html-to-react/</guid><description>
+&lt;!--
+mention, that the problem is recursive its recursive
+react rerendering to manage key,
+representation
+handling headtag elements --&gt;
+&lt;p&gt;I&amp;rsquo;ve been doing new development in my offtime and i&amp;rsquo;m totally enjoying the challenges and hurdles. I wanted to share an interesting problem that I solved, it is a small part on a project that is not public yet (as of 2021 SEP).&lt;/p&gt;
+&lt;h2 id=&#34;problem&#34;&gt;Problem&lt;/h2&gt;
+&lt;p&gt;I have a htmlString that I have to convert to react elements.&lt;/p&gt;
+&lt;p&gt;but why?&amp;hellip; &lt;em&gt;the main reasons were&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I have a react wrapper, that enhances the dom-elements.
+&lt;ul&gt;
+&lt;li&gt;I need this wrapper to handle all the elements.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;because Dom Operations are expensive, but React is not &lt;a href=&#34;https://reactjs.org/docs/faq-internals.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://reactjs.org/docs/faq-internals.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;ok-how-do-i-solve-this-problem&#34;&gt;ok, how do I solve this problem?&lt;/h2&gt;
+&lt;p&gt;step 1 :&lt;/p&gt;
+&lt;p&gt;I need to parse the htmlString to a dom-tree. luckly there is &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/API/DOMParser&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://developer.mozilla.org/en-US/docs/Web/API/DOMParser&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;step 2:&lt;/p&gt;
+&lt;p&gt;I need to convert the &lt;strong&gt;dom-tree to react elements&lt;/strong&gt; but how?. Since the dom is a tree, the problem is to transform the dom tree into a react tree, which if you give it a thought, it tends to have a &lt;strong&gt;recursive structure&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;step 3:&lt;/p&gt;
+&lt;p&gt;Identify the api-calls that are needed to transform the dom-tree into a react tree. Checking the docs, I only need one, &lt;a href=&#34;https://reactjs.org/docs/react-api.html#createelement&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://reactjs.org/docs/react-api.html#createelement&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;step 4:&lt;/p&gt;
+&lt;p&gt;Attach my wrapper to it.&lt;/p&gt;
+&lt;h2 id=&#34;domparser-domtree-from-string&#34;&gt;DomParser, Domtree from string&lt;/h2&gt;
+&lt;p&gt;I was supprised to find that many people don&amp;rsquo;t know about &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/API/DOMParser&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://developer.mozilla.org/en-US/docs/Web/API/DOMParser&lt;/a&gt;. It has a &lt;strong&gt;constructor&lt;/strong&gt;, which takes a string and returns a dom-tree. I believe this is best way to parse html to dom-tree.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;const domParser: any = new DOMParser();
+export const htmlProcessor = (html: string): ReactNode =&amp;gt; {
+if (typeof html !== &#39;string&#39;) {
+console.error(&#39;htmlParser: html is not a string&#39;);
+return React.createElement(&#39;p&#39;, {}, &#39;errors: please check dev console&#39;) as ReactNode;
+}
+let doc = domParser.parseFromString(html, &#39;text/html&#39;);
+if (doc === null) {
+console.error(&#39;htmlParser: unable to process html&#39;);
+return React.createElement(&#39;p&#39;, {}, &#39;errors: please check dev console&#39;) as ReactNode;
+}
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;writing-a-function-that-converts-dom-tree-and-returns-a-react-tree&#34;&gt;Writing a function that converts dom-tree and returns a react-tree&lt;/h2&gt;
+&lt;p&gt;With &lt;a href=&#34;https://reactjs.org/docs/react-api.html#createelement&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;React.createElement&lt;/a&gt;, I can create a react-element.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;const nodeName = &#39;div&#39;;
+const attributes = {
+className: &#39;class-name-that-i-want&#39;, // note: attributes must be camelCase
+id: &#39;created_by_custom&#39;,
+};
+const children = null; // note: if not null, the children should also be react nodes, ie the output from createElement.
+React.createElement(nodeName, attributes, children);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;experimenting with a little example above, I identified three things.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I need tagName, (&amp;lsquo;div&amp;rsquo;, &amp;lsquo;span&amp;rsquo;,etc)&lt;/li&gt;
+&lt;li&gt;I need attributes, (key,className, id, etc)&lt;/li&gt;
+&lt;li&gt;I need children, (null, react-elements, text )&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;So lets begin&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I Have to be careful here, I do this operation for every user action. So to maintain perfomance I need to maintain key consistency,&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;so what is key, why I&amp;rsquo;m stressing about it?. &lt;a href=&#34;https://reactjs.org/docs/glossary.html#keys&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;key React Docs&lt;/a&gt;. after going through the docs, see the example below, if i add a new element below &lt;em&gt;&lt;strong&gt;div key=&amp;ldquo;4&amp;rdquo;&lt;/strong&gt;&lt;/em&gt;, all elements after &lt;em&gt;&lt;strong&gt;key=5&lt;/strong&gt;&lt;/em&gt;, will be recreated with differnet keys. This will cause react algorithm to rerender all the elements with the new key.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;div key=&amp;quot;1&amp;quot;
+div key=&amp;quot;2&amp;quot;
+div key=&amp;quot;3&amp;quot;
+div key=&amp;quot;4&amp;quot;
+div key=&amp;quot;5&amp;quot;
+div key=&amp;quot;6&amp;quot;
+div key=&amp;quot;7&amp;quot;
+div key=&amp;quot;8&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Instead I need to generate keys in the following structure, this way I can maintain key consistency in the virtual-dom. If I were to append a &lt;strong&gt;&lt;em&gt;new element to div &amp;lsquo;new-child-add&amp;rsquo;, only the div &amp;lsquo;new-child-add&amp;rsquo; and its children will be rerendered.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;div key=&amp;quot;1&amp;quot;
+div id=&amp;quot;new-child-add&amp;quot; key=&amp;quot;1&amp;quot;
+div key=&amp;quot;1&amp;quot;
+div key=&amp;quot;2&amp;quot;
+div key=&amp;quot;2&amp;quot;
+div key=&amp;quot;1&amp;quot;
+div key=&amp;quot;2&amp;quot;
+div key=&amp;quot;1&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;keeping-the-things-above-in-mind-i-wrote-the-following-function&#34;&gt;Keeping the things above in mind, I wrote the following function.&lt;/h2&gt;
+&lt;p&gt;Define a function that takes a dom-element. I need to call this recursively later. To maintain key consistency, I also need to pass the key as a parameter.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;const converter = (element: HTMLElement, key = 0) =&amp;gt; {
+if (element === undefined) {
+return;
+}
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I need to get the nodeName and attributes for the current element first. I use &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeName&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;nodeName&lt;/a&gt;, &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/API/Element/attributes&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;attributes&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://reactjs.org/docs/dom-elements.html#style&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;style&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;const nodeName = element.nodeName.toLowerCase();
+let attributes: { [key: string]: string | any } = {};
+for (var i = 0; element.attributes &amp;amp;&amp;amp; i &amp;lt; element.attributes.length; i++) {
+const attribute = element.attributes[i];
+const reactName = toCamelCase(attribute.name);
+let value = attribute.name === &#39;style&#39; ? convertStyleStringToObject(attribute.value) : attribute.value.trim();
+attributes[reactName] = value;
+}
+attributes[&#39;key&#39;] = key++;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Before creating the element, I need to process all the child nodes, if there are any. I use &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;childNodes&lt;/a&gt;. Note that &amp;lsquo;#text&amp;rsquo; have to be handled separately, because it is not a dom-element, its just a string. Also note, I called the function recursively.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;let children: ReactNode[] = [];
+for (let i = 0; i &amp;lt; element.childNodes.length; i++) {
+let child = element.childNodes[i];
+if (child[&#39;nodeName&#39;] === &#39;#text&#39;) {
+if (child.textContent) {
+const content = child.textContent.replaceAll(&#39;\n&#39;, &#39;&#39;);
+content &amp;amp;&amp;amp; child.push(content);
+}
+continue;
+}
+if (child[&#39;nodeName&#39;] === &#39;#comment&#39;) {
+continue; // I dont want to render comments
+}
+if (nodeName !== &#39;script&#39; &amp;amp;&amp;amp; nodeName !== &#39;style&#39;) {
+children.push(converter(child as HTMLElement, key++)); //recursive call
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I have all the properties, now I can create the element.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;return React.createElement(nodeName, attributes, children);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;My function is now complete. I call my wrapper function in different locations based on the type of the element and its attributes.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;const domParser: any = new DOMParser();
+export const htmlProcessor = (html: string): ReactNode =&amp;gt; {
+if (typeof html !== &#39;string&#39;) {
+console.error(&#39;htmlParser: html is not a string&#39;);
+return React.createElement(&#39;p&#39;, {}, &#39;errors: please check dev console&#39;) as ReactNode;
+}
+let doc = domParser.parseFromString(html, &#39;text/html&#39;);
+if (doc === null) {
+console.error(&#39;htmlParser: unable to process html&#39;);
+return React.createElement(&#39;p&#39;, {}, &#39;errors: please check dev console&#39;) as ReactNode;
+}
+return converter(doc as unknown as HTMLElement, 1);
+};
+const converter = (element: HTMLElement, key = 0) =&amp;gt; {
+if (element === undefined) {
+return;
+}
+const nodeName = element.nodeName.toLowerCase();
+let attributes: { [key: string]: string | any } = {};
+for (var i = 0; element.attributes &amp;amp;&amp;amp; i &amp;lt; element.attributes.length; i++) {
+const attribute = element.attributes[i];
+const reactName = toCamelCase(attribute.name);
+let value = attribute.name === &#39;style&#39; ? convertStyleStringToObject(attribute.value) : attribute.value.trim();
+attributes[reactName] = value;
+}
+attributes[&#39;key&#39;] = key++;
+let children: ReactNode[] = [];
+/**
+* wrapper logic here and return the element. If I only want the attributes
+* to be processed, but dont want to process the children.
+*/
+for (let i = 0; i &amp;lt; element.childNodes.length; i++) {
+let child = element.childNodes[i];
+if (child[&#39;nodeName&#39;] === &#39;#text&#39;) {
+if (child.textContent) {
+const content = child.textContent.replaceAll(&#39;\n&#39;, &#39;&#39;);
+content &amp;amp;&amp;amp; child.push(content);
+}
+continue;
+}
+if (child[&#39;nodeName&#39;] === &#39;#comment&#39;) {
+continue;
+}
+if (nodeName !== &#39;script&#39; &amp;amp;&amp;amp; nodeName !== &#39;style&#39;) {
+children.push(converter(child as HTMLElement, key++));
+}
+}
+/**
+* wrapper logic here and return the element. If I want the attrbibutes
+* and children to be processed.
+*/
+return React.createElement(nodeName, attributes, children);
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;end&#34;&gt;End&lt;/h1&gt;
+&lt;p&gt;This was a fun problem to solve, well that marks the end. ~seeya&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I mention the edge cases below, Only read it, if you are interested.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;edge-cases&#34;&gt;Edge cases&lt;/h2&gt;
+&lt;p&gt;There are the following edge cases that I have not covered in this article. But I have in my project,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;img tag should not have child param passed to it&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;if (nodeName === &#39;img&#39;) {
+return React.createElement(nodeName, { key: key++, ...attributes }, null);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;if its a text node, then its children should be a string.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;if (element.nodeType === 3) {
+return React.createElement(nodeName, { ...attributes, key: key++ }, element.textContent);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;handling &amp;lsquo;&amp;lt;head&amp;gt;&amp;rsquo; tag is different too, because each tag with its different property servers a different purpose.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;let el;
+switch (nodeName) {
+case &#39;meta&#39;:
+el = element as HTMLMetaElement;
+// meta tag has http-equiv attribute &amp;amp; content attribute, but no children
+return React.createElement(nodeName, { httpEquiv: el.httpEquiv, content: el.content, key: nodeName + key++ }, null);
+case &#39;link&#39;:
+el = element as HTMLLinkElement;
+let type = null;
+if (el.type) {
+type = el.type;
+}
+// external link has rel attribute &amp;amp; href attribute, but no children
+return React.createElement(
+nodeName,
+{
+href: el.href,
+rel: el.rel,
+type,
+key: nodeName + key++,
+},
+null
+);
+case &#39;br&#39;:
+return React.createElement(nodeName, { key: nodeName + key++ }, null);
+case &#39;title&#39;:
+case &#39;script&#39;:
+case &#39;style&#39;:
+// script/style/title tags have no children
+// script &amp;amp; style have contents in them, so innerHTML
+return React.createElement(nodeName, {
+dangerouslySetInnerHTML: { __html: element.innerHTML, key: nodeName + key++ },
+});
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Android Reversing Part 5 But With Frida</title><link>//bluepie.in/2021/08/android-reversing-part-5-with-frida/</link><pubDate>Sat, 21 Aug 2021 07:25:55 +0000</pubDate><guid>//bluepie.in/2021/08/android-reversing-part-5-with-frida/</guid><description>
 &lt;h2 id=&#34;why-frida&#34;&gt;Why Frida?&lt;/h2&gt;
 &lt;p&gt;Becase it can be many things, &lt;a href=&#34;https://frida.re/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;know more&lt;/a&gt;. Its is,&lt;/p&gt;
 &lt;ul&gt;
@@ -1371,19 +1604,4 @@ const p2, 1
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;that is it, recompile, resign and install the app/game.&lt;/p&gt;
 &lt;h3 id=&#34;end&#34;&gt;End&lt;/h3&gt;
-&lt;p&gt;Im not gona share the apk here, but I believe that I have shared the knowledge to do so. bye, see ya next time.&lt;/p&gt;</description></item><item><title>Its Been Two Years..may</title><link>//bluepie.in/2020/05/its-been-two-years/</link><pubDate>Sat, 23 May 2020 20:47:55 +0530</pubDate><guid>//bluepie.in/2020/05/its-been-two-years/</guid><description>
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Hi.. how are you, I am doing well, still doing work from home.. don&amp;rsquo;t know how long the work from home thing is going to continue. All my friends and family are good(no corona).&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This post is going to be a reminder for me in the future&amp;hellip; and also a milestone.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&#34;decision&#34;&gt;Decision&lt;/h1&gt;
-&lt;p&gt;Well two years ago, exactly this week, I got an offer from a company in Chennai, at that time, I already had an offer from another company in Coimbatore that was close to my home with a nice package. I choose Chennai over Coimbatore because I wanted to leave my home.&lt;/p&gt;
-&lt;p&gt;So here I am after two years, I&amp;rsquo;m happy with my employer. I have my fair-share of cons, I&amp;rsquo;m sure everybody will have them, but the pros over-weigh the cons.&lt;/p&gt;
-&lt;h1 id=&#34;lucky&#34;&gt;Lucky&lt;/h1&gt;
-&lt;p&gt;I&amp;rsquo;m lucky to have joined them, they take such good care of me, I would argue that my team is the best of my company, Its a big team with a lot of talented people packed in.&lt;/p&gt;
-&lt;p&gt;I also had the best team-lead unitll recently&amp;hellip;he left.., my piers are just awesome they can accomplism great things. The technical manager is also one of my team&amp;rsquo;s managers, he is a pretty good and can handle anything thrown at him,&lt;/p&gt;
-&lt;h1 id=&#34;one-complaint&#34;&gt;One complaint&lt;/h1&gt;
-&lt;p&gt;I have good parents, friends, a job that I like in a place im in love with, All these excpet that one thing.. Of all these other things I have Im lost.. Im lost&amp;hellip; searching for something I can not find, distracting myself/ lying to myself, not enjoying/living in the movement.&lt;/p&gt;
-&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;These things aside, &lt;em&gt;TO MY FUTURE SELF&lt;/em&gt; &amp;ldquo;two years went really fast didn&amp;rsquo;t it?&amp;hellip;always had the next thing to work on and you just looked away didn&amp;rsquo;t you?&amp;rdquo;, of all the things that happened over the last two years, from the bottom of my heart, I just wish I learned a lot more than I did..&lt;/p&gt;
-&lt;p&gt;Some of the things I did in the past haunt me daily, those&amp;hellip;missed opportunities, those..fights, those&amp;hellip;bad decisions, those..misunderstandings. I guess its been a long time and I have to move on.. this month of may is something I should forget.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;Im not gona share the apk here, but I believe that I have shared the knowledge to do so. bye, see ya next time.&lt;/p&gt;</description></item></channel></rss>

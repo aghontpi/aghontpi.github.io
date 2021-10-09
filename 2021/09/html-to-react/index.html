@@ -1,0 +1,204 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><meta name=description content="Public Journal of aghontpi"><meta name=keywords content="aghontpi bluepie Journal"><link rel=prev href=//bluepie.in/2021/08/android-reversing-part-5-with-frida/><link rel=canonical href=//bluepie.in/2021/09/html-to-react/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>Html to React | Bluepie&#39;s Journal</title><meta name=title content="Html to React | Bluepie's Journal"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"Html to React","headline":"Html to React","description":"I\x26rsquo;ve been doing new development in my offtime and i\x26rsquo;m totally enjoying the challenges and hurdles. I wanted to share an interesting problem that I solved, it is a small part on a project that is not public yet (as of 2021 SEP).\nProblem I have a htmlString that I have to convert to react elements.\nbut why?\x26hellip; the main reasons were\n I have a react wrapper, that enhances the dom-elements.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2021","datePublished":"2021-09-26 10:22:12 \x2b0000 UTC","dateModified":"2021-09-26 10:22:12 \x2b0000 UTC","url":"\/\/bluepie.in\/2021\/09\/html-to-react\/","wordCount":"1315","keywords":["Bluepie\x27s Journal"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>My Journal</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>My Journal</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-135013873-2','auto');ga('send','pageview');}</script><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">Html to React</h1><div class=post-meta>Written by <a itemprop=name href=//bluepie.in/ rel=author>Bluepie</a> with ♥
+<span class=post-time>on <time datetime=2021-09-26 itemprop=datePublished>September 26, 2021</time></span>
+in
+<i class="iconfont icon-folder"></i><span class=post-category><a href=//bluepie.in/categories/tech/>Tech</a>
+<a href=//bluepie.in/categories/react/>React</a>
+<a href=//bluepie.in/categories/typescript/>Typescript</a></span></div></header><div class=post-content><img src=//bluepie.in/images/posts/html-to-react/html-to-react.png class=featured_image><p>I&rsquo;ve been doing new development in my offtime and i&rsquo;m totally enjoying the challenges and hurdles. I wanted to share an interesting problem that I solved, it is a small part on a project that is not public yet (as of 2021 SEP).</p><h2 id=problem>Problem</h2><p>I have a htmlString that I have to convert to react elements.</p><p>but why?&hellip; <em>the main reasons were</em></p><ul><li>I have a react wrapper, that enhances the dom-elements.<ul><li>I need this wrapper to handle all the elements.</li></ul></li><li>because Dom Operations are expensive, but React is not <a href=https://reactjs.org/docs/faq-internals.html rel="nofollow noreferrer" target=_blank>https://reactjs.org/docs/faq-internals.html</a></li></ul><h2 id=ok-how-do-i-solve-this-problem>ok, how do I solve this problem?</h2><p>step 1 :</p><p>I need to parse the htmlString to a dom-tree. luckly there is <a href=https://developer.mozilla.org/en-US/docs/Web/API/DOMParser rel="nofollow noreferrer" target=_blank>https://developer.mozilla.org/en-US/docs/Web/API/DOMParser</a></p><p>step 2:</p><p>I need to convert the <strong>dom-tree to react elements</strong> but how?. Since the dom is a tree, the problem is to transform the dom tree into a react tree, which if you give it a thought, it tends to have a <strong>recursive structure</strong>.</p><p>step 3:</p><p>Identify the api-calls that are needed to transform the dom-tree into a react tree. Checking the docs, I only need one, <a href=https://reactjs.org/docs/react-api.html#createelement rel="nofollow noreferrer" target=_blank>https://reactjs.org/docs/react-api.html#createelement</a></p><p>step 4:</p><p>Attach my wrapper to it.</p><h2 id=domparser-domtree-from-string>DomParser, Domtree from string</h2><p>I was supprised to find that many people don&rsquo;t know about <a href=https://developer.mozilla.org/en-US/docs/Web/API/DOMParser rel="nofollow noreferrer" target=_blank>https://developer.mozilla.org/en-US/docs/Web/API/DOMParser</a>. It has a <strong>constructor</strong>, which takes a string and returns a dom-tree. I believe this is best way to parse html to dom-tree.</p><pre><code class=language-typescript>const domParser: any = new DOMParser();
+
+export const htmlProcessor = (html: string): ReactNode =&gt; {
+  if (typeof html !== 'string') {
+    console.error('htmlParser: html is not a string');
+    return React.createElement('p', {}, 'errors: please check dev console') as ReactNode;
+  }
+
+  let doc = domParser.parseFromString(html, 'text/html');
+
+  if (doc === null) {
+    console.error('htmlParser: unable to process html');
+    return React.createElement('p', {}, 'errors: please check dev console') as ReactNode;
+  }
+};
+</code></pre><h2 id=writing-a-function-that-converts-dom-tree-and-returns-a-react-tree>Writing a function that converts dom-tree and returns a react-tree</h2><p>With <a href=https://reactjs.org/docs/react-api.html#createelement rel="nofollow noreferrer" target=_blank>React.createElement</a>, I can create a react-element.</p><pre><code class=language-typescript>const nodeName = 'div';
+const attributes = {
+  className: 'class-name-that-i-want', // note: attributes must be camelCase
+  id: 'created_by_custom',
+};
+const children = null; // note: if not null, the children should also be react nodes, ie the output from createElement.
+
+React.createElement(nodeName, attributes, children);
+</code></pre><p>experimenting with a little example above, I identified three things.</p><ul><li>I need tagName, (&lsquo;div&rsquo;, &lsquo;span&rsquo;,etc)</li><li>I need attributes, (key,className, id, etc)</li><li>I need children, (null, react-elements, text )</li></ul><p><em>So lets begin</em></p><blockquote><p>I Have to be careful here, I do this operation for every user action. So to maintain perfomance I need to maintain key consistency,</p></blockquote><p>so what is key, why I&rsquo;m stressing about it?. <a href=https://reactjs.org/docs/glossary.html#keys rel="nofollow noreferrer" target=_blank>key React Docs</a>. after going through the docs, see the example below, if i add a new element below <em><strong>div key=&ldquo;4&rdquo;</strong></em>, all elements after <em><strong>key=5</strong></em>, will be recreated with differnet keys. This will cause react algorithm to rerender all the elements with the new key.</p><pre><code class=language-text>div key=&quot;1&quot;
+    div key=&quot;2&quot;
+        div key=&quot;3&quot;
+        div key=&quot;4&quot;
+    div key=&quot;5&quot;
+        div key=&quot;6&quot;
+div key=&quot;7&quot;
+    div key=&quot;8&quot;
+</code></pre><p>Instead I need to generate keys in the following structure, this way I can maintain key consistency in the virtual-dom. If I were to append a <strong><em>new element to div &lsquo;new-child-add&rsquo;, only the div &lsquo;new-child-add&rsquo; and its children will be rerendered.</em></strong></p><pre><code class=language-text>div key=&quot;1&quot;
+    div id=&quot;new-child-add&quot; key=&quot;1&quot;
+        div key=&quot;1&quot;
+        div key=&quot;2&quot;
+    div key=&quot;2&quot;
+        div key=&quot;1&quot;
+div key=&quot;2&quot;
+    div key=&quot;1&quot;
+</code></pre><hr><h2 id=keeping-the-things-above-in-mind-i-wrote-the-following-function>Keeping the things above in mind, I wrote the following function.</h2><p>Define a function that takes a dom-element. I need to call this recursively later. To maintain key consistency, I also need to pass the key as a parameter.</p><pre><code class=language-typescript>const converter = (element: HTMLElement, key = 0) =&gt; {
+  if (element === undefined) {
+    return;
+  }
+};
+</code></pre><p>I need to get the nodeName and attributes for the current element first. I use <a href=https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeName rel="nofollow noreferrer" target=_blank>nodeName</a>, <a href=https://developer.mozilla.org/en-US/docs/Web/API/Element/attributes rel="nofollow noreferrer" target=_blank>attributes</a> &amp; <a href=https://reactjs.org/docs/dom-elements.html#style rel="nofollow noreferrer" target=_blank>style</a></p><pre><code class=language-typescript>const nodeName = element.nodeName.toLowerCase();
+
+let attributes: { [key: string]: string | any } = {};
+
+for (var i = 0; element.attributes &amp;&amp; i &lt; element.attributes.length; i++) {
+  const attribute = element.attributes[i];
+  const reactName = toCamelCase(attribute.name);
+  let value = attribute.name === 'style' ? convertStyleStringToObject(attribute.value) : attribute.value.trim();
+  attributes[reactName] = value;
+}
+
+attributes['key'] = key++;
+</code></pre><p>Before creating the element, I need to process all the child nodes, if there are any. I use <a href=https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes rel="nofollow noreferrer" target=_blank>childNodes</a>. Note that &lsquo;#text&rsquo; have to be handled separately, because it is not a dom-element, its just a string. Also note, I called the function recursively.</p><pre><code class=language-typescript>let children: ReactNode[] = [];
+
+for (let i = 0; i &lt; element.childNodes.length; i++) {
+  let child = element.childNodes[i];
+
+  if (child['nodeName'] === '#text') {
+    if (child.textContent) {
+      const content = child.textContent.replaceAll('\n', '');
+      content &amp;&amp; child.push(content);
+    }
+    continue;
+  }
+
+  if (child['nodeName'] === '#comment') {
+    continue; // I dont want to render comments
+  }
+
+  if (nodeName !== 'script' &amp;&amp; nodeName !== 'style') {
+    children.push(converter(child as HTMLElement, key++)); //recursive call
+  }
+}
+</code></pre><p>I have all the properties, now I can create the element.</p><pre><code class=language-typescript>return React.createElement(nodeName, attributes, children);
+</code></pre><p>My function is now complete. I call my wrapper function in different locations based on the type of the element and its attributes.</p><pre><code class=language-typescript>const domParser: any = new DOMParser();
+
+export const htmlProcessor = (html: string): ReactNode =&gt; {
+  if (typeof html !== 'string') {
+    console.error('htmlParser: html is not a string');
+    return React.createElement('p', {}, 'errors: please check dev console') as ReactNode;
+  }
+
+  let doc = domParser.parseFromString(html, 'text/html');
+
+  if (doc === null) {
+    console.error('htmlParser: unable to process html');
+    return React.createElement('p', {}, 'errors: please check dev console') as ReactNode;
+  }
+
+  return converter(doc as unknown as HTMLElement, 1);
+};
+
+const converter = (element: HTMLElement, key = 0) =&gt; {
+  if (element === undefined) {
+    return;
+  }
+  const nodeName = element.nodeName.toLowerCase();
+
+  let attributes: { [key: string]: string | any } = {};
+
+  for (var i = 0; element.attributes &amp;&amp; i &lt; element.attributes.length; i++) {
+    const attribute = element.attributes[i];
+    const reactName = toCamelCase(attribute.name);
+    let value = attribute.name === 'style' ? convertStyleStringToObject(attribute.value) : attribute.value.trim();
+    attributes[reactName] = value;
+  }
+  attributes['key'] = key++;
+
+  let children: ReactNode[] = [];
+
+  /**
+   * wrapper logic here and return the element. If I only want the attributes
+   * to be processed, but dont want to process the children.
+   */
+
+  for (let i = 0; i &lt; element.childNodes.length; i++) {
+    let child = element.childNodes[i];
+
+    if (child['nodeName'] === '#text') {
+      if (child.textContent) {
+        const content = child.textContent.replaceAll('\n', '');
+        content &amp;&amp; child.push(content);
+      }
+      continue;
+    }
+
+    if (child['nodeName'] === '#comment') {
+      continue;
+    }
+
+    if (nodeName !== 'script' &amp;&amp; nodeName !== 'style') {
+      children.push(converter(child as HTMLElement, key++));
+    }
+  }
+
+  /**
+   * wrapper logic here and return the element. If I want the attrbibutes
+   * and children to be processed.
+   */
+
+  return React.createElement(nodeName, attributes, children);
+};
+</code></pre><h1 id=end>End</h1><p>This was a fun problem to solve, well that marks the end. ~seeya</p><hr><blockquote><p>I mention the edge cases below, Only read it, if you are interested.</p></blockquote><h2 id=edge-cases>Edge cases</h2><p>There are the following edge cases that I have not covered in this article. But I have in my project,</p><ul><li><p>img tag should not have child param passed to it</p><pre><code class=language-typescript>if (nodeName === 'img') {
+return React.createElement(nodeName, { key: key++, ...attributes }, null);
+}
+</code></pre></li><li><p>if its a text node, then its children should be a string.</p><pre><code class=language-typescript>if (element.nodeType === 3) {
+return React.createElement(nodeName, { ...attributes, key: key++ }, element.textContent);
+}
+</code></pre></li><li><p>handling &lsquo;&lt;head&gt;&rsquo; tag is different too, because each tag with its different property servers a different purpose.</p><pre><code class=language-typescript>let el;
+switch (nodeName) {
+case 'meta':
+el = element as HTMLMetaElement;
+// meta tag has http-equiv attribute &amp; content attribute, but no children
+return React.createElement(nodeName, { httpEquiv: el.httpEquiv, content: el.content, key: nodeName + key++ }, null);
+
+case 'link':
+el = element as HTMLLinkElement;
+let type = null;
+if (el.type) {
+  type = el.type;
+}
+// external link has rel attribute &amp; href attribute, but no children
+return React.createElement(
+  nodeName,
+  {
+    href: el.href,
+    rel: el.rel,
+    type,
+    key: nodeName + key++,
+  },
+  null
+);
+
+case 'br':
+return React.createElement(nodeName, { key: nodeName + key++ }, null);
+
+case 'title':
+case 'script':
+case 'style':
+// script/style/title tags have no children
+// script &amp; style have contents in them, so innerHTML
+return React.createElement(nodeName, {
+  dangerouslySetInnerHTML: { __html: element.innerHTML, key: nodeName + key++ },
+});
+}
+</code></pre></li></ul></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span>Bluepie</span></p><p class=copyright-item><span>Link:</span>
+<a href=//bluepie.in/2021/09/html-to-react/>//bluepie.in/2021/09/html-to-react/</span></p></div><div class=post-tags><section><a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=//bluepie.in/>home</a></span></section></div><div class=post-nav><a href=//bluepie.in/2021/08/android-reversing-part-5-with-frida/ class=prev rel=prev title="Android Reversing Part 5 But With Frida"><i class="iconfont icon-left"></i>&nbsp;Android Reversing Part 5 But With Frida</a></div><div class=post-comment><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
+var d=document,s=d.createElement('script');s.async=true;s.src='//'+"gopinath001-github-io-blog"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></div></main><footer class=footer><div class=copyright>&copy;
+<span itemprop=copyrightYear>2017 - 2021</span>
+<span class=with-love>|</span>
+<span class=author itemprop=copyrightHolder><a href=//bluepie.in/>Bluepie</a></span></div></footer><script src=//bluepie.in/js/vendor_no_gallery.min.js async></script></div></body></html>
