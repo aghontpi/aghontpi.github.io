@@ -1,0 +1,89 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><meta name=description content="Public Journal of aghontpi"><meta name=keywords content="aghontpi bluepie Journal"><link rel=prev href=//bluepie.in/2021/09/html-to-react/><link rel=canonical href=//bluepie.in/2021/10/open-source-dnd-email-editor/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>Open Source Dnd Email Editor | Bluepie&#39;s Journal</title><meta name=title content="Open Source Dnd Email Editor | Bluepie's Journal"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"Open Source Dnd Email Editor","headline":"Open Source Dnd Email Editor","description":"I created a drag and drop email editor, I\x26rsquo;ve been working on it for the past month. It\x26rsquo;s a lot of fun to work on, I completed it for first release, I\x26rsquo;ll shed some light on the challenges I faced and how I solved them.\nWhy\x26rsquo;s \x26amp; What\x26rsquo;s why build this?\nNo free editors\/open source editors that does the job,\nbut why not profit?\nNot interested, I believe in Open Source.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2021","datePublished":"2021-10-10 10:48:30 \x2b0000 UTC","dateModified":"2021-10-10 10:48:30 \x2b0000 UTC","url":"\/\/bluepie.in\/2021\/10\/open-source-dnd-email-editor\/","wordCount":"1144","keywords":["Bluepie\x27s Journal"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>My Journal</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>My Journal</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-135013873-2','auto');ga('send','pageview');}</script><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">Open Source Dnd Email Editor</h1><div class=post-meta>Written by <a itemprop=name href=//bluepie.in/ rel=author>Bluepie</a> with ♥
+<span class=post-time>on <time datetime=2021-10-10 itemprop=datePublished>October 10, 2021</time></span>
+in
+<i class="iconfont icon-folder"></i><span class=post-category><a href=//bluepie.in/categories/tech/>Tech</a>
+<a href=//bluepie.in/categories/react/>React</a>
+<a href=//bluepie.in/categories/typescript/>Typescript</a>
+<a href=//bluepie.in/categories/open-source/>Open Source</a></span></div></header><div class=post-content><img src=//bluepie.in/images/posts/dnde-oct-2021.png class=featured_image><p>I created a drag and drop email editor, I&rsquo;ve been working on it for the past month. It&rsquo;s a lot of fun to work on, I completed it for first release, I&rsquo;ll shed some light on the challenges I faced and how I solved them.</p><h2 id=why-s-what-s>Why&rsquo;s &amp; What&rsquo;s</h2><p><strong><em>why build this?</em></strong></p><p>No free editors/open source editors that does the job,</p><p><strong><em>but why not profit?</em></strong></p><p>Not interested, I believe in Open Source. Heavily inspired by how LINUX (OPEN SOURCE) is useful for everyone now.</p><p><strong><em>the real motivation?</em></strong></p><p>Let me be frank here, I dont like <em>unalyer github</em>, MAINLY BECAUSE OF THEIR FALSE ADVERTISEMENT AS OPEN SOURCE, I understand that&rsquo;s how the get their business going but, damn its scummy.</p><p>One by one respoectively</p><ul><li>scumbag unlayer,</li><li>grapjs mjml,<ul><li><a href=https://github.com/artf/grapesjs-mjml rel="nofollow noreferrer" target=_blank>their implementation</a> was cool with mjml</li></ul></li><li>company that I am working for, at the time of writing this, needed an email dnd editor.</li></ul><h2 id=challenges>Challenges</h2><ul><li><p>maintaining layer between MJML and Me.</p></li><li><p>writing parsers, serializers and deseriealizers.</p></li><li><p>design and code ui</p></li><li><p>manage drag and drop, mouse, key events, &hellip;etc.</p></li><li><p>deciding what kind of api to expose</p></li><li><p>deciding what inline editor to use</p><ul><li>I can do one of two things</li><li>One, spend time &amp; learn the api&rsquo;s of an existing inline editor</li><li>Two, spend time creating a yet another inline editor, that I have full control of. (I&rsquo;ll learn a lot of new things If I do this)</li></ul></li></ul><p>I did both, but after finding serveral small size inline editors, I decided to completely go ahead with creating a custom InlineEditor, it is not a major task if I used <em>document.executeCommand</em></p><ul><li><p>maintaining demo/docs/npm package in single repo</p></li><li><p>backend</p><ul><li>using firebase fn in combination with express</li><li>firestore for database</li></ul></li></ul><p>I&rsquo;ll explain <strong><em>maintaining demo/docs/npm package in single repo</em></strong> now, since that is the recent &amp; last thing that I completed.</p><h2 id=maintaining-demo-docs-npm-package-in-single-repo>Maintaining demo/docs/npm package in single repo</h2><p>Let me fist explain the layout of the items in the repo.</p><p>the repo contains,</p><ul><li><em>create-react-app</em> react-scripts by default for the demo page</li><li>the <em>editor</em> component<ul><li>I want this to be bundled and published to npm</li></ul></li><li>the demo branch, that automatically deploys with <a href=https://pages.github.com/ rel="nofollow noreferrer" target=_blank>github pages</a></li><li>api docs for the project</li></ul><p><strong><em>checklist that I created before starting work on this</em></strong></p><p>Its always better to plan ahead to avoid surprises later, created a small checklist to help me with this.</p><p>I should have,</p><ul><li>verified that the Editor is standalone<ul><li>(i.e). that there is no demo build dependencies directly in the editor (like on first editor load, fetch this template from the backend, ..etc)</li></ul></li><li>verified that the Editor is fully functional<ul><li>(i.e). that the editor can be used in a demo page without problems</li></ul></li><li>decided on what build system to use<ul><li>webpack</li><li>rollup</li><li>nd&hellip;etc, millions of other build systems out there</li></ul></li><li>created the build system, in such a way that It wont affect the demo build (created with create-react-app)<ul><li>at the time of writing this, react-scripts uses webpack v4, So installing another instance of webpack v5 for npm build, will cause react-scripts to fail, the same goes for its dependencies aswell.</li></ul></li><li>created a seperate branch, do all documentations and changes in that branch</li><li>bundled only selected files in the npm build, should only contain<ul><li>editor</li><li>css/sass files used with the editor</li><li>image files used with the editor</li></ul></li><li>created sepereate <strong><em>scripts in package.json</em></strong> for the differnet builds<ul><li>build = for react-scripts-build</li><li>build:module = for npm-build</li></ul></li><li>created a seperate packge.json for the npm build, since the exported Editor component doesn&rsquo;t need all the dependencies from the repository.</li></ul><p><strong><em>Choosing build system for the editor</em></strong></p><p>I have already published packages using webpack in the past, So I already knew webpack and its different modules. But the problem is I don&rsquo;t know if I can use two webpack instances in a single project.</p><p>I Could go for a new build system just to solve this problem alone, Or find a way to use two webpack instances in a single project.</p><p>This is the point in time, where I found out about <a href=https://classic.yarnpkg.com/lang/en/docs/cli/add/#toc-yarn-add-alias rel="nofollow noreferrer" target=_blank><em>yarn alias</em></a>, After I found this, I knew which build system to choose (webpack v5).</p><p>webpack has an environment configuration named &lsquo;WEBPACK_PACKAGE&rsquo;, it takes the package name of the webpack, So I can utilize this to install multiple versions, one with name &lsquo;webpack&rsquo; another with alias &lsquo;webpack-module&rsquo;</p><pre><code class=language-json> &quot;webpack-module&quot;: &quot;npm:webpack@^5.60.0&quot;
+</code></pre><p>I can then run webpack normally with &lsquo;react-scripts&rsquo; and &lsquo;WEBPACK_PACKAGE=webpack-module webpack&rsquo; for npm build</p><p><strong><em>Requirements for publishing to npm</em></strong></p><p>For publishing to npm, I need,</p><ul><li>npm account</li><li>a package.json with seperate dependencies from the demo package.json<ul><li>there should be a two package.json now. One for demo build, another for package build</li></ul></li><li>a webpack configuration file for bundling</li><li>typescript definition file</li><li>output of <em>npm pack</em></li></ul><p><strong><em>Webpack configuration</em></strong></p><p>webpack configuration should process</p><ul><li>process scss, css and module css, scss.</li></ul><p><a href=https://webpack.js.org/loaders/style-loader/ rel="nofollow noreferrer" target=_blank>style loader</a> - Inject the bundled styles into webpage.</p><p>since I used <em>@import</em> for fonts and <em>url</em> for background, I need to add <a href=https://webpack.js.org/loaders/css-loader/ rel="nofollow noreferrer" target=_blank>css loader</a></p><p>I have also used sass, thus <a href=https://webpack.js.org/loaders/sass-loader/ rel="nofollow noreferrer" target=_blank>sass loader</a> is required. To note, for the modern web, there is <a href=https://github.com/sass/dart-sass rel="nofollow noreferrer" target=_blank>dart sass</a>. I can <a href=https://webpack.js.org/loaders/sass-loader/#object rel="nofollow noreferrer" target=_blank>instruct &ldquo;sass loader&rdquo; to use &ldquo;dart sass&rdquo;</a></p><pre><code class=language-json>// css
+{
+  test: /(\.css$|\.module\.css$)/i,
+  use: ['style-loader-module', 'css-loader-module'],
+},
+// scss
+{
+  test: /(\.s[ac]ss$|\.module\.s[ac]ss$)/i,
+  use: [
+    {
+      loader: 'style-loader-module',
+    },
+    {
+      loader: 'css-loader-module',
+      options: {
+        importLoaders: 1,
+        modules: {
+          mode: 'local',
+        },
+      },
+    },
+    {
+      loader: 'sass-loader-module',
+      options: {
+        implementation: require('sass'),
+      },
+    },
+  ],
+}
+</code></pre><ul><li><p>process .tsx, .ts and .jsx&hellip;etc.</p><pre><code class=language-json>{
+test: /\.(js|jsx|ts|tsx)$/,
+exclude: /node_modules/,
+use: {
+    loader: 'babel-loader-module',
+    options: {
+      presets: [
+        '@babel/preset-env',
+        ['@babel/preset-react', { runtime: 'automatic' }],
+        '@babel/preset-typescript',
+      ],
+  },
+}
+}
+</code></pre></li><li><p>instruct webpack to recognize .tsx file extensions.</p><pre><code class=language-json>resolve: {
+extensions: ['.js', '.jsx', '.ts', '.tsx'],
+}
+</code></pre></li><li><p>a way to make image assets work in extensions,In webpack 5, I can bundle images inline in js files.</p><pre><code class=language-json>{
+test: /\.svg/,
+type: 'asset/inline',
+}
+</code></pre></li></ul><p>That is it for the webpack config, Isn&rsquo;t this simple and concise.</p><p><strong><em>Maintaining another package.json for npm</em></strong></p><p>Obviously, only at the time of packing I need package.json untill then I can renaming to something else, I named it to &lsquo;module-package.json&rsquo; then at time of &lsquo;bundling and packing&rsquo;, I rename it to &lsquo;package.json&rsquo;</p><p>the contents of &lsquo;module-package.json&rsquo; should contain the following,</p><pre><code class=language-json>  &quot;name&quot;: &quot;dnd-email-editor&quot;,
+  &quot;version&quot;: &quot;v0.0.0-alpha.3&quot;,
+  &quot;description&quot;: &quot;Drag and Drop Editor designed for mails&quot;,
+  &quot;main&quot;: &quot;./main.js&quot;,
+  &quot;files&quot;: [&quot;**/*&quot;],
+  &quot;types&quot;: &quot;./index.d.ts&quot;,
+  &quot;peerDependencies&quot;: {
+    &quot;react&quot;: &quot;^17.0.1&quot;,
+    &quot;react-dom&quot;: &quot;^17.0.1&quot;
+  },
+  &quot;author&quot;: &quot;https://github.com/aghontpi&quot;,
+  &quot;license&quot;: &quot;GPL-3.0&quot;,
+  &quot;bugs&quot;: {
+    &quot;url&quot;: &quot;https://github.com/aghontpi/dnde/issues&quot;
+  },
+  &quot;homepage&quot;: &quot;https://github.com/aghontpi/dnde&quot;,
+</code></pre><p>On every version change, change &ldquo;version&rdquo; key, It&rsquo;ll automatically update in <a href=https://npmjs.com rel="nofollow noreferrer" target=_blank>npmjs</a>.</p><p><strong><em>bundling and packing</em></strong></p><p>I added the following command to package.json, (original package.json not &lsquo;module-package.json&rsquo;), note the environment variable &lsquo;WEBPACK_PACKAGE&rsquo; I mentioned from before.</p><pre><code class=language-bash>WEBPACK_PACKAGE=webpack-module webpack &amp;&amp;
+  cp module-package.json module/package.json &amp;&amp;
+  cp index.d.ts module/index.d.ts &amp;&amp;
+  cp README.md module/README.md  &amp;&amp;
+  npm pack ./module/
+</code></pre><p>I can the publish the output from the previous command with</p><pre><code class=language-bash>npm publish build-verion.tgz
+</code></pre><h2 id=conclusion>Conclusion</h2><p>I oversimplified in many cases but this covers &lsquo;publishing to npm part&rsquo;. I solved a lot of similar interesting problems in the project, Check it <a href=https://github.com/aghontpi/dnde rel="nofollow noreferrer" target=_blank>github dnde.</a></p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span>Bluepie</span></p><p class=copyright-item><span>Link:</span>
+<a href=//bluepie.in/2021/10/open-source-dnd-email-editor/>//bluepie.in/2021/10/open-source-dnd-email-editor/</span></p></div><div class=post-tags><section><a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=//bluepie.in/>home</a></span></section></div><div class=post-nav><a href=//bluepie.in/2021/09/html-to-react/ class=prev rel=prev title="Html to React"><i class="iconfont icon-left"></i>&nbsp;Html to React</a></div><div class=post-comment><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
+var d=document,s=d.createElement('script');s.async=true;s.src='//'+"gopinath001-github-io-blog"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></div></main><footer class=footer><div class=copyright>&copy;
+<span itemprop=copyrightYear>2017 - 2021</span>
+<span class=with-love>|</span>
+<span class=author itemprop=copyrightHolder><a href=//bluepie.in/>Bluepie</a></span></div></footer><script src=//bluepie.in/js/vendor_no_gallery.min.js async></script></div></body></html>

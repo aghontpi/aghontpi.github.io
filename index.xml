@@ -1,4 +1,215 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 26 Sep 2021 10:22:12 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Html to React</title><link>//bluepie.in/2021/09/html-to-react/</link><pubDate>Sun, 26 Sep 2021 10:22:12 +0000</pubDate><guid>//bluepie.in/2021/09/html-to-react/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 10 Oct 2021 10:48:30 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Open Source Dnd Email Editor</title><link>//bluepie.in/2021/10/open-source-dnd-email-editor/</link><pubDate>Sun, 10 Oct 2021 10:48:30 +0000</pubDate><guid>//bluepie.in/2021/10/open-source-dnd-email-editor/</guid><description>
+&lt;p&gt;I created a drag and drop email editor, I&amp;rsquo;ve been working on it for the past month. It&amp;rsquo;s a lot of fun to work on, I completed it for first release, I&amp;rsquo;ll shed some light on the challenges I faced and how I solved them.&lt;/p&gt;
+&lt;h2 id=&#34;why-s-what-s&#34;&gt;Why&amp;rsquo;s &amp;amp; What&amp;rsquo;s&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;why build this?&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;No free editors/open source editors that does the job,&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;but why not profit?&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Not interested, I believe in Open Source. Heavily inspired by how LINUX (OPEN SOURCE) is useful for everyone now.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;the real motivation?&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Let me be frank here, I dont like &lt;em&gt;unalyer github&lt;/em&gt;, MAINLY BECAUSE OF THEIR FALSE ADVERTISEMENT AS OPEN SOURCE, I understand that&amp;rsquo;s how the get their business going but, damn its scummy.&lt;/p&gt;
+&lt;p&gt;One by one respoectively&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;scumbag unlayer,&lt;/li&gt;
+&lt;li&gt;grapjs mjml,
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/artf/grapesjs-mjml&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;their implementation&lt;/a&gt; was cool with mjml&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;company that I am working for, at the time of writing this, needed an email dnd editor.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;challenges&#34;&gt;Challenges&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;maintaining layer between MJML and Me.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;writing parsers, serializers and deseriealizers.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;design and code ui&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;manage drag and drop, mouse, key events, &amp;hellip;etc.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;deciding what kind of api to expose&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;deciding what inline editor to use&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I can do one of two things&lt;/li&gt;
+&lt;li&gt;One, spend time &amp;amp; learn the api&amp;rsquo;s of an existing inline editor&lt;/li&gt;
+&lt;li&gt;Two, spend time creating a yet another inline editor, that I have full control of. (I&amp;rsquo;ll learn a lot of new things If I do this)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I did both, but after finding serveral small size inline editors, I decided to completely go ahead with creating a custom InlineEditor, it is not a major task if I used &lt;em&gt;document.executeCommand&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;maintaining demo/docs/npm package in single repo&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;backend&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;using firebase fn in combination with express&lt;/li&gt;
+&lt;li&gt;firestore for database&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I&amp;rsquo;ll explain &lt;strong&gt;&lt;em&gt;maintaining demo/docs/npm package in single repo&lt;/em&gt;&lt;/strong&gt; now, since that is the recent &amp;amp; last thing that I completed.&lt;/p&gt;
+&lt;h2 id=&#34;maintaining-demo-docs-npm-package-in-single-repo&#34;&gt;Maintaining demo/docs/npm package in single repo&lt;/h2&gt;
+&lt;p&gt;Let me fist explain the layout of the items in the repo.&lt;/p&gt;
+&lt;p&gt;the repo contains,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;create-react-app&lt;/em&gt; react-scripts by default for the demo page&lt;/li&gt;
+&lt;li&gt;the &lt;em&gt;editor&lt;/em&gt; component
+&lt;ul&gt;
+&lt;li&gt;I want this to be bundled and published to npm&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;the demo branch, that automatically deploys with &lt;a href=&#34;https://pages.github.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;github pages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;api docs for the project&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;checklist that I created before starting work on this&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Its always better to plan ahead to avoid surprises later, created a small checklist to help me with this.&lt;/p&gt;
+&lt;p&gt;I should have,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;verified that the Editor is standalone
+&lt;ul&gt;
+&lt;li&gt;(i.e). that there is no demo build dependencies directly in the editor (like on first editor load, fetch this template from the backend, ..etc)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;verified that the Editor is fully functional
+&lt;ul&gt;
+&lt;li&gt;(i.e). that the editor can be used in a demo page without problems&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;decided on what build system to use
+&lt;ul&gt;
+&lt;li&gt;webpack&lt;/li&gt;
+&lt;li&gt;rollup&lt;/li&gt;
+&lt;li&gt;nd&amp;hellip;etc, millions of other build systems out there&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;created the build system, in such a way that It wont affect the demo build (created with create-react-app)
+&lt;ul&gt;
+&lt;li&gt;at the time of writing this, react-scripts uses webpack v4, So installing another instance of webpack v5 for npm build, will cause react-scripts to fail, the same goes for its dependencies aswell.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;created a seperate branch, do all documentations and changes in that branch&lt;/li&gt;
+&lt;li&gt;bundled only selected files in the npm build, should only contain
+&lt;ul&gt;
+&lt;li&gt;editor&lt;/li&gt;
+&lt;li&gt;css/sass files used with the editor&lt;/li&gt;
+&lt;li&gt;image files used with the editor&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;created sepereate &lt;strong&gt;&lt;em&gt;scripts in package.json&lt;/em&gt;&lt;/strong&gt; for the differnet builds
+&lt;ul&gt;
+&lt;li&gt;build = for react-scripts-build&lt;/li&gt;
+&lt;li&gt;build:module = for npm-build&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;created a seperate packge.json for the npm build, since the exported Editor component doesn&amp;rsquo;t need all the dependencies from the repository.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Choosing build system for the editor&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I have already published packages using webpack in the past, So I already knew webpack and its different modules. But the problem is I don&amp;rsquo;t know if I can use two webpack instances in a single project.&lt;/p&gt;
+&lt;p&gt;I Could go for a new build system just to solve this problem alone, Or find a way to use two webpack instances in a single project.&lt;/p&gt;
+&lt;p&gt;This is the point in time, where I found out about &lt;a href=&#34;https://classic.yarnpkg.com/lang/en/docs/cli/add/#toc-yarn-add-alias&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;yarn alias&lt;/em&gt;&lt;/a&gt;, After I found this, I knew which build system to choose (webpack v5).&lt;/p&gt;
+&lt;p&gt;webpack has an environment configuration named &amp;lsquo;WEBPACK_PACKAGE&amp;rsquo;, it takes the package name of the webpack, So I can utilize this to install multiple versions, one with name &amp;lsquo;webpack&amp;rsquo; another with alias &amp;lsquo;webpack-module&amp;rsquo;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt; &amp;quot;webpack-module&amp;quot;: &amp;quot;npm:webpack@^5.60.0&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I can then run webpack normally with &amp;lsquo;react-scripts&amp;rsquo; and &amp;lsquo;WEBPACK_PACKAGE=webpack-module webpack&amp;rsquo; for npm build&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Requirements for publishing to npm&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;For publishing to npm, I need,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;npm account&lt;/li&gt;
+&lt;li&gt;a package.json with seperate dependencies from the demo package.json
+&lt;ul&gt;
+&lt;li&gt;there should be a two package.json now. One for demo build, another for package build&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;a webpack configuration file for bundling&lt;/li&gt;
+&lt;li&gt;typescript definition file&lt;/li&gt;
+&lt;li&gt;output of &lt;em&gt;npm pack&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Webpack configuration&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;webpack configuration should process&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;process scss, css and module css, scss.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://webpack.js.org/loaders/style-loader/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;style loader&lt;/a&gt; - Inject the bundled styles into webpage.&lt;/p&gt;
+&lt;p&gt;since I used &lt;em&gt;@import&lt;/em&gt; for fonts and &lt;em&gt;url&lt;/em&gt; for background, I need to add &lt;a href=&#34;https://webpack.js.org/loaders/css-loader/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;css loader&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I have also used sass, thus &lt;a href=&#34;https://webpack.js.org/loaders/sass-loader/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;sass loader&lt;/a&gt; is required. To note, for the modern web, there is &lt;a href=&#34;https://github.com/sass/dart-sass&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;dart sass&lt;/a&gt;. I can &lt;a href=&#34;https://webpack.js.org/loaders/sass-loader/#object&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;instruct &amp;ldquo;sass loader&amp;rdquo; to use &amp;ldquo;dart sass&amp;rdquo;&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;// css
+{
+test: /(\.css$|\.module\.css$)/i,
+use: [&#39;style-loader-module&#39;, &#39;css-loader-module&#39;],
+},
+// scss
+{
+test: /(\.s[ac]ss$|\.module\.s[ac]ss$)/i,
+use: [
+{
+loader: &#39;style-loader-module&#39;,
+},
+{
+loader: &#39;css-loader-module&#39;,
+options: {
+importLoaders: 1,
+modules: {
+mode: &#39;local&#39;,
+},
+},
+},
+{
+loader: &#39;sass-loader-module&#39;,
+options: {
+implementation: require(&#39;sass&#39;),
+},
+},
+],
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;process .tsx, .ts and .jsx&amp;hellip;etc.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+test: /\.(js|jsx|ts|tsx)$/,
+exclude: /node_modules/,
+use: {
+loader: &#39;babel-loader-module&#39;,
+options: {
+presets: [
+&#39;@babel/preset-env&#39;,
+[&#39;@babel/preset-react&#39;, { runtime: &#39;automatic&#39; }],
+&#39;@babel/preset-typescript&#39;,
+],
+},
+}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;instruct webpack to recognize .tsx file extensions.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;resolve: {
+extensions: [&#39;.js&#39;, &#39;.jsx&#39;, &#39;.ts&#39;, &#39;.tsx&#39;],
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;a way to make image assets work in extensions,In webpack 5, I can bundle images inline in js files.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+test: /\.svg/,
+type: &#39;asset/inline&#39;,
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;That is it for the webpack config, Isn&amp;rsquo;t this simple and concise.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Maintaining another package.json for npm&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Obviously, only at the time of packing I need package.json untill then I can renaming to something else, I named it to &amp;lsquo;module-package.json&amp;rsquo; then at time of &amp;lsquo;bundling and packing&amp;rsquo;, I rename it to &amp;lsquo;package.json&amp;rsquo;&lt;/p&gt;
+&lt;p&gt;the contents of &amp;lsquo;module-package.json&amp;rsquo; should contain the following,&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt; &amp;quot;name&amp;quot;: &amp;quot;dnd-email-editor&amp;quot;,
+&amp;quot;version&amp;quot;: &amp;quot;v0.0.0-alpha.3&amp;quot;,
+&amp;quot;description&amp;quot;: &amp;quot;Drag and Drop Editor designed for mails&amp;quot;,
+&amp;quot;main&amp;quot;: &amp;quot;./main.js&amp;quot;,
+&amp;quot;files&amp;quot;: [&amp;quot;**/*&amp;quot;],
+&amp;quot;types&amp;quot;: &amp;quot;./index.d.ts&amp;quot;,
+&amp;quot;peerDependencies&amp;quot;: {
+&amp;quot;react&amp;quot;: &amp;quot;^17.0.1&amp;quot;,
+&amp;quot;react-dom&amp;quot;: &amp;quot;^17.0.1&amp;quot;
+},
+&amp;quot;author&amp;quot;: &amp;quot;https://github.com/aghontpi&amp;quot;,
+&amp;quot;license&amp;quot;: &amp;quot;GPL-3.0&amp;quot;,
+&amp;quot;bugs&amp;quot;: {
+&amp;quot;url&amp;quot;: &amp;quot;https://github.com/aghontpi/dnde/issues&amp;quot;
+},
+&amp;quot;homepage&amp;quot;: &amp;quot;https://github.com/aghontpi/dnde&amp;quot;,
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;On every version change, change &amp;ldquo;version&amp;rdquo; key, It&amp;rsquo;ll automatically update in &lt;a href=&#34;https://npmjs.com&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;npmjs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;bundling and packing&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I added the following command to package.json, (original package.json not &amp;lsquo;module-package.json&amp;rsquo;), note the environment variable &amp;lsquo;WEBPACK_PACKAGE&amp;rsquo; I mentioned from before.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;WEBPACK_PACKAGE=webpack-module webpack &amp;amp;&amp;amp;
+cp module-package.json module/package.json &amp;amp;&amp;amp;
+cp index.d.ts module/index.d.ts &amp;amp;&amp;amp;
+cp README.md module/README.md &amp;amp;&amp;amp;
+npm pack ./module/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I can the publish the output from the previous command with&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm publish build-verion.tgz
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I oversimplified in many cases but this covers &amp;lsquo;publishing to npm part&amp;rsquo;. I solved a lot of similar interesting problems in the project, Check it &lt;a href=&#34;https://github.com/aghontpi/dnde&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;github dnde.&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Html to React</title><link>//bluepie.in/2021/09/html-to-react/</link><pubDate>Sun, 26 Sep 2021 10:22:12 +0000</pubDate><guid>//bluepie.in/2021/09/html-to-react/</guid><description>
 &lt;!--
 mention, that the problem is recursive its recursive
 react rerendering to manage key,
@@ -1504,104 +1715,4 @@ sput-object v0, Lcom/dynamixsoftware/printershare/Billing;-&amp;gt;is_prm:[Ljava
 &lt;blockquote&gt;
 &lt;p&gt;Apart from the first app utilising pro-guard, these two apps required very little work, but I enjoyed it neverthless.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Im not gone share the apk for obvious reasons, this concludes this post, have a good day &amp;amp; see you next time.&lt;/p&gt;</description></item><item><title>Android Reversing Part 3</title><link>//bluepie.in/2020/05/android-reversing-part-3/</link><pubDate>Thu, 28 May 2020 04:55:51 +0530</pubDate><guid>//bluepie.in/2020/05/android-reversing-part-3/</guid><description>
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;Hi!, Its nice to post weekely for a change, I never posted weekely before, anyway this might be a one time thing(posting weekely).&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr /&gt;
-&lt;blockquote&gt;
-&lt;h2 id=&#34;disclaimer-im-just-sharing-information-not-distrubuting-mod-files-here-this-is-strictly-for-learning-purposes-only&#34;&gt;Disclaimer : Im just sharing information &amp;amp; not distrubuting mod files here! this is strictly for learning purposes only.&lt;/h2&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;let-s-start-why&#34;&gt;Let&amp;rsquo;s start &amp;amp; why&lt;/h2&gt;
-&lt;p&gt;If you forgot for some reason, this is part-3 of android reversing/modding, I recommend checking out the previous post &lt;a href=&#34;https://bluepie.in/2019/07/android-reversing/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Android Reversing&amp;rdquo;&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://bluepie.in/2019/10/android-reversing-part-2/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Android Reversing Part 2&amp;rdquo;&lt;/a&gt; in &amp;lsquo;reversing category&amp;rsquo;.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Our test subject for today will be Terria, Its a game costing &amp;ldquo;410 rupees&amp;rdquo; or &amp;ldquo;5.38&amp;rdquo; usd,&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Its not a huge sum for a one time fee, but its some amount, and why pay if you have alternatives.&lt;/p&gt;
-&lt;h4 id=&#34;why-this-game&#34;&gt;why this game?&lt;/h4&gt;
-&lt;p&gt;I saw this game on trending, after checking it out, I came to know it was a popular game with a large fanbase. Watching some gameplay made me hooked up to this game. I wanted to try it. (but not pay for it.)&lt;/p&gt;
-&lt;h4 id=&#34;how-to-get-it-for-free-google-search-and-download-it&#34;&gt;How to get it for free?, google search and download it?&lt;/h4&gt;
-&lt;p&gt;As you know me I don&amp;rsquo;t trust the any sources other than google-play, since it is very easy to attach a backdoor to any apk, I do not want that..&lt;/p&gt;
-&lt;h4 id=&#34;so-how&#34;&gt;So how?&lt;/h4&gt;
-&lt;p&gt;Incase you do not know, google has a 30 min window(atleast at the time of writing) (i.e.) if you buy anything on google-play store, within 30 minutes you can choose refund, refund will be provided no questions asked and app will be uninstalled.&lt;/p&gt;
-&lt;p&gt;The trick here is to take a backup of the app before clicking the refund button.&lt;/p&gt;
-&lt;p&gt;The main problem with this method is that, some apps verify (license with google-play) whether if you have really bought the app. So when we try to install the app and open it, the app will not work.&lt;/p&gt;
-&lt;p&gt;so lets see how we can overcome this..&lt;/p&gt;
-&lt;h2 id=&#34;continue-d&#34;&gt;continue..d&lt;/h2&gt;
-&lt;p&gt;As said this section is just a continuation of the prevous posts titled &amp;lsquo;Android Reversing Part 2&amp;rsquo; and &amp;lsquo;android reversing&amp;rsquo;. The basics, installations, decompiling, recompiling and other stuff are in those post, check them out.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h3 id=&#34;patching&#34;&gt;Patching&lt;/h3&gt;
-&lt;p&gt;So &lt;a href=&#34;https://developer.android.com/google/play/licensing&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;license verification&lt;/a&gt; is a library provided by google that comes packged with the app, using our tools, we can decompile and search the files for weak spots.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;You say license patching? Why not use lucky patcher, I dont want trust it/installn it/ risk being hit by malware.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;By analysing the files we find the following lines, they reveal the different codes used for mainting the license check, using these we can proceed.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-smali&#34;&gt;
-# static fields
-...
-.field private static final LICENSED:I = 0x0
-.field private static final LICENSED_OLD_KEY:I = 0x2
-.field private static final NOT_LICENSED:I = 0x1
-.field private static final SIGNATURE_ALGORITHM:Ljava/lang/String; = &amp;quot;SHA1withRSA&amp;quot;
-...
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;by digging deeper, we come across an interesting method called &amp;ldquo;allowAccess&amp;rdquo;,&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-smali&#34;&gt;
-invoke-interface {p2}, Lcom/google/android/vending/licensing/Policy;-&amp;gt;allowAccess()Z
-move-result p2
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;by checking the source of the file &lt;a href=&#34;https://github.com/google/play-licensing/blob/master/lvl_library/src/main/java/com/google/android/vending/licensing/Policy.java&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;github link&lt;/a&gt;, we can verify that this function does the magic work.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
-/**
-* Policy used by {@link LicenseChecker} to determine whether a user should have
-* access to the application.
-*/
-public interface Policy {
-...
-/**
-* Provide results from contact with the license server. Retry counts are
-* incremented if the current value of response is RETRY. Results will be
-* used for any future policy decisions.
-*
-* @param response the result from validating the server response
-* @param rawData the raw server response data, can be null for RETRY
-*/
-void processServerResponse(int response, ResponseData rawData);
-/**
-* Check if the user should be allowed access to the application.
-*/
-boolean allowAccess();
-...
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;override&#34;&gt;Override&lt;/h3&gt;
-&lt;p&gt;the java logic of our override is pretty simple.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;original code&lt;/em&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
-if(mPolicyInterface.allowAccess()){
-unlockApp();
-} else{
-lockApp();
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;em&gt;patched code&lt;/em&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
-if(true){ // we make this always true
-unlockApp();
-} else{
-lockApp();
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;em&gt;the equivalent smali code will be&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;original smali code&lt;/em&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-smali&#34;&gt;
-invoke-interface {p2}, Lcom/google/android/vending/licensing/Policy;-&amp;gt;allowAccess()Z
-move-result p2
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;em&gt;modified smali code&lt;/em&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-smali&#34;&gt;
-const p2, 1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;that is it, recompile, resign and install the app/game.&lt;/p&gt;
-&lt;h3 id=&#34;end&#34;&gt;End&lt;/h3&gt;
-&lt;p&gt;Im not gona share the apk here, but I believe that I have shared the knowledge to do so. bye, see ya next time.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;Im not gone share the apk for obvious reasons, this concludes this post, have a good day &amp;amp; see you next time.&lt;/p&gt;</description></item></channel></rss>
