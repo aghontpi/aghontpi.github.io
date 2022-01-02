@@ -1,4 +1,102 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 10 Oct 2021 10:48:30 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Open Source Dnd Email Editor</title><link>//bluepie.in/2021/10/open-source-dnd-email-editor/</link><pubDate>Sun, 10 Oct 2021 10:48:30 +0000</pubDate><guid>//bluepie.in/2021/10/open-source-dnd-email-editor/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Thu, 18 Nov 2021 19:46:00 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Accuradio, Spotify...etc Adblocker in Kotlin</title><link>//bluepie.in/2021/11/accuradio-spotify-adblocker-in-kotlin/</link><pubDate>Thu, 18 Nov 2021 19:46:00 +0000</pubDate><guid>//bluepie.in/2021/11/accuradio-spotify-adblocker-in-kotlin/</guid><description>
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Hello how you been?, hope everything is going well.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I wanted to learn Kotlin for native Android development, I already knew how to do it with java, so the only obstacle for me is learning Kotlin.&lt;/p&gt;
+&lt;h2 id=&#34;kotlin&#34;&gt;Kotlin&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Kotlin &lt;a href=&#34;https://trello.com/c/zYFtp51G/1-learn-kotlin&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;trello board&lt;/a&gt; that I used to track progress.&lt;/li&gt;
+&lt;li&gt;After learning the basics for Kotlin, &lt;a href=&#34;https://play.kotlinlang.org/koans/overview&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Kotlin koans&lt;/a&gt; is a great place for practice (beginner to advanced).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;chosing-what-to-do-with-kotlin&#34;&gt;Chosing what to do with Kotlin&lt;/h2&gt;
+&lt;p&gt;I use &lt;a href=&#34;https://accuradio.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Accuradio&lt;/a&gt; android app to stream music, but it does not have a paid tear, So the ads are not skippable and there was no existing adblocker that does this(which is a pain). So I decided to write one in Kotlin.&lt;/p&gt;
+&lt;p&gt;So its decided, I am doing a project in Kotlin to block/silence ads in Accuradio, some additional things I decided to implement are the following.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;should be extensible to other apps like Spotify,&amp;hellip;etc&lt;/li&gt;
+&lt;li&gt;should have minimal UI&lt;/li&gt;
+&lt;li&gt;should be lightweight&lt;/li&gt;
+&lt;li&gt;should be completely openSource.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To be extensbile, I should have a common pattern/way to detect ads in these apps&amp;hellip; One such way is by using app&amp;rsquo;s notification.&lt;/p&gt;
+&lt;p&gt;I can determine what an app is currenly playing using the notification, using the &lt;a href=&#34;https://developer.android.com/reference/android/app/NotificationListenerService&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;notification listener&lt;/a&gt; service and parsing the posted notifications, mute/unmute the app based on the content.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/accuradio-spotify-ad-blocker/flow.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;An update, &lt;strong&gt;I already added support for Spotify and Tidal.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;implementation&#34;&gt;Implementation&lt;/h2&gt;
+&lt;p&gt;I pretty much have to just&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;implement the &lt;a href=&#34;https://developer.android.com/reference/android/app/NotificationListenerService&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;NotificationListenerService&lt;/a&gt; service, and parse the posted notifications,&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;extend the &lt;a href=&#34;https://developer.android.com/reference/android/app/NotificationListenerService&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;NotificationListenerService&lt;/a&gt; class and implement the &lt;a href=&#34;https://developer.android.com/reference/android/app/NotificationListenerService.OnNotificationPostedListener.html#onNotificationPosted&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;onNotificationPosted&lt;/a&gt; method &amp;amp; &lt;a href=&#34;https://developer.android.com/reference/android/app/NotificationListenerService.OnNotificationConnectedListener.html#onNotificationConnected&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;onNotificationConnected&lt;/a&gt; method.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-kt&#34;&gt;class NotificationListener : NotificationListenerService() {
+override fun onListenerConnected() {
+super.onListenerConnected()
+appNotificationHelper?.updateNotification(&amp;quot;AdSilence, listening for ads&amp;quot;)?.run {
+startForeground(NOTIFICATION_ID, this) // persistent notification
+}
+Log.v(TAG, &amp;quot;notification listener connected&amp;quot;)
+}
+override fun onNotificationPosted(sbn: StatusBarNotification?) {
+super.onNotificationPosted(sbn)
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;why do I need to run it as a foreground service?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;because In recent versions of android, any app that is actively running the background must post a notification to the status bar. Otherwise the app will be killed by the system.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;then mute/unmute the app based on the content,&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-kt&#34;&gt;
+sbn?.let {
+with(AppNotification(applicationContext, it.notification, sbn.packageName)) {
+Preference(applicationContext).isAppConfigured(this.getApp()).takeIf { b -&amp;gt; b }
+?.run {
+Utils().run {
+when (NotificationParser(this@with).isAd()) {
+true -&amp;gt; {
+this.mute()
+isMuted = true
+}
+false -&amp;gt; {
+isMuted = false
+this.unmute();
+)
+}
+}
+}
+}
+}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;next important step is granting the app, the permission to listen to notifications. (if all apps can listen to incoming notifications, this would be a huge security flaw!)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://developer.android.com/training/permissions/requesting&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;grant permission&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;since this app is openSource, everyone can see the source code before granting permission&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;bascially the following one line has to be used. (note: using string to support older devices)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;startActivity(Intent(&amp;quot;enabled_notification_listeners&amp;quot;))
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;in the android manifest, add the following to the &lt;code&gt;&amp;lt;application&amp;gt;&lt;/code&gt; tag,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;telling the system to use the file &lt;code&gt;NotificationListenerService&lt;/code&gt; as the notification listener service.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;service android:name=&amp;quot;.NotificationListener&amp;quot;
+android:label=&amp;quot;@string/notification_listener_name&amp;quot;
+android:permission=&amp;quot;android.permission.BIND_NOTIFICATION_LISTENER_SERVICE&amp;quot;
+android:exported=&amp;quot;false&amp;quot;&amp;gt;
+&amp;lt;intent-filter&amp;gt;
+&amp;lt;action android:name=&amp;quot;android.service.notification.NotificationListenerService&amp;quot; /&amp;gt;
+&amp;lt;/intent-filter&amp;gt;
+&amp;lt;/service&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;That is all is required to get the app to work, there are other things like UI, checking app installed or not, maintaining the app running in the background, hiding the app from recents, restarting the service, preference&amp;hellip;etc. Since the app is so lightweight (around 150KB)&amp;hellip;&lt;/p&gt;
+&lt;p&gt;I could write about every part of the app in this, but this app is open source&amp;hellip;.its already explained. It was so refreshing and fun work on this&amp;hellip; Kotlin is fun and I am glad to have learned it(atleast some bit).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/aghontpi/ad-silence&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Link to source code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://play.google.com/store/apps/details?id=bluepie.ad_silence&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Google play store link&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://f-droid.org/packages/bluepie.ad_silence/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Fdroid link&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Open Source Dnd Email Editor</title><link>//bluepie.in/2021/10/open-source-dnd-email-editor/</link><pubDate>Sun, 10 Oct 2021 10:48:30 +0000</pubDate><guid>//bluepie.in/2021/10/open-source-dnd-email-editor/</guid><description>
 &lt;p&gt;I created a drag and drop email editor, I&amp;rsquo;ve been working on it for the past month. It&amp;rsquo;s a lot of fun to work on, I completed it for first release, I&amp;rsquo;ll shed some light on the challenges I faced and how I solved them.&lt;/p&gt;
 &lt;h2 id=&#34;why-s-what-s&#34;&gt;Why&amp;rsquo;s &amp;amp; What&amp;rsquo;s&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;why build this?&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -1652,67 +1750,4 @@ service provided language (atleast at the time of writing this post) is php. It&
 &lt;p&gt;I wanted this to have easy setup during development, don&amp;rsquo;t want the hassle of installing php, configuring, adding debug packages, &amp;hellip;etc - &lt;em&gt;reason for choosing docker.&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
 &lt;p&gt;This little project of mine took around a week to complete, though It has been on my mind for two months. &lt;em&gt;Action is necessary for something to work, waiting is useless in most cases&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;That is it, have a good day!.&lt;/p&gt;</description></item><item><title>Android Reversing Part 4</title><link>//bluepie.in/2020/06/android-reversing-part-4/</link><pubDate>Tue, 30 Jun 2020 00:21:31 +0530</pubDate><guid>//bluepie.in/2020/06/android-reversing-part-4/</guid><description>
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;&lt;em&gt;Hi me!, how are you doing, how is the future holding up?&lt;/em&gt;&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Personal Update: It&amp;rsquo;s been a rough couple weeks since the last post, Covid-19 has shown no rate of slowing down. Nothing been around my mind lately just junk&amp;hellip; a lot of junk I don&amp;rsquo;t want to think about. To many frequent decisions, Once a friend told me Self control over your thoughts is very important. No matter what I do, It seems I can not achieve it.. at least up-until now.&lt;/em&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;blockquote&gt;
-&lt;h2 id=&#34;disclaimer-im-just-sharing-information-not-distrubuting-mod-files-here-this-is-strictly-for-learning-purposes-only&#34;&gt;Disclaimer : Im just sharing information &amp;amp; not distrubuting mod files here! this is strictly for learning purposes only.&lt;/h2&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;intro-why&#34;&gt;Intro &amp;amp; why:&lt;/h2&gt;
-&lt;p&gt;This post will be an another reverse engineering/modding post. I recommend checking out last three posts. &lt;a href=&#34;https://bluepie.in/2019/07/android-reversing/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Android Reversing&amp;rdquo;&lt;/a&gt;, &lt;a href=&#34;https://bluepie.in/2019/10/android-reversing-part-2/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Android Reversing Part 2&amp;rdquo;&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://bluepie.in/2020/05/android-reversing-part-3/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Android Reversing part 3&amp;rdquo;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Today we will be looking at two apps to study on, to put it simply I did it for my friends, After I told them about the Terria experiment that I did in the last post, they asked me whether Advanced Download Manager &amp;amp; Printer Sharer app can be modded too, I haven&amp;rsquo;t felt this existed to work on something since a long time. I immediately started working on it. spoiler: I completed it quickly&amp;hellip;but it was fun.&lt;/p&gt;
-&lt;h3 id=&#34;apps-one-two&#34;&gt;Apps one &amp;amp; two:&lt;/h3&gt;
-&lt;p&gt;The first app is ADM (advanced download manager). this app has a premium activation, we will check whether we can exploit this feature.&lt;/p&gt;
-&lt;p&gt;The second app is Print share anywhere, this app has premium features that works by installing another app that has to be bought from google play store, for the app to work both applications should have to installed.&lt;/p&gt;
-&lt;h2 id=&#34;new&#34;&gt;New:&lt;/h2&gt;
-&lt;p&gt;Taking apart of &amp;ldquo;app one&amp;rdquo; and &amp;ldquo;app two&amp;rdquo; does not contain anything new, refer previous post for this section.&lt;/p&gt;
-&lt;p&gt;Before discussing the possible ways to achieve our goals, there is something we would like to know, usually when an app has premium features, during first launch the default state of the purchase flag in code will be &amp;lsquo;not purchased&amp;rsquo;(in code), what I mean by &amp;ldquo;first launch&amp;rdquo; is installing the app fresh from app store and launching it for the first time or it communicates with some license server for it information for the first time.&lt;/p&gt;
-&lt;p&gt;Second thing we should know about: we are getting into advanced territory here, I&amp;rsquo;ve been sharing basic modding until now, lets go advanced for a change.&lt;/p&gt;
-&lt;h2 id=&#34;accessing-data&#34;&gt;Accessing data:&lt;/h2&gt;
-&lt;p&gt;As mentioned the debug flag &amp;lsquo;android:debuggable=&amp;ldquo;true&amp;rdquo;&amp;rsquo; must be added to manifest.xml.&lt;/p&gt;
-&lt;p&gt;as of writing this post, Google&amp;rsquo;s last stable release is android 9 and the following methond works on my devices running android 8 &amp;amp; 9.&lt;/p&gt;
-&lt;p&gt;make sure the device is connected and has debugging enabled.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;
-&amp;gt; adb shell
-shell $ run-as package_name
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;interesting-part&#34;&gt;Interesting part:&lt;/h2&gt;
-&lt;p&gt;For an application to work, consider it being android, apple, windows, space-craft software&amp;hellip;(i.e)any piece of software that has to run and has to retain memory between launches, It has to store the state someplace.&lt;/p&gt;
-&lt;p&gt;Yes exactly the android applications work on the same principle. how do we access it?
-We can add the debug flag during compilation of the app and install it to the device and run it, by this we overcome the restriction imposed by the android system, (i.e) applications private data can not be accessed by us.&lt;/p&gt;
-&lt;p&gt;We can then investigate the configs, private files of the app, One common way an app retains information for example: Entering your name in the app, it remembers it by store the information inside these files(there could be other-ways but lets not over-complicate things).&lt;/p&gt;
-&lt;p&gt;Theoretically, after we find out where the config to app&amp;rsquo;s purchase state is found, we can insert new code into the app to change the &amp;lsquo;buy state&amp;rsquo; of the application.&lt;/p&gt;
-&lt;p&gt;I later found out that these two apps were way-too-simple to mod, so did not bother use this, but anyway Keep this idea in the mind, we might use it in the future.&lt;/p&gt;
-&lt;h2 id=&#34;patching&#34;&gt;patching:&lt;/h2&gt;
-&lt;p&gt;Ways to overcome app one:&lt;/p&gt;
-&lt;p&gt;So after I decompiled the app, It was way too easy, they maintain a flag and use the flag everywhere for premium option, So basically I can just change it? Yea that is what I did and recompiled whola!. You have to be carefull here since during the first launch, It will just check with server whether you have bought the app from google app store or not. if we bought the app, then it stores the status in memory, what we could do here is change the smali-code to default go to insert the premium status in memory, doing &lt;em&gt;this way we could not worry about the different lifecycle problems that you might face. pause, destroy, resume states of the app.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Ways to overcome for app two:&lt;/p&gt;
-&lt;p&gt;The second app had the same logic, I made a similar patch in smali, the actual logic and smali code are as follows:&lt;/p&gt;
-&lt;p&gt;before:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; // by default the license variable contains false values,
-public static final Boolean[] is_prm = new Boolean[2];
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;after:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
-public static final Boolean[] is_prm = {true, true};
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In smali, it translates to:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-smali&#34;&gt;
-const/4 v4, 0x1
-const/4 v0, 0x2
-new-array v0, v0, [Ljava/lang/Boolean;
-const/4 v2, 0x0
-invoke-static {v4}, Ljava/lang/Boolean;-&amp;gt;valueOf(Z)Ljava/lang/Boolean;
-move-result-object v3
-aput-object v3, v0, v2
-invoke-static {v4}, Ljava/lang/Boolean;-&amp;gt;valueOf(Z)Ljava/lang/Boolean;
-move-result-object v2
-aput-object v2, v0, v4
-.line 398
-sput-object v0, Lcom/dynamixsoftware/printershare/Billing;-&amp;gt;is_prm:[Ljava/lang/Boolean;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Apart from the first app utilising pro-guard, these two apps required very little work, but I enjoyed it neverthless.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Im not gone share the apk for obvious reasons, this concludes this post, have a good day &amp;amp; see you next time.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;That is it, have a good day!.&lt;/p&gt;</description></item></channel></rss>
