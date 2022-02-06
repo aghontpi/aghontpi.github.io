@@ -1,4 +1,79 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Thu, 18 Nov 2021 19:46:00 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Accuradio, Spotify...etc Adblocker in Kotlin</title><link>//bluepie.in/2021/11/accuradio-spotify-adblocker-in-kotlin/</link><pubDate>Thu, 18 Nov 2021 19:46:00 +0000</pubDate><guid>//bluepie.in/2021/11/accuradio-spotify-adblocker-in-kotlin/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Wed, 05 Jan 2022 21:34:18 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>&#34;F-droid&#34; vs the pain that is &#34;Google PlayStore&#34;</title><link>//bluepie.in/2022/01/publishing-to-fdroid-google-play/</link><pubDate>Wed, 05 Jan 2022 21:34:18 +0530</pubDate><guid>//bluepie.in/2022/01/publishing-to-fdroid-google-play/</guid><description>
+&lt;p&gt;&lt;strong&gt;How you doing? hope you are doing well. I missed to post on december because I was juggling too much things at once and needed a break&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;fdroid&#34;&gt;Fdroid?&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://fdroid.org&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Fdroid&lt;/a&gt; is a free and open source Android application repository. It is a repository of open source applications that are available for download and installation on Android devices. You can use Fdroid via the &lt;a href=&#34;https://f-droid.org/client&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;F-Droid client&lt;/a&gt; or the &lt;a href=&#34;https://f-droid.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;F-Droid website&lt;/a&gt;. It is similar to the &lt;a href=&#34;https://play.google.com/store&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Google Play Store&lt;/a&gt;, but with a few key differences:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;is free and open source&lt;/li&gt;
+&lt;li&gt;contains only open source applications&lt;/li&gt;
+&lt;li&gt;is not a commercial service&lt;/li&gt;
+&lt;li&gt;all google play dependencies are stripped out when publishing&lt;/li&gt;
+&lt;li&gt;goes through a series of automated tests &amp;amp; reviews before being accepted&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;how-do-i-add-a-new-app-to-fdroid&#34;&gt;How do I add a new app to Fdroid?&lt;/h3&gt;
+&lt;p&gt;There are two options, choose one:&lt;/p&gt;
+&lt;p&gt;If you don&amp;rsquo;t want to do it yourself&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;You create a issue in &lt;a href=&#34;https://gitlab.com/fdroid/rfp/-/issues&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;REP - Request For Packaging&lt;/a&gt; and the contributors will review your request and add it to the repository.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If you want to do it yourself&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Open a issue on &lt;a href=&#34;https://gitlab.com/fdroid/fdroid-data/-/issues&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Fdroid data&lt;/a&gt; with the appropriate yaml(metadata) file, you should create one with your metadata, refer &lt;a href=&#34;https://f-droid.org/docs/FAQ_-_App_Developers/#how-do-i-get-my-app-included&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://f-droid.org/docs/Submitting_to_F-Droid_Quick_Start_Guide/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;this link&lt;/a&gt; for more information.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;After being reviewed and added to the repository, it will avialable for everyone to download and install.&lt;/p&gt;
+&lt;h3 id=&#34;how-do-i-publish-updates-to-fdroid&#34;&gt;How do I publish updates to Fdroid?&lt;/h3&gt;
+&lt;p&gt;The great thing about Fdroid is that it automatically detects new versions of your app from github and updates it there. So you just have to make a new tag in your repo and fdroid will handle the rest.&lt;/p&gt;
+&lt;h3 id=&#34;how-did-i-publish-to-fdroid&#34;&gt;How did I publish to Fdroid?&lt;/h3&gt;
+&lt;p&gt;I followed step 2 and &lt;a href=&#34;https://gitlab.com/fdroid/fdroiddata/-/merge_requests/10097&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;this is the pull request&lt;/a&gt; that I created.&lt;/p&gt;
+&lt;h2 id=&#34;google-play-store&#34;&gt;Google Play Store?&lt;/h2&gt;
+&lt;p&gt;Goople PlayStore needs no explanation. It is a commercial service that is used by millions of users to download and install apps. It is a great way to monetize &amp;amp; distribute your apps. You need to buy a license with a one time fee though.&lt;/p&gt;
+&lt;p&gt;Anyway lets get started&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;First you create a new app,&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/publishing-to-fdroid-and-playstore/create-new-app.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Complete all the tasks in the Dashboard&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/publishing-to-fdroid-and-playstore/complete-tasks-in-console-dashboard.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Generate privacy policy(&lt;a href=&#34;https://app-privacy-policy-generator.firebaseapp.com&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;i recommend this&lt;/a&gt;) and host it somewhere and configure it in store&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/publishing-to-fdroid-and-playstore/generate-privacy-policy.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Take build bundle in android studio.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/publishing-to-fdroid-and-playstore/generate-signed-apk-bundle.png&#34; alt=&#34;&#34; /&gt;
+&lt;img src=&#34;//bluepie.in/images/posts/publishing-to-fdroid-and-playstore/generate-bundle-dialog.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create store listing with appropriate data,&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/publishing-to-fdroid-and-playstore/update-store-listing.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Note to upload the correct images&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/publishing-to-fdroid-and-playstore/upload-appropriate-images.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;use the bundle from before and make a test release and promote it to production. (review process takes time)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/publishing-to-fdroid-and-playstore/upload-bundle.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;the-pain&#34;&gt;The pain&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Publishing to playstore especially when the app is OpenSource is a manual time consuming process vs the automated process in Fdroid.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Every release takes a week to get reviewed and published, even if it is OpenSource.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;from my experience time differs between minor, major and bug fixes (based on semantic versioning)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The customer support is full of bots&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Store is unfair&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I got my app delisted because I had the word &amp;ldquo;AD&amp;rdquo; in the Icon.. eventhough there are other apps from playstore with 1m+ installs that also has the same, either way I had to change the Icon to get it back on the store.&lt;/li&gt;
+&lt;li&gt;I could not get a proper response from Support &lt;a href=&#34;https://github.com/aghontpi/ad-silence/issues/19&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;more on here&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The feedback back system is not that great, If users encounter crash/ something is not working.. In github you can have a correct feedback loop but in playstore..its just an uninstall with a lower rating.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/publishing-to-fdroid-and-playstore/delisted.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
+&lt;p&gt;If you have an OpenSource App, spend less time updating it on Playstore. Stick with Github releases or Fdroid releases. Don&amp;rsquo;t even get my started on Apple app store.&lt;/p&gt;</description></item><item><title>Accuradio, Spotify...etc Adblocker in Kotlin</title><link>//bluepie.in/2021/11/accuradio-spotify-adblocker-in-kotlin/</link><pubDate>Thu, 18 Nov 2021 19:46:00 +0000</pubDate><guid>//bluepie.in/2021/11/accuradio-spotify-adblocker-in-kotlin/</guid><description>
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Hello how you been?, hope everything is going well.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;I wanted to learn Kotlin for native Android development, I already knew how to do it with java, so the only obstacle for me is learning Kotlin.&lt;/p&gt;
 &lt;h2 id=&#34;kotlin&#34;&gt;Kotlin&lt;/h2&gt;
@@ -1704,56 +1779,4 @@ style-src data: blob: &#39;unsafe-inline&#39; *;connect-src *.facebook.com faceb
 &lt;hr /&gt;
 &lt;h3 id=&#34;reflection&#34;&gt;Reflection&lt;/h3&gt;
 &lt;p&gt;Today is my birthday&amp;hellip;i&amp;rsquo;m getting older, I feel like I don&amp;rsquo;t know a lot of things around my surroundings yet, I have to asses my future goals. My goal was to contribute to opensource as much as I can, May be I am wrong?, i don&amp;rsquo;t know yet. As for my career, I made up my mind to excell in a new domain. I will update what is happening in upcoming months and asses my career goals in next august.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;peace bye!&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Rinku</title><link>//bluepie.in/2020/07/rinku/</link><pubDate>Wed, 22 Jul 2020 19:22:49 +0530</pubDate><guid>//bluepie.in/2020/07/rinku/</guid><description>
-&lt;blockquote&gt;
-&lt;p&gt;Hi! hope you are doing well future me!,&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;I&amp;rsquo;m well in the comfort of my home, the pandemic isn&amp;rsquo;t over yet, the cases are increasing day by day, infact today, as I am wiriting this, newly infected patients is over 6.5k. The past few weeks has been productive, I&amp;rsquo;m loving what I am doing, learning new stuff, doing a little of reversing at times, Oh snap, I forgot, my harddisk died on me, it was not fun(thank god important stuff were already on a server backed up), had to replace that with an ssd.&lt;/p&gt;
-&lt;h2 id=&#34;this-post-is-about-rinku&#34;&gt;This post is about Rinku&lt;/h2&gt;
-&lt;p&gt;Rinku is a server side download manager written in react &amp;amp; php.&lt;/p&gt;
-&lt;h2 id=&#34;why-the-motivation&#34;&gt;Why - The motivation&lt;/h2&gt;
-&lt;p&gt;I..&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;wanted to do a project in React.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;recently had to create download links for many files on my server, this happened multiple times,
-there were certain edge cases where I had to disable a link temporarily, disable link after the intended people downloaded the stuff,&amp;hellip;etc&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;needed the download log.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;user-stories-to-fulfill&#34;&gt;User Stories to fulfill&lt;/h2&gt;
-&lt;p&gt;I can..&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;create download link for any files in the server&lt;/li&gt;
-&lt;li&gt;manage all download links&lt;/li&gt;
-&lt;li&gt;get analytics of the downloaded files&lt;/li&gt;
-&lt;li&gt;has google Recaptcha,
-&lt;ul&gt;
-&lt;li&gt;Recaptcha is configurable, can be turned off/on&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;get logs of download files&lt;/li&gt;
-&lt;li&gt;have download page as seperate&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;technology-stack&#34;&gt;Technology stack&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;note: fontend and backend are on different repos&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&#34;frontend&#34;&gt;FrontEnd&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/Rinku-Frontend&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to frontend repo&lt;/a&gt;&lt;/p&gt;
-&lt;h4 id=&#34;react&#34;&gt;React&lt;/h4&gt;
-&lt;p&gt;This was absolutely clear from the start, I madeup my mind to use React. The reason being
-I had already done a project in angular, eversince that wanted to a project in
-React.&lt;/p&gt;
-&lt;h3 id=&#34;backend&#34;&gt;Backend&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/Rinku-Backend/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to backend repo&lt;/a&gt;&lt;/p&gt;
-&lt;h4 id=&#34;php-with-framework-written-from-scratch&#34;&gt;PHP with Framework Written from Scratch.&lt;/h4&gt;
-&lt;p&gt;I wanted a simple backend, that could be deployable anywhere, currently the most popular free hosting
-service provided language (atleast at the time of writing this post) is php. It&amp;rsquo;s used everywhere.&lt;/p&gt;
-&lt;p&gt;So I wanted a simple backend to work for my services, I looked up several frameworks, they had all the features that I do not need, plus add the time I need to learn those frameworks, which is a lot, mainly during development and looking for that unique bug that takes two days to figure out becasue of the framework,&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;I have a little bit of knowledge in the bare essentials, security that it should have, how to write configurable modules.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Thus, decided to write a framework of my own. with basic features,security and so that it is easy to add new modules/functionlaity.&lt;/p&gt;
-&lt;h4 id=&#34;mysql&#34;&gt;Mysql&lt;/h4&gt;
-&lt;p&gt;I have a lot of experience with firebase &amp;amp; mysql, going mysql for this one, mangodb &amp;amp; graphql has to wait.&lt;/p&gt;
-&lt;h3 id=&#34;docker-with-docker-compose&#34;&gt;Docker with Docker-Compose&lt;/h3&gt;
-&lt;p&gt;I wanted this to have easy setup during development, don&amp;rsquo;t want the hassle of installing php, configuring, adding debug packages, &amp;hellip;etc - &lt;em&gt;reason for choosing docker.&lt;/em&gt;&lt;/p&gt;
-&lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
-&lt;p&gt;This little project of mine took around a week to complete, though It has been on my mind for two months. &lt;em&gt;Action is necessary for something to work, waiting is useless in most cases&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;That is it, have a good day!.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&lt;em&gt;peace bye!&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>
