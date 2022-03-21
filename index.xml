@@ -1,4 +1,74 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Wed, 05 Jan 2022 21:34:18 +0530</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>&#34;F-droid&#34; vs the pain that is &#34;Google PlayStore&#34;</title><link>//bluepie.in/2022/01/publishing-to-fdroid-google-play/</link><pubDate>Wed, 05 Jan 2022 21:34:18 +0530</pubDate><guid>//bluepie.in/2022/01/publishing-to-fdroid-google-play/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 20 Feb 2022 19:10:13 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Modding a macOS App</title><link>//bluepie.in/2022/02/modding-a-macos-app/</link><pubDate>Sun, 20 Feb 2022 19:10:13 +0000</pubDate><guid>//bluepie.in/2022/02/modding-a-macos-app/</guid><description>
+&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
+&lt;p&gt;This post is about reversing.. but for a MACOS binary. Lets drive straight into it.&lt;/p&gt;
+&lt;p&gt;Modding in macOS is fairly new to me, but a binary is a binary and it can be modded!. I started to daily drive macOS a month or two ago, the why and what&amp;rsquo;s is a whole different story to post about.&lt;/p&gt;
+&lt;p&gt;Like I have said previously in my other &lt;a href=&#34;https://bluepie.in/categories/reversing/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;re posts&lt;/a&gt;, &amp;ldquo; I don&amp;rsquo;t trust mods from the internet&amp;rdquo; If I can mod it then its fine, otherwise I&amp;rsquo;m paying for it.&lt;/p&gt;
+&lt;p&gt;I just started to understand the quirks of &amp;ldquo;OS X&amp;rdquo;, Though some of my methods may be crude&amp;hellip;it works, I will perfect them..&lt;/p&gt;
+&lt;h2 id=&#34;target&#34;&gt;Target&lt;/h2&gt;
+&lt;p&gt;So there is this great app for cleaning your Mac&amp;rsquo;s junk/storage files, but the free version only lets you clean 500mb daily.. the premium version is a whooping 3k per year&amp;hellip;do you get where I am going with this ? &amp;hellip;YES!&amp;hellip;modding for fun and profit (PROFIT = personal use)&lt;/p&gt;
+&lt;h2 id=&#34;tools&#34;&gt;Tools&lt;/h2&gt;
+&lt;p&gt;So I&amp;rsquo;m gonna be trying out ghidra &amp;ldquo; The NSA&amp;rsquo;s reverse engineering tool &amp;ldquo;, mainly because Its a open source tool and I wanted to do some reverse engineering with it for a long time now.&lt;/p&gt;
+&lt;p&gt;make sure you have &lt;a href=&#34;https://brew.sh/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;brew&lt;/a&gt; installed and then run the following command&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;brew install --cask ghidra
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;making-observation-to-the-target&#34;&gt;Making observation to the target&lt;/h2&gt;
+&lt;p&gt;The app throws you with the &amp;ldquo;Nag Screen&amp;rdquo; whenever you use the app, it blocks the usage of features (can not use the app to remove more than 500MB of data,privacy scanning won&amp;rsquo;t work unless you pay,..etc).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;500mb storage limit reached &amp;lsquo;nag screen&amp;rsquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/modding-a-macos-app/500mb-over-nag-screen.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Trial period expired &amp;lsquo;nag screen&amp;rsquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/modding-a-macos-app/clean-my-mac-unmodded.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;basics-understanding-ghidra&#34;&gt;Basics &amp;amp; Understanding Ghidra&lt;/h2&gt;
+&lt;p&gt;All macOS apps have the following structure, the main binary will always be inside the MacOS directory.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/modding-a-macos-app/mac-app-folder-structure.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Launch Ghidra and create a new project, then drag and drop the binary into the project.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/modding-a-macos-app/create-new-project.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Mac has this binary format &amp;ldquo;macobinary&amp;rdquo; - basically it contains the different target executables, ex: (arm binary vs the x86 binary).. mine is a x86 machine, will be modding that alone.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/modding-a-macos-app/choose-appropriate-target-binary.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;After the import, Ghidra will automatically ask you to analyse the target binary, choose Analyse. (it will make our life easier), based on the binary size and your cpu cores, it may take couple minutes.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/modding-a-macos-app/will-ask-for-analyse-choose-analyse.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Only focus on the following five windows, that is enough to get the job done.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/modding-a-macos-app/ghidra-ui.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1 = will contain the symbol tabel, this is where we do most of the filtering.&lt;/li&gt;
+&lt;li&gt;2 = shows the disassembly of the binary (assembly language), this is where we do the actual reversing, (i.e) patching, understanding logic, etc.&lt;/li&gt;
+&lt;li&gt;3 = This is a great feature, shows the equivalent c code, to the selected assembly section.&lt;/li&gt;
+&lt;li&gt;4 &amp;amp; 5 = shows the incoming and outgoing function calls, this will help us find interesting things about the binary, which then can be used for identifying logic and patching.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;IF ANY OF THE ABOVE WINDOWS ARE NOT OPEN, YOU CAN ENABLE THEM THROUGH THE MENU OPTION &amp;ldquo;WINDOW&amp;rdquo;.&lt;/p&gt;
+&lt;h2 id=&#34;analysis&#34;&gt;Analysis&lt;/h2&gt;
+&lt;p&gt;It will take some time to find what you are looking for, but I have already invested time in this, so what we need is &amp;ldquo;activationManager&amp;rdquo; class, it has all sorts of interesting functions like &amp;ldquo;activationStatus, isAppActivated..etc&amp;rdquo;. Looking for references, it is used throughout the app, so lets change it.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/modding-a-macos-app/different-app-status.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Looking around, we find the different status codes inside &amp;ldquo;activationStatus&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;By checking other functions, it becomes obvious that, changing only &amp;ldquo;isAppActivated&amp;rdquo; function is enough. The return type of the function is &amp;ldquo;char&amp;rdquo;, with reference to &amp;ldquo;status&amp;rdquo; from above..we should return &amp;ldquo;3&amp;rdquo;. From the ascii table, &amp;ldquo;0x33&amp;rdquo; is the equivalnet for &amp;ldquo;3&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Patching the &amp;ldquo;isAppActivated&amp;rdquo; function, with the following code.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;push rbp
+mov rbp,rsp
+mov DWORD PTR [rbp-0x4],0x0
+mov eax,0x33
+pop rbp
+ret
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;then export the program &amp;ldquo;File -&amp;gt; Export Program&amp;rdquo;, our patched binary is ready. Now give executable permission and move it to the original directory.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/modding-a-macos-app/move-exported-binary-to-original-directory.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;rename the original&lt;/p&gt;
+&lt;h2 id=&#34;signing-running-the-modded-binary-for-profit&#34;&gt;Signing &amp;amp; Running the modded binary for PROFIT&lt;/h2&gt;
+&lt;p&gt;Unlike windows and linux, macOS won&amp;rsquo;t run applications without signing the binary.. but we can generate your own certificates for personal use (dont have to buy a developer account for 99$/year).&lt;/p&gt;
+&lt;p&gt;create a certificate using &amp;ldquo;keychain Access&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/modding-a-macos-app/create-custom-certifcate.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;choose &amp;ldquo;code signing&amp;rdquo; in &amp;ldquo;certificate type&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/modding-a-macos-app/choose-code-signing.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Go to the application root &amp;ldquo;/Application/&amp;rdquo; to resign the entire app.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;sudo codesign -s &amp;quot;&amp;lt;name-of-certificate&amp;gt;&amp;quot; -fv CleanMyMac-MAS.app/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Run the app&amp;hellip; Now its been modded and I don&amp;rsquo;t have to pay 3k INR a year or worry about untrusted binaries from the internet.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/modding-a-macos-app/removed-files-beyong-the-limit.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;You can see from the image, all the premium features are now unlocked &amp;amp; we can also remove the junk files exceeding 500MB.&lt;/p&gt;
+&lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
+&lt;p&gt;This was a fun excerise to dig around. Macos is not that limited as I thought it was&amp;hellip; Sure it has its quirks.&lt;/p&gt;</description></item><item><title>&#34;F-droid&#34; vs the pain that is &#34;Google PlayStore&#34;</title><link>//bluepie.in/2022/01/publishing-to-fdroid-google-play/</link><pubDate>Wed, 05 Jan 2022 21:34:18 +0530</pubDate><guid>//bluepie.in/2022/01/publishing-to-fdroid-google-play/</guid><description>
 &lt;p&gt;&lt;strong&gt;How you doing? hope you are doing well. I missed to post on december because I was juggling too much things at once and needed a break&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;fdroid&#34;&gt;Fdroid?&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://fdroid.org&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Fdroid&lt;/a&gt; is a free and open source Android application repository. You can use Fdroid via the &lt;a href=&#34;https://f-droid.org/client&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;F-Droid client&lt;/a&gt; or the &lt;a href=&#34;https://f-droid.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;F-Droid website&lt;/a&gt;. It is similar to the &lt;a href=&#34;https://play.google.com/store&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Google Play Store&lt;/a&gt;, but with a few key differences:&lt;/p&gt;
@@ -1720,90 +1790,4 @@ const [list, setFlatList] = useState&amp;lt;FlatListRenderProps[] | null&amp;gt;
 &lt;p&gt;well.. check it out &lt;a href=&#34;https://poojabags.netlify.app&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;bye, seeya, untill next-time - Gopinath.&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>Birthday month! - reflection and future</title><link>//bluepie.in/2020/08/future/</link><pubDate>Fri, 28 Aug 2020 19:41:47 +0530</pubDate><guid>//bluepie.in/2020/08/future/</guid><description>
-&lt;p&gt;&lt;em&gt;Hello, how are you doing, I&amp;rsquo;m fine thank you, hope you and your loved ones are doing fine.&lt;/em&gt; It&amp;rsquo;s the end of august and covid is still plowing through every city in India, Most of the people are just sitting sulking. What about Me? Im just&amp;hellip;ah, I have a dilema, its just that I don&amp;rsquo;t have a freaking clue what the future holds, Today I go &amp;lsquo;age += 1&amp;rsquo;/ or level up and here is this months review.&lt;/p&gt;
-&lt;p&gt;This month is all over the place from begining to end, but think I&amp;rsquo;ve learned some things here and there.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;tech-stuff&#34;&gt;Tech stuff&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This month I got the chance to work on some nice tools like burp, nessus and zap. Along with the oppurtunity to learn to configuring headers in the server.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h5 id=&#34;the-comparison-is-stricly-based-on-web-applications-burp-pro-vs-nessus-trial-vs-zap&#34;&gt;&lt;em&gt;THE COMPARISON IS STRICLY BASED ON WEB APPLICATIONS, BURP PRO VS nessus trial VS ZAP.&lt;/em&gt;&lt;/h5&gt;
-&lt;p&gt;Burp is pretty awesome, if you have pro, then you&amp;rsquo;ve chosen the right one.&lt;/p&gt;
-&lt;p&gt;Advantages of using burp:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Its popular, atleast at the time of writing this, If you have any doubt in anything, you can find it using the n number of resources available online.&lt;/li&gt;
-&lt;li&gt;Easy to use.&lt;/li&gt;
-&lt;li&gt;Has community version.&lt;/li&gt;
-&lt;li&gt;Has ton of awsome extensions.&lt;/li&gt;
-&lt;li&gt;Easy to write extensions (extension support in python and java.). Even I wrote one, maybe I will post It in the future.&lt;/li&gt;
-&lt;li&gt;Reports.&lt;/li&gt;
-&lt;li&gt;Everything just works.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;cons:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Pro costs money,&lt;/li&gt;
-&lt;li&gt;Some minor things can&amp;rsquo;t be done without writing own extension or a lot of research.for ex: I needed to add a particular header to map the entire site(discover).&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;ZAP:&lt;/p&gt;
-&lt;p&gt;Comparing ZAP and BURP is not okey, because they both are used for different purpose.&lt;/p&gt;
-&lt;p&gt;Advantages of burp.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Easy to do a scan.&lt;/li&gt;
-&lt;li&gt;implemented with selenium.&lt;/li&gt;
-&lt;li&gt;reports.&lt;/li&gt;
-&lt;li&gt;plugins support.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Cons:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Buggy, lags. (maybe its just me, could not work on it for 15 minutes straight, crashes, freezes.)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;nessus:&lt;/p&gt;
-&lt;p&gt;keep in mind (this is based on web application scanning)&lt;/p&gt;
-&lt;p&gt;Comparing nessus to above is a joke, its way too costly, all the things that can be done via nessus can be done with open source alternatives, the only thing you get using nessus is convenience, if you have a ton of money to throw away or if you want immediate scan
-results, nessus is the thing to go.&lt;/p&gt;
-&lt;p&gt;pros:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;you dont have to have indepth knowledge in concepts.&lt;/li&gt;
-&lt;li&gt;Does everything for you in a few clicks.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;cons:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;cost&lt;/li&gt;
-&lt;li&gt;their &amp;lsquo;WAS&amp;rsquo; package costs 3 lakhs, I mean why&amp;hellip; (all the vulnerabilities/reports this thing finds can be found in open source alternatives.)&lt;/li&gt;
-&lt;li&gt;Initial Installation time is way too long, compilation too slow, Im impatient.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h5 id=&#34;headers&#34;&gt;HEADERS:&lt;/h5&gt;
-&lt;p&gt;If the website is taken over by some javascript vulnerability then the first line of defence is just headers&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;by not allowing access of cookies to other sites,&lt;/li&gt;
-&lt;li&gt;by making cookie not accessible to javascript,&lt;/li&gt;
-&lt;li&gt;by transporting cookies only through https,&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;with response flags&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;secure flag&lt;/li&gt;
-&lt;li&gt;samesite flag&lt;/li&gt;
-&lt;li&gt;http flag&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;sample cookie from facebook.com&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
-set-cookie:
-sb=T8pJXwjf4x51HdF-qqumtNHT; expires=Mon, 29-Aug-2022 03:23:59 GMT; Max-Age=63072000; path=/; domain=.facebook.com;
-secure;
-httponly;
-SameSite=None
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;em&gt;Second line of defence would by Content Security Policy&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;CSP - Tells how javascript and css are included in the browser and executed, (xss). A good way is to check with &lt;a href=&#34;https://csp-evaluator.withgoogle.com&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;csp evaluator&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;a sample from &lt;a href=&#34;https://facebook.com&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;facebook&lt;/a&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
-content-security-policy:
-default-src * data: blob: &#39;self&#39;;
-script-src *.facebook.com *.fbcdn.net *.facebook.net *.google-analytics.com *.virtualearth.net *.google.com 127.0.0.1:* *.spotilocal.com:* &#39;unsafe-inline&#39; &#39;unsafe-eval&#39; blob: data: &#39;self&#39;;
-style-src data: blob: &#39;unsafe-inline&#39; *;connect-src *.facebook.com facebook.com *.fbcdn.net *.facebook.net *.spotilocal.com:* wss://*.facebook.com:* https://fb.scanandcleanlocal.com:* attachment.fbsbx.com ws://localhost:* blob: *.cdninstagram.com &#39;self&#39;;block-all-mixed-content;upgrade-insecure-requests;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;h3 id=&#34;reflection&#34;&gt;Reflection&lt;/h3&gt;
-&lt;p&gt;Today is my birthday&amp;hellip;i&amp;rsquo;m getting older, I feel like I don&amp;rsquo;t know a lot of things around my surroundings yet, I have to asses my future goals. My goal was to contribute to opensource as much as I can, May be I am wrong?, i don&amp;rsquo;t know yet. As for my career, I made up my mind to excell in a new domain. I will update what is happening in upcoming months and asses my career goals in next august.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;peace bye!&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>
+&lt;/blockquote&gt;</description></item></channel></rss>
