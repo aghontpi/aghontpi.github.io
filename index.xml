@@ -1,4 +1,63 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 20 Feb 2022 19:10:13 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Modding a macOS App</title><link>//bluepie.in/2022/02/modding-a-macos-app/</link><pubDate>Sun, 20 Feb 2022 19:10:13 +0000</pubDate><guid>//bluepie.in/2022/02/modding-a-macos-app/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 22 May 2022 21:04:22 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Trying Out Flutter 3.0</title><link>//bluepie.in/2022/05/trying-out-flutter3/</link><pubDate>Sun, 22 May 2022 21:04:22 +0000</pubDate><guid>//bluepie.in/2022/05/trying-out-flutter3/</guid><description>
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Been a while..hope everything is going well. PersonalNote: Joined &lt;code&gt;Verizon&lt;/code&gt; on May 9th 2022&amp;hellip;reason for missing posts, was stuck in documentations, kts&amp;rsquo;..etc. I have already met my new team..this will be a great journey for me&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;flutter-3-0&#34;&gt;Flutter 3.0&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://flutter.dev/docs/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Flutter 3.0&lt;/a&gt; is a major update to the Flutter SDK and I decided to try it out.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Supports all platforms&lt;/strong&gt; this is a huge claim..lets try this out shall we?&lt;/p&gt;
+&lt;h2 id=&#34;choosing-a-usecase-that-would-be-useful-for-every-platform&#34;&gt;Choosing a usecase that would be useful for every platform&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;I sit infront of my computer all day&lt;/strong&gt;&amp;hellip;I would like to get reminded to take a break every now and then. Most of the time, &lt;strong&gt;I even forget to drink water&lt;/strong&gt;.
+I want this feature on all platforms.. plus running natively has its benefits. (small footprint, less overhead/fast &amp;amp; minimal usage of system resources to name a few)&lt;/p&gt;
+&lt;h2 id=&#34;goal-for-the-prototype&#34;&gt;Goal for the Prototype&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;minimal UI to get msg &amp;amp; interval from user&lt;/li&gt;
+&lt;li&gt;Notify at configured intervals with the given message&lt;/li&gt;
+&lt;li&gt;If pc, run in background with no active ui
+&lt;ul&gt;
+&lt;li&gt;show icon in the system tray/taskbar&lt;/li&gt;
+&lt;li&gt;open a new window with gif in the bottom right corner&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;If running on mobile devices
+&lt;ul&gt;
+&lt;li&gt;run in background after app is closed&lt;/li&gt;
+&lt;li&gt;show the notification with the given message at set intervals&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;the-prototype&#34;&gt;The Prototype&lt;/h2&gt;
+&lt;p&gt;The source code with demo is available on &lt;a href=&#34;https://github.com/aghontpi/idler&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Github&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;cons-from-my-personal-experience&#34;&gt;Cons from my personal experience&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Eventhough it supports all platforms&amp;hellip;even web(compiles to &lt;code&gt;Javascript&lt;/code&gt; and runs in browser&amp;hellip;) when a feature is not supported, we have to implement this for all platforms.. Note the language to implement the feature for each platform is also different.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;macOS&lt;/code&gt;: &lt;code&gt;Swift&lt;/code&gt;/ &lt;code&gt;Objective-C&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;android&lt;/code&gt;: &lt;code&gt;Kotlin&lt;/code&gt; /&lt;code&gt;Java&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;iOS&lt;/code&gt;: &lt;code&gt;Swift&lt;/code&gt;/ &lt;code&gt;Objective-C&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;window&lt;/code&gt;: &lt;code&gt;c++&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;linux&lt;/code&gt;: &lt;code&gt;c&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;While working in native, each platform has a preferred Editor &amp;amp; each has it own set of tools to work with.
+&lt;ul&gt;
+&lt;li&gt;for ex: you can write swift code in &lt;code&gt;visual studio code&lt;/code&gt;..but you are missing out all the features from &lt;code&gt;xcode&lt;/code&gt;..&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;We do the communication between &lt;code&gt;Dart&lt;/code&gt; and &lt;code&gt;Native&lt;/code&gt; by using &lt;a href=&#34;https://docs.flutter.dev/development/platform-integration/platform-channels&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;platform-channels&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pub.dev&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;pub.dev&lt;/a&gt; is not mature enough at the moment..(finding a package that supports all platforms is rare)
+&lt;ul&gt;
+&lt;li&gt;this is similar to &lt;code&gt;node modules&lt;/code&gt; in &lt;code&gt;npm&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;some examples:
+&lt;ul&gt;
+&lt;li&gt;In my usecase for &lt;code&gt;macos&lt;/code&gt;,&lt;code&gt;windows&lt;/code&gt; and &lt;code&gt;linux&lt;/code&gt;. &lt;strong&gt;I had to open a new window&lt;/strong&gt; to show the reminder with a &lt;code&gt;gif&lt;/code&gt;.. this is not supported in &lt;code&gt;Flutter&lt;/code&gt; yet. &lt;a href=&#34;https://github.com/flutter/flutter/issues/30701&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;This feature request is still open since 2019&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;For &lt;code&gt;Mobiles&lt;/code&gt;.. I decided to &lt;strong&gt;contain the &lt;code&gt;Flutter&lt;/code&gt; UI in a popup window(image above)&lt;/strong&gt;.. this is also not supported in &lt;code&gt;Flutter&lt;/code&gt; yet.. I spend &lt;em&gt;COUPLE OF HOURS&lt;/em&gt; tinkering with different API&amp;rsquo;s. In the end, I achieved the result by implementing it on the &lt;code&gt;Native&lt;/code&gt; side.&lt;/li&gt;
+&lt;li&gt;&amp;amp; many more&amp;hellip; ~sigh&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Flutter supports 70-75% of the features to build a production ready app(in a single codebase &lt;code&gt;Dart&lt;/code&gt;)&amp;hellip; but if the feature we want is in the unsupported 25-30% then we have to implment it :) (mutile codebases bason on target platform).&lt;/p&gt;
+&lt;h2 id=&#34;how-where-did-i-spend-my-time-coding-this&#34;&gt;How &amp;amp; Where did I spend my time coding this?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Dart &amp;amp; Flutter = 40%&lt;/li&gt;
+&lt;li&gt;Researching &amp;amp; Writing native code to support a specific usecase = 40%&lt;/li&gt;
+&lt;li&gt;Configuring, Debugging &amp;amp; Understanding devtools = 20%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Flutter is cool, I like the challenges it offers XD. I am excited to see what the future holds for it.&lt;/p&gt;</description></item><item><title>Modding a macOS App</title><link>//bluepie.in/2022/02/modding-a-macos-app/</link><pubDate>Sun, 20 Feb 2022 19:10:13 +0000</pubDate><guid>//bluepie.in/2022/02/modding-a-macos-app/</guid><description>
 &lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
 &lt;p&gt;This post is about reversing.. but for a MACOS binary. Lets drive straight into it.&lt;/p&gt;
 &lt;p&gt;Modding in macOS is fairly new to me, but a binary is a binary and it can be modded!. I started to daily drive macOS a month or two ago, the why and what&amp;rsquo;s is a whole different story to post about.&lt;/p&gt;
@@ -1756,38 +1815,4 @@ const [list, setFlatList] = useState&amp;lt;FlatListRenderProps[] | null&amp;gt;
 &lt;p&gt;For more &lt;a href=&#34;https://www.typescriptlang.org/docs/handbook/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;official handbook&lt;/a&gt;, explains a lot better than me.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;m just starting to adapt typescript in my javascript workflow, this is the begining phase, obviously there is much more to learn. Bye, See ya soon - Gopinath.&lt;/p&gt;</description></item><item><title>Gatsby Experiment</title><link>//bluepie.in/2020/09/gatsby-experiment/</link><pubDate>Wed, 30 Sep 2020 22:26:17 +0530</pubDate><guid>//bluepie.in/2020/09/gatsby-experiment/</guid><description>
-&lt;p&gt;&lt;em&gt;Hi, how did the day go?, what about the week? what about the month?, Good I hope!. Personal update: I almost bought a guitar, But then I realised something and stopped, the decision correct or wrong? the future holds the truth, hope you got the answer with you! future me reading this.&lt;/em&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Pew!&amp;hellip; I almost did not post this month, although I completed the project/experiment in the middle of the month. I&amp;rsquo;ve been learning a new tech stack offtime and working on a project, more on this on a future post.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;goal&#34;&gt;Goal&lt;/h2&gt;
-&lt;p&gt;To learn&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Gatsby&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;its workflow&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Its seo capabilities, since seo is non existent with client side rendering.(react)&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;GraphQL&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I had my eye on Gatsby for a while now, ever since one of my friends mentioned it, I wanted to see what it had to offer.&lt;/p&gt;
-&lt;h2 id=&#34;so-what-to-build-with-gatsby&#34;&gt;so what to build with gatsby ?&lt;/h2&gt;
-&lt;p&gt;I thought designing a landing page might be a good experiment to do with Gatsby, but did the landing page really had to have Gatsby? Absolutely no, It could have been easily be built by html, css and javascript.&lt;/p&gt;
-&lt;p&gt;Key advantages of gatsby.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Static sites /w React&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;SEO&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;GraphQL&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;workflow&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;plugin support&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I have not used SSR particulary with Gatsby, So my thoughts on it is 0.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;SSR&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;would-i-recomment-it-to-anyone&#34;&gt;Would I recomment it to anyone?&lt;/h2&gt;
-&lt;p&gt;Of course, If they already know react. but for a beginners I would not recommend it, especially if they had time constraint to finish the project.&lt;/p&gt;
-&lt;p&gt;well.. check it out &lt;a href=&#34;https://poojabags.netlify.app&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;bye, seeya, untill next-time - Gopinath.&lt;/p&gt;
-&lt;/blockquote&gt;</description></item></channel></rss>
+&lt;p&gt;I&amp;rsquo;m just starting to adapt typescript in my javascript workflow, this is the begining phase, obviously there is much more to learn. Bye, See ya soon - Gopinath.&lt;/p&gt;</description></item></channel></rss>
