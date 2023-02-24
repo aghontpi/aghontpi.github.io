@@ -1,0 +1,131 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><meta name=description content="Public Journal of aghontpi"><meta name=keywords content="aghontpi bluepie Journal"><link rel=prev href=//bluepie.in/2022/02/modding-a-macos-app/><link rel=canonical href=//bluepie.in/2023/01/updating-dns-servers-for-ads-and-tracking-protection-in-2023/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>Updating Dns Servers for Ads and Tracking Protection in 2023 | Bluepie&#39;s Journal</title><meta name=title content="Updating Dns Servers for Ads and Tracking Protection in 2023 | Bluepie's Journal"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"Updating Dns Servers for Ads and Tracking Protection in 2023","headline":"Updating Dns Servers for Ads and Tracking Protection in 2023","description":"Upgrading PI hole Once every year, I do server maintainence (during Dec-Jan), this year I updated the our dns server from pi-hole to AGH (both are open source projects..) Just wanted to try an alternative, after using it for a while, the UI \x26amp; Features on AGH is much better than pi-hole.\nWhy a custom dns server? All websites\/apis are just ip addresses (just numbers). Nameservers maintains a mapping of the domain names to the ip addresses, so when we make a request, we get the appropriate ip address.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2023","datePublished":"2023-01-28 06:02:22 \x2b0000 UTC","dateModified":"2023-01-28 06:02:22 \x2b0000 UTC","url":"\/\/bluepie.in\/2023\/01\/updating-dns-servers-for-ads-and-tracking-protection-in-2023\/","wordCount":"1225","keywords":["Bluepie\x27s Journal"]}</script><script type=text/javascript>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","9oioq6tja4");</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>My Journal</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>My Journal</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-135013873-2','auto');ga('send','pageview');}</script><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">Updating Dns Servers for Ads and Tracking Protection in 2023</h1><div class=post-meta>Written by <a itemprop=name href=//bluepie.in/ rel=author>Bluepie</a> with ♥
+<span class=post-time>on <time datetime=2023-01-28 itemprop=datePublished>January 28, 2023</time></span>
+in
+<i class="iconfont icon-folder"></i><span class=post-category><a href=//bluepie.in/categories/tech/>Tech</a>
+<a href=//bluepie.in/categories/dns/>DNS</a>
+<a href=//bluepie.in/categories/adblock/>adblock</a>
+<a href=//bluepie.in/categories/server/>server</a></span></div></header><div class=post-content><img src=//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/no-ads-and-tracking.png class=featured_image><h2 id=upgrading-pi-hole>Upgrading PI hole</h2><p>Once every year, I do server maintainence (during Dec-Jan), this year I updated the our dns server from <a href=https://github.com/pi-hole/pi-hole rel="nofollow noreferrer" target=_blank>pi-hole</a> to <a href=https://github.com/AdguardTeam/AdGuardHome rel="nofollow noreferrer" target=_blank>AGH</a> (both are open source projects..) Just wanted to try an alternative, after using it for a while, the UI &amp; Features on AGH is much better than pi-hole.</p><h2 id=why-a-custom-dns-server>Why a custom dns server?</h2><p>All websites/apis are just ip addresses (just numbers). Nameservers maintains a mapping of the domain names to the ip addresses, so when we make a request, we get the appropriate ip address.</p><p>The idea is simple, by running our own dns server, we can prevent our network providers spying on us, on top of that we can intercept &amp; block all ads &amp; trackers.</p><blockquote><p>I get ads, but what are Trackers?</p></blockquote><p>Similar to ads, ever been in a situation where you searched for something in flipkart/amazon.. then later you find the ad to buy the product elsewhere, this is because of trackers.. trackers are worse because they collect your data, the same way we block ads, trackers should be blocked.</p><h2 id=how-this-can-help-us-with-ad-trackers-blocking>How this can help us with ad &amp; trackers blocking?</h2><p>Can you make a guess how serving ads in app/websites work? they are from a server too, that server has a domain linked to it.. can you see where I am are going with this?</p><pre><code class=language-text>good content -&gt; respond with ip address
+ad/tracker -&gt; respond with 0.0.0.0
+</code></pre><p>Not just blocking ads &amp; tracking, you can do much more.. there are other things that you can do in dns level.</p><ul><li>block windows tracking or updates in windows machines</li><li>blocking spyware</li><li>disabling websites for a particular client (ex: blocking instagram on a your phone alone)</li><li>if you don&rsquo;t want to keep tracking of your watch history in youtube
+and many more.</li></ul><h3 id=aren-t-there-other-solutions-to-blocking-trackers-and-ads>Aren&rsquo;t there other solutions to blocking trackers and ads?</h3><p>yes but those come with a disadvantage,</p><ul><li>Browser extensions.. only applies to browsers (system wide, everywhere and all applications)</li><li>Android, Iphone (separate apps that use vpn locally to achieve this) - Drains battery alot</li><li>Rooting android, Jailbreaking ios.</li></ul><p>so this does not require any of that.. no addons, no extra apps, no root, no jailbreak.</p><h2 id=dns-over-tls>DNS Over TLS</h2><p>Introduced in 2016, main idea is wrapping DNS requests and responses via TLS (Transport Layer Security), ensures observer will not be able to track or tamper the contents of the DNS requests.</p><p>Shortly after, android introduced DOT as &ldquo;Private DNS&rdquo; on Android 9 &amp; up, we will be using this feature in our devices to block all ADS &amp; Trackers.</p><p><figure><img src=//bluepie.in/images/ring.svg data-sizes=auto data-src=//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/DOT-noMITM.png alt class=lazyload><figcaption class=image-caption></figcaption></figure></p><p>client -&gt; dot server, dot server -&gt; queries the dns.. (we forward our request to serveral dns servers, load-balancers)</p><p>Traditional DNS vs DOT</p><p><figure><img src=//bluepie.in/images/ring.svg data-sizes=auto data-src=//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/traditional-vs-dot.png alt class=lazyload><figcaption class=image-caption></figcaption></figure></p><h2 id=how-do-we-do-it>How do we do it?</h2><p>We use an existing open source dns resolver.</p><p>One options is to go with <a href=https://github.com/pi-hole/pi-hole rel="nofollow noreferrer" target=_blank>PI Hole</a>, it is a community favourite open source project that has all the bells and whistles for blocking ads and trackers integrated inside it.</p><p>We will be using <a href=https://github.com/AdguardTeam/AdGuardHome rel="nofollow noreferrer" target=_blank>AG Home</a>, it is also a popular open source project, which is community maintained. up until lastmonth (dec 2022) I was using PI-hole, switched to AG-Home, just to try something new.</p><h3 id=installing>Installing</h3><p>I am assuming that you already have a linux box hosted in aws/google/..etc. DOT works on port 853, so you have to allow incoming and outgoing traffic in port 853.</p><h4 id=docker>Docker</h4><p>To make things easier, I will be using docker images to run the software.</p><p>running a docker container.. command</p><pre><code class=language-sh>
+podman run --name dnsServer\
+ --restart unless-stopped\
+ -p 2346:3000/tcp\
+ -p 1853:853/tcp\
+ -d adguard/adguardhome
+
+</code></pre><p>Things to note are, exposed port 3000 is the webport for admin page &amp; 853 is for DOT.</p><p>We maintain the configs in a yaml file which will be mounted to the container.. here is an example version.</p><pre><code class=language-yaml>bind_host: 0.0.0.0
+bind_port: 3000
+beta_bind_port: 0
+users:
+#   - name: &lt;your-username&gt;
+#     password: &lt;your-passowrd&gt;
+auth_attempts: 5
+block_auth_min: 15
+http_proxy: &quot;&quot;
+language: &quot;&quot;
+theme: auto
+debug_pprof: false
+web_session_ttl: 720
+dns:
+  bind_hosts:
+    - 0.0.0.0
+  blocked_response_ttl: 10
+  ratelimit: 20
+  refuse_any: true
+  fastest_timeout: 1s
+tls:
+  enabled: true
+  server_name: dns.bluepie.in
+  port_https: 443
+  port_dns_over_tls: 853
+  certificate_path: /opt/dnsServer/conf/fullchain.pem
+  private_key_path: /opt/dnsServer/conf/privkey.pem
+</code></pre><p>Once everything is configured correctly, the service will be up and running.</p><pre><code class=language-bash>podman ps
+
+b831cf04743d  docker.io/adguard/adguardhome:latest   --no-check-update...  1 days ago   Up 3 weeks ago   0.0.0.0:1853-&gt;853/tcp, 0.0.0.0:2346-&gt;3000/tcp  dnsServer
+</code></pre><h3 id=configuring-domain>Configuring Domain</h3><p><strong>First we need a domain name, a paid one if you have it or a free one would be good, I&rsquo;ll be creating a sub-domain from my domain, (i.e) &lsquo;dns.bluepie.in&rsquo; and get SSL certificates chain for the same.</strong></p><p>Inorder to uniquely identify clients, we need to create a wildcard sud-domain in our DNS provider, in my case godaddy.</p><p><figure><img src=//bluepie.in/images/ring.svg data-sizes=auto data-src=//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/creating-wild-card-dns.png alt class=lazyload><figcaption class=image-caption></figcaption></figure></p><h4 id=nginx>Nginx</h4><p>We will be using nginx as a reverse proxy for exposing our services to the internet.</p><p><strong>Admin Config:</strong></p><pre><code class=language-conf>    server_name dns.bluepie.in;
+    location / {
+
+        proxy_pass http://localhost:2346/;
+        proxy_set_header Upgrade           $http_upgrade;
+        proxy_set_header Host              $host;
+        proxy_set_header X-Real-IP         $remote_addr;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host  $host;
+        proxy_redirect / / ;
+        proxy_cookie_path / /;
+
+        proxy_connect_timeout              15s;
+        proxy_send_timeout                 15s;
+        proxy_read_timeout                 15s;
+
+    }
+
+    listen 443 ssl;
+    ssl_certificate /path/to/fullchain.pem; 
+    ssl_certificate_key /path/to/privkey.pem; 
+    include /etc/ssl/options-ssl-nginx.conf;
+    ssl_dhparam /etc/ssl/ssl-dhparams.pem;
+</code></pre><p><strong>DNS Config:</strong></p><p>nginx has a load balancing feature, stream directive to manage tcp and udp. we can use this to forward our requests to dns servers.</p><pre><code class=language-conf>stream {
+
+    log_format  basic   '$time_iso8601 $remote_addr '
+    '$protocol $status $bytes_sent $bytes_received '
+    '$session_time $upstream_addr '
+    '&quot;$upstream_bytes_sent&quot; &quot;$upstream_bytes_received&quot; &quot;$upstream_connect_time&quot;';
+
+    access_log  /var/log/nginx/dns-access.log  basic buffer=1k flush=5s;
+
+    upstream dot {
+    	zone dot 512k;
+      server 127.0.0.1:1853;
+    }
+
+    server {
+        listen 853;
+        proxy_pass dot;
+    }
+
+}
+</code></pre><h3 id=admin-portal>Admin portal</h3><p><strong>Stats page (configured to refresh every 24 hours)</strong></p><p><figure><img src=//bluepie.in/images/ring.svg data-sizes=auto data-src=//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/dns-statistics.png alt class=lazyload><figcaption class=image-caption></figcaption></figure></p><p><strong>Configuring blocklists</strong></p><p>Over the years, I have accustomed to the following blocklists and it works best for me.</p><p><figure><img src=//bluepie.in/images/ring.svg data-sizes=auto data-src=//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/dns-blocklists.png alt class=lazyload><figcaption class=image-caption></figcaption></figure></p><p><strong>Blocklists (entires count taken at the time of writing this post</strong></p><pre><code class=language-text># Blocks Ads, Mobile Ads, Phishing, Malvertising, Malware, Tracking, Telemetry, CryptoJacking, Analytics, Spyware, Ransomware, Exploit, Fraud, Abuse, Scam, Spam, Hijack, Misleading Marketing.
+# ~300,000 entries
+https://oisd.nl 
+
+# ~180,000 entries
+# Extending and consolidating hosts files from several well-curated sources like adaway.org, mvps.org, malwaredomainlist.com, someonewhocares.org, and potentially others.
+github.com/StevenBlack/hosts
+
+# ~480,000 entries
+# Automatically updated, moderated and optimized list for blocking ads, trackers and other online garbage.
+github.com/notracking/hosts-blocklists
+
+# Specially Designed for Mobile Ad Protection.
+# ~200,000 entries
+github.com/jerryn70/GoodbyeAds
+
+# Blocking mobile ad providers and some analytics providers.
+# ~7,000 entries
+github.com/AdAway/adaway.github.io
+
+# A filter composed of several other filters (AdGuard Base filter, Social media filter, Tracking Protection filter, Mobile Ads filter, EasyList and EasyPrivacy) and simplified specifically to be better compatible with DNS-level ad blocking.
+# ~50,000 entries
+github.com/AdguardTeam/AdguardSDNSFilter
+
+# Protects you from many types of spyware, reduces bandwidth use, blocks certain pop-up traps, prevents user tracking by way of &quot;web bugs&quot; embedded in spam, provides partial protection to IE from certain web-based exploits and blocks most advertising you would otherwise be subjected to on the internet.
+# ~11,000 entries
+someonewhocares.org/hosts
+
+# Filter that blocks ads on mobile devices. Contains all known mobile ad networks.
+# ~1,000 entries
+kb.adguard.com/general/adguard-ad-filters#mobile-ads-filter
+</code></pre><h2 id=how-do-we-use-it>How do we use it?</h2><p>Pick a unique word, ex: gopidevice1, then use this word as prefix for &lsquo;dns.bluepie.in&rsquo;. (i.e) &lsquo;gopidevice1.dns.bluepie.in&rsquo;, this is the url that you should use in your devices.</p><h3 id=android>Android</h3><p><figure><img src=//bluepie.in/images/ring.svg data-sizes=auto data-src=//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/android-config.png alt class=lazyload><figcaption class=image-caption></figcaption></figure></p><h3 id=ios-iphone-ipad>IOS - iphone, ipad</h3><p>Go to <a href=https://dns.bluepie.in/ios/ rel="nofollow noreferrer" target=_blank>dns.bluepie.in/ios/</a>, navigate to &lsquo;tool&rsquo;, give a name and use your unique url to create a profile.</p><p><figure><img src=//bluepie.in/images/ring.svg data-sizes=auto data-src=//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/ios-config-1.png alt class=lazyload><figcaption class=image-caption></figcaption></figure></p><p><figure><img src=//bluepie.in/images/ring.svg data-sizes=auto data-src=//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/ios-config-2.png alt class=lazyload><figcaption class=image-caption></figcaption></figure></p><h3 id=mac-windows>Mac/Windows</h3><p>Same as iphone, go to <a href=https://dns.bluepie.in/ios/ rel="nofollow noreferrer" target=_blank>dns.bluepie.in/ios/</a></p><p><figure><img src=//bluepie.in/images/ring.svg data-sizes=auto data-src=//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/dot-install-macos-3.png alt class=lazyload><figcaption class=image-caption></figcaption></figure></p><h2 id=conclusion>Conclusion</h2><p>Migrating from PI-Hole to AGH was a good move, once you have used this and experienced &ldquo;no ads&rdquo;, you can not go back~</p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span>Bluepie</span></p><p class=copyright-item><span>Link:</span>
+<a href=//bluepie.in/2023/01/updating-dns-servers-for-ads-and-tracking-protection-in-2023/>//bluepie.in/2023/01/updating-dns-servers-for-ads-and-tracking-protection-in-2023/</span></p></div><div class=post-tags><section><a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=//bluepie.in/>home</a></span></section></div><div class=post-nav><a href=//bluepie.in/2022/02/modding-a-macos-app/ class=prev rel=prev title="Modding a macOS App"><i class="iconfont icon-left"></i>&nbsp;Modding a macOS App</a></div><div class=post-comment><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
+var d=document,s=d.createElement('script');s.async=true;s.src='//'+"gopinath001-github-io-blog"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></div></main><footer class=footer><div class=copyright>&copy;
+<span itemprop=copyrightYear>2017 - 2023</span>
+<span class=with-love>|</span>
+<span class=author itemprop=copyrightHolder><a href=//bluepie.in/>Bluepie</a></span></div></footer><link href=//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css rel=stylesheet><script src=//bluepie.in/js/vendor_gallery.min.js async></script></div></body></html>

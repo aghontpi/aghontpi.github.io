@@ -1,63 +1,184 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 22 May 2022 21:04:22 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Trying Out Flutter 3.0</title><link>//bluepie.in/2022/05/trying-out-flutter3/</link><pubDate>Sun, 22 May 2022 21:04:22 +0000</pubDate><guid>//bluepie.in/2022/05/trying-out-flutter3/</guid><description>
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Been a while..hope everything is going well. PersonalNote: Joined &lt;code&gt;Verizon&lt;/code&gt; on May 9th 2022&amp;hellip;reason for missing posts, was stuck in documentations, kts&amp;rsquo;..etc. I have already met my new team..this will be a great journey for me&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&#34;flutter-3-0&#34;&gt;Flutter 3.0&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://flutter.dev/docs/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Flutter 3.0&lt;/a&gt; is a major update to the Flutter SDK and I decided to try it out.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Supports all platforms&lt;/strong&gt; this is a huge claim..lets try this out shall we?&lt;/p&gt;
-&lt;h2 id=&#34;choosing-a-usecase-that-would-be-useful-for-every-platform&#34;&gt;Choosing a usecase that would be useful for every platform&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;I sit infront of my computer all day&lt;/strong&gt;&amp;hellip;I would like to get reminded to take a break every now and then. Most of the time, &lt;strong&gt;I even forget to drink water&lt;/strong&gt;.
-I want this feature on all platforms.. plus running natively has its benefits. (small footprint, less overhead/fast &amp;amp; minimal usage of system resources to name a few)&lt;/p&gt;
-&lt;h2 id=&#34;goal-for-the-prototype&#34;&gt;Goal for the Prototype&lt;/h2&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sat, 28 Jan 2023 06:02:22 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Updating Dns Servers for Ads and Tracking Protection in 2023</title><link>//bluepie.in/2023/01/updating-dns-servers-for-ads-and-tracking-protection-in-2023/</link><pubDate>Sat, 28 Jan 2023 06:02:22 +0000</pubDate><guid>//bluepie.in/2023/01/updating-dns-servers-for-ads-and-tracking-protection-in-2023/</guid><description>
+&lt;h2 id=&#34;upgrading-pi-hole&#34;&gt;Upgrading PI hole&lt;/h2&gt;
+&lt;p&gt;Once every year, I do server maintainence (during Dec-Jan), this year I updated the our dns server from &lt;a href=&#34;https://github.com/pi-hole/pi-hole&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;pi-hole&lt;/a&gt; to &lt;a href=&#34;https://github.com/AdguardTeam/AdGuardHome&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;AGH&lt;/a&gt; (both are open source projects..) Just wanted to try an alternative, after using it for a while, the UI &amp;amp; Features on AGH is much better than pi-hole.&lt;/p&gt;
+&lt;h2 id=&#34;why-a-custom-dns-server&#34;&gt;Why a custom dns server?&lt;/h2&gt;
+&lt;p&gt;All websites/apis are just ip addresses (just numbers). Nameservers maintains a mapping of the domain names to the ip addresses, so when we make a request, we get the appropriate ip address.&lt;/p&gt;
+&lt;p&gt;The idea is simple, by running our own dns server, we can prevent our network providers spying on us, on top of that we can intercept &amp;amp; block all ads &amp;amp; trackers.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I get ads, but what are Trackers?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Similar to ads, ever been in a situation where you searched for something in flipkart/amazon.. then later you find the ad to buy the product elsewhere, this is because of trackers.. trackers are worse because they collect your data, the same way we block ads, trackers should be blocked.&lt;/p&gt;
+&lt;h2 id=&#34;how-this-can-help-us-with-ad-trackers-blocking&#34;&gt;How this can help us with ad &amp;amp; trackers blocking?&lt;/h2&gt;
+&lt;p&gt;Can you make a guess how serving ads in app/websites work? they are from a server too, that server has a domain linked to it.. can you see where I am are going with this?&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;good content -&amp;gt; respond with ip address
+ad/tracker -&amp;gt; respond with 0.0.0.0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Not just blocking ads &amp;amp; tracking, you can do much more.. there are other things that you can do in dns level.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;minimal UI to get msg &amp;amp; interval from user&lt;/li&gt;
-&lt;li&gt;Notify at configured intervals with the given message&lt;/li&gt;
-&lt;li&gt;If pc, run in background with no active ui
-&lt;ul&gt;
-&lt;li&gt;show icon in the system tray/taskbar&lt;/li&gt;
-&lt;li&gt;open a new window with gif in the bottom right corner&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;If running on mobile devices
-&lt;ul&gt;
-&lt;li&gt;run in background after app is closed&lt;/li&gt;
-&lt;li&gt;show the notification with the given message at set intervals&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;block windows tracking or updates in windows machines&lt;/li&gt;
+&lt;li&gt;blocking spyware&lt;/li&gt;
+&lt;li&gt;disabling websites for a particular client (ex: blocking instagram on a your phone alone)&lt;/li&gt;
+&lt;li&gt;if you don&amp;rsquo;t want to keep tracking of your watch history in youtube
+and many more.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;the-prototype&#34;&gt;The Prototype&lt;/h2&gt;
-&lt;p&gt;The source code with demo is available on &lt;a href=&#34;https://github.com/aghontpi/idler&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Github&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;cons-from-my-personal-experience&#34;&gt;Cons from my personal experience&lt;/h2&gt;
+&lt;h3 id=&#34;aren-t-there-other-solutions-to-blocking-trackers-and-ads&#34;&gt;Aren&amp;rsquo;t there other solutions to blocking trackers and ads?&lt;/h3&gt;
+&lt;p&gt;yes but those come with a disadvantage,&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Eventhough it supports all platforms&amp;hellip;even web(compiles to &lt;code&gt;Javascript&lt;/code&gt; and runs in browser&amp;hellip;) when a feature is not supported, we have to implement this for all platforms.. Note the language to implement the feature for each platform is also different.
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;macOS&lt;/code&gt;: &lt;code&gt;Swift&lt;/code&gt;/ &lt;code&gt;Objective-C&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;android&lt;/code&gt;: &lt;code&gt;Kotlin&lt;/code&gt; /&lt;code&gt;Java&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;iOS&lt;/code&gt;: &lt;code&gt;Swift&lt;/code&gt;/ &lt;code&gt;Objective-C&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;window&lt;/code&gt;: &lt;code&gt;c++&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;linux&lt;/code&gt;: &lt;code&gt;c&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;While working in native, each platform has a preferred Editor &amp;amp; each has it own set of tools to work with.
-&lt;ul&gt;
-&lt;li&gt;for ex: you can write swift code in &lt;code&gt;visual studio code&lt;/code&gt;..but you are missing out all the features from &lt;code&gt;xcode&lt;/code&gt;..&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;We do the communication between &lt;code&gt;Dart&lt;/code&gt; and &lt;code&gt;Native&lt;/code&gt; by using &lt;a href=&#34;https://docs.flutter.dev/development/platform-integration/platform-channels&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;platform-channels&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://pub.dev&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;pub.dev&lt;/a&gt; is not mature enough at the moment..(finding a package that supports all platforms is rare)
-&lt;ul&gt;
-&lt;li&gt;this is similar to &lt;code&gt;node modules&lt;/code&gt; in &lt;code&gt;npm&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;some examples:
-&lt;ul&gt;
-&lt;li&gt;In my usecase for &lt;code&gt;macos&lt;/code&gt;,&lt;code&gt;windows&lt;/code&gt; and &lt;code&gt;linux&lt;/code&gt;. &lt;strong&gt;I had to open a new window&lt;/strong&gt; to show the reminder with a &lt;code&gt;gif&lt;/code&gt;.. this is not supported in &lt;code&gt;Flutter&lt;/code&gt; yet. &lt;a href=&#34;https://github.com/flutter/flutter/issues/30701&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;This feature request is still open since 2019&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;For &lt;code&gt;Mobiles&lt;/code&gt;.. I decided to &lt;strong&gt;contain the &lt;code&gt;Flutter&lt;/code&gt; UI in a popup window(image above)&lt;/strong&gt;.. this is also not supported in &lt;code&gt;Flutter&lt;/code&gt; yet.. I spend &lt;em&gt;COUPLE OF HOURS&lt;/em&gt; tinkering with different API&amp;rsquo;s. In the end, I achieved the result by implementing it on the &lt;code&gt;Native&lt;/code&gt; side.&lt;/li&gt;
-&lt;li&gt;&amp;amp; many more&amp;hellip; ~sigh&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Browser extensions.. only applies to browsers (system wide, everywhere and all applications)&lt;/li&gt;
+&lt;li&gt;Android, Iphone (separate apps that use vpn locally to achieve this) - Drains battery alot&lt;/li&gt;
+&lt;li&gt;Rooting android, Jailbreaking ios.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Flutter supports 70-75% of the features to build a production ready app(in a single codebase &lt;code&gt;Dart&lt;/code&gt;)&amp;hellip; but if the feature we want is in the unsupported 25-30% then we have to implment it :) (mutile codebases bason on target platform).&lt;/p&gt;
-&lt;h2 id=&#34;how-where-did-i-spend-my-time-coding-this&#34;&gt;How &amp;amp; Where did I spend my time coding this?&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Dart &amp;amp; Flutter = 40%&lt;/li&gt;
-&lt;li&gt;Researching &amp;amp; Writing native code to support a specific usecase = 40%&lt;/li&gt;
-&lt;li&gt;Configuring, Debugging &amp;amp; Understanding devtools = 20%&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;so this does not require any of that.. no addons, no extra apps, no root, no jailbreak.&lt;/p&gt;
+&lt;h2 id=&#34;dns-over-tls&#34;&gt;DNS Over TLS&lt;/h2&gt;
+&lt;p&gt;Introduced in 2016, main idea is wrapping DNS requests and responses via TLS (Transport Layer Security), ensures observer will not be able to track or tamper the contents of the DNS requests.&lt;/p&gt;
+&lt;!-- ssl - secure socket layer --&gt;
+&lt;!-- tls - tranport layer security, offers end to end security. --&gt;
+&lt;p&gt;Shortly after, android introduced DOT as &amp;ldquo;Private DNS&amp;rdquo; on Android 9 &amp;amp; up, we will be using this feature in our devices to block all ADS &amp;amp; Trackers.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/DOT-noMITM.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;client -&amp;gt; dot server, dot server -&amp;gt; queries the dns.. (we forward our request to serveral dns servers, load-balancers)&lt;/p&gt;
+&lt;p&gt;Traditional DNS vs DOT&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/traditional-vs-dot.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;how-do-we-do-it&#34;&gt;How do we do it?&lt;/h2&gt;
+&lt;p&gt;We use an existing open source dns resolver.&lt;/p&gt;
+&lt;p&gt;One options is to go with &lt;a href=&#34;https://github.com/pi-hole/pi-hole&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;PI Hole&lt;/a&gt;, it is a community favourite open source project that has all the bells and whistles for blocking ads and trackers integrated inside it.&lt;/p&gt;
+&lt;p&gt;We will be using &lt;a href=&#34;https://github.com/AdguardTeam/AdGuardHome&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;AG Home&lt;/a&gt;, it is also a popular open source project, which is community maintained. up until lastmonth (dec 2022) I was using PI-hole, switched to AG-Home, just to try something new.&lt;/p&gt;
+&lt;h3 id=&#34;installing&#34;&gt;Installing&lt;/h3&gt;
+&lt;p&gt;I am assuming that you already have a linux box hosted in aws/google/..etc. DOT works on port 853, so you have to allow incoming and outgoing traffic in port 853.&lt;/p&gt;
+&lt;h4 id=&#34;docker&#34;&gt;Docker&lt;/h4&gt;
+&lt;p&gt;To make things easier, I will be using docker images to run the software.&lt;/p&gt;
+&lt;p&gt;running a docker container.. command&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+podman run --name dnsServer\
+--restart unless-stopped\
+-p 2346:3000/tcp\
+-p 1853:853/tcp\
+-d adguard/adguardhome
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Things to note are, exposed port 3000 is the webport for admin page &amp;amp; 853 is for DOT.&lt;/p&gt;
+&lt;p&gt;We maintain the configs in a yaml file which will be mounted to the container.. here is an example version.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;bind_host: 0.0.0.0
+bind_port: 3000
+beta_bind_port: 0
+users:
+# - name: &amp;lt;your-username&amp;gt;
+# password: &amp;lt;your-passowrd&amp;gt;
+auth_attempts: 5
+block_auth_min: 15
+http_proxy: &amp;quot;&amp;quot;
+language: &amp;quot;&amp;quot;
+theme: auto
+debug_pprof: false
+web_session_ttl: 720
+dns:
+bind_hosts:
+- 0.0.0.0
+blocked_response_ttl: 10
+ratelimit: 20
+refuse_any: true
+fastest_timeout: 1s
+tls:
+enabled: true
+server_name: dns.bluepie.in
+port_https: 443
+port_dns_over_tls: 853
+certificate_path: /opt/dnsServer/conf/fullchain.pem
+private_key_path: /opt/dnsServer/conf/privkey.pem
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once everything is configured correctly, the service will be up and running.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;podman ps
+b831cf04743d docker.io/adguard/adguardhome:latest --no-check-update... 1 days ago Up 3 weeks ago 0.0.0.0:1853-&amp;gt;853/tcp, 0.0.0.0:2346-&amp;gt;3000/tcp dnsServer
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;configuring-domain&#34;&gt;Configuring Domain&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;First we need a domain name, a paid one if you have it or a free one would be good, I&amp;rsquo;ll be creating a sub-domain from my domain, (i.e) &amp;lsquo;dns.bluepie.in&amp;rsquo; and get SSL certificates chain for the same.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Inorder to uniquely identify clients, we need to create a wildcard sud-domain in our DNS provider, in my case godaddy.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/creating-wild-card-dns.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h4 id=&#34;nginx&#34;&gt;Nginx&lt;/h4&gt;
+&lt;p&gt;We will be using nginx as a reverse proxy for exposing our services to the internet.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Admin Config:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt; server_name dns.bluepie.in;
+location / {
+proxy_pass http://localhost:2346/;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto $scheme;
+proxy_set_header X-Forwarded-Host $host;
+proxy_redirect / / ;
+proxy_cookie_path / /;
+proxy_connect_timeout 15s;
+proxy_send_timeout 15s;
+proxy_read_timeout 15s;
+}
+listen 443 ssl;
+ssl_certificate /path/to/fullchain.pem;
+ssl_certificate_key /path/to/privkey.pem;
+include /etc/ssl/options-ssl-nginx.conf;
+ssl_dhparam /etc/ssl/ssl-dhparams.pem;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;DNS Config:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;nginx has a load balancing feature, stream directive to manage tcp and udp. we can use this to forward our requests to dns servers.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt;stream {
+log_format basic &#39;$time_iso8601 $remote_addr &#39;
+&#39;$protocol $status $bytes_sent $bytes_received &#39;
+&#39;$session_time $upstream_addr &#39;
+&#39;&amp;quot;$upstream_bytes_sent&amp;quot; &amp;quot;$upstream_bytes_received&amp;quot; &amp;quot;$upstream_connect_time&amp;quot;&#39;;
+access_log /var/log/nginx/dns-access.log basic buffer=1k flush=5s;
+upstream dot {
+zone dot 512k;
+server 127.0.0.1:1853;
+}
+server {
+listen 853;
+proxy_pass dot;
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;admin-portal&#34;&gt;Admin portal&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Stats page (configured to refresh every 24 hours)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/dns-statistics.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Configuring blocklists&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Over the years, I have accustomed to the following blocklists and it works best for me.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/dns-blocklists.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Blocklists (entires count taken at the time of writing this post&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;# Blocks Ads, Mobile Ads, Phishing, Malvertising, Malware, Tracking, Telemetry, CryptoJacking, Analytics, Spyware, Ransomware, Exploit, Fraud, Abuse, Scam, Spam, Hijack, Misleading Marketing.
+# ~300,000 entries
+https://oisd.nl
+# ~180,000 entries
+# Extending and consolidating hosts files from several well-curated sources like adaway.org, mvps.org, malwaredomainlist.com, someonewhocares.org, and potentially others.
+github.com/StevenBlack/hosts
+# ~480,000 entries
+# Automatically updated, moderated and optimized list for blocking ads, trackers and other online garbage.
+github.com/notracking/hosts-blocklists
+# Specially Designed for Mobile Ad Protection.
+# ~200,000 entries
+github.com/jerryn70/GoodbyeAds
+# Blocking mobile ad providers and some analytics providers.
+# ~7,000 entries
+github.com/AdAway/adaway.github.io
+# A filter composed of several other filters (AdGuard Base filter, Social media filter, Tracking Protection filter, Mobile Ads filter, EasyList and EasyPrivacy) and simplified specifically to be better compatible with DNS-level ad blocking.
+# ~50,000 entries
+github.com/AdguardTeam/AdguardSDNSFilter
+# Protects you from many types of spyware, reduces bandwidth use, blocks certain pop-up traps, prevents user tracking by way of &amp;quot;web bugs&amp;quot; embedded in spam, provides partial protection to IE from certain web-based exploits and blocks most advertising you would otherwise be subjected to on the internet.
+# ~11,000 entries
+someonewhocares.org/hosts
+# Filter that blocks ads on mobile devices. Contains all known mobile ad networks.
+# ~1,000 entries
+kb.adguard.com/general/adguard-ad-filters#mobile-ads-filter
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;how-do-we-use-it&#34;&gt;How do we use it?&lt;/h2&gt;
+&lt;p&gt;Pick a unique word, ex: gopidevice1, then use this word as prefix for &amp;lsquo;dns.bluepie.in&amp;rsquo;. (i.e) &amp;lsquo;gopidevice1.dns.bluepie.in&amp;rsquo;, this is the url that you should use in your devices.&lt;/p&gt;
+&lt;h3 id=&#34;android&#34;&gt;Android&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/android-config.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;ios-iphone-ipad&#34;&gt;IOS - iphone, ipad&lt;/h3&gt;
+&lt;p&gt;Go to &lt;a href=&#34;https://dns.bluepie.in/ios/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;dns.bluepie.in/ios/&lt;/a&gt;, navigate to &amp;lsquo;tool&amp;rsquo;, give a name and use your unique url to create a profile.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/ios-config-1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/ios-config-2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;mac-windows&#34;&gt;Mac/Windows&lt;/h3&gt;
+&lt;p&gt;Same as iphone, go to &lt;a href=&#34;https://dns.bluepie.in/ios/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;dns.bluepie.in/ios/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/dot-install-macos-3.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Flutter is cool, I like the challenges it offers XD. I am excited to see what the future holds for it.&lt;/p&gt;</description></item><item><title>Modding a macOS App</title><link>//bluepie.in/2022/02/modding-a-macos-app/</link><pubDate>Sun, 20 Feb 2022 19:10:13 +0000</pubDate><guid>//bluepie.in/2022/02/modding-a-macos-app/</guid><description>
+&lt;p&gt;Migrating from PI-Hole to AGH was a good move, once you have used this and experienced &amp;ldquo;no ads&amp;rdquo;, you can not go back~&lt;/p&gt;</description></item><item><title>Modding a macOS App</title><link>//bluepie.in/2022/02/modding-a-macos-app/</link><pubDate>Sun, 20 Feb 2022 19:10:13 +0000</pubDate><guid>//bluepie.in/2022/02/modding-a-macos-app/</guid><description>
 &lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
 &lt;p&gt;This post is about reversing.. but for a MACOS binary. Lets drive straight into it.&lt;/p&gt;
 &lt;p&gt;Modding in macOS is fairly new to me, but a binary is a binary and it can be modded!. I started to daily drive macOS a month or two ago, the why and what&amp;rsquo;s is a whole different story to post about.&lt;/p&gt;
