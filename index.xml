@@ -1,4 +1,111 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sat, 28 Jan 2023 06:02:22 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Updating Dns Servers for Ads and Tracking Protection in 2023</title><link>//bluepie.in/2023/01/updating-dns-servers-for-ads-and-tracking-protection-in-2023/</link><pubDate>Sat, 28 Jan 2023 06:02:22 +0000</pubDate><guid>//bluepie.in/2023/01/updating-dns-servers-for-ads-and-tracking-protection-in-2023/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 12 Mar 2023 00:08:06 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Android CI on Github</title><link>//bluepie.in/2023/03/android-ci/</link><pubDate>Sun, 12 Mar 2023 00:08:06 +0000</pubDate><guid>//bluepie.in/2023/03/android-ci/</guid><description>
+&lt;p&gt;Been busy, its not like I lost interest in posting here, I just didn&amp;rsquo;t allocate time for writing here, which is the opposite of what I set out to do.. which in turn does not track my progress at all, I should be held accountable for my progress. ~pff I hate it.&lt;/p&gt;
+&lt;p&gt;A friend told me in the time that I did not post, not necessarily everything should be a progress, maybe this is right or maybe wrong..only time will tell. (Meaning sometimes you can just relax, but to be honest.. I was not releaxing aswell)&lt;/p&gt;
+&lt;h2 id=&#34;why-about&#34;&gt;Why &amp;amp; About&lt;/h2&gt;
+&lt;p&gt;This is going to short, Recently I created a CI for development android builds, this is to reduce &amp;amp; eliminate the manuall build process to every pr, this reduces a lot of time for me.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;so what does this do?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;When a Pull Request is made to &lt;code&gt;development&lt;/code&gt; or &lt;code&gt;master&lt;/code&gt; branch, a CI will trigger that will pull all the latest code from that branch and try to build the code in &lt;code&gt;dev&lt;/code&gt; mode, it will report whether tests and build is success and export the final apk. This will be helpful for testers and even me to take the build right away and check whether the code breaks the build or not. Additionally I dont have to manually make a comment everytime for testers to take the build.&lt;/p&gt;
+&lt;h2 id=&#34;android-ci-with-github-actions&#34;&gt;Android CI with github actions&lt;/h2&gt;
+&lt;p&gt;GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows to automate builds, test, and deployment pipeline. We can create workflows that build and test every pull request to our repositories.&lt;/p&gt;
+&lt;h3 id=&#34;github-actions-free-tier&#34;&gt;Github actions free tier&lt;/h3&gt;
+&lt;p&gt;GitHub Actions are unlimited for public repositories and the Free plan also provides 2,000 minutes of Actions each month for use with out private projects.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/android-ci/github-free-account.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/android-ci/actions-for-private-reporsitories.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;gradle-build&#34;&gt;Gradle build&lt;/h3&gt;
+&lt;p&gt;There are different variants of your application (release &amp;amp; debug, each variant has its own set of porperties). But what do we need here? debug variant, because that is what we share with the users and get feedback from. I mainly wanted this because everytime I make a pull request, I have to check if it builds, take builds.. I then have to link the builds to that pull request, so others/ even I can use it and test that pull request.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Commands&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;debug: This is the specific variant of the application that is being built. In Android projects, you can define different build variants, such as debug and release, to configure different settings and behavior. The debug variant is typically used during development and testing, while the release variant is used for production-ready builds. (note that: for the debug build the sizes will be significantly big than release builds)&lt;/p&gt;
+&lt;p&gt;For example: &lt;a href=&#34;https://github.com/aghontpi/ad-silence/blob/51fb5782f711388c6632fa2d762b4beded3c9320/app/build.gradle#L19-L33&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;In my case I have these two builds&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-gradle&#34;&gt;buildTypes {
+release {
+minifyEnabled true
+shrinkResources true
+proguardFiles getDefaultProguardFile(&#39;proguard-android-optimize.txt&#39;), &#39;proguard-rules.pro&#39;
+}
+debug {
+minifyEnabled true
+shrinkResources true
+proguardFiles getDefaultProguardFile(&#39;proguard-android-optimize.txt&#39;), &#39;proguard-rules.pro&#39;
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I just specifically need the debug build alone.&lt;/p&gt;
+&lt;h2 id=&#34;what-is-a-keystore-why-do-we-need-it&#34;&gt;What is a Keystore &amp;amp; Why do we need it?&lt;/h2&gt;
+&lt;p&gt;A keystore plays a pivotal role in ensuring the security and integrity of our application. Essentially, a keystore is a secure store that holds cryptographic keys, certificates, and sensitive data used to digitally sign our App. These keys are used to digitally sign our App&amp;rsquo;s APK file. This digital signature serves as a means to verify the authenticity and origin of your application. When a user installs an app, the Android system uses the keystore&amp;rsquo;s digital signature to confirm that the App has not been tampered with and that it indeed originates from the expected source. This prevents malicious actors from altering the app&amp;rsquo;s code and introducing potential security vulnerabilities.&lt;/p&gt;
+&lt;p&gt;To simply put, we need this to distribute our app builds, users can trust this build since it is from us.&lt;/p&gt;
+&lt;p&gt;This keystore file should be kept private, should not be shared with others and can not be comitted along with other files in the repository.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If we keep this file private, how do we take builds then?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This is where &lt;a href=&#34;https://docs.github.com/en/actions/security-guides/encrypted-secrets&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;configuring secret in github actions&lt;/a&gt; comes into play.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/android-ci/configuring-secret-github-actions.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Once the secrets are configured, it can be used like below&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;- name: Decode keystore
+env:
+DEBUG_KEYSTORE: ${{ secrets.DEBUG_KEYSTORE }}
+run: |
+echo &amp;quot;$DEBUG_KEYSTORE&amp;quot; | base64 --decode &amp;gt; debug.keystore
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;configuring-the-workflow&#34;&gt;Configuring the workflow&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;We set a name &amp;amp; when should the builds be triggered, it can be of several things Cron, Issue Comment, Pull Request, Fork, Deployment Status..etc. See the &lt;a href=&#34;https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows.&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;full list here&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For my usecase, what I specifically need here is &lt;a href=&#34;https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#push&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;push&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;name: Android CI
+on:
+push:
+branches: [ &amp;quot;master&amp;quot;, &amp;quot;development&amp;quot; ]
+pull_request:
+branches: [ &amp;quot;master&amp;quot;, &amp;quot;development&amp;quot; ]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we need to &lt;a href=&#34;https://docs.github.com/en/actions/using-jobs/using-jobs-in-a-workflow&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;specify the jobs&lt;/a&gt;, there can be multiple job, but in our case, we just need a build job, give it a name.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;jobs:
+build:
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Choosing &lt;a href=&#34;https://docs.github.com/en/actions/using-jobs/choosing-the-runner-for-a-job&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;which type of machine&lt;/a&gt; this should be run on.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;runs-on: ubuntu-latest
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A job contians sequence of tasks called &lt;a href=&#34;https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idsteps&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;steps&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Checking out&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;- name: checkout &amp;amp; set up JDK 11
+- uses: actions/checkout@v3
+uses: actions/setup-java@v3
+with:
+java-version: &#39;11&#39;
+distribution: &#39;temurin&#39;
+cache: gradle
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Decode keystore from repository secrets&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;- name: Decode keystore
+env:
+DEBUG_KEYSTORE: ${{ secrets.DEBUG_KEYSTORE }}
+run: |
+echo &amp;quot;$DEBUG_KEYSTORE&amp;quot; | base64 --decode &amp;gt; debug.keystore
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Make gradle executable &amp;amp; run gradle build&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;- name: Grant execute permission for gradlew
+run: chmod +x gradlew
+- name: Build with Gradle
+env:
+KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+KEY_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+run: ./gradlew assembleDebug -Pandroid.injected.signing.store.file=$(pwd)/debug.keystore -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD -Pandroid.injected.signing.key.alias=$KEY_ALIAS -Pandroid.injected.signing.key.password=$KEY_PASSWORD
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We inject the &lt;code&gt;debug.keystore&lt;/code&gt; &amp;amp; other environment variables into the build using params like &lt;code&gt;-Pandroid.injected.signing.store.file=$(pwd)/debug.keystore&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Upload the artifacts&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;- name: Upload debug build
+uses: actions/upload-artifact@v3
+with:
+name: &amp;lt;upload-name&amp;gt;.apk (build artifact)
+path: app/build/outputs/apk/debug/app-debug.apk
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/ad-silence/blob/master/.github/workflows/android.yml&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Full workflow file.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Build in action&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/android-ci/build-in-action.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;This enabled me to not care about dev-debug builds entirely and focus just on development, which is a great time save.&lt;/p&gt;
+&lt;p&gt;In future, I would create a separate releases named &lt;code&gt;nightly&lt;/code&gt;, where the dev branch is built daily and these builds will be updated there.&lt;/p&gt;</description></item><item><title>Updating Dns Servers for Ads and Tracking Protection in 2023</title><link>//bluepie.in/2023/01/updating-dns-servers-for-ads-and-tracking-protection-in-2023/</link><pubDate>Sat, 28 Jan 2023 06:02:22 +0000</pubDate><guid>//bluepie.in/2023/01/updating-dns-servers-for-ads-and-tracking-protection-in-2023/</guid><description>
 &lt;h2 id=&#34;upgrading-pi-hole&#34;&gt;Upgrading PI hole&lt;/h2&gt;
 &lt;p&gt;Once every year, I do server maintainence (during Dec-Jan), this year I updated the our dns server from &lt;a href=&#34;https://github.com/pi-hole/pi-hole&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;pi-hole&lt;/a&gt; to &lt;a href=&#34;https://github.com/AdguardTeam/AdGuardHome&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;AGH&lt;/a&gt; (both are open source projects..) Just wanted to try an alternative, after using it for a while, the UI &amp;amp; Features on AGH is much better than pi-hole.&lt;/p&gt;
 &lt;h2 id=&#34;why-a-custom-dns-server&#34;&gt;Why a custom dns server?&lt;/h2&gt;
@@ -1861,79 +1968,4 @@ externals: {
 &lt;li&gt;maintain packages in npmjs (admin setting for package)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;conclusion.&lt;/h2&gt;
-&lt;p&gt;It was fun learning, creating and publishing the package. The link to the &lt;a href=&#34;https://www.npmjs.com/package/dynamic-table-react&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;package&lt;/a&gt;. untill next time -aghontpi.&lt;/p&gt;</description></item><item><title>Why I Choose Typescript</title><link>//bluepie.in/2020/10/why-i-choose-typescript/</link><pubDate>Thu, 29 Oct 2020 21:34:18 +0530</pubDate><guid>//bluepie.in/2020/10/why-i-choose-typescript/</guid><description>
-&lt;p&gt;Hello, we meet again!, how was the week? hope you are well and gud!, This post will be about typescript, I&amp;rsquo;m not explaining what it is, but rather why i choose to use it.&lt;/p&gt;
-&lt;h2 id=&#34;typescript-was-everywhere-background&#34;&gt;TypeScript was everywhere - background&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;First of all, I want to clear some air by opening up, &lt;em&gt;In in past, I hated typescript with a passion&lt;/em&gt;, Since then I&amp;rsquo;ve grown a lot as a person, lol.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Typescript was the new kid in the block, soo much hype was around it, stackoverflow surveys did not help either since it had typescript ranked top in their survey.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;ve been a fan of &lt;a href=&#34;https://www.freecodecamp.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;codecamp&amp;rsquo;s&lt;/a&gt; work, they do useful stuff for the community,&lt;/p&gt;
-&lt;p&gt;To my suprise they announced &lt;a href=&#34;https://twitter.com/ossia/status/1183845054449930241?s=20&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;this on twitter&lt;/a&gt;, I&amp;rsquo;ve been following their project - &lt;a href=&#34;https://github.com/freeCodeCamp/chapter&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;chapter&lt;/a&gt;, from then. After a month into development they migrated to typescript from javascript, there is an entire debate on their discord and github, but more importantly I was pissed because of this decision.&lt;/p&gt;
-&lt;p&gt;Ever since they changed the project to use typescript, gradually I started to reason and see-past my hate-wall (because of the respect I have for them). But I was not ready to try it out though, So a month later, I worked on a angular project, I learned basic typescipt(1% - 8%) to complete the project, was still writing javascript code everywhere, I was the &amp;ldquo;any&amp;rdquo; guy, if you know what I mean.&lt;/p&gt;
-&lt;h2 id=&#34;javascript-my-experience&#34;&gt;Javascript - my experience&lt;/h2&gt;
-&lt;p&gt;After the angular project, I did a few projects in React &lt;a href=&#34;https://bluepie.in/2020/07/rinku/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;rinku&lt;/a&gt;, &lt;a href=&#34;https://bluepie.in/2020/09/gatsby-experiment/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;with gatsby&lt;/a&gt; to name a few, I did the entire thing in javascript. From my experience, when the codebase grew along with the files, some issues I faced were,&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Trying to remember object properties, function properties, etc, avoidable bcoz of autocompletion.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;every so-often you are searching through the entire project, either by using find in files/grep.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Facing errors that could be avoidable by typesafety and static analysis, spending a ton of time debugging and fixing it.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Lack of easy peek into method signatures of third party libraries.`&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Maintaining seperate documentation&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;It should be noted that I&amp;rsquo;m adding this on top of es-lint and prettier.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;solution-reasons-for-using-typescript&#34;&gt;Solution - reasons for using Typescript&lt;/h2&gt;
-&lt;p&gt;So naturally when I was starting a new project, I choose typescript as the result of my previous experience, I striclty enable &lt;a href=&#34;https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;no-explicit-any&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Before proceeding below, it should be noted you wont get any of the benefits if they aren&amp;rsquo;t initialized with types.&lt;/p&gt;
-&lt;p&gt;ex:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;
-interface ApiItemProps {
-...
-}
-const [api, setApi] = useState&amp;lt;ApiItemProps[] | null&amp;gt;(null);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;What I get with typescript?&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&#34;autocomplete&#34;&gt;Autocomplete&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/autocomplete-1.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/autocomplete-2.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;library-definition&#34;&gt;Library definition&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/library-1.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/library-2.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;type-checking-for-parameters&#34;&gt;Type checking for parameters&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/typing-passed-params-2.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/typechecking-passed-params.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;customtypes-etc-for-comfort&#34;&gt;Customtypes, etc.. for comfort&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/comfort-1.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/comfort-2.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/comfort-3.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/comfort-4.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/comfort-5.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;static-analysis&#34;&gt;Static analysis&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/static-1.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/static-2.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;typing-api-responses-implemented-with-awesome-library-quicktype-https-github-com-quicktype-quicktype&#34;&gt;Typing api responses - implemented with awesome library &lt;a href=&#34;https://github.com/quicktype/quicktype&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;quicktype&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/why-i-choose-typescript/typing-api.svg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;advanced-features-of-typescript&#34;&gt;Advanced features of typescript,&lt;/h2&gt;
-&lt;p&gt;To achieve the best experience, typescript offers &lt;a href=&#34;https://www.typescriptlang.org/docs/handbook/advanced-types.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;advanced&lt;/a&gt;, &lt;a href=&#34;https://www.typescriptlang.org/docs/handbook/utility-types.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;unity&lt;/a&gt; and &lt;a href=&#34;https://www.typescriptlang.org/docs/handbook/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;much more&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;an example for unity and how I use it.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;interface ListItemProps {
-onPress: () =&amp;gt; void;
-id: string;
-name: string;
-color: keyof theme[&#39;colors&#39;];
-}
-type MenuItemProps = Omit&amp;lt;ListItemProps, &#39;onPress&#39;&amp;gt;;
-interface FlatListRenderProps {
-item: MenuItemProps;
-index: number;
-}
-const [list, setFlatList] = useState&amp;lt;FlatListRenderProps[] | null&amp;gt;(null);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;blockquote&gt;
-&lt;p&gt;For more &lt;a href=&#34;https://www.typescriptlang.org/docs/handbook/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;official handbook&lt;/a&gt;, explains a lot better than me.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;m just starting to adapt typescript in my javascript workflow, this is the begining phase, obviously there is much more to learn. Bye, See ya soon - Gopinath.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;It was fun learning, creating and publishing the package. The link to the &lt;a href=&#34;https://www.npmjs.com/package/dynamic-table-react&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;package&lt;/a&gt;. untill next time -aghontpi.&lt;/p&gt;</description></item></channel></rss>
