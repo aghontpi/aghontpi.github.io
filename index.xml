@@ -1,4 +1,55 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 12 Mar 2023 00:08:06 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Android CI on Github</title><link>//bluepie.in/2023/03/android-ci/</link><pubDate>Sun, 12 Mar 2023 00:08:06 +0000</pubDate><guid>//bluepie.in/2023/03/android-ci/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Mon, 21 Aug 2023 02:06:53 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Birthday Month 2023, Reflection &amp; Goals</title><link>//bluepie.in/2023/08/birthday-month-reflection/</link><pubDate>Mon, 21 Aug 2023 02:06:53 +0000</pubDate><guid>//bluepie.in/2023/08/birthday-month-reflection/</guid><description>
+&lt;p&gt;This is personal post, not about tech.. if anyone other than me is reading this.. ignore this if you wanted somehting technical.&lt;/p&gt;
+&lt;p&gt;I can not belive, its been already 3 years &lt;a href=&#34;https://bluepie.in/2020/08/future/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;since this post&lt;/a&gt;. Covid really took 2 years from my life real quick. I dont know If I&amp;rsquo;d be in a better/ lesser position if it were not for covid though.&lt;/p&gt;
+&lt;p&gt;I started this draft on august 21 and as i am inching each day towards my birthday and beyond. okey so lets compare the posts from previous years, my predictions and what not.&lt;/p&gt;
+&lt;p&gt;I did a purchase with a huge sum of money, atleast my own money without the help/assistance of my parents, so it felt pretty good. Sometimes I think maybe its a bad idea? cuz some of the suggestions when I told others were invest it somewhere else and buy it through other means. Like I always say only future holds the truth.&lt;/p&gt;
+&lt;h2 id=&#34;reflection&#34;&gt;Reflection&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For my future self&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Idk I feel like my judgement is clouded and I got distracted from my life/long term goal of comitting to open source.. or wait till you hear this delusionsal reasoning.. of maybe..maybe I might have leveled up and found something else? maybe.. Im doing a lot of travel back and forth.. and now since I&amp;rsquo;be been living with a close friend of mine in the work location, I had to socialize more.. which is not a bad thing.. I can not just sitback.. thinking and typing away on my keyboard.. while they were in the same/next room&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Its like a limbo [removed&amp;hellip;]&lt;/p&gt;
+&lt;p&gt;Encrypting below and not removing, if future me forgets for some reason.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;U2FsdGVkX1+Z+HeoqIwG5YyizCq6IyINO1be3KxOWWzx6y1rvURg/YAzbhy0SxxQ
+HW3q9sdbRWrNTE57PJBcZFwVtT7NuGjLMPjiSxF1KnaTZ3JULiKbO+riM+TkkxfI
+Z0Yh2BKpSF/HRgdjI787sWXiShmJksyM+itfyO6PkcuI5Qiglq7on+ZzkOqbGID7
+Gj34igwMbpFQOxUzgtC9H6dIeUzTXjxlqPExZXaGtGxVBlQIHtAekFs8igqG3yn3
+OWNHmfbtBHcsA57i4CjOLnJ2VabrLkFX/oym0+6E8aQNiYYZtVf0dlRaAhTcE/vm&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;U2FsdGVkX1+fnI5zDIHyEW0/HpvcfBw1dj7tPcFafQv8HXxlxffZgoluZx9tG7jP
+DZpgSrGa4Uq9CJbCvlin+yLMt7b7SFKRJt7xNkDXO0efAkZnXy/xPWWWA2ZXeUGq
+DN5YzMv6rLtXMISiFzNZHUMiq04mj0qyHAyxZQOLjwA=&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;U2FsdGVkX19MbTbNNHu3p/uw0g+n4qUWxUhn9cbTLU75sG5oayaiiEoJ86S5O9NQ
+zRlF8ODh/y/Z/V0NF/6CTZyAyZKKw91ZtDt9lnCBaMijPUoCL2ShOmSm/ewRP8Q3
+Gjrb5A6Ml8xvhhuomeH37njHWg3112JR+zhJzJ1A+nXB8AJ9uyBhew+F0FYtNDu4
+AhPfDk1Kxs18nKkIs5cOZPptQ8p4fM8fOrvlxZOMdVwHOpCi7pnrHxf0aaBTFoy8
+1skzdWQ5C7k18lPAZig1cg==&amp;rdquo;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#OpenSSL 3.1.2 1 Aug 2023 (Library: OpenSSL 3.1.2 1 Aug 2023)
+#enc
+echo -n &amp;quot;string-to-encrypt&amp;quot; | openssl enc -aes-256-cbc -a -pbkdf2
+#dec
+echo -n &amp;quot;string-to-decrypt&amp;quot; | base64 -d | openssl enc -d -aes-256-cbc -A -pbkdf2
+#incorrect password will print random symbols
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/birthday-month-and-reflection/post-from-august-2019.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;above text from the images is from 4 years ago, like wtf&amp;hellip; I can not grasp time..&lt;/p&gt;
+&lt;p&gt;As i am sitting here writng in this void space at 1:42:14 am, I think to myslef&amp;hellip;wait im drifiting away again..nope. There are lot of distractions during the day time. Sometimes I get the best ideas and solve problems only during the night.. but why.. its not like I can note mute the nose during daytime, I have anc headphones, piano/guitar music, osts, game ost, and etc.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/birthday-month-and-reflection/post-from-august-2020.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;And the above text is from 2020, oh how naive I can be at times? Though I made some progress to contribute to opensource and also progressed in excelling in a new domain. but professionally, I moved to a new company and there I started working in java. Which is not the new domain I told I would pursue. Though for open source I am maintaining some apps for android.&lt;/p&gt;
+&lt;h2 id=&#34;what-am-i-gona-do-this-year&#34;&gt;What am I gona do this year?&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;In terms of Health&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;During the covid period and after, I became unfit, this i realized after during the tavesl between chennain and hometown, I would feel uneasy flexing hy body and I had no stamina, and when I compared photos, it became obvious.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/birthday-month-and-reflection/august-post-2023-taken-2020.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;pic from 2021, during my old office&amp;rsquo;s tour - (though I look skinny (lost muscle mass after going to Chennai), I am perfectly healthy) after this I gained weight, developed love-handles which is hardest to lose, as I an writing, drafting this.. I&amp;rsquo;ve already started to workout more, the goal here is to build my old stamina and going back to gym.. yea..back. I used to go to gym on college, at that time I gained weight then when i moved to chennai, lost weight, then when I got back to home during covid, gained a lot of weight..&lt;/p&gt;
+&lt;p&gt;below is the pic of me from 2023 thought I kinda don&amp;rsquo;t look unhealthy, I am unhealthy here, the shirt is covering my belly and love-handles.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/birthday-month-and-reflection/august-post-2023-taken-2023.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;For this year, my goal is to become fit, already on a xx+ day streak at the time of writing this.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;In terms of Job&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;So here is my goal, I wana move to an even better comapany and expand my knowledge or work here at current compay (vz at the time of writing this) but go to higher designation (SDE II to higher) or even better like my friend who is working remote, find a job that has full time remote. ~review it next year..okey?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;In terms of Open Source&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;With an office job, social life,..nd all the other distractions.. living at the work location.. its difficult for me to maintain a steady contribution to opensource.. I always think about it, but have somthing that has more priority than this. I guess for the coming year too, it will be the same? idk..lets hope for the best!&lt;/p&gt;
+&lt;h2 id=&#34;additionaly-notes&#34;&gt;Additionaly notes&lt;/h2&gt;
+&lt;p&gt;Removed a lot of stuff after reviewing it a couple of times..but some are encrypted, this was in a draft for a long time now.&lt;/p&gt;</description></item><item><title>Android CI on Github</title><link>//bluepie.in/2023/03/android-ci/</link><pubDate>Sun, 12 Mar 2023 00:08:06 +0000</pubDate><guid>//bluepie.in/2023/03/android-ci/</guid><description>
 &lt;p&gt;Been busy, its not like I lost interest in posting here, I just didn&amp;rsquo;t allocate time for writing here, which is the opposite of what I set out to do.. which in turn does not track my progress at all, I should be held accountable for my progress. ~pff I hate it.&lt;/p&gt;
 &lt;p&gt;A friend told me in the time that I did not post, not necessarily everything should be a progress, maybe this is right or maybe wrong..only time will tell. (Meaning sometimes you can just relax, but to be honest.. I was not releaxing aswell)&lt;/p&gt;
 &lt;h2 id=&#34;why-about&#34;&gt;Why &amp;amp; About&lt;/h2&gt;
@@ -1830,142 +1881,4 @@ aghontpi@elitebook:/tmp$
 &lt;h2 id=&#34;what-i-gained&#34;&gt;what I gained?&lt;/h2&gt;
 &lt;p&gt;algorithms, datastructures, problem solving concepts, programming concepts and mainly it was fun and helped me take my mind off things.&lt;/p&gt;
 &lt;h2 id=&#34;questions-and-solutions&#34;&gt;Questions and Solutions.&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/AdventOfCode2020&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Check the repo for questions and solutions.&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Publishing Npm Package</title><link>//bluepie.in/2020/11/publishing-npm-package/</link><pubDate>Mon, 30 Nov 2020 11:47:43 +0530</pubDate><guid>//bluepie.in/2020/11/publishing-npm-package/</guid><description>
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Personal Update: I finally managed to change my github username with all its dependencies to aghontpi, it was less work than I expected. Gosh, Its been 6 months already..since I decided to change my username. Incase my future self is wondering, its still work from home, probablly will go chennai after new years&amp;rsquo; i.e 2021.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;This month was boring as hell in terms of office work, since I had to work on Extjs, I introduced some flare into it, but making it similar to react, because of this, it much easier to work on.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The more important stuff - Learnt to publish a package in npm.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;backstory&#34;&gt;Backstory&lt;/h2&gt;
-&lt;p&gt;So I wanted to do this for almost a year, I never got around it, main reason being, the other person who&amp;rsquo;s collaborating leaving. One of my colleagues &amp;amp; a good friend of mine asked if we could do any open-source projects, this was after he just demonstrated a angular componenet that he was building. It looked cool, So I told him Why not publish this?.
-So that is what we did, but decided to do it for react and publish it to npm.&lt;/p&gt;
-&lt;h2 id=&#34;reason-goal&#34;&gt;Reason/Goal&lt;/h2&gt;
-&lt;p&gt;I wanted to learn, what are the steps necessary to&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;publish to npm,&lt;/li&gt;
-&lt;li&gt;convert a component so that it can be published,&lt;/li&gt;
-&lt;li&gt;generate build
-&lt;ul&gt;
-&lt;li&gt;compiling typescript with types file&lt;/li&gt;
-&lt;li&gt;bundle the whole library as package&lt;/li&gt;
-&lt;li&gt;comparing webpack, lerna, rollup, etc.
-and lastly&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;just for the fun of it&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;the-idea&#34;&gt;The idea&lt;/h2&gt;
-&lt;p&gt;The idea is Table, the logic and functionality was all handled by my friend, I took care of remaining things. left the use cases for him to handle.&lt;/p&gt;
-&lt;h2 id=&#34;so-what-i-learnt&#34;&gt;So what I learnt?&lt;/h2&gt;
-&lt;h3 id=&#34;bundling&#34;&gt;Bundling&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;&lt;em&gt;Removing react-scripts to custom scripts&lt;/em&gt;&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;After some re-search found react-scripts was good, but not suitable for a libaray. so went ahead with just using babel,&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;rimraf lib/ &amp;amp;&amp;amp; babel src -d lib/
-rimraf lib/ &amp;amp;&amp;amp; babel src --watch -d lib/
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;.babelrc.js&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;module.exports = {
-presets: [
-[
-&amp;quot;@babel/preset-react&amp;quot;,
-{
-development: process.env.BABEL_ENV === &amp;quot;development&amp;quot;,
-},
-&amp;quot;@babel/preset-env&amp;quot;,
-],
-],
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;blockquote&gt;
-&lt;p&gt;but babel can not bundle/compile css files, which was used in out project, so researched further on bundlers.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;moving to webpack&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;The final decision came down to choosing between rollup and webpack. rollup was new to me, webpack, I already had experience with.. &amp;amp; my requirements was pretty simple, bundle files to /lib/index.js.
-So went ahead with just using webpack.&lt;/p&gt;
-&lt;p&gt;processing in webpack&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;rimraf lib/ &amp;amp;&amp;amp; webpack
-rimraf lib/ &amp;amp;&amp;amp; webpack --env mode=dev --watch
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;webpack.config.js&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const path = require(&amp;quot;path&amp;quot;)
-const includeFolder = path.resolve(__dirname, &amp;quot;src&amp;quot;)
-const outputFolder = path.resolve(__dirname, &amp;quot;lib&amp;quot;)
-module.exports = (env, argv) =&amp;gt; {
-const mode = env ? (env.mode == &amp;quot;dev&amp;quot; ? &amp;quot;development&amp;quot; : &amp;quot;production&amp;quot;) : &amp;quot;production&amp;quot;
-console.log(`running in ${mode} mode`)
-return {
-entry: &amp;quot;./src/Index.tsx&amp;quot;,
-mode,
-output: {
-filename: &amp;quot;index.js&amp;quot;,
-path: outputFolder,
-library: &amp;quot;dynamic-table-react&amp;quot;,
-libraryTarget: &amp;quot;umd&amp;quot;,
-},
-module: {
-rules: [
-{ //process css files
-test: /\.css$/i,
-include: includeFolder,
-use: [&amp;quot;style-loader&amp;quot;, &amp;quot;css-loader&amp;quot;],
-},
-{
-// process js and ts files
-test: /\.(js|mjs|jsx|ts|tsx)$/,
-include: includeFolder,
-use: {
-loader: &amp;quot;babel-loader&amp;quot;,
-},
-},
-],
-},
-externals: {
-react: &amp;quot;react&amp;quot;,
-&amp;quot;react-dom&amp;quot;: &amp;quot;react-dom&amp;quot;,
-},
-resolve: {
-extensions: [&amp;quot;.js&amp;quot;, &amp;quot;.jsx&amp;quot;, &amp;quot;.ts&amp;quot;, &amp;quot;.tsx&amp;quot;],
-},
-}
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;renamed .babelrc.js to .babelrc&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;// using preset to process react and typescript files
-{
-&amp;quot;presets&amp;quot;: [&amp;quot;@babel/preset-env&amp;quot;, &amp;quot;@babel/preset-react&amp;quot;, &amp;quot;@babel/preset-typescript&amp;quot;]
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;genrating-types-file&#34;&gt;Genrating Types file&lt;/h3&gt;
-&lt;p&gt;generating types file .d.ts was soo much pain, bacause webpack could not do it, (at least at the time of writing this).&lt;/p&gt;
-&lt;p&gt;tsc could do it, but it needs tsconfig.json and also I would have to include it as seperate script in package.json, This is where I thought I should have went with rollup or tsdx.&lt;/p&gt;
-&lt;p&gt;I have not yet added this to the package, still experimenting on stuff, Will update this once I complete that part.&lt;/p&gt;
-&lt;h3 id=&#34;structuring-package-json&#34;&gt;structuring package.json&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;em&gt;Stuff to configure in package.json, importantly main, scripts, types file, peer dependencies.&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-...,
-&amp;quot;main&amp;quot;: &amp;quot;lib/index.js&amp;quot;,Removing react-scripts to custom scripts
-&amp;quot;peerDependencies&amp;quot;: {
-&amp;quot;react&amp;quot;: &amp;quot;^x.x.x&amp;quot;,
-&amp;quot;react-dom&amp;quot;: &amp;quot;^x.x.x&amp;quot;
-},
-&amp;quot;scripts&amp;quot;: {
-&amp;quot;build&amp;quot;: &amp;quot;rimraf lib &amp;amp;&amp;amp; webpack&amp;quot;,
-&amp;quot;start&amp;quot;: &amp;quot;rimraf lib/ &amp;amp;&amp;amp; webpack --env mode=dev --watch&amp;quot;
-}
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;since we added react to be a &lt;a href=&#34;https://nodejs.org/en/blog/npm/peer-dependencies/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;peer-dependency&lt;/a&gt;, we oughta add following to webpack config.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;
-externals: {
-&amp;quot;react&amp;quot;: &amp;quot;react&amp;quot;,
-&amp;quot;react-dom&amp;quot;: &amp;quot;react-dom&amp;quot;,
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;other-minor-stuff&#34;&gt;Other minor stuff&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;building and publishing commands with npm/yarn&lt;/li&gt;
-&lt;li&gt;using yarn link/ npm link while developing&lt;/li&gt;
-&lt;li&gt;maintain packages in npmjs (admin setting for package)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;conclusion&#34;&gt;conclusion.&lt;/h2&gt;
-&lt;p&gt;It was fun learning, creating and publishing the package. The link to the &lt;a href=&#34;https://www.npmjs.com/package/dynamic-table-react&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;package&lt;/a&gt;. untill next time -aghontpi.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/AdventOfCode2020&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Check the repo for questions and solutions.&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>
