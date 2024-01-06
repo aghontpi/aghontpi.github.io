@@ -1,4 +1,92 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Thu, 21 Sep 2023 06:03:26 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Overcoming a limitation in Electron</title><link>//bluepie.in/2023/09/electron-views/</link><pubDate>Thu, 21 Sep 2023 06:03:26 +0000</pubDate><guid>//bluepie.in/2023/09/electron-views/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 19 Nov 2023 21:55:10 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>How I replaced Netflix and using my media server for over 2 years now</title><link>//bluepie.in/2023/11/self-hosted-netflix-replacer/</link><pubDate>Sun, 19 Nov 2023 21:55:10 +0000</pubDate><guid>//bluepie.in/2023/11/self-hosted-netflix-replacer/</guid><description>
+&lt;!-- There are telegram groups - prabh story buy things from sotre 50 rupees per month. --&gt;
+&lt;h2 id=&#34;feasibility&#34;&gt;Feasibility&lt;/h2&gt;
+&lt;p&gt;Can I host Netflix on my own? of course yes, many open source software offers similar functionality, you can set it to work only inside your home network or make it available throughout the internet.&lt;/p&gt;
+&lt;p&gt;I already own a server, I rent out a server for hosting my development activities, so why not use that server as a media server, I don&amp;rsquo;t want it to run just inside the home LAN, I want it to be exposed to the internet, of course with required security measures.. if its open others can access it.&lt;/p&gt;
+&lt;h2 id=&#34;what-i-need&#34;&gt;What I need&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Media server, there are many to choose from using a quick Google search, I&amp;rsquo;ve chosen &lt;a href=&#34;https://github.com/jellyfin/jellyfin&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Jellyfin&lt;/a&gt;, as it has all the features I need.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Application to download, media to the server, i.e. torrent client. &lt;a href=&#34;https://github.com/qbittorrent/qBittorrent&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Qbittorrent-nox&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;That&amp;rsquo;s all you ask&amp;hellip;? Yeah, I was surprised too. anyway I know I need these two software, but how am I going to install and run them on my server?&lt;/p&gt;
+&lt;!-- 12:06 AM12:06 AM --&gt;
+&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
+&lt;p&gt;The choice here would be to use docker/podman because it won&amp;rsquo;t affect the host machine. First, to run the media server, I need to mount a new drive to store all the movies and TV shows, I chose a 150 GB drive, cuz I don&amp;rsquo;t need more than it and I can remove any torrents and add another one whenever needed.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;show disk mount volumes&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;df -h
+Filesystem Size Used Avail Use% Mounted on
+...
+/dev/sdb 150G 134G 16G 90% /mnt/external-disk
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- - Jellyfin UI
+- hosting commands with Podman, mounting volumes --&gt;
+&lt;p&gt;I use Podman, this is the command I use to install Jellyfin. If you notice, I mount all the configs, cache, and media to the host.&lt;/p&gt;
+&lt;!-- uid=1000, gid=1000 --&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;podman run -d \
+--name=jellyfin \
+-e TZ=IN \
+-e PUID=&amp;lt;UID&amp;gt; \
+-e PGID=&amp;lt;GID&amp;gt; \
+-p 8096:8096 \
+-v /home/opc/jellyfin/cache:/cache \
+-v /home/opc/jellyfin/config:/config \
+-v /mnt/external-disk/torrents:/media \
+--restart unless-stopped \
+docker.io/linuxserver/jellyfin:latest
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;wait.. is that it? Yea, it is that simple!&lt;/p&gt;
+&lt;h2 id=&#34;how-do-i-download-stuff-so-i-can-watch-it-in-jellyfin&#34;&gt;How do I download stuff, so I can watch it in Jellyfin?&lt;/h2&gt;
+&lt;p&gt;By running Qbitorrent nox, make sure you set the username and password, when you visit the web-ui, you need to be authenticated to access it.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;yum install qbittorrent-nox
+qbittorrent-nox -d --webui-port=8181
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Qbittorrent UI screenshot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/self-hosted-netflix-replacer/qbittorrentnox.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/self-hosted-netflix-replacer/qbittorrentnox-search-ui.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;access-the-web-ui-and-start-watching&#34;&gt;Access the web-ui and start watching.&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/self-hosted-netflix-replacer/media-server-webclient.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;watch-it-on-mobile-ipad-tv-etc&#34;&gt;Watch it on mobile/ iPad/ TV..etc&lt;/h2&gt;
+&lt;p&gt;There is an &lt;a href=&#34;https://jellyfin.org/downloads/clients&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;official client for everything.&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;using web vs native app.. download links..etc, you need to configure the endpoint Url of Jellyfin, (covering that in a different post)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;configuring the mobile app.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/self-hosted-netflix-replacer/jellyfin-mobile-configuration.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/self-hosted-netflix-replacer/mobile-playback-screenshots.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
+&lt;p&gt;You just have to spend a couple of hours every year in total to maintain update &amp;amp; maintain. The server costs you can share it with friends. I think people are spoon-fed nowadays~&lt;/p&gt;
+&lt;p&gt;You have to consider the fact that, the streaming wars are real, &lt;a href=&#34;https://www.youtube.com/watch?v=yvhv7bgmz64&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;this video summates my frustration.&lt;/a&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;misc&#34;&gt;Misc&lt;/h2&gt;
+&lt;p&gt;To update Jellyfin and get the latest build and not lose data, since we are running it in podman, it&amp;rsquo;s pretty easy. Check the command from top to bottom, it is self-explanatory,&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt; podman pull docker.io/linuxserver/jellyfin:latest
+podman image ls -a
+podman ps
+podman stop jellyfin
+podman container ls -a
+podman container rename jellyfin jellyfin_bkp_&amp;lt;date&amp;gt;
+podman container ls -a
+podman run -d \
+--name=jellyfin \
+-e TZ=IN \
+-e PUID=&amp;lt;UID&amp;gt; \
+-e PGID=&amp;lt;GID&amp;gt; \
+-p 8096:8096 \
+-v /home/opc/jellyfin/cache:/cache \
+-v /home/opc/jellyfin/config:/config \
+-v /mnt/external-disk/torrents:/media \
+--restart unless-stopped \
+docker.io/linuxserver/jellyfin:latest
+podman ps
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;personal-update-rant-about-past-backstory&#34;&gt;Personal update - Rant about past - Backstory&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;This is usually at the start of each post, but I thought it would be better suited at the bottom from now on.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Back before I got a job, basically a broke ass student, I/ we/ everyone used to pirate entertainment content all the time, u name it, movies, tv shows, music..etc, those times were before the JIO era, back when 59kbps was the unlimited internet provided by BSNL for everyone, youtube videos where limited to 240/ 360p, Aor downloading a show or game, we would run it for days, I vividly remember my friend downloading a show with 600+ episodes show for multiple days, now we got unlimited 5g, 200 Mbps unlimited broadband.. boy times have changed. I have to note it down somewhere..make sure future me remembers.&lt;/p&gt;
+&lt;p&gt;After I got my job and the JIO internet era, buying subscriptions became a common thing&amp;hellip; everyone was on the bandwagon&amp;hellip; I came in late but I did try the subscription things before I went with this approach, I knew there were alternatives and I could still pirate stuff. But if I paid the subscription, it is accessible with a click of a button. While writing this I am reminded of something..that it has made us lazy.&lt;/p&gt;</description></item><item><title>Overcoming a limitation in Electron</title><link>//bluepie.in/2023/09/electron-views/</link><pubDate>Thu, 21 Sep 2023 06:03:26 +0000</pubDate><guid>//bluepie.in/2023/09/electron-views/</guid><description>
 &lt;p&gt;Hey, what&amp;rsquo;s going on with you, hopefully good things, a small personal update, I think I lost focus on my goals for almost a 1.6 years, right after I joined vz, maybe its beause this is the first ime I ever switched my official day time job, wtf, time..time..time it moves soo fast, nowadays literally everthing takes soo much time in this attention seeking nightmare.. wtf, you can not even ignore most of the things, otherwise you will be an outcast, Something happened and it gave me a wakeup call on why I wanted my life goals on the first place, then I realized, &amp;ldquo;you are the person shaped by your memories, at least your behaviour should reflect it&amp;rdquo;, because If I still had my old memories and experiences I would have not changed courses? doing all the things that external factors influences me, my future self can agree or disagree on this.&lt;/p&gt;
 &lt;h2 id=&#34;electron&#34;&gt;Electron&lt;/h2&gt;
 &lt;p&gt;I haven&amp;rsquo;t worked in electron before, embedded view and browser views are three different ways to build the UI for your electron app&lt;/p&gt;
@@ -1775,175 +1863,4 @@ req.get(&#39;/top&#39;).expect(429, done);
 &lt;h4 id=&#34;pm2-managing-the-api&#34;&gt;pm2 managing the api&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/express-api-server/running-the-server-in-production.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
-&lt;p&gt;Hope this motivates my futureself in someway, keep learning and reach milestones constantly.&lt;/p&gt;</description></item><item><title>Preconfigured Binary and Installer script through Docker</title><link>//bluepie.in/2021/01/preconfigured-binary-using-docker/</link><pubDate>Fri, 29 Jan 2021 08:23:06 +0530</pubDate><guid>//bluepie.in/2021/01/preconfigured-binary-using-docker/</guid><description>
-&lt;p&gt;How&amp;rsquo;s it going, good I hope!, Hope this year is a blast for you.&lt;/p&gt;
-&lt;h2 id=&#34;what-is-this&#34;&gt;What is this?&lt;/h2&gt;
-&lt;p&gt;Creating a preconfigured container for a precompiled binary utilizing docker.&lt;/p&gt;
-&lt;h2 id=&#34;reason-motivation&#34;&gt;Reason / Motivation:&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;ve been using hugo, even since my blog migration post, the one problem that I am facing with hugo is that,&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;whenever I run update os host system,hugo version also updates, the problem with that is some features are deprecated in the new release, my site design depends upon those features. so what I was doing is constantly degrading the hugo version back to old version, before I write a post everytime.&lt;/li&gt;
-&lt;li&gt;I work in new environments all the time, so downloading the appropriate version and installing takes time.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;goal&#34;&gt;goal&lt;/h2&gt;
-&lt;p&gt;At the end of this venture, I should be able to&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;create a image from scratch&lt;/li&gt;
-&lt;li&gt;install a required binary with its dependencies, either using source or binary distribution&lt;/li&gt;
-&lt;li&gt;create a container from the image and export it&lt;/li&gt;
-&lt;li&gt;upload the container image to a docker hub or something similar&lt;/li&gt;
-&lt;li&gt;setup an environment using the container&lt;/li&gt;
-&lt;li&gt;link the local binary executable to the binary inside the container
-&lt;ul&gt;
-&lt;li&gt;whenever I run the binary locally, the binary inside the container should be executed on the files
-from the host system&amp;rsquo;s current path.&lt;/li&gt;
-&lt;li&gt;I should be able to run the binary, with or without its parameters and environment options&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;is-this-even-possible&#34;&gt;Is this even possible?&lt;/h2&gt;
-&lt;p&gt;what I am trying to achieve is completely possible using docker, its a feature completely baked into the docker core,
-using &amp;lsquo;&amp;ndash;rm&amp;rsquo; with &amp;lsquo;docker -run&amp;rsquo;&lt;/p&gt;
-&lt;h2 id=&#34;lets-start&#34;&gt;Lets start&lt;/h2&gt;
-&lt;h3 id=&#34;choosing-the-best-base-image-i-recommend-alpine-https-hub-docker-com-alpine&#34;&gt;Choosing the best base image, I recommend &lt;a href=&#34;https://hub.docker.com/_/alpine/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;alpine&lt;/a&gt;.&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;why?&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Alpine Linux is a Linux distribution built around musl libc and BusyBox. The &lt;strong&gt;&lt;em&gt;&lt;em&gt;image is only 5 MB&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt; in size and &lt;strong&gt;&lt;em&gt;&lt;em&gt;has access to a package repository&lt;/em&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&#34;set-up-a-container-from-alpine&#34;&gt;Set up a container from alpine&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
-aghontpi@elitebook:~$ docker run --name testalpine -d -it alpine:latest /bin/sh
-1be3fb1ba1c46786dc5034745dcdab31c6588627c086c08f3c0ff8493d270544
-aghontpi@elitebook:~$ docker ps
-CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
-1be3fb1ba1c4 alpine:latest &amp;quot;/bin/sh&amp;quot; 4 seconds ago Up 3 seconds testalpine
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;login-to-the-shell-to-install-your-binary&#34;&gt;Login to the shell to install your binary&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;aghontpi@elitebook:~$ docker exec -it testalpine /bin/sh
-/ # whoami
-root
-/ # apk update
-fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
-fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
-v3.13.2-8-g7bb1c88019 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
-v3.13.2-9-gd3529c068e [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
-OK: 13884 distinct packages available
-/ # apk list vim
-vim-8.2.2320-r0 x86_64 {vim} (Vim)
-/ # apk add --no-cache vim
-fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
-fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
-(1/5) Installing xxd (8.2.2320-r0)
-(2/5) Installing lua5.3-libs (5.3.6-r0)
-(3/5) Installing ncurses-terminfo-base (6.2_p20210109-r0)
-(4/5) Installing ncurses-libs (6.2_p20210109-r0)
-(5/5) Installing vim (8.2.2320-r0)
-Executing busybox-1.32.1-r0.trigger
-OK: 25 MiB in 19 packages
-/ # vim test
-/ # cd home
-/home # wget https://github.com/gohugoio/hugo/releases/download/v0.56.3/hugo_0.56.3_Linux-64bit.tar.gz
-Connecting to github.com (13.234.210.38:443)
-Connecting to github-releases.githubusercontent.com (185.199.108.154:443)
-saving to &#39;hugo_0.56.3_Linux-64bit.tar.gz&#39;
-hugo_0.56.3_Linux-64 100% |*********************************************************************************************************************************************************************************************************************************| 11.4M 0:00:00 ETA
-&#39;hugo_0.56.3_Linux-64bit.tar.gz&#39; saved
-/home # ls
-hugo_0.56.3_Linux-64bit.tar.gz
-/home # tar -xf hugo_0.56.3_Linux-64bit.tar.gz
-/home # ls
-LICENSE README.md hugo hugo_0.56.3_Linux-64bit.tar.gz
-/home # cp hugo /usr/bin/
-/home # mkdir test
-/home # cd test/hugo
-/home # ls
-LICENSE README.md hugo hugo_0.56.3_Linux-64bit.tar.gz test
-/home # cd test/
-/home/test # hugo
-Building sites … WARN 2021/02/19 16:52:24 found no layout file for &amp;quot;HTML&amp;quot; for &amp;quot;taxonomyTerm&amp;quot;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
-WARN 2021/02/19 16:52:24 found no layout file for &amp;quot;HTML&amp;quot; for &amp;quot;home&amp;quot;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
-WARN 2021/02/19 16:52:24 found no layout file for &amp;quot;HTML&amp;quot; for &amp;quot;taxonomyTerm&amp;quot;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
-| EN
-+------------------+----+
-Pages | 3
-Paginator pages | 0
-Non-page files | 0
-Static files | 0
-Processed images | 0
-Aliases | 0
-Sitemaps | 1
-Cleaned | 0
-Total in 4 ms
-/home/test # ls
-public resources
-/home/test # cd ..
-/home # ls
-LICENSE README.md hugo hugo_0.56.3_Linux-64bit.tar.gz test
-/home # rm -rf ./*
-/home # exit
-aghontpi@elitebook:~$
-aghontpi@elitebook:~$ docker container stop testalpine
-testalpine
-aghontpi@elitebook:~$ docker commit testalpine testalpinewithhugo/0.1
-sha256:c305edf7f82a912801ae44dfe6ffe9e834e0541728295c2968ef69ad2ba9e90f
-aghontpi@elitebook:~$ docker image ls testalpinewithhugo/0.1
-REPOSITORY TAG IMAGE ID CREATED SIZE
-testalpinewithhugo/0.1 latest c305edf7f82a 14 seconds ago 60.1MB
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;host-the-image-remotely-in-a-service-of-your-choice&#34;&gt;Host the image remotely in a service of your choice.&lt;/h3&gt;
-&lt;p&gt;Then use services like &lt;a href=&#34;https://hub.docker.com&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;docker-hub&lt;/a&gt; to your private repo, it will look like below.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/preconfigured-binary-using-docker/docker-container-export-and-upload-to-docker-hub.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;shell-script-to-orchestrate-the-whole-thing&#34;&gt;Shell script to orchestrate the whole thing.&lt;/h3&gt;
-&lt;p&gt;Didn&amp;rsquo;t want to brushup my sheel script so wrote a python script and used it as executable instead.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://gist.github.com/aghontpi/8271dc0f28c2c844ae2a0d1e03c70bf5&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to the following code&lt;/a&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#! /usr/bin/python3
-import os
-calling_directory = os.getcwd()
-cmd = f&amp;quot;docker run --rm -it \
---user $(id -u):$(id -g) \
--v &#39;/etc/group:/etc/group:ro&#39; \
--v &#39;/etc/passwd:/etc/passwd:ro&#39; \
--v &#39;/etc/shadow:/etc/shadow:ro&#39;
--v {calling_directory}/:/tmp/ \
--e HUGO_ENV \
--p 80:1313 \
-bluepie/hugo:0.1 \
-/bin/sh -c &#39;cd /tmp/ &amp;amp;&amp;amp; hugo &amp;quot; + &#39; &#39;.join(sys.argv[1:]) +&amp;quot; &#39;&amp;quot;
-print(cmd)
-os.system(cmd)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;finally-installation-script&#34;&gt;Finally Installation script&lt;/h3&gt;
-&lt;p&gt;The code is verbose, so check it out through the link.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://gist.github.com/aghontpi/a9f160d80923823757a9894caf37aba7&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to installation script&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;what the script does..&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;check if hugo and docker is already installed&lt;/li&gt;
-&lt;li&gt;create .bin directory inside $HOME&lt;/li&gt;
-&lt;li&gt;downloads the &lt;a href=&#34;https://gist.github.com/aghontpi/8271dc0f28c2c844ae2a0d1e03c70bf5&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;code&lt;/a&gt; and places it as executable inside $HOME/.bin/hugo&lt;/li&gt;
-&lt;li&gt;adds the path $HOME/.bin to .bashrc&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;script-in-action&#34;&gt;Script in action&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
-aghontpi@elitebook:/tmp$ ./install-script.py
-&amp;gt; docker-hugo custom binary script v0.0.1
-&amp;gt; docker is installed proceeding..
-&amp;gt; hugo does not exists, initiating docker pull and installation
-&amp;gt; authenticating /w docker, enter credential when asked
-Authenticating with existing credentials...
-WARNING! Your password will be stored unencrypted in /home/aghontpi/.docker/config.json.
-Configure a credential helper to remove this warning. See
-https://docs.docker.com/engine/reference/commandline/login/#credentials-store
-Login Succeeded
-&amp;gt; pulling from docker repo
-0.1: Pulling from bluepie/hugo
-Digest: sha256:db54d94cfb7ad12726b1ee9f5fa7b2a2ad9d7e567021886fe2dd74e4262a43ea
-Status: Image is up to date for bluepie/hugo:0.1
-docker.io/bluepie/hugo:0.1
-&amp;gt; getting the custom script
-&amp;gt; writing to disc
-&amp;gt; setting permission
-&amp;gt; backup cmd -&amp;gt; cp /home/aghontpi/.bashrc /home/aghontpi/.bashrc_bkp_19022021-21:20:15
-&amp;gt; modifying bashrc of user
-&amp;gt; installation complete
----&amp;gt; use a new terminal to test &amp;lt;---
-aghontpi@elitebook:/tmp$
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
-&lt;p&gt;I learned a lot through this little experiment, It saves a ton of my time.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;Hope this motivates my futureself in someway, keep learning and reach milestones constantly.&lt;/p&gt;</description></item></channel></rss>
