@@ -1,4 +1,118 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 19 Nov 2023 21:55:10 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>How I replaced Netflix and using my media server for over 2 years now</title><link>//bluepie.in/2023/11/self-hosted-netflix-replacer/</link><pubDate>Sun, 19 Nov 2023 21:55:10 +0000</pubDate><guid>//bluepie.in/2023/11/self-hosted-netflix-replacer/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Thu, 07 Dec 2023 20:49:16 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>How I Set Up Nginx and SSL for My Media Server and Torrent</title><link>//bluepie.in/2023/12/how-i-configure-nginx-for-my-server-and-torrent/</link><pubDate>Thu, 07 Dec 2023 20:49:16 +0000</pubDate><guid>//bluepie.in/2023/12/how-i-configure-nginx-for-my-server-and-torrent/</guid><description>
+&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;
+&lt;p&gt;This post is a nginx configurations of my &lt;a href=&#34;https://bluepie.in/2023/11/self-hosted-netflix-replacer/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;How I replaced Netflix and started using my media server for over 2 years now&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;config of jellyfin&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We already run jellyfin inside podman and expose the service on port 8096, so we use nginx to handle requests to domain &amp;lsquo;media.bluepie.in&amp;rsquo;, which connects to jellyfin podman instance.&lt;/p&gt;
+&lt;p&gt;I point my domain (through domain provider) to the ip address of the server im running my jellyfin instance, then use nginx to serve the requests, the nginx configs are located inside config folders and are included in main file.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Setting Up Nginx (Reminder for me, others ignore)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Install Nginx.&lt;/li&gt;
+&lt;li&gt;Then, make a config file in the conf.d folder. I use one config file for each domain and add it to the main Nginx config with /etc/nginx/conf.d/*.conf&lt;/li&gt;
+&lt;li&gt;Check Nginx config: &lt;code&gt;nginx -t&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Restart Nginx: &lt;code&gt;sudo service nginx restart&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Reload Nginx: &lt;code&gt;sudo service nginx reload&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Config file for media server&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt; server {
+server_name media.bluepie.in;
+location / {
+proxy_pass http://127.0.0.1:8096;
+proxy_pass_request_headers on;
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto $scheme;
+proxy_set_header X-Forwarded-Protocol $scheme;
+proxy_set_header X-Forwarded-Host $http_host;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection $http_connection;
+proxy_buffering on;
+proxy_redirect / / ;
+proxy_cookie_path / /;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;config of torrent&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Instead of maintaining a separate domain for running qBittorrent, I utilize the main domain but with the &amp;lsquo;/torrent/&amp;rsquo; prefix. To enhance security and prevent others from accessing it, I implement two layers of protection: HTTP basic authentication. For this purpose, a new .htpasswd file is created and linked with Nginx for handling HTTP basic login before accessing qBittorrent. After the initial login to qBittorrent, the username and password are configured. Subsequently, during subsequent logins, users will be prompted for HTTP basic authentication first and then for qBittorrent authentication.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Creating a .htpasswd File for Authentication:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;(self note: The auth_basic and auth_basic_user_file directives are built-in and don&amp;rsquo;t require any extra modules)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Creation:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;htpasswd -c /etc/nginx/.htpasswd &amp;lt;username&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Subsequently, specify its usage in Nginx:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt;auth_basic &amp;quot;Restricted Access&amp;quot;;
+auth_basic_user_file /etc/nginx/.htpasswd;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Config to be added to main nginx config&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt; location /torrent/ {
+proxy_pass http://127.0.0.1:8181/;
+proxy_set_header Host $host;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection upgrade;
+proxy_set_header Accept-Encoding gzip;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto $scheme;
+proxy_set_header X-Forwarded-Port $server_port;
+auth_basic &amp;quot;restricted space&amp;quot;;
+auth_basic_user_file /etc/nginx/.htpasswd;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- - ssl config for all sites, including a bounds dns, tell that I should automate based on godaddy api. --&gt;
+&lt;p&gt;I automate SSL certificate renewals across my devices with Certbot, ensuring secure, uninterrupted service without manual oversight. The heart of this automation is a daily cron job configured to run Certbot&amp;rsquo;s renewal command, specifically opting for the &amp;ndash;preferred-chain &amp;ldquo;ISRG Root X1&amp;rdquo; to ensure broad compatibility (particularly for setting up custom DNS servers on Android devices that are operating on version 10 or higher). Here&amp;rsquo;s the crux of the setup:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+10 0 * * * /usr/bin/certbot renew --preferred-chain &amp;quot;ISRG Root X1&amp;quot; &amp;gt;&amp;gt; /home/&amp;lt;user&amp;gt;/cronlog.log 2&amp;gt;&amp;amp;1
+# The schedule 10 0 * * * means the task will run at 12:10 AM every day server time.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This approach leverages the reliability of cron for scheduling and Certbot for execution, automating the renewal process and logging outcomes for easy monitoring. It&amp;rsquo;s a streamlined, efficient method.&lt;/p&gt;
+&lt;h3 id=&#34;an-insight-into-dns-renewal-challenges-unrelated-to-jellyfin-or-qbittorrent&#34;&gt;An Insight into DNS Renewal Challenges (Unrelated to Jellyfin or qBittorrent)&lt;/h3&gt;
+&lt;!-- usually a tmux shell is running tmux ls
+- login to server
+- check cronlog.log in home directory
+-I wrote for myself, found inside adguard
+certbot certonly --manual --preferred-challenges=dns --preferred-chain=&#34;ISRG Root X1&#34;
+- certificate for dns.bluepie.in, media.bluepie.in,uat.bluepie.in will automatically renew.
+- have to manually renew the certificate for *.dns.bluepie.in
+- certificates are stored in /etc/letsencrypt/live/dns.bluepie.in-0001
+- copy the pri.pem &amp; fullchain.pem to /home/opc/adguard/conf
+::raw_log_start::
+[root@instance-20220718-0253 dns.bluepie.in-0001]# certbot certonly --manual --preferred-challenges=dns --preferred-chain=&#34;ISRG Root X1&#34;
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Please enter the domain name(s) you would like on your certificate (comma and/or
+space separated) (Enter &#39;c&#39; to cancel): *.dns.bluepie.in
+Renewing an existing certificate for *.dns.bluepie.in
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Please deploy a DNS TXT record under the name:
+_acme-challenge.dns.bluepie.in.
+with the following value:
+fWQdh1jwhPtKe8Wz1NMaX2dhNt_a2Rd4iM_pYZjTIHo
+Before continuing, verify the TXT record has been deployed. Depending on the DNS
+provider, this may take some time, from a few seconds to multiple minutes. You can
+check if it has finished deploying with aid of online tools, such as the Google
+Admin Toolbox: https://toolbox.googleapps.com/apps/dig/#TXT/_acme-challenge.dns.bluepie.in.
+Look for one or more bolded line(s) below the line &#39;;ANSWER&#39;. It should show the
+value(s) you&#39;ve just added. --&gt;
+&lt;p&gt;Every time I want to renews the whildcard DNS domain (i.e) *.dns.bluepie.in, I start with logging in and checking the cronlog.log in my logs Directory. This log helps me keep track of the automated renewals for all services running in that server.&lt;/p&gt;
+&lt;p&gt;This setup works well for most of my domains, automatically renewing their certificates. However, there&amp;rsquo;s a catch with the wildcard domain *.dns.bluepie.in which requires a manual renewal process every two months. After renewing, I manually move the private key and pem files do dns service so that it can read and update the certificates.&lt;/p&gt;
+&lt;p&gt;The manual part involves adding a DNS TXT record for _acme-challenge.dns.bluepie.in. and waiting for it to be verified. This process, although straightforward, is a bit of a hassle because it can&amp;rsquo;t be automated with my current setup. After updating the DNS record, I always double-check to make sure it&amp;rsquo;s correctly deployed using the Google Admin Toolbox: &lt;a href=&#34;https://toolbox.googleapps.com/apps/dig/#TXT/_acme-challenge.dns.bluepie.in&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://toolbox.googleapps.com/apps/dig/#TXT/_acme-challenge.dns.bluepie.in&lt;/a&gt;. This tool confirms the record is live, which is crucial before proceeding with the certification.&lt;/p&gt;
+&lt;p&gt;The Google Admin Toolbox, specifically the &amp;ldquo;Dig&amp;rdquo; tool, is a web-based version of the Unix dig command, which I often use for DNS verification. This tool is part of a suite designed to troubleshoot Google Workspace services and is particularly handy for checking DNS record propagation, such as the TXT records required for SSL certificate validation. I use this tool to confirm that the record is correctly propagated across the DNS system. This step is crucial because the validation of SSL certificates by Let&amp;rsquo;s Encrypt (or any other certificate authority that supports DNS-01 challenge). For more detailed functionalities and tools, you can explore the toolbox directly at &lt;a href=&#34;https://toolbox.googleapps.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;toolbox.googleapps.com​&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve been thinking about solving this issue by integrating with the GoDaddy API for DNS wildcard renewal. Doing this would remove the need for manual intervention every two months, making the process smoother and fully automated. It&amp;rsquo;s definitely something I plan to work on in the future to streamline my server management tasks.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;personal-update&#34;&gt;Personal Update&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;This section typically opens each of my posts, a tradition spanning many years. However, I&amp;rsquo;ve decided it might be better placed at the end moving forward.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve begun to engage heavily with LeetCode this year, a detail I haven&amp;rsquo;t shared in my posts. So, in case future me forgets, I&amp;rsquo;m jotting it down here for remembrance. Remember &lt;a href=&#34;https://adventofcode.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;AOC&lt;/a&gt;, which I previously tackled in 2020 and maintained a GitHub repo &lt;a href=&#34;https://bluepie.in/2020/12/adventofcode-2020/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;? I&amp;rsquo;ve opted to take it on this year as well. Yes, even though my plate is overflowing, I&amp;rsquo;ve decided to add this to my queue&amp;hellip; I know, :facepalm:.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve leased a new place in Chennai (Mugalivakkam), roughly 6 kilometers from my current office. It&amp;rsquo;s a 2BHK flat with parking facilities. I moved in, stating that it would be a family residence, with plans for my parents to join me. This decision came after a series of abrupt changes. Initially, I had a different plan in mind, but it&amp;rsquo;s funny how things evolve up to the last moment. My friend from the police force, with whom I&amp;rsquo;ve lived since after COVID and who recently got posted in Chennai after passing his exams, is a close friend. So, despite only needing to be in the Chennai office two days every two weeks (totalling four days a month) and despite the office policy changing around August/September to require my presence two days every week, I opted for a permanent stay over the convenience of crashing at a friend&amp;rsquo;s place. My decision was influenced by several factors:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;My close friend, who I&amp;rsquo;ve known for eight years (time really flies), got a posting in Erode and plans to move out in December 2024. He had his transfer announced just before Diwali in 2023.&lt;/li&gt;
+&lt;li&gt;Parents take care of me, homemade food, household chores, them being atpeace without worring seeing me everyday.&lt;/li&gt;
+&lt;li&gt;The home-like setup for productivity and peace of mind.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I&amp;rsquo;m writing this update after December, so for me, December is already in the past. I&amp;rsquo;ve been sick and bedridden over Christmas, alone since my friends and family were in their hometowns, including my parents. Despite my mother&amp;rsquo;s insistence on coming over as soon as possible because of my neglect towards self-care and healthy eating, I plan to bring them here in January after Pongal 2024. This is another reason I chose an individual house over sharing a space with friends, opting for a PG, or having a flatmate.&lt;/p&gt;</description></item><item><title>How I Replaced Netflix and Have Been Using My Media Server for Over 2 Years</title><link>//bluepie.in/2023/11/self-hosted-netflix-replacer/</link><pubDate>Sun, 19 Nov 2023 21:55:10 +0000</pubDate><guid>//bluepie.in/2023/11/self-hosted-netflix-replacer/</guid><description>
 &lt;!-- There are telegram groups - prabh story buy things from sotre 50 rupees per month. --&gt;
 &lt;h2 id=&#34;feasibility&#34;&gt;Feasibility&lt;/h2&gt;
 &lt;p&gt;Can I host Netflix on my own? of course yes, many open source software offers similar functionality, you can set it to work only inside your home network or make it available throughout the internet.&lt;/p&gt;
@@ -1745,122 +1859,4 @@ email:
 &lt;/table&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/watchlist/tree/70e02ba3485dd1b957033ca33c208d10a72482c6/src/Firebase&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Link to code/files&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
-&lt;p&gt;I planned to take a break, ill update on it next month. untill then seeya. tc &amp;lt;3.&lt;/p&gt;</description></item><item><title>Express Api Server</title><link>//bluepie.in/2021/02/express-api-server/</link><pubDate>Sun, 21 Feb 2021 10:54:20 +0000</pubDate><guid>//bluepie.in/2021/02/express-api-server/</guid><description>
-&lt;p&gt;After a hectic past two months, hope I get some free time in the upcomming months.&lt;/p&gt;
-&lt;h2 id=&#34;what-is-this&#34;&gt;What is this?&lt;/h2&gt;
-&lt;p&gt;This is a backend, written for one of my projects. &lt;em&gt;This was originally developed to be a private repository, I made it public this month.&lt;/em&gt; And this was my first time using typescript 100 percent for backend, my experience with it is pretty cool.&lt;/p&gt;
-&lt;h2 id=&#34;stack&#34;&gt;Stack&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;express server&lt;/li&gt;
-&lt;li&gt;mongodb&lt;/li&gt;
-&lt;li&gt;nginx&lt;/li&gt;
-&lt;li&gt;pm manager&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;framework&#34;&gt;Framework&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;model&lt;/li&gt;
-&lt;li&gt;view&lt;/li&gt;
-&lt;li&gt;controller&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;folder-structure&#34;&gt;Folder structure&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Name&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;src&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Source files of the server&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;src/public&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Static files to be used on client side&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;src/models&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Storing and retrieving datails from different schema, not using mongoose models&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;src/controllers&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Controllers define functions that respond to various http requests&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;src&lt;/strong&gt;/server.ts&lt;/td&gt;
-&lt;td&gt;Entry point for the app&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;src/util/&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;helpers - logging, cache, ratelimit, database&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;test&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Test cases to perform before taking a new build, is also used in combination with github actions before merging the code to master branch&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;views&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Template files for rendering dynamic content to client side, since this is a api server, there is not much there in this folder.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;.env.example&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;repos.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;.github&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;CI - github actions - run test cases on pull request and report if it is safe to merge.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;cache&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Cache folder for responses that do not need to connect to database all the time.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;explore-the-code-in-github&#34;&gt;Explore the code in github&lt;/h3&gt;
-&lt;p&gt;Repository Link:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/watchlist-backend&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/aghontpi/watchlist-backend&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;misc&#34;&gt;Misc&lt;/h3&gt;
-&lt;h4 id=&#34;a-cool-library-that-i-found-useful-for-testing-api&#34;&gt;A cool library that I found useful for testing api&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.npmjs.com/package/supertest&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;supertest&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;see the code examples below, &lt;a href=&#34;https://github.com/aghontpi/watchlist-backend/blob/104b3b1b53850c626f557a1936a68ce5bd0aa121/test/api.test.ts&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;link to source file&lt;/a&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-ts&#34;&gt;# testing routing redirect
-describe(&#39;GET /asdfd/askf&#39;, () =&amp;gt; {
-it(&#39;should return redirect&#39;, (done) =&amp;gt; {
-request(app).get(&#39;/random&#39;).expect(302, done);
-});
-});
-# testing api endpoint
-describe(&#39;GET /top&#39;, () =&amp;gt; {
-it(&#39;should return type json with 200 OK&#39;, (done) =&amp;gt; {
-request(app).get(&#39;/top&#39;).expect(&#39;Content-Type&#39;, /json/).expect(200, done);
-});
-});
-# testing rate limiting
-describe(&#39;GET /top&#39;, () =&amp;gt; {
-const req = request.agent(app);
-it(&#39;shoult not be ratelimited&#39;, (done) =&amp;gt; {
-req.get(&#39;/top&#39;).expect(200, done);
-});
-it(&#39;should not be ratelimited&#39;, (done) =&amp;gt; {
-req.get(&#39;/top&#39;).expect(200, done);
-});
-it(&#39;should not be ratelimited&#39;, (done) =&amp;gt; {
-req.get(&#39;/top&#39;).expect(200, done);
-});
-it(&#39;should not be ratelimited&#39;, (done) =&amp;gt; {
-req.get(&#39;/top&#39;).expect(200, done);
-});
-it(&#39;should &amp;quot;be ratelimited&amp;quot;&#39;, (done) =&amp;gt; {
-req.get(&#39;/top&#39;).expect(429, done);
-});
-});
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;merging-pull-requests-automatically-run-tests-on-bug-fixes-and-new-features&#34;&gt;Merging pull requests, automatically run tests on bug fixes and new features.&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/express-api-server/pull-request-merge-after-build-success.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h4 id=&#34;nginx-config-used-for-deploying&#34;&gt;Nginx config used for deploying&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/express-api-server/nginx-config-for-express-server.png&#34; alt=&#34;nginx config&#34; /&gt;&lt;/p&gt;
-&lt;h4 id=&#34;pm2-managing-the-api&#34;&gt;pm2 managing the api&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/express-api-server/running-the-server-in-production.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
-&lt;p&gt;Hope this motivates my futureself in someway, keep learning and reach milestones constantly.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;I planned to take a break, ill update on it next month. untill then seeya. tc &amp;lt;3.&lt;/p&gt;</description></item></channel></rss>
