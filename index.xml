@@ -1,4 +1,47 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Thu, 07 Dec 2023 20:49:16 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>How I Set Up Nginx and SSL for My Media Server and Torrent</title><link>//bluepie.in/2023/12/how-i-configure-nginx-for-my-server-and-torrent/</link><pubDate>Thu, 07 Dec 2023 20:49:16 +0000</pubDate><guid>//bluepie.in/2023/12/how-i-configure-nginx-for-my-server-and-torrent/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Wed, 03 Jan 2024 14:31:56 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Creating and Publishing Chrome Extension in Chrome Store</title><link>//bluepie.in/2024/01/creating-and-publishing-chrome-extension-in-chrome-store/</link><pubDate>Wed, 03 Jan 2024 14:31:56 +0000</pubDate><guid>//bluepie.in/2024/01/creating-and-publishing-chrome-extension-in-chrome-store/</guid><description>
+&lt;h2 id=&#34;why-motivation&#34;&gt;Why &amp;amp; Motivation&lt;/h2&gt;
+&lt;p&gt;Wanted an adblocker for accuradio website, I just need to silence the ads on this website. How can it be done? Custom script that get injected into the page by some extensions such as tamper monkey, the disadvantage is u gotta install tamper monkey. The other idea I have in my brain is I Wanted to try out chrome extesnion that specifically does this job, since my current work needs me work on chrome extensions.&lt;/p&gt;
+&lt;p&gt;Wanted to do for a while, the ads on accuradio is annoying, I wanted to write a script to block it, i wanted to just install it and be done with it. Even if I use a new machine/laptop.. i dont have to set it up or anything, just install the extension and use the website.&lt;/p&gt;
+&lt;h2 id=&#34;how-chrome-extensions-work&#34;&gt;How chrome extensions work&lt;/h2&gt;
+&lt;p&gt;How to publish chrome extenision, how chrome extensions work? why they are necessary?&lt;/p&gt;
+&lt;p&gt;Chrome extensions are essentially web apps that use web technologies but are limited to the Chrome browser. They run in a sandboxed environment, ensuring they don&amp;rsquo;t interfere with the webpage content unless explicitly designed to do so.&lt;/p&gt;
+&lt;p&gt;Background Scripts: Handle the behind-the-scenes logic, such as listening for specific browser events.&lt;/p&gt;
+&lt;p&gt;Content Scripts: Injected into web pages to modify their content or behavior.
+Popup HTML: Defines the UI, which appears when users click the extension icon.
+Extensions: communicates with web pages through messages and shared storage, maintaining separation while enabling interaction.&lt;/p&gt;
+&lt;h2 id=&#34;to-publish-new-extensions&#34;&gt;To publish new extensions&lt;/h2&gt;
+&lt;p&gt;To publish a Chrome extension, we must create a developer account on the Google Chrome Web Store. As of writing this post, Google requires a one-time registration fee of 5 USD for setting up this account. This fee is intended to verify the developer&amp;rsquo;s identity and to discourage spam and fraudulent extensions on the platform.&lt;/p&gt;
+&lt;h3 id=&#34;extension-code&#34;&gt;Extension code&lt;/h3&gt;
+&lt;p&gt;Extension code that is responsible to detect the ads on the page.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt; observer = new MutationObserver((mutations) =&amp;gt; {
+mutations.forEach((mutation) =&amp;gt; {
+// filter the target to contain only if it is adPlaying or not
+if (
+mutation &amp;amp;&amp;amp;
+mutation.target &amp;amp;&amp;amp;
+mutation.target.cloneNode().classList &amp;amp;&amp;amp;
+mutation.target.classList.contains(&amp;quot;adPlaying&amp;quot;)
+) {
+// mute the tab
+} else {
+if (chrome &amp;amp;&amp;amp; chrome.runtime) {
+// unmute the tab
+}
+}
+});
+});
+observer.observe(accuradioPlayerControls, {
+attributes: true,
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When creating Chrome extensions, it&amp;rsquo;s crucial to handle permissions carefully. Given that Chrome is designed with a robust focus on security and user privacy, any extension listed on the Chrome Web Store is required to request only the permissions essential for its functions. The principle of &amp;ldquo;minimum necessary privileges&amp;rdquo; is not just a best practice in security; it is a fundamental requirement. This principle dictates that an extension should operate with the least amount of privileges it needs to function properly.&lt;/p&gt;
+&lt;p&gt;I had this happen to me, more permission than I actaully needed, so my first submission was rejected, but then I re-submitted with the permissions fine grained, it got approved.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/jan2024/chrome-store-rejection.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;link-to-chrome-extension&#34;&gt;Link to chrome extension:&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://chromewebstore.google.com/detail/mute-audio-ads-on-website/lhgmlkkpdhcgenmglmbomhemkkgccjef&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://chromewebstore.google.com/detail/mute-audio-ads-on-website/lhgmlkkpdhcgenmglmbomhemkkgccjef&lt;/a&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h3 id=&#34;personal-update&#34;&gt;Personal update:&lt;/h3&gt;
+&lt;p&gt;Brought my mom to chennai; im getting home food again. close friend left to hometown. Mom asking me to buy stuff for the new home; so doing that. Going pretty well~&lt;/p&gt;</description></item><item><title>How I Set Up Nginx and SSL for My Media Server and Torrent</title><link>//bluepie.in/2023/12/how-i-configure-nginx-for-my-server-and-torrent/</link><pubDate>Thu, 07 Dec 2023 20:49:16 +0000</pubDate><guid>//bluepie.in/2023/12/how-i-configure-nginx-for-my-server-and-torrent/</guid><description>
 &lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;
 &lt;p&gt;This post is a nginx configurations of my &lt;a href=&#34;https://bluepie.in/2023/11/self-hosted-netflix-replacer/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;How I replaced Netflix and started using my media server for over 2 years now&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -1723,140 +1766,4 @@ return true;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;note-to-future-self&#34;&gt;Note to future-self&lt;/h2&gt;
-&lt;p&gt;Last year, It was trying to forget the month of May, but this year, not so much. Great, Hope this continues.&lt;/p&gt;</description></item><item><title>Firebase-RealtimeDatabase &amp; Self-assesment</title><link>//bluepie.in/2021/03/firebase-realtimedatabase/</link><pubDate>Mon, 29 Mar 2021 19:08:42 +0000</pubDate><guid>//bluepie.in/2021/03/firebase-realtimedatabase/</guid><description>
-&lt;p&gt;&lt;em&gt;Hi!, its been a wild month, jumping all over the places, future me reading!, keep your composure.&lt;/em&gt; &lt;strong&gt;Coming to other things, I&amp;rsquo;ve been doing work from home for the past year, but recently (the past 3 months) I was asked to come office atleast a week or two. Although some of my friends are still doing WFM, I had to go chennai, Which I felt was bad, but this is not a major consern.&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&#34;time-management-upuntill-now&#34;&gt;Time Management upuntill now&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;ve been managing three different workflows in my life(tech side),&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;office&lt;/li&gt;
-&lt;li&gt;hobbies (this is where I maintain my public journal, &lt;strong&gt;posting here&lt;/strong&gt; )&lt;/li&gt;
-&lt;li&gt;learning new stuff&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Which often makes me wana take a break from everything(like the one I&amp;rsquo;m about to take, 20-30 days), after an assesment that I made myself, I&amp;rsquo;ve decided its not good for me to continue this way, &lt;em&gt;I am juggling too much things at once&lt;/em&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;time-management-going-forward&#34;&gt;Time management going forward&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;office&lt;/li&gt;
-&lt;li&gt;hobbies &amp;amp; learning new stuff (combining hobbies and learning new stuff as a public journal)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Due to the said change, The jorunal will now contain&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Scrum_(software_development)&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Scrum&lt;/a&gt; of hobby &amp;amp; learning projects.&lt;/li&gt;
-&lt;li&gt;where did I spent my time (on tech)each month.&lt;/li&gt;
-&lt;li&gt;Reverse engineering/Modding/Programming/Competitions.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;things-i-have-completed-in-this-month-in-my-freetime&#34;&gt;Things I have completed in this month in my freetime.&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;design &amp;amp; implement searching/adding friends in an RN app that I am building.&lt;/li&gt;
-&lt;li&gt;create an animation from scratch for RN using RN reanimated.&lt;/li&gt;
-&lt;li&gt;restructure RealtimeDatabase to manage follow requests and friends.&lt;/li&gt;
-&lt;li&gt;managing firebase rules for differnet roots/refs.&lt;/li&gt;
-&lt;li&gt;refactor firebase connection&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;design-and-implement-searching-adding-friends&#34;&gt;design and implement searching/adding friends&lt;/h4&gt;
-&lt;p&gt;I took inspiration from twitter and this is how Im panning it out.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/march-2021/design.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h4 id=&#34;creating-an-animation-similar-to-twitter-s-search-and-trending-from-scratch&#34;&gt;creating an animation similar to twitter&amp;rsquo;s search and trending from &lt;strong&gt;&lt;em&gt;scratch&lt;/em&gt;&lt;/strong&gt;.&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/watchlist/blob/70e02ba3485dd1b957033ca33c208d10a72482c6/src/Home/Friends/TabbedView.tsx&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;code link&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;following the documentation, it was pretty simple to implement.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;const translateX = useSharedValue(0);
-const scrollHandler = useAnimatedScrollHandler((event) =&amp;gt; {
-translateX.value = -event.contentOffset.x;
-});
-const activeTab = useDerivedValue(() =&amp;gt; interpolate(translateX.value, [0, -wWidth / 2], [0, 1], Extrapolate.CLAMP));
-const animatedStyle = useAnimatedStyle(() =&amp;gt; {
-return {
-transform: [{ translateX: -translateX.value / 2 }],
-};
-});
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;above code handles the animation logic, then incorporating this into our style makes it perfect.&lt;/p&gt;
-&lt;p&gt;Further tweaking was done just by using the &amp;lsquo;activeTab&amp;rsquo; variable. ex: changing color during animation, etc.&lt;/p&gt;
-&lt;h5 id=&#34;restructuring-firebase-rules&#34;&gt;restructuring firebase &amp;amp; rules.&lt;/h5&gt;
-&lt;h6 id=&#34;structuring&#34;&gt;structuring&lt;/h6&gt;
-&lt;p&gt;My initial design holds up pretty good since I already had an experience. I only had to design the new data to store in exisiting structure.&lt;/p&gt;
-&lt;p&gt;my hypothetical design looks like below(for extending existing to add feature friends)&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;users/user[]
-user:{
-..details,
-friends:friend[]
-}
-frind{
-status: requeststed/accepted
-friendssince: accpeted date
-userid: from userid in the given list
-}
-users/friends/frind[]
-users-list:{
-user:
-profile:
-email:
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I avoided creating a new api, &amp;amp; preferred to use workaround in firebase, cuz it would have consumed a lot of my time in backend.&lt;/p&gt;
-&lt;p&gt;This &lt;a href=&#34;https://firebase.google.com/docs/database/web/structure-data&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;article was greatly helpful in making decisions&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;bellow exchange pretty much sums it up.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/march-2021/firebase-scenario.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h6 id=&#34;rules&#34;&gt;rules&lt;/h6&gt;
-&lt;ul&gt;
-&lt;li&gt;any logged in user can access &amp;lsquo;new-ref&amp;rsquo;&lt;/li&gt;
-&lt;li&gt;only owner of the uid can access the uid and its properties&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;any logged in user can access another-ref, (this is based on above article)&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;ref&amp;quot;:{
-&amp;quot;$uid&amp;quot;: {
-&amp;quot;.read&amp;quot;: &amp;quot;auth.uid != null &amp;amp;&amp;amp; auth.uid == $uid&amp;quot;,
-&amp;quot;.write&amp;quot;: &amp;quot;auth.uid != null &amp;amp;&amp;amp; auth.uid == $uid&amp;quot;,
-&amp;quot;new-ref&amp;quot;: {
-&amp;quot;.read&amp;quot;: &amp;quot;auth.uid != null&amp;quot;,
-&amp;quot;.write&amp;quot;: &amp;quot;auth.uid != null&amp;quot;
-}
-}
-},
-&amp;quot;another-ref&amp;quot;: {
-&amp;quot;.read&amp;quot;: &amp;quot;auth.uid != null&amp;quot;,
-&amp;quot;.write&amp;quot;: &amp;quot;auth.uid != null&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;refactoring-firebase&#34;&gt;Refactoring Firebase&lt;/h4&gt;
-&lt;p&gt;Since the RN app was getting bigger, It was time for refactoring the firebase part.&lt;/p&gt;
-&lt;p&gt;from /root/Firebase.ts(single file) to following folder strucutre,&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;folder&lt;/th&gt;
-&lt;th&gt;description&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;root&lt;/td&gt;
-&lt;td&gt;root directory contents&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/Firebase/login.ts&lt;/td&gt;
-&lt;td&gt;curd operations post login&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/Firebase/friends.ts&lt;/td&gt;
-&lt;td&gt;crud operatios for people realted&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/Firebase/movie.ts&lt;/td&gt;
-&lt;td&gt;crud operations for movie related&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/Firebase/index.ts&lt;/td&gt;
-&lt;td&gt;exports in a single file&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&amp;hellip;etc&lt;/td&gt;
-&lt;td&gt;other&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/watchlist/tree/70e02ba3485dd1b957033ca33c208d10a72482c6/src/Firebase&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Link to code/files&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
-&lt;p&gt;I planned to take a break, ill update on it next month. untill then seeya. tc &amp;lt;3.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;Last year, It was trying to forget the month of May, but this year, not so much. Great, Hope this continues.&lt;/p&gt;</description></item></channel></rss>
