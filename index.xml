@@ -1,4 +1,179 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Tue, 20 Feb 2024 21:56:24 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>My Stab at Using Ai for Productivity</title><link>//bluepie.in/2024/02/my-stab-at-using-ai-for-productivity/</link><pubDate>Tue, 20 Feb 2024 21:56:24 +0000</pubDate><guid>//bluepie.in/2024/02/my-stab-at-using-ai-for-productivity/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Thu, 04 Apr 2024 03:14:06 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Rooting My Pixel For Unlimited gphotos backup</title><link>//bluepie.in/2024/04/rooting-my-pixel/</link><pubDate>Thu, 04 Apr 2024 03:14:06 +0000</pubDate><guid>//bluepie.in/2024/04/rooting-my-pixel/</guid><description>
+&lt;p&gt;All the previous android phones I had, I rooted them and used them with a custom ROM that had gphotos mod or used it with gphotos mod, I&amp;rsquo;ve had a pixel for android development as my second device..but all this time, it had stock android and not rooted with no modifications.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;But what do I mean by gphotos mod..?
+You get unlimited photos and videos backup in Google photos, the mod makes it seem like you&amp;rsquo;re using a pixel device. But I already have a pixel device..?.. Google previously had announced that their pixel phones will have unlimited backup, but they reverted this decision after thier initial announcement.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;click image to enlarge&lt;/em&gt;
+&lt;img src=&#34;//bluepie.in/images/posts/april2024/pixel-unlimited-photos-google-help.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;google-pixel-phone-storage-offers&#34;&gt;Google Pixel Phone Storage Offers&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;Pixel Model&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Unlimited Storage Offer&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Details&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Original Pixel&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Unlimited Original quality (free)&lt;/td&gt;
+&lt;td&gt;No limits on photo and video storage.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Pixel 2&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Unlimited Original quality (free)&lt;/td&gt;
+&lt;td&gt;Applies only to photos and videos taken before January 16, 2021.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Pixel 3&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Unlimited Original quality (free)&lt;/td&gt;
+&lt;td&gt;Applies only to photos and videos taken before January 31, 2022.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Pixel 3a and onwards&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Not available&lt;/td&gt;
+&lt;td&gt;Instead, offers a 3-month trial for the 100 GB Google One plan (Pixel 4, 4a, 4a (5G), Pixel 5).&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;google-photos-storage-policy-changes&#34;&gt;Google Photos Storage Policy Changes&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;Date&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Change&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Impact&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;November 2020&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Announced end of free unlimited storage for High quality and Express quality starting June 1, 2021&lt;/td&gt;
+&lt;td&gt;Users must use Storage saver or Original quality; new photos count towards the user&amp;rsquo;s shared storage quota.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;June 1, 2021&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Renamed &amp;ldquo;High quality&amp;rdquo; to &amp;ldquo;Storage saver&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;Existing photos remain unaffected; new uploads consume storage quota across Google Drive, Gmail, and Photos.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Post-June 1, 2021&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Pixel smartphone owners up to Pixel 5 remain exempt from the storage changes&lt;/td&gt;
+&lt;td&gt;Owners can continue enjoying unlimited Original quality storage despite the policy changes.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;em&gt;click image to enlarge&lt;/em&gt;
+&lt;img src=&#34;//bluepie.in/images/posts/april2024/wikipedia-google-photos-storage.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;If you read the support page or the wikipedia or any source, it is clear that you get original quaility backups for free for the original pixel device, which is the first pixel device, though im having a new pixel device if I emulate the first pixel device, I can get unlimited storage.&lt;/p&gt;
+&lt;h3 id=&#34;rooting-magisk&#34;&gt;Rooting &amp;amp; Magisk&lt;/h3&gt;
+&lt;p&gt;Back in 2015.. along those times. Rooting was mainly SuperSU, you install a custom recovery and flash SuperSU, or install an apk like (kingRoot..or something similar..there was a long list, I remember this just because of the name, easy to remember). The apk way to root is bascailly the app tries the known os vulnerabilities to do previlege escaltion for that specific android version. Then you would have superSU installed on the device and use the app to grant permissions to any app that uses it. Some of the apps that I&amp;rsquo;ve used are app2sd, titanium backup, (backup any app with data)..2:22am and having hard time remembering the apps that i&amp;rsquo;ve used over the years.. those were the days, have fond memories now.&lt;/p&gt;
+&lt;p&gt;Nowadays there&amp;rsquo;s just one main way.. and that is to use Magisk.&lt;/p&gt;
+&lt;p&gt;To install magisk, follow the &lt;a href=&#34;https://topjohnwu.github.io/Magisk/install.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;magisk official docs&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For my device, which is a pixel, I need to get the original &lt;code&gt;boot&lt;/code&gt; img of the current firmware version I have, this we can check in About Phone or notification shade in android 13 and above(could be from before.. started noticing only it from then on). (&lt;a href=&#34;https://developers.google.com/android/images#lynx&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Official pixel images&lt;/a&gt;) Once I downloaded the zip, extracted it and found the boot img, I then followed the following instructions from official manual.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;click image to enlarge&lt;/em&gt;
+&lt;img src=&#34;//bluepie.in/images/posts/april2024/patched_img_instructions.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;bluepie@dev-machine pixel backup % adb reboot bootloader
+bluepie@dev-machine pixel backup % fastboot flashing unlock
+OKAY [ 0.039s]
+Finished. Total time: 0.039s
+bluepie@dev-machine pixel backup % adb reboot bootloader
+bluepie@dev-machine pixel backup % fastboot flashing unlock
+OKAY [ 0.006s]
+Finished. Total time: 0.006s
+bluepie@dev-machine pixel backup % fastboot flash init_boot magisk_patched-27000_EyWu8.img
+fastboot: error: cannot load &#39;magisk_patched-27000_EyWu8.img&#39;: No such file or directory
+bluepie@dev-machine pixel backup % cd ..
+bluepie@dev-machine Desktop % cd ..
+bluepie@dev-machine ~ % fastboot flash init_boot magisk_patched-27000_EyWu8.img
+Sending &#39;init_boot_b&#39; (8192 KB) OKAY [ 0.211s]
+Writing &#39;init_boot_b&#39; OKAY [ 0.014s]
+Finished. Total time: 0.228s
+bluepie@dev-machine ~ % fastboot reboot
+Rebooting OKAY [ 0.000s]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once Magisk is installed and on reboot, you will see warning image that bootloader is unlocked saying device is insecure (which is true),&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/april2024/magisk.png&#34; alt=&#34;&#34; style=&#34;height:480px;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;install-software-for-gphotos&#34;&gt;Install software for Gphotos&lt;/h3&gt;
+&lt;p&gt;Once Magisk is installed and phone is rooted, we need something called &lt;a href=&#34;https://github.com/rovo89/Xposed&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Xposed&lt;/a&gt; (it exposes/ enables/ writes ways for us to modify certain parts of the system by exposing them as API). Back.. early days Xposed was the king..(its archived and other projects took over). One such is &lt;a href=&#34;https://github.com/LSPosed/LSPosed&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;LSPosed&lt;/a&gt; (but this only works till Android 13, again project archived). There is a fork of the lsposed which gives support for android 14. Since as of writing this.. I&amp;rsquo;m on Android 14..and this android version.. i.e. latest android 14..is not supported by lspoed because its archived by that point, so I&amp;rsquo;ll be flashing the latest lsposed &lt;a href=&#34;https://github.com/re-zero001/LSPosed-Irena&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;v1.9.2&lt;/a&gt; inside magisk. Once installed..reboot the device. Now you have lsposed installed.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/april2024/lsposed.png&#34; alt=&#34;&#34; style=&#34;height:480px;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;pixelify-gphotos&#34;&gt;Pixelify gphotos&lt;/h3&gt;
+&lt;p&gt;The reason why we do all this because, for pixelify gphotos (to enable unlimited photos &amp;amp; video uploads), we need to install magisk and have lsposed (as of android 14). Just install the module and enable it for Google photos and reboot. Open the Pixelify gphotos app and set to spoof Pixel XL devices, thats the last step.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/april2024/pixelify-gphotos.png&#34; alt=&#34;&#34; style=&#34;height:480px;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;Get unlimited backups until this is patched.. I know irl friends that use this to upload xx gbs of photos. I&amp;rdquo;ve used before, since now that I enabled this, gonna upload all my photos from the gap (3 years of not using this) to backup using this mod.&lt;/p&gt;
+&lt;p&gt;Photos uploaded through this mechanism do not take space on the account.&lt;/p&gt;
+&lt;div style=&#34;display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;&#34;&gt;
+&lt;img src=&#34;//bluepie.in/images/posts/april2024/photos-backed-up-for-free.png&#34; alt=&#34;&#34; style=&#34;height:480px;&#34;&gt;
+&lt;img src=&#34;//bluepie.in/images/posts/april2024/magisk_modules.png&#34; alt=&#34;&#34; style=&#34;height:480px;&#34;&gt;
+&lt;img src=&#34;//bluepie.in/images/posts/april2024/spoof_logs.png&#34; alt=&#34;&#34; style=&#34;height:480px;&#34;&gt;
+&lt;/div&gt;
+&lt;p&gt;Couple of other cool things with Xposed, can emulate an unrooted device with patches and make banking apps work, but I have a separate phone just for that. This pixel is just for development and photos backup (additional bonus)&lt;/p&gt;
+&lt;h3 id=&#34;personal-update&#34;&gt;Personal update&lt;/h3&gt;
+&lt;p&gt;I&amp;rsquo;ve been slipping on my dreams.. though I am happy on some parts of my life, &lt;!-- I found a special person, It happened in the new office, we were strangers first, I did not want to know them.. or wanted to have anything with them, then we became friends over video games and guitar, we became close friends over the months, then on feb 2024, we got together. Knowing we couldn&#39;t be together..I started to erase her in my life..how I did other, but she confronted me and got me into 2 days of love.. then asked for additional two days.. then additional 6 months, I asked what&#39;s after 6 months. she said.. that my birthday was in 6 months..(august 29). I gotta get back to the groove. --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Whispers Between Strings&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In a place of new beginnings, under fluorescent glow,
+I crossed paths with a soul I thought I’d never know.
+A stranger in the crowd, I turned the other way,
+No intentions in my heart for friendship’s gentle sway.&lt;/p&gt;
+&lt;p&gt;But fate had strings to strum, and games for us to play,
+Through chords and pixels bright, we whiled hours away.
+From strangers into friends, we wove a silent thread,
+Months unfolded softly, with every word unsaid.&lt;/p&gt;
+&lt;p&gt;Come February’s whisper, we stepped across the line,
+Entangled in a moment, pretending all was fine.
+Yet shadows loomed around us, a truth we couldn’t flee,
+I tried to fade her presence, like footprints in the sea.&lt;/p&gt;
+&lt;p&gt;But she held on with courage, refused to let it end,
+“Just two more days,” she pleaded, “let hearts begin to mend.”
+Then days turned into months, six circles ‘round the sun,
+“What happens when time’s up?” I asked. She said, “We’ve just begun.”&lt;/p&gt;
+&lt;p&gt;“Your birthday marks the turning,” she smiled with knowing eyes,
+A hint of something deeper, a plan beneath disguise.
+Now time’s a path before me, with rhythm to approve,
+It’s time to find my footing, and get back in the groove.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;Echoes in the Labyrinth&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In the maze of new beginnings, I walked alone,
+Content with solitary paths, untraveled and unknown.
+But whispers of a melody, a song of strings and play,
+Lured me toward a crossroads on an unexpected day.&lt;/p&gt;
+&lt;p&gt;A fellow traveler appeared, with laughter in her eyes,
+We danced through hidden corridors beneath the open skies.
+With every game and note we shared, the walls began to fade,
+The labyrinth seemed less daunting, its edges softly frayed.&lt;/p&gt;
+&lt;p&gt;As winter turned to springtime, our footsteps fell in rhyme,
+We found a secret clearing, a moment out of time.
+But shadows loomed to tell us that our paths were not the same,
+I tried to turn away to where no memory spoke her name.&lt;/p&gt;
+&lt;p&gt;Yet she reached out and held my gaze, “Just stay a little more,”
+Two days became a promise, then extended to a score.
+“What’s beyond these winding trails?” I asked beneath the moon.
+She smiled, “A new horizon comes with August’s afternoon.”&lt;/p&gt;
+&lt;p&gt;Now the maze feels less confining, each step a subtle groove,
+Embracing twists and turns ahead, I find my feet can move.
+For in this intricate design, where every choice is free,
+I’m learning that the journey means as much as destiny.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;Letter to the Universe:&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Dear Universe,&lt;/p&gt;
+&lt;p&gt;I didn’t plan for this convergence of souls. In the hustle of new surroundings, I was content navigating alone, charting my course without expectation. Then, unexpectedly, someone entered my orbit—a bright comet against the night sky of routine.&lt;/p&gt;
+&lt;p&gt;We connected over shared joys: the strategic thrill of games, the harmony of strings vibrating in unison. These simple pleasures wove threads between us, creating a tapestry I hadn’t anticipated.&lt;/p&gt;
+&lt;p&gt;As time flowed, our paths aligned more closely than I thought possible. Yet, knowing the stars might pull us in different directions, I tried to drift away, to return to the solitude I once knew. But she reached out, her resolve unwavering, asking me to remain—not forever, just a little longer.&lt;/p&gt;
+&lt;p&gt;“Stay for two more days,” she said, and then, “Let’s see where six months takes us.”&lt;/p&gt;
+&lt;p&gt;“What’s at the end of that journey?” I wondered.&lt;/p&gt;
+&lt;p&gt;She hinted at a milestone—my own revolution around the sun, a birthday that could mark new beginnings.&lt;/p&gt;
+&lt;p&gt;So here I stand, Universe, open to the possibilities you lay before me. I don’t know where this path leads, but perhaps that’s the point of the journey. I’m ready to embrace the rhythm you’ve set, to find my place within the greater symphony.&lt;/p&gt;
+&lt;p&gt;Guide me as I step back into the groove of life’s unfolding melody.&lt;/p&gt;
+&lt;p&gt;With cautious hope,&lt;/p&gt;
+&lt;p&gt;A Wanderer&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>My Stab at Using Ai for Productivity</title><link>//bluepie.in/2024/02/my-stab-at-using-ai-for-productivity/</link><pubDate>Tue, 20 Feb 2024 21:56:24 +0000</pubDate><guid>//bluepie.in/2024/02/my-stab-at-using-ai-for-productivity/</guid><description>
 &lt;h2 id=&#34;my-ai-usecases&#34;&gt;My ai usecases&lt;/h2&gt;
 &lt;h2 id=&#34;purchasing-ai-using-it-as-api-vs-monthly-subscription-for-chatgpt-claude&#34;&gt;Purchasing AI - Using It as API vs Monthly Subscription for ChatGPT/Claude&lt;/h2&gt;
 &lt;p&gt;Do you need to buy monthly subscriptions? Take Copilot and other examples. To test this out, I bought $5 worth of usage from OpenAI, used an extension for VSCode for ai  operations, and used ai tools that require api token..like AI Commits. Did it work? Yes. Have I used all of those $5? No, it&amp;rsquo;s still there. Usually, the models I use for these kinds of tasks are very affordable and don&amp;rsquo;t accumulate significant costs.&lt;/p&gt;
@@ -1559,192 +1734,4 @@ setImmediate(main);
 &lt;p&gt;After patching, navigating the app we now see the premium features are unlocked, that was way easier than conventional methods, greatly reduces the time.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/android-reversing-part-5/patch_with_frida_accessing_premium.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
-&lt;p&gt;I intend to use Frida in the future stuff I do, its simply great. Seeya next time. untill then - aghontpi :)&lt;/p&gt;</description></item><item><title>Android Reversing Part 5</title><link>//bluepie.in/2021/07/android-reversing-part-5/</link><pubDate>Fri, 16 Jul 2021 15:00:24 +0000</pubDate><guid>//bluepie.in/2021/07/android-reversing-part-5/</guid><description>
-&lt;hr /&gt;
-&lt;h1 id=&#34;contents&#34;&gt;Contents&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#why--motivation&#34;&gt;Why &amp;amp; Motivation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#decompiling&#34;&gt;Decompiling&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#finding-where-to-patch&#34;&gt;Finding where to patch&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#patching-recompiling-and-installing-it-on-device&#34;&gt;Patching, recompiling and installing it on device&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#premium-features-does-not-work-fully&#34;&gt;App&amp;rsquo;s premium features does not work fully&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#finding-integrity-checks-digging-deeper-for-final-patch&#34;&gt;Finding integrity checks, digging deeper for final patch.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#end&#34;&gt;End&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;why-motivation&#34;&gt;Why &amp;amp; Motivation&lt;/h2&gt;
-&lt;p&gt;I wanted to monitor my mobile network traffic after I found some wierd dns logs in my custom dns server, I could not figure out which app made that request thus I found out this &lt;a href=&#34;https://play.google.com/store/apps/details?id=com.protectstar.firewall&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;app&lt;/a&gt; in playstore called &amp;lsquo;No Root Firewall, Internet Data Blocker Protection&amp;rsquo;. it had good ui and satisfied 60% of my usage needs. The downside of this is they require a montly subscription for app features. This is bit much if you ask me so decided to mod it for personal use. &lt;em&gt;In my defense, I did purchase it for a month.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/android-reversing-part-5/orderhistoryforfirewall.png&#34; alt=&#34;Proof that I bought this thing&#34; /&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;My past posts cover which tools I use, how to decompile, configs, etc.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;decompiling&#34;&gt;Decompiling&lt;/h2&gt;
-&lt;p&gt;Extracing the app.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-pm path com.placeholder.app
-adb pull path_of_apk # one by one
-# we get the following files
--rw-rw-r-- 1 nouser nouser 6273850 base.apk
--rw-rw-r-- 1 nouser nouser 90809 split_config.arm64_v8a.apk
--rw-rw-r-- 1 nouser nouser 126542 split_config.xxhdpi.apk
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This app uses &lt;a href=&#34;https://developer.android.com/guide/app-bundle&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;app bundle&lt;/a&gt; so we make use of &amp;ndash;use-aapt2 flag in apk-tool &lt;em&gt;I am using apktool v2.5.0&lt;/em&gt;&lt;/p&gt;
-&lt;h2 id=&#34;finding-where-to-patch&#34;&gt;Finding where to patch&lt;/h2&gt;
-&lt;p&gt;after decompiling, immediately in mainActivity we find a call to this,&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;//from
-public static boolean hasSubscription(Context context) {
-if (Settings.isLicenseActive(context)) {
-return true;
-}
-try {
-Subscription subscription = (Subscription) new TinyDB(context).getObject(Settings.SAVE_KEY_SUBSCRIPTION, Subscription.class);
-if (subscription == Subscription.Month || subscription == Subscription.Year || subscription == Subscription.Lifetime) {
-return true;
-}
-return false;
-} catch (Exception unused) {
-return false;
-}
-}
-// to
-public static boolean hasSubscription(Context context){
-return true;
-}
-//from
-public static boolean isLifeTime(Context context) {
-if (!hasSubscription(context)) {
-return false;
-}
-try {
-if (((Subscription) new TinyDB(context).getObject(Settings.SAVE_KEY_SUBSCRIPTION, Subscription.class)) == Subscription.Lifetime) {
-return true;
-}
-return false;
-} catch (Exception unused) {
-return false;
-}
-}
-//to
-public static boolean isLifeTime(Context context){
-return true;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Smali logic for return true.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-smali&#34;&gt;
-const/4 v1, 0x1
-return v1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;patching-recompiling-and-installing-it-on-device&#34;&gt;Patching, recompiling and installing it on device&lt;/h2&gt;
-&lt;p&gt;while recompiling and signing, sign all the split apks with the same key, even if you did not touch the other split apks.
-(this is because android expects all the split apks to have the same signature)&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-zip -d ./split_config.arm64_v8a.apk META-INF/\*
-zip -d ./split_config.xxhdpi.apk META-INF/\*
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;then sign them as mentioned from my previous posts.&lt;/p&gt;
-&lt;p&gt;For installing, since we have 3 apks&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-├── base.apk
-├── split_config.arm64_v8a.apk
-└── split_config.xxhdpi.apk
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-adb install-multiple ./base.apk ./split_config.arm64_v8a.apk ./split_config.xxhdpi.apk
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;premium-features-does-not-work-fully&#34;&gt;Premium features does not work fully&lt;/h2&gt;
-&lt;p&gt;After installing and using it, it was apparent that some of the premium features were not working, like filter lists provided by the app, ip information and location presented visually in map.&lt;/p&gt;
-&lt;p&gt;In situations like this, there could be only one possible scenario and that is an additional check, it may be in the form of&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;app integrity, whether the app was tampered&lt;/li&gt;
-&lt;li&gt;was it not installed from google play store&lt;/li&gt;
-&lt;li&gt;verifying the purchase information via google services,&lt;/li&gt;
-&lt;li&gt;based on implementor&amp;rsquo;s thought process..etc,&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;finding-integrity-checks-digging-deeper-for-final-patch&#34;&gt;Finding integrity checks, digging deeper for final patch.&lt;/h2&gt;
-&lt;p&gt;Digging deeper we find the app along with integrity check,&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
-public static boolean detect(Context context) {
-PackageInfo packageInfo;
-Signature[] signatureArr;
-try {
-if (Build.VERSION.SDK_INT &amp;gt;= 28) {
-packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 134217728);
-} else {
-packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 64);
-}
-if (Build.VERSION.SDK_INT &amp;lt; 28) {
-signatureArr = packageInfo.signatures;
-} else if (packageInfo.signingInfo.hasMultipleSigners()) {
-signatureArr = packageInfo.signingInfo.getApkContentsSigners();
-} else {
-signatureArr = packageInfo.signingInfo.getSigningCertificateHistory();
-}
-try {
-String calculateSHA = calculateSHA(&amp;quot;SHA-1&amp;quot;, signatureArr[0].toByteArray());
-if (calculateSHA.equalsIgnoreCase(&amp;quot;44F217A05AE9E2A8FB0F627528EABF8855FBC274&amp;quot;) || calculateSHA.equalsIgnoreCase(&amp;quot;8aa072cdd29068b79d30cbff9afb2d3ab89e7ec4&amp;quot;) || calculateSHA.equalsIgnoreCase(&amp;quot;dfe607e53da092636e47789497365fca36589cba&amp;quot;)) {
-return false;
-}
-return true;
-} catch (Exception e) {
-e.printStackTrace();
-return false;
-}
-} catch (Throwable unused) {
-return false;
-}
-}
-private static String calculateSHA(String str, byte[] bArr) {
-try {
-return FileUtils.byte2HexFormatted(MessageDigest.getInstance(str).digest(bArr));
-} catch (Exception e) {
-e.printStackTrace();
-return &amp;quot;&amp;quot;;
-}
-}
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So add it to the list of item to patch.&lt;/p&gt;
-&lt;p&gt;smali equivalent&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-smali&#34;&gt;
-const/4 v1,0x0
-return v1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Interestingly we also find lucky patcher detection, I don&amp;rsquo;t use lucky patcher, so ignorning this.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
-public static boolean hasLuckyPatcher(Context context) {
-PackageManager packageManager = context.getPackageManager();
-return isPackageInstalled(&amp;quot;ru.aaaaaaad.installer&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.sxbuIDfx.pFSOyagrF&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.HUounqZv.qGDvALdrY&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.yFarPSsi.lSWLCBgGE&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.auLSaZJK.OldqqVPqY&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.HvZVLLax.FuBLzbTId&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.FxCVdppm.yVDnvQgJU&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.oCHfhtgN.LaiQlIeIK&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.ohHbeFjR.uZvxvLPnK&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.oSFnVIfs.fUUFExgWn&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.PDOIPrWH.abjKeIKLW&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.UaLzEHLI.yXTTBtSFW&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;ru.uBVJgfKc.udsaLjziD&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;com.chelpus.lackypatch&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;com.dimonvideo.luckypatcher&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;com.luckypatchers.luckypatcherinstaller&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;com.android.vending.billing.InAppBillingService.LACK&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;com.android.vending.billing.InAppBillingService.COIN&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;com.android.vending.billing.InAppBillingService.LOCK&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;com.android.vending.billing.InAppBillingService.CRAC&amp;quot;, packageManager) || isPackageInstalled(&amp;quot;com.android.vending.billing.InAppBillingService.COIO&amp;quot;, packageManager);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This time, we also mod the isLicenseActive setting function, since there are a number of calls from others parts of the app, I did not notice this earlier.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// from
-public static boolean isLicenseActive(Context context) {
-TinyDB tinyDB = new TinyDB(context);
-String string = tinyDB.getString(LicenseActivation.SAVE_KEY_EXPIRE_DATE, &amp;quot;&amp;quot;);
-if (!string.isEmpty()) {
-if (string.equals(&amp;quot;0&amp;quot;)) {
-return true;
-}
-try {
-if (new Date().getTime() &amp;lt;= new SimpleDateFormat(&amp;quot;yyyyMMdd&amp;quot;, Locale.getDefault()).parse(string).getTime()) {
-return true;
-}
-tinyDB.removeKey(LicenseActivation.SAVE_KEY_EXPIRE_DATE);
-checkProfessional(context, false, null);
-return false;
-} catch (ParseException unused) {
-}
-}
-return false;
-}
-//to
-public static boolean isLicenseActive(Context context) {
-return true;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Patch the two places noted before, repeat the recompiling and installation step.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Now The app works with all the premium features.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
-&lt;p&gt;I dont have to pay 3k every year for using this app.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;If this post offends you in any way, contact me to it take it down.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;I intend to use Frida in the future stuff I do, its simply great. Seeya next time. untill then - aghontpi :)&lt;/p&gt;</description></item></channel></rss>
