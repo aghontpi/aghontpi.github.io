@@ -1,4 +1,164 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Thu, 04 Apr 2024 03:14:06 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Rooting My Pixel For Unlimited gphotos backup</title><link>//bluepie.in/2024/04/rooting-my-pixel/</link><pubDate>Thu, 04 Apr 2024 03:14:06 +0000</pubDate><guid>//bluepie.in/2024/04/rooting-my-pixel/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sat, 07 Dec 2024 03:02:36 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Certbot Manual Hook – Automating Wildcard Domain Renewals</title><link>//bluepie.in/2024/12/certbot-manual-hookpr/</link><pubDate>Sat, 07 Dec 2024 03:02:36 +0000</pubDate><guid>//bluepie.in/2024/12/certbot-manual-hookpr/</guid><description>
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;Securing my website with HTTPS is crucial, and &lt;a href=&#34;https://certbot.eff.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Certbot&lt;/a&gt; makes it straightforward for many domains. However, when it comes to wildcard domains (like &lt;code&gt;*.domain.com&lt;/code&gt;), there’s a bit more work involved—particularly if I want to automate renewals.&lt;/p&gt;
+&lt;p&gt;This post explains how I set up a &lt;strong&gt;manual DNS hook&lt;/strong&gt; for Certbot that integrates with my domain name provider’s API (in this example, GoDaddy), so I no longer have to manually add DNS TXT records every time I need to renew my wildcard certificate.&lt;/p&gt;
+&lt;h2 id=&#34;why-do-we-need-this&#34;&gt;Why Do We Need This?&lt;/h2&gt;
+&lt;p&gt;Certbot automates the HTTPS setup for many domain configurations. However, &lt;strong&gt;wildcard certificates&lt;/strong&gt; require DNS-based validation—meaning I must add a TXT record to prove domain ownership. Certbot does not automatically update DNS for every provider. Thus, without automation, I’d be forced to:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Run Certbot.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Grab the &lt;code&gt;_acme-challenge&lt;/code&gt; TXT record details.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Log in to my DNS panel and manually create the TXT record.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Wait for DNS to propagate.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Resume the Certbot process.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Finally, clean up the TXT record.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Doing this every few months quickly becomes tedious, especially if I manage multiple wildcard domains. Luckily, Certbot’s &lt;code&gt;--manual-auth-hook&lt;/code&gt; parameter can help me automate these steps.&lt;/p&gt;
+&lt;h2 id=&#34;the-goal&#34;&gt;The Goal&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Automate&lt;/strong&gt; the DNS validation process for wildcard certificate renewals using Certbot hooks.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Utilize my DNS provider’s API (in my case, &lt;strong&gt;GoDaddy&lt;/strong&gt;) to create and remove the required &lt;code&gt;_acme-challenge&lt;/code&gt; TXT record automatically.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Integrate this process into a &lt;code&gt;crontab&lt;/code&gt; so renewals happen on schedule without manual intervention.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;current-manual-process&#34;&gt;Current (Manual) Process&lt;/h2&gt;
+&lt;p&gt;Here’s what I was doing without automation:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Run Certbot: &lt;code&gt;certbot certonly --manual ...&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Certbot tells me which TXT record to create, e.g. &lt;code&gt;&amp;quot;_acme-challenge.domain.com&amp;quot;&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;I log into GoDaddy (or another provider) and create the TXT record with the provided value.&lt;/li&gt;
+&lt;li&gt;I wait for DNS propagation (a few minutes).&lt;/li&gt;
+&lt;li&gt;Certbot verifies and finalizes the certificate issuance.&lt;/li&gt;
+&lt;li&gt;I remove or empty out the TXT record.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This process, while doable, is time-consuming and must be repeated every 60–90 days (depending on my renewal schedule).&lt;/p&gt;
+&lt;h2 id=&#34;godaddy-api-endpoint&#34;&gt;Godaddy API endpoint&lt;/h2&gt;
+&lt;h2 id=&#34;automating-the-workflow&#34;&gt;Automating the Workflow&lt;/h2&gt;
+&lt;p&gt;To automate the renewal of my wildcard domain certificate, I leverage my domain provider&amp;rsquo;s API to manage DNS TXT records programmatically. I use &lt;strong&gt;GoDaddy&lt;/strong&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;API Access:&lt;/strong&gt; Ensure GoDaddy supports DNS management via API.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;API Credentials:&lt;/strong&gt; Obtain my API key and secret from the &lt;a href=&#34;https://developer.godaddy.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;GoDaddy Developer Portal&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;godaddy-api-endpoint-1&#34;&gt;GoDaddy API Endpoint&lt;/h3&gt;
+&lt;p&gt;I use the following endpoint to manage TXT records:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;https://api.godaddy.com/v1/domains/${GODADDY_DOMAIN}/records/TXT/${RECORD_NAME}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Parameters:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;${GODADDY_DOMAIN}&lt;/code&gt;&lt;/strong&gt;: My root domain (e.g., &lt;code&gt;example.com&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;${RECORD_NAME}&lt;/code&gt;&lt;/strong&gt;: Typically &lt;code&gt;_acme-challenge&lt;/code&gt; for Certbot.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;using-the-api&#34;&gt;Using the API&lt;/h3&gt;
+&lt;h4 id=&#34;testing-create-update-txt-record-endpoints&#34;&gt;Testing Create/Update TXT Record Endpoints&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;curl -s -X PUT \
+-H &amp;quot;Authorization: sso-key ${GODADDY_KEY}:${GODADDY_SECRET}&amp;quot; \
+-H &amp;quot;Content-Type: application/json&amp;quot; \
+-d &amp;quot;[{\&amp;quot;data\&amp;quot;: \&amp;quot;${CERTBOT_VALIDATION}\&amp;quot;, \&amp;quot;ttl\&amp;quot;: 600}]&amp;quot; \
+&amp;quot;https://api.godaddy.com/v1/domains/${GODADDY_DOMAIN}/records/TXT/${RECORD_NAME}&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Headers:&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Authorization&lt;/code&gt;: &lt;code&gt;sso-key MY_API_KEY:MY_API_SECRET&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Content-Type&lt;/code&gt;: &lt;code&gt;application/json&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data:&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;quot;data&amp;quot;&lt;/code&gt;: Validation string from Certbot.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;quot;ttl&amp;quot;&lt;/code&gt;: Time-to-live (e.g., &lt;code&gt;600&lt;/code&gt; seconds).&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;remove-txt-record&#34;&gt;Remove TXT Record&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;curl -s -X PUT \
+-H &amp;quot;Authorization: sso-key ${GODADDY_KEY}:${GODADDY_SECRET}&amp;quot; \
+-H &amp;quot;Content-Type: application/json&amp;quot; \
+-d &amp;quot;[]&amp;quot; \
+&amp;quot;https://api.godaddy.com/v1/domains/${GODADDY_DOMAIN}/records/TXT/${RECORD_NAME}&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;integration-with-certbot-hooks&#34;&gt;Integration with Certbot Hooks&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Auth Hook (&lt;code&gt;godaddy-auth.sh&lt;/code&gt;):&lt;/strong&gt; Adds the TXT record before validation.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cleanup Hook (&lt;code&gt;godaddy-cleanup.sh&lt;/code&gt;):&lt;/strong&gt; Removes the TXT record after validation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I ensure my scripts use the above &lt;code&gt;curl&lt;/code&gt; commands with the appropriate environment variables (&lt;code&gt;GODADDY_KEY&lt;/code&gt;, &lt;code&gt;GODADDY_SECRET&lt;/code&gt;, &lt;code&gt;GODADDY_DOMAIN&lt;/code&gt;, &lt;code&gt;RECORD_NAME&lt;/code&gt;, &lt;code&gt;CERTBOT_VALIDATION&lt;/code&gt;).&lt;/p&gt;
+&lt;h2 id=&#34;the-automated-solution&#34;&gt;The Automated Solution&lt;/h2&gt;
+&lt;p&gt;Certbot offers hooks that run custom scripts to automate these exact steps:&lt;/p&gt;
+&lt;h3 id=&#34;1-command-with-hooks&#34;&gt;1. Command with Hooks&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;certbot certonly \
+--manual \
+--preferred-challenges dns \
+--manual-auth-hook /etc/letsencrypt/scripts/godaddy-auth.sh \
+--manual-cleanup-hook /etc/letsencrypt/scripts/godaddy-cleanup.sh \
+--agree-tos \
+-d &#39;*.wild.card.domain&#39; \
+--preferred-chain &amp;quot;ISRG Root X1&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--manual-auth-hook&lt;/code&gt;&lt;/strong&gt;: Runs a script before Certbot attempts to validate the domain (to set up the TXT record).&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--manual-cleanup-hook&lt;/code&gt;&lt;/strong&gt;: Runs a script after validation completes (to remove or clear the TXT record).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-godaddy-auth-script&#34;&gt;2. GoDaddy Auth Script&lt;/h3&gt;
+&lt;p&gt;The following script (&lt;code&gt;godaddy-auth.sh&lt;/code&gt;) is triggered by the &lt;code&gt;--manual-auth-hook&lt;/code&gt;. It reads environment variables set by Certbot—like &lt;code&gt;CERTBOT_DOMAIN&lt;/code&gt; and &lt;code&gt;CERTBOT_VALIDATION&lt;/code&gt;—and then updates the DNS record via the GoDaddy API.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/usr/bin/env bash
+# /etc/letsencrypt/scripts/godaddy-auth.sh
+# Certbot environment variables:
+# - CERTBOT_DOMAIN (the domain being authenticated)
+# - CERTBOT_VALIDATION (the validation string for TXT record)
+GODADDY_KEY=&amp;quot;domain_name_provider_key&amp;quot;
+GODADDY_SECRET=&amp;quot;domain_name_provider_secret&amp;quot;
+GODADDY_DOMAIN=&amp;quot;your_root_domain&amp;quot; # e.g., &amp;quot;example.com&amp;quot;
+TTL=600
+# Subdomain that needs to be updated
+RECORD_NAME=&amp;quot;_acme-challenge&amp;quot;
+# Build request payload
+DATA=&amp;quot;[{\&amp;quot;data\&amp;quot;: \&amp;quot;${CERTBOT_VALIDATION}\&amp;quot;, \&amp;quot;ttl\&amp;quot;: ${TTL}}]&amp;quot;
+curl -s -X PUT \
+-H &amp;quot;Authorization: sso-key ${GODADDY_KEY}:${GODADDY_SECRET}&amp;quot; \
+-H &amp;quot;Content-Type: application/json&amp;quot; \
+-d &amp;quot;${DATA}&amp;quot; \
+&amp;quot;https://api.godaddy.com/v1/domains/${GODADDY_DOMAIN}/records/TXT/${RECORD_NAME}&amp;quot;
+echo &amp;quot;GoDaddy AUTH-HOOK: Created TXT record for ${CERTBOT_DOMAIN}.&amp;quot;
+# Sleep to allow DNS propagation
+sleep 60
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If I have a subdomain or different domain structure, I adjust &lt;code&gt;RECORD_NAME&lt;/code&gt; accordingly.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;3-godaddy-cleanup-script&#34;&gt;3. GoDaddy Cleanup Script&lt;/h3&gt;
+&lt;p&gt;This script (&lt;code&gt;godaddy-cleanup.sh&lt;/code&gt;) runs after verification succeeds. It removes (or resets) the &lt;code&gt;_acme-challenge&lt;/code&gt; TXT record, keeping my DNS tidy.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/usr/bin/env bash
+# /etc/letsencrypt/scripts/godaddy-cleanup.sh
+# Certbot environment variables:
+# - CERTBOT_DOMAIN (the domain being authenticated)
+GODADDY_KEY=&amp;quot;domain_name_provider_key&amp;quot;
+GODADDY_SECRET=&amp;quot;domain_name_provider_secret&amp;quot;
+GODADDY_DOMAIN=&amp;quot;your_root_domain&amp;quot;
+RECORD_NAME=&amp;quot;_acme-challenge&amp;quot;
+# Empty the TXT record (or remove it altogether)
+DATA=&amp;quot;[]&amp;quot;
+curl -s -X PUT \
+-H &amp;quot;Authorization: sso-key ${GODADDY_KEY}:${GODADDY_SECRET}&amp;quot; \
+-H &amp;quot;Content-Type: application/json&amp;quot; \
+-d &amp;quot;${DATA}&amp;quot; \
+&amp;quot;https://api.godaddy.com/v1/domains/${GODADDY_DOMAIN}/records/TXT/${RECORD_NAME}&amp;quot;
+echo &amp;quot;GoDaddy CLEANUP-HOOK: Removed TXT record for ${CERTBOT_DOMAIN}.&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;scheduling-with-crontab&#34;&gt;Scheduling With Crontab&lt;/h2&gt;
+&lt;p&gt;After confirming the manual hooks work, I automate the renewal checks using crontab:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;10 0 * * * /usr/bin/certbot renew --preferred-chain &amp;quot;ISRG Root X1&amp;quot; &amp;gt;&amp;gt; /folder/to/save/cronlog.log 2&amp;gt;&amp;amp;1
+10 0 * * * /etc/letsencrypt/scripts/certbot-renew-dns.sh &amp;gt;&amp;gt; /folder/to/save/cronlog-manualhook.log 2&amp;gt;&amp;amp;1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;pro-tips&#34;&gt;Pro Tips&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;DNS Propagation&lt;/strong&gt;: Sometimes DNS changes can take longer than expected, especially if my DNS TTL is high. I might adjust my &lt;code&gt;sleep&lt;/code&gt; time or TTL in the script if validations fail.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Permissions&lt;/strong&gt;: I ensure my hook scripts are &lt;strong&gt;executable&lt;/strong&gt; by using &lt;code&gt;chmod +x /path/to/script.sh&lt;/code&gt;.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Security&lt;/strong&gt;: I keep my API keys secret. Storing them in environment variables or a secure file is best.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Testing&lt;/strong&gt;: I run &lt;code&gt;certbot renew --dry-run&lt;/code&gt; to verify that my hooks and scripts work before scheduling them in production.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Using Certbot’s DNS challenge manual hook scripts, I can seamlessly automate the issuance and renewal of wildcard certificates. Gone are the days of logging into my DNS provider’s dashboard every few months. With minimal scripting and a few Cron entries, my wildcard certificates can renew without me lifting a finger.&lt;/p&gt;
+&lt;!-- If this guide was helpful, [check out more of my tech insights at BluePie](https://bluepie.in) or leave a comment below to share your experience or ask questions! --&gt;
+&lt;p&gt;Leave a comment below to share your experience or ask questions!&lt;/p&gt;
+&lt;p&gt;Merry Christmas &amp;amp; A Happy New Year, See ya soon~&lt;/p&gt;</description></item><item><title>Rooting My Pixel For Unlimited gphotos backup</title><link>//bluepie.in/2024/04/rooting-my-pixel/</link><pubDate>Thu, 04 Apr 2024 03:14:06 +0000</pubDate><guid>//bluepie.in/2024/04/rooting-my-pixel/</guid><description>
 &lt;p&gt;All the previous android phones I had, I rooted them and used them with a custom ROM that had gphotos mod or used it with gphotos mod, I&amp;rsquo;ve had a pixel for android development as my second device..but all this time, it had stock android and not rooted with no modifications.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;But what do I mean by gphotos mod..?
@@ -34,7 +194,7 @@ You get unlimited photos and videos backup in Google photos, the mod makes it se
 &lt;tr&gt;
 &lt;td&gt;&lt;strong&gt;Pixel 3a and onwards&lt;/strong&gt;&lt;/td&gt;
 &lt;td&gt;Not available&lt;/td&gt;
-&lt;td&gt;Instead, offers a 3-month trial for the 100 GB Google One plan (Pixel 4, 4a, 4a (5G), Pixel 5).&lt;/td&gt;
+&lt;td&gt;Instead, offers a 3-month trial for the 100 GB Google One plan (Pixel 4, 4a, 4a (5G), Pixel 5&amp;hellip;.etc)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -1637,101 +1797,4 @@ dangerouslySetInnerHTML: { __html: element.innerHTML, key: nodeName + key++ },
 });
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>Android Reversing Part 5 But With Frida</title><link>//bluepie.in/2021/08/android-reversing-part-5-with-frida/</link><pubDate>Sat, 21 Aug 2021 07:25:55 +0000</pubDate><guid>//bluepie.in/2021/08/android-reversing-part-5-with-frida/</guid><description>
-&lt;h2 id=&#34;why-frida&#34;&gt;Why Frida?&lt;/h2&gt;
-&lt;p&gt;Becase it can be many things, &lt;a href=&#34;https://frida.re/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;know more&lt;/a&gt;. Its is,&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;easy, sure learning curve takes some time, but it pays off spectacularly.&lt;/li&gt;
-&lt;li&gt;efficient, a rough estimate for the modification took 30 min in frida vs 2 hours in traditional methods, its way more flexible.&lt;/li&gt;
-&lt;li&gt;elegant when compared to traditional ways. you get creative new ideas and implement them easily (implementating manually takes way longer).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;my-setup&#34;&gt;My setup&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://www.genymotion.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Genymotion&lt;/a&gt;, but why? (better than avd) runs way faster than avd, default root, runs via virtual box, image size is small, less cpu usage compared to avd.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;latest frida server and client from &lt;a href=&#34;https://github.com/frida/frida/releases&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;frida/releases&lt;/a&gt;.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;in my case, &lt;a href=&#34;https://github.com/frida/frida/releases/download/15.0.17/frida-server-15.0.17-android-x86.xz&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&amp;lsquo;frida-server-15.0.17-android-arm.xz&amp;rsquo;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;move the fridaserver to android device/emulator and start it.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;adb push /data/local/tmp/firda-server
-adb shell
-cd /data/local/tmp/frida-server
-./frida-server &amp;amp;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;modding-with-very-little-effort&#34;&gt;Modding with very little effort&lt;/h2&gt;
-&lt;p&gt;Frida has a great feature &lt;strong&gt;&amp;lsquo;TRACE&amp;rsquo;&lt;/strong&gt;, but without manually injection, by doing it dynamically, &lt;a href=&#34;https://frida.re/docs/frida-trace/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;more here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;what it does in oneline is &lt;strong&gt;you give it &amp;lsquo;wildcard methods&amp;rsquo; and a process, it will then log the input params and out values when the traced method is called of the target process&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# for tracing all methods which contains &#39;license&#39;
-noone@pc:frida-trace -U Firewall -j &#39;*!*license*/isu&#39;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;Trace Logs&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt; 26442 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.ActivityRules&amp;gt;&amp;quot;)
-26443 ms &amp;lt;= false
-26598 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.ActivityRules&amp;gt;&amp;quot;)
-26599 ms &amp;lt;= false
-26603 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.ActivityRules&amp;gt;&amp;quot;)
-26604 ms &amp;lt;= false
-39331 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.settings.Settings&amp;gt;&amp;quot;)
-39331 ms &amp;lt;= false
-45614 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.settings.Settings&amp;gt;&amp;quot;)
-45614 ms &amp;lt;= false
-49377 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.ActivityLogs&amp;gt;&amp;quot;)
-49378 ms &amp;lt;= false
-49567 ms &amp;lt;= false
-49581 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.ActivityLogs&amp;gt;&amp;quot;)
-49581 ms &amp;lt;= false
-52637 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.settings.SettingsInApp&amp;gt;&amp;quot;)
-52637 ms &amp;lt;= false
-52786 ms Settings.isLicenseActive(&amp;quot;&amp;lt;instance: android.content.Context, $className: com.protectstar.firewall.activity.settings.SettingsInApp&amp;gt;&amp;quot;)
-52789 ms &amp;lt;= false
-52792 ms SettingsInApp.initLicense()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;With just guessing the method name &amp;lsquo;license&amp;rsquo;, following license methods were found and its input and output params are logged when run via adb, without even decompiling and going through code (isn&amp;rsquo;t this great!?)&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;8 directories, 31 files
-__handlers__/
-├── com.protectstar.firewall.activity.settings.Settings
-│   └── isLicenseActive.js &amp;lt;--- this file seems interesting?!
-├── com.protectstar.firewall.activity.settings.SettingsInApp
-│   ├── initLicense.js
-...
-│   └── licenseSuccess.js
-├── com.protectstar.firewall.cloud.Auth
-│   ├── getLicense1Url.js
-...
-├── com.protectstar.firewall.utility.LicenseActivation
-│   ├── access_000.js
-...
-│   ├── checkLicenseDuration.js &amp;lt;--- this file seems interesting?!
-│   └── _init.js
-├── com.protectstar.firewall.utility.LicenseActivation_Customer
-...
-│   ├── access_900.js
-│   └── _init.js
-├── com.protectstar.firewall.utility.LicenseActivation_Reason
-│   ├── valueOf.js
-│   └── values.js
-├── com.protectstar.firewall.utility.LicenseActivation_ResponseListener
-   ├── error.js
-   └── licenseSuccess.js
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now navigate though all sections of the app and find any interesting methods invoked through the trace logs.&lt;/p&gt;
-&lt;h2 id=&#34;patching-on-the-fly-without-seeing-the-original-code&#34;&gt;patching on the fly, without seeing the original code&lt;/h2&gt;
-&lt;p&gt;By observing the invoked methods and its input/output values, we can guess the method name to patch, it is &lt;em&gt;&amp;lsquo;isLicenseActive&amp;rsquo; from &amp;lsquo;com.protectstar.firewall.activity.settings.Settings&amp;rsquo;&lt;/em&gt;, in frida-trace, we see the return value is &lt;em&gt;False&lt;/em&gt;, so why not make it as true and observe the behaviour?&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// patching the method
-function main() {
-Java.perform(function () {
-// match the method signature
-Java.use(&#39;com.protectstar.firewall.activity.settings.Settings&#39;).isLicenseActive.implementation = function (
-context
-) {
-return true;
-};
-});
-}
-setImmediate(main);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;After patching, navigating the app we now see the premium features are unlocked, that was way easier than conventional methods, greatly reduces the time.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/android-reversing-part-5/patch_with_frida_accessing_premium.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
-&lt;p&gt;I intend to use Frida in the future stuff I do, its simply great. Seeya next time. untill then - aghontpi :)&lt;/p&gt;</description></item></channel></rss>
+&lt;/ul&gt;</description></item></channel></rss>

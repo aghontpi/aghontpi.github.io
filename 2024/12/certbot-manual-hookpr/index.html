@@ -1,0 +1,87 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><meta name=description content="Public Journal of aghontpi"><meta name=keywords content="aghontpi bluepie Journal"><link rel=prev href=//bluepie.in/2024/04/rooting-my-pixel/><link rel=canonical href=//bluepie.in/2024/12/certbot-manual-hookpr/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>Certbot Manual Hook – Automating Wildcard Domain Renewals | Bluepie&#39;s Journal</title><meta name=title content="Certbot Manual Hook – Automating Wildcard Domain Renewals | Bluepie's Journal"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"Certbot Manual Hook – Automating Wildcard Domain Renewals","headline":"Certbot Manual Hook – Automating Wildcard Domain Renewals","description":"Overview Securing my website with HTTPS is crucial, and Certbot makes it straightforward for many domains. However, when it comes to wildcard domains (like *.domain.com), there’s a bit more work involved—particularly if I want to automate renewals.\nThis post explains how I set up a manual DNS hook for Certbot that integrates with my domain name provider’s API (in this example, GoDaddy), so I no longer have to manually add DNS TXT records every time I need to renew my wildcard certificate.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2024","datePublished":"2024-12-07 03:02:36 \x2b0000 UTC","dateModified":"2024-12-07 03:02:36 \x2b0000 UTC","url":"\/\/bluepie.in\/2024\/12\/certbot-manual-hookpr\/","wordCount":"976","keywords":["Bluepie\x27s Journal"]}</script><script type=text/javascript>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","9oioq6tja4");</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>Journal entries</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>Journal entries</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-135013873-2','auto');ga('send','pageview');}</script><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">Certbot Manual Hook – Automating Wildcard Domain Renewals</h1><div class=post-meta>Written by <a itemprop=name href=//bluepie.in/ rel=author>Bluepie</a> with ♥
+<span class=post-time>on <time datetime=2024-12-07 itemprop=datePublished>December 7, 2024</time></span>
+in
+<i class="iconfont icon-folder"></i><span class=post-category><a href=//bluepie.in/categories/tech/>Tech</a>
+<a href=//bluepie.in/categories/dns/>DNS</a>
+<a href=//bluepie.in/categories/certbot/>Certbot</a></span></div></header><div class=post-content><img src=//bluepie.in/static/images/posts/dec-2024/certbot-automation.png class=featured_image><h2 id=overview>Overview</h2><p>Securing my website with HTTPS is crucial, and <a href=https://certbot.eff.org/ rel="nofollow noreferrer" target=_blank>Certbot</a> makes it straightforward for many domains. However, when it comes to wildcard domains (like <code>*.domain.com</code>), there’s a bit more work involved—particularly if I want to automate renewals.</p><p>This post explains how I set up a <strong>manual DNS hook</strong> for Certbot that integrates with my domain name provider’s API (in this example, GoDaddy), so I no longer have to manually add DNS TXT records every time I need to renew my wildcard certificate.</p><h2 id=why-do-we-need-this>Why Do We Need This?</h2><p>Certbot automates the HTTPS setup for many domain configurations. However, <strong>wildcard certificates</strong> require DNS-based validation—meaning I must add a TXT record to prove domain ownership. Certbot does not automatically update DNS for every provider. Thus, without automation, I’d be forced to:</p><ol><li>Run Certbot.<br></li><li>Grab the <code>_acme-challenge</code> TXT record details.<br></li><li>Log in to my DNS panel and manually create the TXT record.<br></li><li>Wait for DNS to propagate.<br></li><li>Resume the Certbot process.<br></li><li>Finally, clean up the TXT record.</li></ol><p>Doing this every few months quickly becomes tedious, especially if I manage multiple wildcard domains. Luckily, Certbot’s <code>--manual-auth-hook</code> parameter can help me automate these steps.</p><h2 id=the-goal>The Goal</h2><ul><li><strong>Automate</strong> the DNS validation process for wildcard certificate renewals using Certbot hooks.<br></li><li>Utilize my DNS provider’s API (in my case, <strong>GoDaddy</strong>) to create and remove the required <code>_acme-challenge</code> TXT record automatically.<br></li><li>Integrate this process into a <code>crontab</code> so renewals happen on schedule without manual intervention.</li></ul><h2 id=current-manual-process>Current (Manual) Process</h2><p>Here’s what I was doing without automation:</p><ol><li>Run Certbot: <code>certbot certonly --manual ...</code></li><li>Certbot tells me which TXT record to create, e.g. <code>&quot;_acme-challenge.domain.com&quot;</code>.</li><li>I log into GoDaddy (or another provider) and create the TXT record with the provided value.</li><li>I wait for DNS propagation (a few minutes).</li><li>Certbot verifies and finalizes the certificate issuance.</li><li>I remove or empty out the TXT record.</li></ol><p>This process, while doable, is time-consuming and must be repeated every 60–90 days (depending on my renewal schedule).</p><h2 id=godaddy-api-endpoint>Godaddy API endpoint</h2><h2 id=automating-the-workflow>Automating the Workflow</h2><p>To automate the renewal of my wildcard domain certificate, I leverage my domain provider&rsquo;s API to manage DNS TXT records programmatically. I use <strong>GoDaddy</strong>.</p><h3 id=prerequisites>Prerequisites</h3><ol><li><strong>API Access:</strong> Ensure GoDaddy supports DNS management via API.</li><li><strong>API Credentials:</strong> Obtain my API key and secret from the <a href=https://developer.godaddy.com/ rel="nofollow noreferrer" target=_blank>GoDaddy Developer Portal</a>.</li></ol><h3 id=godaddy-api-endpoint-1>GoDaddy API Endpoint</h3><p>I use the following endpoint to manage TXT records:</p><pre><code class=language-sh>https://api.godaddy.com/v1/domains/${GODADDY_DOMAIN}/records/TXT/${RECORD_NAME}
+</code></pre><p><strong>Parameters:</strong></p><ul><li><strong><code>${GODADDY_DOMAIN}</code></strong>: My root domain (e.g., <code>example.com</code>).</li><li><strong><code>${RECORD_NAME}</code></strong>: Typically <code>_acme-challenge</code> for Certbot.</li></ul><h3 id=using-the-api>Using the API</h3><h4 id=testing-create-update-txt-record-endpoints>Testing Create/Update TXT Record Endpoints</h4><pre><code class=language-sh>curl -s -X PUT \
+  -H &quot;Authorization: sso-key ${GODADDY_KEY}:${GODADDY_SECRET}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &quot;[{\&quot;data\&quot;: \&quot;${CERTBOT_VALIDATION}\&quot;, \&quot;ttl\&quot;: 600}]&quot; \
+  &quot;https://api.godaddy.com/v1/domains/${GODADDY_DOMAIN}/records/TXT/${RECORD_NAME}&quot;
+</code></pre><ul><li><strong>Headers:</strong><ul><li><code>Authorization</code>: <code>sso-key MY_API_KEY:MY_API_SECRET</code></li><li><code>Content-Type</code>: <code>application/json</code></li></ul></li><li><strong>Data:</strong><ul><li><code>&quot;data&quot;</code>: Validation string from Certbot.</li><li><code>&quot;ttl&quot;</code>: Time-to-live (e.g., <code>600</code> seconds).</li></ul></li></ul><h4 id=remove-txt-record>Remove TXT Record</h4><pre><code class=language-sh>curl -s -X PUT \
+  -H &quot;Authorization: sso-key ${GODADDY_KEY}:${GODADDY_SECRET}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &quot;[]&quot; \
+  &quot;https://api.godaddy.com/v1/domains/${GODADDY_DOMAIN}/records/TXT/${RECORD_NAME}&quot;
+</code></pre><h3 id=integration-with-certbot-hooks>Integration with Certbot Hooks</h3><ul><li><strong>Auth Hook (<code>godaddy-auth.sh</code>):</strong> Adds the TXT record before validation.</li><li><strong>Cleanup Hook (<code>godaddy-cleanup.sh</code>):</strong> Removes the TXT record after validation.</li></ul><p>I ensure my scripts use the above <code>curl</code> commands with the appropriate environment variables (<code>GODADDY_KEY</code>, <code>GODADDY_SECRET</code>, <code>GODADDY_DOMAIN</code>, <code>RECORD_NAME</code>, <code>CERTBOT_VALIDATION</code>).</p><h2 id=the-automated-solution>The Automated Solution</h2><p>Certbot offers hooks that run custom scripts to automate these exact steps:</p><h3 id=1-command-with-hooks>1. Command with Hooks</h3><pre><code class=language-sh>certbot certonly \
+  --manual \
+  --preferred-challenges dns \
+  --manual-auth-hook /etc/letsencrypt/scripts/godaddy-auth.sh \
+  --manual-cleanup-hook /etc/letsencrypt/scripts/godaddy-cleanup.sh \
+  --agree-tos \
+  -d '*.wild.card.domain' \
+  --preferred-chain &quot;ISRG Root X1&quot;
+</code></pre><ul><li><strong><code>--manual-auth-hook</code></strong>: Runs a script before Certbot attempts to validate the domain (to set up the TXT record).<br></li><li><strong><code>--manual-cleanup-hook</code></strong>: Runs a script after validation completes (to remove or clear the TXT record).</li></ul><h3 id=2-godaddy-auth-script>2. GoDaddy Auth Script</h3><p>The following script (<code>godaddy-auth.sh</code>) is triggered by the <code>--manual-auth-hook</code>. It reads environment variables set by Certbot—like <code>CERTBOT_DOMAIN</code> and <code>CERTBOT_VALIDATION</code>—and then updates the DNS record via the GoDaddy API.</p><pre><code class=language-bash>#!/usr/bin/env bash
+# /etc/letsencrypt/scripts/godaddy-auth.sh
+
+# Certbot environment variables:
+#  - CERTBOT_DOMAIN (the domain being authenticated)
+#  - CERTBOT_VALIDATION (the validation string for TXT record)
+
+GODADDY_KEY=&quot;domain_name_provider_key&quot;
+GODADDY_SECRET=&quot;domain_name_provider_secret&quot;
+GODADDY_DOMAIN=&quot;your_root_domain&quot;  # e.g., &quot;example.com&quot;
+TTL=600    
+
+# Subdomain that needs to be updated
+RECORD_NAME=&quot;_acme-challenge&quot;  
+
+# Build request payload
+DATA=&quot;[{\&quot;data\&quot;: \&quot;${CERTBOT_VALIDATION}\&quot;, \&quot;ttl\&quot;: ${TTL}}]&quot;
+
+curl -s -X PUT \
+  -H &quot;Authorization: sso-key ${GODADDY_KEY}:${GODADDY_SECRET}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &quot;${DATA}&quot; \
+  &quot;https://api.godaddy.com/v1/domains/${GODADDY_DOMAIN}/records/TXT/${RECORD_NAME}&quot;
+
+echo &quot;GoDaddy AUTH-HOOK: Created TXT record for ${CERTBOT_DOMAIN}.&quot;
+
+# Sleep to allow DNS propagation
+sleep 60
+</code></pre><blockquote><p><strong>Note:</strong> If I have a subdomain or different domain structure, I adjust <code>RECORD_NAME</code> accordingly.</p></blockquote><h3 id=3-godaddy-cleanup-script>3. GoDaddy Cleanup Script</h3><p>This script (<code>godaddy-cleanup.sh</code>) runs after verification succeeds. It removes (or resets) the <code>_acme-challenge</code> TXT record, keeping my DNS tidy.</p><pre><code class=language-bash>#!/usr/bin/env bash
+# /etc/letsencrypt/scripts/godaddy-cleanup.sh
+
+# Certbot environment variables:
+#  - CERTBOT_DOMAIN (the domain being authenticated)
+
+GODADDY_KEY=&quot;domain_name_provider_key&quot;
+GODADDY_SECRET=&quot;domain_name_provider_secret&quot;
+GODADDY_DOMAIN=&quot;your_root_domain&quot;
+
+RECORD_NAME=&quot;_acme-challenge&quot;
+
+# Empty the TXT record (or remove it altogether)
+DATA=&quot;[]&quot;
+
+curl -s -X PUT \
+  -H &quot;Authorization: sso-key ${GODADDY_KEY}:${GODADDY_SECRET}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &quot;${DATA}&quot; \
+  &quot;https://api.godaddy.com/v1/domains/${GODADDY_DOMAIN}/records/TXT/${RECORD_NAME}&quot;
+
+echo &quot;GoDaddy CLEANUP-HOOK: Removed TXT record for ${CERTBOT_DOMAIN}.&quot;
+</code></pre><h2 id=scheduling-with-crontab>Scheduling With Crontab</h2><p>After confirming the manual hooks work, I automate the renewal checks using crontab:</p><pre><code class=language-bash>10 0 * * * /usr/bin/certbot renew --preferred-chain &quot;ISRG Root X1&quot; &gt;&gt; /folder/to/save/cronlog.log 2&gt;&amp;1
+
+10 0 * * * /etc/letsencrypt/scripts/certbot-renew-dns.sh &gt;&gt; /folder/to/save/cronlog-manualhook.log 2&gt;&amp;1
+</code></pre><h2 id=pro-tips>Pro Tips</h2><ul><li><strong>DNS Propagation</strong>: Sometimes DNS changes can take longer than expected, especially if my DNS TTL is high. I might adjust my <code>sleep</code> time or TTL in the script if validations fail.<br></li><li><strong>Permissions</strong>: I ensure my hook scripts are <strong>executable</strong> by using <code>chmod +x /path/to/script.sh</code>.<br></li><li><strong>Security</strong>: I keep my API keys secret. Storing them in environment variables or a secure file is best.<br></li><li><strong>Testing</strong>: I run <code>certbot renew --dry-run</code> to verify that my hooks and scripts work before scheduling them in production.</li></ul><h2 id=conclusion>Conclusion</h2><p>Using Certbot’s DNS challenge manual hook scripts, I can seamlessly automate the issuance and renewal of wildcard certificates. Gone are the days of logging into my DNS provider’s dashboard every few months. With minimal scripting and a few Cron entries, my wildcard certificates can renew without me lifting a finger.</p><p>Leave a comment below to share your experience or ask questions!</p><p>Merry Christmas &amp; A Happy New Year, See ya soon~</p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span>Bluepie</span></p><p class=copyright-item><span>Link:</span>
+<a href=//bluepie.in/2024/12/certbot-manual-hookpr/>//bluepie.in/2024/12/certbot-manual-hookpr/</span></p></div><div class=post-tags><section><a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=//bluepie.in/>home</a></span></section></div><div class=post-nav><a href=//bluepie.in/2024/04/rooting-my-pixel/ class=prev rel=prev title="Rooting My Pixel For Unlimited gphotos backup"><i class="iconfont icon-left"></i>&nbsp;Rooting My Pixel For Unlimited gphotos backup</a></div><div class=post-comment><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
+var d=document,s=d.createElement('script');s.async=true;s.src='//'+"gopinath001-github-io-blog"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></div></main><footer class=footer><div class=copyright>&copy;
+<span itemprop=copyrightYear>2017 - 2025</span>
+<span class=with-love>|</span>
+<span class=author itemprop=copyrightHolder><a href=//bluepie.in/>Bluepie</a></span></div></footer><script src=//bluepie.in/js/vendor_no_gallery.min.js async></script></div></body></html>
