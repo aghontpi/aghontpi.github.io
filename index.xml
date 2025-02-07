@@ -1,4 +1,118 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sat, 07 Dec 2024 03:02:36 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Certbot Manual Hook – Automating Wildcard Domain Renewals</title><link>//bluepie.in/2024/12/certbot-manual-hook/</link><pubDate>Sat, 07 Dec 2024 03:02:36 +0000</pubDate><guid>//bluepie.in/2024/12/certbot-manual-hook/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Fri, 03 Jan 2025 18:11:41 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Unlimited Photos Storage Without Root - Part 2</title><link>//bluepie.in/2025/01/unlimited-photos-storage-without-root/</link><pubDate>Fri, 03 Jan 2025 18:11:41 +0000</pubDate><guid>//bluepie.in/2025/01/unlimited-photos-storage-without-root/</guid><description>
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;This post is a continuation of my &lt;a href=&#34;https://bluepie.in/2024/04/rooting-my-pixel/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Rooting My Pixel&lt;/a&gt;. Over the past months, I’ve been using my rooted phone to bypass storage limits and enjoy unlimited Google Photos storage. However, using a rooted device isn’t without its challenges—if someone gains physical access to my phone, my data becomes vulnerable. Banking appsa and even general purpose applications refuse to run on rooted devices because they detect system tampering. In some cases, the Play Store won’t allow you to install certain apps at all. To get around these restrictions, I rely on LSPosed modules that help conceal root access, allowing these apps to function without issues.&lt;/p&gt;
+&lt;h2 id=&#34;the-update-dilemma-keeping-root-intact&#34;&gt;The Update Dilemma: Keeping Root Intact&lt;/h2&gt;
+&lt;p&gt;Every time my Pixel receives an update, I’m forced to patch the boot image, a critical step for Magisk to continue functioning properly. The process generally involves:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Downloading the stock image for my Pixel model.&lt;/li&gt;
+&lt;li&gt;Extracting the boot image.&lt;/li&gt;
+&lt;li&gt;Patching the boot image using Magisk.&lt;/li&gt;
+&lt;li&gt;Flashing the patched boot image back onto the device.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Skipping any of these steps means Magisk (and its modules) won’t load, breaking the tweaks I depend on.&lt;/p&gt;
+&lt;h2 id=&#34;why-not-disable-updates&#34;&gt;Why Not Disable Updates?&lt;/h2&gt;
+&lt;p&gt;It might seem tempting to simply disable updates, but the monthly Pixel updates often include important stability and OS fixes. For instance, the December 2024 Android 15 update introduced a bug where Wi-Fi and mobile internet would disconnect automatically after a period of inactivity, a problem that’s been widely discussed on Reddit, Google Forums, and other communities. I’m now waiting for the January patch that should resolve this issue. The takeaway? Staying updated is crucial despite the extra work it sometimes entails.&lt;/p&gt;
+&lt;h2 id=&#34;emulating-the-old-pixel-without-root&#34;&gt;Emulating the Old Pixel Without Root&lt;/h2&gt;
+&lt;p&gt;If you’ve followed my previous posts, you know that rooting was once the only method to emulate the old Pixel’s functionality. Today, patching offers a robust alternative. The &lt;a href=&#34;https://github.com/revanced/revanced-patches&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;ReVanced Patches repository&lt;/a&gt; provides a comprehensive collection of smali patches that let you modify apps without needing root access.&lt;/p&gt;
+&lt;p&gt;I stumbled upon these patches while exploring alternatives to YouTube Premium. After canceling my subscription.&lt;/p&gt;
+&lt;p&gt;There was some controversy earlier in the ReVanced journey. The project initially faced criticism on GitHub for directly hosting mods, which led to pressure from the google and github. In response, the devs decided to split the project, hosting the patch files separately from the patched binaries. This move not only addressed the concerns but also streamlined the development process, keeping the patch logic distinct and easier to manage.&lt;/p&gt;
+&lt;h2 id=&#34;downloading-the-patches-and-apk&#34;&gt;Downloading the Patches and APK&lt;/h2&gt;
+&lt;p&gt;Before patching, you need to:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Download the Latest Google Photos APK&lt;/strong&gt;&lt;br /&gt;
+Make sure to obtain the standalone APK file rather than a bundled format. sites like &lt;a href=&#34;https://www.apkmirror.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;APKMirror&lt;/a&gt; are a good source.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Download the Latest ReVanced Patches&lt;/strong&gt;&lt;br /&gt;
+Head over to the &lt;a href=&#34;https://github.com/revanced/revanced-patches&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;ReVanced Patches repository&lt;/a&gt; to get the most recent version of the patch file (the &lt;code&gt;.rvp&lt;/code&gt; file). Using the latest patches ensures better compatibility with the app version you’re patching.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;patching-the-apk&#34;&gt;Patching the APK&lt;/h2&gt;
+&lt;p&gt;Once you have both the APK and the patch file, you can patch the app using the following command.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;java -jar revanced-cli.jar patch --patches patches.rvp -o patched.apk my_app.apk
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Simply replace &lt;code&gt;our_app.apk&lt;/code&gt; with the path to the downloaded APK (for example, my Google Photos APK). This command tells the Revanced CLI to apply the patches defined in &lt;code&gt;patches.rvp&lt;/code&gt; to my APK and output a patched version named &lt;code&gt;patched.apk&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;how-it-works&#34;&gt;How It Works&lt;/h2&gt;
+&lt;p&gt;The magic happens in the &lt;code&gt;.rvp&lt;/code&gt; file—it acts as a manifest that lists all supported packages along with their corresponding patches. When you run the command, the tool detects the package name in my APK and applies only the relevant modifications. (A small caveat: the current patching process only works via the PC command-line interface; the Android-based ReVanced Patcher app has issues patching google photos app for years now..)&lt;/p&gt;
+&lt;h2 id=&#34;installing-the-patched-app&#34;&gt;Installing the Patched App&lt;/h2&gt;
+&lt;p&gt;After patching, simply install the new APK on the device. On first launch, the app will prompt you to install ReVanced MicroG—a companion component needed for proper operation. For my convenience, I’m including download links for all the essential files at the end of this post. I’ll update this section as I patch new versions.&lt;/p&gt;
+&lt;div style=&#34;display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;&#34;&gt;
+&lt;img src=&#34;//bluepie.in/images/posts/jan2025/img1.png&#34; alt=&#34;&#34; style=&#34;height:320px;&#34;&gt;
+&lt;img src=&#34;//bluepie.in/images/posts/jan2025/img2.png&#34; alt=&#34;&#34; style=&#34;height:320px;&#34;&gt;
+&lt;img src=&#34;//bluepie.in/images/posts/jan2025/img3.png&#34; alt=&#34;&#34; style=&#34;height:320px;&#34;&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;relocking-the-pixel-device&#34;&gt;Relocking the Pixel Device&lt;/h2&gt;
+&lt;p&gt;Relocking Pixel device is a critical step if I want to revert my device back to its original, secure state. Whether we choose to relock via fastboot or by flashing the official ROM, please note that both methods will erase our device data. Make sure to backup all important files before proceeding.&lt;/p&gt;
+&lt;h3 id=&#34;method-1-fastboot-relock&#34;&gt;Method 1: Fastboot Relock&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Enter Fastboot Mode:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Power off device completely.&lt;/li&gt;
+&lt;li&gt;Hold the &lt;strong&gt;Power&lt;/strong&gt; and &lt;strong&gt;Volume Down&lt;/strong&gt; buttons simultaneously until the fastboot screen appears.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Relock the Bootloader:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Connect my device to my computer using a USB cable.&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Open a terminal (or Command Prompt) and execute the command:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;fastboot flashing lock
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; Some devices might require the command &lt;code&gt;fastboot oem lock&lt;/code&gt; instead.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Disable OEM Unlocking:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Once the bootloader is relocked, navigate to &lt;strong&gt;Developer Options&lt;/strong&gt; on the device.&lt;/li&gt;
+&lt;li&gt;Disable the &lt;strong&gt;OEM Unlocking&lt;/strong&gt; option to prevent unauthorized bootloader modifications in the future.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;method-2-flashing-the-official-rom&#34;&gt;Method 2: Flashing the Official ROM&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Download the Official ROM:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Visit the &lt;a href=&#34;https://developers.google.com/android/images#lynx&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Official Pixel Devices Site&lt;/a&gt; to download the latest factory image for your specific model.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Flash the ROM:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Follow the detailed instructions provided on the support site to flash the official ROM. This method restores the device to its factory state and automatically relocks the bootloader.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Choose the method that best fits your comfort level and requirements. Relocking via fastboot is generally quicker if you’re familiar with command-line operations, while flashing the official ROM provides a comprehensive reset to stock software.&lt;/p&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ReVanced CLI&lt;/strong&gt;: &lt;a href=&#34;https://github.com/revanced/revanced-cli&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;GitHub - ReVanced CLI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ReVanced Patches Repo&lt;/strong&gt;: &lt;a href=&#34;https://github.com/revanced/revanced-patches&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;GitHub - ReVanced Patches&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ReVanced GmsCore&lt;/strong&gt;: &lt;a href=&#34;https://github.com/ReVanced/GmsCore/releases&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;GitHub - ReVanced GmsCore&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Google Photos APK&lt;/strong&gt;: &lt;a href=&#34;https://www.apkmirror.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;APKMirror&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;patched-files&#34;&gt;Patched Files&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Any future patches that I release will be updated in this section.&lt;/p&gt;
+&lt;h2 id=&#34;patches-files&#34;&gt;Patches Files&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;File Name&lt;/th&gt;
+&lt;th&gt;Download Link&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;gphotos-patched-jan-2025 (Part 1)&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;//bluepie.in/attachments/jan2025/gphotos-patched-jan-2025.apk.zip.001&#34;&gt;Download Part 1&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;gphotos-patched-jan-2025 (Part 2)&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;//bluepie.in/attachments/jan2025/gphotos-patched-jan-2025.apk.zip.002&#34;&gt;Download Part 2&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;gms-core-jan2025&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;//bluepie.in/attachments/jan2025/app.revanced.android.gms-240913008-signed.apk&#34;&gt;Download&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
+The &lt;code&gt;gphotos-patched-jan-2025&lt;/code&gt; file is split into parts using Keka on macOS with a 99MB split threshold to help manage file sizes and site tracking. After downloading both parts, simply extract the first file (with the &lt;code&gt;.zip.001&lt;/code&gt; extension) using your preferred archive tool (such as Keka, 7-Zip, or WinRAR..etc). The tool will automatically combine the parts and extract the complete APK.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;personal-update&#34;&gt;Personal Update&lt;/h2&gt;
+&lt;p&gt;AI is taking over, wth! For historical matching… DeepSeek is released, competing with OpenAI&amp;rsquo;s latest thinking model. I&amp;rsquo;m sure OpenAI will have some response to it. I’ve enjoyed a 5-day vacation—it was pleasant and something I’ll remember for the upcoming days. (Spent with Vi, aka 3&amp;rsquo;rd Frost.) I&amp;rsquo;m planning to go home and spend some time with family, and I have to set up Jio AirFibre, converting my SIMs to Jio for unlimited internet (you’ll see a post about this later). The broadband over there isn’t that good and the signal inside the home is weak; plus, it comes bundled with TV, movies, and disney+, discovery+,..etc I’m going to disconnect Airtel TV/DTH in favor of this since it works with just WiFi and doesn&amp;rsquo;t require routing everywhere. Since I&amp;rsquo;m planning to vacate Chennai in March, after February (Frost&amp;rsquo;s 3rd birthday), things are going well. I even decided to tell Mom and Dad about Vi and show them by taking them to our Chennai home. Currently, as of this writing, they are not in Chennai with me—they went hometown last time I visited for functions and to take care of Grandma.&lt;/p&gt;</description></item><item><title>Certbot Manual Hook – Automating Wildcard Domain Renewals</title><link>//bluepie.in/2024/12/certbot-manual-hook/</link><pubDate>Sat, 07 Dec 2024 03:02:36 +0000</pubDate><guid>//bluepie.in/2024/12/certbot-manual-hook/</guid><description>
 &lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
 &lt;p&gt;Securing my website with HTTPS is crucial, and &lt;a href=&#34;https://certbot.eff.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Certbot&lt;/a&gt; makes it straightforward for many domains. However, when it comes to wildcard domains (like &lt;code&gt;*.domain.com&lt;/code&gt;), there’s a bit more work involved—particularly if I want to automate renewals.&lt;/p&gt;
 &lt;p&gt;This post explains how I set up a &lt;strong&gt;manual DNS hook&lt;/strong&gt; for Certbot that integrates with my domain name provider’s API (in this example, GoDaddy), so I no longer have to manually add DNS TXT records every time I need to renew my wildcard certificate.&lt;/p&gt;
@@ -1439,215 +1553,4 @@ android:exported=&amp;quot;false&amp;quot;&amp;gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://youtu.be/hWfiQN4IUFM&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;featured in top apps - youtube&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.nextpit.com/apps-of-the-week-48-2021&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;featured in app of the week&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>Open Source Dnd Email Editor</title><link>//bluepie.in/2021/10/open-source-dnd-email-editor/</link><pubDate>Sun, 10 Oct 2021 10:48:30 +0000</pubDate><guid>//bluepie.in/2021/10/open-source-dnd-email-editor/</guid><description>
-&lt;p&gt;I created a drag and drop email editor, I&amp;rsquo;ve been working on it for the past month. It&amp;rsquo;s a lot of fun to work on, I completed it for first release, I&amp;rsquo;ll shed some light on the challenges I faced and how I solved them.&lt;/p&gt;
-&lt;h2 id=&#34;why-s-what-s&#34;&gt;Why&amp;rsquo;s &amp;amp; What&amp;rsquo;s&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;why build this?&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;No free editors/open source editors that does the job,&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;but why not profit?&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Not interested, I believe in Open Source. Heavily inspired by how LINUX (OPEN SOURCE) is useful for everyone now.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;the real motivation?&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Let me be frank here, I dont like &lt;em&gt;unalyer github&lt;/em&gt;, MAINLY BECAUSE OF THEIR FALSE ADVERTISEMENT AS OPEN SOURCE, I understand that&amp;rsquo;s how the get their business going but, damn its scummy.&lt;/p&gt;
-&lt;p&gt;One by one respoectively&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;scumbag unlayer,&lt;/li&gt;
-&lt;li&gt;grapjs mjml,
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/artf/grapesjs-mjml&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;their implementation&lt;/a&gt; was cool with mjml&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;company that I am working for, at the time of writing this, needed an email dnd editor.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;challenges&#34;&gt;Challenges&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;maintaining layer between MJML and Me.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;writing parsers, serializers and deseriealizers.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;design and code ui&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;manage drag and drop, mouse, key events, &amp;hellip;etc.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;deciding what kind of api to expose&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;deciding what inline editor to use&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;I can do one of two things&lt;/li&gt;
-&lt;li&gt;One, spend time &amp;amp; learn the api&amp;rsquo;s of an existing inline editor&lt;/li&gt;
-&lt;li&gt;Two, spend time creating a yet another inline editor, that I have full control of. (I&amp;rsquo;ll learn a lot of new things If I do this)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I did both, but after finding serveral small size inline editors, I decided to completely go ahead with creating a custom InlineEditor, it is not a major task if I used &lt;em&gt;document.executeCommand&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;maintaining demo/docs/npm package in single repo&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;backend&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;using firebase fn in combination with express&lt;/li&gt;
-&lt;li&gt;firestore for database&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I&amp;rsquo;ll explain &lt;strong&gt;&lt;em&gt;maintaining demo/docs/npm package in single repo&lt;/em&gt;&lt;/strong&gt; now, since that is the recent &amp;amp; last thing that I completed.&lt;/p&gt;
-&lt;h2 id=&#34;maintaining-demo-docs-npm-package-in-single-repo&#34;&gt;Maintaining demo/docs/npm package in single repo&lt;/h2&gt;
-&lt;p&gt;Let me fist explain the layout of the items in the repo.&lt;/p&gt;
-&lt;p&gt;the repo contains,&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;create-react-app&lt;/em&gt; react-scripts by default for the demo page&lt;/li&gt;
-&lt;li&gt;the &lt;em&gt;editor&lt;/em&gt; component
-&lt;ul&gt;
-&lt;li&gt;I want this to be bundled and published to npm&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;the demo branch, that automatically deploys with &lt;a href=&#34;https://pages.github.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;github pages&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;api docs for the project&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;checklist that I created before starting work on this&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Its always better to plan ahead to avoid surprises later, created a small checklist to help me with this.&lt;/p&gt;
-&lt;p&gt;I should have,&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;verified that the Editor is standalone
-&lt;ul&gt;
-&lt;li&gt;(i.e). that there is no demo build dependencies directly in the editor (like on first editor load, fetch this template from the backend, ..etc)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;verified that the Editor is fully functional
-&lt;ul&gt;
-&lt;li&gt;(i.e). that the editor can be used in a demo page without problems&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;decided on what build system to use
-&lt;ul&gt;
-&lt;li&gt;webpack&lt;/li&gt;
-&lt;li&gt;rollup&lt;/li&gt;
-&lt;li&gt;nd&amp;hellip;etc, millions of other build systems out there&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;created the build system, in such a way that It wont affect the demo build (created with create-react-app)
-&lt;ul&gt;
-&lt;li&gt;at the time of writing this, react-scripts uses webpack v4, So installing another instance of webpack v5 for npm build, will cause react-scripts to fail, the same goes for its dependencies aswell.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;created a seperate branch, do all documentations and changes in that branch&lt;/li&gt;
-&lt;li&gt;bundled only selected files in the npm build, should only contain
-&lt;ul&gt;
-&lt;li&gt;editor&lt;/li&gt;
-&lt;li&gt;css/sass files used with the editor&lt;/li&gt;
-&lt;li&gt;image files used with the editor&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;created sepereate &lt;strong&gt;&lt;em&gt;scripts in package.json&lt;/em&gt;&lt;/strong&gt; for the differnet builds
-&lt;ul&gt;
-&lt;li&gt;build = for react-scripts-build&lt;/li&gt;
-&lt;li&gt;build:module = for npm-build&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;created a seperate packge.json for the npm build, since the exported Editor component doesn&amp;rsquo;t need all the dependencies from the repository.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Choosing build system for the editor&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;I have already published packages using webpack in the past, So I already knew webpack and its different modules. But the problem is I don&amp;rsquo;t know if I can use two webpack instances in a single project.&lt;/p&gt;
-&lt;p&gt;I Could go for a new build system just to solve this problem alone, Or find a way to use two webpack instances in a single project.&lt;/p&gt;
-&lt;p&gt;This is the point in time, where I found out about &lt;a href=&#34;https://classic.yarnpkg.com/lang/en/docs/cli/add/#toc-yarn-add-alias&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;yarn alias&lt;/em&gt;&lt;/a&gt;, After I found this, I knew which build system to choose (webpack v5).&lt;/p&gt;
-&lt;p&gt;webpack has an environment configuration named &amp;lsquo;WEBPACK_PACKAGE&amp;rsquo;, it takes the package name of the webpack, So I can utilize this to install multiple versions, one with name &amp;lsquo;webpack&amp;rsquo; another with alias &amp;lsquo;webpack-module&amp;rsquo;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt; &amp;quot;webpack-module&amp;quot;: &amp;quot;npm:webpack@^5.60.0&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I can then run webpack normally with &amp;lsquo;react-scripts&amp;rsquo; and &amp;lsquo;WEBPACK_PACKAGE=webpack-module webpack&amp;rsquo; for npm build&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Requirements for publishing to npm&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;For publishing to npm, I need,&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;npm account&lt;/li&gt;
-&lt;li&gt;a package.json with seperate dependencies from the demo package.json
-&lt;ul&gt;
-&lt;li&gt;there should be a two package.json now. One for demo build, another for package build&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;a webpack configuration file for bundling&lt;/li&gt;
-&lt;li&gt;typescript definition file&lt;/li&gt;
-&lt;li&gt;output of &lt;em&gt;npm pack&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Webpack configuration&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;webpack configuration should process&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;process scss, css and module css, scss.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;a href=&#34;https://webpack.js.org/loaders/style-loader/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;style loader&lt;/a&gt; - Inject the bundled styles into webpage.&lt;/p&gt;
-&lt;p&gt;since I used &lt;em&gt;@import&lt;/em&gt; for fonts and &lt;em&gt;url&lt;/em&gt; for background, I need to add &lt;a href=&#34;https://webpack.js.org/loaders/css-loader/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;css loader&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;I have also used sass, thus &lt;a href=&#34;https://webpack.js.org/loaders/sass-loader/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;sass loader&lt;/a&gt; is required. To note, for the modern web, there is &lt;a href=&#34;https://github.com/sass/dart-sass&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;dart sass&lt;/a&gt;. I can &lt;a href=&#34;https://webpack.js.org/loaders/sass-loader/#object&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;instruct &amp;ldquo;sass loader&amp;rdquo; to use &amp;ldquo;dart sass&amp;rdquo;&lt;/a&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;// css
-{
-test: /(\.css$|\.module\.css$)/i,
-use: [&#39;style-loader-module&#39;, &#39;css-loader-module&#39;],
-},
-// scss
-{
-test: /(\.s[ac]ss$|\.module\.s[ac]ss$)/i,
-use: [
-{
-loader: &#39;style-loader-module&#39;,
-},
-{
-loader: &#39;css-loader-module&#39;,
-options: {
-importLoaders: 1,
-modules: {
-mode: &#39;local&#39;,
-},
-},
-},
-{
-loader: &#39;sass-loader-module&#39;,
-options: {
-implementation: require(&#39;sass&#39;),
-},
-},
-],
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;process .tsx, .ts and .jsx&amp;hellip;etc.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-test: /\.(js|jsx|ts|tsx)$/,
-exclude: /node_modules/,
-use: {
-loader: &#39;babel-loader-module&#39;,
-options: {
-presets: [
-&#39;@babel/preset-env&#39;,
-[&#39;@babel/preset-react&#39;, { runtime: &#39;automatic&#39; }],
-&#39;@babel/preset-typescript&#39;,
-],
-},
-}
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;instruct webpack to recognize .tsx file extensions.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;resolve: {
-extensions: [&#39;.js&#39;, &#39;.jsx&#39;, &#39;.ts&#39;, &#39;.tsx&#39;],
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;a way to make image assets work in extensions,In webpack 5, I can bundle images inline in js files.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-test: /\.svg/,
-type: &#39;asset/inline&#39;,
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;That is it for the webpack config, Isn&amp;rsquo;t this simple and concise.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Maintaining another package.json for npm&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Obviously, only at the time of packing I need package.json untill then I can renaming to something else, I named it to &amp;lsquo;module-package.json&amp;rsquo; then at time of &amp;lsquo;bundling and packing&amp;rsquo;, I rename it to &amp;lsquo;package.json&amp;rsquo;&lt;/p&gt;
-&lt;p&gt;the contents of &amp;lsquo;module-package.json&amp;rsquo; should contain the following,&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt; &amp;quot;name&amp;quot;: &amp;quot;dnd-email-editor&amp;quot;,
-&amp;quot;version&amp;quot;: &amp;quot;v0.0.0-alpha.3&amp;quot;,
-&amp;quot;description&amp;quot;: &amp;quot;Drag and Drop Editor designed for mails&amp;quot;,
-&amp;quot;main&amp;quot;: &amp;quot;./main.js&amp;quot;,
-&amp;quot;files&amp;quot;: [&amp;quot;**/*&amp;quot;],
-&amp;quot;types&amp;quot;: &amp;quot;./index.d.ts&amp;quot;,
-&amp;quot;peerDependencies&amp;quot;: {
-&amp;quot;react&amp;quot;: &amp;quot;^17.0.1&amp;quot;,
-&amp;quot;react-dom&amp;quot;: &amp;quot;^17.0.1&amp;quot;
-},
-&amp;quot;author&amp;quot;: &amp;quot;https://github.com/aghontpi&amp;quot;,
-&amp;quot;license&amp;quot;: &amp;quot;GPL-3.0&amp;quot;,
-&amp;quot;bugs&amp;quot;: {
-&amp;quot;url&amp;quot;: &amp;quot;https://github.com/aghontpi/dnde/issues&amp;quot;
-},
-&amp;quot;homepage&amp;quot;: &amp;quot;https://github.com/aghontpi/dnde&amp;quot;,
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;On every version change, change &amp;ldquo;version&amp;rdquo; key, It&amp;rsquo;ll automatically update in &lt;a href=&#34;https://npmjs.com&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;npmjs&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;bundling and packing&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;I added the following command to package.json, (original package.json not &amp;lsquo;module-package.json&amp;rsquo;), note the environment variable &amp;lsquo;WEBPACK_PACKAGE&amp;rsquo; I mentioned from before.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;WEBPACK_PACKAGE=webpack-module webpack &amp;amp;&amp;amp;
-cp module-package.json module/package.json &amp;amp;&amp;amp;
-cp index.d.ts module/index.d.ts &amp;amp;&amp;amp;
-cp README.md module/README.md &amp;amp;&amp;amp;
-npm pack ./module/
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I can the publish the output from the previous command with&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm publish build-verion.tgz
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;I oversimplified in many cases but this covers &amp;lsquo;publishing to npm part&amp;rsquo;. I solved a lot of similar interesting problems in the project, Check it &lt;a href=&#34;https://github.com/aghontpi/dnde&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;github dnde.&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>
+&lt;/ul&gt;</description></item></channel></rss>
