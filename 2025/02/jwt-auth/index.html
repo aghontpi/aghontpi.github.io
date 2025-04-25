@@ -1,0 +1,151 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noodp><meta name=author content=Bluepie><meta name=description content="Public Journal of aghontpi"><meta name=keywords content="aghontpi bluepie Journal"><link rel=prev href=//bluepie.in/2025/01/unlimited-photos-storage-without-root/><link rel=canonical href=//bluepie.in/2025/02/jwt-auth/><link rel=apple-touch-icon sizes=180x180 href=//bluepie.in/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=//bluepie.in/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=//bluepie.in/favicon-16x16.png><link rel=manifest href=//bluepie.in/site.webmanifest><link rel=mask-icon href=//bluepie.in/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content=#da532c><meta name=theme-color content=#ffffff><title>JWT Authentication | Bluepie&#39;s Journal</title><meta name=title content="JWT Authentication | Bluepie's Journal"><link rel=stylesheet href=//bluepie.in/font/iconfont.css><link rel=stylesheet href=//bluepie.in/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"\/\/bluepie.in\/"},"articleSection":"posts","name":"JWT Authentication","headline":"JWT Authentication","description":"Introduction  Summary: I’m documenting this so that I can refer back to it in the future. Recently, I’ve been working with Spring WebFlux, and although I’ve previously used JWTs, this is my first time writing about them. I often forget the implementation details when switching between languages or frameworks, so I’m recording this while it’s still fresh in my mind.\n JSON Web Tokens (JWTs) are a compact way to prove a user’s identity between two parties—usually a browser and your API.","inLanguage":"en-us","author":"Bluepie","creator":"Bluepie","publisher":"Bluepie","accountablePerson":"Bluepie","copyrightHolder":"Bluepie","copyrightYear":"2025","datePublished":"2025-02-02 16:10:12 \x2b0000 UTC","dateModified":"2025-02-02 16:10:12 \x2b0000 UTC","url":"\/\/bluepie.in\/2025\/02\/jwt-auth\/","wordCount":"832","keywords":["Bluepie\x27s Journal"]}</script><script type=text/javascript>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","9oioq6tja4");</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class="menu navbar-right"><a class=menu-item href=//bluepie.in/posts/>Journal entries</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="extra extra-moon"></i></a>&nbsp;<a href=//bluepie.in/>Bluepie&#39;s Journal</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=//bluepie.in/posts/>Journal entries</a>
+<a class=menu-item href=//bluepie.in/categories/>Categories</a></div></div></nav><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-135013873-2','auto');ga('send','pageview');}</script><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">JWT Authentication</h1><div class=post-meta>Written by <a itemprop=name href=//bluepie.in/ rel=author>Bluepie</a> with ♥
+<span class=post-time>on <time datetime=2025-02-02 itemprop=datePublished>February 2, 2025</time></span>
+in
+<i class="iconfont icon-folder"></i><span class=post-category><a href=//bluepie.in/categories/tech/>Tech</a>
+<a href=//bluepie.in/categories/teach/>Teach</a></span></div></header><div class=post-content><img src=//bluepie.in/images/posts/feb-2025/jwt.png class=featured_image><h3 id=introduction><strong>Introduction</strong></h3><blockquote><p><strong>Summary:</strong> I’m documenting this so that I can refer back to it in the future. Recently, I’ve been working with Spring WebFlux, and although I’ve previously used JWTs, this is my first time writing about them. I often forget the implementation details when switching between languages or frameworks, so I’m recording this while it’s still fresh in my mind.</p></blockquote><p>JSON Web Tokens (<strong>JWTs</strong>) are a compact way to prove a user’s identity between two parties—usually a browser and your API.</p><hr><h2 id=token-life-cycle><strong>Token life-cycle</strong></h2><p>A JWT is <em>self-contained</em>: it carries the user’s ID, roles, and an <strong>expiry</strong> inside the token itself.<br>To balance security and convenience I use <strong>two clocks</strong>:</p><table><thead><tr><th><strong>Clock</strong></th><th><strong>What it limits</strong></th><th><strong>Typical value</strong></th><th><strong>What happens when it hits zero</strong></th></tr></thead><tbody><tr><td><strong>Access expiry</strong></td><td>How long the current token stays valid</td><td><em>15–30 min</em></td><td>Client must call <code>/auth/refresh</code></td></tr><tr><td><strong>Refresh expiry</strong></td><td>How long the <em>refresh token</em> can mint new access tokens</td><td><em>7–30 days</em></td><td>User must log in again</td></tr></tbody></table><p>Flow:</p><pre><code class=language-text>/login  ──► access + refresh token
+         │
+   (before access expiry)
+         ▼
+/refresh ──► new access token
+</code></pre><p>After the <strong>refresh expiry</strong> passes, even the refresh endpoint refuses to issue new tokens—forcing a fresh login.</p><hr><h3 id=building-blocks><strong>Building blocks</strong></h3><ol><li><strong>Model</strong> – database tables for users &amp; login history</li><li><strong>Repository</strong> – Reactive CRUD interfaces provided by Spring Data R2DBC</li><li><strong>Service</strong> – business logic (password checks, audit log)</li><li><strong>Auth manager</strong> – validates credentials or JWT claims</li><li><strong>Filter</strong> – extracts the Authorization: Bearer … header</li><li><strong>Security config</strong> – wires it all together</li></ol><hr><h2 id=essential-code><strong>Essential code</strong></h2><h4 id=entity-classes><strong>Entity Classes</strong></h4><p>These classes represent database tables as Java objects using Spring Data R2DBC. <code>@Table</code> maps the class to a table, and Lombok annotations (<code>@Data</code>, <code>@Builder</code>, etc.) generate getters, setters, constructors, and a builder.</p><pre><code class=language-java>@Table(&quot;users&quot;)
+@Data @Builder @NoArgsConstructor @AllArgsConstructor
+public class UserEntity {
+  @Id  private Long id;
+  private String username;
+  private String password;   // hashed
+  private String roles;      // e.g. &quot;USER,ADMIN&quot;
+  private boolean enabled;
+}
+
+@Table(&quot;login_history&quot;)
+@Data @Builder @NoArgsConstructor @AllArgsConstructor
+public class LoginHistory {
+  @Id  private Long id;
+  private Long userId;
+  private LocalDateTime loginTime;
+  private String ipAddress;
+  private boolean successful;
+}
+</code></pre><h4 id=repositories><strong>Repositories</strong></h4><p>Spring Data’s <code>ReactiveCrudRepository</code> provides reactive CRUD operations. By extending these interfaces, Spring auto-generates the implementation at runtime.</p><pre><code class=language-java>public interface UserRepository
+    extends ReactiveCrudRepository&lt;UserEntity, Long&gt; {
+  Mono&lt;UserEntity&gt; findByUsername(String username);
+}
+
+public interface LoginHistoryRepository
+    extends ReactiveCrudRepository&lt;LoginHistory, Long&gt; {}
+</code></pre><h4 id=jwt-filter-excerpt><strong>JWT filter</strong> (excerpt)</h4><p><code>ServerAuthenticationConverter</code> is a Spring Security WebFlux interface for converting HTTP requests into <code>Authentication</code> objects. In this converter, we extract and validate the JWT token from the Authorization header.</p><pre><code class=language-java>@Slf4j
+public class JwtAuthConverter implements ServerAuthenticationConverter {
+  @Override
+  public Mono&lt;Authentication&gt; convert(ServerWebExchange exchange) {
+    String header = exchange.getRequest()
+                            .getHeaders()
+                            .getFirst(HttpHeaders.AUTHORIZATION);
+
+    if (header == null || !header.startsWith(&quot;Bearer &quot;)) return Mono.empty();
+
+    try {
+      String token = header.substring(7);
+      Jws&lt;Claims&gt; claims = JwtUtil.validateTokenAndGetClaims(token);
+
+      String username = claims.getBody().getSubject();
+      List&lt;String&gt; roles = claims.getBody().get(&quot;roles&quot;, List.class);
+
+      List&lt;GrantedAuthority&gt; authorities = roles.stream()
+          .map(SimpleGrantedAuthority::new)
+          .collect(Collectors.toList());
+
+      return Mono.just(new UsernamePasswordAuthenticationToken(
+          username, null, authorities));
+
+    } catch (Exception ex) {
+      log.warn(&quot;Invalid token: {}&quot;, ex.getMessage());
+      return Mono.empty();
+    }
+  }
+}
+</code></pre><h4 id=security-configuration-simplified><strong>Security configuration</strong> (simplified)</h4><p>The <code>@Configuration</code> class defines beans for Spring’s application context. <code>@EnableWebFluxSecurity</code> activates WebFlux security support. We configure a <code>SecurityWebFilterChain</code> bean to set up CSRF, CORS, endpoint permissions, and insert our JWT filter.</p><pre><code class=language-java>@Configuration
+@EnableWebFluxSecurity
+public class SecurityConfig {
+
+  @Bean
+  public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+
+    JwtAuthWebFilter jwt = new JwtAuthWebFilter(new JwtReactiveAuthManager());
+    jwt.setServerAuthenticationConverter(new JwtAuthConverter());
+
+    return http
+        .csrf(ServerHttpSecurity.CsrfSpec::disable)
+        .cors(ServerHttpSecurity.CorsSpec::disable)
+        .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
+        .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
+        .exceptionHandling(e -&gt; e.authenticationEntryPoint(
+            (exch, ex) -&gt; {
+              exch.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+              return exch.getResponse().setComplete();
+            }))
+        .authorizeExchange(ex -&gt; ex
+            .pathMatchers(
+                &quot;/api/v1/auth/login&quot;,
+                &quot;/api/v1/auth/refresh&quot;,
+                &quot;/api/v1/auth/validate&quot;,
+                &quot;/actuator/**&quot;)
+            .permitAll()
+            .pathMatchers(&quot;/api/v1/task/**&quot;).authenticated())
+        .addFilterAt(jwt, SecurityWebFiltersOrder.AUTHENTICATION)
+        .build();
+  }
+}
+</code></pre><h4 id=reactive-authentication-manager><strong>Reactive authentication manager</strong></h4><p>Implementing <code>ReactiveAuthenticationManager</code> allows custom authentication logic in WebFlux. This manager checks credentials, handles disabled accounts, and records login attempts via the <code>UserService</code>.</p><pre><code class=language-java>@Component
+@RequiredArgsConstructor
+public class DatabaseReactiveAuthManager implements ReactiveAuthenticationManager {
+
+  private final UserService users;
+
+  @Override
+  public Mono&lt;Authentication&gt; authenticate(Authentication auth) {
+    String username = auth.getName();
+    String rawPwd   = auth.getCredentials().toString();
+
+    return users.findByUsername(username)
+        .switchIfEmpty(Mono.error(new BadCredentialsException(&quot;User not found&quot;)))
+        .flatMap(u -&gt; {
+          if (!users.checkPassword(rawPwd, u.getPassword()))
+            return users.recordLoginAttempt(u, false, null)
+                        .then(Mono.error(new BadCredentialsException(&quot;Bad password&quot;)));
+
+          if (!u.isEnabled())
+            return Mono.error(new DisabledException(&quot;Account disabled&quot;));
+
+          List&lt;GrantedAuthority&gt; roles = Arrays.stream(u.getRoles().split(&quot;,&quot;))
+              .map(String::trim)
+              .map(SimpleGrantedAuthority::new)
+              .collect(Collectors.toList());
+
+          return users.recordLoginAttempt(u, true, null)
+                      .thenReturn(new UsernamePasswordAuthenticationToken(
+                          username, null, roles));
+        });
+  }
+}
+</code></pre><hr><h4 id=configuration-properties><strong>Configuration properties</strong></h4><p>These YAML properties configure Spring Security’s JWT support, specifying the signing <strong>secret</strong> and token lifetimes.</p><pre><code class=language-yaml>security:
+  encryption:
+    secret: _&quot;encryption_secret&quot;_
+  jwt:
+    expiration-time: __1_440_000__           # 24 minutes (ms)
+    refresh-expiration-time: __604_800_000__ # 7 days (ms)
+</code></pre><p>Tip – generate a strong secret:</p><pre><code class=language-py># This one-off command uses Docker to generate a bcrypt hash for a random 32-byte secret
+docker run --rm python:3.9-slim \
+  python - &lt;&lt;'PY'
+import bcrypt, os
+print(bcrypt.hashpw(os.urandom(32), bcrypt.gensalt()).decode())
+PY
+</code></pre><hr><h2 id=recap><strong>Recap</strong></h2><ul><li><strong>Two expiries</strong> keep sessions short yet user-friendly.</li><li>A reactive filter <strong>parses</strong> the token and attaches <strong>authorities</strong>.</li><li>A database auth manager handles <strong>login</strong>, <strong>password checks</strong>, and <strong>audit logs</strong>.</li><li>Spring WebFlux security is glued together with one concise <strong><code>SecurityWebFilterChain</code></strong>.</li></ul><hr><h2 id=references><strong>References</strong></h2><ul><li><a href=https://jwt.io/introduction/ rel="nofollow noreferrer" target=_blank>JWT.io Introduction</a></li><li><a href=https://github.com/jwtk/jjwt#readme rel="nofollow noreferrer" target=_blank>JJWT (Java JWT) Documentation</a></li></ul><hr><h2 id=personal-update><strong>Personal Update</strong></h2><p>Setup JioFiber at home, disconnected Airtel in Chennai, and ported all my SIMs to Jio except mom’s. Jio offers unlimited data (4G/5G) on individual plans for $8.77 per month. Nowadays I don’t have enough time to do anything. No no no…not gonna start a rant here…lol. Talked to a friend about old WiFi hacking days…(more in the next few posts).</p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span>Bluepie</span></p><p class=copyright-item><span>Link:</span>
+<a href=//bluepie.in/2025/02/jwt-auth/>//bluepie.in/2025/02/jwt-auth/</span></p></div><div class=post-tags><section><a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=//bluepie.in/>home</a></span></section></div><div class=post-nav><a href=//bluepie.in/2025/01/unlimited-photos-storage-without-root/ class=prev rel=prev title="Unlimited Photos Storage Without Root - Part 2"><i class="iconfont icon-left"></i>&nbsp;Unlimited Photos Storage Without Root - Part 2</a></div><div class=post-comment><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
+var d=document,s=d.createElement('script');s.async=true;s.src='//'+"gopinath001-github-io-blog"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></div></main><footer class=footer><div class=copyright>&copy;
+<span itemprop=copyrightYear>2017 - 2025</span>
+<span class=with-love>|</span>
+<span class=author itemprop=copyrightHolder><a href=//bluepie.in/>Bluepie</a></span></div></footer><script src=//bluepie.in/js/vendor_no_gallery.min.js async></script></div></body></html>

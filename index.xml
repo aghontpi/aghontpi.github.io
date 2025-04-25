@@ -1,4 +1,210 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Fri, 03 Jan 2025 18:11:41 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Unlimited Photos Storage Without Root - Part 2</title><link>//bluepie.in/2025/01/unlimited-photos-storage-without-root/</link><pubDate>Fri, 03 Jan 2025 18:11:41 +0000</pubDate><guid>//bluepie.in/2025/01/unlimited-photos-storage-without-root/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 02 Feb 2025 16:10:12 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>JWT Authentication</title><link>//bluepie.in/2025/02/jwt-auth/</link><pubDate>Sun, 02 Feb 2025 16:10:12 +0000</pubDate><guid>//bluepie.in/2025/02/jwt-auth/</guid><description>
+&lt;h3 id=&#34;introduction&#34;&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Summary:&lt;/strong&gt; I’m documenting this so that I can refer back to it in the future. Recently, I’ve been working with Spring WebFlux, and although I’ve previously used JWTs, this is my first time writing about them. I often forget the implementation details when switching between languages or frameworks, so I’m recording this while it’s still fresh in my mind.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;JSON Web Tokens (&lt;strong&gt;JWTs&lt;/strong&gt;) are a compact way to prove a user’s identity between two parties—usually a browser and your API.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;token-life-cycle&#34;&gt;&lt;strong&gt;Token life-cycle&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;A JWT is &lt;em&gt;self-contained&lt;/em&gt;: it carries the user’s ID, roles, and an &lt;strong&gt;expiry&lt;/strong&gt; inside the token itself.&lt;br /&gt;
+To balance security and convenience I use &lt;strong&gt;two clocks&lt;/strong&gt;:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;Clock&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;What it limits&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Typical value&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;What happens when it hits zero&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Access expiry&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;How long the current token stays valid&lt;/td&gt;
+&lt;td&gt;&lt;em&gt;15–30 min&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;Client must call &lt;code&gt;/auth/refresh&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Refresh expiry&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;How long the &lt;em&gt;refresh token&lt;/em&gt; can mint new access tokens&lt;/td&gt;
+&lt;td&gt;&lt;em&gt;7–30 days&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;User must log in again&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Flow:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;/login ──► access + refresh token
+│
+(before access expiry)
+▼
+/refresh ──► new access token
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After the &lt;strong&gt;refresh expiry&lt;/strong&gt; passes, even the refresh endpoint refuses to issue new tokens—forcing a fresh login.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h3 id=&#34;building-blocks&#34;&gt;&lt;strong&gt;Building blocks&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Model&lt;/strong&gt; – database tables for users &amp;amp; login history&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Repository&lt;/strong&gt; – Reactive CRUD interfaces provided by Spring Data R2DBC&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Service&lt;/strong&gt; – business logic (password checks, audit log)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Auth manager&lt;/strong&gt; – validates credentials or JWT claims&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Filter&lt;/strong&gt; – extracts the Authorization: Bearer … header&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Security config&lt;/strong&gt; – wires it all together&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;essential-code&#34;&gt;&lt;strong&gt;Essential code&lt;/strong&gt;&lt;/h2&gt;
+&lt;h4 id=&#34;entity-classes&#34;&gt;&lt;strong&gt;Entity Classes&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;These classes represent database tables as Java objects using Spring Data R2DBC. &lt;code&gt;@Table&lt;/code&gt; maps the class to a table, and Lombok annotations (&lt;code&gt;@Data&lt;/code&gt;, &lt;code&gt;@Builder&lt;/code&gt;, etc.) generate getters, setters, constructors, and a builder.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Table(&amp;quot;users&amp;quot;)
+@Data @Builder @NoArgsConstructor @AllArgsConstructor
+public class UserEntity {
+@Id private Long id;
+private String username;
+private String password; // hashed
+private String roles; // e.g. &amp;quot;USER,ADMIN&amp;quot;
+private boolean enabled;
+}
+@Table(&amp;quot;login_history&amp;quot;)
+@Data @Builder @NoArgsConstructor @AllArgsConstructor
+public class LoginHistory {
+@Id private Long id;
+private Long userId;
+private LocalDateTime loginTime;
+private String ipAddress;
+private boolean successful;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;repositories&#34;&gt;&lt;strong&gt;Repositories&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;Spring Data’s &lt;code&gt;ReactiveCrudRepository&lt;/code&gt; provides reactive CRUD operations. By extending these interfaces, Spring auto-generates the implementation at runtime.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public interface UserRepository
+extends ReactiveCrudRepository&amp;lt;UserEntity, Long&amp;gt; {
+Mono&amp;lt;UserEntity&amp;gt; findByUsername(String username);
+}
+public interface LoginHistoryRepository
+extends ReactiveCrudRepository&amp;lt;LoginHistory, Long&amp;gt; {}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;jwt-filter-excerpt&#34;&gt;&lt;strong&gt;JWT filter&lt;/strong&gt; (excerpt)&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;ServerAuthenticationConverter&lt;/code&gt; is a Spring Security WebFlux interface for converting HTTP requests into &lt;code&gt;Authentication&lt;/code&gt; objects. In this converter, we extract and validate the JWT token from the Authorization header.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Slf4j
+public class JwtAuthConverter implements ServerAuthenticationConverter {
+@Override
+public Mono&amp;lt;Authentication&amp;gt; convert(ServerWebExchange exchange) {
+String header = exchange.getRequest()
+.getHeaders()
+.getFirst(HttpHeaders.AUTHORIZATION);
+if (header == null || !header.startsWith(&amp;quot;Bearer &amp;quot;)) return Mono.empty();
+try {
+String token = header.substring(7);
+Jws&amp;lt;Claims&amp;gt; claims = JwtUtil.validateTokenAndGetClaims(token);
+String username = claims.getBody().getSubject();
+List&amp;lt;String&amp;gt; roles = claims.getBody().get(&amp;quot;roles&amp;quot;, List.class);
+List&amp;lt;GrantedAuthority&amp;gt; authorities = roles.stream()
+.map(SimpleGrantedAuthority::new)
+.collect(Collectors.toList());
+return Mono.just(new UsernamePasswordAuthenticationToken(
+username, null, authorities));
+} catch (Exception ex) {
+log.warn(&amp;quot;Invalid token: {}&amp;quot;, ex.getMessage());
+return Mono.empty();
+}
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;security-configuration-simplified&#34;&gt;&lt;strong&gt;Security configuration&lt;/strong&gt; (simplified)&lt;/h4&gt;
+&lt;p&gt;The &lt;code&gt;@Configuration&lt;/code&gt; class defines beans for Spring’s application context. &lt;code&gt;@EnableWebFluxSecurity&lt;/code&gt; activates WebFlux security support. We configure a &lt;code&gt;SecurityWebFilterChain&lt;/code&gt; bean to set up CSRF, CORS, endpoint permissions, and insert our JWT filter.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Configuration
+@EnableWebFluxSecurity
+public class SecurityConfig {
+@Bean
+public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+JwtAuthWebFilter jwt = new JwtAuthWebFilter(new JwtReactiveAuthManager());
+jwt.setServerAuthenticationConverter(new JwtAuthConverter());
+return http
+.csrf(ServerHttpSecurity.CsrfSpec::disable)
+.cors(ServerHttpSecurity.CorsSpec::disable)
+.httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
+.formLogin(ServerHttpSecurity.FormLoginSpec::disable)
+.exceptionHandling(e -&amp;gt; e.authenticationEntryPoint(
+(exch, ex) -&amp;gt; {
+exch.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+return exch.getResponse().setComplete();
+}))
+.authorizeExchange(ex -&amp;gt; ex
+.pathMatchers(
+&amp;quot;/api/v1/auth/login&amp;quot;,
+&amp;quot;/api/v1/auth/refresh&amp;quot;,
+&amp;quot;/api/v1/auth/validate&amp;quot;,
+&amp;quot;/actuator/**&amp;quot;)
+.permitAll()
+.pathMatchers(&amp;quot;/api/v1/task/**&amp;quot;).authenticated())
+.addFilterAt(jwt, SecurityWebFiltersOrder.AUTHENTICATION)
+.build();
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;reactive-authentication-manager&#34;&gt;&lt;strong&gt;Reactive authentication manager&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;Implementing &lt;code&gt;ReactiveAuthenticationManager&lt;/code&gt; allows custom authentication logic in WebFlux. This manager checks credentials, handles disabled accounts, and records login attempts via the &lt;code&gt;UserService&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Component
+@RequiredArgsConstructor
+public class DatabaseReactiveAuthManager implements ReactiveAuthenticationManager {
+private final UserService users;
+@Override
+public Mono&amp;lt;Authentication&amp;gt; authenticate(Authentication auth) {
+String username = auth.getName();
+String rawPwd = auth.getCredentials().toString();
+return users.findByUsername(username)
+.switchIfEmpty(Mono.error(new BadCredentialsException(&amp;quot;User not found&amp;quot;)))
+.flatMap(u -&amp;gt; {
+if (!users.checkPassword(rawPwd, u.getPassword()))
+return users.recordLoginAttempt(u, false, null)
+.then(Mono.error(new BadCredentialsException(&amp;quot;Bad password&amp;quot;)));
+if (!u.isEnabled())
+return Mono.error(new DisabledException(&amp;quot;Account disabled&amp;quot;));
+List&amp;lt;GrantedAuthority&amp;gt; roles = Arrays.stream(u.getRoles().split(&amp;quot;,&amp;quot;))
+.map(String::trim)
+.map(SimpleGrantedAuthority::new)
+.collect(Collectors.toList());
+return users.recordLoginAttempt(u, true, null)
+.thenReturn(new UsernamePasswordAuthenticationToken(
+username, null, roles));
+});
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h4 id=&#34;configuration-properties&#34;&gt;&lt;strong&gt;Configuration properties&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;These YAML properties configure Spring Security’s JWT support, specifying the signing &lt;strong&gt;secret&lt;/strong&gt; and token lifetimes.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;security:
+encryption:
+secret: _&amp;quot;encryption_secret&amp;quot;_
+jwt:
+expiration-time: __1_440_000__ # 24 minutes (ms)
+refresh-expiration-time: __604_800_000__ # 7 days (ms)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Tip – generate a strong secret:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-py&#34;&gt;# This one-off command uses Docker to generate a bcrypt hash for a random 32-byte secret
+docker run --rm python:3.9-slim \
+python - &amp;lt;&amp;lt;&#39;PY&#39;
+import bcrypt, os
+print(bcrypt.hashpw(os.urandom(32), bcrypt.gensalt()).decode())
+PY
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;recap&#34;&gt;&lt;strong&gt;Recap&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Two expiries&lt;/strong&gt; keep sessions short yet user-friendly.&lt;/li&gt;
+&lt;li&gt;A reactive filter &lt;strong&gt;parses&lt;/strong&gt; the token and attaches &lt;strong&gt;authorities&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;A database auth manager handles &lt;strong&gt;login&lt;/strong&gt;, &lt;strong&gt;password checks&lt;/strong&gt;, and &lt;strong&gt;audit logs&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Spring WebFlux security is glued together with one concise &lt;strong&gt;&lt;code&gt;SecurityWebFilterChain&lt;/code&gt;&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;references&#34;&gt;&lt;strong&gt;References&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://jwt.io/introduction/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;JWT.io Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/jwtk/jjwt#readme&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;JJWT (Java JWT) Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;personal-update&#34;&gt;&lt;strong&gt;Personal Update&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Setup JioFiber at home, disconnected Airtel in Chennai, and ported all my SIMs to Jio except mom’s. Jio offers unlimited data (4G/5G) on individual plans for $8.77 per month. Nowadays I don’t have enough time to do anything. No no no…not gonna start a rant here…lol. Talked to a friend about old WiFi hacking days…(more in the next few posts).&lt;/p&gt;</description></item><item><title>Unlimited Photos Storage Without Root - Part 2</title><link>//bluepie.in/2025/01/unlimited-photos-storage-without-root/</link><pubDate>Fri, 03 Jan 2025 18:11:41 +0000</pubDate><guid>//bluepie.in/2025/01/unlimited-photos-storage-without-root/</guid><description>
 &lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
 &lt;p&gt;This post is a continuation of my &lt;a href=&#34;https://bluepie.in/2024/04/rooting-my-pixel/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Rooting My Pixel&lt;/a&gt;. Over the past months, I’ve been using my rooted phone to bypass storage limits and enjoy unlimited Google Photos storage. However, using a rooted device isn’t without its challenges—if someone gains physical access to my phone, my data becomes vulnerable. Banking appsa and even general purpose applications refuse to run on rooted devices because they detect system tampering. In some cases, the Play Store won’t allow you to install certain apps at all. To get around these restrictions, I rely on LSPosed modules that help conceal root access, allowing these apps to function without issues.&lt;/p&gt;
 &lt;h2 id=&#34;the-update-dilemma-keeping-root-intact&#34;&gt;The Update Dilemma: Keeping Root Intact&lt;/h2&gt;
@@ -1449,108 +1655,4 @@ AuthorName: BluePie
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/publishing-to-fdroid-and-playstore/delisted.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;end&#34;&gt;End&lt;/h2&gt;
-&lt;p&gt;If you have an OpenSource App, spend less time updating it on Playstore. Stick with Github releases or Fdroid releases. Don&amp;rsquo;t even get my started on Apple app store.&lt;/p&gt;</description></item><item><title>Accuradio, Spotify...etc Adblocker in Kotlin</title><link>//bluepie.in/2021/11/accuradio-spotify-adblocker-in-kotlin/</link><pubDate>Thu, 18 Nov 2021 19:46:00 +0000</pubDate><guid>//bluepie.in/2021/11/accuradio-spotify-adblocker-in-kotlin/</guid><description>
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Hello how you been?, hope everything is going well.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;I wanted to learn Kotlin for native Android development, I already knew how to do it with java, so the only obstacle for me is learning Kotlin.&lt;/p&gt;
-&lt;h2 id=&#34;kotlin&#34;&gt;Kotlin&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Kotlin &lt;a href=&#34;https://trello.com/c/zYFtp51G/1-learn-kotlin&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;trello board&lt;/a&gt; that I used to track progress.&lt;/li&gt;
-&lt;li&gt;After learning the basics for Kotlin, &lt;a href=&#34;https://play.kotlinlang.org/koans/overview&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Kotlin koans&lt;/a&gt; is a great place for practice (beginner to advanced).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;chosing-what-to-do-with-kotlin&#34;&gt;Chosing what to do with Kotlin&lt;/h2&gt;
-&lt;p&gt;I use &lt;a href=&#34;https://accuradio.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Accuradio&lt;/a&gt; android app to stream music, but it does not have a paid tear, So the ads are not skippable and there was no existing adblocker that does this(which is a pain). So I decided to write one in Kotlin.&lt;/p&gt;
-&lt;p&gt;So its decided, I am doing a project in Kotlin to block/silence ads in Accuradio, some additional things I decided to implement are the following.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;should be extensible to other apps like Spotify,&amp;hellip;etc&lt;/li&gt;
-&lt;li&gt;should have minimal UI&lt;/li&gt;
-&lt;li&gt;should be lightweight&lt;/li&gt;
-&lt;li&gt;should be completely openSource.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;To be extensbile, I should have a common pattern/way to detect ads in these apps&amp;hellip; One such way is by using app&amp;rsquo;s notification.&lt;/p&gt;
-&lt;p&gt;I can determine what an app is currenly playing using the notification, using the &lt;a href=&#34;https://developer.android.com/reference/android/app/NotificationListenerService&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;notification listener&lt;/a&gt; service and parsing the posted notifications, mute/unmute the app based on the content.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/accuradio-spotify-ad-blocker/flow.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;An update, &lt;strong&gt;I already added support for Spotify and Tidal.&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;implementation&#34;&gt;Implementation&lt;/h2&gt;
-&lt;p&gt;I pretty much have to just&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;implement the &lt;a href=&#34;https://developer.android.com/reference/android/app/NotificationListenerService&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;NotificationListenerService&lt;/a&gt; service, and parse the posted notifications,&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;extend the &lt;a href=&#34;https://developer.android.com/reference/android/app/NotificationListenerService&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;NotificationListenerService&lt;/a&gt; class and implement the &lt;a href=&#34;https://developer.android.com/reference/android/app/NotificationListenerService.OnNotificationPostedListener.html#onNotificationPosted&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;onNotificationPosted&lt;/a&gt; method &amp;amp; &lt;a href=&#34;https://developer.android.com/reference/android/app/NotificationListenerService.OnNotificationConnectedListener.html#onNotificationConnected&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;onNotificationConnected&lt;/a&gt; method.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-kt&#34;&gt;class NotificationListener : NotificationListenerService() {
-override fun onListenerConnected() {
-super.onListenerConnected()
-appNotificationHelper?.updateNotification(&amp;quot;AdSilence, listening for ads&amp;quot;)?.run {
-startForeground(NOTIFICATION_ID, this) // persistent notification
-}
-Log.v(TAG, &amp;quot;notification listener connected&amp;quot;)
-}
-override fun onNotificationPosted(sbn: StatusBarNotification?) {
-super.onNotificationPosted(sbn)
-}
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;why do I need to run it as a foreground service?&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;because In recent versions of android, any app that is actively running the background must post a notification to the status bar. Otherwise the app will be killed by the system.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;then mute/unmute the app based on the content,&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-kt&#34;&gt;
-sbn?.let {
-with(AppNotification(applicationContext, it.notification, sbn.packageName)) {
-Preference(applicationContext).isAppConfigured(this.getApp()).takeIf { b -&amp;gt; b }
-?.run {
-Utils().run {
-when (NotificationParser(this@with).isAd()) {
-true -&amp;gt; {
-this.mute()
-isMuted = true
-}
-false -&amp;gt; {
-isMuted = false
-this.unmute();
-)
-}
-}
-}
-}
-}
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;next important step is granting the app, the permission to listen to notifications. (if all apps can listen to incoming notifications, this would be a huge security flaw!)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://developer.android.com/training/permissions/requesting&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;grant permission&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;since this app is openSource, everyone can see the source code before granting permission&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;bascially the following one line has to be used. (note: using string to support older devices)&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;startActivity(Intent(&amp;quot;enabled_notification_listeners&amp;quot;))
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;in the android manifest, add the following to the &lt;code&gt;&amp;lt;application&amp;gt;&lt;/code&gt; tag,&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;telling the system to use the file &lt;code&gt;NotificationListenerService&lt;/code&gt; as the notification listener service.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;service android:name=&amp;quot;.NotificationListener&amp;quot;
-android:label=&amp;quot;@string/notification_listener_name&amp;quot;
-android:permission=&amp;quot;android.permission.BIND_NOTIFICATION_LISTENER_SERVICE&amp;quot;
-android:exported=&amp;quot;false&amp;quot;&amp;gt;
-&amp;lt;intent-filter&amp;gt;
-&amp;lt;action android:name=&amp;quot;android.service.notification.NotificationListenerService&amp;quot; /&amp;gt;
-&amp;lt;/intent-filter&amp;gt;
-&amp;lt;/service&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;That is all is required to get the app to work, there are other things like UI, checking app installed or not, maintaining the app running in the background, hiding the app from recents, restarting the service, preference&amp;hellip;etc. Since the app is so lightweight (around 150KB)&amp;hellip;&lt;/p&gt;
-&lt;p&gt;I could write about every part of the app in this, but this app is open source&amp;hellip;.its already explained. It was so refreshing and fun work on this&amp;hellip; Kotlin is fun and I am glad to have learned it(atleast some bit).&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/aghontpi/ad-silence&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Github/source code&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://play.google.com/store/apps/details?id=bluepie.ad_silence&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Google play store link&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://f-droid.org/packages/bluepie.ad_silence/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Fdroid link&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://youtu.be/hWfiQN4IUFM&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;featured in top apps - youtube&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.nextpit.com/apps-of-the-week-48-2021&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;featured in app of the week&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</description></item></channel></rss>
+&lt;p&gt;If you have an OpenSource App, spend less time updating it on Playstore. Stick with Github releases or Fdroid releases. Don&amp;rsquo;t even get my started on Apple app store.&lt;/p&gt;</description></item></channel></rss>
