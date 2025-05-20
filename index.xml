@@ -1,4 +1,225 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Mon, 31 Mar 2025 22:30:39 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>DIY RO - Water Purification</title><link>//bluepie.in/2025/03/diy-water-purification/</link><pubDate>Mon, 31 Mar 2025 22:30:39 +0000</pubDate><guid>//bluepie.in/2025/03/diy-water-purification/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 27 Apr 2025 10:18:56 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Reducing Spring Reactor Java Project Cold Start to Milliseconds</title><link>//bluepie.in/2025/04/reducing-spring-reactor-java-project-cold-start-to-milliseconds/</link><pubDate>Sun, 27 Apr 2025 10:18:56 +0000</pubDate><guid>//bluepie.in/2025/04/reducing-spring-reactor-java-project-cold-start-to-milliseconds/</guid><description>
+&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
+&lt;p&gt;I run several backend services built on different frameworks and languages, One of them being Spring Boot and Spring Reactor on my own Linux server. Recently, I asked myself: why not host these services on Google Cloud Run? Cloud Run offers a free tier for the first 2 million requests per month, but if I leave an instance running (with a minimum instance count), it costs around ₹200–₹500 monthly—something I&amp;rsquo;ve paid before. The problem is cold-start latency: a traditional Spring Boot/Reactor application can take over 15 seconds to start. My users will never wait that long. Once a Cloud Run instance starts, it stays alive for about 15 minutes of inactivity before shutting down. We can’t force users to endure a 15-second delay on first request.&lt;/p&gt;
+&lt;p&gt;TL;DR — A &lt;strong&gt;Spring WebFlux&lt;/strong&gt; app compiled with &lt;strong&gt;GraalVM native-image&lt;/strong&gt;:
+• cold-starts in ≈ 100 ms&lt;br /&gt;
+• uses ≈ 90 MB RSS&lt;br /&gt;
+• when deployed on Cloud Run behind Firebase Hosting, serves up to &lt;strong&gt;2 million requests/month for free&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Below you’ll find the why-and-how, plus comparisons with Quarkus &amp;amp; Micronaut.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;why-care-about-cold-starts&#34;&gt;Why Care About Cold-Starts?&lt;/h2&gt;
+&lt;p&gt;“If my Spring service gets only 10 000 requests a month, do I really need to pay for a min-instance on Cloud Run?”&lt;/p&gt;
+&lt;p&gt;Answer: No. Even if each cold-start lasts 5 s, that’s only &lt;em&gt;125 vCPU-s&lt;/em&gt; and &lt;em&gt;250 GiB-s&lt;/em&gt;, which is well below the free monthly quotas of 180 k vCPU-s and 360 k GiB-s. But latency matters for user-facing APIs: a 3–5 s delay is acceptable for CRON jobs, not for UI interactions. Enter &lt;strong&gt;GraalVM Native Image&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;spring-boot-3-native-the-easy-path&#34;&gt;Spring Boot 3 Native (the Easy Path)&lt;/h2&gt;
+&lt;p&gt;With Spring Boot 3.4.x and the GraalVM build tools plugin, creating a native image is nearly zero-effort:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# build.gradle.kts snippet
+plugins {
+id(&amp;quot;org.springframework.boot&amp;quot;) version &amp;quot;3.4.1&amp;quot;
+id(&amp;quot;org.graalvm.buildtools.native&amp;quot;) version &amp;quot;0.10.2&amp;quot;
+}
+# build and deploy
+./gradlew clean bootBuildImage -PBP_NATIVE_IMAGE=true \
+--image-name=gcr.io/$PROJECT/webflux-native
+gcloud run deploy webflux-native \
+--image gcr.io/$PROJECT/webflux-native \
+--region us-central1 \
+--platform managed \
+--memory 512Mi \
+--min-instances 0 \
+--allow-unauthenticated
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;• Cold-start: 40–120 ms (0.25 vCPU)&lt;br /&gt;
+• Memory on Cloud Run: 70–90 MB&lt;br /&gt;
+• Code changes: none—your usual &lt;code&gt;@RestController&lt;/code&gt;, &lt;code&gt;Mono&lt;/code&gt;, &lt;code&gt;Flux&lt;/code&gt;, etc.&lt;/p&gt;
+&lt;p&gt;The Spring Boot plugin runs the Ahead-Of-Time (AOT) engine, generates reflection hints automatically, and hands them to GraalVM. No manual JSON is required.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;quarkus-vs-micronaut-vs-spring-boot-native&#34;&gt;Quarkus vs Micronaut vs Spring Boot Native&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Framework&lt;/th&gt;
+&lt;th&gt;Native Image Size&lt;/th&gt;
+&lt;th&gt;Cold-start (0.25 vCPU)&lt;/th&gt;
+&lt;th&gt;DI Model&lt;/th&gt;
+&lt;th&gt;Reactive API&lt;/th&gt;
+&lt;th&gt;Migration Effort&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Boot 3 Native&lt;/td&gt;
+&lt;td&gt;70–85 MB&lt;/td&gt;
+&lt;td&gt;40–120 ms&lt;/td&gt;
+&lt;td&gt;Spring DI&lt;/td&gt;
+&lt;td&gt;Reactor (Mono/Flux)&lt;/td&gt;
+&lt;td&gt;★☆☆☆☆&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Quarkus 3&lt;/td&gt;
+&lt;td&gt;45–60 MB&lt;/td&gt;
+&lt;td&gt;25–80 ms&lt;/td&gt;
+&lt;td&gt;CDI&lt;/td&gt;
+&lt;td&gt;Mutiny / Vert.x&lt;/td&gt;
+&lt;td&gt;★★★★☆&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Micronaut 4&lt;/td&gt;
+&lt;td&gt;45–55 MB&lt;/td&gt;
+&lt;td&gt;20–60 ms&lt;/td&gt;
+&lt;td&gt;Compile-time DI&lt;/td&gt;
+&lt;td&gt;Reactor, RxJava&lt;/td&gt;
+&lt;td&gt;★★★☆☆&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Since my code already uses WebFlux, Spring Boot Native was a five-minute flip. The others are powerful but require annotation and API rewrites.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;cost-breakdown&#34;&gt;Cost Breakdown&lt;/h2&gt;
+&lt;p&gt;• Requests: first 2 million/month free (then \$0.40/M)&lt;br /&gt;
+• CPU: first 180 000 vCPU-s/month free&lt;br /&gt;
+• Memory: first 360 000 GiB-s/month free&lt;br /&gt;
+• Idle min-instance: \$0.0000025/vCPU-s + \$0.0000025/GiB-s&lt;br /&gt;
+• Egress: first 1 GB free&lt;/p&gt;
+&lt;p&gt;Example:&lt;br /&gt;
+10 000 requests × 300 ms active ≈ 3 000 s total CPU time → ~63 000 free units → cost = \$0.00.&lt;/p&gt;
+&lt;p&gt;Keeping one min-instance warm (0.25 vCPU / 512 MiB) costs ≈\$3.50/month—still trivial compared to user-facing latency improvements.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;custom-domain-binding&#34;&gt;Custom Domain Binding&lt;/h2&gt;
+&lt;p&gt;I bound my service to a custom domain in Cloud Run—a new feature available in the &lt;code&gt;us-central1&lt;/code&gt; region. DNS setup was straightforward, and Cloud Run automatically provisions an SSL certificate.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;using-graalvm-for-my-existing-app&#34;&gt;Using GraalVM for My Existing App&lt;/h2&gt;
+&lt;p&gt;I already have a mature Spring WebFlux application, so the GraalVM native-image path is the simplest. I chose GraalVM Community Edition 21:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Install GraalVM JDK 21 and the &lt;code&gt;native-image&lt;/code&gt; component (or rely on Paketo buildpacks).&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Add the &lt;code&gt;org.graalvm.buildtools.native&lt;/code&gt; plugin to &lt;code&gt;build.gradle&lt;/code&gt;.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Run:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;./gradlew clean bootBuildImage \
+-Pprofile=cloudrun \
+--no-daemon
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Deploy with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;gcloud run deploy my-service \
+--image gcr.io/$PROJECT/my-service:latest \
+--region us-central1 \
+--allow-unauthenticated \
+--min-instances=0
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;hiccup-runtime-hints-for-reflection&#34;&gt;Hiccup: Runtime Hints for Reflection&lt;/h3&gt;
+&lt;p&gt;GraalVM performs aggressive tree-shaking and needs explicit hints for any reflection usage. In my case, I use &lt;code&gt;jjwt&lt;/code&gt; for JWT handling. Without hints, the native binary would fail at runtime, although development mode wouldn’t show errors. I provided a small registrar:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;class JjwtRuntimeHints implements RuntimeHintsRegistrar {
+private static final Class&amp;lt;?&amp;gt;[] JJWT_TYPES = {
+DefaultJwtParser.class,
+DefaultClaimsBuilder.class,
+StandardSecureDigestAlgorithms.class,
+StandardKeyOperations.class,
+SignatureAlgorithm.class,
+StandardEncryptionAlgorithms.class,
+StandardKeyAlgorithms.class,
+StandardCompressionAlgorithms.class,
+KeysBridge.class
+};
+@Override
+public void registerHints(RuntimeHints hints, ClassLoader cl) {
+for (Class&amp;lt;?&amp;gt; type : JJWT_TYPES) {
+hints.reflection().registerType(
+type,
+MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS,
+MemberCategory.INVOKE_PUBLIC_METHODS,
+MemberCategory.DECLARED_FIELDS
+);
+}
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Just enough to satisfy &lt;code&gt;io.jsonwebtoken&lt;/code&gt; internals—they get scanned at native-image build time.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;final-artifact-sizes-and-cold-start&#34;&gt;Final Artifact Sizes and Cold-Start&lt;/h2&gt;
+&lt;p&gt;• Docker image: 109 MB raw&lt;br /&gt;
+• Compressed in registry: 76 MB&lt;br /&gt;
+• Cold-start observed: 0.603 ms (including initial PostgreSQL connection to a remote host)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/april-2025/artifactory-size.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;//bluepie.in/images/posts/april-2025/startuptime.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;ci-cd-github-actions-workflow&#34;&gt;CI/CD: GitHub Actions Workflow&lt;/h2&gt;
+&lt;p&gt;I automated build &amp;amp; deploy with a GitHub workflow on every push to &lt;code&gt;main&lt;/code&gt; branch, it will also work on pull request.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;name: Build and Deploy Backend to Cloud Run
+on:
+push:
+branches: [ main ]
+paths:
+- &#39;backend/**&#39;
+- &#39;.github/workflows/backend.yml&#39;
+....
+- name: Authenticate to GCP
+uses: google-github-actions/auth@v2
+with:
+credentials_json: ${{ secrets.GCP_SA_KEY }}
+- name: Activate Service Account
+run: gcloud auth activate-service-account \
+--key-file=${{ secrets.GCP_SA_KEY }}
+....
+- name: Set up GraalVM 21
+uses: graalvm/setup-graalvm@v1
+with:
+java-version: &#39;21&#39;
+distribution: &#39;graalvm-community&#39;
+....
+- name: Build Native Image Locally
+working-directory: backend/
+run: |
+./gradlew clean bootBuildImage \
+-Pspring.profiles.active=cloudrun \
+--imageName &amp;quot;${{ steps.image_details.outputs.path }}:${{ steps.image_details.outputs.version }}&amp;quot;
+- name: Push Versioned Image
+run: docker push &amp;quot;${{ steps.image_details.outputs.path }}:${{ steps.image_details.outputs.version }}&amp;quot;
+- name: Tag &amp;amp; Push Latest
+run: |
+docker tag &amp;quot;${{ steps.image_details.outputs.path }}:${{ steps.image_details.outputs.version }}&amp;quot; \
+&amp;quot;${{ steps.image_details.outputs.path }}:latest&amp;quot;
+docker push &amp;quot;${{ steps.image_details.outputs.path }}:latest&amp;quot;
+- name: Deploy to Cloud Run
+uses: google-github-actions/deploy-cloudrun@v2
+with:
+service: opentasks-service
+region: us-central1
+...
+project_id: ${{ secrets.GCP_PROJECT_ID }}
+env_vars: |
+...
+SPRING_R2DBC_URL=${{ secrets.R2DBC_URL }}
+SPRING_R2DBC_USERNAME=${{ secrets.R2DBC_USERNAME }}
+secrets: |
+...
+SPRING_R2DBC_PASSWORD=db-pass:latest
+flags: |
+--memory=512Mi
+--min-instances=0
+--concurrency=250
+...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Explanation of key parts:&lt;br /&gt;
+• Triggers on pushes to &lt;code&gt;main&lt;/code&gt; or manual dispatch.&lt;br /&gt;
+• Authenticates with a GCP service account.&lt;br /&gt;
+• Sets up GraalVM 21 community edition.&lt;br /&gt;
+• Build the native image locally via &lt;code&gt;bootBuildImage&lt;/code&gt;.&lt;br /&gt;
+• Pushes both versioned and &lt;code&gt;latest&lt;/code&gt; tags to Artifact Registry.&lt;br /&gt;
+• Deploys to Cloud Run with zero minimum instances, custom environment variables, and resource flags.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;By combining Spring Boot 3’s native-image support with GraalVM, I reduced my service’s cold-start time from 15 seconds to under 1 second, fitting in under 100 MB of memory. This lets me use Cloud Run’s free tier without sacrificing user experience.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.spring.io/spring-boot/docs/current/reference/html/native-image.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Spring Boot Native Reference Documentation&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.graalvm.org/latest/reference-manual/native-image/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;GraalVM Native Image Guide&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://cloud.google.com/run/pricing&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Google Cloud Run Free Tier &amp;amp; Pricing&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;personal-update&#34;&gt;Personal update&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m cutting down things over the past 15 days, focusing on items that I want to puruse.. Thinking a lot.. almost everyday making it a habbit. My mind is too much cluttered and for reasons..i&amp;rsquo;ll share in future posts, future me.. how its going? did everything go well? &lt;del&gt;did you make the right choise?&lt;/del&gt; did you make peace with your choise? When I was in hometonw, frined told his dad whats going on with me since I seemed off when I visited him, had a good conversation with him.. maybe that is what I needed..? He said something that made me think.. explore your thoughts with friends/ others don&amp;rsquo;t keep it a secret.. thats how you get an idea/ improve the idea, you will get the push you need?.. I feel this is true to some extent but the other is also true.. Again future me what do you think?&lt;/p&gt;
+&lt;p&gt;In some of my free time, I&amp;rsquo;ve been playing Ghost of Tsushima, It helps me take my mind off things. The game is beautiful, taking it slow. In more ways its helping me relax and gives me a boost when I want to focus. I&amp;rsquo;m keeping it under control though, not treating it like a time sink, When I was younger, I remember.. I used to lock in and play for days, heck! the last game I got addicted on, division 2. Used to plan and play raids with people, lost touch with most people from guilds, thinking back.. my first game guild will be on from a game called Elsword.. As everyone was getting busy with life and not logging into game, we planned to disband the guild and had a last day party with everyone. we have a video of that in my old harddrive, I was back from class and I was late to the party and &amp;ldquo;Pandemonim&amp;rdquo; the guild master was waiting on me and we had a blast and it was a nice sunset.. Hopefully I can recover it and post it here.. I had fond memories from that guild. Coming back to Division 2, I constructed a huge ass essay on how its affecting my life posted it to the guild and discord servers and left it.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/april-2025/Ghost-Of-Tsushima-april-2025.mp4&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description></item><item><title>DIY RO - Water Purification</title><link>//bluepie.in/2025/03/diy-water-purification/</link><pubDate>Mon, 31 Mar 2025 22:30:39 +0000</pubDate><guid>//bluepie.in/2025/03/diy-water-purification/</guid><description>
 &lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
 &lt;p&gt;The water hardness in my home (Gobi) is around ~600 ppm. In Chennai where I live, it’s around 800 ppm (metro water). Half the people get purified water for their drinking; there is business for those who supply water, while the other half get a water-purification system installed in their homes by a vendor/company that produces it. We can build a DIY homemade purifier. It’s a new challenge, a chance to learn new things, and cheaper than buying ready-made.&lt;/p&gt;
 &lt;p&gt;Water “hardness” is simply the concentration of dissolved calcium and magnesium ions in water. It is usually expressed in mg/L or ppm as CaCO₃.&lt;br /&gt;
@@ -253,228 +474,7 @@ This shows the remineralizer is doing its job—bringing the pH back close to ne
 &lt;a href=&#34;https://cpcb.nic.in/wqm/BIS_Drinking_Water_Specification.pdf&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://cpcb.nic.in/wqm/BIS_Drinking_Water_Specification.pdf&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;personal-update&#34;&gt;Personal Update&lt;/h2&gt;
 &lt;p&gt;Feel like everything is stagnant… even though there’s small progress. If you are working for big corpora, you are just a row in an Excel sheet. The feeling resonates more and more reading trending Hacker News and things that happen around in personal experience. As for me, as always trying to make time for open source and my hobbies… in the increasing midst of responsibilities coming towards me. I also almost got into a marriage arranged by my dad, forced to go see them… the girl &amp;amp; girl’s family like me and are trying to convince me into marriage, my dad doing all his best to set this up, fighting with me, etc. The girl is good too, perfect for family, they are a distant relative, born in 2000… But there are other plans/God has other plans. ~future me reading this… what happened?&lt;/p&gt;
-&lt;p&gt;Talked to an old friend; he said he discovered a private office Wi-Fi password written on a note and has been using it secretly. That reminded me of the first time I cracked a WPA endpoint in 2015. It felt great back then. We had BSNL broadband—“unlimited” but stuck at 60 kbps. I used to combine my connection with my neighbor’s Wi-Fi for maximum speeds. Those were fun times; I even made a mod of an application that combined network connections&amp;hellip;Long story short, he reminded me of Wi-Fi hacking. When I got back home to Gobi, I brought out my old Wi-Fi packet-injecting dongle and Linux laptop to chennai. I found a couple of neighbors’ Wi-Fi networks. After shutting down my unreliable Airtel connection in Chennai, I switched to unlimited mobile data (from previous posts), so I decided to use their Wi-Fi (nobody uses wpa3.. even the new routers comes with wpa2, you can easily capture the handshake and crack it.. I used hashcat, its super fast and reliable). While on their network, I logged in to their router, checked their device list, and configured Wi-Fi settings for a longer range on 2.4 GHz by switching between 20 Hz and 40 Hz channels.. Some of the closest Wi-Fi access points are 5 GHz and offers low latency too.. By seeing the device list, I was able to mimic their device name and avoid being caught. For example: “smart-camera.”.. to be fair, I would just use them for internet..nothing more..nothing less.&lt;/p&gt;</description></item><item><title>Reducing Spring Reactor Java Project Cold Start to Milliseconds</title><link>//bluepie.in/2025/03/reducing-spring-reactor-java-project-cold-start-to-milliseconds/</link><pubDate>Mon, 31 Mar 2025 22:30:39 +0000</pubDate><guid>//bluepie.in/2025/03/reducing-spring-reactor-java-project-cold-start-to-milliseconds/</guid><description>
-&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
-&lt;p&gt;I run several backend services built on different frameworks and languages, One of them being Spring Boot and Spring Reactor on my own Linux server. Recently, I asked myself: why not host these services on Google Cloud Run? Cloud Run offers a free tier for the first 2 million requests per month, but if I leave an instance running (with a minimum instance count), it costs around ₹200–₹500 monthly—something I&amp;rsquo;ve paid before. The problem is cold-start latency: a traditional Spring Boot/Reactor application can take over 15 seconds to start. My users will never wait that long. Once a Cloud Run instance starts, it stays alive for about 15 minutes of inactivity before shutting down. We can’t force users to endure a 15-second delay on first request.&lt;/p&gt;
-&lt;p&gt;TL;DR — A &lt;strong&gt;Spring WebFlux&lt;/strong&gt; app compiled with &lt;strong&gt;GraalVM native-image&lt;/strong&gt;:
-• cold-starts in ≈ 100 ms&lt;br /&gt;
-• uses ≈ 90 MB RSS&lt;br /&gt;
-• when deployed on Cloud Run behind Firebase Hosting, serves up to &lt;strong&gt;2 million requests/month for free&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Below you’ll find the why-and-how, plus comparisons with Quarkus &amp;amp; Micronaut.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;why-care-about-cold-starts&#34;&gt;Why Care About Cold-Starts?&lt;/h2&gt;
-&lt;p&gt;“If my Spring service gets only 10 000 requests a month, do I really need to pay for a min-instance on Cloud Run?”&lt;/p&gt;
-&lt;p&gt;Answer: No. Even if each cold-start lasts 5 s, that’s only &lt;em&gt;125 vCPU-s&lt;/em&gt; and &lt;em&gt;250 GiB-s&lt;/em&gt;, which is well below the free monthly quotas of 180 k vCPU-s and 360 k GiB-s. But latency matters for user-facing APIs: a 3–5 s delay is acceptable for CRON jobs, not for UI interactions. Enter &lt;strong&gt;GraalVM Native Image&lt;/strong&gt;.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;spring-boot-3-native-the-easy-path&#34;&gt;Spring Boot 3 Native (the Easy Path)&lt;/h2&gt;
-&lt;p&gt;With Spring Boot 3.4.x and the GraalVM build tools plugin, creating a native image is nearly zero-effort:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# build.gradle.kts snippet
-plugins {
-id(&amp;quot;org.springframework.boot&amp;quot;) version &amp;quot;3.4.1&amp;quot;
-id(&amp;quot;org.graalvm.buildtools.native&amp;quot;) version &amp;quot;0.10.2&amp;quot;
-}
-# build and deploy
-./gradlew clean bootBuildImage -PBP_NATIVE_IMAGE=true \
---image-name=gcr.io/$PROJECT/webflux-native
-gcloud run deploy webflux-native \
---image gcr.io/$PROJECT/webflux-native \
---region us-central1 \
---platform managed \
---memory 512Mi \
---min-instances 0 \
---allow-unauthenticated
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;• Cold-start: 40–120 ms (0.25 vCPU)&lt;br /&gt;
-• Memory on Cloud Run: 70–90 MB&lt;br /&gt;
-• Code changes: none—your usual &lt;code&gt;@RestController&lt;/code&gt;, &lt;code&gt;Mono&lt;/code&gt;, &lt;code&gt;Flux&lt;/code&gt;, etc.&lt;/p&gt;
-&lt;p&gt;The Spring Boot plugin runs the Ahead-Of-Time (AOT) engine, generates reflection hints automatically, and hands them to GraalVM. No manual JSON is required.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;quarkus-vs-micronaut-vs-spring-boot-native&#34;&gt;Quarkus vs Micronaut vs Spring Boot Native&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Framework&lt;/th&gt;
-&lt;th&gt;Native Image Size&lt;/th&gt;
-&lt;th&gt;Cold-start (0.25 vCPU)&lt;/th&gt;
-&lt;th&gt;DI Model&lt;/th&gt;
-&lt;th&gt;Reactive API&lt;/th&gt;
-&lt;th&gt;Migration Effort&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Spring Boot 3 Native&lt;/td&gt;
-&lt;td&gt;70–85 MB&lt;/td&gt;
-&lt;td&gt;40–120 ms&lt;/td&gt;
-&lt;td&gt;Spring DI&lt;/td&gt;
-&lt;td&gt;Reactor (Mono/Flux)&lt;/td&gt;
-&lt;td&gt;★☆☆☆☆&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Quarkus 3&lt;/td&gt;
-&lt;td&gt;45–60 MB&lt;/td&gt;
-&lt;td&gt;25–80 ms&lt;/td&gt;
-&lt;td&gt;CDI&lt;/td&gt;
-&lt;td&gt;Mutiny / Vert.x&lt;/td&gt;
-&lt;td&gt;★★★★☆&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Micronaut 4&lt;/td&gt;
-&lt;td&gt;45–55 MB&lt;/td&gt;
-&lt;td&gt;20–60 ms&lt;/td&gt;
-&lt;td&gt;Compile-time DI&lt;/td&gt;
-&lt;td&gt;Reactor, RxJava&lt;/td&gt;
-&lt;td&gt;★★★☆☆&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;Since my code already uses WebFlux, Spring Boot Native was a five-minute flip. The others are powerful but require annotation and API rewrites.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;cost-breakdown&#34;&gt;Cost Breakdown&lt;/h2&gt;
-&lt;p&gt;• Requests: first 2 million/month free (then \$0.40/M)&lt;br /&gt;
-• CPU: first 180 000 vCPU-s/month free&lt;br /&gt;
-• Memory: first 360 000 GiB-s/month free&lt;br /&gt;
-• Idle min-instance: \$0.0000025/vCPU-s + \$0.0000025/GiB-s&lt;br /&gt;
-• Egress: first 1 GB free&lt;/p&gt;
-&lt;p&gt;Example:&lt;br /&gt;
-10 000 requests × 300 ms active ≈ 3 000 s total CPU time → ~63 000 free units → cost = \$0.00.&lt;/p&gt;
-&lt;p&gt;Keeping one min-instance warm (0.25 vCPU / 512 MiB) costs ≈\$3.50/month—still trivial compared to user-facing latency improvements.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;custom-domain-binding&#34;&gt;Custom Domain Binding&lt;/h2&gt;
-&lt;p&gt;I bound my service to a custom domain in Cloud Run—a new feature available in the &lt;code&gt;us-central1&lt;/code&gt; region. DNS setup was straightforward, and Cloud Run automatically provisions an SSL certificate.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;using-graalvm-for-my-existing-app&#34;&gt;Using GraalVM for My Existing App&lt;/h2&gt;
-&lt;p&gt;I already have a mature Spring WebFlux application, so the GraalVM native-image path is the simplest. I chose GraalVM Community Edition 21:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Install GraalVM JDK 21 and the &lt;code&gt;native-image&lt;/code&gt; component (or rely on Paketo buildpacks).&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Add the &lt;code&gt;org.graalvm.buildtools.native&lt;/code&gt; plugin to &lt;code&gt;build.gradle&lt;/code&gt;.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Run:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;./gradlew clean bootBuildImage \
--Pprofile=cloudrun \
---no-daemon
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Deploy with:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;gcloud run deploy my-service \
---image gcr.io/$PROJECT/my-service:latest \
---region us-central1 \
---allow-unauthenticated \
---min-instances=0
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;hiccup-runtime-hints-for-reflection&#34;&gt;Hiccup: Runtime Hints for Reflection&lt;/h3&gt;
-&lt;p&gt;GraalVM performs aggressive tree-shaking and needs explicit hints for any reflection usage. In my case, I use &lt;code&gt;jjwt&lt;/code&gt; for JWT handling. Without hints, the native binary would fail at runtime, although development mode wouldn’t show errors. I provided a small registrar:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;class JjwtRuntimeHints implements RuntimeHintsRegistrar {
-private static final Class&amp;lt;?&amp;gt;[] JJWT_TYPES = {
-DefaultJwtParser.class,
-DefaultClaimsBuilder.class,
-StandardSecureDigestAlgorithms.class,
-StandardKeyOperations.class,
-SignatureAlgorithm.class,
-StandardEncryptionAlgorithms.class,
-StandardKeyAlgorithms.class,
-StandardCompressionAlgorithms.class,
-KeysBridge.class
-};
-@Override
-public void registerHints(RuntimeHints hints, ClassLoader cl) {
-for (Class&amp;lt;?&amp;gt; type : JJWT_TYPES) {
-hints.reflection().registerType(
-type,
-MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS,
-MemberCategory.INVOKE_PUBLIC_METHODS,
-MemberCategory.DECLARED_FIELDS
-);
-}
-}
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Just enough to satisfy &lt;code&gt;io.jsonwebtoken&lt;/code&gt; internals—they get scanned at native-image build time.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;final-artifact-sizes-and-cold-start&#34;&gt;Final Artifact Sizes and Cold-Start&lt;/h2&gt;
-&lt;p&gt;• Docker image: 109 MB raw&lt;br /&gt;
-• Compressed in registry: 76 MB&lt;br /&gt;
-• Cold-start observed: 0.603 ms (including initial PostgreSQL connection to a remote host)&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/april-2025/artifactory-size.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
-&lt;img src=&#34;//bluepie.in/images/posts/april-2025/startuptime.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;ci-cd-github-actions-workflow&#34;&gt;CI/CD: GitHub Actions Workflow&lt;/h2&gt;
-&lt;p&gt;I automated build &amp;amp; deploy with a GitHub workflow on every push to &lt;code&gt;main&lt;/code&gt; branch, it will also work on pull request.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;name: Build and Deploy Backend to Cloud Run
-on:
-push:
-branches: [ main ]
-paths:
-- &#39;backend/**&#39;
-- &#39;.github/workflows/backend.yml&#39;
-....
-- name: Authenticate to GCP
-uses: google-github-actions/auth@v2
-with:
-credentials_json: ${{ secrets.GCP_SA_KEY }}
-- name: Activate Service Account
-run: gcloud auth activate-service-account \
---key-file=${{ secrets.GCP_SA_KEY }}
-....
-- name: Set up GraalVM 21
-uses: graalvm/setup-graalvm@v1
-with:
-java-version: &#39;21&#39;
-distribution: &#39;graalvm-community&#39;
-....
-- name: Build Native Image Locally
-working-directory: backend/
-run: |
-./gradlew clean bootBuildImage \
--Pspring.profiles.active=cloudrun \
---imageName &amp;quot;${{ steps.image_details.outputs.path }}:${{ steps.image_details.outputs.version }}&amp;quot;
-- name: Push Versioned Image
-run: docker push &amp;quot;${{ steps.image_details.outputs.path }}:${{ steps.image_details.outputs.version }}&amp;quot;
-- name: Tag &amp;amp; Push Latest
-run: |
-docker tag &amp;quot;${{ steps.image_details.outputs.path }}:${{ steps.image_details.outputs.version }}&amp;quot; \
-&amp;quot;${{ steps.image_details.outputs.path }}:latest&amp;quot;
-docker push &amp;quot;${{ steps.image_details.outputs.path }}:latest&amp;quot;
-- name: Deploy to Cloud Run
-uses: google-github-actions/deploy-cloudrun@v2
-with:
-service: opentasks-service
-region: us-central1
-...
-project_id: ${{ secrets.GCP_PROJECT_ID }}
-env_vars: |
-...
-SPRING_R2DBC_URL=${{ secrets.R2DBC_URL }}
-SPRING_R2DBC_USERNAME=${{ secrets.R2DBC_USERNAME }}
-secrets: |
-...
-SPRING_R2DBC_PASSWORD=db-pass:latest
-flags: |
---memory=512Mi
---min-instances=0
---concurrency=250
-...
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Explanation of key parts:&lt;br /&gt;
-• Triggers on pushes to &lt;code&gt;main&lt;/code&gt; or manual dispatch.&lt;br /&gt;
-• Authenticates with a GCP service account.&lt;br /&gt;
-• Sets up GraalVM 21 community edition.&lt;br /&gt;
-• Build the native image locally via &lt;code&gt;bootBuildImage&lt;/code&gt;.&lt;br /&gt;
-• Pushes both versioned and &lt;code&gt;latest&lt;/code&gt; tags to Artifact Registry.&lt;br /&gt;
-• Deploys to Cloud Run with zero minimum instances, custom environment variables, and resource flags.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;By combining Spring Boot 3’s native-image support with GraalVM, I reduced my service’s cold-start time from 15 seconds to under 1 second, fitting in under 100 MB of memory. This lets me use Cloud Run’s free tier without sacrificing user experience.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://docs.spring.io/spring-boot/docs/current/reference/html/native-image.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Spring Boot Native Reference Documentation&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.graalvm.org/latest/reference-manual/native-image/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;GraalVM Native Image Guide&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://cloud.google.com/run/pricing&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Google Cloud Run Free Tier &amp;amp; Pricing&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;personal-update&#34;&gt;Personal update&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;m cutting down things over the past 15 days, focusing on items that I want to puruse.. Thinking a lot.. almost everyday making it a habbit. My mind is too much cluttered and for reasons..i&amp;rsquo;ll share in future posts, future me.. how its going? did everything go well? &lt;del&gt;did you make the right choise?&lt;/del&gt; did you make peace with your choise? When I was in hometonw, frined told his dad whats going on with me since I seemed off when I visited him, had a good conversation with him.. maybe that is what I needed..? He said something that made me think.. explore your thoughts with friends/ others don&amp;rsquo;t keep it a secret.. thats how you get an idea/ improve the idea, you will get the push you need?.. I feel this is true to some extent but the other is also true.. Again future me what do you think?&lt;/p&gt;
-&lt;p&gt;In some of my free time, I&amp;rsquo;ve been playing Ghost of Tsushima, It helps me take my mind off things. The game is beautiful, taking it slow. In more ways its helping me relax and gives me a boost when I want to focus. I&amp;rsquo;m keeping it under control though, not treating it like a time sink, When I was younger, I remember.. I used to lock in and play for days, heck! the last game I got addicted on, division 2. Used to plan and play raids with people, lost touch with most people from guilds, thinking back.. my first game guild will be on from a game called Elsword.. As everyone was getting busy with life and not logging into game, we planned to disband the guild and had a last day party with everyone. we have a video of that in my old harddrive, I was back from class and I was late to the party and &amp;ldquo;Pandemonim&amp;rdquo; the guild master was waiting on me and we had a blast and it was a nice sunset.. Hopefully I can recover it and post it here.. I had fond memories from that guild. Coming back to Division 2, I constructed a huge ass essay on how its affecting my life posted it to the guild and discord servers and left it.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/april-2025/Ghost-Of-Tsushima-april-2025.mp4&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description></item><item><title>JWT Authentication with Refresh Tokens in Spring WebFlux</title><link>//bluepie.in/2025/02/jwt-auth/</link><pubDate>Sun, 02 Feb 2025 16:10:12 +0000</pubDate><guid>//bluepie.in/2025/02/jwt-auth/</guid><description>
+&lt;p&gt;Talked to an old friend; he said he discovered a private office Wi-Fi password written on a note and has been using it secretly. That reminded me of the first time I cracked a WPA endpoint in 2015. It felt great back then. We had BSNL broadband—“unlimited” but stuck at 60 kbps. I used to combine my connection with my neighbor’s Wi-Fi for maximum speeds. Those were fun times; I even made a mod of an application that combined network connections&amp;hellip;Long story short, he reminded me of Wi-Fi hacking. When I got back home to Gobi, I brought out my old Wi-Fi packet-injecting dongle and Linux laptop to chennai. I found a couple of neighbors’ Wi-Fi networks. After shutting down my unreliable Airtel connection in Chennai, I switched to unlimited mobile data (from previous posts), so I decided to use their Wi-Fi (nobody uses wpa3.. even the new routers comes with wpa2, you can easily capture the handshake and crack it.. I used hashcat, its super fast and reliable). While on their network, I logged in to their router, checked their device list, and configured Wi-Fi settings for a longer range on 2.4 GHz by switching between 20 Hz and 40 Hz channels.. Some of the closest Wi-Fi access points are 5 GHz and offers low latency too.. By seeing the device list, I was able to mimic their device name and avoid being caught. For example: “smart-camera.”.. to be fair, I would just use them for internet..nothing more..nothing less.&lt;/p&gt;</description></item><item><title>JWT Authentication with Refresh Tokens in Spring WebFlux</title><link>//bluepie.in/2025/02/jwt-auth/</link><pubDate>Sun, 02 Feb 2025 16:10:12 +0000</pubDate><guid>//bluepie.in/2025/02/jwt-auth/</guid><description>
 &lt;h3 id=&#34;introduction&#34;&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Summary:&lt;/strong&gt; I’m documenting this so that I can refer back to it in the future. Recently, I’ve been working with Spring WebFlux, and although I’ve previously used JWTs, this is my first time writing about them. I often forget the implementation details when switching between languages or frameworks, so I’m recording this while it’s still fresh in my mind.&lt;/p&gt;
