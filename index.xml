@@ -1,4 +1,52 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 27 Apr 2025 10:18:56 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Sub-Second Serverless Spring Boot/Reactor: Millisecond Cold-Starts via GraalVM</title><link>//bluepie.in/2025/04/reducing-spring-reactor-java-project-cold-start-to-milliseconds/</link><pubDate>Sun, 27 Apr 2025 10:18:56 +0000</pubDate><guid>//bluepie.in/2025/04/reducing-spring-reactor-java-project-cold-start-to-milliseconds/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 25 May 2025 21:22:39 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>MVP vs SLC - Fixing Duplicate Tabs</title><link>//bluepie.in/2025/05/fixing-duplicate-tabs/</link><pubDate>Sun, 25 May 2025 21:22:39 +0000</pubDate><guid>//bluepie.in/2025/05/fixing-duplicate-tabs/</guid><description>
+&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
+&lt;p&gt;I’ve been running into duplicate-tab problems across both my personal and office browsers. I needed a simple application that can detect duplicates and show a minimal UI to merge, close, or keep them.&lt;/p&gt;
+&lt;h2 id=&#34;mvp-vs-slc&#34;&gt;MVP vs SLC&lt;/h2&gt;
+&lt;p&gt;I’ve followed the MVP approach for years, but this time I went with SLC: &lt;strong&gt;Simple, Lovable, Complete&lt;/strong&gt;. Rather than shipping a bare-bones, bug-ridden MVP, I wanted something small and meaningful that people genuinely love—and that feels complete out of the box.&lt;/p&gt;
+&lt;p&gt;As the main user of this tool, my core requirement was clear&amp;hellip; whenever I open a tab that already exists—no matter which window(same profile, different profile&amp;hellip;etc) it’s in—I want to be notified immediately, so I can either jump to the original or keep both if I really need two copies.&lt;/p&gt;
+&lt;h2 id=&#34;designing-the-initial-version&#34;&gt;Designing the initial version&lt;/h2&gt;
+&lt;p&gt;For the first release, I kept everything ultra-lightweight (under 30 KB) and focused on a few key flows:&lt;/p&gt;
+&lt;p&gt;• Duplicate-Tab Detection&lt;br /&gt;
+– I scan all open tabs using the Chrome Tabs API.&lt;br /&gt;
+– If the current tab matches an existing URL, I show a toast that lets you &lt;strong&gt;Merge (Switch &amp;amp; Close)&lt;/strong&gt; or &lt;strong&gt;Keep &amp;amp; Go Back&lt;/strong&gt;.&lt;br /&gt;
+– Dismissing the toast with the X still updates a badge counter showing your total duplicates.&lt;/p&gt;
+&lt;p&gt;• Badge &amp;amp; Popup Panel&lt;br /&gt;
+– The badge counter turns red when duplicates exist.&lt;br /&gt;
+– Clicking the extension icon opens a popup listing every open tab.&lt;br /&gt;
+– From that panel you can &lt;strong&gt;Close&lt;/strong&gt;, &lt;strong&gt;Save &amp;amp; Close&lt;/strong&gt;, or &lt;strong&gt;Save all &amp;amp; Close&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;• Session Save / Restore&lt;br /&gt;
+– One-click &lt;strong&gt;Save all tabs &amp;amp; Close&lt;/strong&gt; to snapshot your session.&lt;br /&gt;
+– Later, press &lt;strong&gt;Reopen all tabs&lt;/strong&gt; to bring everything back.&lt;/p&gt;
+&lt;p&gt;• Import / Export / Share&lt;br /&gt;
+– Export saved sessions to an HTML file.&lt;br /&gt;
+– Import them back on any machine and merge with your current tabs.&lt;/p&gt;
+&lt;p&gt;• Duplicate Tabs Summary&lt;br /&gt;
+– A separate block at the top of the popup shows all duplicate groups so you can close them in bulk.&lt;/p&gt;
+&lt;h2 id=&#34;next-version-v1-3-0-and-beyond&#34;&gt;Next version: v1.3.0 and beyond&lt;/h2&gt;
+&lt;h3 id=&#34;v1-3-0-highlights&#34;&gt;v1.3.0 Highlights&lt;/h3&gt;
+&lt;p&gt;• Clickable Tabs&lt;br /&gt;
+– You can now click any tab in the extension UI to navigate directly.&lt;br /&gt;
+• URL Handling&lt;br /&gt;
+– Fixed duplicate detection for URLs lacking &lt;code&gt;http://&lt;/code&gt; or &lt;code&gt;https://&lt;/code&gt;.&lt;br /&gt;
+• Group Counts&lt;br /&gt;
+– Every tab group shows a count badge.&lt;br /&gt;
+• Fullscreen Dashboard Link&lt;br /&gt;
+– “Open in fullscreen-mode” in the popup reuses an existing fullscreen window.&lt;br /&gt;
+• Save All &amp;amp; Close / Restore All&lt;br /&gt;
+– Quickly snapshot or restore entire sessions.&lt;br /&gt;
+• HTML Import / Export&lt;br /&gt;
+– Share sessions as HTML files.&lt;/p&gt;
+&lt;h2 id=&#34;relevant-links&#34;&gt;Relevant links&lt;/h2&gt;
+&lt;p&gt;Source code:&lt;br /&gt;
+&lt;a href=&#34;https://github.com/aghontpi/Tab-Options&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/aghontpi/Tab-Options&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Chrome Web Store:&lt;br /&gt;
+&lt;a href=&#34;https://chromewebstore.google.com/detail/tab-options/kafdoidjnnbjciplpkhhfjoefkpfbplj&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://chromewebstore.google.com/detail/tab-options/kafdoidjnnbjciplpkhhfjoefkpfbplj&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;personal-update&#34;&gt;Personal update&lt;/h2&gt;
+&lt;p&gt;Sometimes small things you do, doesn&amp;rsquo;t feel like a big thing.. but it does have a significant impact on our lives. The feeling of why am I even doing this..like your brain is somehwere else but still gotta push through everyday..if its study/ work..etc&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To a lost soul&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;When its hard, try foucs on things and writing. Read the book I got, thats all I got now, as im writing now at 2:01am. Its tough, My left eye twitching, everytime during the day when my eye twitch (which ______ said might be because of stressed about thinking about something, but I think it might be because you are going through something), I think you are going through the same stress &amp;amp; punishment but about 1000x more.&lt;/p&gt;</description></item><item><title>Sub-Second Serverless Spring Boot/Reactor: Millisecond Cold-Starts via GraalVM</title><link>//bluepie.in/2025/04/reducing-spring-reactor-java-project-cold-start-to-milliseconds/</link><pubDate>Sun, 27 Apr 2025 10:18:56 +0000</pubDate><guid>//bluepie.in/2025/04/reducing-spring-reactor-java-project-cold-start-to-milliseconds/</guid><description>
 &lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
 &lt;p&gt;I run several backend services built on different frameworks and languages, One of them being Spring Boot and Spring Reactor on my own Linux server. Recently, I asked myself: why not host these services on Google Cloud Run? Cloud Run offers a free tier for the first 2 million requests per month, but if I leave an instance running (with a minimum instance count), it costs around ₹200–₹500 monthly—something I&amp;rsquo;ve paid before. The problem is cold-start latency: a traditional Spring Boot/Reactor application can take over 15 seconds to start. My users will never wait that long. Once a Cloud Run instance starts, it stays alive for about 15 minutes of inactivity before shutting down. We can’t force users to endure a 15-second delay on first request.&lt;/p&gt;
 &lt;p&gt;TL;DR — A &lt;strong&gt;Spring WebFlux&lt;/strong&gt; app compiled with &lt;strong&gt;GraalVM native-image&lt;/strong&gt;:
@@ -1773,184 +1821,4 @@ path: app/build/outputs/apk/debug/app-debug.apk
 &lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/android-ci/build-in-action.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;This enabled me to not care about dev-debug builds entirely and focus just on development, which is a great time save.&lt;/p&gt;
-&lt;p&gt;In future, I would create a separate releases named &lt;code&gt;nightly&lt;/code&gt;, where the dev branch is built daily and these builds will be updated there.&lt;/p&gt;</description></item><item><title>Updating Dns Servers for Ads and Tracking Protection in 2023</title><link>//bluepie.in/2023/01/updating-dns-servers-for-ads-and-tracking-protection-in-2023/</link><pubDate>Sat, 28 Jan 2023 06:02:22 +0000</pubDate><guid>//bluepie.in/2023/01/updating-dns-servers-for-ads-and-tracking-protection-in-2023/</guid><description>
-&lt;h2 id=&#34;upgrading-pi-hole&#34;&gt;Upgrading PI hole&lt;/h2&gt;
-&lt;p&gt;Once every year, I do server maintainence (during Dec-Jan), this year I updated the our dns server from &lt;a href=&#34;https://github.com/pi-hole/pi-hole&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;pi-hole&lt;/a&gt; to &lt;a href=&#34;https://github.com/AdguardTeam/AdGuardHome&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;AGH&lt;/a&gt; (both are open source projects..) Just wanted to try an alternative, after using it for a while, the UI &amp;amp; Features on AGH is much better than pi-hole.&lt;/p&gt;
-&lt;h2 id=&#34;why-a-custom-dns-server&#34;&gt;Why a custom dns server?&lt;/h2&gt;
-&lt;p&gt;All websites/apis are just ip addresses (just numbers). Nameservers maintains a mapping of the domain names to the ip addresses, so when we make a request, we get the appropriate ip address.&lt;/p&gt;
-&lt;p&gt;The idea is simple, by running our own dns server, we can prevent our network providers spying on us, on top of that we can intercept &amp;amp; block all ads &amp;amp; trackers.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;I get ads, but what are Trackers?&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Similar to ads, ever been in a situation where you searched for something in flipkart/amazon.. then later you find the ad to buy the product elsewhere, this is because of trackers.. trackers are worse because they collect your data, the same way we block ads, trackers should be blocked.&lt;/p&gt;
-&lt;h2 id=&#34;how-this-can-help-us-with-ad-trackers-blocking&#34;&gt;How this can help us with ad &amp;amp; trackers blocking?&lt;/h2&gt;
-&lt;p&gt;Can you make a guess how serving ads in app/websites work? they are from a server too, that server has a domain linked to it.. can you see where I am are going with this?&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;good content -&amp;gt; respond with ip address
-ad/tracker -&amp;gt; respond with 0.0.0.0
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Not just blocking ads &amp;amp; tracking, you can do much more.. there are other things that you can do in dns level.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;block windows tracking or updates in windows machines&lt;/li&gt;
-&lt;li&gt;blocking spyware&lt;/li&gt;
-&lt;li&gt;disabling websites for a particular client (ex: blocking instagram on a your phone alone)&lt;/li&gt;
-&lt;li&gt;if you don&amp;rsquo;t want to keep tracking of your watch history in youtube
-and many more.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;aren-t-there-other-solutions-to-blocking-trackers-and-ads&#34;&gt;Aren&amp;rsquo;t there other solutions to blocking trackers and ads?&lt;/h3&gt;
-&lt;p&gt;yes but those come with a disadvantage,&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Browser extensions.. only applies to browsers (system wide, everywhere and all applications)&lt;/li&gt;
-&lt;li&gt;Android, Iphone (separate apps that use vpn locally to achieve this) - Drains battery alot&lt;/li&gt;
-&lt;li&gt;Rooting android, Jailbreaking ios.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;so this does not require any of that.. no addons, no extra apps, no root, no jailbreak.&lt;/p&gt;
-&lt;h2 id=&#34;dns-over-tls&#34;&gt;DNS Over TLS&lt;/h2&gt;
-&lt;p&gt;Introduced in 2016, main idea is wrapping DNS requests and responses via TLS (Transport Layer Security), ensures observer will not be able to track or tamper the contents of the DNS requests.&lt;/p&gt;
-&lt;!-- ssl - secure socket layer --&gt;
-&lt;!-- tls - tranport layer security, offers end to end security. --&gt;
-&lt;p&gt;Shortly after, android introduced DOT as &amp;ldquo;Private DNS&amp;rdquo; on Android 9 &amp;amp; up, we will be using this feature in our devices to block all ADS &amp;amp; Trackers.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/DOT-noMITM.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;client -&amp;gt; dot server, dot server -&amp;gt; queries the dns.. (we forward our request to serveral dns servers, load-balancers)&lt;/p&gt;
-&lt;p&gt;Traditional DNS vs DOT&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/traditional-vs-dot.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;how-do-we-do-it&#34;&gt;How do we do it?&lt;/h2&gt;
-&lt;p&gt;We use an existing open source dns resolver.&lt;/p&gt;
-&lt;p&gt;One options is to go with &lt;a href=&#34;https://github.com/pi-hole/pi-hole&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;PI Hole&lt;/a&gt;, it is a community favourite open source project that has all the bells and whistles for blocking ads and trackers integrated inside it.&lt;/p&gt;
-&lt;p&gt;We will be using &lt;a href=&#34;https://github.com/AdguardTeam/AdGuardHome&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;AG Home&lt;/a&gt;, it is also a popular open source project, which is community maintained. up until lastmonth (dec 2022) I was using PI-hole, switched to AG-Home, just to try something new.&lt;/p&gt;
-&lt;h3 id=&#34;installing&#34;&gt;Installing&lt;/h3&gt;
-&lt;p&gt;I am assuming that you already have a linux box hosted in aws/google/..etc. DOT works on port 853, so you have to allow incoming and outgoing traffic in port 853.&lt;/p&gt;
-&lt;h4 id=&#34;docker&#34;&gt;Docker&lt;/h4&gt;
-&lt;p&gt;To make things easier, I will be using docker images to run the software.&lt;/p&gt;
-&lt;p&gt;running a docker container.. command&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
-podman run --name dnsServer\
---restart unless-stopped\
--p 2346:3000/tcp\
--p 1853:853/tcp\
--d adguard/adguardhome
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Things to note are, exposed port 3000 is the webport for admin page &amp;amp; 853 is for DOT.&lt;/p&gt;
-&lt;p&gt;We maintain the configs in a yaml file which will be mounted to the container.. here is an example version.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;bind_host: 0.0.0.0
-bind_port: 3000
-beta_bind_port: 0
-users:
-# - name: &amp;lt;your-username&amp;gt;
-# password: &amp;lt;your-passowrd&amp;gt;
-auth_attempts: 5
-block_auth_min: 15
-http_proxy: &amp;quot;&amp;quot;
-language: &amp;quot;&amp;quot;
-theme: auto
-debug_pprof: false
-web_session_ttl: 720
-dns:
-bind_hosts:
-- 0.0.0.0
-blocked_response_ttl: 10
-ratelimit: 20
-refuse_any: true
-fastest_timeout: 1s
-tls:
-enabled: true
-server_name: dns.bluepie.in
-port_https: 443
-port_dns_over_tls: 853
-certificate_path: /opt/dnsServer/conf/fullchain.pem
-private_key_path: /opt/dnsServer/conf/privkey.pem
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Once everything is configured correctly, the service will be up and running.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;podman ps
-b831cf04743d docker.io/adguard/adguardhome:latest --no-check-update... 1 days ago Up 3 weeks ago 0.0.0.0:1853-&amp;gt;853/tcp, 0.0.0.0:2346-&amp;gt;3000/tcp dnsServer
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;configuring-domain&#34;&gt;Configuring Domain&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;First we need a domain name, a paid one if you have it or a free one would be good, I&amp;rsquo;ll be creating a sub-domain from my domain, (i.e) &amp;lsquo;dns.bluepie.in&amp;rsquo; and get SSL certificates chain for the same.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Inorder to uniquely identify clients, we need to create a wildcard sud-domain in our DNS provider, in my case godaddy.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/creating-wild-card-dns.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h4 id=&#34;nginx&#34;&gt;Nginx&lt;/h4&gt;
-&lt;p&gt;We will be using nginx as a reverse proxy for exposing our services to the internet.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Admin Config:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt; server_name dns.bluepie.in;
-location / {
-proxy_pass http://localhost:2346/;
-proxy_set_header Upgrade $http_upgrade;
-proxy_set_header Host $host;
-proxy_set_header X-Real-IP $remote_addr;
-proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-proxy_set_header X-Forwarded-Proto $scheme;
-proxy_set_header X-Forwarded-Host $host;
-proxy_redirect / / ;
-proxy_cookie_path / /;
-proxy_connect_timeout 15s;
-proxy_send_timeout 15s;
-proxy_read_timeout 15s;
-}
-listen 443 ssl;
-ssl_certificate /path/to/fullchain.pem;
-ssl_certificate_key /path/to/privkey.pem;
-include /etc/ssl/options-ssl-nginx.conf;
-ssl_dhparam /etc/ssl/ssl-dhparams.pem;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;DNS Config:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;nginx has a load balancing feature, stream directive to manage tcp and udp. we can use this to forward our requests to dns servers.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt;stream {
-log_format basic &#39;$time_iso8601 $remote_addr &#39;
-&#39;$protocol $status $bytes_sent $bytes_received &#39;
-&#39;$session_time $upstream_addr &#39;
-&#39;&amp;quot;$upstream_bytes_sent&amp;quot; &amp;quot;$upstream_bytes_received&amp;quot; &amp;quot;$upstream_connect_time&amp;quot;&#39;;
-access_log /var/log/nginx/dns-access.log basic buffer=1k flush=5s;
-upstream dot {
-zone dot 512k;
-server 127.0.0.1:1853;
-}
-server {
-listen 853;
-proxy_pass dot;
-}
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;admin-portal&#34;&gt;Admin portal&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;Stats page (configured to refresh every 24 hours)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/dns-statistics.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Configuring blocklists&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Over the years, I have accustomed to the following blocklists and it works best for me.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/dns-blocklists.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Blocklists (entires count taken at the time of writing this post&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;# Blocks Ads, Mobile Ads, Phishing, Malvertising, Malware, Tracking, Telemetry, CryptoJacking, Analytics, Spyware, Ransomware, Exploit, Fraud, Abuse, Scam, Spam, Hijack, Misleading Marketing.
-# ~300,000 entries
-https://oisd.nl
-# ~180,000 entries
-# Extending and consolidating hosts files from several well-curated sources like adaway.org, mvps.org, malwaredomainlist.com, someonewhocares.org, and potentially others.
-github.com/StevenBlack/hosts
-# ~480,000 entries
-# Automatically updated, moderated and optimized list for blocking ads, trackers and other online garbage.
-github.com/notracking/hosts-blocklists
-# Specially Designed for Mobile Ad Protection.
-# ~200,000 entries
-github.com/jerryn70/GoodbyeAds
-# Blocking mobile ad providers and some analytics providers.
-# ~7,000 entries
-github.com/AdAway/adaway.github.io
-# A filter composed of several other filters (AdGuard Base filter, Social media filter, Tracking Protection filter, Mobile Ads filter, EasyList and EasyPrivacy) and simplified specifically to be better compatible with DNS-level ad blocking.
-# ~50,000 entries
-github.com/AdguardTeam/AdguardSDNSFilter
-# Protects you from many types of spyware, reduces bandwidth use, blocks certain pop-up traps, prevents user tracking by way of &amp;quot;web bugs&amp;quot; embedded in spam, provides partial protection to IE from certain web-based exploits and blocks most advertising you would otherwise be subjected to on the internet.
-# ~11,000 entries
-someonewhocares.org/hosts
-# Filter that blocks ads on mobile devices. Contains all known mobile ad networks.
-# ~1,000 entries
-kb.adguard.com/general/adguard-ad-filters#mobile-ads-filter
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;how-do-we-use-it&#34;&gt;How do we use it?&lt;/h2&gt;
-&lt;p&gt;Pick a unique word, ex: gopidevice1, then use this word as prefix for &amp;lsquo;dns.bluepie.in&amp;rsquo;. (i.e) &amp;lsquo;gopidevice1.dns.bluepie.in&amp;rsquo;, this is the url that you should use in your devices.&lt;/p&gt;
-&lt;h3 id=&#34;android&#34;&gt;Android&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/android-config.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;ios-iphone-ipad&#34;&gt;IOS - iphone, ipad&lt;/h3&gt;
-&lt;p&gt;Go to &lt;a href=&#34;https://dns.bluepie.in/ios/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;dns.bluepie.in/ios/&lt;/a&gt;, navigate to &amp;lsquo;tool&amp;rsquo;, give a name and use your unique url to create a profile.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/ios-config-1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/ios-config-2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;mac-windows&#34;&gt;Mac/Windows&lt;/h3&gt;
-&lt;p&gt;Same as iphone, go to &lt;a href=&#34;https://dns.bluepie.in/ios/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;dns.bluepie.in/ios/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/block-ads-and-tracking-upgradging-dns-server/dot-install-macos-3.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Migrating from PI-Hole to AGH was a good move, once you have used this and experienced &amp;ldquo;no ads&amp;rdquo;, you can not go back~&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;In future, I would create a separate releases named &lt;code&gt;nightly&lt;/code&gt;, where the dev branch is built daily and these builds will be updated there.&lt;/p&gt;</description></item></channel></rss>
