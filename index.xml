@@ -1,4 +1,115 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 25 May 2025 21:22:39 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>MVP vs SLC - Fixing Duplicate Tabs</title><link>//bluepie.in/2025/05/fixing-duplicate-tabs/</link><pubDate>Sun, 25 May 2025 21:22:39 +0000</pubDate><guid>//bluepie.in/2025/05/fixing-duplicate-tabs/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Mon, 30 Jun 2025 11:33:00 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Building an IP Based Firebase Ratelimiter</title><link>//bluepie.in/2025/06/building-an-ip-based-firebase-ratelimiter/</link><pubDate>Mon, 30 Jun 2025 11:33:00 +0000</pubDate><guid>//bluepie.in/2025/06/building-an-ip-based-firebase-ratelimiter/</guid><description>
+&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
+&lt;p&gt;I have a project that I wrote 7 years ago, its still running on firebase.. no hickups (I had to occusionally update to a new node lts environment).. but it still worsks, at the time of writing/ implementing, ratelimiter was not implemented, So everyonce in a while I see the request logs and I see some IPs hitting the server with 1000s of requests, judging from the rquest.. its easy to distinguish them as bots and scanners. I have to weed them out, but I have to write it in a way that will not use unnecessary firestore reads and writes. (yea I also used firestore for this probject)&lt;/p&gt;
+&lt;h2 id=&#34;constraints-before-going-in&#34;&gt;Constraints before going in&lt;/h2&gt;
+&lt;p&gt;I have to make sure the firestore reads and writes are minimal, one read + one write per request, make sure automatic TTL purging keeps the firestore collection small.&lt;/p&gt;
+&lt;p&gt;I have no Redis / Memcached layer here, so I can&amp;rsquo;t use them..(using them would be the best solution)&lt;/p&gt;
+&lt;h2 id=&#34;schema-thats-need-to-be-changed-in-firestore&#34;&gt;Schema thats need to be changed in firestore&lt;/h2&gt;
+&lt;p&gt;A new collection called &lt;code&gt;ip_throttle&lt;/code&gt;, we will use the document ID as the client IP address.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-txt&#34;&gt;ip_throttle/
+└─ {ipAddress} # document ID == client IP
+• count number # requests in current window
+• windowStart timestamp # start of the rolling window
+• expiresAt timestamp # TTL field (auto‑deleted)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can leverage the &lt;a href=&#34;https://cloud.google.com/firestore/native/docs/ttl&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Firestore TTL&lt;/a&gt; to automatically delete documents after the marked time, I have to mark my field &lt;code&gt;expiresAt&lt;/code&gt; in the TTL policy.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/june-2025/ttl_policy.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;configurations-needed&#34;&gt;Configurations needed&lt;/h2&gt;
+&lt;p&gt;Follwing new configurations are needed, these doen&amp;rsquo;t involve code changes, In 5 minutes, we have 100 requests per IP.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;firebase functions:config:set \
+ratelimit.window_seconds=3600 \
+ratelimit.max_hits=100
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For local emulation we can utilise&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;firebase functions:config:get &amp;gt; .runtimeconfig.json
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;implementing&#34;&gt;Implementing.&lt;/h2&gt;
+&lt;p&gt;Nowadsys I dont care if the project was in TS or not, I just choose js and go with it, back then I was still using TS, so I have to write the code in TS.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-ts&#34;&gt;
+// abstraction to Firestore
+const db = getConnection();
+export async function rateLimiter(
+ip: string,
+windowSeconds = 3600, // just incase config does not exist
+maxHits = 100 // just incase config does not exist
+): Promise&amp;lt;boolean&amp;gt; {
+const now = Timestamp.now();
+const ref = db.collection(&amp;quot;ip_throttle&amp;quot;).doc(ip);
+return db.runTransaction(async (tx: Transaction) =&amp;gt; {
+const snap = await tx.get(ref);
+// this is the first request we get from this IP
+if (!snap.exists) {
+tx.set(ref, {
+count: 1,
+windowStart: now,
+expiresAt: Timestamp.fromMillis(
+now.toMillis() + windowSeconds * 1000
+),
+});
+logger.info(`IP ${ip}: first hit, record created.`);
+return true;
+}
+const data = snap.data()!;
+const ageMs = now.toMillis() - data.windowStart.toMillis();
+// if the window has expired, reset it
+if (ageMs &amp;gt; windowSeconds * 1000) {
+tx.set(
+ref,
+{
+count: 1,
+windowStart: now,
+expiresAt: Timestamp.fromMillis(
+now.toMillis() + windowSeconds * 1000
+),
+},
+{ merge: true }
+);
+logger.info(`IP ${ip}: window reset.`);
+return true;
+}
+// if the request is within the window and within limit.
+if (data.count &amp;lt; maxHits) {
+tx.update(ref, { count: FieldValue.increment(1) });
+logger.debug(`IP ${ip}: allowed (${data.count + 1}/${maxHits}).`);
+return true;
+}
+// if the request is over the limit
+logger.warn(
+`IP ${ip}: throttled (${data.count}/${maxHits} in ${windowSeconds}s).`
+);
+return false;
+});
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;Now to configure in router and sending out the response&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-ts&#34;&gt; // existing code
+const cfg = process.env;
+const windowSeconds =
+Number(cfg.RL_WINDOW_SECONDS) ||
+Number(cfg.RATELIMIT_WINDOW_SECONDS) ||
+3600;
+const maxHits =
+Number(cfg.RL_MAX_HITS) ||
+Number(cfg.RATELIMIT_MAX_HITS) ||
+5;
+// check for ratelimit
+if (!(await rateLimiter(ip, windowSeconds, maxHits))) {
+res.status(429).json({ error: &amp;quot;Too many requests. Try again later.&amp;quot; });
+return;
+}
+// original code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;in-action-in-production&#34;&gt;In action in production&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/june-2025/ip_throtle_in_action.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;The solution I&amp;rsquo;ve implemented is simple, effective and horizonally scalable all within firebase. No extra services, minimal reads and writes. I was able to implement and deploy to production in one single sitting. I had validated this with ai thinking models to find downsides, so it gave me a motivation to complete it quickly.&lt;/p&gt;
+&lt;h2 id=&#34;personal-updates&#34;&gt;Personal updates&lt;/h2&gt;
+&lt;p&gt;Like with tradition, I have the personal updates here, I moved the personal section from top to the end of the post over the years. I wana write/ share soo much more.. remind myself more. Been travelling back and forth from work location &amp;amp; home, Been busy with work a lot, though I shouldn&amp;rsquo;t take it too seriously, but when its a new skill, im all up for it, even if its people or project management, the one thing that pains is that there is a onshore team and sync with them is a pain (currently at the time of writing this you work in VZ), evey week, every months feels like an instant, its monday.. then its already friday, then its friday night start.. then its sunday night again with an instant. Feels like a cycle, The older I get, time does feel to go a lot faster. I even stopped playing the occasional gaming on the side.&lt;/p&gt;
+&lt;p&gt;My timer tracking project (didnt make it open source yet) was a lot helpful over the months, but I think im lossing a grip on it, its too micro managementy, everytime I do something, I have to open and start and end it, feels like..its taking lot of time just to do that between each teask. So what I&amp;rsquo;ll do is stop using the time tracking app that I built for 1 or 2 months and see how I fare, If I can still be productive without it and can remeber and complete tasks, then its great..future me how is it going?&lt;/p&gt;
+&lt;p&gt;Personally I have commitments now and that too is a time sink, Im not keeping tabs on how much time Im spending, I think to myself on heindsight at the end of the week or during self refelction, small small actions, small pieces of time each day over the week.. adding up.. is a lot of time. but I can&amp;rsquo;t ignore it can I, now I know why my friends&amp;rsquo; changed behaviours is attributed to. Its nobody&amp;rsquo;s fault, thats just life.&lt;/p&gt;
+&lt;p&gt;The AI slop is all over the place with the internet, its the worst. Manytimes I wonder.. I think for some/ many tasks, If people didn&amp;rsquo;t just overrely on AI, they can complete the job/ task way faster. Again on some tasks, its way easier with AI and reduces lot of time.&lt;/p&gt;
+&lt;p&gt;Another trend Im noticing is, people are too much relient on AI to write a feature in a product or entire codebase/product. When something comes up later on the project, they don&amp;rsquo;t know howt to fix it, I&amp;rsquo;ve seen it inside office projects (migration of entire codebase with AI and the people sturggle later), on the internet and word of mouth. Future me.. how its it going?&lt;/p&gt;
+&lt;p&gt;About the thing on may.. I&amp;rsquo;d be lying If I said its good/ going great. It is what it is, Trust on the process, I have to keep doing what I do, keep going, keep moving forward, things will fall in place, For now.. For this moment, I know, I have to make the right decision (Future me remember?) and the right decision I know is to stay without making any rash decisions..me reading..what happpended?..hope I/we are in a better place then..when are you reading this? 20&amp;rsquo;s, 30&amp;rsquo;s, 40&amp;rsquo;s?.&lt;/p&gt;</description></item><item><title>MVP vs SLC - Fixing Duplicate Tabs</title><link>//bluepie.in/2025/05/fixing-duplicate-tabs/</link><pubDate>Sun, 25 May 2025 21:22:39 +0000</pubDate><guid>//bluepie.in/2025/05/fixing-duplicate-tabs/</guid><description>
 &lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
 &lt;p&gt;I’ve been running into duplicate-tab problems across both my personal and office browsers. I needed a simple application that can detect duplicates and show a minimal UI to merge, close, or keep them.&lt;/p&gt;
 &lt;h2 id=&#34;mvp-vs-slc&#34;&gt;MVP vs SLC&lt;/h2&gt;
@@ -17,11 +128,6 @@
 &lt;p&gt;• Session Save / Restore&lt;br /&gt;
 – One-click &lt;strong&gt;Save all tabs &amp;amp; Close&lt;/strong&gt; to snapshot your session.&lt;br /&gt;
 – Later, press &lt;strong&gt;Reopen all tabs&lt;/strong&gt; to bring everything back.&lt;/p&gt;
-&lt;p&gt;• Import / Export / Share&lt;br /&gt;
-– Export saved sessions to an HTML file.&lt;br /&gt;
-– Import them back on any machine and merge with your current tabs.&lt;/p&gt;
-&lt;p&gt;• Duplicate Tabs Summary&lt;br /&gt;
-– A separate block at the top of the popup shows all duplicate groups so you can close them in bulk.&lt;/p&gt;
 &lt;h2 id=&#34;next-version-v1-3-0-and-beyond&#34;&gt;Next version: v1.3.0 and beyond&lt;/h2&gt;
 &lt;h3 id=&#34;v1-3-0-highlights&#34;&gt;v1.3.0 Highlights&lt;/h3&gt;
 &lt;p&gt;• Clickable Tabs&lt;br /&gt;
@@ -36,11 +142,13 @@
 – Quickly snapshot or restore entire sessions.&lt;br /&gt;
 • HTML Import / Export&lt;br /&gt;
 – Share sessions as HTML files.&lt;/p&gt;
-&lt;h2 id=&#34;relevant-links&#34;&gt;Relevant links&lt;/h2&gt;
+&lt;h2 id=&#34;source-code-and-chrome-web-store&#34;&gt;Source code and Chrome Web Store&lt;/h2&gt;
 &lt;p&gt;Source code:&lt;br /&gt;
 &lt;a href=&#34;https://github.com/aghontpi/Tab-Options&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/aghontpi/Tab-Options&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Chrome Web Store:&lt;br /&gt;
 &lt;a href=&#34;https://chromewebstore.google.com/detail/tab-options/kafdoidjnnbjciplpkhhfjoefkpfbplj&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://chromewebstore.google.com/detail/tab-options/kafdoidjnnbjciplpkhhfjoefkpfbplj&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Firefox Add-on:
+&lt;a href=&#34;https://addons.mozilla.org/en-US/firefox/addon/tab-options-open-source/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://addons.mozilla.org/en-US/firefox/addon/tab-options-open-source/&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;personal-update&#34;&gt;Personal update&lt;/h2&gt;
 &lt;p&gt;Sometimes small things you do, doesn&amp;rsquo;t feel like a big thing.. but it does have a significant impact on our lives. The feeling of why am I even doing this..like your brain is somehwere else but still gotta push through everyday..if its study/ work..etc&lt;/p&gt;
 &lt;blockquote&gt;
@@ -1714,111 +1822,4 @@ echo -n &amp;quot;string-to-decrypt&amp;quot; | base64 -d | openssl enc -d -aes-
 &lt;p&gt;&lt;strong&gt;In terms of Open Source&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;With an office job, social life,..nd all the other distractions.. living at the work location.. its difficult for me to maintain a steady contribution to opensource.. I always think about it, but have somthing that has more priority than this. I guess for the coming year too, it will be the same? idk..lets hope for the best!&lt;/p&gt;
 &lt;h2 id=&#34;additionaly-notes&#34;&gt;Additionaly notes&lt;/h2&gt;
-&lt;p&gt;Removed a lot of stuff after reviewing it a couple of times..but some are encrypted, this was in a draft for a long time now.&lt;/p&gt;</description></item><item><title>Android CI on Github</title><link>//bluepie.in/2023/03/android-ci/</link><pubDate>Sun, 12 Mar 2023 00:08:06 +0000</pubDate><guid>//bluepie.in/2023/03/android-ci/</guid><description>
-&lt;p&gt;Been busy, its not like I lost interest in posting here, I just didn&amp;rsquo;t allocate time for writing here, which is the opposite of what I set out to do.. which in turn does not track my progress at all, I should be held accountable for my progress. ~pff I hate it.&lt;/p&gt;
-&lt;p&gt;A friend told me in the time that I did not post, not necessarily everything should be a progress, maybe this is right or maybe wrong..only time will tell. (Meaning sometimes you can just relax, but to be honest.. I was not releaxing aswell)&lt;/p&gt;
-&lt;h2 id=&#34;why-about&#34;&gt;Why &amp;amp; About&lt;/h2&gt;
-&lt;p&gt;This is going to short, Recently I created a CI for development android builds, this is to reduce &amp;amp; eliminate the manuall build process to every pr, this reduces a lot of time for me.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;so what does this do?&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;When a Pull Request is made to &lt;code&gt;development&lt;/code&gt; or &lt;code&gt;master&lt;/code&gt; branch, a CI will trigger that will pull all the latest code from that branch and try to build the code in &lt;code&gt;dev&lt;/code&gt; mode, it will report whether tests and build is success and export the final apk. This will be helpful for testers and even me to take the build right away and check whether the code breaks the build or not. Additionally I dont have to manually make a comment everytime for testers to take the build.&lt;/p&gt;
-&lt;h2 id=&#34;android-ci-with-github-actions&#34;&gt;Android CI with github actions&lt;/h2&gt;
-&lt;p&gt;GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows to automate builds, test, and deployment pipeline. We can create workflows that build and test every pull request to our repositories.&lt;/p&gt;
-&lt;h3 id=&#34;github-actions-free-tier&#34;&gt;Github actions free tier&lt;/h3&gt;
-&lt;p&gt;GitHub Actions are unlimited for public repositories and the Free plan also provides 2,000 minutes of Actions each month for use with out private projects.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/android-ci/github-free-account.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/android-ci/actions-for-private-reporsitories.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;gradle-build&#34;&gt;Gradle build&lt;/h3&gt;
-&lt;p&gt;There are different variants of your application (release &amp;amp; debug, each variant has its own set of porperties). But what do we need here? debug variant, because that is what we share with the users and get feedback from. I mainly wanted this because everytime I make a pull request, I have to check if it builds, take builds.. I then have to link the builds to that pull request, so others/ even I can use it and test that pull request.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Commands&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;debug: This is the specific variant of the application that is being built. In Android projects, you can define different build variants, such as debug and release, to configure different settings and behavior. The debug variant is typically used during development and testing, while the release variant is used for production-ready builds. (note that: for the debug build the sizes will be significantly big than release builds)&lt;/p&gt;
-&lt;p&gt;For example: &lt;a href=&#34;https://github.com/aghontpi/ad-silence/blob/51fb5782f711388c6632fa2d762b4beded3c9320/app/build.gradle#L19-L33&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;In my case I have these two builds&lt;/a&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-gradle&#34;&gt;buildTypes {
-release {
-minifyEnabled true
-shrinkResources true
-proguardFiles getDefaultProguardFile(&#39;proguard-android-optimize.txt&#39;), &#39;proguard-rules.pro&#39;
-}
-debug {
-minifyEnabled true
-shrinkResources true
-proguardFiles getDefaultProguardFile(&#39;proguard-android-optimize.txt&#39;), &#39;proguard-rules.pro&#39;
-}
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I just specifically need the debug build alone.&lt;/p&gt;
-&lt;h2 id=&#34;what-is-a-keystore-why-do-we-need-it&#34;&gt;What is a Keystore &amp;amp; Why do we need it?&lt;/h2&gt;
-&lt;p&gt;A keystore plays a pivotal role in ensuring the security and integrity of our application. Essentially, a keystore is a secure store that holds cryptographic keys, certificates, and sensitive data used to digitally sign our App. These keys are used to digitally sign our App&amp;rsquo;s APK file. This digital signature serves as a means to verify the authenticity and origin of your application. When a user installs an app, the Android system uses the keystore&amp;rsquo;s digital signature to confirm that the App has not been tampered with and that it indeed originates from the expected source. This prevents malicious actors from altering the app&amp;rsquo;s code and introducing potential security vulnerabilities.&lt;/p&gt;
-&lt;p&gt;To simply put, we need this to distribute our app builds, users can trust this build since it is from us.&lt;/p&gt;
-&lt;p&gt;This keystore file should be kept private, should not be shared with others and can not be comitted along with other files in the repository.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;If we keep this file private, how do we take builds then?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;This is where &lt;a href=&#34;https://docs.github.com/en/actions/security-guides/encrypted-secrets&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;configuring secret in github actions&lt;/a&gt; comes into play.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/android-ci/configuring-secret-github-actions.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Once the secrets are configured, it can be used like below&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;- name: Decode keystore
-env:
-DEBUG_KEYSTORE: ${{ secrets.DEBUG_KEYSTORE }}
-run: |
-echo &amp;quot;$DEBUG_KEYSTORE&amp;quot; | base64 --decode &amp;gt; debug.keystore
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;configuring-the-workflow&#34;&gt;Configuring the workflow&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;We set a name &amp;amp; when should the builds be triggered, it can be of several things Cron, Issue Comment, Pull Request, Fork, Deployment Status..etc. See the &lt;a href=&#34;https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows.&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;full list here&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;For my usecase, what I specifically need here is &lt;a href=&#34;https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#push&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;push&lt;/a&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;name: Android CI
-on:
-push:
-branches: [ &amp;quot;master&amp;quot;, &amp;quot;development&amp;quot; ]
-pull_request:
-branches: [ &amp;quot;master&amp;quot;, &amp;quot;development&amp;quot; ]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Then we need to &lt;a href=&#34;https://docs.github.com/en/actions/using-jobs/using-jobs-in-a-workflow&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;specify the jobs&lt;/a&gt;, there can be multiple job, but in our case, we just need a build job, give it a name.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;jobs:
-build:
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Choosing &lt;a href=&#34;https://docs.github.com/en/actions/using-jobs/choosing-the-runner-for-a-job&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;which type of machine&lt;/a&gt; this should be run on.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;runs-on: ubuntu-latest
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;A job contians sequence of tasks called &lt;a href=&#34;https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idsteps&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;steps&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Checking out&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;- name: checkout &amp;amp; set up JDK 11
-- uses: actions/checkout@v3
-uses: actions/setup-java@v3
-with:
-java-version: &#39;11&#39;
-distribution: &#39;temurin&#39;
-cache: gradle
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;Decode keystore from repository secrets&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;- name: Decode keystore
-env:
-DEBUG_KEYSTORE: ${{ secrets.DEBUG_KEYSTORE }}
-run: |
-echo &amp;quot;$DEBUG_KEYSTORE&amp;quot; | base64 --decode &amp;gt; debug.keystore
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;Make gradle executable &amp;amp; run gradle build&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;- name: Grant execute permission for gradlew
-run: chmod +x gradlew
-- name: Build with Gradle
-env:
-KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-KEY_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
-KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-run: ./gradlew assembleDebug -Pandroid.injected.signing.store.file=$(pwd)/debug.keystore -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD -Pandroid.injected.signing.key.alias=$KEY_ALIAS -Pandroid.injected.signing.key.password=$KEY_PASSWORD
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We inject the &lt;code&gt;debug.keystore&lt;/code&gt; &amp;amp; other environment variables into the build using params like &lt;code&gt;-Pandroid.injected.signing.store.file=$(pwd)/debug.keystore&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Upload the artifacts&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;- name: Upload debug build
-uses: actions/upload-artifact@v3
-with:
-name: &amp;lt;upload-name&amp;gt;.apk (build artifact)
-path: app/build/outputs/apk/debug/app-debug.apk
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/aghontpi/ad-silence/blob/master/.github/workflows/android.yml&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Full workflow file.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Build in action&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/android-ci/build-in-action.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;This enabled me to not care about dev-debug builds entirely and focus just on development, which is a great time save.&lt;/p&gt;
-&lt;p&gt;In future, I would create a separate releases named &lt;code&gt;nightly&lt;/code&gt;, where the dev branch is built daily and these builds will be updated there.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;Removed a lot of stuff after reviewing it a couple of times..but some are encrypted, this was in a draft for a long time now.&lt;/p&gt;</description></item></channel></rss>
