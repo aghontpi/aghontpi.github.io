@@ -1,4 +1,109 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Mon, 30 Jun 2025 11:33:00 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Building an IP Based Firebase Ratelimiter</title><link>//bluepie.in/2025/06/building-an-ip-based-firebase-ratelimiter/</link><pubDate>Mon, 30 Jun 2025 11:33:00 +0000</pubDate><guid>//bluepie.in/2025/06/building-an-ip-based-firebase-ratelimiter/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Wed, 30 Jul 2025 23:53:43 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Using the best thinking models and not burn money (Jul 31st, 2025)</title><link>//bluepie.in/2025/07/july-2025/</link><pubDate>Wed, 30 Jul 2025 23:53:43 +0000</pubDate><guid>//bluepie.in/2025/07/july-2025/</guid><description>
+&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;ve been having a dilemma, I don&amp;rsquo;t want to pay open ai the monthly 20$ subscription, but I want to use the latest and greatest model on some of the problems I have to reduce time. How can I achieve this? I&amp;rsquo;ve already mentioned in a previous writing last year.. that I use open api keys. I started using mobile and desktop clients with just the api keys. Couple months ago OpenAI also reduced the pricing of o3 model by 80%, I&amp;rsquo;ve been using the ai very actively, trying to burn my credits as soon as possible.&lt;/p&gt;
+&lt;h2 id=&#34;deciding-on-a-budget&#34;&gt;Deciding on a budget.&lt;/h2&gt;
+&lt;p&gt;I decided to load my account with 6 dollars, on an estimate I thought I&amp;rsquo;d run out of credits within half a month. I can use o4-mini thinking for most tasks and o3 thinking model for only tough tasks questions. Nowadays I always default to thinking model o4-mini, it&amp;rsquo;s very cost effective. I told myself, I&amp;rsquo;m getting this alternate to one KFC ultimate savings bucket.&lt;/p&gt;
+&lt;h2 id=&#34;the-ui&#34;&gt;The UI&lt;/h2&gt;
+&lt;p&gt;The chatgpt UI is clean and gives more control for devs, I like this UI, unfamiliar people might need to get used to it. It even shows the thinking tokens, at the time of writing.. only the openai web portal and the official api client shows the thinking tokens, if you use third party clients (more about this later on this post) for chat api.. we will not get the thinking tokens, we will just see the output.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/july-2025/OpenAI-api_view.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;using-the-right-models-for-the-right-usage&#34;&gt;Using the right models for the right usage,&lt;/h2&gt;
+&lt;p&gt;I exclusively used openAI models alone, I stopped using google AI Studio and claude&amp;hellip; more context. I used google AI studio and claude occasionally to validate my solutions.. like my writing from last month about Ratelimiting with firestore.&lt;/p&gt;
+&lt;p&gt;In chatgpt we have different models, For most of my use cases I use o4-mini, at the time of writing (31st july, 2025).. the latest thinking models from Open AI are O3 and o4 mini-high, I&amp;rsquo;ve created a table to compare the pricing from openAI portal &lt;a href=&#34;https://openai.com/api/pricing/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;OpenAI API Pricing&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;(maybe below pricing details act like a snapshot in future&amp;ndash;for me or anyone&amp;ndash;looking back 10/20/..etc years from future)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Thinking models&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Model&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Input Price&lt;/th&gt;
+&lt;th&gt;Cached Input Price&lt;/th&gt;
+&lt;th&gt;Output Price&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OpenAI o3&lt;/td&gt;
+&lt;td&gt;Most powerful reasoning model with leading performance on coding, math, science, and vision&lt;/td&gt;
+&lt;td&gt;$2.00 / 1M tokens&lt;/td&gt;
+&lt;td&gt;$0.50 / 1M tokens&lt;/td&gt;
+&lt;td&gt;$8.00 / 1M tokens&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;OpenAI o4-mini&lt;/td&gt;
+&lt;td&gt;Faster, cost-efficient reasoning model delivering strong performance on math, coding and vision&lt;/td&gt;
+&lt;td&gt;$1.10 / 1M tokens&lt;/td&gt;
+&lt;td&gt;$0.275 / 1M tokens&lt;/td&gt;
+&lt;td&gt;$4.40 / 1M tokens&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Non thinking models&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Model&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Input Price&lt;/th&gt;
+&lt;th&gt;Cached Input Price&lt;/th&gt;
+&lt;th&gt;Output Price&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;GPT-4.1&lt;/td&gt;
+&lt;td&gt;Smartest model for complex tasks&lt;/td&gt;
+&lt;td&gt;$2.00 / 1M tokens&lt;/td&gt;
+&lt;td&gt;$0.50 / 1M tokens&lt;/td&gt;
+&lt;td&gt;$8.00 / 1M tokens&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;GPT-4.1 mini&lt;/td&gt;
+&lt;td&gt;Affordable model balancing speed and intelligence&lt;/td&gt;
+&lt;td&gt;$0.40 / 1M tokens&lt;/td&gt;
+&lt;td&gt;$0.10 / 1M tokens&lt;/td&gt;
+&lt;td&gt;$1.60 / 1M tokens&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;GPT-4.1 nano&lt;/td&gt;
+&lt;td&gt;Fastest, most cost-effective model for low-latency tasks&lt;/td&gt;
+&lt;td&gt;$0.100 / 1M tokens&lt;/td&gt;
+&lt;td&gt;$0.025 / 1M tokens&lt;/td&gt;
+&lt;td&gt;$0.400 / 1M tokens&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;I always use thinking model.. cuz I think I am biased towards that, I need to change my view on this lol, my thinking is if reasoning model should be always better.. but I have seen videos from bytecloud (youtube) and reddit, that sometimes..it&amp;rsquo;s not always the case.&lt;/p&gt;
+&lt;h2 id=&#34;reason-i-don-t-use-openrouter&#34;&gt;Reason I don&amp;rsquo;t use OpenRouter&lt;/h2&gt;
+&lt;p&gt;The reason I don&amp;rsquo;t use OpenRouter is because of the money topup with tax, let me explain. When I load money in OpenAI api, I have a trick and can load all the money without tax, but when I try the same thing with OpenRouter.. it doesn&amp;rsquo;t work. so that&amp;rsquo;s the only reason I&amp;rsquo;m not using OpenRouter. One thing to point out is I do use OpenRouter but I&amp;rsquo;m not loading money into it.. There are free reasoning models on OpenRouter, I&amp;rsquo;ve tried them like &amp;ldquo;DeepSeek: DeepSeek V3 0324 (free)&amp;rdquo; which is completely free and works great, but it&amp;rsquo;s just for testing.&lt;/p&gt;
+&lt;h2 id=&#34;about-perplexity&#34;&gt;About perplexity,&lt;/h2&gt;
+&lt;p&gt;Perplexity made a stunt in India as far as I know.. I don&amp;rsquo;t know about other countries, they partnered with Airtel (a telecommunications company), they made a offer for all existing airtel users of all plans irrespective of prepaid/ postpaid/ broadband/ DTH&amp;hellip;etc and no restrictions on plans, that the users can claim perplexity Pro for 1 year at no charge. I always thought OpenAI, Anthropic (claude) &amp;amp; Google all caught up to Perplexity&amp;rsquo;s features.. and thought its userbase is declining, cuz the main feature of perplexity is the search integration with AI, all others major companies now have that option, I personally think this is a desperate move with fleeting userbase.. To harvest more data and use it? or show userbase is high to investors, though they said they had future funds for many more years.. idk im looking too deep into this. I tried to use it for some applications, it was okayish but not useful all the time. Recently you would have known I switched all my mobile numbers and broadband to jio.. not all, I still had one private number and my mom&amp;rsquo;s number didn&amp;rsquo;t get port over cuz of some complication due to I was not there while doing the porting (now she is on a year plan in airtel, still 10 months left I think)..so I used my mom&amp;rsquo;s number to claim the reward.&lt;/p&gt;
+&lt;p&gt;But I don&amp;rsquo;t think they are using the models that is selected in pro mode under the hood.. at least not all the time, because the results are bad, when compared with the result of Open AI o3 (at the time of writing from before), the results form Open AI are better, You have to trust my word on this one, I didn&amp;rsquo;t save my responses, but maybe I can do that as part of another writing, or maybe you can have a personal test as well.&lt;/p&gt;
+&lt;h2 id=&#34;ai-in-office&#34;&gt;AI in Office&lt;/h2&gt;
+&lt;p&gt;In office at the time of writing this, I/ you work at VZ, we have gemini pro included (2.5 pro is the one that latest from google gemini) and github copilot. You can use it for any amount without limits. In github copilot there are lots of limitations inside the enterprise.. many public features are not even available inside, like mcp servers and custom chat modes, all the publicly available models, and even sometimes when the output of the AI is being generated.. the message from model gets flagged and the output is removed from the chat.. saying it contains public code and asking us to retry with different prompt. The company (leaders/ managers) is also hardly pushing for using AI for everything.. Even before they are saying.. I&amp;rsquo;m already on the train, I was on the first members to get access to github copilot and was using ever since. I was one of the beta testers for copilot inside vz as well, I still have that public github public account that we were testing it with. I provided many feedbacks during that time.. don&amp;rsquo;t know if its valuable for them or not.. during this period I changed entire teams/ organisations and went on promotion etc.&lt;/p&gt;
+&lt;h2 id=&#34;using-openai-with-third-party-clients&#34;&gt;Using OpenAI with third party clients,&lt;/h2&gt;
+&lt;p&gt;I tried several self hosted opensource AI solutions so I can host on my server and then I can configure different API keys, be that may OpenAI, google or Anthropic. I tried running them in local but none of them satisfied my requirements, at the very end I choose to look for clients, apps on mac and iphone and found opencat &lt;a href=&#34;https://opencat.app/en/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;open cat&lt;/a&gt;, its lightweight and really fast and met all my requirements I use the free tier of the app, I can always mod the application as well if I want.. instead of paying monthly/ one time subscriptions.&lt;/p&gt;
+&lt;p&gt;You can configure different default models, currently I have o4 mini as the default model.&lt;/p&gt;
+&lt;div style=&#34;display:flex; gap:10px;&#34;&gt;
+&lt;img src=&#34;//bluepie.in/images/posts/july-2025/open-cat-1.PNG&#34; style=&#34;height:500px;&#34; alt=&#34;OpenCat screenshot 1&#34; /&gt;
+&lt;img src=&#34;//bluepie.in/images/posts/july-2025/open-cat-2.PNG&#34; style=&#34;height:500px;&#34; alt=&#34;OpenCat screenshot 2&#34; /&gt;
+&lt;/div&gt;
+&lt;div style=&#34;display:flex; gap:10px; margin-top:60px;&#34;&gt;
+&lt;img src=&#34;//bluepie.in/images/posts/july-2025/open-cat-3.PNG&#34; style=&#34;height:500px;&#34; alt=&#34;OpenCat screenshot 3&#34; /&gt;
+&lt;img src=&#34;//bluepie.in/images/posts/july-2025/open-cat-4.PNG&#34; style=&#34;height:500px;&#34; alt=&#34;OpenCat screenshot 4&#34; /&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;So about the the 6$ I loaded up for AI usage, I got two months of usage out of it.. which is a lot compared to the 20$ monthly price tag by Open AI for chatgpt plus or more costlier tiers. The key is to be smart for on which model to use and how to consume them.. even if over reliant on ai models on certain tasks, use them smart by not exceeding the budget. During these two months I&amp;rsquo;ve also used it to create images and experimented with audio as well.&lt;/p&gt;
+&lt;p&gt;I used around 300 requests, that accounts for about 2 million input tokens, again these are a mixture of all models.. like I said I only preferred to use reasoning models.. but a combination of different reasoning models.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/july-2025/openai-ai-input-token-usage.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Usage based on month-wise, openai&amp;rsquo;s month-wise usage report is weird, you can&amp;rsquo;t see the entire graph, you are literally given a sliding window of only one month..where you can see the requests.&lt;/p&gt;
+&lt;p&gt;My 6$ I was able to use it for 2 months and more.. I only counted till 5$, If I didn&amp;rsquo;t use it exclusively and the experiment it would have lasted even more.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/july-2025/month-1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/july-2025/month-2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;personal-update&#34;&gt;Personal Update&lt;/h2&gt;
+&lt;p&gt;Continuing to not use the time tracker from last month&amp;rsquo;s suggestion, its bit of a hassle, in between I tried to write everything physical (pen and paper), because I was forgetting the tasks too focused on one thing and forgetting, As an adult I have a lot of things to do all the time. Gotta reason with my decisions and spend time on things appropriately.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve been getting into reverse engineering in the last 30 days, it started off because I wanted to place designs on &lt;a href=&#34;https://www.autodesk.com/products/autocad/overview&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;AutoCAD&lt;/a&gt;, My usage is only minimal, so I don&amp;rsquo;t want to pay for it (even the civil engineers that live here don&amp;rsquo;t pay for autocad), but I also don&amp;rsquo;t want to use cracks from the internet for the latest versions, I can crack it myself with enough effort and use it, the one thing that is different is.. I have to mod the apps on mac (previously I wrote on how to mod apps for macOS, but that was done on intel or x86 architecture), that too on arm/ apple silicon. That was a learning curve for me, I also have to bypass the &lt;a href=&#34;https://support.apple.com/en-us/HT204899&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;SIP&lt;/a&gt; on macOS, disable it by booting into recovery mode/ keeping it active and patching it, debugging applications and cracking is only possible with disabling SIP because macOS won&amp;rsquo;t allow to debug application if that is turned on. I can do static analysis patch it that way, sign it with my custom certificate and run it..etc, I want to write about it separately.. Long story short, I made a patch that after checking if trial expired, instead of quitting, I made it so..its doesn&amp;rsquo;t quit. I also blocked internet for the cad software and patched the function that checks if trial license to false. This made the application work and I can use it without internet and all features work, the application does not quit, not does it complain about not having a license &amp;ndash; So going back to reverse engineering was lot of fun and I still want to do it..everyday, I&amp;rsquo;m trying to find time everyday to do more things. One thing I found out was I need cad architecture, its only available on windows, my civil friend told me to use that software to design. I daily drive a apple silicon mac nowadays, so I had to run windows on it, surprisingly there is &lt;a href=&#34;https://www.parallels.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Parallels&lt;/a&gt;, I tried the trial version and I tried windows 11 arm version on it and installed architecture trial (x86 version of this software) inside it and it worked, got no errors. Since I&amp;rsquo;m running that inside a VM I don&amp;rsquo;t have to patch it myself and spend another whole lot of time, I can use patches from the internet.. but the one thing that I have to patch is Parallels. currently its on trial period and works well.&lt;/p&gt;
+&lt;p&gt;Writing helps alleviate a lot of things, future me reading. hope you got through this situation, My current plan is to write more. Also writing without ai support make me write more things. The things I&amp;rsquo;m writing are more of a personal journal so I don&amp;rsquo;t care about the quality.&lt;/p&gt;</description></item><item><title>Building an IP Based Firebase Ratelimiter</title><link>//bluepie.in/2025/06/building-an-ip-based-firebase-ratelimiter/</link><pubDate>Mon, 30 Jun 2025 11:33:00 +0000</pubDate><guid>//bluepie.in/2025/06/building-an-ip-based-firebase-ratelimiter/</guid><description>
 &lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
 &lt;p&gt;I have a project that I wrote 7 years ago, its still running on firebase.. no hickups (I had to occusionally update to a new node lts environment).. but it still worsks, at the time of writing/ implementing, ratelimiter was not implemented, So everyonce in a while I see the request logs and I see some IPs hitting the server with 1000s of requests, judging from the rquest.. its easy to distinguish them as bots and scanners. I have to weed them out, but I have to write it in a way that will not use unnecessary firestore reads and writes. (yea I also used firestore for this probject)&lt;/p&gt;
 &lt;h2 id=&#34;constraints-before-going-in&#34;&gt;Constraints before going in&lt;/h2&gt;
@@ -1771,55 +1876,4 @@ like I said in the begining personal udpate.&lt;/p&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;Electron is fun, using exisiting tech that we already know to speed up the dev process to deliver quick.. maybe I will cover bundling/building in a diff post..if I feel that I can contribute something different than what is already present all over the internet.&lt;/p&gt;
 &lt;p&gt;I made the bad desicision of looking back into my past.. I shouldn&amp;rsquo;t have.. and tried to make contact.. why did I do that? (not influenced by core belief&amp;hellip;suggestions?) by the time I got a response, I was already regretting and back to my current self of just moving forward. all happended in july (remember future me!)&lt;/p&gt;
-&lt;p&gt;The thing about memories,it has proven me once again. Since I started to write..complete and had this post in draft for months, I already forgot a lot.. if I remembered all the things from the begining paragraph while making decisions over the last months, I would have made differnet decisions. Memory is really important to _ your _ &amp;amp; _.. (future me remebers?) maybe I can build something for me that keeps track of all these.. with a search user interface and a keyword.. so I can make an informed decision?? google tasks, keep already do this.. no?..something to think about for me. Hope future me reads this and realises how important some small things can be.&lt;/p&gt;</description></item><item><title>Birthday Month 2023, Reflection &amp; Goals</title><link>//bluepie.in/2023/08/birthday-month-reflection/</link><pubDate>Mon, 21 Aug 2023 02:06:53 +0000</pubDate><guid>//bluepie.in/2023/08/birthday-month-reflection/</guid><description>
-&lt;p&gt;This is personal post, not about tech.. if anyone other than me is reading this.. ignore this if you wanted somehting technical.&lt;/p&gt;
-&lt;p&gt;I can not belive, its been already 3 years &lt;a href=&#34;https://bluepie.in/2020/08/future/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;since this post&lt;/a&gt;. Covid really took 2 years from my life real quick. I dont know If I&amp;rsquo;d be in a better/ lesser position if it were not for covid though.&lt;/p&gt;
-&lt;p&gt;I started this draft on august 21 and as i am inching each day towards my birthday and beyond. okey so lets compare the posts from previous years, my predictions and what not.&lt;/p&gt;
-&lt;p&gt;I did a purchase with a huge sum of money, atleast my own money without the help/assistance of my parents, so it felt pretty good. Sometimes I think maybe its a bad idea? cuz some of the suggestions when I told others were invest it somewhere else and buy it through other means. Like I always say only future holds the truth.&lt;/p&gt;
-&lt;h2 id=&#34;reflection&#34;&gt;Reflection&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;For my future self&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Idk I feel like my judgement is clouded and I got distracted from my life/long term goal of comitting to open source.. or wait till you hear this delusionsal reasoning.. of maybe..maybe I might have leveled up and found something else? maybe.. Im doing a lot of travel back and forth.. and now since I&amp;rsquo;be been living with a close friend of mine in the work location, I had to socialize more.. which is not a bad thing.. I can not just sitback.. thinking and typing away on my keyboard.. while they were in the same/next room&amp;hellip;&lt;/p&gt;
-&lt;p&gt;Its like a limbo [removed&amp;hellip;]&lt;/p&gt;
-&lt;p&gt;Encrypting below and not removing, if future me forgets for some reason.&lt;/p&gt;
-&lt;p&gt;&amp;ldquo;U2FsdGVkX1+Z+HeoqIwG5YyizCq6IyINO1be3KxOWWzx6y1rvURg/YAzbhy0SxxQ
-HW3q9sdbRWrNTE57PJBcZFwVtT7NuGjLMPjiSxF1KnaTZ3JULiKbO+riM+TkkxfI
-Z0Yh2BKpSF/HRgdjI787sWXiShmJksyM+itfyO6PkcuI5Qiglq7on+ZzkOqbGID7
-Gj34igwMbpFQOxUzgtC9H6dIeUzTXjxlqPExZXaGtGxVBlQIHtAekFs8igqG3yn3
-OWNHmfbtBHcsA57i4CjOLnJ2VabrLkFX/oym0+6E8aQNiYYZtVf0dlRaAhTcE/vm&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;&amp;ldquo;U2FsdGVkX1+fnI5zDIHyEW0/HpvcfBw1dj7tPcFafQv8HXxlxffZgoluZx9tG7jP
-DZpgSrGa4Uq9CJbCvlin+yLMt7b7SFKRJt7xNkDXO0efAkZnXy/xPWWWA2ZXeUGq
-DN5YzMv6rLtXMISiFzNZHUMiq04mj0qyHAyxZQOLjwA=&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;&amp;ldquo;U2FsdGVkX19MbTbNNHu3p/uw0g+n4qUWxUhn9cbTLU75sG5oayaiiEoJ86S5O9NQ
-zRlF8ODh/y/Z/V0NF/6CTZyAyZKKw91ZtDt9lnCBaMijPUoCL2ShOmSm/ewRP8Q3
-Gjrb5A6Ml8xvhhuomeH37njHWg3112JR+zhJzJ1A+nXB8AJ9uyBhew+F0FYtNDu4
-AhPfDk1Kxs18nKkIs5cOZPptQ8p4fM8fOrvlxZOMdVwHOpCi7pnrHxf0aaBTFoy8
-1skzdWQ5C7k18lPAZig1cg==&amp;rdquo;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#OpenSSL 3.1.2 1 Aug 2023 (Library: OpenSSL 3.1.2 1 Aug 2023)
-#enc
-echo -n &amp;quot;string-to-encrypt&amp;quot; | openssl enc -aes-256-cbc -a -pbkdf2
-#dec
-echo -n &amp;quot;string-to-decrypt&amp;quot; | base64 -d | openssl enc -d -aes-256-cbc -A -pbkdf2
-#incorrect password will print random symbols
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/birthday-month-and-reflection/post-from-august-2019.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;above text from the images is from 4 years ago, like wtf&amp;hellip; I can not grasp time..&lt;/p&gt;
-&lt;p&gt;As i am sitting here writng in this void space at 1:42:14 am, I think to myslef&amp;hellip;wait im drifiting away again..nope. There are lot of distractions during the day time. Sometimes I get the best ideas and solve problems only during the night.. but why.. its not like I can note mute the nose during daytime, I have anc headphones, piano/guitar music, osts, game ost, and etc.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/birthday-month-and-reflection/post-from-august-2020.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;And the above text is from 2020, oh how naive I can be at times? Though I made some progress to contribute to opensource and also progressed in excelling in a new domain. but professionally, I moved to a new company and there I started working in java. Which is not the new domain I told I would pursue. Though for open source I am maintaining some apps for android.&lt;/p&gt;
-&lt;h2 id=&#34;what-am-i-gona-do-this-year&#34;&gt;What am I gona do this year?&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;In terms of Health&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;During the covid period and after, I became unfit, this i realized after during the tavesl between chennain and hometown, I would feel uneasy flexing hy body and I had no stamina, and when I compared photos, it became obvious.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/birthday-month-and-reflection/august-post-2023-taken-2020.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;pic from 2021, during my old office&amp;rsquo;s tour - (though I look skinny (lost muscle mass after going to Chennai), I am perfectly healthy) after this I gained weight, developed love-handles which is hardest to lose, as I an writing, drafting this.. I&amp;rsquo;ve already started to workout more, the goal here is to build my old stamina and going back to gym.. yea..back. I used to go to gym on college, at that time I gained weight then when i moved to chennai, lost weight, then when I got back to home during covid, gained a lot of weight..&lt;/p&gt;
-&lt;p&gt;below is the pic of me from 2023 thought I kinda don&amp;rsquo;t look unhealthy, I am unhealthy here, the shirt is covering my belly and love-handles.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/birthday-month-and-reflection/august-post-2023-taken-2023.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;For this year, my goal is to become fit, already on a xx+ day streak at the time of writing this.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;In terms of Job&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;So here is my goal, I wana move to an even better comapany and expand my knowledge or work here at current compay (vz at the time of writing this) but go to higher designation (SDE II to higher) or even better like my friend who is working remote, find a job that has full time remote. ~review it next year..okey?&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;In terms of Open Source&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;With an office job, social life,..nd all the other distractions.. living at the work location.. its difficult for me to maintain a steady contribution to opensource.. I always think about it, but have somthing that has more priority than this. I guess for the coming year too, it will be the same? idk..lets hope for the best!&lt;/p&gt;
-&lt;h2 id=&#34;additionaly-notes&#34;&gt;Additionaly notes&lt;/h2&gt;
-&lt;p&gt;Removed a lot of stuff after reviewing it a couple of times..but some are encrypted, this was in a draft for a long time now.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;The thing about memories,it has proven me once again. Since I started to write..complete and had this post in draft for months, I already forgot a lot.. if I remembered all the things from the begining paragraph while making decisions over the last months, I would have made differnet decisions. Memory is really important to _ your _ &amp;amp; _.. (future me remebers?) maybe I can build something for me that keeps track of all these.. with a search user interface and a keyword.. so I can make an informed decision?? google tasks, keep already do this.. no?..something to think about for me. Hope future me reads this and realises how important some small things can be.&lt;/p&gt;</description></item></channel></rss>
