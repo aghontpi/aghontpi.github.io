@@ -1,4 +1,72 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Wed, 30 Jul 2025 23:53:43 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Using the best thinking models and not burn money (Jul 31st, 2025)</title><link>//bluepie.in/2025/07/july-2025/</link><pubDate>Wed, 30 Jul 2025 23:53:43 +0000</pubDate><guid>//bluepie.in/2025/07/july-2025/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 28 Sep 2025 22:49:48 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Better Downloader Self Hosted</title><link>//bluepie.in/2025/09/september-2025/</link><pubDate>Sun, 28 Sep 2025 22:49:48 +0000</pubDate><guid>//bluepie.in/2025/09/september-2025/</guid><description>
+&lt;h2 id=&#34;why&#34;&gt;Why&lt;/h2&gt;
+&lt;p&gt;I Need a better downloader that is on a server somewhere, it should have segmented downloads, It can have mutliple connections to a single download file that can maximize download speeds, The second problem to solve is that the media server if something has to be downloaded and watched, it has to be a torrent file, if its a direct file, the server, currently I have to login to a server and download with wget or aria2 via terminal.&lt;/p&gt;
+&lt;p&gt;Finding the right solution to selfhost.&lt;/p&gt;
+&lt;p&gt;I know of &lt;a href=&#34;https://github.com/aria2/aria2&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/aria2/aria2&lt;/a&gt; existence, I used to use this long ago when downloading things directly to server. it has a lot of features that I looked for and on top of that even more.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Command-line interface&lt;/li&gt;
+&lt;li&gt;Download files through HTTP(S)/FTP/SFTP/BitTorrent&lt;/li&gt;
+&lt;li&gt;Segmented downloading&lt;/li&gt;
+&lt;li&gt;and believe me there are lots more, check the official &lt;a href=&#34;https://github.com/aria2/aria2&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;github repo link&lt;/a&gt;.. i&amp;rsquo;ve provided.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;the-frontend&#34;&gt;The frontend&lt;/h2&gt;
+&lt;p&gt;My thought process is this, this is a command line utility, how will I use it with gui..? there are already similar projects which are called frontends for an already existing terminal utilites. so a quick google search, lead me to this project. &lt;a href=&#34;https://github.com/mayswind/AriaNg?tab=readme-ov-file&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/mayswind/AriaNg?tab=readme-ov-file&lt;/a&gt; , I liked the ui and it proviced all the configs and how it can configured.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Iimage showing aria2 initial configuration&lt;/em&gt; notice the port of the service, its 443, since im running on https and behind reverse proxy. Notice the secret token, this is important, without this, the FE will fail to connect.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/september-2025/initial-configuration.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;need-a-way-to-run-it&#34;&gt;Need a way to run it,&lt;/h2&gt;
+&lt;p&gt;I was ready to spend hours on this to configure, figure out how to integrate these too separate programs.. but then since it has a lot of popularity.. 10k+ starts on github, I searched for any existing solutions, that it might already have, which lead me to the finding of this project: &lt;a href=&#34;https://github.com/hurlenko/aria2-ariang-docker&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/hurlenko/aria2-ariang-docker&lt;/a&gt;, Now I have an existing project that I can self host. I just need to run it on my server with custom configurations and reverse proxy it on my existing server which has nginx running. at some point I have to check out and configure caddy.. but thats for another day.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;image showing aria2 download options&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/september-2025/download-link.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;configurations&#34;&gt;Configurations&lt;/h2&gt;
+&lt;p&gt;I use podman to run all the services instead of docker, so based on the docker image, I came up with the following command to run it on my server.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Docker/ Podman&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;podman run -d \
+--name=aria2-ui-idm \
+-e ARIA2RPCPORT=6800 \
+-e RPC_SECRET=&amp;lt;REDACTED&amp;gt; \
+-p 5050:8080 \
+-p 6800:6800 \
+-v /mnt/torrents:/aria2/data \
+-v /var/oled/aria2/config:/aria2/conf \
+--restart unless-stopped \
+docker.io/hurlenko/aria2-ariang:latest
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next comes the nginx config, I use the following nginx configuration to reverse proxy the requests to the aria2 container. Port 5050 is the web ui port.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt; # Proxy requests to the Ariang Web UI
+location / {
+proxy_pass http://127.0.0.1:5050;
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto $scheme;
+proxy_read_timeout 999999999;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now the frontend has to connect to the aria2 rpc service, which is exposed on port 6800 on the container, so we are proxying that too.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt; # Proxy WebSocket requests to the Aria2 RPC service
+location /jsonrpc {
+proxy_pass http://127.0.0.1:6800/jsonrpc;
+proxy_http_version 1.1;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection &amp;quot;upgrade&amp;quot;;
+proxy_set_header Host $host;
+# Set a long timeout for the RPC connection
+proxy_read_timeout 999999999;
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I also configured ssl on the server, but ignoring it here on explanations.&lt;/p&gt;
+&lt;h2 id=&#34;how-it-works&#34;&gt;How it works&lt;/h2&gt;
+&lt;p&gt;The FE layer connect with the terminal utility through post request or websocket, we have to configure the first time we land on the Frontend UI, these requests have to be authenticated and have a secret token, that must be configured on the server.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;image showing download options&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/september-2025/downloading-1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;image showing segmented download&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/september-2025/downloading-2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;In combination with media server, torrent and downloader, Its easier for me to get anyting on the media server/ download anything that I need, I&amp;rsquo;ve also configured copy party on my server, so Its easy to manage, download/ uplaod files on my server now, I&amp;rsquo;ll write about it someday. A long waiting requirement that I&amp;rsquo;ve been putting off..is finally done.&lt;/p&gt;
+&lt;h2 id=&#34;personal-updates&#34;&gt;Personal updates&lt;/h2&gt;
+&lt;p&gt;I thought of holding off marriage, due to recent events, I think its best that I didn&amp;rsquo;t rush through marriage and take decisions drastically (I&amp;rsquo;ve updated this section on oct 15&amp;rsquo;th 2025). As for my counter part, she agreed on the same, though I initially asked her to wait, she also thinks waiting for now is the best way forward.. for people who dont&amp;rsquo; follow or in some weird case.. if I dont follow.. read back the previous posts.&lt;/p&gt;
+&lt;p&gt;I want to look back to this one day in the future and add comments/ updates and see how I feel.&lt;/p&gt;</description></item><item><title>Using the best thinking models and not burn money (Jul 31st, 2025)</title><link>//bluepie.in/2025/07/july-2025/</link><pubDate>Wed, 30 Jul 2025 23:53:43 +0000</pubDate><guid>//bluepie.in/2025/07/july-2025/</guid><description>
 &lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
 &lt;p&gt;I&amp;rsquo;ve been having a dilemma, I don&amp;rsquo;t want to pay open ai the monthly 20$ subscription, but I want to use the latest and greatest model on some of the problems I have to reduce time. How can I achieve this? I&amp;rsquo;ve already mentioned in a previous writing last year.. that I use open api keys. I started using mobile and desktop clients with just the api keys. Couple months ago OpenAI also reduced the pricing of o3 model by 80%, I&amp;rsquo;ve been using the ai very actively, trying to burn my credits as soon as possible.&lt;/p&gt;
 &lt;h2 id=&#34;deciding-on-a-budget&#34;&gt;Deciding on a budget.&lt;/h2&gt;
@@ -1045,6 +1113,10 @@ Head over to the &lt;a href=&#34;https://github.com/revanced/revanced-patches&#3
 &lt;td&gt;gms-core-jan2025&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;//bluepie.in/attachments/jan2025/app.revanced.android.gms-240913008-signed.apk&#34;&gt;Download&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;gphotos-patched-aug-2025&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;//bluepie.in/attachments/aug2025/gphotos-patched-aug-2025.apk.zip&#34;&gt;Download&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
@@ -1802,78 +1874,4 @@ podman ps
 &lt;h2 id=&#34;personal-update-rant-about-past-backstory&#34;&gt;Personal update - Rant about past - Backstory&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;This is usually at the start of each post, but I thought it would be better suited at the bottom from now on.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Back before I got a job, basically a broke ass student, I/ we/ everyone used to pirate entertainment content all the time, u name it, movies, tv shows, music..etc, those times were before the JIO era, back when 59kbps was the unlimited internet provided by BSNL for everyone, youtube videos where limited to 240/ 360p, Aor downloading a show or game, we would run it for days, I vividly remember my friend downloading a show with 600+ episodes show for multiple days, now we got unlimited 5g, 200 Mbps unlimited broadband.. boy times have changed. I have to note it down somewhere..make sure future me remembers.&lt;/p&gt;
-&lt;p&gt;After I got my job and the JIO internet era, buying subscriptions became a common thing&amp;hellip; everyone was on the bandwagon&amp;hellip; I came in late but I did try the subscription things before I went with this approach, I knew there were alternatives and I could still pirate stuff. But if I paid the subscription, it is accessible with a click of a button. While writing this I am reminded of something..that it has made us lazy.&lt;/p&gt;</description></item><item><title>Overcoming a limitation in Electron</title><link>//bluepie.in/2023/09/electron-views/</link><pubDate>Thu, 21 Sep 2023 06:03:26 +0000</pubDate><guid>//bluepie.in/2023/09/electron-views/</guid><description>
-&lt;p&gt;Hey, what&amp;rsquo;s going on with you, hopefully good things, a small personal update, I think I lost focus on my goals for almost a 1.6 years, right after I joined vz, maybe its beause this is the first ime I ever switched my official day time job, wtf, time..time..time it moves soo fast, nowadays literally everthing takes soo much time in this attention seeking nightmare.. wtf, you can not even ignore most of the things, otherwise you will be an outcast, Something happened and it gave me a wakeup call on why I wanted my life goals on the first place, then I realized, &amp;ldquo;you are the person shaped by your memories, at least your behaviour should reflect it&amp;rdquo;, because If I still had my old memories and experiences I would have not changed courses? doing all the things that external factors influences me, my future self can agree or disagree on this.&lt;/p&gt;
-&lt;h2 id=&#34;electron&#34;&gt;Electron&lt;/h2&gt;
-&lt;p&gt;I haven&amp;rsquo;t worked in electron before, embedded view and browser views are three different ways to build the UI for your electron app&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;iframe tag&lt;/li&gt;
-&lt;li&gt;webview tag&lt;/li&gt;
-&lt;li&gt;BrowserView&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Officailly in the docs there is note asking people to not use webiew though, &lt;a href=&#34;https://www.electronjs.org/docs/latest/api/webview-tag#warning&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Important Note: we do not recommend you to use WebViews&amp;rdquo;&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;what-why&#34;&gt;What &amp;amp; why&lt;/h2&gt;
-&lt;p&gt;Recently I&amp;rsquo;ve been tasked with creating an electron experience on my office job, sadly I can not talk about it though, but I can share how I solved some of the engineering problems though.&lt;/p&gt;
-&lt;h2 id=&#34;this-post-is-gona-be-detailing-about&#34;&gt;This post is gona be detailing about,&lt;/h2&gt;
-&lt;p&gt;Problem to solve:
-Overcoming the lack of support of z-Index on Electron Views&lt;/p&gt;
-&lt;h2 id=&#34;figma-design-views&#34;&gt;Figma design views&lt;/h2&gt;
-&lt;p&gt;Maybe this can be solved in a different way, maybe there is even an official solution, but when I searched for zindex for browser views, there was not any solution.&lt;/p&gt;
-&lt;p&gt;For the project, I needed to work with showing different views simultaneously at the same time.&lt;/p&gt;
-&lt;p&gt;All the views are maintained and accessbile in electron api&amp;rsquo;s, In addition to that, I built a wrapper Class that track all the windows in the app, It also trackts what is the current active view.&lt;/p&gt;
-&lt;h3 id=&#34;what-i-mean-by-main-view-current-active-view&#34;&gt;What I mean by main view/ current active view?&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/Solving an electron problem/view-expl-part-1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Section labelled as &amp;ldquo;1&amp;rdquo; is like a sidebar to a website, its main purpose of it is to switch between showing content on section labelled as &amp;ldquo;2&amp;rdquo;.&lt;/li&gt;
-&lt;li&gt;Both &amp;ldquo;1&amp;rdquo; &amp;amp; &amp;ldquo;2&amp;rdquo; are &lt;a href=&#34;https://www.electronjs.org/docs/latest/api/browser-view&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;BrowserViews&lt;/a&gt; positioned absolutely using &lt;a href=&#34;https://www.electronjs.org/docs/latest/api/browser-view#viewsetboundsbounds-experimental&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;set bounds&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;the-problem&#34;&gt;The problem&lt;/h3&gt;
-&lt;p&gt;If the view for the left sidebar (section &amp;ldquo;1&amp;rdquo; from image) has to show a popup, that is beyound the bounds (width and height), the content in the view will be cut-off by the main view (section &amp;ldquo;2&amp;rdquo; of the image). In browser if we were to do this, we can set &lt;code&gt;z-index&lt;/code&gt; to overcome the issue, this is true even for electron, if we have used the &lt;code&gt;iframe&lt;/code&gt; instead of &lt;code&gt;BrowserView&lt;/code&gt;,&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/Solving an electron problem/view expl - part 3.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
-&lt;p&gt;Since &lt;code&gt;BrowserViews&lt;/code&gt; does not have &lt;code&gt;z-index&lt;/code&gt;, I have to find a different solution. In &lt;code&gt;BrowserView&lt;/code&gt; the last added window is always placed on top of other windows. So this is the reason, the sidebar view (section 1) has its view (view that is out of bounds) cut-off. But luckly we have this &lt;a href=&#34;https://www.electronjs.org/docs/latest/api/browser-window#winsettopbrowserviewbrowserview-experimental&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;api (setTopBrowserView)&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;[API definition] - win.setTopBrowserView(browserView)&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Raises browserView above other BrowserViews attached to win. Throws an error if browserView is not attached to win.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Using &lt;code&gt;setTopBrowserView&lt;/code&gt; I can make the sidebar view to come front, wheneven I want to show a popup or any view that is out of bounds (width and height exceeds the bounds in the view).&lt;/p&gt;
-&lt;h3 id=&#34;how-do-we-do-this&#34;&gt;How do we do this?&lt;/h3&gt;
-&lt;p&gt;For my usecase, I wanted to show a popup that will be out of bounds when user interacts with the contents of the sidebar, so I have a trigger which I can use when to show or hide out of bounds contents.&lt;/p&gt;
-&lt;p&gt;I can listen for mouse events on the side bar view (section &lt;code&gt;1&lt;/code&gt; from the image), whenever the mouse enters the sidebar view I can use &lt;code&gt;setTopBrowserView&lt;/code&gt; to set sidebarview as the &lt;code&gt;top&lt;/code&gt; view.&lt;/p&gt;
-&lt;p&gt;Now all the contents. Normal and out of bounds contents are visible, as it is the top view.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/Solving an electron problem/view expl - part 2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;On mouse leave, I can then set the original view that was top view to reset the behaviour.&lt;/p&gt;
-&lt;h3 id=&#34;how-do-we-do-this-in-react&#34;&gt;How do we do this in react?&lt;/h3&gt;
-&lt;p&gt;Code is pretty straight forward and will make it easy to understand the logic.&lt;/p&gt;
-&lt;p&gt;render part&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;&amp;lt;div
-...
-ref={divListenerRef}
-&amp;gt;
-...
-...
-...
-&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;setting up the mouse enter and mouse leave triggers&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;useEffect(() =&amp;gt; {
-if (divListenerRef &amp;amp;&amp;amp; divListenerRef.current) {
-console.debug(&#39;[setting bounds triggers]&#39;);
-divListenerRef.current.addEventListener(&#39;mouseenter&#39;, callbackToExpand);
-divListenerRef.current.addEventListener(&#39;mouseleave&#39;, callbackToRestrict);
-}
-return () =&amp;gt; {
-if (divListenerRef.current) {
-console.debug(&#39;[cleaning up triggers]&#39;);
-divListenerRef.current.removeEventListener(&#39;mouseenter&#39;, callbackToExpand);
-divListenerRef.current.removeEventListener(&#39;mouseleave&#39;, callbackToRestrict);
-}
-};
-}, [popupCoordinates, popupProfile]);
-#popupCoordinates, popupProfile are just x,y values &amp;amp; status, whether to show or hide the popup
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;like I said code is self explanatory.
-I&amp;rsquo;ve had this in draft for over couple of months now.. I wanted to check office laptop to refer my code to be accurate, finally had the urge to open office laptop..at 408am.
-like I said in the begining personal udpate.&lt;/p&gt;
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Electron is fun, using exisiting tech that we already know to speed up the dev process to deliver quick.. maybe I will cover bundling/building in a diff post..if I feel that I can contribute something different than what is already present all over the internet.&lt;/p&gt;
-&lt;p&gt;I made the bad desicision of looking back into my past.. I shouldn&amp;rsquo;t have.. and tried to make contact.. why did I do that? (not influenced by core belief&amp;hellip;suggestions?) by the time I got a response, I was already regretting and back to my current self of just moving forward. all happended in july (remember future me!)&lt;/p&gt;
-&lt;p&gt;The thing about memories,it has proven me once again. Since I started to write..complete and had this post in draft for months, I already forgot a lot.. if I remembered all the things from the begining paragraph while making decisions over the last months, I would have made differnet decisions. Memory is really important to _ your _ &amp;amp; _.. (future me remebers?) maybe I can build something for me that keeps track of all these.. with a search user interface and a keyword.. so I can make an informed decision?? google tasks, keep already do this.. no?..something to think about for me. Hope future me reads this and realises how important some small things can be.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;After I got my job and the JIO internet era, buying subscriptions became a common thing&amp;hellip; everyone was on the bandwagon&amp;hellip; I came in late but I did try the subscription things before I went with this approach, I knew there were alternatives and I could still pirate stuff. But if I paid the subscription, it is accessible with a click of a button. While writing this I am reminded of something..that it has made us lazy.&lt;/p&gt;</description></item></channel></rss>
