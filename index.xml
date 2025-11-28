@@ -1,4 +1,62 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Tue, 14 Oct 2025 19:36:37 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>&#34;Slop Generators - Make no mistake, they cannot think&#34;, as of Nov 25th, 2025</title><link>//bluepie.in/2025/10/oct-2025/</link><pubDate>Tue, 14 Oct 2025 19:36:37 +0000</pubDate><guid>//bluepie.in/2025/10/oct-2025/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Tue, 18 Nov 2025 18:25:04 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Custom CSS Utility - npm package - Open source</title><link>//bluepie.in/2025/11/nov-2025/</link><pubDate>Tue, 18 Nov 2025 18:25:04 +0000</pubDate><guid>//bluepie.in/2025/11/nov-2025/</guid><description>
+&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
+&lt;p&gt;For my projects, I use &lt;a href=&#34;https://meyerweb.com/eric/tools/css/reset/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;reset.css&lt;/a&gt; and a set of utility classes without external libraries. (which I learnt from my prev company, I learnt a lot from there, when I joined a big company.. it was not the same, enterprise wise its different yea..sure but it has its pros and cons), I move them from project to project. This eliminates it and makes it easier to maintain and view the docs.&lt;/p&gt;
+&lt;p&gt;I wanted a minimal CSS utility that provides just basic features to get started quickly without the bloat of larger frameworks.&lt;/p&gt;
+&lt;h2 id=&#34;what-i-did&#34;&gt;What I did&lt;/h2&gt;
+&lt;p&gt;Given the background and the context, I was in the process of changing the UI/Frontend of an existing project. I moved all the reset css to a file, then wrote all the utilities to a separate file.&lt;/p&gt;
+&lt;p&gt;Then came the idea of publishing the same, so I moved all the scss code from the main project, put it inside a new folder, initialised it with a package config and bundled it with &lt;a href=&#34;https://rollupjs.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;rollup&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;At this current state, I could not make it public because&amp;hellip; first I had to decouple the existing logic from the codebase to the project, then I looked at the docs and with help of ai, wrote helper functions and saw the standard and fixed my implementations and made it ready for publishing.&lt;/p&gt;
+&lt;h2 id=&#34;how-i-build-them&#34;&gt;How I build them&lt;/h2&gt;
+&lt;p&gt;It&amp;rsquo;s pretty straightforward, if you look at them.. gosh the tooling came a long way since the &lt;a href=&#34;https://gulpjs.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;gulp js&lt;/a&gt; tooling era.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt; &amp;quot;clean&amp;quot;: &amp;quot;rimraf dist docs/.vitepress/dist&amp;quot;,
+&amp;quot;build:theme&amp;quot;: &amp;quot;rollup -c&amp;quot;,
+&amp;quot;docs:dev&amp;quot;: &amp;quot;vitepress dev docs&amp;quot;,
+&amp;quot;docs:build&amp;quot;: &amp;quot;pnpm run build:theme &amp;amp;&amp;amp; vitepress build docs&amp;quot;,
+&amp;quot;docs:preview&amp;quot;: &amp;quot;vitepress preview docs&amp;quot;,
+&amp;quot;format&amp;quot;: &amp;quot;prettier --write .&amp;quot;,
+&amp;quot;build&amp;quot;: &amp;quot;pnpm run clean &amp;amp;&amp;amp; pnpm run build:theme &amp;amp;&amp;amp; pnpm run docs:build&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;how-to-install-use-it&#34;&gt;How to install &amp;amp; use it&lt;/h2&gt;
+&lt;p&gt;You can install with &lt;a href=&#34;https://www.npmjs.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;npm&lt;/a&gt;; it&amp;rsquo;s here &lt;a href=&#34;https://www.npmjs.com/package/minimal-css-utility&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://www.npmjs.com/package/minimal-css-utility&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Use the following command with npm or other package managers, or you can even use a &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Glossary/CDN&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;CDN&lt;/a&gt;,&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;link
+rel=&amp;quot;stylesheet&amp;quot;
+href=&amp;quot;https://cdn.jsdelivr.net/npm/minimal-css-utility/dist/min.css&amp;quot;
+/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;npm install minimal-css-utility
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;then import this in your main css file,&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;@import &#39;minimal-css-utility/dist/min.css&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;css-scoping&#34;&gt;CSS Scoping&lt;/h2&gt;
+&lt;p&gt;I added the support to have css scopes, what this means is I can have multiple css frameworks and work on the same codebase, my project won&amp;rsquo;t interfere with anything.&lt;/p&gt;
+&lt;p&gt;Read more on how to implement it here. I&amp;rsquo;ve added an example here for &lt;a href=&#34;https://react.dev/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;react&lt;/a&gt;, but it should be the same for vanilla or other frameworks.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://bluepie.in/minimal-css-utility/getting-started/scoping.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://bluepie.in/minimal-css-utility/getting-started/scoping.html&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;the-docs&#34;&gt;The docs&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://bluepie.in/minimal-css-utility/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://bluepie.in/minimal-css-utility/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Since I used &lt;a href=&#34;https://vitejs.dev/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Vite&lt;/a&gt;, I saw the documentation system by them, it was quite nice to navigate through the docs and easy to setup, I find that sometimes I have to navigate to the codebase and look up a particular css class and probably change it, So I put the docs inside the same folder and wrote the generation scripts inside the &lt;a href=&#34;https://docs.npmjs.com/cli/v10/configuring-npm/package-json&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;package.json&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Writing the docs was very fun, Include my css file and use it&amp;hellip; like how a user would. Because of this&amp;hellip; I was able to figure out
+multiple wrong implementations, I was using them with wrong implementations all this time everywhere, I didnt realise it was wrong since I was just copying and moving these source files from one place to another.&lt;/p&gt;
+&lt;p&gt;check source examples here:
+- &lt;a href=&#34;https://github.com/aghontpi/minimal-css-utility/blob/main/docs/utilities/sizing.md?plain=1&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/aghontpi/minimal-css-utility/blob/main/docs/utilities/sizing.md?plain=1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;check some of the rendered examples there,
+- &lt;a href=&#34;https://bluepie.in/minimal-css-utility/utilities/positioning.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://bluepie.in/minimal-css-utility/utilities/positioning.html&lt;/a&gt;
+- &lt;a href=&#34;https://bluepie.in/minimal-css-utility/layout/grid.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://bluepie.in/minimal-css-utility/layout/grid.html&lt;/a&gt;
+- &lt;a href=&#34;https://bluepie.in/minimal-css-utility/utilities/flexbox.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://bluepie.in/minimal-css-utility/utilities/flexbox.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Writing the above gave me the idea that this is how I would test this: visually identify the issues after taking build, I can just skim through the docs of the places where I made changes in source code of utility classes and check only those affected places in docs, since I used the build from the css utility class, these changes would come here.&lt;/p&gt;
+&lt;p&gt;I looked up online, major big css frameworks employ similar and better versions of what I just said and there are testing frameworks that just do that, for ex: &lt;a href=&#34;https://github.com/garris/BackstopJS&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;BackstopJS&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;what-i-like-the-most-from-the-docs&#34;&gt;What I like the most from the docs&lt;/h2&gt;
+&lt;p&gt;I like the search functionality a lot, click search button or use the shortcut and starting to type, you see only the relevant information and takes me right to the spot, what and where I was looking.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/nov-2025/docs-ref.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;the-release-future-versions&#34;&gt;The release &amp;amp; Future versions&lt;/h2&gt;
+&lt;p&gt;Currently, it&amp;rsquo;s on npm and github, If I use additional things to my custom ui, I will add it here, make a new release, so it can be upgraded with version specific installs from npm. so it wont break anything.&lt;/p&gt;
+&lt;p&gt;npm: &lt;a href=&#34;https://www.npmjs.com/package/minimal-css-utility&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://www.npmjs.com/package/minimal-css-utility&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;github: &lt;a href=&#34;https://github.com/aghontpi/minimal-css-utility/releases&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/aghontpi/minimal-css-utility/releases&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;personal-updates&#34;&gt;Personal updates&lt;/h2&gt;
+&lt;p&gt;The last month&amp;rsquo;s feeling of just an excel sheet because it happened to a person close to me. Their problem is still not resolved it&amp;rsquo;s the second half of Nov.. like heck?. the people who were in charge wrote a lame-ass email of the same thing after 1 month of delay, basically they came back after enjoying diwali and holidays, enjoying their leaves, personally I think I thought.. they just didn&amp;rsquo;t want to deal with all this. The managers who were idiotic saying to a person who was in that situation &amp;ldquo;Now you are the one to help us&amp;rdquo;, just after hearing the announcement, the numbness of that lady is outstanding, I hope she gets what she deserves, karma will come back for her. To see they are having the same kind of feeling they put the person within a short span of time was eye opening.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s amplified by this month&amp;rsquo;s announcement of VZ, search Vz, Nov, 2025 (me) you will remember and find it in news articles. Do you remember all the people packing? Im sure you do, For me, I was thinking I was doing my job, make progress every day, handling my releases well.&lt;/p&gt;
+&lt;p&gt;The ugly of corporate world, a lot of vendors make the company shit, the developers dont know what they are doing, they are just here for the paycheck with the minimal/ no amount of work, there is no engineering happening even in higher and lower levels, seeing all the frenzy when an announcement is made for budget cuts and etc, they started putting effort again.. I was expecting a level of standard and I can&amp;rsquo;t put a single word to explain it.. again going back.. I think its better for me to just be my own boss, I can&amp;rsquo;t expect these people to have the same level of dedication, integrity..etc&lt;/p&gt;</description></item><item><title>&#34;Slop Generators - Make no mistake, they cannot think&#34;, as of Nov 25th, 2025</title><link>//bluepie.in/2025/10/oct-2025/</link><pubDate>Tue, 14 Oct 2025 19:36:37 +0000</pubDate><guid>//bluepie.in/2025/10/oct-2025/</guid><description>
 &lt;h2 id=&#34;quote-i-liked-from-asahi-linux&#34;&gt;Quote I liked from Asahi Linux&lt;/h2&gt;
 &lt;p&gt;I&amp;rsquo;ve read the quote, in an open source AI contribution page, exact word for word, &lt;a href=&#34;#Quote I liked from Asahi Linux&#34;&gt;quote&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://asahilinux.org/docs/project/policies/slop/#its-just-matmul&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://asahilinux.org/docs/project/policies/slop/#its-just-matmul&lt;/a&gt;&lt;/p&gt;
@@ -1694,118 +1752,4 @@ attributes: true,
 &lt;p&gt;&lt;a href=&#34;https://chromewebstore.google.com/detail/mute-audio-ads-on-website/lhgmlkkpdhcgenmglmbomhemkkgccjef&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://chromewebstore.google.com/detail/mute-audio-ads-on-website/lhgmlkkpdhcgenmglmbomhemkkgccjef&lt;/a&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;h3 id=&#34;personal-update&#34;&gt;Personal update:&lt;/h3&gt;
-&lt;p&gt;Brought my mom to chennai; im getting home food again. close friend left to hometown. Mom asking me to buy stuff for the new home; so doing that. Going pretty well~&lt;/p&gt;</description></item><item><title>How I Set Up Nginx and SSL for My Media Server and Torrent</title><link>//bluepie.in/2023/12/how-i-configure-nginx-for-my-server-and-torrent/</link><pubDate>Thu, 07 Dec 2023 20:49:16 +0000</pubDate><guid>//bluepie.in/2023/12/how-i-configure-nginx-for-my-server-and-torrent/</guid><description>
-&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;
-&lt;p&gt;This post is a nginx configurations of my &lt;a href=&#34;https://bluepie.in/2023/11/self-hosted-netflix-replacer/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;How I replaced Netflix and started using my media server for over 2 years now&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;config of jellyfin&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We already run jellyfin inside podman and expose the service on port 8096, so we use nginx to handle requests to domain &amp;lsquo;media.bluepie.in&amp;rsquo;, which connects to jellyfin podman instance.&lt;/p&gt;
-&lt;p&gt;I point my domain (through domain provider) to the ip address of the server im running my jellyfin instance, then use nginx to serve the requests, the nginx configs are located inside config folders and are included in main file.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Setting Up Nginx (Reminder for me, others ignore)&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Install Nginx.&lt;/li&gt;
-&lt;li&gt;Then, make a config file in the conf.d folder. I use one config file for each domain and add it to the main Nginx config with /etc/nginx/conf.d/*.conf&lt;/li&gt;
-&lt;li&gt;Check Nginx config: &lt;code&gt;nginx -t&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Restart Nginx: &lt;code&gt;sudo service nginx restart&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Reload Nginx: &lt;code&gt;sudo service nginx reload&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Config file for media server&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt; server {
-server_name media.bluepie.in;
-location / {
-proxy_pass http://127.0.0.1:8096;
-proxy_pass_request_headers on;
-proxy_set_header Host $host;
-proxy_set_header X-Real-IP $remote_addr;
-proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-proxy_set_header X-Forwarded-Proto $scheme;
-proxy_set_header X-Forwarded-Protocol $scheme;
-proxy_set_header X-Forwarded-Host $http_host;
-proxy_set_header Upgrade $http_upgrade;
-proxy_set_header Connection $http_connection;
-proxy_buffering on;
-proxy_redirect / / ;
-proxy_cookie_path / /;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;config of torrent&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Instead of maintaining a separate domain for running qBittorrent, I utilize the main domain but with the &amp;lsquo;/torrent/&amp;rsquo; prefix. To enhance security and prevent others from accessing it, I implement two layers of protection: HTTP basic authentication. For this purpose, a new .htpasswd file is created and linked with Nginx for handling HTTP basic login before accessing qBittorrent. After the initial login to qBittorrent, the username and password are configured. Subsequently, during subsequent logins, users will be prompted for HTTP basic authentication first and then for qBittorrent authentication.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Creating a .htpasswd File for Authentication:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;(self note: The auth_basic and auth_basic_user_file directives are built-in and don&amp;rsquo;t require any extra modules)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Creation:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;htpasswd -c /etc/nginx/.htpasswd &amp;lt;username&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Subsequently, specify its usage in Nginx:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt;auth_basic &amp;quot;Restricted Access&amp;quot;;
-auth_basic_user_file /etc/nginx/.htpasswd;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Config to be added to main nginx config&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt; location /torrent/ {
-proxy_pass http://127.0.0.1:8181/;
-proxy_set_header Host $host;
-proxy_set_header Upgrade $http_upgrade;
-proxy_set_header Connection upgrade;
-proxy_set_header Accept-Encoding gzip;
-proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-proxy_set_header X-Forwarded-Proto $scheme;
-proxy_set_header X-Forwarded-Port $server_port;
-auth_basic &amp;quot;restricted space&amp;quot;;
-auth_basic_user_file /etc/nginx/.htpasswd;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;!-- - ssl config for all sites, including a bounds dns, tell that I should automate based on godaddy api. --&gt;
-&lt;p&gt;I automate SSL certificate renewals across my devices with Certbot, ensuring secure, uninterrupted service without manual oversight. The heart of this automation is a daily cron job configured to run Certbot&amp;rsquo;s renewal command, specifically opting for the &amp;ndash;preferred-chain &amp;ldquo;ISRG Root X1&amp;rdquo; to ensure broad compatibility (particularly for setting up custom DNS servers on Android devices that are operating on version 10 or higher). Here&amp;rsquo;s the crux of the setup:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;SHELL=/bin/bash
-PATH=/sbin:/bin:/usr/sbin:/usr/bin
-10 0 * * * /usr/bin/certbot renew --preferred-chain &amp;quot;ISRG Root X1&amp;quot; &amp;gt;&amp;gt; /home/&amp;lt;user&amp;gt;/cronlog.log 2&amp;gt;&amp;amp;1
-# The schedule 10 0 * * * means the task will run at 12:10 AM every day server time.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This approach leverages the reliability of cron for scheduling and Certbot for execution, automating the renewal process and logging outcomes for easy monitoring. It&amp;rsquo;s a streamlined, efficient method.&lt;/p&gt;
-&lt;h3 id=&#34;an-insight-into-dns-renewal-challenges-unrelated-to-jellyfin-or-qbittorrent&#34;&gt;An Insight into DNS Renewal Challenges (Unrelated to Jellyfin or qBittorrent)&lt;/h3&gt;
-&lt;!-- usually a tmux shell is running tmux ls
-- login to server
-- check cronlog.log in home directory
--I wrote for myself, found inside adguard
-certbot certonly --manual --preferred-challenges=dns --preferred-chain=&#34;ISRG Root X1&#34;
-- certificate for dns.bluepie.in, media.bluepie.in,uat.bluepie.in will automatically renew.
-- have to manually renew the certificate for *.dns.bluepie.in
-- certificates are stored in /etc/letsencrypt/live/dns.bluepie.in-0001
-- copy the pri.pem &amp; fullchain.pem to /home/opc/adguard/conf
-::raw_log_start::
-[root@instance-20220718-0253 dns.bluepie.in-0001]# certbot certonly --manual --preferred-challenges=dns --preferred-chain=&#34;ISRG Root X1&#34;
-Saving debug log to /var/log/letsencrypt/letsencrypt.log
-Please enter the domain name(s) you would like on your certificate (comma and/or
-space separated) (Enter &#39;c&#39; to cancel): *.dns.bluepie.in
-Renewing an existing certificate for *.dns.bluepie.in
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Please deploy a DNS TXT record under the name:
-_acme-challenge.dns.bluepie.in.
-with the following value:
-fWQdh1jwhPtKe8Wz1NMaX2dhNt_a2Rd4iM_pYZjTIHo
-Before continuing, verify the TXT record has been deployed. Depending on the DNS
-provider, this may take some time, from a few seconds to multiple minutes. You can
-check if it has finished deploying with aid of online tools, such as the Google
-Admin Toolbox: https://toolbox.googleapps.com/apps/dig/#TXT/_acme-challenge.dns.bluepie.in.
-Look for one or more bolded line(s) below the line &#39;;ANSWER&#39;. It should show the
-value(s) you&#39;ve just added. --&gt;
-&lt;p&gt;Every time I want to renews the whildcard DNS domain (i.e) *.dns.bluepie.in, I start with logging in and checking the cronlog.log in my logs Directory. This log helps me keep track of the automated renewals for all services running in that server.&lt;/p&gt;
-&lt;p&gt;This setup works well for most of my domains, automatically renewing their certificates. However, there&amp;rsquo;s a catch with the wildcard domain *.dns.bluepie.in which requires a manual renewal process every two months. After renewing, I manually move the private key and pem files do dns service so that it can read and update the certificates.&lt;/p&gt;
-&lt;p&gt;The manual part involves adding a DNS TXT record for _acme-challenge.dns.bluepie.in. and waiting for it to be verified. This process, although straightforward, is a bit of a hassle because it can&amp;rsquo;t be automated with my current setup. After updating the DNS record, I always double-check to make sure it&amp;rsquo;s correctly deployed using the Google Admin Toolbox: &lt;a href=&#34;https://toolbox.googleapps.com/apps/dig/#TXT/_acme-challenge.dns.bluepie.in&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://toolbox.googleapps.com/apps/dig/#TXT/_acme-challenge.dns.bluepie.in&lt;/a&gt;. This tool confirms the record is live, which is crucial before proceeding with the certification.&lt;/p&gt;
-&lt;p&gt;The Google Admin Toolbox, specifically the &amp;ldquo;Dig&amp;rdquo; tool, is a web-based version of the Unix dig command, which I often use for DNS verification. This tool is part of a suite designed to troubleshoot Google Workspace services and is particularly handy for checking DNS record propagation, such as the TXT records required for SSL certificate validation. I use this tool to confirm that the record is correctly propagated across the DNS system. This step is crucial because the validation of SSL certificates by Let&amp;rsquo;s Encrypt (or any other certificate authority that supports DNS-01 challenge). For more detailed functionalities and tools, you can explore the toolbox directly at &lt;a href=&#34;https://toolbox.googleapps.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;toolbox.googleapps.com​&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;ve been thinking about solving this issue by integrating with the GoDaddy API for DNS wildcard renewal. Doing this would remove the need for manual intervention every two months, making the process smoother and fully automated. It&amp;rsquo;s definitely something I plan to work on in the future to streamline my server management tasks.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;personal-update&#34;&gt;Personal Update&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;This section typically opens each of my posts, a tradition spanning many years. However, I&amp;rsquo;ve decided it might be better placed at the end moving forward.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;ve begun to engage heavily with LeetCode this year, a detail I haven&amp;rsquo;t shared in my posts. So, in case future me forgets, I&amp;rsquo;m jotting it down here for remembrance. Remember &lt;a href=&#34;https://adventofcode.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;AOC&lt;/a&gt;, which I previously tackled in 2020 and maintained a GitHub repo &lt;a href=&#34;https://bluepie.in/2020/12/adventofcode-2020/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;? I&amp;rsquo;ve opted to take it on this year as well. Yes, even though my plate is overflowing, I&amp;rsquo;ve decided to add this to my queue&amp;hellip; I know, :facepalm:.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;ve leased a new place in Chennai (Mugalivakkam), roughly 6 kilometers from my current office. It&amp;rsquo;s a 2BHK flat with parking facilities. I moved in, stating that it would be a family residence, with plans for my parents to join me. This decision came after a series of abrupt changes. Initially, I had a different plan in mind, but it&amp;rsquo;s funny how things evolve up to the last moment. My friend from the police force, with whom I&amp;rsquo;ve lived since after COVID and who recently got posted in Chennai after passing his exams, is a close friend. So, despite only needing to be in the Chennai office two days every two weeks (totalling four days a month) and despite the office policy changing around August/September to require my presence two days every week, I opted for a permanent stay over the convenience of crashing at a friend&amp;rsquo;s place. My decision was influenced by several factors:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;My close friend, who I&amp;rsquo;ve known for eight years (time really flies), got a posting in Erode and plans to move out in December 2024. He had his transfer announced just before Diwali in 2023.&lt;/li&gt;
-&lt;li&gt;Parents take care of me, homemade food, household chores, them being atpeace without worring seeing me everyday.&lt;/li&gt;
-&lt;li&gt;The home-like setup for productivity and peace of mind.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I&amp;rsquo;m writing this update after December, so for me, December is already in the past. I&amp;rsquo;ve been sick and bedridden over Christmas, alone since my friends and family were in their hometowns, including my parents. Despite my mother&amp;rsquo;s insistence on coming over as soon as possible because of my neglect towards self-care and healthy eating, I plan to bring them here in January after Pongal 2024. This is another reason I chose an individual house over sharing a space with friends, opting for a PG, or having a flatmate.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;Brought my mom to chennai; im getting home food again. close friend left to hometown. Mom asking me to buy stuff for the new home; so doing that. Going pretty well~&lt;/p&gt;</description></item></channel></rss>
