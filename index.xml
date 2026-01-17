@@ -1,4 +1,19 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Tue, 18 Nov 2025 18:25:04 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Custom CSS Utility - npm package - Open source</title><link>//bluepie.in/2025/11/nov-2025/</link><pubDate>Tue, 18 Nov 2025 18:25:04 +0000</pubDate><guid>//bluepie.in/2025/11/nov-2025/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Mon, 12 Jan 2026 01:04:25 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Local Agent Workflows</title><link>//bluepie.in/2026/01/dec-2025/</link><pubDate>Mon, 12 Jan 2026 01:04:25 +0000</pubDate><guid>//bluepie.in/2026/01/dec-2025/</guid><description>
+&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;ve been mentioning these things in my previous posts. I don&amp;rsquo;t use AI to write these, but I use them as a way to fix spelling and grammar mistakes. There is also another way that I use these tools for, and that is for local workflows. Local workflows help writing automation scripts in natural language; you don&amp;rsquo;t have to write code and handle edge cases to cover it. Give an example and it will take it over. Of course, I&amp;rsquo;m overseeing what code it&amp;rsquo;s actually running throughout the whole process.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/dec-2025/customisatons-menu.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/dec-2025/list-of-workflows.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;what-i-mean&#34;&gt;What I Mean&lt;/h2&gt;
+&lt;p&gt;Take Antigravity for example, but this works in VSCode Copilot, Cursor, etc. It&amp;rsquo;s like a shortcut key creation. Once you create it, you run it with &amp;ldquo;/&lt;name-you-gave-for-workflow&gt;&amp;ldquo;&lt;/p&gt;
+&lt;h2 id=&#34;creating-a-workflow&#34;&gt;Creating a workflow&lt;/h2&gt;
+&lt;p&gt;It&amp;rsquo;s as simple as instructing a person on a task; AIs have come so far in very little time (as of Dec, 2025).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/dec-2025/automation.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Once the workflow is created, it&amp;rsquo;s simple to run it.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/dec-2025/workflow-runs.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;personal-update&#34;&gt;Personal Update&lt;/h2&gt;
+&lt;p&gt;So the office things came and went. December time usually there is a lot of free time, but this year, I have a deadline to work towards. I was assigned to a project and the deliverable is at Dec 29 for that microservice side. Though I have a ton of leaves, I can&amp;rsquo;t use them. The leaves will get wasted; I get 12 sick leaves, 12 casual leaves, then paid leaves. The sick and casual leaves don&amp;rsquo;t get transferred to the next year, so you have to use them within that year; they get credited at the start of every year.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve been seeing a lot of bus accidents of late, mostly when I&amp;rsquo;m driving to and back from my hometown and where I work. I&amp;rsquo;ll attach a HandBrake-processed video here for future me for reference, so you can remember.&lt;/p&gt;
+&lt;p&gt;Happy New Year and stay safe; see you next year~&lt;/p&gt;</description></item><item><title>Custom CSS Utility - npm package - Open source</title><link>//bluepie.in/2025/11/nov-2025/</link><pubDate>Tue, 18 Nov 2025 18:25:04 +0000</pubDate><guid>//bluepie.in/2025/11/nov-2025/</guid><description>
 &lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
 &lt;p&gt;For my projects, I use &lt;a href=&#34;https://meyerweb.com/eric/tools/css/reset/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;reset.css&lt;/a&gt; and a set of utility classes without external libraries. (which I learnt from my prev company, I learnt a lot from there, when I joined a big company.. it was not the same, enterprise wise its different yea..sure but it has its pros and cons), I move them from project to project. This eliminates it and makes it easier to maintain and view the docs.&lt;/p&gt;
 &lt;p&gt;I wanted a minimal CSS utility that provides just basic features to get started quickly without the bloat of larger frameworks.&lt;/p&gt;
@@ -1713,47 +1728,4 @@ git diff --staged | pbcopy
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;You can create ai assistant based on your needs to reduce your time working on things and increase your productivity.. these are the usecases I find for now.. should find more ones in future.&lt;/p&gt;
 &lt;h2 id=&#34;personal-update&#34;&gt;Personal update&lt;/h2&gt;
-&lt;p&gt;Found another frost, getting a lot of life experiences.. I know it will not work between surroundings and struggles for future, deciding on august 29th, hopefully they understand.. still want entire life. Suggestion from frost 2 is just live in the moment and enjoy?. Future me.. tell me how it is going?.. remember feb 2024?. Good luck, stay positive and have a little bit of hope!.&lt;/p&gt;</description></item><item><title>Creating and Publishing Chrome Extension in Chrome Store</title><link>//bluepie.in/2024/01/creating-and-publishing-chrome-extension-in-chrome-store/</link><pubDate>Wed, 03 Jan 2024 14:31:56 +0000</pubDate><guid>//bluepie.in/2024/01/creating-and-publishing-chrome-extension-in-chrome-store/</guid><description>
-&lt;h2 id=&#34;why-motivation&#34;&gt;Why &amp;amp; Motivation&lt;/h2&gt;
-&lt;p&gt;Wanted an adblocker for accuradio website, I just need to silence the ads on this website. How can it be done? Custom script that get injected into the page by some extensions such as tamper monkey, the disadvantage is u gotta install tamper monkey. The other idea I have in my brain is I Wanted to try out chrome extesnion that specifically does this job, since my current work needs me work on chrome extensions.&lt;/p&gt;
-&lt;p&gt;Wanted to do for a while, the ads on accuradio is annoying, I wanted to write a script to block it, i wanted to just install it and be done with it. Even if I use a new machine/laptop.. i dont have to set it up or anything, just install the extension and use the website.&lt;/p&gt;
-&lt;h2 id=&#34;how-chrome-extensions-work&#34;&gt;How chrome extensions work&lt;/h2&gt;
-&lt;p&gt;How to publish chrome extenision, how chrome extensions work? why they are necessary?&lt;/p&gt;
-&lt;p&gt;Chrome extensions are essentially web apps that use web technologies but are limited to the Chrome browser. They run in a sandboxed environment, ensuring they don&amp;rsquo;t interfere with the webpage content unless explicitly designed to do so.&lt;/p&gt;
-&lt;p&gt;Background Scripts: Handle the behind-the-scenes logic, such as listening for specific browser events.&lt;/p&gt;
-&lt;p&gt;Content Scripts: Injected into web pages to modify their content or behavior.
-Popup HTML: Defines the UI, which appears when users click the extension icon.
-Extensions: communicates with web pages through messages and shared storage, maintaining separation while enabling interaction.&lt;/p&gt;
-&lt;h2 id=&#34;to-publish-new-extensions&#34;&gt;To publish new extensions&lt;/h2&gt;
-&lt;p&gt;To publish a Chrome extension, we must create a developer account on the Google Chrome Web Store. As of writing this post, Google requires a one-time registration fee of 5 USD for setting up this account. This fee is intended to verify the developer&amp;rsquo;s identity and to discourage spam and fraudulent extensions on the platform.&lt;/p&gt;
-&lt;h3 id=&#34;extension-code&#34;&gt;Extension code&lt;/h3&gt;
-&lt;p&gt;Extension code that is responsible to detect the ads on the page.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt; observer = new MutationObserver((mutations) =&amp;gt; {
-mutations.forEach((mutation) =&amp;gt; {
-// filter the target to contain only if it is adPlaying or not
-if (
-mutation &amp;amp;&amp;amp;
-mutation.target &amp;amp;&amp;amp;
-mutation.target.cloneNode().classList &amp;amp;&amp;amp;
-mutation.target.classList.contains(&amp;quot;adPlaying&amp;quot;)
-) {
-// mute the tab
-} else {
-if (chrome &amp;amp;&amp;amp; chrome.runtime) {
-// unmute the tab
-}
-}
-});
-});
-observer.observe(accuradioPlayerControls, {
-attributes: true,
-});
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;When creating Chrome extensions, it&amp;rsquo;s crucial to handle permissions carefully. Given that Chrome is designed with a robust focus on security and user privacy, any extension listed on the Chrome Web Store is required to request only the permissions essential for its functions. The principle of &amp;ldquo;minimum necessary privileges&amp;rdquo; is not just a best practice in security; it is a fundamental requirement. This principle dictates that an extension should operate with the least amount of privileges it needs to function properly.&lt;/p&gt;
-&lt;p&gt;I had this happen to me, more permission than I actaully needed, so my first submission was rejected, but then I re-submitted with the permissions fine grained, it got approved.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/jan2024/chrome-store-rejection.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;link-to-chrome-extension&#34;&gt;Link to chrome extension:&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;https://chromewebstore.google.com/detail/mute-audio-ads-on-website/lhgmlkkpdhcgenmglmbomhemkkgccjef&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://chromewebstore.google.com/detail/mute-audio-ads-on-website/lhgmlkkpdhcgenmglmbomhemkkgccjef&lt;/a&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h3 id=&#34;personal-update&#34;&gt;Personal update:&lt;/h3&gt;
-&lt;p&gt;Brought my mom to chennai; im getting home food again. close friend left to hometown. Mom asking me to buy stuff for the new home; so doing that. Going pretty well~&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;Found another frost, getting a lot of life experiences.. I know it will not work between surroundings and struggles for future, deciding on august 29th, hopefully they understand.. still want entire life. Suggestion from frost 2 is just live in the moment and enjoy?. Future me.. tell me how it is going?.. remember feb 2024?. Good luck, stay positive and have a little bit of hope!.&lt;/p&gt;</description></item></channel></rss>
