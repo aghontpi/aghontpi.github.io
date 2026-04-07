@@ -1,17 +1,36 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sat, 28 Feb 2026 15:17:41 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Selfhosting an Automation tool - N8N</title><link>//bluepie.in/2026/02/feb-2026-2/</link><pubDate>Sat, 28 Feb 2026 15:17:41 +0000</pubDate><guid>//bluepie.in/2026/02/feb-2026-2/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Tue, 03 Mar 2026 05:24:25 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>&#39;AI Skills&#39;</title><link>//bluepie.in/2026/03/mar-2026/</link><pubDate>Tue, 03 Mar 2026 05:24:25 +0000</pubDate><guid>//bluepie.in/2026/03/mar-2026/</guid><description>
+&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
+&lt;p&gt;Anthropic came and published their skills documentation and what they are roughly 2 months ago, but I suspect they and other AI companies were using them internally even before they published. The idea of people seeing them as a new thing and being astonished is abysmal..because we were already using it..but without the naming convention and the context limiting. The concept is simple: you create a folder named the skill, then inside it, the main file is called skill.md. This takes less context; you tell the AI to scan all skill folders for skills that it can use ad hoc. The problem it solves with MCP is that this uses way less context than others and only triggers when necessary.&lt;/p&gt;
+&lt;h2 id=&#34;example-plantuml-generator&#34;&gt;Example: PlantUML Generator&lt;/h2&gt;
+&lt;p&gt;So the idea is simple; as you can infer from what I was saying, let&amp;rsquo;s go with an example. I wanted to create an architecture diagram in the office and have to update them, ..in office we are using the PlantUML to create sequence diagrams.&lt;/p&gt;
+&lt;p&gt;The problem is you have to ask the AI to generate it, and then generate the image and maintain the image somewhere. The problem with this is it takes time and is a manual process. How can we use skills to automate this? We can write instructions to ask the AI chat / agent to be like, if a user asks x, then do the process and update the diagram. We can add these instructions in the skill.md file, keep the name and descriptions to work with the architecture diagram.&lt;/p&gt;
+&lt;p&gt;You can write scripts and then use them to generate things; the AI will execute them based on the instructions. The next is dependencies, if any. Since PlantUML is an open-source project, so we can download the jar file and put that in the skills folder. It&amp;rsquo;s byte code and it&amp;rsquo;s platform independent.&lt;/p&gt;
+&lt;p&gt;So everything can be packaged into a single skill.&lt;/p&gt;
+&lt;p&gt;you can see the skills folder here: &lt;a href=&#34;https://github.com/aghontpi/dot-configs-ai/tree/main/skills/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/aghontpi/dot-configs-ai/tree/main/skills/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;embedding-code-in-images&#34;&gt;Embedding Code in Images&lt;/h2&gt;
+&lt;p&gt;On top of the skill, I was thinking about for a optimization. In college, I conducted a Capture the Flag; the event was like Google CTF and other CTF events from that time. I was inspired by them, Anyway. one of the competitions was to find the hidden details from the image. Inside an image, you can add a data to it, it can be any data. So I was thinking, why can&amp;rsquo;t we use the same thing here? So I asked ai to write a script to embed code into the images. So the PlantUML diagram is stored inside the images, the images are the output of the code. It&amp;rsquo;s like a chicken and egg problem once you delete the code file from the repo.&lt;/p&gt;
+&lt;p&gt;We want crud options on this; the update image, edit image, and create image commands are just a set of instructions that the AI can read and execute. Python scripts, when wanted to edit / asked to edit, it will extract the code from the image and create a temporary file we can work on, and when we ask to store it, it saves it again inside the image, deleting the code file again.&lt;/p&gt;
+&lt;h2 id=&#34;other-skills&#34;&gt;Other Skills&lt;/h2&gt;
+&lt;p&gt;There are other skills that I use here, one skill that I use to review code. It has custom code review rules.. it keeps changing overtime.&lt;/p&gt;
+&lt;p&gt;The main one I wanted to share is the PlantUML generator; it has all the features that I need to be adding to demonstrate the features of the skill.&lt;/p&gt;
+&lt;h2 id=&#34;sub-agents-lifecycle-hooks&#34;&gt;Sub-agents &amp;amp; Lifecycle Hooks&lt;/h2&gt;
+&lt;p&gt;At the end of Feb 2026, the Claude team updated the skillset to have custom features, like sub-agents. What it is, is that the sub-agent is being called by the main agent when doing a certain task.. so it will fix the context problem. it&amp;rsquo;s one of the major updates to skills; it&amp;rsquo;s the major one that makes a significant difference, because it won&amp;rsquo;t clutter the main context; the main agent is not interfered with.&lt;/p&gt;
+&lt;p&gt;It also has access to the lifecycle events, Lifecycle hooks (on_start, on_success, on_error, PreToolUse, etc.).. but i haven&amp;rsquo;t adopted them yet; but this will help me with the cryo vault project: &lt;a href=&#34;https://github.com/aghontpi/cryo-vault&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/aghontpi/cryo-vault&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;personal-update&#34;&gt;Personal update&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m having to juggle a lot of things in my life currently; finding focus time to think on what is essential or next is hard with this attention-seeking world; socializing; maintaining health and ad hoc new plans; argh! I started to have a new habit; hopefully, when I am consistent on this.. I&amp;rsquo;ll post on this later!.. future me..! what is happening? hope you are good!&lt;/p&gt;</description></item><item><title>Selfhosting an Automation tool - N8N</title><link>//bluepie.in/2026/02/feb-2026-2/</link><pubDate>Sat, 28 Feb 2026 15:17:41 +0000</pubDate><guid>//bluepie.in/2026/02/feb-2026-2/</guid><description>
 &lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
 &lt;p&gt;In the previous post, I was talking about &lt;a href=&#34;https://claude.com/skills&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;claude&lt;/a&gt; skills. This is about automation, no code/ minimal solutions. At this point, it&amp;rsquo;s been over 1.5 to 2 years since &lt;a href=&#34;https://docs.n8n.io/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;n8n&lt;/a&gt; and automation; nowadays it&amp;rsquo;s easy to just build an app/ ask AI to build the app instead of creating the automation, it&amp;rsquo;s easier that way, but regardless, let&amp;rsquo;s see how the future goes; I&amp;rsquo;m already seeing the trend of creating custom apps for each one&amp;rsquo;s personal preference.&lt;/p&gt;
 &lt;h2 id=&#34;why&#34;&gt;Why&lt;/h2&gt;
 &lt;p&gt;Instead of creating projects for each use and hosting it for every use case, I thought of using automation tools and solving those problems; for ex, one such problem is creating a diet maintainer; I ranted in a previous post that I gained a couple of kgs in a short while, but I&amp;rsquo;m trying to reduce it; so I have to keep track of the amount of calories, etc., but I want this to be an Excel sheet for tracking, yes there are apps for that; but I wanted a simple chat interface where I can type the food I ate and when I ate it, and it should approximate the calories, and when I ask how much is left, it should give back the amount of food that I can eat in the remaining part of the day/ from that point onwards.&lt;/p&gt;
 &lt;h2 id=&#34;n8n&#34;&gt;n8n&lt;/h2&gt;
-&lt;p&gt;I choose &lt;a href=&#34;https://docs.n8n.io/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;n8n&lt;/a&gt;. The main reason I prefer it is the immense community support it has, it&amp;rsquo;s incredibly popular, which means if I run into a wall, someone else has probably already solved it and posted about it. Plus, being able to tinker with it under the hood while self-hosting is a massive bonus compared to locked-in cloud alternatives.&lt;/p&gt;
+&lt;p&gt;I choose n8n. The main reason I prefer it is the immense community support it has, it&amp;rsquo;s incredibly popular, which means if I run into a wall, someone else has probably already solved it and posted about it. Plus, being able to tinker with it under the hood while self-hosting is a massive bonus compared to locked-in cloud alternatives.&lt;/p&gt;
 &lt;p&gt;Speaking of alternatives, there are quite a few out there:
 - &lt;a href=&#34;https://www.make.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Make (formerly Integromat)&lt;/a&gt;: Great visual builder,
 - &lt;a href=&#34;https://zapier.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Zapier&lt;/a&gt;: The biggest name out there with the most integrations,
 - &lt;a href=&#34;https://pipedream.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Pipedream&lt;/a&gt;: Fantastic for developers who want to write code snippets, but maybe overkill if you just want pure drag-and-drop.
 - &lt;a href=&#34;https://www.activepieces.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Activepieces&lt;/a&gt;: is similar to n8n&lt;/p&gt;
 &lt;h2 id=&#34;self-hosting&#34;&gt;Self hosting&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://docs.n8n.io/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Here is the official n8n documentation guide&lt;/a&gt;, I started to see the official docs of &lt;a href=&#34;https://docs.n8n.io/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;n8n&lt;/a&gt;. One thing I got astonished by is that they have incorporated AI, and that AI is surprisingly good at providing the right instructions, because when you host with different server software, server config differs for each one like &lt;a href=&#34;https://caddyserver.com/docs/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;caddy&lt;/a&gt; / &lt;a href=&#34;https://nginx.org/en/docs/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;nginx&lt;/a&gt;/ etc., and for automation to work, it has to be able to receive webhooks, and alongside things like if it&amp;rsquo;s behind a proxy; it must be configured to tell that you are behind a proxy, and based on that it can handle the incoming request, etc.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.n8n.io/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Here is the official n8n documentation guide&lt;/a&gt;, I started to see the official docs of n8n. One thing I got surprised by is that they have incorporated AI, and that AI is surprisingly good at providing the right instructions, because when you host with different servers, server config differs for each one like &lt;a href=&#34;https://caddyserver.com/docs/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;caddy&lt;/a&gt; / &lt;a href=&#34;https://nginx.org/en/docs/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;nginx&lt;/a&gt;/ etc., and for automation to work, it has to be able to receive webhooks, and alongside things like if it&amp;rsquo;s behind a proxy; it must be configured to tell that you are behind a proxy, and based on that it can handle the incoming request, etc.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;ll save you the trouble and give the config here; basically I was able to set up the Nginx server pretty easily using the AI bot that they have incorporated in their site. Below is all the config I needed to be able to run this from &lt;a href=&#34;https://docs.docker.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;docker&lt;/a&gt; and &lt;a href=&#34;https://nginx.org/en/docs/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;nginx&lt;/a&gt;:&lt;/p&gt;
 &lt;p&gt;As I&amp;rsquo;ve mentioned in previous posts, I like to run things with &lt;a href=&#34;https://docs.podman.io/en/latest/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;podman&lt;/a&gt;/&lt;a href=&#34;https://docs.docker.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;docker&lt;/a&gt; as it removes the dependency from my cloud machine.&lt;/p&gt;
 &lt;p&gt;Obviously I have to configure my domain name to &lt;a href=&#34;https://www.godaddy.com/help&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;godaddy&lt;/a&gt;/&lt;a href=&#34;https://developers.cloudflare.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;cloudflare&lt;/a&gt; and deploy SSL certificates; I&amp;rsquo;ve covered that plenty in my other posts:&lt;/p&gt;
@@ -65,6 +84,7 @@ proxy_set_header X-Forwarded-Proto $scheme;
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;configuring-how-to-configure&#34;&gt;Configuring - How to configure&lt;/h2&gt;
+&lt;p&gt;Modifying a telegram bot to track the calory intake of the day based on estimates from me.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/feb-2026/overview.png&#34; alt=&#34;Overview&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;There is initial learning time to get used to what each option is, but when you get the hang of it, it&amp;rsquo;s pretty easy, since I&amp;rsquo;ve done drag and drop editors before; I caught up easily in approx 5-10ish mins.&lt;/p&gt;
 &lt;p&gt;Create a &lt;a href=&#34;https://core.telegram.org/bots/api&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;telegram&lt;/a&gt; node and select the appropriate Telegram account credential. Set the &lt;strong&gt;Trigger On&lt;/strong&gt; parameter to &lt;code&gt;Message&lt;/code&gt; so it triggers on new incoming messages of any kind (text, photo, sticker, etc.). Note that due to Telegram API limitations, you can only use one Telegram trigger per bot. Also ensure there is validation to only process messages from your known user ID, otherwise the bot will refuse to respond.&lt;/p&gt;
@@ -1526,89 +1546,4 @@ echo &amp;quot;GoDaddy CLEANUP-HOOK: Removed TXT record for ${CERTBOT_DOMAIN}.&a
 &lt;/ul&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;Using Certbot’s DNS challenge manual hook scripts, I can automate things, I never would have thought DNS provider would have full api access and are allowing acess to anyone who are buying domains.&lt;/p&gt;
-&lt;p&gt;Merry Christmas &amp;amp; A Happy New Year, See ya soon~&lt;/p&gt;</description></item><item><title>Project IDX: A Look Into Google’s Cloud-Based Development Platform</title><link>//bluepie.in/2024/11/project-idx/</link><pubDate>Sun, 24 Nov 2024 21:14:29 +0000</pubDate><guid>//bluepie.in/2024/11/project-idx/</guid><description>
-&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
-&lt;p&gt;I’ve been experimenting with &lt;a href=&#34;https://idx.dev/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Project IDX&lt;/a&gt; lately, and it’s quite an intriguing solution for cloud-based development. In essence, Project IDX gives you an always-available coding environment running on Google Cloud. As long as you keep the instance running and remain active, you effectively have a &lt;sup&gt;24&lt;/sup&gt;&amp;frasl;&lt;sub&gt;7&lt;/sub&gt; development machine at your disposal.&lt;/p&gt;
-&lt;p&gt;I primarily use Project IDX for Java and front-end development on my personal projects. One of the coolest parts of my setup is using it with &lt;strong&gt;Samsung DeX&lt;/strong&gt;. By simply connecting a mobile device, opening Project IDX in the browser, and plugging in a keyboard and mouse, you can achieve a desktop-like workflow from anywhere.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;my-experience-with-project-idx&#34;&gt;My Experience with Project IDX&lt;/h2&gt;
-&lt;h3 id=&#34;quick-start&#34;&gt;Quick Start&lt;/h3&gt;
-&lt;p&gt;The onboarding process is straightforward: sign in with your Google account, spin up an IDX instance, and you’re off to the races. Under the hood, Project IDX uses Nix to manage packages and dependencies, allowing you to define your environment as code.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;System specs&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/nov2024/project-idx-htop.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;using-nix&#34;&gt;Using Nix&lt;/h3&gt;
-&lt;p&gt;Nix is a functional package manager that ensures reproducible, declarative environments. Within Project IDX, you can configure all your tooling in a &lt;code&gt;dev.nix&lt;/code&gt; file:&lt;/p&gt;
-&lt;p&gt;below is my actual config file from a project.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-nix&#34;&gt;{ pkgs, ... }: {
-channel = &amp;quot;stable-24.05&amp;quot;;
-packages = [
-pkgs.docker-compose
-pkgs.zulu17
-pkgs.nodejs_20
-pkgs.gradle
-pkgs.htop
-pkgs.sudo
-pkgs.pnpm
-pkgs.deno
-pkgs.tmux
-];
-services.docker.enable = true;
-services.postgres = {
-enable = true;
-};
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;When your workspace initializes, Project IDX automatically installs and configures everything specified in this file. It’s fast, consistent, and eliminates the classic “it works on my machine” problem.&lt;/p&gt;
-&lt;h3 id=&#34;ai-integration&#34;&gt;AI Integration&lt;/h3&gt;
-&lt;p&gt;Project IDX is essentially a modified version of open-source VS Code, but with &lt;strong&gt;deep integration of Google’s AI&lt;/strong&gt;. You can use conversational prompts to perform tasks like creating files, refactoring code, or running commands. This isn’t just code suggestions—Project IDX can physically change files based on your instructions in the integrated chat window. It’s wild to see in action! when it actually works, it still needs work, it will only get better from here? so its okey I guess.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/nov2024/project-idx-usage-onproject-chat.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Even in the above image, when instructed to create a folder similar to an existing folder, it created the folder but the latest msg from the AI shows the command failed, the editor failed to parse the command. which resulted in an error. &amp;ldquo;user-management.scss&amp;rdquo;&lt;/p&gt;
-&lt;h3 id=&#34;port-forwarding&#34;&gt;Port Forwarding&lt;/h3&gt;
-&lt;p&gt;Forwarding ports is also streamlined. When you start up a development server—say, a Java Spring Boot app on port 8080—it automatically detects the listening port and allows you to expose it publicly or keep it private. This is great if you’re running multiple services, like:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Spring Reactor app on port 8080&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Front-end dev server on port 7173&lt;/li&gt;
-&lt;li&gt;Database on a dedicated port (e.g., 5432 or 27017)&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;A database manager like Adminer runnin inside docker and exposes port on 8181
-..etc&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;This setup makes it simple to preview projects from any device or share them with collaborations.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/nov2024/open-ports-porject-idx.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;pros-and-cons-of-project-idx&#34;&gt;Pros and Cons of Project IDX&lt;/h2&gt;
-&lt;h3 id=&#34;pros&#34;&gt;Pros&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Cloud Accessibility&lt;/strong&gt;: No need for a powerful local machine; you can develop from virtually anywhere, even on a modest laptop or mobile device.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;AI-Driven&lt;/strong&gt;: Built-in AI assistance (sometimes referred to as “Gemini AI”) can refactor code, generate boilerplate, or provide debugging tips.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Preconfigured Templates&lt;/strong&gt;: Supports a wide range of frameworks (React, Angular, Next.js, Flutter, Python, Go, etc.). You can quickly spin up a new project with minimal setup.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Collaboration Features&lt;/strong&gt;: Real-time collaboration (shared terminals, pair debugging) is ideal for remote teams.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Nix-Based Customization&lt;/strong&gt;: Define your entire dev environment in a single file for reproducibility across projects.&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;cons&#34;&gt;Cons&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Performance Limits&lt;/strong&gt;: As of now, the default VM specs (currently as of writing 8GB RAM, 2 CPU cores) can feel slow when running multiple services in running parallel (docker db service, db viewer, node-frontend..etc) and heavy IDE tasks (like Java code completion).&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Beta Uncertainties&lt;/strong&gt;: Project IDX is still in beta, so things can change. There’s no official SLA, and certain features could be introduced or deprecated.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Pricing Future&lt;/strong&gt;: Currently free, but Google may charge for more powerful machines or advanced features down the road.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Dependent on Internet&lt;/strong&gt;: You need a reliable internet connection. If you lose connectivity, you lose access to your dev environment.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Growing Ecosystem&lt;/strong&gt;: While extensions exist, it’s not as mature as traditional VS Code.&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;personal-takeaways&#34;&gt;Personal Takeaways&lt;/h2&gt;
-&lt;p&gt;Despite occasional slowdowns—especially with Java’s language server—I find Project IDX to be &lt;strong&gt;fast and reliable&lt;/strong&gt; for quick tests and collaborative workflows. If your instance gets messed up, you can simply reset the VM. Your user storage partition remains intact, meaning you don’t lose any data.&lt;/p&gt;
-&lt;p&gt;However, for heavier workloads or large multi-service applications, the 8GB RAM limit can become a bottleneck. If you find yourself needing more horsepower, you can request an increase from Google, but it’s not an automated process yet.&lt;/p&gt;
-&lt;h3 id=&#34;final-thoughts&#34;&gt;Final Thoughts&lt;/h3&gt;
-&lt;p&gt;For developers curious about cloud-based workstations, Project IDX is worth exploring. It balances the convenience of a full Linux environment in your browser with advanced AI-driven coding tools. With Nix managing your dependencies, your environment is reproducible, shareable, and straightforward to set up. While the platform isn’t perfect—still in beta, with performance and resource constraints—it’s a promising glimpse into the future of development.&lt;/p&gt;
-&lt;p&gt;If you have any questions or experiences of your own, feel free to drop a comment or reach out. Happy coding!&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;em&gt;References &amp;amp; Further Reading&lt;/em&gt;&lt;br /&gt;
-- &lt;a href=&#34;https://idx.dev/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Official Project IDX Website&lt;/a&gt;&lt;br /&gt;
-- &lt;a href=&#34;https://developers.google.com/idx/guides&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Project IDX Developers Guide&lt;/a&gt;&lt;br /&gt;
-- &lt;a href=&#34;https://nixos.org/manual/nix/stable/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Nix Official Documentation&lt;/a&gt;&lt;br /&gt;
-- &lt;a href=&#34;https://community.idx.dev/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Project IDX Community Forum&lt;/a&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;em&gt;(Note: All information is based on personal experience and available details as of November 2024. Features and pricing may change as Project IDX evolves.)&lt;/em&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;personal-update-thoughts-on-life-edited-updated-on-jan24-2025&#34;&gt;Personal Update (Thoughts on Life (edited/updated on jan24/2025))&lt;/h2&gt;
-&lt;p&gt;Sometimes, life presents crossroads where you wonder if it’s better to step aside so someone else can be happier—even if it stings. Is that genuine sacrifice, or is it avoidance? The line can be blurry, but the hope is that such tough decisions lead to growth or peace for everyone involved.&lt;/p&gt;
-&lt;p&gt;I’m planning for a bit of rest and enjoyment in December—a week unplugged from the world’s noise (work..).&lt;/p&gt;
-&lt;hr /&gt;</description></item></channel></rss>
+&lt;p&gt;Merry Christmas &amp;amp; A Happy New Year, See ya soon~&lt;/p&gt;</description></item></channel></rss>
