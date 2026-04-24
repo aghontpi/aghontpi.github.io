@@ -1,4 +1,24 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Tue, 03 Mar 2026 05:24:25 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>&#39;AI Skills&#39;</title><link>//bluepie.in/2026/03/mar-2026/</link><pubDate>Tue, 03 Mar 2026 05:24:25 +0000</pubDate><guid>//bluepie.in/2026/03/mar-2026/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Sun, 12 Apr 2026 05:49:01 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Gemma4 - Easily running on phones - April 2026</title><link>//bluepie.in/2026/04/april-2026/</link><pubDate>Sun, 12 Apr 2026 05:49:01 +0000</pubDate><guid>//bluepie.in/2026/04/april-2026/</guid><description>
+&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
+&lt;p&gt;Today I want to talk about, &lt;a href=&#34;https://ai.google.dev/gemma/docs&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Google Gemma 4&lt;/a&gt;; this sets a new standard for source AI models. I am astonished by the quality of this, though it has a small model size compared to the other big ones out there.. like &lt;a href=&#34;https://kimi.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Kimi K2.5 from Moonshot AI&lt;/a&gt;, that thing is a 1 trillion parameter model.. 1 trillion! and Gemma 4&amp;rsquo;s biggest is only 31 billion.. but here is the thing, Kimi K2.5 only uses 32 billion of those parameters at any given time, so they are not that far apart in practice.. and Gemma 4 punches way above its weight for how small it actually is..&lt;/p&gt;
+&lt;h2 id=&#34;gemma4&#34;&gt;gemma4&lt;/h2&gt;
+&lt;p&gt;In the Gemma models, they always release with active and passive parameters being announced in the model name. They do this by mentioning a and e. There is also a dense model which loads the complete model. So.. the &lt;code&gt;e&lt;/code&gt; stands for effective, like &lt;code&gt;E2B&lt;/code&gt; or &lt;code&gt;E4B&lt;/code&gt;.. that means it is a Mixture of Experts model and the number is how many parameters are actually active per token. Think of it like a restaurant with 26 chefs.. but only 4 of them are actually cooking your order at any point, the rest are just standing by with their own specialization, so it runs fast like a 4B model but it has the knowledge of a full 26B one.. pretty clever. The &lt;code&gt;a&lt;/code&gt; is used similarly in some naming, same idea basically. And then there is the dense model.. that one just loads everything, all 31 billion parameters fire for every single token, no routing no tricks, just brute force.. uses more memory but more predictable&lt;/p&gt;
+&lt;p&gt;There are two classifications of models, and in each of these classifications there are multiple models that are released. Two of the four.. are for desktop/laptop, and the others, they created for edge devices. What they mean by edge devices are mobile phones, Raspberry Pi, and other less powerful devices or mobile.&lt;/p&gt;
+&lt;h2 id=&#34;on-pc&#34;&gt;On PC&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;ve been a long time user of &lt;a href=&#34;https://lmstudio.ai/docs&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;lm studio&lt;/a&gt;, it offers great features.. I like it because it offers ease of use, ability to manage different models all at once,&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/april-2026/lm-studio-ui.webp&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;from the official documentation. I can run up to 14 GB of graphics memory worth of model. The 31B dense model needs around 20+ GB at full precision.. so that is out for me. The 26B MoE is interesting though.. even though it has 26B total params you only compute 4B at a time, so it is lighter on the processor, but you still have to load all 26B into VRAM which I don&amp;rsquo;t have.. at least until now. The trick people use is Q4 quantization, which basically compresses the model down significantly. The 31B at Q4 can fit around 16-17 GB.. still a bit above what I got but getting closer. Maybe next GPU.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/april-2026/gemma4-on-laptop.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;on-mobile&#34;&gt;On mobile&lt;/h2&gt;
+&lt;p&gt;Runs surprisingly fast and accurate to a degree. It&amp;rsquo;s not the same as the desktop models, because.. for the model, when run on each layer, the layers are precalculated. They are being called as.. instead of doing computation on each layer, they are reusing a map on each layer; that is what is making the mobile devices run faster. Because of this, it&amp;rsquo;s hard to measure accuracy on this. To give it credit, it does have the ability to recognize 140 languages easily; heck, I even used my native language and it worked great when I tried it.&lt;/p&gt;
+&lt;p&gt;To run these models locally, I am using &lt;strong&gt;&lt;a href=&#34;https://github.com/google-ai-edge/gallery&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Google AI Edge Gallery&lt;/a&gt;&lt;/strong&gt;. It is an open-source, experimental mobile application from Google that showcases running Large Language Models entirely on-device (Android and iOS). Because the app uses &lt;a href=&#34;https://ai.google.dev/edge/litert&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;LiteRT&lt;/a&gt; (formerly TensorFlow Lite) and the &lt;a href=&#34;https://ai.google.dev/edge/mediapipe/solutions/genai/llm_inference&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;LLM Inference API&lt;/a&gt;, the models execute offline directly on the phone&amp;rsquo;s hardware. This means complete data privacy with no cloud API costs. The app provides great features out of the box like LLM Chat, multimodal interactions to ask questions about images, a Prompt Lab for testing ideas locally.. and much more.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/april-2026/gemma4-on-mobile.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;personal&#34;&gt;personal&lt;/h2&gt;
+&lt;p&gt;Hey, how are you doing? I hope everything is going well. I lost my iPhone this month; it was hectic. I lost it when traveling back from the office to my Chennai home. Although I have had the phone for a while now, and it&amp;rsquo;s old.. it still stings. My first time losing a phone. Why would I lose an iPhone? It was a series of events that happened that day. A few days before.. I accidentally bent the new glasses I got. Then during that day, the glasses got so loose that I couldn&amp;rsquo;t wear them the entire day. The temples (new term.. weird to call that piece that.. anyway) were so loose, they would have come into two pieces if I had worn them that day. So before that, a day ago, my mom got into a little accident. All of these in mind, I got into a weird headspace and it led to me losing the phone. I felt something drop.. but when I looked for it, it was still there where I kept the phone. On top of it, the pouch that I kept the phone in was torn a bit and I hadn&amp;rsquo;t changed it.. which also contributed to this. I&amp;rsquo;m never keeping a phone in a pouch again! ..that&amp;rsquo;s what I told myself, but future me will catch myself doing the same in the future, I think. After that.. I lost my building entrance card. My office card I had, but I lost the Olympia Guindy building card, which is another pain.. but at the time of updating this, on April 15, it was found and I went and collected it.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s been a long time since I bought a phone. Before, I used to develop for Android and iOS; now I don&amp;rsquo;t anymore. I don&amp;rsquo;t think I need an iPhone again.. a better deal is to buy a latest &lt;a href=&#34;https://www.qualcomm.com/snapdragon&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Snapdragon chipset&lt;/a&gt; phone and call it a day. Going to switch back to bigger XL screen phones.&lt;/p&gt;
+&lt;p&gt;Lots of things to do, yet you choose to have little moments of fun? At the moment, my brain can&amp;rsquo;t remember what pending things are left.&lt;/p&gt;
+&lt;p&gt;A friend stayed over for a while at the start of April. I had to work on weekends because of horrible management in the office. I try to do a small piece of work every day though, but still.. yeah. He was going on a trip.. north and back and stayed for a while. The initial plan was that he would stay here for a while, but then we would both go to our hometown. He is a childhood friend of mine, but work got hectic; I couldn&amp;rsquo;t make it as discussed next week and he had to go alone.&lt;/p&gt;
+&lt;p&gt;Last year at this time, I was playing &lt;a href=&#34;https://www.playstation.com/games/ghost-of-tsushima/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Ghost of Tsushima&lt;/a&gt; in my off-time. This year, I&amp;rsquo;m playing &lt;a href=&#34;https://megacrit.com/slaythespire2&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Slay the Spire 2&lt;/a&gt; and &lt;a href=&#34;https://crimsondesert.pearlabyss.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Crimson Desert&lt;/a&gt; (released on March 19th, 2026) in my off-time.. dang nab it, I should give up this gaming.. I&amp;rsquo;m getting old.. but what if that changes me entirely? Risky..&lt;/p&gt;</description></item><item><title>&#39;AI Skills&#39;</title><link>//bluepie.in/2026/03/mar-2026/</link><pubDate>Tue, 03 Mar 2026 05:24:25 +0000</pubDate><guid>//bluepie.in/2026/03/mar-2026/</guid><description>
 &lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
 &lt;p&gt;Anthropic came and published their skills documentation on what they are roughly 2 months ago, but I suspect they and other AI companies were using them internally even before they published. The idea of people seeing them as a new thing and being astonished is abysmal..because we were already using it..but without the naming convention and the optimised context limiting. The concept is simple: you create a folder named skill you want, then inside it, the main file is called skill.md. This takes less context when ai reads it, as it just reads the frontmatter alone; you write detailed instructions below the frontmatter with different scripts and whatever that is necessary to finish that task/skill, you also writter a condition upon which the ai will trigger. The AI then keeps all these details and uses it ad hoc. The problem it solves is that this uses way less context than mcp or others and only triggers when necessary.&lt;/p&gt;
 &lt;h2 id=&#34;example-plantuml-generator&#34;&gt;Example: PlantUML Generator&lt;/h2&gt;
@@ -1388,162 +1408,4 @@ Head over to the &lt;a href=&#34;https://github.com/revanced/revanced-patches&#3
 The &lt;code&gt;gphotos-patched-jan-2025&lt;/code&gt; file is split into parts using Keka on macOS with a 99MB split threshold to help manage file sizes and site tracking. After downloading both parts, simply extract the first file (with the &lt;code&gt;.zip.001&lt;/code&gt; extension) using your preferred archive tool (such as Keka, 7-Zip, or WinRAR..etc). The tool will automatically combine the parts and extract the complete APK.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;personal-update&#34;&gt;Personal Update&lt;/h2&gt;
-&lt;p&gt;AI is taking over, wth! For historical matching… DeepSeek is released, competing with OpenAI&amp;rsquo;s latest thinking model. I&amp;rsquo;m sure OpenAI will have some response to it. &lt;!---I’ve enjoyed a 5-day vacation—it was pleasant and something I’ll remember for the upcoming days. (Spent with Vi, aka 3&#39;rd Frost.)---&gt;I&amp;rsquo;m planning to go home and spend some time with family, and I have to set up Jio AirFibre, converting my SIMs to Jio for unlimited internet (you’ll see a post about this later). The broadband over there isn’t that good and the signal inside the home is weak; plus, it comes bundled with TV, movies, and disney+, discovery+,..etc I’m going to disconnect Airtel TV/DTH in favor of this since it works with just WiFi and doesn&amp;rsquo;t require routing everywhere. &lt;!---Since I&#39;m planning to vacate Chennai in March, after February (Frost&#39;s 3rd birthday), things are going well. I even decided to tell Mom and Dad about Vi and show them by taking them to our Chennai home. Currently, as of this writing, they are not in Chennai with me—they went hometown last time I visited for functions and to take care of Grandma.---&gt;&lt;/p&gt;</description></item><item><title>Certbot Manual Hook – Automating Wildcard Domain Renewals</title><link>//bluepie.in/2024/12/certbot-manual-hook/</link><pubDate>Sat, 07 Dec 2024 03:02:36 +0000</pubDate><guid>//bluepie.in/2024/12/certbot-manual-hook/</guid><description>
-&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
-&lt;p&gt;Securing my website with HTTPS is crucial, and &lt;a href=&#34;https://certbot.eff.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Certbot&lt;/a&gt; makes it straightforward for many domains. However, when it comes to wildcard domains (like &lt;code&gt;*.domain.com&lt;/code&gt;), there’s a bit more work involved—particularly if I want to automate renewals.&lt;/p&gt;
-&lt;p&gt;This post explains how I set up a &lt;strong&gt;manual DNS hook&lt;/strong&gt; for Certbot that integrates with my domain name provider’s API (in this example, GoDaddy), so I no longer have to manually add DNS TXT records every time I need to renew my wildcard certificate.&lt;/p&gt;
-&lt;h2 id=&#34;why-do-we-need-this&#34;&gt;Why Do We Need This?&lt;/h2&gt;
-&lt;p&gt;Certbot automates the HTTPS setup for many domain configurations. However, &lt;strong&gt;wildcard certificates&lt;/strong&gt; require DNS-based validation—meaning I must add a TXT record to prove domain ownership. Certbot does not automatically update DNS for every provider. Thus, without automation, I’d be forced to:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Run Certbot.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Grab the &lt;code&gt;_acme-challenge&lt;/code&gt; TXT record details.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Log in to my DNS panel and manually create the TXT record.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Wait for DNS to propagate.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Resume the Certbot process.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Finally, clean up the TXT record.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Doing this every few months quickly becomes tedious, especially if I manage multiple wildcard domains. Luckily, Certbot’s &lt;code&gt;--manual-auth-hook&lt;/code&gt; parameter can help me automate these steps.&lt;/p&gt;
-&lt;h2 id=&#34;the-goal&#34;&gt;The Goal&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Automate&lt;/strong&gt; the DNS validation process for wildcard certificate renewals using Certbot hooks.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Utilize my DNS provider’s API (in my case, &lt;strong&gt;GoDaddy&lt;/strong&gt;) to create and remove the required &lt;code&gt;_acme-challenge&lt;/code&gt; TXT record automatically.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Integrate this process into a &lt;code&gt;crontab&lt;/code&gt; so renewals happen on schedule without manual intervention.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;current-manual-process&#34;&gt;Current (Manual) Process&lt;/h2&gt;
-&lt;p&gt;Here’s what I was doing without automation:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Run Certbot: &lt;code&gt;certbot certonly --manual ...&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Certbot tells me which TXT record to create, e.g. &lt;code&gt;&amp;quot;_acme-challenge.domain.com&amp;quot;&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;I log into GoDaddy (or another provider) and create the TXT record with the provided value.&lt;/li&gt;
-&lt;li&gt;I wait for DNS propagation (a few minutes).&lt;/li&gt;
-&lt;li&gt;Certbot verifies and finalizes the certificate issuance.&lt;/li&gt;
-&lt;li&gt;I remove or empty out the TXT record.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;This process, while doable, is time-consuming and must be repeated every 60–90 days (depending on my renewal schedule).&lt;/p&gt;
-&lt;h2 id=&#34;godaddy-api-endpoint&#34;&gt;Godaddy API endpoint&lt;/h2&gt;
-&lt;h2 id=&#34;automating-the-workflow&#34;&gt;Automating the Workflow&lt;/h2&gt;
-&lt;p&gt;To automate the renewal of my wildcard domain certificate, I leverage my domain provider&amp;rsquo;s API to manage DNS TXT records programmatically. I use &lt;strong&gt;GoDaddy&lt;/strong&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;API Access:&lt;/strong&gt; Ensure GoDaddy supports DNS management via API.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;API Credentials:&lt;/strong&gt; Obtain my API key and secret from the &lt;a href=&#34;https://developer.godaddy.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;GoDaddy Developer Portal&lt;/a&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;godaddy-api-endpoint-1&#34;&gt;GoDaddy API Endpoint&lt;/h3&gt;
-&lt;p&gt;I use the following endpoint to manage TXT records:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;https://api.godaddy.com/v1/domains/${GODADDY_DOMAIN}/records/TXT/${RECORD_NAME}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;Parameters:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;${GODADDY_DOMAIN}&lt;/code&gt;&lt;/strong&gt;: My root domain (e.g., &lt;code&gt;example.com&lt;/code&gt;).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;${RECORD_NAME}&lt;/code&gt;&lt;/strong&gt;: Typically &lt;code&gt;_acme-challenge&lt;/code&gt; for Certbot.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;using-the-api&#34;&gt;Using the API&lt;/h3&gt;
-&lt;h4 id=&#34;testing-create-update-txt-record-endpoints&#34;&gt;Testing Create/Update TXT Record Endpoints&lt;/h4&gt;
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;curl -s -X PUT \
--H &amp;quot;Authorization: sso-key ${GODADDY_KEY}:${GODADDY_SECRET}&amp;quot; \
--H &amp;quot;Content-Type: application/json&amp;quot; \
--d &amp;quot;[{\&amp;quot;data\&amp;quot;: \&amp;quot;${CERTBOT_VALIDATION}\&amp;quot;, \&amp;quot;ttl\&amp;quot;: 600}]&amp;quot; \
-&amp;quot;https://api.godaddy.com/v1/domains/${GODADDY_DOMAIN}/records/TXT/${RECORD_NAME}&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Headers:&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Authorization&lt;/code&gt;: &lt;code&gt;sso-key MY_API_KEY:MY_API_SECRET&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Content-Type&lt;/code&gt;: &lt;code&gt;application/json&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Data:&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;&amp;quot;data&amp;quot;&lt;/code&gt;: Validation string from Certbot.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;quot;ttl&amp;quot;&lt;/code&gt;: Time-to-live (e.g., &lt;code&gt;600&lt;/code&gt; seconds).&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;remove-txt-record&#34;&gt;Remove TXT Record&lt;/h4&gt;
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;curl -s -X PUT \
--H &amp;quot;Authorization: sso-key ${GODADDY_KEY}:${GODADDY_SECRET}&amp;quot; \
--H &amp;quot;Content-Type: application/json&amp;quot; \
--d &amp;quot;[]&amp;quot; \
-&amp;quot;https://api.godaddy.com/v1/domains/${GODADDY_DOMAIN}/records/TXT/${RECORD_NAME}&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;integration-with-certbot-hooks&#34;&gt;Integration with Certbot Hooks&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Auth Hook (&lt;code&gt;godaddy-auth.sh&lt;/code&gt;):&lt;/strong&gt; Adds the TXT record before validation.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Cleanup Hook (&lt;code&gt;godaddy-cleanup.sh&lt;/code&gt;):&lt;/strong&gt; Removes the TXT record after validation.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I ensure my scripts use the above &lt;code&gt;curl&lt;/code&gt; commands with the appropriate environment variables (&lt;code&gt;GODADDY_KEY&lt;/code&gt;, &lt;code&gt;GODADDY_SECRET&lt;/code&gt;, &lt;code&gt;GODADDY_DOMAIN&lt;/code&gt;, &lt;code&gt;RECORD_NAME&lt;/code&gt;, &lt;code&gt;CERTBOT_VALIDATION&lt;/code&gt;).&lt;/p&gt;
-&lt;h2 id=&#34;the-automated-solution&#34;&gt;The Automated Solution&lt;/h2&gt;
-&lt;p&gt;Certbot offers hooks that run custom scripts to automate these exact steps:&lt;/p&gt;
-&lt;h3 id=&#34;1-command-with-hooks&#34;&gt;1. Command with Hooks&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;certbot certonly \
---manual \
---preferred-challenges dns \
---manual-auth-hook /etc/letsencrypt/scripts/godaddy-auth.sh \
---manual-cleanup-hook /etc/letsencrypt/scripts/godaddy-cleanup.sh \
---agree-tos \
--d &#39;*.wild.card.domain&#39; \
---preferred-chain &amp;quot;ISRG Root X1&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;--manual-auth-hook&lt;/code&gt;&lt;/strong&gt;: Runs a script before Certbot attempts to validate the domain (to set up the TXT record).&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;--manual-cleanup-hook&lt;/code&gt;&lt;/strong&gt;: Runs a script after validation completes (to remove or clear the TXT record).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;2-godaddy-auth-script&#34;&gt;2. GoDaddy Auth Script&lt;/h3&gt;
-&lt;p&gt;The following script (&lt;code&gt;godaddy-auth.sh&lt;/code&gt;) is triggered by the &lt;code&gt;--manual-auth-hook&lt;/code&gt;. It reads environment variables set by Certbot—like &lt;code&gt;CERTBOT_DOMAIN&lt;/code&gt; and &lt;code&gt;CERTBOT_VALIDATION&lt;/code&gt;—and then updates the DNS record via the GoDaddy API.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/usr/bin/env bash
-# /etc/letsencrypt/scripts/godaddy-auth.sh
-# Certbot environment variables:
-# - CERTBOT_DOMAIN (the domain being authenticated)
-# - CERTBOT_VALIDATION (the validation string for TXT record)
-GODADDY_KEY=&amp;quot;domain_name_provider_key&amp;quot;
-GODADDY_SECRET=&amp;quot;domain_name_provider_secret&amp;quot;
-GODADDY_DOMAIN=&amp;quot;your_root_domain&amp;quot; # e.g., &amp;quot;example.com&amp;quot;
-TTL=600
-# Subdomain that needs to be updated
-RECORD_NAME=&amp;quot;_acme-challenge&amp;quot;
-# Build request payload
-DATA=&amp;quot;[{\&amp;quot;data\&amp;quot;: \&amp;quot;${CERTBOT_VALIDATION}\&amp;quot;, \&amp;quot;ttl\&amp;quot;: ${TTL}}]&amp;quot;
-curl -s -X PUT \
--H &amp;quot;Authorization: sso-key ${GODADDY_KEY}:${GODADDY_SECRET}&amp;quot; \
--H &amp;quot;Content-Type: application/json&amp;quot; \
--d &amp;quot;${DATA}&amp;quot; \
-&amp;quot;https://api.godaddy.com/v1/domains/${GODADDY_DOMAIN}/records/TXT/${RECORD_NAME}&amp;quot;
-echo &amp;quot;GoDaddy AUTH-HOOK: Created TXT record for ${CERTBOT_DOMAIN}.&amp;quot;
-# Sleep to allow DNS propagation
-sleep 60
-&lt;/code&gt;&lt;/pre&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If I have a subdomain or different domain structure, I adjust &lt;code&gt;RECORD_NAME&lt;/code&gt; accordingly.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;3-godaddy-cleanup-script&#34;&gt;3. GoDaddy Cleanup Script&lt;/h3&gt;
-&lt;p&gt;This script (&lt;code&gt;godaddy-cleanup.sh&lt;/code&gt;) runs after verification succeeds. It removes (or resets) the &lt;code&gt;_acme-challenge&lt;/code&gt; TXT record, keeping my DNS tidy.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/usr/bin/env bash
-# /etc/letsencrypt/scripts/godaddy-cleanup.sh
-# Certbot environment variables:
-# - CERTBOT_DOMAIN (the domain being authenticated)
-GODADDY_KEY=&amp;quot;domain_name_provider_key&amp;quot;
-GODADDY_SECRET=&amp;quot;domain_name_provider_secret&amp;quot;
-GODADDY_DOMAIN=&amp;quot;your_root_domain&amp;quot;
-RECORD_NAME=&amp;quot;_acme-challenge&amp;quot;
-# Empty the TXT record (or remove it altogether)
-DATA=&amp;quot;[]&amp;quot;
-curl -s -X PUT \
--H &amp;quot;Authorization: sso-key ${GODADDY_KEY}:${GODADDY_SECRET}&amp;quot; \
--H &amp;quot;Content-Type: application/json&amp;quot; \
--d &amp;quot;${DATA}&amp;quot; \
-&amp;quot;https://api.godaddy.com/v1/domains/${GODADDY_DOMAIN}/records/TXT/${RECORD_NAME}&amp;quot;
-echo &amp;quot;GoDaddy CLEANUP-HOOK: Removed TXT record for ${CERTBOT_DOMAIN}.&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;scheduling-with-crontab&#34;&gt;Scheduling With Crontab&lt;/h2&gt;
-&lt;p&gt;After confirming the manual hooks work, I automate the renewal checks using crontab:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;10 0 * * * /usr/bin/certbot renew --preferred-chain &amp;quot;ISRG Root X1&amp;quot; &amp;gt;&amp;gt; /folder/to/save/cronlog.log 2&amp;gt;&amp;amp;1
-10 0 * * * /etc/letsencrypt/scripts/certbot-renew-dns.sh &amp;gt;&amp;gt; /folder/to/save/cronlog-manualhook.log 2&amp;gt;&amp;amp;1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;pro-tips&#34;&gt;Pro Tips&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;DNS Propagation&lt;/strong&gt;: Sometimes DNS changes can take longer than expected, especially if my DNS TTL is high. I might adjust my &lt;code&gt;sleep&lt;/code&gt; time or TTL in the script if validations fail.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Permissions&lt;/strong&gt;: I ensure my hook scripts are &lt;strong&gt;executable&lt;/strong&gt; by using &lt;code&gt;chmod +x /path/to/script.sh&lt;/code&gt;.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Security&lt;/strong&gt;: I keep my API keys secret. Storing them in environment variables or a secure file is best.&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Testing&lt;/strong&gt;: I run &lt;code&gt;certbot renew --dry-run&lt;/code&gt; to verify that my hooks and scripts work before scheduling them in production.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Using Certbot’s DNS challenge manual hook scripts, I can automate things, I never would have thought DNS provider would have full api access and are allowing acess to anyone who are buying domains.&lt;/p&gt;
-&lt;p&gt;Merry Christmas &amp;amp; A Happy New Year, See ya soon~&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;AI is taking over, wth! For historical matching… DeepSeek is released, competing with OpenAI&amp;rsquo;s latest thinking model. I&amp;rsquo;m sure OpenAI will have some response to it. &lt;!---I’ve enjoyed a 5-day vacation—it was pleasant and something I’ll remember for the upcoming days. (Spent with Vi, aka 3&#39;rd Frost.)---&gt;I&amp;rsquo;m planning to go home and spend some time with family, and I have to set up Jio AirFibre, converting my SIMs to Jio for unlimited internet (you’ll see a post about this later). The broadband over there isn’t that good and the signal inside the home is weak; plus, it comes bundled with TV, movies, and disney+, discovery+,..etc I’m going to disconnect Airtel TV/DTH in favor of this since it works with just WiFi and doesn&amp;rsquo;t require routing everywhere. &lt;!---Since I&#39;m planning to vacate Chennai in March, after February (Frost&#39;s 3rd birthday), things are going well. I even decided to tell Mom and Dad about Vi and show them by taking them to our Chennai home. Currently, as of this writing, they are not in Chennai with me—they went hometown last time I visited for functions and to take care of Grandma.---&gt;&lt;/p&gt;</description></item></channel></rss>
