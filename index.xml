@@ -1,4 +1,135 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Fri, 01 May 2026 17:54:17 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>Comparing Free Chinese Models For Daily Use - May 2026</title><link>//bluepie.in/2026/05/may-2026/</link><pubDate>Fri, 01 May 2026 17:54:17 +0000</pubDate><guid>//bluepie.in/2026/05/may-2026/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bluepie&#39;s Journal on Bluepie&#39;s Journal</title><link>//bluepie.in/</link><description>Recent content in Bluepie&#39;s Journal on Bluepie&#39;s Journal</description><language>en-us</language><lastBuildDate>Thu, 18 Jun 2026 21:50:43 +0000</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml"/><item><title>June 2026 - Deepseek API For Performance &amp; Cost</title><link>//bluepie.in/2026/06/june-2026/</link><pubDate>Thu, 18 Jun 2026 21:50:43 +0000</pubDate><guid>//bluepie.in/2026/06/june-2026/</guid><description>
+&lt;blockquote&gt;
+&lt;p&gt;(following post has been updated 5th of july, 2026)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;intro&#34;&gt;Intro&lt;/h3&gt;
+&lt;p&gt;A shift in LLM/AI usage: GitHub Copilot changed its user pricing. Microsoft changed the pricing. Nvidia &amp;amp; AMD are coming up with new laptops with 128 or more GB of VRAM to run agents and LLMs locally! But the prices of the chips are not going down; at the time of writing, the Nvidia RTX 5070 16GB is 65k INR.&lt;/p&gt;
+&lt;p&gt;The company that I work for at the time of writing this broke the Microsoft GitHub Copilot tie-up and looked for other vendors. They did it so fast: they sent a company-wide email stating it would be terminated immediately for the FTE (own employees) developers but will be kept only for the vendors, and asked users to utilize and adopt Claude Code. So we started using that, but a lot of people just use it for the sake of it to finish the job. At this point, there is no auto mode in the Claude version they allow inside the organization; people just set the model to high and burn through the tokens. It&amp;rsquo;s been 2 days and people went ham on it, and already 25% of the team budget is gone. We can check out individual budgets and the team&amp;rsquo;s budget at the usage metrics.&lt;/p&gt;
+&lt;p&gt;For me, I got around 300 dollars of AI credits at my disposal: $100 for Claude and around 200 for Cursor. To think that is around 28k INR—the salary I got at the time of starting my career when I left college. Back then, was it considered good money? Things changed really fast and got pricey, huh? These token budgets are arbitrary values set by companies on their own terms and bullshit logic. We are paying money and allocating budget for thin air—tokens? A decade ago, people would laugh at the idea! That would be 2016. I remember 2016; it was a different time: peaceful, chaotic, it had its charms.&lt;/p&gt;
+&lt;h2 id=&#34;deepseek-api-for-the-win&#34;&gt;Deepseek api For The Win&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;ve been using the DeepSeek API directly for the entire month of June 2026. It&amp;rsquo;s been great; they offer cheap prices for the latest model they have (at the point of writing this in June/July 2026 (this line was edited on July 5th, 2026, 1:08 AM)). Here is a comparison of the API pricing per 1 million tokens (as of July 2026):&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Provider&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Model&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Input Price (Cache Miss)&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Input Price (Cache Hit)&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Output Price&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;strong&gt;DeepSeek&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;deepseek-v4-flash&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$0.14&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$0.0028&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$0.28&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;deepseek-v4-pro&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$0.435&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$0.003625&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$0.87&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;strong&gt;Google&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;Gemini 2.5 Flash-Lite&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$0.10&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;—&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$0.40&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;Gemini 3.5 Flash&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$1.50&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;—&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$9.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;Gemini 3.1 Pro Preview&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$2.00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;—&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$12.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;strong&gt;Anthropic&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;Claude Haiku 4.5&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$1.00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$0.10 (90% off)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$5.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;Claude Sonnet 5&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$3.00*&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$0.30 (90% off)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$15.00*&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;Claude Opus 4.8&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$5.00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$0.50 (90% off)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$25.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;strong&gt;OpenAI&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;GPT-5.4 Nano&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$0.20&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$0.02 (90% off)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$1.25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;GPT-5.4 (Production)&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$2.50&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$0.25 (90% off)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$15.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;GPT-5.5 (Flagship)&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$5.00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$0.50 (90% off)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;$30.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;em&gt;*Note: Claude Sonnet 5 features introductory pricing of $2.00/$10.00 per million tokens through August 31, 2026. For verification, check the official docs: &lt;a href=&#34;https://platform.deepseek.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;DeepSeek Pricing&lt;/a&gt;, &lt;a href=&#34;https://aistudio.google.com/pricing&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Google AI Studio Pricing&lt;/a&gt;, &lt;a href=&#34;https://www.anthropic.com/pricing&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Anthropic Claude Pricing&lt;/a&gt;, and &lt;a href=&#34;https://openai.com/api/pricing&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;OpenAI API Pricing&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;deepseek-api-for-the-right-reason&#34;&gt;Deepseek api for the right reason.&lt;/h2&gt;
+&lt;p&gt;All the frontier AI models at this point are capable of doing the job they are told to do. There is a saying that you just have to do 80%/90% of the work, and the remaining work I can do myself. A lot of people are feeling that way regarding the AI models. What about them? The AI models have been performing well over the last 6 months; we don&amp;rsquo;t want the last itty-bitty performance for the day-to-day tasks that we do. It is needed for hard problems, sure, but for daily things it&amp;rsquo;s definitely not needed. So, for the reason of being cheap, affordable, and open weights&amp;hellip; I chose to use DeepSeek.&lt;/p&gt;
+&lt;h2 id=&#34;purpose&#34;&gt;Purpose&lt;/h2&gt;
+&lt;p&gt;I mainly started to use the deepseek api for the coding, they offer the model to be compatible with claude code and vscode (github copilot), they have instructions to integrate with every tool you can think of — see the &lt;a href=&#34;https://api-docs.deepseek.com&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;DeepSeek API Documentation&lt;/a&gt; for details. Specifically, for VS Code you can use extensions like &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=Continue.continue&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Continue&lt;/a&gt; or &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Cline&lt;/a&gt; configured to point to the base URL &lt;code&gt;https://api.deepseek.com&lt;/code&gt;, or install the &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=deepseek.deepseek-v4-copilot-chat&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;DeepSeek V4 for Copilot Chat&lt;/a&gt; extension. For Claude Code, you can use the Anthropic-compatible endpoint by exporting environment variables before starting the CLI:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export ANTHROPIC_BASE_URL=&amp;quot;https://api.deepseek.com/anthropic&amp;quot;
+export ANTHROPIC_AUTH_TOKEN=&amp;quot;&amp;lt;your_deepseek_api_key&amp;gt;&amp;quot;
+export ANTHROPIC_MODEL=&amp;quot;deepseek-v4-pro[1m]&amp;quot;
+export ANTHROPIC_DEFAULT_OPUS_MODEL=&amp;quot;deepseek-v4-pro[1m]&amp;quot;
+export ANTHROPIC_DEFAULT_SONNET_MODEL=&amp;quot;deepseek-v4-pro[1m]&amp;quot;
+export ANTHROPIC_DEFAULT_HAIKU_MODEL=&amp;quot;deepseek-v4-flash&amp;quot;
+export CLAUDE_CODE_SUBAGENT_MODEL=&amp;quot;deepseek-v4-flash&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;No matter how much I use, they didn&amp;rsquo;t utilize the money I topped up on their site. It was just $5, but the usage I was doing was hardly making a dent. Given that I was using the pro model for the tasks and the flash model for menial tasks, seeing that it made no difference on the token budget, I started to use the DeepSeek-V4-Pro model for all tasks. Even then&amp;hellip; it made no dent in the billing. I still haven&amp;rsquo;t utilized the $5.&lt;/p&gt;
+&lt;p&gt;I was mostly using it for coding and simple tasks like automation to do mundane tasks, but just for the one instance, that&amp;rsquo;s it. Since I was doing coding mostly for experimental stuff and not code that I want to be private, I didn&amp;rsquo;t care about the Chinese company using my prompts or data. It&amp;rsquo;s been an agreed-upon truth (for anyone reading from far beyond~ maybe a different era), (everybody in the world agrees upon this one thing) that all the Chinese companies ever do is steal technology and steal data from people around the world. At the point of writing this, maybe things will have changed in the future. There are other service providers that advertise/say they don&amp;rsquo;t train on the API we use (like OpenCode (I&amp;rsquo;m going to try that next month, I&amp;rsquo;ll tell you why in a bit)); they also host the DeepSeek API inside the USA. Since the model is open-weights&amp;hellip; they can just download and host them on their own hardware&amp;hellip; or buy it from vendors inside the USA and serve it to customers, but internally they could be doing anything we don&amp;rsquo;t know.&lt;/p&gt;
+&lt;h2 id=&#34;evolving&#34;&gt;Evolving&lt;/h2&gt;
+&lt;p&gt;As I&amp;rsquo;ve stated before, since there is no cost involved for most of the time when I&amp;rsquo;m using the APIs, I started to use AI agents &lt;sup&gt;24&lt;/sup&gt;&amp;frasl;&lt;sub&gt;7&lt;/sub&gt;. Before, I just used them whenever necessary with different tools, but never ran Hermes or OpenClaw for a long time. I started to use OpenClaw and the Hermes agent on my laptop. Then, liked it? I made the setup on my server. Now, both the Hermes agent and OpenClaw are running &lt;sup&gt;24&lt;/sup&gt;&amp;frasl;&lt;sub&gt;7&lt;/sub&gt; on my server. At first, it was just intrigue: why did others get obsessed with them? But since the cost is low, why not? And I tried to understand why people were hyping it up, and I understood to some extent. If I had it on my laptop and running all the time&amp;hellip; I don&amp;rsquo;t know how I would have felt, but running it on my server all the time is a different story. But I only gave it restricted access, and it&amp;rsquo;s running inside a container&amp;hellip; even inside that container, it doesn&amp;rsquo;t have sudo access.&lt;/p&gt;
+&lt;p&gt;Initially, I liked OpenClaw, but then when I used it more and more, I started to use Hermes more. It is important to note that OpenClaw is written in Node and uses Node for everything when doing tasks, but Hermes is written in Python, so it uses Python everywhere when it&amp;rsquo;s doing tasks.&lt;/p&gt;
+&lt;p&gt;Since there is no cost, I started to use AI agents &lt;sup&gt;24&lt;/sup&gt;&amp;frasl;&lt;sub&gt;7&lt;/sub&gt; (Hermes and OpenClaw). Before, I just used them whenever required, so I started experimenting. Instead of just on my laptop, I hosted them on the server, configured 3 messaging apps, and added others. They work nicely and actually save time mostly by doing work independently.&lt;/p&gt;
+&lt;h2 id=&#34;how-much-ai-tokens-did-i-spend-this-month-from-deepseek-directly-updated-after-june&#34;&gt;How much AI tokens did I spend this month from DeepSeek directly? (updated after June)&lt;/h2&gt;
+&lt;p&gt;So for the whole month, since I started using it, I&amp;rsquo;ve used 400M tokens and around 10$, i&amp;rsquo;ll cover in the next post of what i&amp;rsquo;be been using this for.. hint (hermes &amp;amp; openclaw)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;//bluepie.in/images/posts/june-2026/deepseek-uage.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;personal-updates&#34;&gt;Personal updates&lt;/h2&gt;
+&lt;p&gt;It&amp;rsquo;s 3:26 AM on a night. I&amp;rsquo;m pondering over things, thinking through things. Things are muddy during the day; I&amp;rsquo;m thinking how can I get this calmness during the day&amp;hellip; silence? The comfort of knowing others are asleep, only I am awake, and no one&amp;hellip; willingly at this hour contacts anyone. I&amp;rsquo;ve gotta find that cheat. Is it the ambiance? Or the feeling of knowing there is still 7 hours of time left&amp;hellip; until I won&amp;rsquo;t be bothered by other things.&lt;/p&gt;
+&lt;p&gt;This month, I&amp;rsquo;m doing something that I wanted to do for a long time: moving out of Chennai and back to my hometown with all my things and stuff. I&amp;rsquo;ve been thinking&amp;hellip; &amp;ldquo;what if&amp;rdquo; this and that for a long time&amp;hellip; but the thing is&amp;hellip; it&amp;rsquo;s good to be prepared. I&amp;rsquo;ve realized I can just do it again when it&amp;rsquo;s required; it&amp;rsquo;s not a big deal. Sure, it can be based on luck, but I&amp;rsquo;m sure I have talented people and smart SAs to sort it out. It&amp;rsquo;s been a long time&amp;hellip; I have an attachment to this place now—my messy table, AC at 21 degrees C on a July night, lights on, curtains half open, fan on top of my head at 55% with rainy weather outside in Chennai and a cold night. Remember this: no glasses, closet behind, half asleep but yet wide awake, thoughts of wanting to sleep so I won&amp;rsquo;t be groggy for work next morning, reflecting, searing memory, what-ifs.
+Sorry, all over the place. Swear I&amp;rsquo;m not drunk.&lt;/p&gt;
+&lt;p&gt;Still double-minded. Maybe I should keep a small place for myself alone? On the fence on this. All the actions I take based on this&amp;hellip; are fruitless. I have the weekend to disassemble things; I think it would be a different set of tasks than I usually do. Gosh, to think I was doing a lot of different things 2 and 4 years ago on the weekends than what I am doing currently.&lt;/p&gt;
+&lt;p&gt;What happened to EV S, H, M? What happened to those rules of L? Can&amp;rsquo;t control how and what you are already perceived as. Best to get rid of it, stepping stone, learn?&lt;/p&gt;
+&lt;p&gt;From me talking earlier about GPUs, I&amp;rsquo;m thinking of building a machine just for running desktop-level LLMs. For most not-so-significant knowledge work, we don&amp;rsquo;t need a state-of-the-art model with advanced reasoning. The things people require are context-aware agents/AI that follow the instructions and act accordingly&amp;hellip; that&amp;rsquo;s all there is to it, at least at the current state of LLMs now. All the open-weights models have gotten a lot better over the months; we can host the flash version of those models easily and we are good. But I think I would need a desktop-grade/level GPU&amp;hellip; multiple GPUs, to have that sort of resource available to me. In the future, there are probably cheaper ways to run LLMs, or even better, LLMs won&amp;rsquo;t require GPUs. There are already TPUs from Google and NPUs&amp;hellip; but still the same as a GPU in the future&amp;hellip; or better yet, there are no LLMs at all? AI is completely different.&lt;/p&gt;
+&lt;p&gt;After so long, I left my Chennai apartment. I remember writing about it 2 years ago on a December, now on a June. I&amp;rsquo;m planning to vacate this month; I already informed them that I would be leaving. Will update on this next month.&lt;/p&gt;
+&lt;!-- maybe I&#39;m just angry at myself for the things I&#39;ve done in my life, it&#39;s not that great? To send in Discord, I stopped saying things but that takes a lot of time, so conserving. When did this change? --&gt;
+&lt;!-- only thing that I have is my studies and my self-work, never give that up for anything, remember the dread, 1:04 AM, can&#39;t keep up doing the same thing --&gt;</description></item><item><title>Comparing Free Chinese Models For Daily Use - May 2026</title><link>//bluepie.in/2026/05/may-2026/</link><pubDate>Fri, 01 May 2026 17:54:17 +0000</pubDate><guid>//bluepie.in/2026/05/may-2026/</guid><description>
 &lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
 &lt;p&gt;I wanted to test the performance and accuracy of the ai models at the time of writing this (May 2026, so I can leverage them in my day-to-day tasks).
 Currently, I am testing 3 models: 1. Deepseek (v4 just got released) 2. GLM 3. Qwen.&lt;/p&gt;
@@ -1119,210 +1250,4 @@ This shows the remineralizer is doing its job—bringing the pH back close to ne
 &lt;a href=&#34;https://cpcb.nic.in/wqm/BIS_Drinking_Water_Specification.pdf&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://cpcb.nic.in/wqm/BIS_Drinking_Water_Specification.pdf&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;personal-update&#34;&gt;Personal Update&lt;/h2&gt;
 &lt;p&gt;Feel like everything is stagnant… even though there’s small progress. If you are working for big corpora, you are just a row in an Excel sheet. The feeling resonates more and more reading trending Hacker News and things that happen around in personal experience. As for me, as always trying to make time for open source and my hobbies… in the increasing midst of responsibilities coming towards me. I also almost got into a marriage arranged by my dad, forced to go see them… the girl &amp;amp; girl’s family like me and are trying to convince me into marriage, my dad doing all his best to set this up, fighting with me, etc. The girl is good too, perfect for family, they are a distant relative, born in 2000… But there are other plans/God has other plans. ~future me reading this… what happened?&lt;/p&gt;
-&lt;p&gt;Talked to an old friend; he said he discovered a private office Wi-Fi password written on a note and has been using it secretly. That reminded me of the first time I cracked a WPA endpoint in 2015. It felt great back then. We had BSNL broadband—“unlimited” but stuck at 60 kbps. I used to combine my connection with my neighbor’s Wi-Fi for maximum speeds. Those were fun times; I even made a mod of an application that combined network connections&amp;hellip;Long story short, he reminded me of Wi-Fi hacking. When I got back home to Gobi, I brought out my old Wi-Fi packet-injecting dongle and Linux laptop to chennai. I found a couple of neighbors’ Wi-Fi networks. After shutting down my unreliable Airtel connection in Chennai, I switched to unlimited mobile data (from previous posts), so I decided to use their Wi-Fi (nobody uses wpa3.. even the new routers comes with wpa2, you can easily capture the handshake and crack it.. I used hashcat, its super fast and reliable). While on their network, I logged in to their router, checked their device list, and configured Wi-Fi settings for a longer range on 2.4 GHz by switching between 20 Hz and 40 Hz channels.. Some of the closest Wi-Fi access points are 5 GHz and offers low latency too.. By seeing the device list, I was able to mimic their device name and avoid being caught. For example: “smart-camera.”.. to be fair, I would just use them for internet..nothing more..nothing less.&lt;/p&gt;</description></item><item><title>JWT Authentication with Refresh Tokens in Spring WebFlux</title><link>//bluepie.in/2025/02/jwt-auth/</link><pubDate>Sun, 02 Feb 2025 16:10:12 +0000</pubDate><guid>//bluepie.in/2025/02/jwt-auth/</guid><description>
-&lt;h3 id=&#34;introduction&#34;&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Summary:&lt;/strong&gt; I’m documenting this so that I can refer back to it in the future. Recently, I’ve been working with Spring WebFlux, and although I’ve previously used JWTs, this is my first time writing about them. I often forget the implementation details when switching between languages or frameworks, so I’m recording this while it’s still fresh in my mind.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;JSON Web Tokens (&lt;strong&gt;JWTs&lt;/strong&gt;) are a compact way to prove a user’s identity between two parties—usually a browser and your API.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;token-life-cycle&#34;&gt;&lt;strong&gt;Token life-cycle&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;A JWT is &lt;em&gt;self-contained&lt;/em&gt;: it carries the user’s ID, roles, and an &lt;strong&gt;expiry&lt;/strong&gt; inside the token itself.&lt;br /&gt;
-To balance security and convenience I use &lt;strong&gt;two clocks&lt;/strong&gt;:&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;strong&gt;Clock&lt;/strong&gt;&lt;/th&gt;
-&lt;th&gt;&lt;strong&gt;What it limits&lt;/strong&gt;&lt;/th&gt;
-&lt;th&gt;&lt;strong&gt;Typical value&lt;/strong&gt;&lt;/th&gt;
-&lt;th&gt;&lt;strong&gt;What happens when it hits zero&lt;/strong&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;Access expiry&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;How long the current token stays valid&lt;/td&gt;
-&lt;td&gt;&lt;em&gt;15–30 min&lt;/em&gt;&lt;/td&gt;
-&lt;td&gt;Client must call &lt;code&gt;/auth/refresh&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;Refresh expiry&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;How long the &lt;em&gt;refresh token&lt;/em&gt; can mint new access tokens&lt;/td&gt;
-&lt;td&gt;&lt;em&gt;7–30 days&lt;/em&gt;&lt;/td&gt;
-&lt;td&gt;User must log in again&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;Flow:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;/login ──► access + refresh token
-│
-(before access expiry)
-▼
-/refresh ──► new access token
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;After the &lt;strong&gt;refresh expiry&lt;/strong&gt; passes, even the refresh endpoint refuses to issue new tokens—forcing a fresh login.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h3 id=&#34;building-blocks&#34;&gt;&lt;strong&gt;Building blocks&lt;/strong&gt;&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Model&lt;/strong&gt; – database tables for users &amp;amp; login history&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Repository&lt;/strong&gt; – Reactive CRUD interfaces provided by Spring Data R2DBC&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Service&lt;/strong&gt; – business logic (password checks, audit log)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Auth manager&lt;/strong&gt; – validates credentials or JWT claims&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Filter&lt;/strong&gt; – extracts the Authorization: Bearer … header&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Security config&lt;/strong&gt; – wires it all together&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;essential-code&#34;&gt;&lt;strong&gt;Essential code&lt;/strong&gt;&lt;/h2&gt;
-&lt;h4 id=&#34;entity-classes&#34;&gt;&lt;strong&gt;Entity Classes&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;These classes represent database tables as Java objects using Spring Data R2DBC. &lt;code&gt;@Table&lt;/code&gt; maps the class to a table, and Lombok annotations (&lt;code&gt;@Data&lt;/code&gt;, &lt;code&gt;@Builder&lt;/code&gt;, etc.) generate getters, setters, constructors, and a builder.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Table(&amp;quot;users&amp;quot;)
-@Data @Builder @NoArgsConstructor @AllArgsConstructor
-public class UserEntity {
-@Id private Long id;
-private String username;
-private String password; // hashed
-private String roles; // e.g. &amp;quot;USER,ADMIN&amp;quot;
-private boolean enabled;
-}
-@Table(&amp;quot;login_history&amp;quot;)
-@Data @Builder @NoArgsConstructor @AllArgsConstructor
-public class LoginHistory {
-@Id private Long id;
-private Long userId;
-private LocalDateTime loginTime;
-private String ipAddress;
-private boolean successful;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;repositories&#34;&gt;&lt;strong&gt;Repositories&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;Spring Data’s &lt;code&gt;ReactiveCrudRepository&lt;/code&gt; provides reactive CRUD operations. By extending these interfaces, Spring auto-generates the implementation at runtime.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public interface UserRepository
-extends ReactiveCrudRepository&amp;lt;UserEntity, Long&amp;gt; {
-Mono&amp;lt;UserEntity&amp;gt; findByUsername(String username);
-}
-public interface LoginHistoryRepository
-extends ReactiveCrudRepository&amp;lt;LoginHistory, Long&amp;gt; {}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;jwt-filter-excerpt&#34;&gt;&lt;strong&gt;JWT filter&lt;/strong&gt; (excerpt)&lt;/h4&gt;
-&lt;p&gt;&lt;code&gt;ServerAuthenticationConverter&lt;/code&gt; is a Spring Security WebFlux interface for converting HTTP requests into &lt;code&gt;Authentication&lt;/code&gt; objects. In this converter, we extract and validate the JWT token from the Authorization header.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Slf4j
-public class JwtAuthConverter implements ServerAuthenticationConverter {
-@Override
-public Mono&amp;lt;Authentication&amp;gt; convert(ServerWebExchange exchange) {
-String header = exchange.getRequest()
-.getHeaders()
-.getFirst(HttpHeaders.AUTHORIZATION);
-if (header == null || !header.startsWith(&amp;quot;Bearer &amp;quot;)) return Mono.empty();
-try {
-String token = header.substring(7);
-Jws&amp;lt;Claims&amp;gt; claims = JwtUtil.validateTokenAndGetClaims(token);
-String username = claims.getBody().getSubject();
-List&amp;lt;String&amp;gt; roles = claims.getBody().get(&amp;quot;roles&amp;quot;, List.class);
-List&amp;lt;GrantedAuthority&amp;gt; authorities = roles.stream()
-.map(SimpleGrantedAuthority::new)
-.collect(Collectors.toList());
-return Mono.just(new UsernamePasswordAuthenticationToken(
-username, null, authorities));
-} catch (Exception ex) {
-log.warn(&amp;quot;Invalid token: {}&amp;quot;, ex.getMessage());
-return Mono.empty();
-}
-}
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;security-configuration-simplified&#34;&gt;&lt;strong&gt;Security configuration&lt;/strong&gt; (simplified)&lt;/h4&gt;
-&lt;p&gt;The &lt;code&gt;@Configuration&lt;/code&gt; class defines beans for Spring’s application context. &lt;code&gt;@EnableWebFluxSecurity&lt;/code&gt; activates WebFlux security support. We configure a &lt;code&gt;SecurityWebFilterChain&lt;/code&gt; bean to set up CSRF, CORS, endpoint permissions, and insert our JWT filter.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Configuration
-@EnableWebFluxSecurity
-public class SecurityConfig {
-@Bean
-public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
-JwtAuthWebFilter jwt = new JwtAuthWebFilter(new JwtReactiveAuthManager());
-jwt.setServerAuthenticationConverter(new JwtAuthConverter());
-return http
-.csrf(ServerHttpSecurity.CsrfSpec::disable)
-.cors(ServerHttpSecurity.CorsSpec::disable)
-.httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
-.formLogin(ServerHttpSecurity.FormLoginSpec::disable)
-.exceptionHandling(e -&amp;gt; e.authenticationEntryPoint(
-(exch, ex) -&amp;gt; {
-exch.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-return exch.getResponse().setComplete();
-}))
-.authorizeExchange(ex -&amp;gt; ex
-.pathMatchers(
-&amp;quot;/api/v1/auth/login&amp;quot;,
-&amp;quot;/api/v1/auth/refresh&amp;quot;,
-&amp;quot;/api/v1/auth/validate&amp;quot;,
-&amp;quot;/actuator/**&amp;quot;)
-.permitAll()
-.pathMatchers(&amp;quot;/api/v1/task/**&amp;quot;).authenticated())
-.addFilterAt(jwt, SecurityWebFiltersOrder.AUTHENTICATION)
-.build();
-}
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;reactive-authentication-manager&#34;&gt;&lt;strong&gt;Reactive authentication manager&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;Implementing &lt;code&gt;ReactiveAuthenticationManager&lt;/code&gt; allows custom authentication logic in WebFlux. This manager checks credentials, handles disabled accounts, and records login attempts via the &lt;code&gt;UserService&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Component
-@RequiredArgsConstructor
-public class DatabaseReactiveAuthManager implements ReactiveAuthenticationManager {
-private final UserService users;
-@Override
-public Mono&amp;lt;Authentication&amp;gt; authenticate(Authentication auth) {
-String username = auth.getName();
-String rawPwd = auth.getCredentials().toString();
-return users.findByUsername(username)
-.switchIfEmpty(Mono.error(new BadCredentialsException(&amp;quot;User not found&amp;quot;)))
-.flatMap(u -&amp;gt; {
-if (!users.checkPassword(rawPwd, u.getPassword()))
-return users.recordLoginAttempt(u, false, null)
-.then(Mono.error(new BadCredentialsException(&amp;quot;Bad password&amp;quot;)));
-if (!u.isEnabled())
-return Mono.error(new DisabledException(&amp;quot;Account disabled&amp;quot;));
-List&amp;lt;GrantedAuthority&amp;gt; roles = Arrays.stream(u.getRoles().split(&amp;quot;,&amp;quot;))
-.map(String::trim)
-.map(SimpleGrantedAuthority::new)
-.collect(Collectors.toList());
-return users.recordLoginAttempt(u, true, null)
-.thenReturn(new UsernamePasswordAuthenticationToken(
-username, null, roles));
-});
-}
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;h4 id=&#34;configuration-properties&#34;&gt;&lt;strong&gt;Configuration properties&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;These YAML properties configure Spring Security’s JWT support, specifying the signing &lt;strong&gt;secret&lt;/strong&gt; and token lifetimes.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;security:
-encryption:
-secret: _&amp;quot;encryption_secret&amp;quot;_
-jwt:
-expiration-time: __1_440_000__ # 24 minutes (ms)
-refresh-expiration-time: __604_800_000__ # 7 days (ms)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Tip – generate a strong secret:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-py&#34;&gt;# This one-off command uses Docker to generate a bcrypt hash for a random 32-byte secret
-docker run --rm python:3.9-slim \
-python - &amp;lt;&amp;lt;&#39;PY&#39;
-import bcrypt, os
-print(bcrypt.hashpw(os.urandom(32), bcrypt.gensalt()).decode())
-PY
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;recap&#34;&gt;&lt;strong&gt;Recap&lt;/strong&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Two expiries&lt;/strong&gt; keep sessions short yet user-friendly.&lt;/li&gt;
-&lt;li&gt;A reactive filter &lt;strong&gt;parses&lt;/strong&gt; the token and attaches &lt;strong&gt;authorities&lt;/strong&gt;.&lt;/li&gt;
-&lt;li&gt;A database auth manager handles &lt;strong&gt;login&lt;/strong&gt;, &lt;strong&gt;password checks&lt;/strong&gt;, and &lt;strong&gt;audit logs&lt;/strong&gt;.&lt;/li&gt;
-&lt;li&gt;Spring WebFlux security is glued together with one concise &lt;strong&gt;&lt;code&gt;SecurityWebFilterChain&lt;/code&gt;&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;references&#34;&gt;&lt;strong&gt;References&lt;/strong&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://jwt.io/introduction/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;JWT.io Introduction&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/jwtk/jjwt#readme&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;JJWT (Java JWT) Documentation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2 id=&#34;personal-update&#34;&gt;&lt;strong&gt;Personal Update&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;Setup JioFiber at home, disconnected Airtel in Chennai, and ported all my SIMs to Jio except mom’s. Jio offers unlimited data (4G/5G) on individual plans for $8.77 per month. Nowadays I don’t have enough time to do anything. No no no…not gonna start a rant here…lol. Talked to a friend about old WiFi hacking days…(more in the next few posts).&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;Talked to an old friend; he said he discovered a private office Wi-Fi password written on a note and has been using it secretly. That reminded me of the first time I cracked a WPA endpoint in 2015. It felt great back then. We had BSNL broadband—“unlimited” but stuck at 60 kbps. I used to combine my connection with my neighbor’s Wi-Fi for maximum speeds. Those were fun times; I even made a mod of an application that combined network connections&amp;hellip;Long story short, he reminded me of Wi-Fi hacking. When I got back home to Gobi, I brought out my old Wi-Fi packet-injecting dongle and Linux laptop to chennai. I found a couple of neighbors’ Wi-Fi networks. After shutting down my unreliable Airtel connection in Chennai, I switched to unlimited mobile data (from previous posts), so I decided to use their Wi-Fi (nobody uses wpa3.. even the new routers comes with wpa2, you can easily capture the handshake and crack it.. I used hashcat, its super fast and reliable). While on their network, I logged in to their router, checked their device list, and configured Wi-Fi settings for a longer range on 2.4 GHz by switching between 20 Hz and 40 Hz channels.. Some of the closest Wi-Fi access points are 5 GHz and offers low latency too.. By seeing the device list, I was able to mimic their device name and avoid being caught. For example: “smart-camera.”.. to be fair, I would just use them for internet..nothing more..nothing less.&lt;/p&gt;</description></item></channel></rss>
